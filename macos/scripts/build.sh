@@ -59,7 +59,7 @@ for skin in spritesheet-angel; do
   [ -f "$ASSETS_DIR/$skin.webp" ] && cp "$ASSETS_DIR/$skin.webp" "$RESOURCES_DIR/$skin.webp"
 done
 cp "$ASSETS_DIR/NanumMiNiSonGeurSsi.ttf" "$RESOURCES_DIR/NanumMiNiSonGeurSsi.ttf"
-# 훅을 앱에 넣어 둔다. 발바닥 메뉴의 "Claude 훅 설치·갱신" 이 이걸 쓴다.
+# 훅을 앱에 넣어 둔다. 설치기와 「레토 제거」 가 이걸 쓴다.
 rm -rf "$RESOURCES_DIR/hook"
 mkdir -p "$RESOURCES_DIR/hook"
 cp "$APP_ROOT/hook/hook.cjs" "$APP_ROOT/hook/install.cjs" "$RESOURCES_DIR/hook/"

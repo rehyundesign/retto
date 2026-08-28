@@ -369,10 +369,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         stateItem.target = self
         menu.addItem(stateItem)
 
-        let hooksItem = NSMenuItem(title: "Claude 훅 설치·갱신", action: #selector(installClaudeHooks), keyEquivalent: "")
-        hooksItem.target = self
-        menu.addItem(hooksItem)
-
         let uninstallItem = NSMenuItem(title: "레토 제거…", action: #selector(uninstallRetto), keyEquivalent: "")
         uninstallItem.target = self
         menu.addItem(uninstallItem)
@@ -1065,46 +1061,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         } else if !screens.contains(where: { $0.intersects(panel.frame) }) {
             resetPosition()
         }
-    }
-
-    /// 앱에 담아 둔 설치기를 돌린다. 훅이 없으면 레토는 아무것도 모르는 그림이 된다.
-    /// GUI 로 띄운 앱은 PATH 가 거의 비어 있으므로 node 를 흔한 자리에서 직접 찾는다.
-    @objc private func installClaudeHooks() {
-        let alert = NSAlert()
-        guard let script = Bundle.main.url(forResource: "install", withExtension: "cjs", subdirectory: "hook") else {
-            alert.messageText = "설치기를 찾지 못했어요"
-            alert.informativeText = "앱을 다시 빌드해 주세요 (build.sh)."
-            alert.runModal()
-            return
-        }
-        let candidates = ["/opt/homebrew/bin/node", "/usr/local/bin/node", "/usr/bin/node"]
-        guard let node = candidates.first(where: { FileManager.default.isExecutableFile(atPath: $0) }) else {
-            alert.messageText = "Node.js 를 찾지 못했어요"
-            alert.informativeText = "훅은 node 로 실행됩니다. Node.js 를 설치한 뒤 다시 눌러 주세요."
-            alert.runModal()
-            return
-        }
-
-        let process = Process()
-        process.executableURL = URL(fileURLWithPath: node)
-        process.arguments = [script.path]
-        let pipe = Pipe()
-        process.standardOutput = pipe
-        process.standardError = pipe
-        do {
-            try process.run()
-        } catch {
-            alert.messageText = "훅 설치를 실행하지 못했어요"
-            alert.informativeText = error.localizedDescription
-            alert.runModal()
-            return
-        }
-        let output = String(data: pipe.fileHandleForReading.readDataToEndOfFile(), encoding: .utf8) ?? ""
-        process.waitUntilExit()
-
-        alert.messageText = process.terminationStatus == 0 ? "Claude 훅을 최신으로 맞췄어요" : "훅 설치가 실패했어요"
-        alert.informativeText = output.trimmingCharacters(in: .whitespacesAndNewlines)
-        alert.runModal()
     }
 
     /// 레토를 깨끗이 걷어낸다. 훅 등록·상태 파일·앱 설정·로그인 항목·앱 본체까지.

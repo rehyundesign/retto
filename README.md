@@ -393,8 +393,8 @@ apps/retto-pet/scripts/install-hooks.sh --uninstall  # 제거
 cd apps/retto-pet/hook && npm test                   # 훅·설치기 테스트 10개
 ```
 
-`build.sh --install` 이 앱을 깔 때 훅도 함께 갱신하고, 발바닥 메뉴의 **Claude 훅 설치·갱신**
-으로도 같은 일을 할 수 있다. 설정에 박는 node 경로는 버전이 든 실경로(`.../Cellar/node/26.6.0/...`)
+`build.sh --install` 이 앱을 깔 때 훅도 함께 갱신한다. 발바닥 메뉴에 같은 항목을 두었다가
+걷어냈다 — 설치 경로 둘이 이미 하는 일이라 누를 일이 없었다. 설정에 박는 node 경로는 버전이 든 실경로(`.../Cellar/node/26.6.0/...`)
 대신 `/opt/homebrew/bin/node` 처럼 안정적인 자리를 고른다 — brew 로 node 를 올려도 훅이 죽지 않게.
 
 ## 지난 구조

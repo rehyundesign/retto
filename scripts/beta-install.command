@@ -93,8 +93,7 @@ if (( ! hook_ok )); then
   print -r -- ""
   print -r -- "다만 훅이 안 붙었습니다. 레토가 Claude Code 상태를 읽는 통로라서,"
   print -r -- "이게 없으면 고양이는 떠 있어도 아무 반응을 하지 않습니다."
-  print -r -- "Node.js (https://nodejs.org) 를 설치한 뒤, 고양이의 발바닥을 클릭해"
-  print -r -- "「Claude 훅 설치·갱신」을 눌러 주세요."
+  print -r -- "Node.js (https://nodejs.org) 를 설치한 뒤 이 설치.command 를 다시 실행해 주세요."
 fi
 
 print -r -- ""
