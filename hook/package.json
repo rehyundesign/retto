@@ -1,0 +1,10 @@
+{
+  "name": "retto-pet-hook",
+  "private": true,
+  "description": "Claude Code 상태를 레토에게 전달하는 훅과 설치기",
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "install-hooks": "node install.cjs",
+    "uninstall-hooks": "node install.cjs --uninstall"
+  }
+}
