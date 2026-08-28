@@ -88,13 +88,23 @@ func runSelfTest() -> Int32 {
     // 엉뚱한 자리를 그린다.
     let sleepRow = animationCatalog[.sleeping]?.row ?? -1
     let sleepRowOK = sleepRow >= 0 && CGFloat(sleepRow + 1) * cellHeight <= sheetHeight
+    // 끌 때 쓰는 달리기 두 행. 아틀라스 안에 있고 칸 수가 한 행을 넘지 않아야 한다.
+    let dragRunOK = Set(dragRunAnimations.keys) == Set<DragRun>([.right, .left])
+        && dragRunAnimations.values.allSatisfy { run in
+            run.row >= 0 && CGFloat(run.row + 1) * cellHeight <= sheetHeight
+                && run.frames > 0 && CGFloat(run.frames) * cellWidth <= sheetWidth
+        }
     let behaviorsOK = allSpacesBehavior.contains(.canJoinAllSpaces)
         && allSpacesBehavior.contains(.fullScreenAuxiliary)
         && allSpacesBehavior.contains(.stationary)
     let statesOK = Set(animationCatalog.keys) == Set(PetState.allCases)
-    // 두 딥링크가 각 앱의 규격 그대로여야 한다. 한 글자만 틀려도 클릭이 조용히 아무 일도 안 한다.
+    // VS Code 딥링크는 확장 규격 그대로여야 한다. 한 글자만 틀려도 클릭이 조용히 아무 일도 안 한다.
+    // Claude 앱에는 세션을 집어 띄우는 길이 없으므로 링크를 만들지 않는다 —
+    // 예전에 쓰던 `claude://resume` 은 세션을 앱으로 가져오는 길이라 누를 때마다 새 창이 떴다.
     let deepLinkOK = claudeDeepLink(sessionId: "session-test", app: .vscode)?.absoluteString == "vscode://anthropic.claude-code/open?session=session-test"
-        && claudeDeepLink(sessionId: "session-test", app: .claude)?.absoluteString == "claude://resume?session=session-test"
+        && claudeDeepLink(sessionId: "session-test", app: .claude) == nil
+        && OpenApp.vscode.hasSessionDeepLink
+        && !OpenApp.claude.hasSessionDeepLink
     // 훅이 적어 둔 클라이언트가 앱으로 옳게 풀리는지. 모르는 값은 예전 동작인 VS Code 로 남아야 한다.
     let clientRoutingOK = openApp(forClient: "claude") == .claude
         && openApp(forClient: "vscode") == .vscode
@@ -327,8 +337,8 @@ func runSelfTest() -> Int32 {
     let halo = headroomHalo(spriteSheet: image)
     let haloOK = halo.rows <= 3 && halo.deepest <= 12
 
-    let ok = fallbackOK && cornerOK && lookingOK && sleepRowOK && displayOK && dozeOK && sleepOK && ancientOK && viewedOK && haloOK && assetOK && skinsOK && behaviorsOK && statesOK && deepLinkOK && clientRoutingOK && scalesOK && baselineOK && decoupledOK && fontOK && priorityOK && registryOK && badgeLayoutOK && clickRoutingOK && gazeStatesOK && expandOK && lineBudgetOK && typefaceOK && textDeltaOK && tonesOK && folderFoldOK && labelOK && doneStaysOK && bubbleShapeOK && seenOK && staleOK
-    print("{\"ok\":\(ok),\"asset\":\"\(Int(image.size.width))x\(Int(image.size.height))\",\"skins\":\(PetSkin.allCases.count),\"skinsOK\":\(skinsOK),\"canJoinAllSpaces\":\(behaviorsOK),\"states\":\(animationCatalog.count),\"deepLink\":\(deepLinkOK),\"clientRouting\":\(clientRoutingOK),\"sizePresets\":\(supportedScales.count),\"baselineLayout\":\(baselineOK),\"scaleDecoupled\":\(decoupledOK),\"badgePlacement\":\(badgeLayoutOK),\"ribbonExpand\":\(expandOK),\"lineBudget\":\(lineBudgetOK),\"typefaces\":\(PetTypeface.allCases.count),\"typefaceOK\":\(typefaceOK),\"textDelta\":\(textDeltaOK),\"tones\":\(tonesOK),\"folderFold\":\(folderFoldOK),\"doneStays\":\(doneStaysOK),\"bubbleShape\":\(bubbleShapeOK),\"seenRule\":\(seenOK),\"staleWorking\":\(staleOK),\"headroomClean\":\(haloOK),\"viewedElsewhere\":\(viewedOK),\"ancientNews\":\(ancientOK),\"sleeps\":\(sleepOK),\"sleepRow\":\(sleepRow),\"dozes\":\(dozeOK),\"displayState\":\(displayOK),\"seenByLooking\":\(lookingOK),\"corners\":\(cornerOK),\"appFallback\":\(fallbackOK),\"haloRows\":\(halo.rows),\"haloDeepest\":\(halo.deepest),\"haloFaint\":\(haloFaintPixels),\"font\":\"\(rettoHandwritingFontName)\",\"fontLoaded\":\(fontOK),\"multiSession\":\(registryOK),\"prioritySelection\":\(priorityOK),\"badgeLayout\":\(badgeLayoutOK),\"clickRouting\":\(clickRoutingOK)}")
+    let ok = fallbackOK && cornerOK && lookingOK && sleepRowOK && displayOK && dozeOK && sleepOK && ancientOK && viewedOK && haloOK && assetOK && skinsOK && dragRunOK && behaviorsOK && statesOK && deepLinkOK && clientRoutingOK && scalesOK && baselineOK && decoupledOK && fontOK && priorityOK && registryOK && badgeLayoutOK && clickRoutingOK && gazeStatesOK && expandOK && lineBudgetOK && typefaceOK && textDeltaOK && tonesOK && folderFoldOK && labelOK && doneStaysOK && bubbleShapeOK && seenOK && staleOK
+    print("{\"ok\":\(ok),\"asset\":\"\(Int(image.size.width))x\(Int(image.size.height))\",\"skins\":\(PetSkin.allCases.count),\"skinsOK\":\(skinsOK),\"dragRun\":\(dragRunOK),\"canJoinAllSpaces\":\(behaviorsOK),\"states\":\(animationCatalog.count),\"deepLink\":\(deepLinkOK),\"clientRouting\":\(clientRoutingOK),\"sizePresets\":\(supportedScales.count),\"baselineLayout\":\(baselineOK),\"scaleDecoupled\":\(decoupledOK),\"badgePlacement\":\(badgeLayoutOK),\"ribbonExpand\":\(expandOK),\"lineBudget\":\(lineBudgetOK),\"typefaces\":\(PetTypeface.allCases.count),\"typefaceOK\":\(typefaceOK),\"textDelta\":\(textDeltaOK),\"tones\":\(tonesOK),\"folderFold\":\(folderFoldOK),\"doneStays\":\(doneStaysOK),\"bubbleShape\":\(bubbleShapeOK),\"seenRule\":\(seenOK),\"staleWorking\":\(staleOK),\"headroomClean\":\(haloOK),\"viewedElsewhere\":\(viewedOK),\"ancientNews\":\(ancientOK),\"sleeps\":\(sleepOK),\"sleepRow\":\(sleepRow),\"dozes\":\(dozeOK),\"displayState\":\(displayOK),\"seenByLooking\":\(lookingOK),\"corners\":\(cornerOK),\"appFallback\":\(fallbackOK),\"haloRows\":\(halo.rows),\"haloDeepest\":\(halo.deepest),\"haloFaint\":\(haloFaintPixels),\"font\":\"\(rettoHandwritingFontName)\",\"fontLoaded\":\(fontOK),\"multiSession\":\(registryOK),\"prioritySelection\":\(priorityOK),\"badgeLayout\":\(badgeLayoutOK),\"clickRouting\":\(clickRoutingOK)}")
     return ok ? 0 : 1
 }
 

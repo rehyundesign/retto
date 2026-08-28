@@ -726,7 +726,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         let app = resolveOpenApp(for: target)
         focusHostApp(for: target, app: app) { [weak self] matchedWindow in
             guard let self, !windowOnly, matchedWindow else { return }
-            self.openClaudeSession(target, app: app)
+            // 세션을 집어 띄울 길이 없는 앱(Claude 데스크탑)은 앞으로 보낸 것으로 끝낸다.
+            // 예전에는 여기서도 딥링크를 보냈는데, 그게 세션을 앱으로 가져오는 길이라
+            // 누를 때마다 사본이 새 창으로 떴다.
+            if app.hasSessionDeepLink { self.openClaudeSession(target, app: app) }
+            // 눌렀다는 것 자체를 다녀온 것으로 센다. 그 앱 안에서 어느 세션을 보는지까지는
+            // 알 수 없지만, 배지가 안 지워지는 쪽이 더 성가시다. 손으로 지울 길도 따로 있다.
             self.markSeen(target)
         }
     }

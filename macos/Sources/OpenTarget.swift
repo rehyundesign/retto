@@ -25,6 +25,19 @@ enum OpenApp {
     /// VS Code 는 세션이 사는 폴더 창을 먼저 앞으로 보내야 딥링크가 그 창에 배달된다.
     /// Claude 앱은 세션이 창 하나 안에 모여 있어서 그 단계가 없다.
     var needsWindowFocusFirst: Bool { self == .vscode }
+
+    /// 세션 하나를 콕 집어 띄우는 딥링크가 있는가.
+    ///
+    /// Claude 데스크탑 앱에는 없다. 앱 번들(1.37937.3)을 뜯어 확인한 것이다.
+    ///   `claude://resume?session=…`        CLI 세션을 앱으로 **가져오는** 길이다.
+    ///                                      `importCliSession` → `adoptCliSession` 을 부르고,
+    ///                                      이미 가져온 id 로 다시 부르면 "preserved session" 이라며 던진다.
+    ///                                      그래서 처음 누를 때 사본이 새 창으로 뜨고 그다음부터는 조용히 실패한다.
+    ///   `claude://code/continue?session=…` 검증이 `last` 또는 `/^local_[A-Za-z0-9-]{1,64}$/` 만 받는다.
+    ///                                      우리가 가진 것은 Claude Code 세션 UUID 라 걸리지 않는다.
+    ///
+    /// 앱을 앞으로 보내는 것까지만 한다. 세션 목록은 앱이 스스로 보여 준다.
+    var hasSessionDeepLink: Bool { self == .vscode }
 }
 
 /// 훅이 적어 둔 클라이언트를 앱으로 옮긴다. 모르면 VS Code — 훅이 이 값을 적기 전에 시작된 세션들이다.
@@ -50,9 +63,8 @@ func claudeDeepLink(sessionId: String?, app: OpenApp) -> URL? {
         components.host = "anthropic.claude-code"
         components.path = "/open"
     case .claude:
-        // 앱의 URL 핸들러가 이 세션 id 로 `importCliSession` 을 부른다.
-        components.scheme = "claude"
-        components.host = "resume"
+        // 세션을 집어 띄우는 길이 없다 — `hasSessionDeepLink` 에 이유를 적어 두었다.
+        return nil
     }
     if let sessionId, !sessionId.isEmpty {
         components.queryItems = [URLQueryItem(name: "session", value: sessionId)]
