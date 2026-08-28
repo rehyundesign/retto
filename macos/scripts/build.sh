@@ -8,7 +8,7 @@ APP_ROOT="${PROJECT_DIR:h}"
 ASSETS_DIR="$APP_ROOT/assets"
 BUILD_DIR="$PROJECT_DIR/build"
 DIST_DIR="$APP_ROOT/dist"
-VERSION="0.5.0"
+VERSION="0.6.0"
 APP_NAME="Retto Claude Pet.app"
 # 0.4.0 까지는 "Reto Claude Pet.app" 이었다. 영어 표기를 Retto 로 맞추면서 이름이 바뀌었으니,
 # 설치할 때 옛 이름 앱을 함께 걷어낸다. 그대로 두면 둘이 같이 떠서 말풍선이 두 개가 된다.
@@ -55,7 +55,7 @@ BUILD_STAMP="$(date '+%Y-%m-%d %H:%M') · $GIT_SHA"
 echo "stamp: $VERSION ($BUILD_NUMBER) · $BUILD_STAMP"
 cp "$ASSETS_DIR/spritesheet.webp" "$RESOURCES_DIR/spritesheet.webp"
 # 스킨 아틀라스. 발바닥 메뉴 "스킨" 이 이걸 갈아 끼운다. 없으면 기본 스킨만 뜬다.
-for skin in spritesheet-angel spritesheet-rilakkuma; do
+for skin in spritesheet-angel spritesheet-bee spritesheet-rilakkuma; do
   [ -f "$ASSETS_DIR/$skin.webp" ] && cp "$ASSETS_DIR/$skin.webp" "$RESOURCES_DIR/$skin.webp"
 done
 cp "$ASSETS_DIR/NanumMiNiSonGeurSsi.ttf" "$RESOURCES_DIR/NanumMiNiSonGeurSsi.ttf"
@@ -86,6 +86,17 @@ SHARE_DIR="$DIST_DIR/share/레토 $VERSION"
 rm -rf "$DIST_DIR/share"
 mkdir -p "$SHARE_DIR"
 cp -R "$APP_DIR" "$SHARE_DIR/$APP_NAME"
+# 개인 스킨은 남에게 보내는 묶음에서 뺀다. 내 기기에서는 그대로 쓴다.
+# 무엇이 개인 것인지는 git 이 안다 — .gitignore 에 올려 둔 에셋이 그것이다.
+# (리락쿠마처럼 남의 캐릭터로 만든 스킨이 여기 해당한다.)
+for skin in "$ASSETS_DIR"/spritesheet-*.webp; do
+  [ -f "$skin" ] || continue
+  if git -C "$APP_ROOT" check-ignore -q "$skin" 2>/dev/null; then
+    rm -f "$SHARE_DIR/$APP_NAME/Contents/Resources/$(basename "$skin")"
+    echo "share: 개인 스킨 제외 $(basename "$skin")"
+  fi
+done
+
 cp "$APP_ROOT/scripts/beta-install.command" "$SHARE_DIR/설치.command"
 chmod +x "$SHARE_DIR/설치.command"
 sed "s/__VERSION__/$VERSION/g" "$APP_ROOT/scripts/beta-readme.txt" > "$SHARE_DIR/먼저-읽어주세요.txt"
