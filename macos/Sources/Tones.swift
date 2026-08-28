@@ -61,12 +61,18 @@ struct StatusTone {
     let text: NSColor
 }
 
-let toneWorking = StatusTone(key: "working", background: hexColor(0x73DF5D), text: hexColor(0x0A5225))
-let toneNeedsYou = StatusTone(key: "needsYou", background: hexColor(0x0885FE), text: hexColor(0xFFFFFF))
-// 완료 주황은 흰 글자와의 대비 때문에 한 단계만 진하게 했다(#FF7009 2.77:1 → #F06200 3.25:1).
-let toneDone = StatusTone(key: "done", background: hexColor(0xF06200), text: hexColor(0xFFFFFF))
-let toneFailed = StatusTone(key: "failed", background: hexColor(0xF82D39), text: hexColor(0xFFF499))
-let toneQuiet = StatusTone(key: "quiet", background: hexColor(0x848484), text: hexColor(0xFFFFFF))
+// 이름표는 열두 자짜리 작은 글자다. 그래서 큰 글자 기준(3:1)이 아니라 본문 기준 4.5:1 을 지킨다.
+// 예전에는 완료 2.77, 문제 3.44, 쉬는 중 3.74, 내 답 대기 3.62 로 전부 모자랐다.
+//
+// 배경 밝기에 따라 글자색을 정한다 — 밝은 배경(초록·주황)은 어두운 글자, 깊은 배경은 흰 글자.
+// 초록이 이미 그렇게 쓰고 있었고, 그 밝기비(0.29)를 주황에도 그대로 적용했다.
+// 주황은 배경을 어둡게 하지 않고 글자만 낮췄다 — 배지로도 쓰는 색이라 눈에 띄는 것이 먼저다.
+// 나머지 셋은 배경만 한 단계 낮춰 지금 인상을 지켰다(밝기 87~89%, 문제는 77%).
+let toneWorking = StatusTone(key: "working", background: hexColor(0x73DF5D), text: hexColor(0x0A5225))   // 5.54:1
+let toneNeedsYou = StatusTone(key: "needsYou", background: hexColor(0x0174E3), text: hexColor(0xFFFFFF)) // 4.56:1
+let toneDone = StatusTone(key: "done", background: hexColor(0xF06200), text: hexColor(0x441C00))         // 4.57:1
+let toneFailed = StatusTone(key: "failed", background: hexColor(0xDC0714), text: hexColor(0xFFF499))     // 4.57:1
+let toneQuiet = StatusTone(key: "quiet", background: hexColor(0x757575), text: hexColor(0xFFFFFF))       // 4.61:1
 
 struct Animation {
     let row: Int

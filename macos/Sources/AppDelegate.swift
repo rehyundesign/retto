@@ -23,6 +23,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     private let transcriptReader = TranscriptReader()
     private var clearAttentionItem: NSMenuItem!
     private var typefaceItems: [NSMenuItem] = []
+    private var skinItems: [NSMenuItem] = []
     /// 이 순간부터의 일만 새 소식으로 센다. 앱이 켜진 시각.
     private let trackingStartedAtMs = Date().timeIntervalSince1970 * 1000
     private var pinnedCorner: PetCorner {
@@ -32,6 +33,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     private var cornerItems: [NSMenuItem] = []
     /// 우리가 창을 옮기는 동안에는 windowDidMove 를 사용자의 드래그로 오해하지 않는다.
     private var isRepositioning = false
+    /// 제거를 시작하면 켠다. 종료 직전에 설정을 한 번 더 지우는 근거다.
+    private var isUninstalling = false
     /// 세션이 없을 때 쓰는 빈 껍데기. 상태·이름·멘트는 넘겨 주는 값으로 덮는다.
     private static let placeholderPayload: StatePayload? = {
         let fixture = "{\"state\":\"idle\",\"sessionId\":\"placeholder\"}".data(using: .utf8)!
@@ -109,6 +112,21 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         }
     }
 
+    /// 레토의 겉모습. 고르면 아틀라스를 갈아 끼우고 다음 실행에도 남는다.
+    private var skin: PetSkin {
+        get { PetSkin(rawValue: UserDefaults.standard.string(forKey: skinDefaultsKey) ?? "") ?? .classic }
+        set { UserDefaults.standard.set(newValue.rawValue, forKey: skinDefaultsKey) }
+    }
+
+    /// 스킨의 아틀라스를 읽는다. 파일이 없으면 기본 스킨으로 물러난다 —
+    /// 옛 앱에 새 스킨 설정만 남아 있는 경우에도 레토가 사라지지 않게.
+    private func loadSpriteSheet(_ skin: PetSkin) -> NSImage? {
+        if let url = Bundle.main.url(forResource: skin.resourceName, withExtension: "webp"),
+           let image = NSImage(contentsOf: url) { return image }
+        guard skin != .classic else { return nil }
+        return loadSpriteSheet(.classic)
+    }
+
     /// 말풍선 글꼴. 고르면 바로 다시 그리고 다음 실행에도 남는다.
     private var typeface: PetTypeface {
         get { PetTypeface(rawValue: UserDefaults.standard.string(forKey: typefaceDefaultsKey) ?? "") ?? .handwriting }
@@ -119,8 +137,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         // 설정을 하나라도 읽기 전에 옮겨 와야 한다. createPanel 이 크기·위치를 바로 읽는다.
         migrateLegacyDefaults()
         registerRettoFont()
-        guard let imageURL = Bundle.main.url(forResource: "spritesheet", withExtension: "webp"),
-              let spriteSheet = NSImage(contentsOf: imageURL) else {
+        guard let spriteSheet = loadSpriteSheet(skin) else {
             NSAlert(error: NSError(domain: "RettoClaudePet", code: 1, userInfo: [NSLocalizedDescriptionKey: "레토 스프라이트를 불러오지 못했어요."])).runModal()
             NSApp.terminate(nil)
             return
@@ -247,6 +264,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         launchAtLoginItem.state = SMAppService.mainApp.status == .enabled ? .on : .off
         menu.addItem(launchAtLoginItem)
 
+        // 여기부터 세션 묶음. 무엇을 보여줄지 고르는 항목들이다.
+        menu.addItem(.separator())
+
         let sessionsItem = NSMenuItem(title: "Claude 세션", action: nil, keyEquivalent: "")
         sessionsItem.submenu = sessionsMenu
         menu.addItem(sessionsItem)
@@ -264,6 +284,15 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         }
         openTargetItem.submenu = openTargetMenu
         menu.addItem(openTargetItem)
+
+        // 레토를 누르지 않고 세션에 직접 다녀오는 경우가 있다. 그때 손으로 지울 길을 둔다.
+        // 시간이 지나면 저절로 조용해지게 하지는 않는다 — 돌려놓고 한참 뒤에 오는 게 배지의 쓸모다.
+        clearAttentionItem = NSMenuItem(title: "완료 표시 지우기", action: #selector(markAllSeen), keyEquivalent: "")
+        clearAttentionItem.target = self
+        menu.addItem(clearAttentionItem)
+
+        // 여기부터 모양 묶음. 레토가 어떻게 보일지 정하는 항목들이다.
+        menu.addItem(.separator())
 
         let sizeItem = NSMenuItem(title: "크기", action: nil, keyEquivalent: "")
         let sizeMenu = NSMenu(title: "크기")
@@ -288,6 +317,21 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         }
         sizeItem.submenu = sizeMenu
         menu.addItem(sizeItem)
+
+        // 겉모습. 아틀라스만 갈아 끼우므로 상태·말풍선 동작은 그대로다.
+        let skinMenu = NSMenu(title: "스킨")
+        skinMenu.autoenablesItems = false
+        skinItems = PetSkin.allCases.map { value in
+            let item = NSMenuItem(title: value.label, action: #selector(changeSkin(_:)), keyEquivalent: "")
+            item.target = self
+            item.representedObject = value.rawValue
+            item.state = value == skin ? .on : .off
+            skinMenu.addItem(item)
+            return item
+        }
+        let skinItem = NSMenuItem(title: "스킨", action: nil, keyEquivalent: "")
+        skinItem.submenu = skinMenu
+        menu.addItem(skinItem)
 
         // 손글씨가 예쁘지만 작은 배율에서 읽기 힘들다는 사람이 있다. 골라 쓰게 둔다.
         let typefaceMenu = NSMenu(title: "서체")
@@ -318,21 +362,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         cornerItem.submenu = cornerMenu
         menu.addItem(cornerItem)
 
-        // 레토를 누르지 않고 세션에 직접 다녀오는 경우가 있다. 그때 손으로 지울 길을 둔다.
-        // 시간이 지나면 저절로 조용해지게 하지는 않는다 — 돌려놓고 한참 뒤에 오는 게 배지의 쓸모다.
-        clearAttentionItem = NSMenuItem(title: "완료 표시 지우기", action: #selector(markAllSeen), keyEquivalent: "")
-        clearAttentionItem.target = self
-        menu.addItem(clearAttentionItem)
-
+        // 여기부터 손볼 일 묶음. 평소에는 누를 일이 없는 항목들이다.
         menu.addItem(.separator())
 
         let stateItem = NSMenuItem(title: "Claude 상태 파일 보기", action: #selector(revealStateFile), keyEquivalent: "")
         stateItem.target = self
         menu.addItem(stateItem)
-
-        let hooksItem = NSMenuItem(title: "Claude 훅 설치·갱신", action: #selector(installClaudeHooks), keyEquivalent: "")
-        hooksItem.target = self
-        menu.addItem(hooksItem)
 
         let uninstallItem = NSMenuItem(title: "레토 제거…", action: #selector(uninstallRetto), keyEquivalent: "")
         uninstallItem.target = self
@@ -696,6 +731,17 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         }
     }
 
+    @objc private func changeSkin(_ sender: NSMenuItem) {
+        guard let raw = sender.representedObject as? String, let next = PetSkin(rawValue: raw) else { return }
+        // 파일을 못 읽으면 설정을 바꾸지 않는다. 체크 표시만 옮겨 두면 다음 실행에 엉뚱한 모습이 뜬다.
+        guard let sheet = loadSpriteSheet(next) else { return }
+        skin = next
+        petView.spriteSheet = sheet
+        for item in skinItems {
+            item.state = (item.representedObject as? String) == raw ? .on : .off
+        }
+    }
+
     @objc private func changeTypeface(_ sender: NSMenuItem) {
         guard let raw = sender.representedObject as? String, let next = PetTypeface(rawValue: raw) else { return }
         typeface = next
@@ -737,6 +783,29 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     }
 
     @objc private func toggleClickThrough() {
+        // 켜면 레토가 마우스를 아예 받지 않는다 — 우클릭 메뉴도 같이 막힌다.
+        // 그래서 끄는 길이 메뉴 막대 발바닥 하나뿐인데, 그 아이콘은 메뉴 막대가 빠듯하면
+        // 노치 뒤로 밀려 안 보인다. 둘이 겹치면 강제 종료 말고는 되돌릴 방법이 없다.
+        // 켤 때만 한 번 알려 주고, 아는 사람은 다시 안 보게 한다.
+        if !panel.ignoresMouseEvents, !UserDefaults.standard.bool(forKey: clickThroughNoticeDefaultsKey) {
+            let notice = NSAlert()
+            notice.messageText = "클릭 통과를 켤까요?"
+            notice.informativeText = [
+                "레토가 마우스를 받지 않게 됩니다. 뒤에 있는 창을 그대로 쓸 수 있는 대신,",
+                "레토를 눌러 세션을 열거나 우클릭 메뉴를 여는 것도 안 됩니다.",
+                "",
+                "끄려면 메뉴 막대의 발바닥 → 「클릭 통과 끄기」 를 누르세요.",
+                "발바닥이 안 보이면 ⌘ 를 누른 채 메뉴 막대 아이콘을 끌어 자리를 만들 수 있습니다."
+            ].joined(separator: "\n")
+            notice.addButton(withTitle: "켜기")
+            notice.addButton(withTitle: "취소")
+            notice.showsSuppressionButton = true
+            notice.suppressionButton?.title = "다시 보지 않기"
+            guard notice.runModal() == .alertFirstButtonReturn else { return }
+            if notice.suppressionButton?.state == .on {
+                UserDefaults.standard.set(true, forKey: clickThroughNoticeDefaultsKey)
+            }
+        }
         panel.ignoresMouseEvents.toggle()
         clickThroughItem.title = panel.ignoresMouseEvents ? "클릭 통과 끄기" : "클릭 통과 켜기"
     }
@@ -994,46 +1063,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         }
     }
 
-    /// 앱에 담아 둔 설치기를 돌린다. 훅이 없으면 레토는 아무것도 모르는 그림이 된다.
-    /// GUI 로 띄운 앱은 PATH 가 거의 비어 있으므로 node 를 흔한 자리에서 직접 찾는다.
-    @objc private func installClaudeHooks() {
-        let alert = NSAlert()
-        guard let script = Bundle.main.url(forResource: "install", withExtension: "cjs", subdirectory: "hook") else {
-            alert.messageText = "설치기를 찾지 못했어요"
-            alert.informativeText = "앱을 다시 빌드해 주세요 (build.sh)."
-            alert.runModal()
-            return
-        }
-        let candidates = ["/opt/homebrew/bin/node", "/usr/local/bin/node", "/usr/bin/node"]
-        guard let node = candidates.first(where: { FileManager.default.isExecutableFile(atPath: $0) }) else {
-            alert.messageText = "Node.js 를 찾지 못했어요"
-            alert.informativeText = "훅은 node 로 실행됩니다. Node.js 를 설치한 뒤 다시 눌러 주세요."
-            alert.runModal()
-            return
-        }
-
-        let process = Process()
-        process.executableURL = URL(fileURLWithPath: node)
-        process.arguments = [script.path]
-        let pipe = Pipe()
-        process.standardOutput = pipe
-        process.standardError = pipe
-        do {
-            try process.run()
-        } catch {
-            alert.messageText = "훅 설치를 실행하지 못했어요"
-            alert.informativeText = error.localizedDescription
-            alert.runModal()
-            return
-        }
-        let output = String(data: pipe.fileHandleForReading.readDataToEndOfFile(), encoding: .utf8) ?? ""
-        process.waitUntilExit()
-
-        alert.messageText = process.terminationStatus == 0 ? "Claude 훅을 최신으로 맞췄어요" : "훅 설치가 실패했어요"
-        alert.informativeText = output.trimmingCharacters(in: .whitespacesAndNewlines)
-        alert.runModal()
-    }
-
     /// 레토를 깨끗이 걷어낸다. 훅 등록·상태 파일·앱 설정·로그인 항목·앱 본체까지.
     /// 앱이 자기 번들을 지우는 일이라 되돌릴 수 없다. 그래서 먼저 묻는다.
     @objc private func uninstallRetto() {
@@ -1058,58 +1087,20 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         confirm.buttons[1].keyEquivalent = "\r"
         guard confirm.runModal() == .alertFirstButtonReturn else { return }
 
-        var report: [String] = []
-        let fileManager = FileManager.default
-        let home = fileManager.homeDirectoryForCurrentUser
+        // 지운 것이 되살아나지 않게 먼저 손을 뗀다.
+        //   폴링 — 0.25초마다 도는 타이머가 알림창 중에도 살아 있어 읽음 기록을 되쓸 수 있다
+        //   창 위치 — AppKit 이 종료할 때 프레임을 설정에 도로 쓴다. 이름을 비우면 쓰지 않는다
+        isUninstalling = true
+        stateMonitor?.stop()
+        panel.setFrameAutosaveName("")
 
-        // 1. 훅 등록을 뺀다. 앱을 지운 뒤에는 번들 안의 설치기를 쓸 수 없으니 이걸 먼저 한다.
-        if let script = Bundle.main.url(forResource: "install", withExtension: "cjs", subdirectory: "hook"),
-           let node = ["/opt/homebrew/bin/node", "/usr/local/bin/node", "/usr/bin/node"]
-               .first(where: { fileManager.isExecutableFile(atPath: $0) }) {
-            let process = Process()
-            process.executableURL = URL(fileURLWithPath: node)
-            process.arguments = [script.path, "--uninstall"]
-            process.standardOutput = Pipe()
-            process.standardError = Pipe()
-            do {
-                try process.run()
-                process.waitUntilExit()
-                report.append(process.terminationStatus == 0
-                    ? "· Claude 훅 등록을 뺐습니다"
-                    : "· ⚠ 훅 등록을 빼지 못했습니다 — settings.json 을 직접 확인해 주세요")
-            } catch {
-                report.append("· ⚠ 훅 제거를 실행하지 못했습니다 — settings.json 을 직접 확인해 주세요")
-            }
-        } else {
-            report.append("· ⚠ node 가 없어 훅 등록이 남습니다 — settings.json 을 직접 확인해 주세요")
-        }
+        // 훅 등록·상태 파일·자동 실행. 실제 작업은 `--uninstall` 과 같은 코드를 쓴다.
+        let outcome = performUninstall()
+        var report = outcome.lines
 
-        // 2. 상태 파일과 설치된 훅.
-        // 옛 이름(reto-pet)으로 깔렸던 폴더가 남아 있을 수 있다. 둘 다 본다.
-        var removedState = false
-        for name in [".claude/retto-pet", ".claude/reto-pet"] {
-            let directory = home.appendingPathComponent(name)
-            guard fileManager.fileExists(atPath: directory.path) else { continue }
-            do {
-                try fileManager.removeItem(at: directory)
-                removedState = true
-            } catch {
-                report.append("· ⚠ 상태 파일을 지우지 못했습니다 (~/\(name))")
-            }
-        }
-        if removedState { report.append("· 상태 파일을 지웠습니다") }
-
-        // 3. 로그인할 때 자동 실행. 남겨 두면 지워진 앱을 계속 띄우려 한다.
-        if SMAppService.mainApp.status == .enabled {
-            try? SMAppService.mainApp.unregister()
-            report.append("· 자동 실행을 껐습니다")
-        }
-
-        // 4. 크기·위치·읽음 표시 같은 앱 설정.
-        if let bundleID = Bundle.main.bundleIdentifier {
-            UserDefaults.standard.removePersistentDomain(forName: bundleID)
-            report.append("· 앱 설정을 지웠습니다")
-        }
+        // 4. 크기·위치·읽음 표시 같은 앱 설정. 실제로 지우는 것은 종료 직전이다 —
+        //    여기서 지우면 알림창과 종료 사이에 AppKit 이 창 프레임을 도로 써 넣는다.
+        report.append("· 앱 설정을 지웠습니다")
 
         let done = NSAlert()
         done.messageText = "정리했습니다"
@@ -1119,9 +1110,37 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
 
         // 5. 앱 본체. 도는 중에 번들을 옮기는 건 macOS 가 허용한다 — 프로세스는 그대로 살아 있다.
         //    옮긴 뒤에 종료해야 앱이 자기 무덤을 다 파고 나갈 수 있다.
-        NSWorkspace.shared.recycle([Bundle.main.bundleURL]) { _, _ in
-            DispatchQueue.main.async { NSApp.terminate(nil) }
+        let bundleURL = Bundle.main.bundleURL
+        NSWorkspace.shared.recycle([bundleURL]) { _, error in
+            DispatchQueue.main.async { [weak self] in
+                // 옮기지 못했으면 말해 준다. 앞에서 "휴지통으로 갑니다" 라고 해 놓고
+                // 조용히 남겨 두면, 지운 줄 알았던 앱이 다음에 또 뜬다.
+                if error != nil {
+                    let failed = NSAlert()
+                    failed.messageText = "앱을 휴지통으로 옮기지 못했어요"
+                    failed.informativeText = "다른 건 정리했습니다. 아래 앱을 직접 지워 주세요.\n\n" + bundleURL.path
+                    failed.addButton(withTitle: "위치 보기")
+                    failed.addButton(withTitle: "닫기")
+                    if failed.runModal() == .alertFirstButtonReturn {
+                        NSWorkspace.shared.activateFileViewerSelecting([bundleURL])
+                    }
+                }
+                self?.clearDefaultsIfUninstalling()
+                NSApp.terminate(nil)
+            }
         }
+    }
+
+    /// 제거 중일 때만 설정을 지운다. 종료 직전과 종료 훅에서 두 번 부른다 —
+    /// AppKit 이 마지막에 창 프레임을 써 넣어 지운 설정이 되살아나던 것을 막는다.
+    private func clearDefaultsIfUninstalling() {
+        guard isUninstalling, let bundleID = Bundle.main.bundleIdentifier else { return }
+        UserDefaults.standard.removePersistentDomain(forName: bundleID)
+        UserDefaults.standard.synchronize()
+    }
+
+    func applicationWillTerminate(_ notification: Notification) {
+        clearDefaultsIfUninstalling()
     }
 
     @objc private func quit() { NSApp.terminate(nil) }

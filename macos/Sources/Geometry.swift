@@ -11,6 +11,28 @@ let sheetHeight: CGFloat = 2496
 let rettoHandwritingFontName = "NanumMiNiSonGeurSsi"
 
 /// 말풍선에 쓸 글꼴. 손글씨가 기본이고, 읽기 힘들면 시스템 서체로 바꾼다.
+/// 레토의 겉모습. 아틀라스 파일을 통째로 갈아 끼운다.
+/// 스킨마다 칸 규격(192x208, 8x12)은 같아야 한다 — 그리는 자리 계산이 공용이다.
+enum PetSkin: String, CaseIterable {
+    case classic
+    case angelWings
+
+    var label: String {
+        switch self {
+        case .classic: return "기본"
+        case .angelWings: return "천사 날개"
+        }
+    }
+
+    /// 번들 안 리소스 이름. 확장자는 webp 로 고정이다.
+    var resourceName: String {
+        switch self {
+        case .classic: return "spritesheet"
+        case .angelWings: return "spritesheet-angel"
+        }
+    }
+}
+
 enum PetTypeface: String, CaseIterable {
     case handwriting
     case system
@@ -85,6 +107,8 @@ let seenSessionsDefaultsKey = "RettoClaudePetSeenSessions"
 let cornerDefaultsKey = "RettoClaudePetCorner"
 let openTargetDefaultsKey = "RettoClaudePetOpenTarget"
 let typefaceDefaultsKey = "RettoClaudePetTypeface"
+let clickThroughNoticeDefaultsKey = "RettoClaudePetClickThroughNoticeSeen"
+let skinDefaultsKey = "RettoClaudePetSkin"
 // 배지 지름과 흰 테두리. 이름표 오른쪽 위 모서리에 살짝 겹쳐 앉는다.
 let attentionBadgeSide: CGFloat = 20
 /// 이름표와 배지가 같이 쓰는 흰 테두리 두께.
