@@ -4,23 +4,34 @@ import AppKit
 import CoreText
 import Foundation
 
-let cellWidth: CGFloat = 192
-let cellHeight: CGFloat = 208
-let sheetWidth: CGFloat = 1536
-let sheetHeight: CGFloat = 2496
+// 칸은 몸보다 넓다. 남는 좌우 여백은 스킨의 날개가 쓴다 — 여백이 없으면 날개를 달려고
+// 고양이를 줄여야 했다. 여백은 투명이라 hitTest 가 클릭을 통과시킨다.
+let cellWidth: CGFloat = 224
+// 칸은 머리 위로도 여유를 둔다. 스킨의 후드 귀나 날개 끝이 여기로 들어간다.
+let cellHeight: CGFloat = 240
+let sheetWidth: CGFloat = 1792
+let sheetHeight: CGFloat = 2880
 let rettoHandwritingFontName = "NanumMiNiSonGeurSsi"
 
 /// 말풍선에 쓸 글꼴. 손글씨가 기본이고, 읽기 힘들면 시스템 서체로 바꾼다.
+/// 끌고 갈 때 달리는 방향. 화면 기준이다.
+enum DragRun {
+    case right
+    case left
+}
+
 /// 레토의 겉모습. 아틀라스 파일을 통째로 갈아 끼운다.
-/// 스킨마다 칸 규격(192x208, 8x12)은 같아야 한다 — 그리는 자리 계산이 공용이다.
+/// 스킨마다 칸 규격(224x240, 8x12)은 같아야 한다 — 그리는 자리 계산이 공용이다.
 enum PetSkin: String, CaseIterable {
     case classic
     case angelWings
+    case rilakkuma
 
     var label: String {
         switch self {
         case .classic: return "기본"
         case .angelWings: return "천사 날개"
+        case .rilakkuma: return "리락쿠마"
         }
     }
 
@@ -29,7 +40,22 @@ enum PetSkin: String, CaseIterable {
         switch self {
         case .classic: return "spritesheet"
         case .angelWings: return "spritesheet-angel"
+        case .rilakkuma: return "spritesheet-rilakkuma"
         }
+    }
+
+    /// 만든 사람만 쓰는 스킨. 아틀라스를 레포에도 배포 묶음에도 넣지 않는다.
+    /// 받아 간 쪽에서는 파일이 없으므로 메뉴에 자물쇠로 뜨고 고를 수 없다.
+    var isPersonal: Bool {
+        switch self {
+        case .rilakkuma: return true
+        default: return false
+        }
+    }
+
+    /// 이 기기의 앱 번들에 아틀라스가 실제로 들어 있는지.
+    var isAvailable: Bool {
+        Bundle.main.url(forResource: resourceName, withExtension: "webp") != nil
     }
 }
 
@@ -60,8 +86,10 @@ func petFont(_ typeface: PetTypeface, size: CGFloat, bold: Bool = false) -> NSFo
 // 레토 몸과 상태 리본은 따로 자란다. 몸은 고른 배율을 그대로 따르고,
 // 리본은 글자가 읽히는 최소 배율(chromeScaleFloor) 아래로는 줄지 않는다.
 // 창은 둘 중 넓은 쪽에 맞추므로 작은 배율에서는 몸보다 창이 넓어진다.
-let basePetWidth: CGFloat = 252
-let petSideMargin: CGFloat = 27
+// 칸이 192 에서 224 로 넓어진 만큼 같이 키운다(252 × 224/192). 화면에 보이는 몸 크기는 그대로다.
+let basePetWidth: CGFloat = 294
+// 칸 자체가 좌우 16px 씩 여백을 갖게 되어 창 여백은 그만큼 줄인다. 창 폭 306 은 그대로다.
+let petSideMargin: CGFloat = 6
 let petBadgeHeadroom: CGFloat = 26
 // 동물의 숲 대화창 비례. 이름표가 말풍선 위로 솟으므로 레토와 말풍선 사이를 띄운다.
 let petRibbonOverlap: CGFloat = -4
@@ -105,6 +133,8 @@ let sectionLabelWidthSample = String(repeating: "가", count: 12)
 let namePillOverlap: CGFloat = 0.45
 let seenSessionsDefaultsKey = "RettoClaudePetSeenSessions"
 let cornerDefaultsKey = "RettoClaudePetCorner"
+let followClaudeDefaultsKey = "RettoPetFollowClaudeSession"
+let accessibilityAskedDefaultsKey = "RettoPetAskedAccessibility"
 let openTargetDefaultsKey = "RettoClaudePetOpenTarget"
 let typefaceDefaultsKey = "RettoClaudePetTypeface"
 let clickThroughNoticeDefaultsKey = "RettoClaudePetClickThroughNoticeSeen"

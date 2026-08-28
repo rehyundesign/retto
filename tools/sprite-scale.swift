@@ -11,8 +11,8 @@ import AppKit
 import CoreGraphics
 import Foundation
 
-let cellWidth = 192
-let cellHeight = 208
+let cellWidth = 224
+let cellHeight = 240
 let columns = 8
 let rows = 11
 

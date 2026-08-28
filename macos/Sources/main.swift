@@ -4,6 +4,13 @@ import AppKit
 import CoreText
 import Foundation
 
+// 접근성 권한이 이 앱에 실제로 붙어 있는지. 애드혹 서명이라 다시 빌드할 때마다 풀리고,
+// 손쉬운 사용 목록에는 켜져 보이는데 실제로는 없는 상태가 된다. 그때 이걸로 확인한다.
+if CommandLine.arguments.contains("--ax-check") {
+    print(ClaudeAppNavigator.isPermitted ? "접근성 권한: 있음" : "접근성 권한: 없음")
+    exit(ClaudeAppNavigator.isPermitted ? 0 : 1)
+}
+
 if CommandLine.arguments.contains("--self-test") {
     exit(runSelfTest())
 }

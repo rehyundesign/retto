@@ -84,6 +84,15 @@ struct Animation {
     let tone: StatusTone
 }
 
+/// 끌 때 끌리는 방향으로 달린다 — 코덱스 펫과 같은 반응이다.
+/// 상태가 아니라 조작에 대한 반응이라 animationCatalog 에 넣지 않는다.
+/// 말풍선·이름표·우선순위는 끄는 동안에도 실제 상태를 그대로 쓴다.
+/// 행 2 는 행 1 을 좌우로 뒤집어 만든 것이다 — 원본 행 2 는 얼굴이 칸 밖으로 잘려 있었다.
+let dragRunAnimations: [DragRun: Animation] = [
+    .right: Animation(row: 1, frames: 8, interval: 0.085, cycleLimit: nil, kicker: "RUN", title: "따라가는 중", tone: toneWorking),
+    .left:  Animation(row: 2, frames: 8, interval: 0.085, cycleLimit: nil, kicker: "RUN", title: "따라가는 중", tone: toneWorking),
+]
+
 let animationCatalog: [PetState: Animation] = [
     .idle: Animation(row: 0, frames: 6, interval: 0.23, cycleLimit: nil, kicker: "RESTING", title: "조용히 곁을 지키는 중", tone: toneQuiet),
     .running: Animation(row: 7, frames: 6, interval: 0.125, cycleLimit: nil, kicker: "THINKING", title: "Claude가 생각중…", tone: toneWorking),

@@ -55,7 +55,7 @@ BUILD_STAMP="$(date '+%Y-%m-%d %H:%M') · $GIT_SHA"
 echo "stamp: $VERSION ($BUILD_NUMBER) · $BUILD_STAMP"
 cp "$ASSETS_DIR/spritesheet.webp" "$RESOURCES_DIR/spritesheet.webp"
 # 스킨 아틀라스. 발바닥 메뉴 "스킨" 이 이걸 갈아 끼운다. 없으면 기본 스킨만 뜬다.
-for skin in spritesheet-angel; do
+for skin in spritesheet-angel spritesheet-rilakkuma; do
   [ -f "$ASSETS_DIR/$skin.webp" ] && cp "$ASSETS_DIR/$skin.webp" "$RESOURCES_DIR/$skin.webp"
 done
 cp "$ASSETS_DIR/NanumMiNiSonGeurSsi.ttf" "$RESOURCES_DIR/NanumMiNiSonGeurSsi.ttf"

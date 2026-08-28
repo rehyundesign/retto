@@ -12,6 +12,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     private var statusItem: NSStatusItem!
     private var visibilityItem: NSMenuItem!
     private var clickThroughItem: NSMenuItem!
+    private var followClaudeItem: NSMenuItem!
+    /// Claude 앱에서 세션까지 따라갈지. 접근성으로 사이드바를 대신 누르는 방식이라,
+    /// 앱이 바뀌어 어긋나면 사용자가 여기서 끌 수 있어야 한다.
+    private var followsClaudeSession: Bool {
+        get { UserDefaults.standard.object(forKey: followClaudeDefaultsKey) as? Bool ?? true }
+        set { UserDefaults.standard.set(newValue, forKey: followClaudeDefaultsKey) }
+    }
     private var launchAtLoginItem: NSMenuItem!
     private var sizeItems: [NSMenuItem] = []
     private var openTargetItems: [NSMenuItem] = []
@@ -134,6 +141,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     }
 
     func applicationDidFinishLaunching(_ notification: Notification) {
+        ClaudeAppNavigator.log("앱 시작 · 접근성=\(ClaudeAppNavigator.isPermitted)")
         // 설정을 하나라도 읽기 전에 옮겨 와야 한다. createPanel 이 크기·위치를 바로 읽는다.
         migrateLegacyDefaults()
         registerRettoFont()
@@ -259,6 +267,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         clickThroughItem.target = self
         menu.addItem(clickThroughItem)
 
+        followClaudeItem = NSMenuItem(title: "Claude 앱에서 세션까지 따라가기", action: #selector(toggleFollowClaude), keyEquivalent: "")
+        followClaudeItem.target = self
+        menu.addItem(followClaudeItem)
+        updateFollowClaudeItem()
+
         launchAtLoginItem = NSMenuItem(title: "로그인할 때 자동 실행", action: #selector(toggleLaunchAtLogin), keyEquivalent: "")
         launchAtLoginItem.target = self
         launchAtLoginItem.state = SMAppService.mainApp.status == .enabled ? .on : .off
@@ -322,10 +335,16 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         let skinMenu = NSMenu(title: "스킨")
         skinMenu.autoenablesItems = false
         skinItems = PetSkin.allCases.map { value in
-            let item = NSMenuItem(title: value.label, action: #selector(changeSkin(_:)), keyEquivalent: "")
-            item.target = self
+            // 개인 스킨은 받아 간 쪽 번들에 파일이 없다. 지우지 않고 자물쇠로 남겨 둔다 —
+            // 항목이 통째로 사라지면 고장인지 원래 없는 건지 알 수 없다.
+            let available = value.isAvailable
+            let title = available ? value.label : "\(value.label) 🔒"
+            let item = NSMenuItem(title: title, action: available ? #selector(changeSkin(_:)) : nil, keyEquivalent: "")
+            item.target = available ? self : nil
+            item.isEnabled = available
             item.representedObject = value.rawValue
             item.state = value == skin ? .on : .off
+            if !available { item.toolTip = "만든 사람만 쓰는 스킨이라 이 앱에는 그림이 들어 있지 않습니다." }
             skinMenu.addItem(item)
             return item
         }
@@ -729,7 +748,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             // 세션을 집어 띄울 길이 없는 앱(Claude 데스크탑)은 앞으로 보낸 것으로 끝낸다.
             // 예전에는 여기서도 딥링크를 보냈는데, 그게 세션을 앱으로 가져오는 길이라
             // 누를 때마다 사본이 새 창으로 떴다.
-            if app.hasSessionDeepLink { self.openClaudeSession(target, app: app) }
+            if app.hasSessionDeepLink {
+                self.openClaudeSession(target, app: app)
+            } else {
+                // 딥링크로는 세션을 못 바꾸는 앱(Claude 데스크탑). 사이드바 행을 대신 눌러 준다.
+                // 앱이 앞으로 나온 뒤라야 한다 — 뒤에 있을 때는 접근성 트리가 아예 만들어지지 않는다.
+                self.followClaudeSessionIfPossible(target)
+            }
             // 눌렀다는 것 자체를 다녀온 것으로 센다. 그 앱 안에서 어느 세션을 보는지까지는
             // 알 수 없지만, 배지가 안 지워지는 쪽이 더 성가시다. 손으로 지울 길도 따로 있다.
             self.markSeen(target)
@@ -784,6 +809,77 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         } else {
             panel.orderFrontRegardless()
             visibilityItem.title = "레토 숨기기"
+        }
+    }
+
+    @objc private func toggleFollowClaude() {
+        // 권한이 없으면 켜 봐야 아무 일도 안 일어난다. 끄고 켜는 대신 권한부터 청한다.
+        guard ClaudeAppNavigator.isPermitted else {
+            askAccessibility()
+            updateFollowClaudeItem()
+            return
+        }
+        followsClaudeSession.toggle()
+        updateFollowClaudeItem()
+    }
+
+    /// 켜짐·꺼짐과 권한 상태를 제목에 함께 보여 준다.
+    ///
+    /// 애드혹 서명이라 앱을 다시 빌드하면 손쉬운 사용 목록의 항목이 낡은 서명을 가리키게 되고,
+    /// 목록에는 켜져 있는데 실제로는 권한이 없는 상태가 된다. 그때 여기서 알아챌 수 있어야 한다.
+    private func updateFollowClaudeItem() {
+        guard let item = followClaudeItem else { return }
+        if ClaudeAppNavigator.isPermitted {
+            item.title = "Claude 앱에서 세션까지 따라가기"
+            item.state = followsClaudeSession ? .on : .off
+        } else {
+            item.title = "Claude 앱에서 세션까지 따라가기 — 권한 필요"
+            item.state = .off
+        }
+    }
+
+    /// Claude 앱 안에서 그 세션까지 따라간다. 안 되면 조용히 앞으로 보낸 것으로 끝낸다.
+    private func followClaudeSessionIfPossible(_ payload: StatePayload?) {
+        ClaudeAppNavigator.log("클릭 · 따라가기=\(followsClaudeSession) 권한=\(ClaudeAppNavigator.isPermitted) 세션=\(payload?.title ?? "없음")")
+        guard followsClaudeSession, let payload else { return }
+        guard ClaudeAppNavigator.isPermitted else {
+            askAccessibilityOnce()
+            return
+        }
+        ClaudeAppNavigator.focusSession(cliSessionId: payload.id, fallbackTitle: payload.title) { _ in }
+    }
+
+    /// 세션을 누르다 권한이 없을 때는 한 번만 청한다. 누를 때마다 물으면 성가시다.
+    /// 메뉴에서 직접 부를 때는 이 제한을 두지 않는다 — 그때는 사용자가 원해서 온 것이다.
+    private func askAccessibilityOnce() {
+        let defaults = UserDefaults.standard
+        guard !defaults.bool(forKey: accessibilityAskedDefaultsKey) else { return }
+        defaults.set(true, forKey: accessibilityAskedDefaultsKey)
+        askAccessibility()
+    }
+
+    private func askAccessibility() {
+        let alert = NSAlert()
+        alert.messageText = "Claude 앱에서 세션까지 따라가려면 권한이 필요해요"
+        alert.informativeText = [
+            "Claude 앱은 세션을 지정해 여는 길을 열어 두지 않았습니다.",
+            "그래서 레토가 사이드바에서 그 세션을 대신 눌러 줍니다.",
+            "",
+            "시스템 설정 > 개인정보 보호 및 보안 > 손쉬운 사용에서 레토를 켜 주세요.",
+            "권한을 주지 않아도 앱을 앞으로 보내는 것까지는 그대로 됩니다.",
+            "",
+            "발바닥 메뉴의 「Claude 앱에서 세션까지 따라가기」로 언제든 끌 수 있습니다.",
+            "",
+            "목록에 레토가 이미 있는데도 이 안내가 나온다면, 그 항목을 빼고(−) 다시 넣어 주세요.",
+            "베타는 서명이 매번 바뀌어서 예전 항목이 지금 앱을 가리키지 않습니다."
+        ].joined(separator: "\n")
+        alert.addButton(withTitle: "설정 열기")
+        alert.addButton(withTitle: "나중에")
+        if alert.runModal() == .alertFirstButtonReturn {
+            ClaudeAppNavigator.requestPermission()
+            if let url = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility") {
+                NSWorkspace.shared.open(url)
+            }
         }
     }
 

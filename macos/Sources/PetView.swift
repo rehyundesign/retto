@@ -22,6 +22,10 @@ final class RettoView: NSView {
     private var dragStartWindowOrigin: NSPoint?
     private var pressedTarget: PetClickTarget?
     private var didDrag = false
+    /// 끌고 가는 동안 달리는 방향. 끌지 않으면 nil.
+    private var dragRun: DragRun?
+    /// 방향을 마지막으로 판단한 마우스 x. 미세한 떨림으로 좌우가 튀지 않게 한다.
+    private var lastDragX: CGFloat?
     private var isRibbonHovering = false
     private var sessionCount = 0
     private var attentionCount = 0
@@ -205,9 +209,15 @@ final class RettoView: NSView {
         setAccessibilityLabel("\(payload?.project ?? "Claude Code"), \(animation.title).\(message) \(selection), 총 \(sessionCount)개 세션.\(attention)")
     }
 
+    /// 지금 그려야 하는 동작. 끄는 중이면 달리기가 상태를 이긴다.
+    private var currentAnimation: Animation? {
+        if let dragRun { return dragRunAnimations[dragRun] }
+        return animationCatalog[visibleState]
+    }
+
     private func restartAnimation() {
         animationTimer?.invalidate()
-        guard let animation = animationCatalog[visibleState] else { return }
+        guard let animation = currentAnimation else { return }
         let timer = Timer(timeInterval: animation.interval, repeats: true) { [weak self] _ in
             self?.advanceFrame()
         }
@@ -217,7 +227,7 @@ final class RettoView: NSView {
     }
 
     private func advanceFrame() {
-        guard lookDirection == nil, let animation = animationCatalog[visibleState] else { return }
+        guard dragRun != nil || lookDirection == nil, let animation = currentAnimation else { return }
         frameIndex = (frameIndex + 1) % animation.frames
         if frameIndex == 0 { completedCycles += 1 }
         // 반응은 한 바퀴만 돌고 실제 상태로 돌아간다.
@@ -361,9 +371,22 @@ final class RettoView: NSView {
         // 배지를 눌러 끌면 창이 움직이지 않게 막는다.
         if pressedTarget == .badge { return }
         window?.setFrameOrigin(NSPoint(x: startOrigin.x + deltaX, y: startOrigin.y + deltaY))
-        // 코덱스 펫은 끌려가는 방향으로 달린다(아틀라스 행 1·2). 여기서는 쓰지 않는다 —
-        // 그 두 행은 대기 프레임보다 크게 그려져 있고 꼬리가 셀 경계에서 잘려 있어서,
-        // 끌 때마다 레토가 확대되고 꼬리가 사라진다. 행을 다시 생성하면 살릴 수 있다.
+        // 코덱스 펫처럼 끌리는 방향으로 달린다. 방향은 직전 위치와의 차이로 정하고,
+        // 2pt 를 넘지 않는 떨림은 무시한다 — 안 그러면 좌우가 매 프레임 뒤집힌다.
+        let previousX = lastDragX ?? startMouse.x
+        let step = currentMouse.x - previousX
+        var next = dragRun
+        if step > 2 { next = .right; lastDragX = currentMouse.x }
+        else if step < -2 { next = .left; lastDragX = currentMouse.x }
+        else if dragRun == nil { next = deltaX >= 0 ? .right : .left; lastDragX = currentMouse.x }
+        if next != dragRun {
+            dragRun = next
+            // 시선 추적은 끄는 동안 쉰다. 손을 놓으면 다시 따라간다.
+            lookDirection = nil
+            frameIndex = 0
+            completedCycles = 0
+            restartAnimation()
+        }
     }
 
     override func mouseUp(with event: NSEvent) {
@@ -374,6 +397,13 @@ final class RettoView: NSView {
             dragStartWindowOrigin = nil
             pressedTarget = nil
             didDrag = false
+            if dragRun != nil {
+                dragRun = nil
+                lastDragX = nil
+                frameIndex = 0
+                completedCycles = 0
+                restartAnimation()
+            }
             if isBadgePressed {
                 isBadgePressed = false
                 startBadgeAnimator()
@@ -409,7 +439,10 @@ final class RettoView: NSView {
         let petRect = layout.petRect
         let row: Int
         let column: Int
-        if let direction = lookDirection {
+        if let dragRun, let run = dragRunAnimations[dragRun] {
+            row = run.row
+            column = frameIndex
+        } else if let direction = lookDirection {
             row = direction < 8 ? 9 : 10
             column = direction < 8 ? direction : direction - 8
         } else {

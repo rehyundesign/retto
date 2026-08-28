@@ -8,14 +8,14 @@
 //   cwebp -lossless out.png -o assets/spritesheet.webp
 //
 // 새로 그린 자는 그림이 있으면 그것을 행 11 에 얹는다. 스트립은 가로로 이어 붙인
-// 1536×208 PNG(192×208 여섯 칸, 투명 배경)여야 한다.
+// 1344×240 PNG(224×240 여섯 칸, 투명 배경)여야 한다.
 //
 //   swift tools/sprite-sleep.swift assets/spritesheet.webp out.png --strip sleeping.png
 //   cwebp -lossless out.png -o assets/spritesheet.webp
 import AppKit
 
-let cellWidth: CGFloat = 192
-let cellHeight: CGFloat = 208
+let cellWidth: CGFloat = 224
+let cellHeight: CGFloat = 240
 let columns = 8
 let sourceRow = 0        // 대기
 let sourceColumn = 2     // 눈을 감은 프레임
