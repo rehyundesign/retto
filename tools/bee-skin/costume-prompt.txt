@@ -1,0 +1,11 @@
+The FIRST image is a grid of animation frames of the same ragdoll kitten on a flat blue background, with empty margins around each kitten. The SECOND image shows the exact plush bumblebee costume to use.
+
+Dress EVERY kitten in the grid in that same costume: a bright soft-yellow fleece hood with two big round fluffy pale-yellow pom-pom ears on top and two thin dark antennae standing up between them, each antenna ending in a small yellow ball. A tiny simple embroidered face sits on the front of the hood. Around the neck, a thick fluffy white collar ruff. Over the body, a short round bee suit in horizontal stripes of warm yellow and soft dark brown, and two small translucent pale wings peeking out at the back.
+
+The hood opening frames each kitten's own face, so its blue eyes, pink nose, white muzzle and cheek fur stay fully visible and unchanged. The paws and the tail stay free and visible.
+
+The costume must be IDENTICAL in colour, shape and detail in every cell — same yellow, same stripe pattern, same pom-pom ears, same antennae, same white ruff. Only the way the fabric drapes changes with the pose, following the body naturally: the hood stays on the head and tilts with it, the antennae stay upright, the striped suit follows the body and folds where it bends.
+
+Keep every kitten exactly as it is otherwise — same pose, same body shape, same size, same position on the canvas, same face, same blue eyes. Each kitten with its costume stays entirely inside the empty margin of its own cell and must not touch or cross a cell boundary or the outer edge of the image.
+
+No gridlines, no borders, no shadows, no text, no letters, no tags, no logos. Background stays a completely flat solid blue #0369F3 everywhere.

@@ -25,12 +25,14 @@ enum DragRun {
 enum PetSkin: String, CaseIterable {
     case classic
     case angelWings
+    case bee
     case rilakkuma
 
     var label: String {
         switch self {
         case .classic: return "기본"
         case .angelWings: return "천사 날개"
+        case .bee: return "꿀벌"
         case .rilakkuma: return "리락쿠마"
         }
     }
@@ -40,6 +42,7 @@ enum PetSkin: String, CaseIterable {
         switch self {
         case .classic: return "spritesheet"
         case .angelWings: return "spritesheet-angel"
+        case .bee: return "spritesheet-bee"
         case .rilakkuma: return "spritesheet-rilakkuma"
         }
     }
