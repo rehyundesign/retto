@@ -1,0 +1,68 @@
+// 세션을 어디서 열지(VS Code · Claude 앱)와 그 딥링크.
+
+import AppKit
+import CoreText
+import Foundation
+
+enum OpenApp {
+    case vscode
+    case claude
+
+    var bundleIdentifier: String {
+        switch self {
+        case .vscode: return "com.microsoft.VSCode"
+        case .claude: return "com.anthropic.claudefordesktop"
+        }
+    }
+
+    var fallbackPath: String {
+        switch self {
+        case .vscode: return "/Applications/Visual Studio Code.app"
+        case .claude: return "/Applications/Claude.app"
+        }
+    }
+
+    /// VS Code 는 세션이 사는 폴더 창을 먼저 앞으로 보내야 딥링크가 그 창에 배달된다.
+    /// Claude 앱은 세션이 창 하나 안에 모여 있어서 그 단계가 없다.
+    var needsWindowFocusFirst: Bool { self == .vscode }
+}
+
+/// 훅이 적어 둔 클라이언트를 앱으로 옮긴다. 모르면 VS Code — 훅이 이 값을 적기 전에 시작된 세션들이다.
+/// 고른 앱이 깔려 있지 않으면 다른 쪽으로 보낸다.
+///
+/// 받는 사람이 Claude 앱만 쓰거나 VS Code 만 쓰는 경우가 있다. 예전에는 없는 앱을 열려다
+/// 삐 소리만 났다. 둘 다 없으면 고른 것을 그대로 돌려준다 — 그때는 어차피 열 수 없다.
+func installedOpenApp(preferred: OpenApp, isInstalled: (OpenApp) -> Bool) -> OpenApp {
+    if isInstalled(preferred) { return preferred }
+    let other: OpenApp = preferred == .vscode ? .claude : .vscode
+    return isInstalled(other) ? other : preferred
+}
+
+func openApp(forClient client: String?) -> OpenApp {
+    client == "claude" ? .claude : .vscode
+}
+
+func claudeDeepLink(sessionId: String?, app: OpenApp) -> URL? {
+    var components = URLComponents()
+    switch app {
+    case .vscode:
+        components.scheme = "vscode"
+        components.host = "anthropic.claude-code"
+        components.path = "/open"
+    case .claude:
+        // 앱의 URL 핸들러가 이 세션 id 로 `importCliSession` 을 부른다.
+        components.scheme = "claude"
+        components.host = "resume"
+    }
+    if let sessionId, !sessionId.isEmpty {
+        components.queryItems = [URLQueryItem(name: "session", value: sessionId)]
+    }
+    return components.url
+}
+
+final class OverlayPanel: NSPanel {
+    override var canBecomeKey: Bool { false }
+    override var canBecomeMain: Bool { false }
+}
+
+/// 코덱스 배지가 쓰는 스프링 등장을 근사한다. 살짝 넘겼다가 제자리로 온다.
