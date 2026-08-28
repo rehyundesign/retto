@@ -8,6 +8,33 @@ if CommandLine.arguments.contains("--self-test") {
     exit(runSelfTest())
 }
 
+/// 발바닥 메뉴의 「레토 제거」와 같은 코드를 화면 없이 돌린다.
+/// 설치기가 스크립트로 깔아 주므로 지우는 쪽도 스크립트로 되는 편이 맞고,
+/// 알림창을 클릭해야만 도는 코드는 시험해 볼 방법이 없다.
+/// `--keep-app` 을 붙이면 앱 본체는 휴지통에 넣지 않는다.
+if CommandLine.arguments.contains("--uninstall") {
+    let outcome = performUninstall()
+    for line in outcome.lines { print(line) }
+    if let bundleID = Bundle.main.bundleIdentifier {
+        UserDefaults.standard.removePersistentDomain(forName: bundleID)
+        UserDefaults.standard.synchronize()
+        print("· 앱 설정을 지웠습니다")
+    }
+    if !CommandLine.arguments.contains("--keep-app") {
+        let bundleURL = Bundle.main.bundleURL
+        let done = DispatchSemaphore(value: 0)
+        var trashError: Error?
+        NSWorkspace.shared.recycle([bundleURL]) { _, error in
+            trashError = error
+            done.signal()
+        }
+        _ = done.wait(timeout: .now() + 10)
+        if trashError == nil { print("· 앱을 휴지통으로 옮겼습니다") }
+        else { print("· ⚠ 앱을 휴지통으로 옮기지 못했습니다 — \(bundleURL.path) 를 직접 지워 주세요") }
+    }
+    exit(outcome.hadProblem ? 1 : 0)
+}
+
 if CommandLine.arguments.contains("--shape-report") {
     // 이미지 없이 윤곽을 확인한다: 높이별 폭과 인접 선분 사이의 최대 꺾임 각도.
     func report(_ name: String, _ path: NSBezierPath) {
