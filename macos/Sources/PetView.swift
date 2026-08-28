@@ -5,7 +5,10 @@ import CoreText
 import Foundation
 
 final class RettoView: NSView {
-    private let spriteSheet: NSImage
+    /// 지금 그리는 아틀라스. 스킨을 고르면 앱이 갈아 끼운다.
+    var spriteSheet: NSImage {
+        didSet { needsDisplay = true }
+    }
     private let onOpenClaude: (StatePayload?, Bool) -> Void
     private let onOpenAttention: (NSPoint) -> Void
     private var payload: StatePayload?
@@ -697,14 +700,49 @@ final class RettoView: NSView {
     }
 
     /// 이름표 한 줄에 들어갈 만큼만 남긴다.
+    /// 뒤만 자르면 같은 프로젝트의 세션들이 전부 같은 이름표가 된다 —
+    /// "백오피스 조직별 화면 목업…" 이 둘이면 어느 쪽인지 알 수 없다.
+    /// 앞뒤를 남기고 가운데를 줄여 무엇에 관한 세션인지와 어떤 세션인지를 함께 보인다.
+    /// 뒤가 앞보다 더 잘 갈라서(대개 앞은 프로젝트, 뒤는 하는 일) 뒤에 조금 더 준다.
     private func fittedSingleLine(_ text: String, maxWidth: CGFloat, attributes: [NSAttributedString.Key: Any]) -> NSString {
         guard maxWidth > 0 else { return "" as NSString }
-        if (text as NSString).size(withAttributes: attributes).width <= maxWidth { return text as NSString }
-        var trimmed = text
-        while !trimmed.isEmpty, ((trimmed + "…") as NSString).size(withAttributes: attributes).width > maxWidth {
-            trimmed = String(trimmed.dropLast())
+        func width(_ candidate: String) -> CGFloat {
+            (candidate as NSString).size(withAttributes: attributes).width
         }
-        return (trimmed.trimmingCharacters(in: .whitespaces) + "…") as NSString
+        if width(text) <= maxWidth { return text as NSString }
+
+        let characters = Array(text)
+        func candidate(_ head: Int, _ tail: Int) -> String {
+            String(characters.prefix(head)) + "…" + String(characters.suffix(tail))
+        }
+        // 앞뒤를 번갈아 한 글자씩 늘린다. 한쪽만 먼저 채우면 반대쪽이 통째로 사라져
+        // "…조직별 화면 목업 다시 봐줘" 처럼 무슨 프로젝트인지가 날아간다.
+        // 같은 길이면 뒤를 먼저 준다 — 앞은 대개 프로젝트라 서로 같고, 뒤가 세션을 가른다.
+        var head = 0
+        var tail = 0
+        while head + tail < characters.count {
+            let growTailFirst = tail <= head
+            let order = growTailFirst ? [(head, tail + 1), (head + 1, tail)] : [(head + 1, tail), (head, tail + 1)]
+            var grew = false
+            for (h, t) in order where h + t <= characters.count && width(candidate(h, t)) <= maxWidth {
+                head = h
+                tail = t
+                grew = true
+                break
+            }
+            if !grew { break }
+        }
+        // 가운데를 줄일 자리조차 없으면 예전처럼 뒤를 자른다.
+        guard head + tail > 0 else {
+            var trimmed = text
+            while !trimmed.isEmpty, width(trimmed + "…") > maxWidth {
+                trimmed = String(trimmed.dropLast())
+            }
+            return (trimmed.trimmingCharacters(in: .whitespaces) + "…") as NSString
+        }
+        let front = String(characters.prefix(head)).trimmingCharacters(in: .whitespaces)
+        let back = String(characters.suffix(tail)).trimmingCharacters(in: .whitespaces)
+        return (front + "…" + back) as NSString
     }
 
     /// 주어진 칸에 들어갈 만큼만 남기고 잘라낸다. 잘렸으면 끝에 … 를 붙인다.
@@ -769,9 +807,15 @@ final class RettoView: NSView {
             // 떠오르다 사라진다. 갓 나온 것과 사라지는 것 모두 옅게.
             let fade = sin(phase * .pi)
             guard fade > 0.05 else { continue }
+            // 어두운 회색 하나로 그리면 어두운 배경화면에서 통째로 사라진다. 자는 상태는 말풍선을
+            // 건드리지 않기로 했으니 이 z 가 유일한 신호인데, 그게 배경에 따라 없어지면 안 된다.
+            // 말풍선과 같은 크림색으로 칠하고 어두운 테두리를 둘러 양쪽 배경에서 다 읽히게 한다.
+            // strokeWidth 가 음수면 채우기와 테두리를 함께 그린다.
             let attributes: [NSAttributedString.Key: Any] = [
                 .font: petFont(typeface, size: size, bold: true),
-                .foregroundColor: NSColor(calibratedWhite: 0.30, alpha: 0.72 * fade)
+                .foregroundColor: hexColor(0xFFFBE8).withAlphaComponent(0.92 * fade),
+                .strokeColor: NSColor(calibratedWhite: 0.22, alpha: 0.70 * fade),
+                .strokeWidth: -3.0
             ]
             let text = "z" as NSString
             text.draw(
@@ -841,6 +885,13 @@ final class StateMonitor {
         let pollingTimer = Timer(timeInterval: 0.25, repeats: true) { [weak self] _ in self?.poll() }
         timer = pollingTimer
         RunLoop.main.add(pollingTimer, forMode: .common)
+    }
+
+    /// 타이머는 `.common` 모드라 알림창이 떠 있는 동안에도 계속 돈다. 평소에는 그게 맞지만,
+    /// 제거처럼 상태를 걷어내는 중에는 멈춰야 방금 지운 것이 폴링 때문에 되살아나지 않는다.
+    func stop() {
+        timer?.invalidate()
+        timer = nil
     }
 
     private func poll() {
