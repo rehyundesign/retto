@@ -1,0 +1,13 @@
+The FIRST image is a grid of animation frames of the same ragdoll kitten on a flat green background, with empty margins around each kitten. The SECOND image shows exactly the colouring to apply.
+
+Recolour EVERY kitten in the grid to match the SECOND image. Copy from it: the deep navy body coat, the darker navy ears and tail, the pale silvery periwinkle chest, muzzle, cheeks and chin, the soft navy mask over the forehead and around the eyes, the warm pink inner ears and paw pads.
+
+Eyes: large round wide-open kitten eyes with a bright cherry-red iris, a soft lighter red rim and two crisp white highlights. Gentle and curious, no frown, no shadow over the eyes.
+
+Forehead: the same gold crescent moon on every kitten, horns pointing up, about a fifth of the head width, sitting centred just above the eyes. It is FUR THAT IS COLOURED, not an object — the hairs inside the shape are gold instead of dark, lying in the same direction with the same fluffy texture, individual strands crossing the edge so the outline is soft and feathered. Completely flat and matte: no outline, no gloss, no highlight, no shadow.
+
+The colouring must be IDENTICAL in every cell — same navy, same mask placement, same pale chest, same crescent, same eye colour. Only the way light falls changes with the pose.
+
+Keep every kitten exactly as it is otherwise — same pose, same body shape, same size, same position on the canvas, same expression. No costume, no clothes, no accessories. Each kitten stays entirely inside the empty margin of its own cell and must not touch or cross a cell boundary or the outer edge of the image.
+
+No gridlines, no borders, no shadows, no text, no letters, no logos. The background must stay a completely flat solid GREEN #00B140 everywhere — never blue.
