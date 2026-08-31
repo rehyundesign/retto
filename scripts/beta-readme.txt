@@ -1,5 +1,5 @@
 레토 (Retto) __VERSION__ — 베타
-Claude Code 상태에 맞춰 움직이는 랙돌 고양이
+Claude Code와 Codex 상태에 맞춰 움직이는 랙돌 고양이
 
 
 ■ 설치
@@ -28,7 +28,7 @@ Claude Code 상태에 맞춰 움직이는 랙돌 고양이
 
   · 애플 실리콘 맥 (M1 이상)  — 인텔 맥에서는 실행되지 않습니다
   · macOS 13 (Ventura) 이상
-  · Claude Code
+  · Claude Code 또는 Codex (둘 다 함께 사용 가능)
   · Node.js  — 상태를 읽는 훅이 node 로 돕니다 (https://nodejs.org)
 
 
@@ -37,12 +37,22 @@ Claude Code 상태에 맞춰 움직이는 랙돌 고양이
   · ~/Applications/Retto Claude Pet.app          앱
   · ~/.claude/retto-pet/                          상태 파일과 훅
   · ~/.claude/settings.json                      훅 등록
-    이미 있던 훅은 건드리지 않고, 고치기 전에 백업을 남깁니다.
+  · ~/.codex/hooks.json                          Codex 훅 등록
+    이미 있던 훅은 건드리지 않고, Claude 설정은 고치기 전에 백업을 남깁니다.
+
+
+■ Codex 는 설치 뒤 한 번 승인해 줘야 합니다
+
+  Codex 는 새로 등록된 훅을 바로 돌리지 않습니다. 설치하고 Codex 를 다시 켜면
+  "hooks are new or changed" 같은 안내와 함께 승인 화면이 뜹니다. 거기서 허용해야
+  레토가 Codex 세션을 보기 시작합니다. 승인 전에는 Claude Code 세션만 보입니다.
+
+  레토를 업데이트해 훅이 다시 등록되면 같은 승인을 한 번 더 물어봅니다.
 
 
 ■ 색이 뜻하는 것
 
-  초록   Claude 가 일하는 중
+  초록   Claude 또는 Codex가 일하는 중
   파랑   네 결정을 기다리는 중 (권한 요청·질문)
   주황   답이 끝났는데 아직 안 본 것
   빨강   실패
@@ -51,7 +61,7 @@ Claude Code 상태에 맞춰 움직이는 랙돌 고양이
 
 ■ 쓰는 법
 
-  · 몸통이나 말풍선을 클릭   →  그 세션을 Claude Code(또는 Claude 앱)에서 엽니다
+  · 몸통이나 말풍선을 클릭   →  그 세션을 Claude Code·Claude 앱·Codex에서 엽니다
   · 말풍선 오른쪽 위 주황 배지 →  답이 끝난 세션이 여럿일 때 목록이 나옵니다
   · 말풍선 위에 마우스를 올리면 →  잘린 문장이 있을 때 아래로 펼쳐집니다
   · 레토를 끌면            →  옮겨집니다
@@ -61,7 +71,10 @@ Claude Code 상태에 맞춰 움직이는 랙돌 고양이
   · 크기        35% ~ 140% 일곱 단계
   · 위치        자유 위치, 네 모서리 고정 중에서 고릅니다. 고정하면 크기가
                 바뀌어도 그 모서리에 계속 붙어 있고, 끌면 고정이 풀립니다
-  · 세션 열 곳   VS Code / Claude 앱 / 자동(세션이 시작된 곳)
+  · 세션 열 곳   Claude 세션용: VS Code / Claude 앱 / 자동
+                 Codex task는 항상 Codex에서 엽니다
+  · AI 세션      Claude 세션과 Codex task를 나눠 보여줍니다
+  · AI 세션 열 곳 > Codex task   자동 연결 상태를 확인하고 설정 파일을 엽니다
   · 완료 표시 지우기   주황 배지를 한 번에 내려놓습니다
   · 로그인할 때 자동 실행
   · 클릭 통과     마우스가 레토를 통과해 뒤 창을 누릅니다

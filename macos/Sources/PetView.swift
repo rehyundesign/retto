@@ -103,7 +103,7 @@ final class RettoView: NSView {
         wantsLayer = true
         layer?.backgroundColor = NSColor.clear.cgColor
         setAccessibilityRole(.group)
-        setAccessibilityLabel("Claude Code 상태를 보여주는 " + Retto.character + " " + Retto.koreanName)
+        setAccessibilityLabel("Claude Code와 Codex 상태를 보여주는 " + Retto.character + " " + Retto.koreanName)
         restartAnimation()
     }
 
@@ -206,7 +206,8 @@ final class RettoView: NSView {
         // 말풍선 내용도 읽어 준다. 소리로만 듣는 경우 이게 유일한 통로다.
         let spoken = bodyText()
         let message = spoken.isEmpty ? "" : " \(String(spoken.prefix(160)))."
-        setAccessibilityLabel("\(payload?.project ?? "Claude Code"), \(animation.title).\(message) \(selection), 총 \(sessionCount)개 세션.\(attention)")
+        let source = payload?.sourceLabel ?? "AI"
+        setAccessibilityLabel("\(source), \(payload?.project ?? "AI 작업"), \(animation.title).\(message) \(selection), 총 \(sessionCount)개 세션.\(attention)")
     }
 
     /// 지금 그려야 하는 동작. 끄는 중이면 달리기가 상태를 이긴다.
@@ -958,4 +959,3 @@ final class StateMonitor {
         }
     }
 }
-

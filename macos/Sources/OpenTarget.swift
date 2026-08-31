@@ -1,4 +1,4 @@
-// 세션을 어디서 열지(VS Code · Claude 앱)와 그 딥링크.
+// 세션을 어디서 열지(VS Code · Claude 앱 · Codex)와 그 딥링크.
 
 import AppKit
 import CoreText
@@ -7,11 +7,13 @@ import Foundation
 enum OpenApp {
     case vscode
     case claude
+    case codex
 
     var bundleIdentifier: String {
         switch self {
         case .vscode: return "com.microsoft.VSCode"
         case .claude: return "com.anthropic.claudefordesktop"
+        case .codex: return "com.openai.codex"
         }
     }
 
@@ -19,6 +21,7 @@ enum OpenApp {
         switch self {
         case .vscode: return "/Applications/Visual Studio Code.app"
         case .claude: return "/Applications/Claude.app"
+        case .codex: return "/Applications/ChatGPT.app"
         }
     }
 
@@ -37,7 +40,17 @@ enum OpenApp {
     ///                                      우리가 가진 것은 Claude Code 세션 UUID 라 걸리지 않는다.
     ///
     /// 앱을 앞으로 보내는 것까지만 한다. 세션 목록은 앱이 스스로 보여 준다.
-    var hasSessionDeepLink: Bool { self == .vscode }
+    var hasSessionDeepLink: Bool { self != .claude }
+}
+
+let aiSessionOpenMenuTitle = "AI 세션 열 곳"
+let emptyClaudeSessionLabel = "Claude · 실행 중인 세션 없음"
+let emptyCodexSessionLabel = "Codex · 실행 중인 task 없음"
+
+/// Codex task는 다른 앱으로 보낼 수 없으므로 선택값이 아니라 고정 목적지로 보여 준다.
+/// 실제 실행 허용 여부는 Codex가 관리하므로 여기서는 hooks.json 등록 여부만 덧붙인다.
+func codexOpenTargetMenuLabel(isRegistered: Bool) -> String {
+    isRegistered ? "Codex task → Codex 앱 · 자동" : "Codex task → Codex 앱 · 훅 확인 필요"
 }
 
 /// 훅이 적어 둔 클라이언트를 앱으로 옮긴다. 모르면 VS Code — 훅이 이 값을 적기 전에 시작된 세션들이다.
@@ -47,15 +60,24 @@ enum OpenApp {
 /// 삐 소리만 났다. 둘 다 없으면 고른 것을 그대로 돌려준다 — 그때는 어차피 열 수 없다.
 func installedOpenApp(preferred: OpenApp, isInstalled: (OpenApp) -> Bool) -> OpenApp {
     if isInstalled(preferred) { return preferred }
-    let other: OpenApp = preferred == .vscode ? .claude : .vscode
-    return isInstalled(other) ? other : preferred
+    let fallbacks: [OpenApp]
+    switch preferred {
+    case .vscode: fallbacks = [.claude, .codex]
+    case .claude: fallbacks = [.vscode, .codex]
+    case .codex: fallbacks = [.claude, .vscode]
+    }
+    return fallbacks.first(where: isInstalled) ?? preferred
 }
 
 func openApp(forClient client: String?) -> OpenApp {
-    client == "claude" ? .claude : .vscode
+    switch client {
+    case "claude": return .claude
+    case "codex": return .codex
+    default: return .vscode
+    }
 }
 
-func claudeDeepLink(sessionId: String?, app: OpenApp) -> URL? {
+func sessionDeepLink(sessionId: String?, app: OpenApp) -> URL? {
     var components = URLComponents()
     switch app {
     case .vscode:
@@ -65,8 +87,13 @@ func claudeDeepLink(sessionId: String?, app: OpenApp) -> URL? {
     case .claude:
         // 세션을 집어 띄우는 길이 없다 — `hasSessionDeepLink` 에 이유를 적어 두었다.
         return nil
+    case .codex:
+        guard let sessionId, !sessionId.isEmpty else { return nil }
+        components.scheme = "codex"
+        components.host = "threads"
+        components.path = "/\(sessionId)"
     }
-    if let sessionId, !sessionId.isEmpty {
+    if app == .vscode, let sessionId, !sessionId.isEmpty {
         components.queryItems = [URLQueryItem(name: "session", value: sessionId)]
     }
     return components.url

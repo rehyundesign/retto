@@ -36,13 +36,13 @@ func performUninstall(bundle: Bundle = .main) -> UninstallOutcome {
         do {
             try process.run()
             process.waitUntilExit()
-            if process.terminationStatus == 0 { outcome.ok("Claude 훅 등록을 뺐습니다") }
-            else { outcome.warn("훅 등록을 빼지 못했습니다 — settings.json 을 직접 확인해 주세요") }
+            if process.terminationStatus == 0 { outcome.ok("Claude·Codex 훅 등록을 뺐습니다") }
+            else { outcome.warn("훅 등록을 빼지 못했습니다 — Claude settings.json과 Codex hooks.json을 확인해 주세요") }
         } catch {
-            outcome.warn("훅 제거를 실행하지 못했습니다 — settings.json 을 직접 확인해 주세요")
+            outcome.warn("훅 제거를 실행하지 못했습니다 — Claude settings.json과 Codex hooks.json을 확인해 주세요")
         }
     } else {
-        outcome.warn("node 가 없어 훅 등록이 남습니다 — settings.json 을 직접 확인해 주세요")
+        outcome.warn("node 가 없어 훅 등록이 남습니다 — Claude settings.json과 Codex hooks.json을 확인해 주세요")
     }
 
     // 2. 상태 파일과 설치된 훅. 옛 이름(reto-pet)으로 깔렸던 폴더도 같이 본다.

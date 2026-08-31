@@ -1,4 +1,4 @@
-// Claude Code 훅이 적어 둔 세션 상태를 읽고 무엇을 먼저 보여줄지 정한다.
+// Claude Code와 Codex 훅이 적어 둔 세션 상태를 읽고 무엇을 먼저 보여줄지 정한다.
 
 import AppKit
 import CoreText
@@ -112,6 +112,8 @@ struct StatePayload: Decodable {
     let updatedAt: String?
     let event: String?
     let sessionId: String?
+    let rawSessionId: String?
+    let source: String?
     let cwd: String?
     let toolName: String?
     let notificationType: String?
@@ -131,10 +133,13 @@ struct StatePayload: Decodable {
 
     var petState: PetState { PetState(rawValue: state) ?? .idle }
     var id: String { sessionId ?? "" }
+    /// 레지스트리에서는 제품별 접두어를 붙이지만 딥링크에는 원래 세션 id가 들어간다.
+    var navigationSessionId: String { rawSessionId ?? sessionId ?? "" }
+    var sourceLabel: String { source == "codex" || client == "codex" ? "Codex" : "Claude" }
     var project: String {
         if let projectName, !projectName.isEmpty { return projectName }
         if let cwd, !cwd.isEmpty { return URL(fileURLWithPath: cwd).lastPathComponent }
-        return "Claude Code"
+        return sourceLabel == "Codex" ? "Codex" : "Claude Code"
     }
     /// 이름표에 쓰는 이름. Claude Code 가 트랜스크립트에 적어 둔 세션 타이틀이 첫째다.
     /// 사용자가 직접 바꾼 이름 → Claude 가 붙인 이름 → 진행 중 작업 → 보낸 프롬프트 → 레포 순.
@@ -204,6 +209,30 @@ func transcriptAccessedAtMs(path: String?) -> Double? {
     var info = stat()
     guard stat(path, &info) == 0 else { return nil }
     return TimeInterval(info.st_atimespec.tv_sec) * 1000 + TimeInterval(info.st_atimespec.tv_nsec) / 1_000_000
+}
+
+/// 두 클라이언트는 같은 말을 다른 모양으로 적는다. 훅의 `assistantTextIn` 과 같은 규칙이다.
+///   Claude : {"type":"assistant","message":{"content":[{"type":"text","text":…}]}}
+///   Codex  : {"type":"response_item","payload":{"type":"message","role":"assistant",
+///                                               "content":[{"type":"output_text","text":…}]}}
+func assistantText(in record: [String: Any]) -> String {
+    let message: [String: Any]?
+    if record["type"] as? String == "assistant" {
+        message = record["message"] as? [String: Any]
+    } else if record["type"] as? String == "response_item",
+              let payload = record["payload"] as? [String: Any],
+              payload["type"] as? String == "message",
+              payload["role"] as? String == "assistant" {
+        message = payload
+    } else {
+        message = nil
+    }
+    guard let content = message?["content"] as? [[String: Any]] else { return "" }
+    return content
+        .filter { $0["type"] as? String == "text" || $0["type"] as? String == "output_text" }
+        .compactMap { $0["text"] as? String }
+        .joined(separator: " ")
+        .trimmingCharacters(in: .whitespacesAndNewlines)
 }
 
 /// 트랜스크립트에서 Claude 가 가장 최근에 쓴 문장을 집는다.
@@ -278,15 +307,8 @@ final class TranscriptReader {
         for line in chunk.split(separator: "\n").reversed() {
             if message.isEmpty, line.contains("\"assistant\"") {
                 if let lineData = line.data(using: .utf8),
-                   let record = try? JSONSerialization.jsonObject(with: lineData) as? [String: Any],
-                   record["type"] as? String == "assistant",
-                   let payload = record["message"] as? [String: Any],
-                   let content = payload["content"] as? [[String: Any]] {
-                    let text = content
-                        .filter { $0["type"] as? String == "text" }
-                        .compactMap { $0["text"] as? String }
-                        .joined(separator: " ")
-                        .trimmingCharacters(in: .whitespacesAndNewlines)
+                   let record = try? JSONSerialization.jsonObject(with: lineData) as? [String: Any] {
+                    let text = assistantText(in: record)
                     if !text.isEmpty { message = String(text.prefix(400)) }
                 }
             }

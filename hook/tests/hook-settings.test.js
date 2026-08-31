@@ -1,8 +1,11 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const {
+  CODEX_EVENT_STATES,
   EVENT_STATES,
+  mergeRettoCodexHooks,
   mergeRettoHooks,
+  removeRettoCodexHooks,
   removeRettoHooks
 } = require('../lib/hook-settings');
 
@@ -66,4 +69,39 @@ test('installs hooks for concurrent sessions, task progress, and user input', ()
   for (const event of ['PostToolBatch', 'Elicitation', 'SubagentStart', 'SubagentStop', 'TaskCreated', 'TaskCompleted']) {
     assert.ok(result.hooks[event], `missing ${event}`);
   }
+});
+
+test('merges supported Codex lifecycle hooks without replacing neighbors', () => {
+  const existing = {
+    description: 'mine',
+    hooks: {
+      Stop: [{ hooks: [{ type: 'command', command: 'announce' }] }]
+    }
+  };
+  const result = mergeRettoCodexHooks(existing, hookPath, '/opt/homebrew/bin/node');
+  assert.equal(result.description, 'mine');
+  assert.equal(result.hooks.Stop[0].hooks[0].command, 'announce');
+  assert.equal(result.hooks.Stop.length, 2);
+  assert.deepEqual(Object.keys(result.hooks).sort(), CODEX_EVENT_STATES.map((entry) => entry.event).sort());
+  const command = result.hooks.UserPromptSubmit[0].hooks[0].command;
+  assert.match(command, /'\/opt\/homebrew\/bin\/node'/);
+  assert.match(command, /'running' 'codex'$/);
+  assert.equal(result.hooks.UserPromptSubmit[0].hooks[0].timeout, 5);
+  assert.equal(result.hooks.UserPromptSubmit[0].hooks[0].async, true);
+  assert.equal(result.hooks.SessionEnd[0].hooks[0].timeout, 3);
+  assert.equal(result.hooks.SessionEnd[0].hooks[0].async, false);
+});
+
+test('Codex hook install is idempotent and removal keeps other hooks', () => {
+  const first = mergeRettoCodexHooks({}, hookPath);
+  const second = mergeRettoCodexHooks(first, hookPath);
+  for (const entry of CODEX_EVENT_STATES) {
+    const handlers = second.hooks[entry.event]
+      .flatMap((group) => group.hooks || [])
+      .filter((handler) => handler.command?.includes(hookPath) && handler.command.includes("'codex'"));
+    assert.equal(handlers.length, 1, entry.event);
+  }
+  second.hooks.Stop.unshift({ hooks: [{ type: 'command', command: 'announce' }] });
+  const removed = removeRettoCodexHooks(second, hookPath);
+  assert.deepEqual(removed.hooks.Stop, [{ hooks: [{ type: 'command', command: 'announce' }] }]);
 });

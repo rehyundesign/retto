@@ -5,9 +5,11 @@ const os = require('node:os');
 const path = require('node:path');
 const { spawn } = require('node:child_process');
 
-function invoke(hookPath, payload, fallbackState = 'idle', env = undefined) {
+function invoke(hookPath, payload, fallbackState = 'idle', env = undefined, source = 'claude') {
   return new Promise((resolve, reject) => {
-    const child = spawn(process.execPath, [hookPath, fallbackState], {
+    const args = [hookPath, fallbackState];
+    if (source === 'codex') args.push('codex');
+    const child = spawn(process.execPath, args, {
       stdio: ['pipe', 'ignore', 'pipe'],
       env: { ...process.env, CLAUDE_CODE_ENTRYPOINT: '', CLAUDE_CODE_EXECPATH: '', ...env }
     });
@@ -35,6 +37,48 @@ test('keeps concurrent Claude sessions instead of losing the last writer', async
   assert.equal(Object.keys(registry.sessions).length, count);
   assert.equal(registry.sessions['session-0'].state, 'waiting');
   assert.equal(registry.sessions['session-1'].displayTitle, '작업 1');
+});
+
+test('stores Codex beside Claude and keeps the raw thread id for deep links', async () => {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'retto-hook-codex-'));
+  const hookPath = path.join(directory, 'hook.cjs');
+  fs.copyFileSync(path.join(__dirname, '..', 'hook.cjs'), hookPath);
+
+  await invoke(hookPath, {
+    hook_event_name: 'UserPromptSubmit',
+    session_id: 'thread-same',
+    cwd: '/tmp/codex-project',
+    prompt: '코덱스 작업'
+  }, 'running', {}, 'codex');
+  await invoke(hookPath, {
+    hook_event_name: 'UserPromptSubmit',
+    session_id: 'thread-same',
+    cwd: '/tmp/claude-project',
+    prompt: '클로드 작업'
+  }, 'running');
+
+  const sessions = JSON.parse(fs.readFileSync(path.join(directory, 'sessions.json'), 'utf8')).sessions;
+  assert.equal(Object.keys(sessions).length, 2);
+  assert.equal(sessions['codex:thread-same'].rawSessionId, 'thread-same');
+  assert.equal(sessions['codex:thread-same'].source, 'codex');
+  assert.equal(sessions['codex:thread-same'].client, 'codex');
+  assert.equal(sessions['codex:thread-same'].displayTitle, '코덱스 작업');
+  assert.equal(sessions['thread-same'].source, 'claude');
+});
+
+test('maps a failed Codex tool result to failed', async () => {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'retto-hook-codex-failure-'));
+  const hookPath = path.join(directory, 'hook.cjs');
+  fs.copyFileSync(path.join(__dirname, '..', 'hook.cjs'), hookPath);
+  await invoke(hookPath, {
+    hook_event_name: 'PostToolUse',
+    session_id: 'failed-tool',
+    tool_name: 'Bash',
+    tool_response: { exit_code: 2, output: 'nope' }
+  }, 'running', {}, 'codex');
+  const session = JSON.parse(fs.readFileSync(path.join(directory, 'sessions.json'), 'utf8')).sessions['codex:failed-tool'];
+  assert.equal(session.state, 'failed');
+  assert.equal(session.attention, true);
 });
 
 test('maps read tools to review and mutating tools to running', async () => {
@@ -186,4 +230,79 @@ test('ghosts already in the file get swept on the next write', async () => {
   const after = registry(directory);
   assert.equal(after.husk, undefined);
   assert.ok(after.kept);
+});
+
+/// 훅은 두 클라이언트의 트랜스크립트를 함께 읽는다. Codex 롤아웃은 한 겹 더 싸여 있고
+/// 글 조각의 이름도 `output_text` 라, Claude 모양만 보던 파서는 말풍선을 빈 채로 남겼다.
+test('reads the latest line from both Claude and Codex transcripts', async () => {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'retto-hook-transcript-'));
+  const hookPath = path.join(directory, 'hook.cjs');
+  fs.copyFileSync(path.join(__dirname, '..', 'hook.cjs'), hookPath);
+
+  const claudeTranscript = path.join(directory, 'claude.jsonl');
+  fs.writeFileSync(claudeTranscript, [
+    JSON.stringify({ type: 'ai-title', aiTitle: '레토 훅 고치기' }),
+    JSON.stringify({ type: 'assistant', message: { content: [{ type: 'text', text: '옛 문장' }] } }),
+    JSON.stringify({ type: 'assistant', message: { content: [{ type: 'text', text: '클로드가 하는 말' }] } })
+  ].join('\n') + '\n');
+
+  const codexTranscript = path.join(directory, 'rollout.jsonl');
+  fs.writeFileSync(codexTranscript, [
+    JSON.stringify({ type: 'session_meta', payload: { cwd: '/tmp/codex-project' } }),
+    JSON.stringify({ type: 'event_msg', payload: { type: 'agent_message', message: '[external_agent_tool_result] 도구 결과' } }),
+    JSON.stringify({
+      type: 'response_item',
+      payload: { type: 'message', role: 'assistant', content: [{ type: 'output_text', text: '코덱스가 하는 말' }] }
+    })
+  ].join('\n') + '\n');
+
+  await invoke(hookPath, {
+    hook_event_name: 'Stop',
+    session_id: 'claude-transcript',
+    transcript_path: claudeTranscript
+  }, 'waving');
+  await invoke(hookPath, {
+    hook_event_name: 'Stop',
+    session_id: 'codex-transcript',
+    transcript_path: codexTranscript
+  }, 'waving', {}, 'codex');
+
+  const sessions = JSON.parse(fs.readFileSync(path.join(directory, 'sessions.json'), 'utf8')).sessions;
+  assert.equal(sessions['claude-transcript'].lastAssistantMessage, '클로드가 하는 말');
+  assert.equal(sessions['claude-transcript'].sessionTitle, '레토 훅 고치기');
+  assert.equal(sessions['codex:codex-transcript'].lastAssistantMessage, '코덱스가 하는 말');
+});
+
+/// Codex 롤아웃에는 이름 줄이 없다. 이름은 `session_index.jsonl` 에 따로 적히므로
+/// 그걸 안 읽으면 이름표가 프로젝트 이름이나 첫 프롬프트로 떨어진다.
+test('names a Codex session from the thread index', async () => {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'retto-hook-thread-name-'));
+  const hookPath = path.join(directory, 'hook.cjs');
+  fs.copyFileSync(path.join(__dirname, '..', 'hook.cjs'), hookPath);
+
+  const codexHome = path.join(directory, 'codex-home');
+  fs.mkdirSync(codexHome);
+  fs.writeFileSync(path.join(codexHome, 'session_index.jsonl'), [
+    JSON.stringify({ id: 'other-thread', thread_name: '남의 스레드' }),
+    JSON.stringify({ id: 'thread-named', thread_name: '옛 이름' }),
+    JSON.stringify({ id: 'thread-named', thread_name: '레토 펫 코덱스 지원' })
+  ].join('\n') + '\n');
+
+  await invoke(hookPath, {
+    hook_event_name: 'UserPromptSubmit',
+    session_id: 'thread-named',
+    cwd: '/tmp/codex-project',
+    prompt: '코덱스도 같이 쓸 수 있게 해줘'
+  }, 'running', { CODEX_HOME: codexHome }, 'codex');
+  await invoke(hookPath, {
+    hook_event_name: 'UserPromptSubmit',
+    session_id: 'thread-unnamed',
+    cwd: '/tmp/codex-project',
+    prompt: '이름 없는 스레드'
+  }, 'running', { CODEX_HOME: codexHome }, 'codex');
+
+  const sessions = JSON.parse(fs.readFileSync(path.join(directory, 'sessions.json'), 'utf8')).sessions;
+  assert.equal(sessions['codex:thread-named'].sessionTitle, '레토 펫 코덱스 지원');
+  assert.equal(sessions['codex:thread-unnamed'].sessionTitle, '');
+  assert.equal(sessions['codex:thread-unnamed'].displayTitle, '이름 없는 스레드');
 });

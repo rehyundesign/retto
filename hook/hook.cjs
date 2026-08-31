@@ -1,5 +1,6 @@
 const fs = require('node:fs');
 const path = require('node:path');
+const os = require('node:os');
 
 const VALID_STATES = new Set(['idle', 'running', 'review', 'waiting', 'failed', 'waving', 'jumping']);
 const chunks = [];
@@ -8,6 +9,7 @@ const registryPath = path.join(petDir, 'sessions.json');
 const legacyStatePath = path.join(petDir, 'state.json');
 const lockPath = path.join(petDir, '.sessions.lock');
 const sleepArray = new Int32Array(new SharedArrayBuffer(4));
+const eventSource = process.argv[3] === 'codex' ? 'codex' : 'claude';
 
 function text(value, limit = 180) {
   if (!value) return '';
@@ -23,7 +25,7 @@ function normalizeError(value) {
 }
 
 function basename(cwd) {
-  if (!cwd) return 'Claude Code';
+  if (!cwd) return eventSource === 'codex' ? 'Codex' : 'Claude Code';
   return path.basename(cwd) || cwd;
 }
 
@@ -40,7 +42,10 @@ function writeJSONAtomic(filePath, value) {
 function withRegistryLock(callback) {
   fs.mkdirSync(petDir, { recursive: true });
   let acquired = false;
-  for (let attempt = 0; attempt < 100; attempt += 1) {
+  // 5ms 씩 600번 = 3초. 훅 등록에 걸어 둔 timeout 5초 안에 들어간다.
+  // 짧게 잡았다가 검사에서 한 번 놓쳤다 — 잠금을 못 잡으면 조용히 그냥 돌아가므로,
+  // 부하가 몰릴 때 상태 한 칸이 소리 없이 사라진다. 기다리는 편이 낫다.
+  for (let attempt = 0; attempt < 600; attempt += 1) {
     try {
       fs.mkdirSync(lockPath);
       acquired = true;
@@ -69,6 +74,8 @@ function eventState(input, fallback) {
     case 'PreToolUse':
       return /^(Read|Grep|Glob|WebFetch|WebSearch|LS|NotebookRead)$/i.test(toolName) ? 'review' : 'running';
     case 'PostToolUse':
+      if (eventSource === 'codex' && toolResponseFailed(input.tool_response)) return 'failed';
+      return 'running';
     case 'PostToolBatch':
     case 'SubagentStart':
     case 'SubagentStop':
@@ -88,6 +95,13 @@ function eventState(input, fallback) {
     case 'SessionEnd': return 'idle';
     default: return VALID_STATES.has(fallback) ? fallback : 'idle';
   }
+}
+
+function toolResponseFailed(response) {
+  if (!response || typeof response !== 'object') return false;
+  if (response.isError === true || response.is_error === true) return true;
+  const exitCode = response.exit_code ?? response.exitCode ?? response.termination_status;
+  return typeof exitCode === 'number' && exitCode !== 0;
 }
 
 /// Claude Code 는 세션 타이틀을 트랜스크립트에 적어 둔다.
@@ -127,6 +141,62 @@ function sessionTitleFrom(transcriptPath) {
 /// 트랜스크립트 끝에서 Claude 가 가장 최근에 쓴 문장을 집는다.
 /// assistant 레코드의 message.content 안 text 블록이 그것이고, 도구를 부를 때마다 새로 쌓이므로
 /// 훅이 돌 때마다 값이 갱신된다 — 그래서 펫 말풍선이 "지금 하는 말" 을 따라간다.
+/// 두 클라이언트는 같은 말을 다른 모양으로 적는다. 한쪽 모양만 읽으면
+/// 다른 쪽 세션의 말풍선이 통째로 비어 "생각중" 에 머문다.
+///   Claude : {"type":"assistant","message":{"content":[{"type":"text","text":…}]}}
+///   Codex  : {"type":"response_item","payload":{"type":"message","role":"assistant",
+///                                               "content":[{"type":"output_text","text":…}]}}
+/// Codex 의 `event_msg:agent_message` 도 같은 문장을 담지만 도구 결과까지 섞여 들어와 쓰지 않는다.
+function assistantTextIn(record) {
+  if (!record || typeof record !== 'object') return '';
+  let message;
+  if (record.type === 'assistant') message = record.message;
+  else if (record.type === 'response_item'
+    && record.payload
+    && record.payload.type === 'message'
+    && record.payload.role === 'assistant') message = record.payload;
+  const content = message && message.content;
+  if (!Array.isArray(content)) return '';
+  return content
+    .filter((block) => block
+      && (block.type === 'text' || block.type === 'output_text')
+      && typeof block.text === 'string')
+    .map((block) => block.text)
+    .join(' ')
+    .trim();
+}
+
+/// Codex 세션의 이름. Claude 와 달리 롤아웃 파일에는 이름 줄이 없고,
+/// Codex 가 따로 `session_index.jsonl` 에 스레드 이름을 적어 둔다(이름이 붙은 스레드만 올라온다).
+/// 이걸 안 읽으면 이름표가 첫 프롬프트로 떨어져, 레토가 내 말을 되돌려 주는 것처럼 읽힌다.
+/// 이름은 자주 바뀌지 않으므로 끝 64KB 만 보고 마지막에 적힌 값을 쓴다.
+function codexThreadNameFrom(threadId) {
+  if (!threadId) return '';
+  const home = process.env.CODEX_HOME || path.join(os.homedir(), '.codex');
+  const indexPath = path.join(home, 'session_index.jsonl');
+  let fd;
+  try {
+    fd = fs.openSync(indexPath, 'r');
+    const size = fs.fstatSync(fd).size;
+    const span = Math.min(size, 65536);
+    const buffer = Buffer.alloc(span);
+    fs.readSync(fd, buffer, 0, span, size - span);
+    let name = '';
+    for (const line of buffer.toString('utf8').split('\n')) {
+      if (!line.includes(threadId)) continue;
+      try {
+        const record = JSON.parse(line);
+        if (record.id === threadId && record.thread_name) name = record.thread_name;
+      } catch {}
+    }
+    return text(name, 80);
+  } catch {
+    return '';
+  } finally {
+    if (fd !== undefined) { try { fs.closeSync(fd); } catch {} }
+  }
+}
+
 function lastAssistantTextFrom(transcriptPath) {
   if (!transcriptPath) return '';
   let fd;
@@ -141,14 +211,7 @@ function lastAssistantTextFrom(transcriptPath) {
       if (!line.includes('"assistant"')) continue;
       let record;
       try { record = JSON.parse(line); } catch { continue; }
-      if (record.type !== 'assistant') continue;
-      const content = record.message && record.message.content;
-      if (!Array.isArray(content)) continue;
-      const text = content
-        .filter((block) => block && block.type === 'text' && typeof block.text === 'string')
-        .map((block) => block.text)
-        .join(' ')
-        .trim();
+      const text = assistantTextIn(record);
       if (text) latest = text;
     }
     return text_(latest);
@@ -215,7 +278,10 @@ function updateRegistry(input, fallbackState) {
   const now = new Date();
   const nowMs = now.getTime();
   const event = input.hook_event_name || input.hookEventName || '';
-  const sessionId = text(input.session_id, 200) || `unknown-${process.ppid}`;
+  const rawSessionId = text(input.session_id, 200) || `unknown-${process.ppid}`;
+  // Claude와 Codex가 우연히 같은 id를 써도 서로 덮지 않는다. 기존 Claude 레코드는
+  // 호환을 위해 예전 UUID를 그대로 두고 Codex 쪽만 접두어를 붙인다.
+  const sessionId = eventSource === 'codex' ? `codex:${rawSessionId}` : rawSessionId;
   const registry = readJSON(registryPath, { version: 1, sessions: {} });
   registry.version = 1;
   registry.sessions = registry.sessions && typeof registry.sessions === 'object' ? registry.sessions : {};
@@ -226,17 +292,22 @@ function updateRegistry(input, fallbackState) {
   const prompt = text(input.prompt, 80);
   const taskSubject = text(input.task_subject || input.subject, 100);
   const lastAssistantMessage = text(input.last_assistant_message, 400);
-  const error = normalizeError(input.error || input.error_type || input.message);
+  const error = normalizeError(input.error || input.error_type || input.message
+    || (toolResponseFailed(input.tool_response) ? input.tool_response : ''));
   const backgroundTaskCount = Array.isArray(input.background_tasks) ? input.background_tasks.length : 0;
   const isClosed = event === 'SessionEnd';
 
   const transcriptPath = input.transcript_path || input.transcriptPath;
-  const sessionTitle = sessionTitleFrom(transcriptPath);
+  const sessionTitle = eventSource === 'codex'
+    ? codexThreadNameFrom(rawSessionId)
+    : sessionTitleFrom(transcriptPath);
   // 새 명령을 받은 순간에는 아직 할 말이 없다. 비워 두면 펫이 "생각중" 을 띄운다.
   const liveMessage = event === 'UserPromptSubmit' ? '' : lastAssistantTextFrom(transcriptPath);
 
   const record = {
     sessionId,
+    rawSessionId,
+    source: eventSource,
     state,
     // 살아 있는 세션에 프로세스가 다시 붙은 것뿐이면 시각도 그대로 둔다.
     // 시각을 밀면 이미 읽은 완료 알림이 안 읽음으로 되살아난다(읽음 판정이 이 시각을 본다).
@@ -260,7 +331,7 @@ function updateRegistry(input, fallbackState) {
     backgroundTaskCount,
     attention: liveRestart ? previous.attention === true : attentionFor(state, event),
     closed: isClosed,
-    client: detectClient() || previous.client || '',
+    client: eventSource === 'codex' ? 'codex' : (detectClient() || previous.client || ''),
     entrypoint: text(process.env.CLAUDE_CODE_ENTRYPOINT, 40) || previous.entrypoint || '',
     // 사람이 이 세션에 말을 건 적이 있나. 유령 세션을 가려내는 유일한 표식이다.
     promptedAt: event === 'UserPromptSubmit' ? now.toISOString() : (previous.promptedAt || ''),

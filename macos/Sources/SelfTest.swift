@@ -101,19 +101,36 @@ func runSelfTest() -> Int32 {
     // VS Code 딥링크는 확장 규격 그대로여야 한다. 한 글자만 틀려도 클릭이 조용히 아무 일도 안 한다.
     // Claude 앱에는 세션을 집어 띄우는 길이 없으므로 링크를 만들지 않는다 —
     // 예전에 쓰던 `claude://resume` 은 세션을 앱으로 가져오는 길이라 누를 때마다 새 창이 떴다.
-    let deepLinkOK = claudeDeepLink(sessionId: "session-test", app: .vscode)?.absoluteString == "vscode://anthropic.claude-code/open?session=session-test"
-        && claudeDeepLink(sessionId: "session-test", app: .claude) == nil
+    let deepLinkOK = sessionDeepLink(sessionId: "session-test", app: .vscode)?.absoluteString == "vscode://anthropic.claude-code/open?session=session-test"
+        && sessionDeepLink(sessionId: "session-test", app: .claude) == nil
+        && sessionDeepLink(sessionId: "thread-test", app: .codex)?.absoluteString == "codex://threads/thread-test"
         && OpenApp.vscode.hasSessionDeepLink
         && !OpenApp.claude.hasSessionDeepLink
+        && OpenApp.codex.hasSessionDeepLink
     // 훅이 적어 둔 클라이언트가 앱으로 옳게 풀리는지. 모르는 값은 예전 동작인 VS Code 로 남아야 한다.
+    // 말풍선 본문은 두 클라이언트의 트랜스크립트에서 온다. Codex 롤아웃은 한 겹 더 싸여 있고
+    // 글 조각 이름도 `output_text` 라, 한쪽 모양만 읽으면 그 클라이언트 말풍선이 빈 채로 남는다.
+    let claudeRecord: [String: Any] = ["type": "assistant", "message": ["content": [["type": "text", "text": "클로드가 하는 말"]]]]
+    let codexRecord: [String: Any] = ["type": "response_item", "payload": ["type": "message", "role": "assistant", "content": [["type": "output_text", "text": "코덱스가 하는 말"]]]]
+    let userRecord: [String: Any] = ["type": "response_item", "payload": ["type": "message", "role": "user", "content": [["type": "input_text", "text": "사람이 한 말"]]]]
+    let transcriptShapesOK = assistantText(in: claudeRecord) == "클로드가 하는 말"
+        && assistantText(in: codexRecord) == "코덱스가 하는 말"
+        && assistantText(in: userRecord).isEmpty
+
     let clientRoutingOK = openApp(forClient: "claude") == .claude
         && openApp(forClient: "vscode") == .vscode
+        && openApp(forClient: "codex") == .codex
         && openApp(forClient: "cli") == .vscode
         && openApp(forClient: nil) == .vscode
         && openApp(forClient: "") == .vscode
     // 창을 먼저 앞으로 보내는 단계는 VS Code 에만 있다. Claude 앱에서 이걸 켜면 딥링크가 영영 안 나간다.
-        && OpenApp.vscode.needsWindowFocusFirst && !OpenApp.claude.needsWindowFocusFirst
+        && OpenApp.vscode.needsWindowFocusFirst && !OpenApp.claude.needsWindowFocusFirst && !OpenApp.codex.needsWindowFocusFirst
         && OpenTarget.allCases.map(\.rawValue) == ["auto", "vscode", "claude"]
+    let codexMenuOK = aiSessionOpenMenuTitle == "AI 세션 열 곳"
+        && emptyClaudeSessionLabel == "Claude · 실행 중인 세션 없음"
+        && emptyCodexSessionLabel == "Codex · 실행 중인 task 없음"
+        && codexOpenTargetMenuLabel(isRegistered: true) == "Codex task → Codex 앱 · 자동"
+        && codexOpenTargetMenuLabel(isRegistered: false) == "Codex task → Codex 앱 · 훅 확인 필요"
     let scalesOK = supportedScales.first == 0.39 && supportedScales.last == 1.4
     // 배율 1에서는 예전 창 크기를 그대로 유지한다.
     let baseline = petLayout(scale: 1)
@@ -297,6 +314,7 @@ func runSelfTest() -> Int32 {
     // 깔려 있지 않은 앱으로 보내지 않는지.
     let fallbackOK = installedOpenApp(preferred: .vscode) { $0 == .claude } == .claude
         && installedOpenApp(preferred: .claude) { $0 == .vscode } == .vscode
+        && installedOpenApp(preferred: .codex) { $0 == .claude } == .claude
         && installedOpenApp(preferred: .vscode) { _ in true } == .vscode
         && installedOpenApp(preferred: .claude) { _ in false } == .claude
 
@@ -349,8 +367,8 @@ func runSelfTest() -> Int32 {
         && !claudeRowMatchesSession(rowLabel: "", sessionTitle: "흠냐링")
         && !claudeRowMatchesSession(rowLabel: "입력 대기 중 흠냐링", sessionTitle: "")
 
-    let ok = claudeRowOK && fallbackOK && cornerOK && lookingOK && sleepRowOK && displayOK && dozeOK && sleepOK && ancientOK && viewedOK && haloOK && assetOK && skinsOK && dragRunOK && behaviorsOK && statesOK && deepLinkOK && clientRoutingOK && scalesOK && baselineOK && decoupledOK && fontOK && priorityOK && registryOK && badgeLayoutOK && clickRoutingOK && gazeStatesOK && expandOK && lineBudgetOK && typefaceOK && textDeltaOK && tonesOK && folderFoldOK && labelOK && doneStaysOK && bubbleShapeOK && seenOK && staleOK
-    print("{\"ok\":\(ok),\"asset\":\"\(Int(image.size.width))x\(Int(image.size.height))\",\"skins\":\(PetSkin.allCases.count),\"skinsOK\":\(skinsOK),\"dragRun\":\(dragRunOK),\"canJoinAllSpaces\":\(behaviorsOK),\"states\":\(animationCatalog.count),\"deepLink\":\(deepLinkOK),\"clientRouting\":\(clientRoutingOK),\"sizePresets\":\(supportedScales.count),\"baselineLayout\":\(baselineOK),\"scaleDecoupled\":\(decoupledOK),\"badgePlacement\":\(badgeLayoutOK),\"ribbonExpand\":\(expandOK),\"lineBudget\":\(lineBudgetOK),\"typefaces\":\(PetTypeface.allCases.count),\"typefaceOK\":\(typefaceOK),\"textDelta\":\(textDeltaOK),\"tones\":\(tonesOK),\"folderFold\":\(folderFoldOK),\"doneStays\":\(doneStaysOK),\"bubbleShape\":\(bubbleShapeOK),\"seenRule\":\(seenOK),\"staleWorking\":\(staleOK),\"headroomClean\":\(haloOK),\"viewedElsewhere\":\(viewedOK),\"ancientNews\":\(ancientOK),\"sleeps\":\(sleepOK),\"sleepRow\":\(sleepRow),\"dozes\":\(dozeOK),\"displayState\":\(displayOK),\"seenByLooking\":\(lookingOK),\"corners\":\(cornerOK),\"appFallback\":\(fallbackOK),\"haloRows\":\(halo.rows),\"haloDeepest\":\(halo.deepest),\"haloFaint\":\(haloFaintPixels),\"claudeRow\":\(claudeRowOK),\"font\":\"\(rettoHandwritingFontName)\",\"fontLoaded\":\(fontOK),\"multiSession\":\(registryOK),\"prioritySelection\":\(priorityOK),\"badgeLayout\":\(badgeLayoutOK),\"clickRouting\":\(clickRoutingOK)}")
+    let ok = claudeRowOK && fallbackOK && cornerOK && lookingOK && sleepRowOK && displayOK && dozeOK && sleepOK && ancientOK && viewedOK && haloOK && assetOK && skinsOK && dragRunOK && behaviorsOK && statesOK && deepLinkOK && clientRoutingOK && codexMenuOK && transcriptShapesOK && scalesOK && baselineOK && decoupledOK && fontOK && priorityOK && registryOK && badgeLayoutOK && clickRoutingOK && gazeStatesOK && expandOK && lineBudgetOK && typefaceOK && textDeltaOK && tonesOK && folderFoldOK && labelOK && doneStaysOK && bubbleShapeOK && seenOK && staleOK
+    print("{\"ok\":\(ok),\"asset\":\"\(Int(image.size.width))x\(Int(image.size.height))\",\"skins\":\(PetSkin.allCases.count),\"skinsOK\":\(skinsOK),\"dragRun\":\(dragRunOK),\"canJoinAllSpaces\":\(behaviorsOK),\"states\":\(animationCatalog.count),\"deepLink\":\(deepLinkOK),\"clientRouting\":\(clientRoutingOK),\"codexMenu\":\(codexMenuOK),\"transcriptShapes\":\(transcriptShapesOK),\"sizePresets\":\(supportedScales.count),\"baselineLayout\":\(baselineOK),\"scaleDecoupled\":\(decoupledOK),\"badgePlacement\":\(badgeLayoutOK),\"ribbonExpand\":\(expandOK),\"lineBudget\":\(lineBudgetOK),\"typefaces\":\(PetTypeface.allCases.count),\"typefaceOK\":\(typefaceOK),\"textDelta\":\(textDeltaOK),\"tones\":\(tonesOK),\"folderFold\":\(folderFoldOK),\"doneStays\":\(doneStaysOK),\"bubbleShape\":\(bubbleShapeOK),\"seenRule\":\(seenOK),\"staleWorking\":\(staleOK),\"headroomClean\":\(haloOK),\"viewedElsewhere\":\(viewedOK),\"ancientNews\":\(ancientOK),\"sleeps\":\(sleepOK),\"sleepRow\":\(sleepRow),\"dozes\":\(dozeOK),\"displayState\":\(displayOK),\"seenByLooking\":\(lookingOK),\"corners\":\(cornerOK),\"appFallback\":\(fallbackOK),\"haloRows\":\(halo.rows),\"haloDeepest\":\(halo.deepest),\"haloFaint\":\(haloFaintPixels),\"claudeRow\":\(claudeRowOK),\"font\":\"\(rettoHandwritingFontName)\",\"fontLoaded\":\(fontOK),\"multiSession\":\(registryOK),\"prioritySelection\":\(priorityOK),\"badgeLayout\":\(badgeLayoutOK),\"clickRouting\":\(clickRoutingOK)}")
     return ok ? 0 : 1
 }
 
@@ -421,4 +439,3 @@ func renderPreview(to path: String) -> Int32 {
     print(path)
     return 0
 }
-

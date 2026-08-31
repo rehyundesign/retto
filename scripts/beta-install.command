@@ -47,7 +47,7 @@ if (( os_major < 13 )); then
 fi
 
 # 4. 이미 돌고 있으면 내린다. 덮어쓰는 중에 살아 있으면 앱이 깨진다.
-if pkill -f "Claude Pet.app/Contents/MacOS/RetoClaudePet" 2>/dev/null; then
+if pkill -f "Claude Pet.app/Contents/MacOS/(RetoClaudePet|RettoClaudePet)" 2>/dev/null; then
   print -r -- "· 실행 중이던 레토를 내렸습니다"
   sleep 1
 fi
@@ -68,7 +68,7 @@ if [[ -d "$TARGET_DIR/$LEGACY_APP_NAME" && -d "$TARGET_APP" ]]; then
   print -r -- "· 옛 이름으로 깔려 있던 앱을 걷어냈습니다"
 fi
 
-# 7. 훅을 설치한다. 이게 없으면 레토는 Claude Code 상태를 못 읽는 그림일 뿐이다.
+# 7. 훅을 설치한다. 이게 없으면 레토는 Claude Code·Codex 상태를 못 읽는 그림일 뿐이다.
 #    GUI 앱과 같은 자리에서 node 를 찾는다 — 터미널 PATH 에 의존하지 않는다.
 NODE=""
 for candidate in /opt/homebrew/bin/node /usr/local/bin/node /usr/bin/node "$(command -v node 2>/dev/null || true)"; do
@@ -91,7 +91,7 @@ print -r -- "✓ 설치 끝. 화면에 고양이가 나오면 성공입니다."
 
 if (( ! hook_ok )); then
   print -r -- ""
-  print -r -- "다만 훅이 안 붙었습니다. 레토가 Claude Code 상태를 읽는 통로라서,"
+  print -r -- "다만 훅이 안 붙었습니다. 레토가 Claude Code·Codex 상태를 읽는 통로라서,"
   print -r -- "이게 없으면 고양이는 떠 있어도 아무 반응을 하지 않습니다."
   print -r -- "Node.js (https://nodejs.org) 를 설치한 뒤 이 설치.command 를 다시 실행해 주세요."
 fi

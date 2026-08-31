@@ -1,17 +1,23 @@
 #!/usr/bin/env node
-// 레토가 Claude Code 상태를 알 수 있게 훅을 설치한다.
+// 레토가 Claude Code와 Codex 상태를 알 수 있게 훅을 설치한다.
 //   node install.cjs            설치·갱신
 //   node install.cjs --uninstall  제거
 //
-// 하는 일 두 가지다.
+// 하는 일 세 가지다.
 //   1. hook.cjs 를 ~/.claude/retto-pet/ 로 복사
 //   2. ~/.claude/settings.json 에 이벤트 17개를 등록 (다른 훅은 건드리지 않는다)
-// settings.json 은 고치기 전에 백업한다.
+//   3. ~/.codex/hooks.json 에 Codex lifecycle 이벤트를 등록 (다른 훅은 건드리지 않는다)
+// 두 설정 파일은 고치기 전에 백업한다.
 
 const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
-const { installClaudeHooks, uninstallClaudeHooks } = require('./lib/hook-settings');
+const {
+  installClaudeHooks,
+  installCodexHooks,
+  uninstallClaudeHooks,
+  uninstallCodexHooks
+} = require('./lib/hook-settings');
 
 /// 설정에 박을 node 경로. process.execPath 는 버전이 든 실경로(.../Cellar/node/26.6.0/bin/node)라
 /// brew 로 node 를 올리면 사라진다. 버전이 안 든 안정적인 자리를 먼저 쓴다.
@@ -26,6 +32,7 @@ function stableNodePath() {
 }
 
 const settingsPath = path.join(os.homedir(), '.claude', 'settings.json');
+const codexHooksPath = path.join(os.homedir(), '.codex', 'hooks.json');
 const petDir = path.join(os.homedir(), '.claude', 'retto-pet');
 const legacyPetDir = path.join(os.homedir(), '.claude', 'reto-pet');
 const installedHookPath = path.join(petDir, 'hook.cjs');
@@ -49,16 +56,19 @@ try {
   migrateLegacyPetDir();
   if (process.argv.includes('--uninstall')) {
     uninstallClaudeHooks({ settingsPath, installedHookPath });
-    console.log(`레토 훅을 제거했습니다 · ${settingsPath}`);
+    uninstallCodexHooks({ hooksPath: codexHooksPath, installedHookPath });
+    console.log(`레토 훅을 제거했습니다\n  Claude: ${settingsPath}\n  Codex: ${codexHooksPath}`);
   } else {
     // 설정에는 절대 경로가 들어가야 한다. GUI 로 띄운 Claude Code 는 PATH 가 거의 비어 있다.
+    const nodeCommand = stableNodePath();
     installClaudeHooks({
       settingsPath,
       packagedHookPath,
       installedHookPath,
-      nodeCommand: stableNodePath()
+      nodeCommand
     });
-    console.log(`레토 훅을 설치했습니다 · ${installedHookPath}\n  node: ${stableNodePath()}\n  설정: ${settingsPath}`);
+    installCodexHooks({ hooksPath: codexHooksPath, installedHookPath, nodeCommand });
+    console.log(`레토 훅을 설치했습니다 · ${installedHookPath}\n  node: ${nodeCommand}\n  Claude: ${settingsPath}\n  Codex: ${codexHooksPath}`);
   }
 } catch (error) {
   console.error(`실패: ${error && error.message ? error.message : error}`);

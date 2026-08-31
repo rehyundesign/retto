@@ -8,7 +8,7 @@ APP_ROOT="${PROJECT_DIR:h}"
 ASSETS_DIR="$APP_ROOT/assets"
 BUILD_DIR="$PROJECT_DIR/build"
 DIST_DIR="$APP_ROOT/dist"
-VERSION="0.6.0"
+VERSION="0.7.0"
 APP_NAME="Retto Claude Pet.app"
 # 0.4.0 까지는 "Reto Claude Pet.app" 이었다. 영어 표기를 Retto 로 맞추면서 이름이 바뀌었으니,
 # 설치할 때 옛 이름 앱을 함께 걷어낸다. 그대로 두면 둘이 같이 떠서 말풍선이 두 개가 된다.

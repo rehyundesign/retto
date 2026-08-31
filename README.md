@@ -4,20 +4,54 @@
 > 영어 표기는 `t` 를 둘 쓴다 — Reto 가 아니라 **Retto**.
 > 앱에서는 발바닥 메뉴 → **Retto 정보** 에서 같은 내용을 볼 수 있다(메일 주소 복사 버튼 포함).
 
-Claude Code 상태에 맞춰 움직이는 랙돌 고양이. 원래는 Codex 의 `hatch-pet` 스킬로 스프라이트를 만들고
+Claude Code와 Codex 상태에 맞춰 움직이는 랙돌 고양이. 앱 하나가 두 제품의 세션을 함께 추적한다.
+원래는 Codex 의 `hatch-pet` 스킬로 스프라이트를 만들고
 `~/Documents/Codex/.../work` 에서 굴리던 작업이고, 2026-08-27 부터 이 레포에서 관리한다.
 
 ```
 apps/retto-pet/
 ├── assets/   스프라이트 아틀라스·손글씨 폰트·아이콘
 ├── macos/    데스크탑 오버레이 (Swift, 모든 Space·전체화면 위에 상주)
-├── hook/     Claude Code 훅과 설치기
+├── hook/     Claude Code·Codex 훅과 설치기
 ├── scripts/  훅 설치 래퍼
 └── tools/    에셋 검사·교정 도구
 ```
 
 VS Code 사이드바 확장은 2026-08-27 에 은퇴시켰다. 오버레이 하나로 정리하면서 확장이 하던
 훅 설치를 `hook/install.cjs` 로 독립시켰다.
+
+Claude와 Codex용 앱을 따로 두지 않는다. 설치기가 `~/.claude/settings.json`과
+`~/.codex/hooks.json`에 같은 상태 브리지를 등록하고, 두 제품의 이벤트를
+`~/.claude/retto-pet/sessions.json` 하나로 모은다. Codex 키에는 `codex:` 접두사를 붙여
+두 제품에서 같은 세션 ID가 나와도 충돌하지 않게 한다.
+
+Codex 훅은 그 쪽이 실제로 부르는 아홉 개(`SessionStart` `UserPromptSubmit` `PreToolUse`
+`PermissionRequest` `PostToolUse` `SubagentStart` `SubagentStop` `Stop` `SessionEnd`)만 건다 —
+Codex 바이너리에 박힌 `HookEventName` 목록과 훅 입력 JSON 스키마를 읽고 맞춘 것이다.
+Claude 전용 이벤트(`Notification` `Elicitation` `TaskCompleted` 등)를 섞으면 훅 설정 전체가 거부될 수 있다.
+Codex 는 `cwd` `session_id` `transcript_path` `tool_name` `tool_response` 를 Claude 와 같은 이름으로 준다.
+
+
+Codex 는 등록된 훅을 바로 돌리지 않는다. 훅 설정이 새로 생기거나 바뀌면 시작할 때
+승인 화면(`startup_hooks_review`)을 띄우고, 승인한 내용을 `trusted_hash` 로 기억한다.
+그래서 설치 직후에는 Codex 를 한 번 다시 켜서 승인해 줘야 세션이 레토에게 보인다 —
+설치기가 훅을 다시 쓸 때마다 해시가 바뀌므로 승인도 다시 물어본다.
+
+### 두 트랜스크립트는 모양이 다르다
+
+말풍선 본문과 이름표는 훅이 아니라 트랜스크립트에서 온다. 그런데 같은 것을 서로 다르게 적는다.
+
+| | Claude Code | Codex |
+| --- | --- | --- |
+| 말 | `{"type":"assistant","message":{"content":[{"type":"text"}]}}` | `{"type":"response_item","payload":{"type":"message","role":"assistant","content":[{"type":"output_text"}]}}` |
+| 이름 | 트랜스크립트 안 `custom-title` → `ai-title` | 파일 밖 `~/.codex/session_index.jsonl` 의 `thread_name` |
+
+한쪽 모양만 읽으면 그 클라이언트 세션의 말풍선이 통째로 비어 "생각중" 에 머문다. 그래서 훅의
+`assistantTextIn` 과 오버레이의 `assistantText(in:)` 이 두 모양을 함께 받는다(같은 규칙, 두 언어).
+Codex 의 `event_msg:agent_message` 에도 같은 문장이 있지만 도구 결과까지 섞여 들어와 쓰지 않는다.
+
+이름은 Codex 롤아웃 안에 아예 없다. `session_index.jsonl` 을 안 읽으면 이름표가 첫 프롬프트로
+떨어져 레토가 내 말을 되돌려 주는 것처럼 읽힌다. 이름이 붙지 않은 스레드는 그대로 프롬프트를 쓴다.
 
 ## macOS 오버레이
 
@@ -281,15 +315,17 @@ VS Code 쪽 `reveal()`(살아 있는 탭 되살리기)과 다른 것 아닌가 �
 
 | 파일 | 줄 | 맡은 일 |
 |---|---:|---|
-| `main.swift` | 53 | 실행 진입점, 진단 플래그(`--self-test`·`--shape-report`·`--render-preview`) |
-| `OpenTarget.swift` | 58 | 세션을 어디서 열지(VS Code·Claude 앱)와 딥링크 |
-| `Tones.swift` | 66 | 뜻 단위 색 넷과 상태별 애니메이션 |
-| `Sessions.swift` | 111 | 훅이 적은 상태 읽기, 우선순위, 트랜스크립트 읽기 |
+| `Uninstall.swift` | 73 | 훅 등록·상태 파일·앱 되돌리기 |
+| `main.swift` | 87 | 실행 진입점, 진단 플래그(`--self-test`·`--shape-report`·`--render-preview`) |
+| `OpenTarget.swift` | 97 | 세션을 어디서 열지(VS Code·Claude 앱·Codex)와 딥링크 |
+| `Tones.swift` | 126 | 뜻 단위 색 넷과 상태별 애니메이션 |
 | `Bubble.swift` | 128 | 동물의 숲 윤곽(Figma 벡터 + 다듬기) |
-| `Geometry.swift` | 130 | 몸/말풍선 크기·자리 계산 |
-| `SelfTest.swift` | 227 | 자체 검사 24항목, 배율별 미리보기 |
-| `AppDelegate.swift` | 597 | 창·메뉴·세션 감시, 클릭을 동작으로 |
-| `PetView.swift` | 718 | 그리기와 마우스 |
+| `ClaudeAppNavigator.swift` | 194 | Claude 앱 안에서 세션 찾아가기 |
+| `Geometry.swift` | 260 | 몸/말풍선 크기·자리 계산 |
+| `Sessions.swift` | 332 | 훅이 적은 상태 읽기, 우선순위, 두 모양의 트랜스크립트 읽기 |
+| `SelfTest.swift` | 436 | 자체 검사, 배율별 미리보기 |
+| `PetView.swift` | 961 | 그리기와 마우스 |
+| `AppDelegate.swift` | 1,254 | 창·메뉴·세션 감시, 클릭을 동작으로 |
 
 최상단 선언만 `internal` 로 열고 멤버의 `private` 는 그대로 뒀다. `build.sh` 는 `Sources/*.swift`
 전체를 넘긴다.
@@ -297,7 +333,7 @@ VS Code 쪽 `reveal()`(살아 있는 탭 되살리기)과 다른 것 아닌가 �
 ## 검사
 
 ```sh
-apps/retto-pet/scripts/check.sh    # 빌드 + 자체 검사 24항목 + 훅 테스트 10개
+apps/retto-pet/scripts/check.sh    # 빌드 + 자체 검사 + Claude·Codex 훅 테스트
 ```
 
 `.githooks/pre-commit` 이 `apps/retto-pet/` 를 건드린 커밋에서만 이걸 돌린다

@@ -95,7 +95,7 @@ let dragRunAnimations: [DragRun: Animation] = [
 
 let animationCatalog: [PetState: Animation] = [
     .idle: Animation(row: 0, frames: 6, interval: 0.23, cycleLimit: nil, kicker: "RESTING", title: "조용히 곁을 지키는 중", tone: toneQuiet),
-    .running: Animation(row: 7, frames: 6, interval: 0.125, cycleLimit: nil, kicker: "THINKING", title: "Claude가 생각중…", tone: toneWorking),
+    .running: Animation(row: 7, frames: 6, interval: 0.125, cycleLimit: nil, kicker: "THINKING", title: "AI가 생각중…", tone: toneWorking),
     .review: Animation(row: 8, frames: 6, interval: 0.155, cycleLimit: nil, kicker: "USING A TOOL", title: "도구를 쓰는 중", tone: toneWorking),
     .waiting: Animation(row: 6, frames: 6, interval: 0.31, cycleLimit: nil, kicker: "NEEDS YOU", title: "네 결정을 기다리는 중", tone: toneNeedsYou),
     .failed: Animation(row: 5, frames: 8, interval: 0.18, cycleLimit: nil, kicker: "OOPS", title: "잠깐 발이 꼬였어", tone: toneFailed),
@@ -107,7 +107,8 @@ let animationCatalog: [PetState: Animation] = [
 ]
 
 /// 메뉴에서 고르는 값. `auto` 는 훅이 세션마다 적어 둔 클라이언트를 따른다.
-/// VS Code 와 Claude 앱을 섞어 쓰면 고정값은 반드시 절반을 틀리므로 자동이 기본이다.
+/// Codex 세션은 Codex 앱으로만 열 수 있어서 이 선택과 무관하게 Codex 로 간다.
+/// 이 값은 Claude Code 세션을 VS Code 와 Claude 앱 중 어디서 열지 정한다.
 enum OpenTarget: String, CaseIterable {
     case auto
     case vscode

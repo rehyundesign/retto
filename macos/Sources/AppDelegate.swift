@@ -13,6 +13,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     private var visibilityItem: NSMenuItem!
     private var clickThroughItem: NSMenuItem!
     private var followClaudeItem: NSMenuItem!
+    private var codexOpenTargetItem: NSMenuItem!
     /// Claude 앱에서 세션까지 따라갈지. 접근성으로 사이드바를 대신 누르는 방식이라,
     /// 앱이 바뀌어 어긋나면 사용자가 여기서 끌 수 있어야 한다.
     private var followsClaudeSession: Bool {
@@ -23,7 +24,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     private var sizeItems: [NSMenuItem] = []
     private var openTargetItems: [NSMenuItem] = []
     private var currentScale: CGFloat = 1.0
-    private var sessionsMenu = NSMenu(title: "Claude 세션")
+    private var sessionsMenu = NSMenu(title: "AI 세션")
     private var autoSelectionItem: NSMenuItem!
     private var sessions: [StatePayload] = []
     private var selectedPayload: StatePayload?
@@ -203,7 +204,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             frame: NSRect(origin: .zero, size: size),
             spriteSheet: spriteSheet,
             onOpenClaude: { [weak self] payload, windowOnly in
-                self?.revealClaudeSession(payload, windowOnly: windowOnly)
+                self?.revealAgentSession(payload, windowOnly: windowOnly)
             },
             onOpenAttention: { [weak self] point in self?.showAttentionMenu(at: point) }
         )
@@ -231,6 +232,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     }
 
     private func resolveOpenApp(for payload: StatePayload?) -> OpenApp {
+        // Codex task id 는 Claude Code session id 와 호환되지 않는다. 사용자가 Claude 쪽 열기
+        // 대상을 고정했더라도 Codex 세션은 반드시 Codex 로 돌려보낸다.
+        if payload?.source == "codex" || payload?.client == "codex" {
+            return .codex
+        }
         switch openTarget {
         // 자동일 때만 되돌린다. 메뉴에서 직접 고른 것은 그 뜻을 지킨다.
         case .auto: return availableOpenApp(openApp(forClient: payload?.client))
@@ -280,13 +286,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         // 여기부터 세션 묶음. 무엇을 보여줄지 고르는 항목들이다.
         menu.addItem(.separator())
 
-        let sessionsItem = NSMenuItem(title: "Claude 세션", action: nil, keyEquivalent: "")
+        let sessionsItem = NSMenuItem(title: "AI 세션", action: nil, keyEquivalent: "")
         sessionsItem.submenu = sessionsMenu
         menu.addItem(sessionsItem)
         rebuildSessionsMenu()
 
-        let openTargetItem = NSMenuItem(title: "세션 열 곳", action: nil, keyEquivalent: "")
-        let openTargetMenu = NSMenu(title: "세션 열 곳")
+        let openTargetItem = NSMenuItem(title: aiSessionOpenMenuTitle, action: nil, keyEquivalent: "")
+        let openTargetMenu = NSMenu(title: aiSessionOpenMenuTitle)
         openTargetItems = OpenTarget.allCases.map { target in
             let item = NSMenuItem(title: target.label, action: #selector(changeOpenTarget(_:)), keyEquivalent: "")
             item.target = self
@@ -295,6 +301,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             openTargetMenu.addItem(item)
             return item
         }
+        openTargetMenu.addItem(.separator())
+        codexOpenTargetItem = NSMenuItem(title: "Codex task → Codex 앱", action: #selector(showCodexIntegration), keyEquivalent: "")
+        codexOpenTargetItem.target = self
+        openTargetMenu.addItem(codexOpenTargetItem)
+        updateCodexOpenTargetItem()
         openTargetItem.submenu = openTargetMenu
         menu.addItem(openTargetItem)
 
@@ -384,7 +395,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         // 여기부터 손볼 일 묶음. 평소에는 누를 일이 없는 항목들이다.
         menu.addItem(.separator())
 
-        let stateItem = NSMenuItem(title: "Claude 상태 파일 보기", action: #selector(revealStateFile), keyEquivalent: "")
+        let stateItem = NSMenuItem(title: "AI 상태 파일 보기", action: #selector(revealStateFile), keyEquivalent: "")
         stateItem.target = self
         menu.addItem(stateItem)
 
@@ -444,7 +455,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
                 petView.apply(
                     placeholder,
                     state: .sleeping,
-                    liveMessage: "Claude Code 를 켜면 여기서 알려줄게",
+                    liveMessage: "Claude Code나 Codex를 켜면 여기서 알려줄게",
                     liveTitle: Retto.koreanName,
                     sessionCount: 0,
                     attentionCount: 0,
@@ -501,18 +512,18 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     }
 
     private func sessionLabel(for payload: StatePayload) -> String {
-        "\(stateMark(for: payload))  \(payload.project) · \(String(payload.title.prefix(42)))"
+        "\(stateMark(for: payload))  [\(payload.sourceLabel)] \(payload.project) · \(String(payload.title.prefix(42)))"
     }
 
     /// 배지를 누르면 배지가 세던 세션들을 그대로 목록으로 보여준다. 하나뿐이면 묻지 않고 바로 연다.
     private func showAttentionMenu(at point: NSPoint) {
         let waiting = badgeSessions()
         guard let first = waiting.first else {
-            revealClaudeSession(nil, windowOnly: false)
+            revealAgentSession(nil, windowOnly: false)
             return
         }
         if waiting.count == 1 {
-            revealClaudeSession(first, windowOnly: false)
+            revealAgentSession(first, windowOnly: false)
             return
         }
         let menu = NSMenu(title: "손이 필요한 세션")
@@ -533,7 +544,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         guard let sessionId = sender.representedObject as? String,
               let payload = sessions.first(where: { $0.id == sessionId }) else { return }
         // ⌥ 를 누른 채 고르면 창만 앞으로 보내고 탭은 건드리지 않는다.
-        revealClaudeSession(payload, windowOnly: NSEvent.modifierFlags.contains(.option))
+        revealAgentSession(payload, windowOnly: NSEvent.modifierFlags.contains(.option))
     }
 
     private func rebuildSessionsMenu() {
@@ -544,20 +555,34 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         sessionsMenu.addItem(autoSelectionItem)
         sessionsMenu.addItem(.separator())
 
-        let recent = sessions.filter { !$0.isClosed }.prefix(12)
-        if recent.isEmpty {
-            let emptyItem = NSMenuItem(title: "실행 중인 Claude 세션이 없어요", action: nil, keyEquivalent: "")
-            emptyItem.isEnabled = false
-            sessionsMenu.addItem(emptyItem)
-            return
+        let recent = Array(sessions.filter { !$0.isClosed }.prefix(12))
+        let claudeSessions = recent.filter { $0.sourceLabel == "Claude" }
+        let codexSessions = recent.filter { $0.sourceLabel == "Codex" }
+
+        func addGroup(title: String, payloads: [StatePayload], emptyTitle: String) {
+            let header = NSMenuItem(title: title, action: nil, keyEquivalent: "")
+            header.isEnabled = false
+            sessionsMenu.addItem(header)
+
+            if payloads.isEmpty {
+                let emptyItem = NSMenuItem(title: emptyTitle, action: nil, keyEquivalent: "")
+                emptyItem.isEnabled = false
+                sessionsMenu.addItem(emptyItem)
+                return
+            }
+
+            for payload in payloads {
+                let item = NSMenuItem(title: sessionLabel(for: payload), action: #selector(selectSession(_:)), keyEquivalent: "")
+                item.target = self
+                item.representedObject = payload.id
+                item.state = pinnedSessionId == payload.id ? .on : .off
+                sessionsMenu.addItem(item)
+            }
         }
-        for payload in recent {
-            let item = NSMenuItem(title: sessionLabel(for: payload), action: #selector(selectSession(_:)), keyEquivalent: "")
-            item.target = self
-            item.representedObject = payload.id
-            item.state = pinnedSessionId == payload.id ? .on : .off
-            sessionsMenu.addItem(item)
-        }
+
+        addGroup(title: "Claude Code 세션", payloads: claudeSessions, emptyTitle: emptyClaudeSessionLabel)
+        sessionsMenu.addItem(.separator())
+        addGroup(title: "Codex task", payloads: codexSessions, emptyTitle: emptyCodexSessionLabel)
     }
 
     private func initialOrigin(for size: NSSize) -> NSPoint {
@@ -727,9 +752,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         }
     }
 
-    private func openClaudeSession(_ payload: StatePayload?, app: OpenApp) {
+    private func openAgentSession(_ payload: StatePayload?, app: OpenApp) {
         let target = payload ?? selectedPayload
-        guard let url = claudeDeepLink(sessionId: target?.sessionId, app: app) else { return }
+        guard let url = sessionDeepLink(sessionId: target?.navigationSessionId, app: app) else { return }
         if !NSWorkspace.shared.open(url) {
             NSSound.beep()
         }
@@ -740,7 +765,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     /// 읽음은 "그 세션을 실제로 눈앞에 띄웠을 때" 만 찍는다.
     /// 몸통·말풍선·배지 어느 쪽을 눌렀든 그 세션 탭이 앞으로 왔으면 다녀온 것이다.
     /// 반대로 ⌥(창만 앞으로)나 창을 특정하지 못해 딥링크를 못 보낸 경우는 아직 안 본 것으로 남긴다.
-    private func revealClaudeSession(_ payload: StatePayload?, windowOnly: Bool) {
+    private func revealAgentSession(_ payload: StatePayload?, windowOnly: Bool) {
         let target = payload ?? selectedPayload
         let app = resolveOpenApp(for: target)
         focusHostApp(for: target, app: app) { [weak self] matchedWindow in
@@ -749,7 +774,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             // 예전에는 여기서도 딥링크를 보냈는데, 그게 세션을 앱으로 가져오는 길이라
             // 누를 때마다 사본이 새 창으로 떴다.
             if app.hasSessionDeepLink {
-                self.openClaudeSession(target, app: app)
+                self.openAgentSession(target, app: app)
             } else {
                 // 딥링크로는 세션을 못 바꾸는 앱(Claude 데스크탑). 사이드바 행을 대신 눌러 준다.
                 // 앱이 앞으로 나온 뒤라야 한다 — 뒤에 있을 때는 접근성 트리가 아예 만들어지지 않는다.
@@ -821,6 +846,49 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         }
         followsClaudeSession.toggle()
         updateFollowClaudeItem()
+    }
+
+    private var codexHooksURL: URL {
+        FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent(".codex/hooks.json")
+    }
+
+    /// 다른 훅의 내용은 해석하지 않고 레토 command가 등록되어 있는지만 본다.
+    /// Codex의 신뢰 승인은 Codex 자체가 관리하므로 여기서 "실행 허용됨"이라고 과장하지 않는다.
+    private func codexHooksRegistered() -> Bool {
+        guard let data = try? Data(contentsOf: codexHooksURL),
+              let text = String(data: data, encoding: .utf8) else { return false }
+        return text.contains("retto-pet/hook.cjs") && text.contains("codex")
+    }
+
+    private func updateCodexOpenTargetItem() {
+        guard let item = codexOpenTargetItem else { return }
+        let registered = codexHooksRegistered()
+        item.title = codexOpenTargetMenuLabel(isRegistered: registered)
+        item.state = registered ? .on : .off
+    }
+
+    /// 자동 라우팅이라 선택지가 따로 없다는 사실과 실제 훅 등록 상태를 함께 설명한다.
+    @objc private func showCodexIntegration() {
+        let registered = codexHooksRegistered()
+        updateCodexOpenTargetItem()
+
+        let alert = NSAlert()
+        alert.messageText = registered ? "Codex 연동 훅이 등록돼 있어요" : "Codex 연동을 확인해 주세요"
+        alert.informativeText = [
+            registered
+                ? "Codex task의 상태를 같은 레토 앱에서 받고 있습니다."
+                : "~/.codex/hooks.json에서 레토 훅 항목을 찾지 못했습니다.",
+            "",
+            "Codex task ID는 Claude session ID와 달라서, Codex 세션은 항상 Codex 앱의 해당 task로 엽니다.",
+            "새 Codex task에서 훅 검토 안내가 나타나면 한 번 승인해 주세요.",
+            "",
+            "설정: ~/.codex/hooks.json"
+        ].joined(separator: "\n")
+        alert.addButton(withTitle: "닫기")
+        alert.addButton(withTitle: "설정 파일 보기")
+        if alert.runModal() == .alertSecondButtonReturn {
+            NSWorkspace.shared.activateFileViewerSelecting([codexHooksURL])
+        }
     }
 
     /// 켜짐·꺼짐과 권한 상태를 제목에 함께 보여 준다.
@@ -1121,7 +1189,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
                 ? "켜짐 — 세션 창을 3초 이상 보고 있으면 배지를 내려놓습니다"
                 : "꺼짐 — 화면 기록 권한이 필요합니다"),
             "",
-            "여러 Claude Code 세션을 대신 지켜보다가 내 답이 필요할 때",
+            "여러 Claude Code·Codex 세션을 대신 지켜보다가 내 답이 필요할 때",
             "알려 주고, 누르면 그 세션으로 데려다준다."
         ].compactMap { $0 }.joined(separator: "\n")
         if let icon = NSApp.applicationIconImage {
@@ -1173,12 +1241,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             "아래를 정리하고 레토가 종료됩니다.",
             "",
             "· Claude Code 훅 등록 (~/.claude/settings.json)",
+            "· Codex 훅 등록 (~/.codex/hooks.json)",
             "· 상태 파일과 훅 (~/.claude/retto-pet/)",
             "· 크기·위치 같은 앱 설정",
             "· 로그인할 때 자동 실행",
             "· 앱 본체 — 휴지통으로 갑니다",
             "",
-            "Claude Code 자체와 다른 훅은 건드리지 않습니다."
+            "Claude Code·Codex 자체와 다른 훅은 건드리지 않습니다."
         ].joined(separator: "\n")
         confirm.alertStyle = .warning
         confirm.addButton(withTitle: "제거")
@@ -1246,4 +1315,3 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
 
     @objc private func quit() { NSApp.terminate(nil) }
 }
-

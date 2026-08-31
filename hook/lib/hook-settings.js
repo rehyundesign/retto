@@ -21,10 +21,29 @@ const EVENT_STATES = [
   { event: 'SessionEnd', state: 'idle' }
 ];
 
+// Codex 가 공식적으로 제공하는 lifecycle hook만 등록한다.
+// Claude Code 전용 이벤트(Notification, Elicitation, TaskCompleted 등)를 섞으면
+// Codex 시작 때 알 수 없는 이벤트로 전체 훅 설정이 거부될 수 있다.
+const CODEX_EVENT_STATES = [
+  { event: 'SessionStart', state: 'idle' },
+  { event: 'UserPromptSubmit', state: 'running' },
+  { event: 'PreToolUse', state: 'running' },
+  { event: 'PermissionRequest', state: 'waiting' },
+  { event: 'PostToolUse', state: 'running' },
+  { event: 'SubagentStart', state: 'running' },
+  { event: 'SubagentStop', state: 'running' },
+  { event: 'Stop', state: 'waving' },
+  { event: 'SessionEnd', state: 'idle' }
+];
+
 // 이름을 Retto 로 바로잡으면서 설치 폴더가 reto-pet → retto-pet 으로 바뀌었다.
 // settings.json 에는 절대 경로가 박혀 있으므로, 옛 경로도 계속 알아봐야
 // 갱신·제거할 때 죽은 항목 17개가 그대로 남는 일이 없다.
 const HOOK_PATH_MARKERS = ['.claude/retto-pet/hook.cjs', '.claude/reto-pet/hook.cjs'];
+
+function shellQuote(value) {
+  return `'${String(value).replaceAll("'", "'\\''")}'`;
+}
 
 function isRettoHandler(handler, hookPath) {
   if (!handler || handler.type !== 'command') return false;
@@ -57,6 +76,36 @@ function removeRettoHooks(settings, hookPath) {
   return next;
 }
 
+function isRettoCodexHandler(handler, hookPath) {
+  if (!handler || handler.type !== 'command' || typeof handler.command !== 'string') return false;
+  const pointsAtRetto = handler.command.includes(hookPath)
+    || HOOK_PATH_MARKERS.some((marker) => handler.command.includes(marker));
+  return pointsAtRetto && /(?:^|[\s'\"])codex(?:$|[\s'\"])/.test(handler.command);
+}
+
+function removeRettoCodexHooks(settings, hookPath) {
+  const next = structuredClone(settings || {});
+  if (!next.hooks || typeof next.hooks !== 'object') return next;
+
+  for (const [event, groups] of Object.entries(next.hooks)) {
+    if (!Array.isArray(groups)) continue;
+    next.hooks[event] = groups
+      .map((group) => {
+        if (!group || !Array.isArray(group.hooks)) return group;
+        return {
+          ...group,
+          hooks: group.hooks.filter((handler) => !isRettoCodexHandler(handler, hookPath))
+        };
+      })
+      .filter((group) => !group || !Array.isArray(group.hooks) || group.hooks.length > 0);
+
+    if (next.hooks[event].length === 0) delete next.hooks[event];
+  }
+
+  if (Object.keys(next.hooks).length === 0) delete next.hooks;
+  return next;
+}
+
 function mergeRettoHooks(settings, hookPath, nodeCommand = 'node') {
   const next = removeRettoHooks(settings, hookPath);
   next.hooks = next.hooks || {};
@@ -71,6 +120,29 @@ function mergeRettoHooks(settings, hookPath, nodeCommand = 'node') {
           args: [hookPath, entry.state],
           timeout: 5,
           async: true
+        }
+      ]
+    };
+    next.hooks[entry.event] = [...(next.hooks[entry.event] || []), group];
+  }
+
+  return next;
+}
+
+function mergeRettoCodexHooks(settings, hookPath, nodeCommand = 'node') {
+  const next = removeRettoCodexHooks(settings, hookPath);
+  next.description = next.description || 'User lifecycle hooks for Codex.';
+  next.hooks = next.hooks || {};
+
+  for (const entry of CODEX_EVENT_STATES) {
+    const command = [nodeCommand, hookPath, entry.state, 'codex'].map(shellQuote).join(' ');
+    const group = {
+      hooks: [
+        {
+          type: 'command',
+          command,
+          timeout: entry.event === 'SessionEnd' ? 3 : 5,
+          async: entry.event !== 'SessionEnd'
         }
       ]
     };
@@ -135,11 +207,32 @@ function uninstallClaudeHooks({ settingsPath, installedHookPath }) {
   return { settingsPath, backupPath };
 }
 
+function installCodexHooks({ hooksPath, installedHookPath, nodeCommand = 'node' }) {
+  const settings = readSettings(hooksPath);
+  const backupPath = backupSettings(hooksPath);
+  writeSettingsAtomic(hooksPath, mergeRettoCodexHooks(settings, installedHookPath, nodeCommand));
+  return { hooksPath, installedHookPath, backupPath };
+}
+
+function uninstallCodexHooks({ hooksPath, installedHookPath }) {
+  const settings = readSettings(hooksPath);
+  const next = removeRettoCodexHooks(settings, installedHookPath);
+  const backupPath = backupSettings(hooksPath);
+  writeSettingsAtomic(hooksPath, next);
+  return { hooksPath, backupPath };
+}
+
 module.exports = {
+  CODEX_EVENT_STATES,
   EVENT_STATES,
   installClaudeHooks,
+  installCodexHooks,
   isRettoHandler,
+  isRettoCodexHandler,
+  mergeRettoCodexHooks,
   mergeRettoHooks,
+  removeRettoCodexHooks,
   removeRettoHooks,
+  uninstallCodexHooks,
   uninstallClaudeHooks
 };
