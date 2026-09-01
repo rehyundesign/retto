@@ -3,7 +3,8 @@ import os, sys
 from PIL import Image
 import numpy as np
 
-ASSETS = os.path.expanduser('~/Documents/git-rehyundesign/apps/retto-pet/assets')
+# 레포 안 어디서 부르든 같은 자리를 본다. 절대경로를 박으면 레포를 옮기는 순간 멈춘다.
+ASSETS = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), 'assets')
 CW, CH = 224, 240
 SLOT_W, SLOT_H, CAT_H, FOOT_PAD = 448, 480, 380, 50
 

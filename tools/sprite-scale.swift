@@ -1,7 +1,7 @@
 // 레토 스프라이트 아틀라스의 셀 단위 크기를 재고, 특정 행의 크기 드리프트를 교정한다.
 //
-//   swift apps/retto-pet/tools/sprite-scale.swift measure <atlas>
-//   swift apps/retto-pet/tools/sprite-scale.swift apply <in> <out.png> <row>=<factor> ...
+//   swift tools/sprite-scale.swift measure <atlas>
+//   swift tools/sprite-scale.swift apply <in> <out.png> <row>=<factor> ...
 //
 // 크기 비교 지표는 알파 면적의 제곱근이다. 실루엣 넓이는 포즈에 따라 변하지만,
 // 같은 포즈 묶음(행) 안에서 중앙값을 비교하면 "같은 고양이를 얼마나 확대해 그렸는지"가 남는다.
