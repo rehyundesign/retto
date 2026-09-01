@@ -131,6 +131,51 @@ func runSelfTest() -> Int32 {
         && emptyCodexSessionLabel == "Codex · 실행 중인 task 없음"
         && codexOpenTargetMenuLabel(isRegistered: true) == "Codex task → Codex 앱 · 자동"
         && codexOpenTargetMenuLabel(isRegistered: false) == "Codex task → Codex 앱 · 훅 확인 필요"
+    // 연동 확인이 실제로 셋을 가려내는지. 이게 틀리면 "정상" 이라고 말해 놓고 아무 소식도 안 온다.
+    // 훅 세는 규칙은 지금의 command 한 줄과 0.7.0 까지의 command+args 를 함께 알아봐야 한다 —
+    // 갱신 전에 열어 본 사람에게 "훅 없음" 이라고 말하면 안 된다.
+    let hookFixture: [String: Any] = ["hooks": [
+        "Stop": [["hooks": [
+            ["type": "command", "command": "'/Users/x/.claude/retto-pet/hook.sh' 'waving'"],
+            ["type": "command", "command": "announce"]
+        ]]],
+        "SessionStart": [["hooks": [
+            ["type": "command", "command": "node", "args": ["/Users/x/.claude/retto-pet/hook.cjs", "idle"]]
+        ]]],
+        "PreToolUse": [["hooks": [["type": "command", "command": "/Users/x/.claude/reto-pet/hook.cjs"]]]]
+    ]]
+    let newsFixture = [
+        "{\"state\":\"running\",\"sessionId\":\"a\",\"client\":\"vscode\",\"updatedAtMs\":1000}",
+        "{\"state\":\"idle\",\"sessionId\":\"b\",\"client\":\"vscode\",\"updatedAtMs\":5000}",
+        "{\"state\":\"idle\",\"sessionId\":\"c\",\"source\":\"codex\",\"updatedAtMs\":3000}",
+        "{\"state\":\"idle\",\"sessionId\":\"d\",\"updatedAtMs\":9000}"
+    ].compactMap { try? JSONDecoder().decode(StatePayload.self, from: $0.data(using: .utf8)!) }
+    let news = ClaudeIntegration.lastNews(in: newsFixture)
+    var missingHooks = ClaudeIntegrationStatus()
+    missingHooks.shimInstalled = true
+    missingHooks.hookInstalled = true
+    missingHooks.nodePath = "/opt/homebrew/bin/node"
+    var quiet = missingHooks
+    quiet.registeredEvents = 17
+    var healthy = quiet
+    healthy.lastNews = [.vscode: Date()]
+    let integrationOK = ClaudeIntegration.countRegisteredEvents(in: hookFixture) == 3
+        && ClaudeIntegration.countRegisteredEvents(in: ["hooks": [String: Any]()]) == 0
+        && NewsChannel.of(client: "claude", source: nil) == .claudeApp
+        && NewsChannel.of(client: "cli", source: nil) == .cli
+        && NewsChannel.of(client: "vscode", source: "codex") == .codex
+        // client 를 못 읽은 옛 기록은 어느 채널로도 세지 않는다. 셌다가는 없는 소식을 있다고 한다.
+        && NewsChannel.of(client: nil, source: nil) == nil
+        && news.count == 2
+        && news[.vscode] == Date(timeIntervalSince1970: 5)
+        && news[.claudeApp] == nil
+        && missingHooks.menuTitle == "Claude 연동 확인 — 훅 없음"
+        && quiet.menuTitle == "Claude 연동 확인 — 소식 없음"
+        && healthy.menuTitle == "Claude 연동 확인"
+        && healthy.isHealthy && !quiet.isHealthy
+        && elapsedLabel(since: Date(timeIntervalSinceNow: -30)) == "방금"
+        && elapsedLabel(since: Date(timeIntervalSinceNow: -180)) == "3분 전"
+        && elapsedLabel(since: Date(timeIntervalSinceNow: -7200)) == "2시간 전"
     let scalesOK = supportedScales.first == 0.39 && supportedScales.last == 1.4
     // 배율 1에서는 예전 창 크기를 그대로 유지한다.
     let baseline = petLayout(scale: 1)
@@ -367,8 +412,8 @@ func runSelfTest() -> Int32 {
         && !claudeRowMatchesSession(rowLabel: "", sessionTitle: "흠냐링")
         && !claudeRowMatchesSession(rowLabel: "입력 대기 중 흠냐링", sessionTitle: "")
 
-    let ok = claudeRowOK && fallbackOK && cornerOK && lookingOK && sleepRowOK && displayOK && dozeOK && sleepOK && ancientOK && viewedOK && haloOK && assetOK && skinsOK && dragRunOK && behaviorsOK && statesOK && deepLinkOK && clientRoutingOK && codexMenuOK && transcriptShapesOK && scalesOK && baselineOK && decoupledOK && fontOK && priorityOK && registryOK && badgeLayoutOK && clickRoutingOK && gazeStatesOK && expandOK && lineBudgetOK && typefaceOK && textDeltaOK && tonesOK && folderFoldOK && labelOK && doneStaysOK && bubbleShapeOK && seenOK && staleOK
-    print("{\"ok\":\(ok),\"asset\":\"\(Int(image.size.width))x\(Int(image.size.height))\",\"skins\":\(PetSkin.allCases.count),\"skinsOK\":\(skinsOK),\"dragRun\":\(dragRunOK),\"canJoinAllSpaces\":\(behaviorsOK),\"states\":\(animationCatalog.count),\"deepLink\":\(deepLinkOK),\"clientRouting\":\(clientRoutingOK),\"codexMenu\":\(codexMenuOK),\"transcriptShapes\":\(transcriptShapesOK),\"sizePresets\":\(supportedScales.count),\"baselineLayout\":\(baselineOK),\"scaleDecoupled\":\(decoupledOK),\"badgePlacement\":\(badgeLayoutOK),\"ribbonExpand\":\(expandOK),\"lineBudget\":\(lineBudgetOK),\"typefaces\":\(PetTypeface.allCases.count),\"typefaceOK\":\(typefaceOK),\"textDelta\":\(textDeltaOK),\"tones\":\(tonesOK),\"folderFold\":\(folderFoldOK),\"doneStays\":\(doneStaysOK),\"bubbleShape\":\(bubbleShapeOK),\"seenRule\":\(seenOK),\"staleWorking\":\(staleOK),\"headroomClean\":\(haloOK),\"viewedElsewhere\":\(viewedOK),\"ancientNews\":\(ancientOK),\"sleeps\":\(sleepOK),\"sleepRow\":\(sleepRow),\"dozes\":\(dozeOK),\"displayState\":\(displayOK),\"seenByLooking\":\(lookingOK),\"corners\":\(cornerOK),\"appFallback\":\(fallbackOK),\"haloRows\":\(halo.rows),\"haloDeepest\":\(halo.deepest),\"haloFaint\":\(haloFaintPixels),\"claudeRow\":\(claudeRowOK),\"font\":\"\(rettoHandwritingFontName)\",\"fontLoaded\":\(fontOK),\"multiSession\":\(registryOK),\"prioritySelection\":\(priorityOK),\"badgeLayout\":\(badgeLayoutOK),\"clickRouting\":\(clickRoutingOK)}")
+    let ok = claudeRowOK && fallbackOK && cornerOK && lookingOK && sleepRowOK && displayOK && dozeOK && sleepOK && ancientOK && viewedOK && haloOK && assetOK && skinsOK && dragRunOK && behaviorsOK && statesOK && deepLinkOK && clientRoutingOK && codexMenuOK && integrationOK && transcriptShapesOK && scalesOK && baselineOK && decoupledOK && fontOK && priorityOK && registryOK && badgeLayoutOK && clickRoutingOK && gazeStatesOK && expandOK && lineBudgetOK && typefaceOK && textDeltaOK && tonesOK && folderFoldOK && labelOK && doneStaysOK && bubbleShapeOK && seenOK && staleOK
+    print("{\"ok\":\(ok),\"asset\":\"\(Int(image.size.width))x\(Int(image.size.height))\",\"skins\":\(PetSkin.allCases.count),\"skinsOK\":\(skinsOK),\"dragRun\":\(dragRunOK),\"canJoinAllSpaces\":\(behaviorsOK),\"states\":\(animationCatalog.count),\"deepLink\":\(deepLinkOK),\"clientRouting\":\(clientRoutingOK),\"codexMenu\":\(codexMenuOK),\"integration\":\(integrationOK),\"transcriptShapes\":\(transcriptShapesOK),\"sizePresets\":\(supportedScales.count),\"baselineLayout\":\(baselineOK),\"scaleDecoupled\":\(decoupledOK),\"badgePlacement\":\(badgeLayoutOK),\"ribbonExpand\":\(expandOK),\"lineBudget\":\(lineBudgetOK),\"typefaces\":\(PetTypeface.allCases.count),\"typefaceOK\":\(typefaceOK),\"textDelta\":\(textDeltaOK),\"tones\":\(tonesOK),\"folderFold\":\(folderFoldOK),\"doneStays\":\(doneStaysOK),\"bubbleShape\":\(bubbleShapeOK),\"seenRule\":\(seenOK),\"staleWorking\":\(staleOK),\"headroomClean\":\(haloOK),\"viewedElsewhere\":\(viewedOK),\"ancientNews\":\(ancientOK),\"sleeps\":\(sleepOK),\"sleepRow\":\(sleepRow),\"dozes\":\(dozeOK),\"displayState\":\(displayOK),\"seenByLooking\":\(lookingOK),\"corners\":\(cornerOK),\"appFallback\":\(fallbackOK),\"haloRows\":\(halo.rows),\"haloDeepest\":\(halo.deepest),\"haloFaint\":\(haloFaintPixels),\"claudeRow\":\(claudeRowOK),\"font\":\"\(rettoHandwritingFontName)\",\"fontLoaded\":\(fontOK),\"multiSession\":\(registryOK),\"prioritySelection\":\(priorityOK),\"badgeLayout\":\(badgeLayoutOK),\"clickRouting\":\(clickRoutingOK)}")
     return ok ? 0 : 1
 }
 

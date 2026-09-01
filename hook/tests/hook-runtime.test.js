@@ -306,3 +306,60 @@ test('names a Codex session from the thread index', async () => {
   assert.equal(sessions['codex:thread-unnamed'].sessionTitle, '');
   assert.equal(sessions['codex:thread-unnamed'].displayTitle, '이름 없는 스레드');
 });
+
+test('the shim finds node even when the path chosen at install time is gone', async () => {
+  // settings.json 에 node 절대경로를 직접 넣던 시절에는, nvm 으로 버전을 바꿔
+  // 그 경로가 사라지면 훅 전체가 동작을 멈췄다. hook.sh 는 다른 자리를 마저 찾아본다.
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'retto-shim-'));
+  fs.copyFileSync(path.join(__dirname, '..', 'hook.cjs'), path.join(directory, 'hook.cjs'));
+  const shimPath = path.join(directory, 'hook.sh');
+  const template = fs.readFileSync(path.join(__dirname, '..', 'hook.sh'), 'utf8');
+  fs.writeFileSync(shimPath, template.replace('__RETTO_NODE__', '/nope/node/v1/bin/node'), { mode: 0o755 });
+
+  await new Promise((resolve, reject) => {
+    const child = spawn(shimPath, ['running'], { stdio: ['pipe', 'ignore', 'pipe'] });
+    let stderr = '';
+    child.stderr.on('data', (chunk) => { stderr += chunk; });
+    child.on('error', reject);
+    child.on('exit', (code) => code === 0 ? resolve() : reject(new Error(stderr || `exit ${code}`)));
+    child.stdin.end(JSON.stringify({
+      hook_event_name: 'UserPromptSubmit',
+      session_id: 'shim-session',
+      cwd: '/tmp/shim-project',
+      prompt: '실행기로 들어온 작업'
+    }));
+  });
+
+  const registry = JSON.parse(fs.readFileSync(path.join(directory, 'sessions.json'), 'utf8'));
+  assert.equal(registry.sessions['shim-session'].state, 'running');
+  assert.equal(registry.sessions['shim-session'].displayTitle, '실행기로 들어온 작업');
+});
+
+test('the shim ends without an error when no node exists at all', async () => {
+  // 훅이 실패하면 Claude Code 가 경고를 띄운다. node 가 없는 사람 화면에
+  // 레토 때문에 경고가 붙는 것은 과하다.
+  //
+  // 이 기계에는 node 가 있으므로, 후보 자리를 전부 없는 경로로 바꿔 그 상황을 만든다.
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'retto-shim-none-'));
+  const shimPath = path.join(directory, 'hook.sh');
+  const template = fs.readFileSync(path.join(__dirname, '..', 'hook.sh'), 'utf8')
+    .replace('__RETTO_NODE__', '/nope/pinned')
+    .replaceAll('/opt/homebrew/bin/node', '/nope/homebrew')
+    .replaceAll('/usr/local/bin/node', '/nope/local')
+    .replaceAll('/usr/bin/node', '/nope/usr');
+  fs.writeFileSync(shimPath, template, { mode: 0o755 });
+
+  const code = await new Promise((resolve, reject) => {
+    // PATH 와 HOME 도 비워 command -v 와 버전 관리자 자리까지 없앤다.
+    const child = spawn('/bin/sh', [shimPath, 'running'], {
+      stdio: ['pipe', 'ignore', 'ignore'],
+      env: { PATH: '/nonexistent', HOME: path.join(directory, 'no-home') }
+    });
+    child.on('error', reject);
+    child.on('exit', resolve);
+    child.stdin.end('{}');
+  });
+  assert.equal(code, 0);
+  // 아무것도 하지 않고 끝났다는 증거. node 가 돌았다면 여기 기록이 생긴다.
+  assert.equal(fs.existsSync(path.join(directory, 'sessions.json')), false);
+});

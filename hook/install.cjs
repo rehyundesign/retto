@@ -1,26 +1,33 @@
 #!/usr/bin/env node
 // 레토가 Claude Code와 Codex 상태를 알 수 있게 훅을 설치한다.
-//   node install.cjs            설치·갱신
+//   node install.cjs              설치·갱신
+//   node install.cjs --minimal    오래된 이벤트 여덟 개만 등록
+//   node install.cjs --full       열일곱 개 전부 등록 (버전 확인을 넘긴다)
 //   node install.cjs --uninstall  제거
 //
-// 하는 일 세 가지다.
+// 하는 일 네 가지다.
 //   1. hook.cjs 를 ~/.claude/retto-pet/ 로 복사
-//   2. ~/.claude/settings.json 에 이벤트 17개를 등록 (다른 훅은 건드리지 않는다)
-//   3. ~/.codex/hooks.json 에 Codex lifecycle 이벤트를 등록 (다른 훅은 건드리지 않는다)
+//   2. hook.sh(node 를 찾아 주는 실행기)를 같은 자리에 깔고 실행 권한을 준다
+//   3. ~/.claude/settings.json 에 이벤트를 등록 (다른 훅은 건드리지 않는다)
+//   4. ~/.codex/hooks.json 에 Codex lifecycle 이벤트를 등록 (다른 훅은 건드리지 않는다)
 // 두 설정 파일은 고치기 전에 백업한다.
 
 const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
+const { decideEventScope, eventCountFor } = require('./lib/claude-versions');
 const {
   installClaudeHooks,
   installCodexHooks,
+  shimPathFor,
   uninstallClaudeHooks,
   uninstallCodexHooks
 } = require('./lib/hook-settings');
 
-/// 설정에 박을 node 경로. process.execPath 는 버전이 든 실경로(.../Cellar/node/26.6.0/bin/node)라
-/// brew 로 node 를 올리면 사라진다. 버전이 안 든 안정적인 자리를 먼저 쓴다.
+/// hook.sh 에 적어 둘 node 경로. process.execPath 는 버전이 든 실경로
+/// (.../Cellar/node/26.6.0/bin/node, .../.nvm/versions/node/v22.1.0/bin/node)라
+/// 버전을 올리면 사라진다. 버전이 안 든 안정적인 자리를 먼저 쓴다.
+/// 여기서 고른 경로가 나중에 사라져도 hook.sh 가 다른 자리를 찾아본다.
 function stableNodePath() {
   for (const candidate of ['/opt/homebrew/bin/node', '/usr/local/bin/node', '/usr/bin/node']) {
     try {
@@ -51,24 +58,37 @@ function migrateLegacyPetDir() {
   console.log(`옛 폴더를 옮겼습니다 · ${legacyPetDir} → ${petDir}`);
 }
 const packagedHookPath = path.join(__dirname, 'hook.cjs');
+const packagedShimPath = path.join(__dirname, 'hook.sh');
 
 try {
   migrateLegacyPetDir();
   if (process.argv.includes('--uninstall')) {
     uninstallClaudeHooks({ settingsPath, installedHookPath });
     uninstallCodexHooks({ hooksPath: codexHooksPath, installedHookPath });
+    for (const leftover of [shimPathFor(installedHookPath), installedHookPath]) {
+      fs.rmSync(leftover, { force: true });
+    }
     console.log(`레토 훅을 제거했습니다\n  Claude: ${settingsPath}\n  Codex: ${codexHooksPath}`);
   } else {
-    // 설정에는 절대 경로가 들어가야 한다. GUI 로 띄운 Claude Code 는 PATH 가 거의 비어 있다.
     const nodeCommand = stableNodePath();
-    installClaudeHooks({
+    const { minimal, reason } = decideEventScope(process.argv);
+    const { installedShimPath } = installClaudeHooks({
       settingsPath,
       packagedHookPath,
+      packagedShimPath,
       installedHookPath,
-      nodeCommand
+      nodeCommand,
+      minimal
     });
-    installCodexHooks({ hooksPath: codexHooksPath, installedHookPath, nodeCommand });
-    console.log(`레토 훅을 설치했습니다 · ${installedHookPath}\n  node: ${nodeCommand}\n  Claude: ${settingsPath}\n  Codex: ${codexHooksPath}`);
+    installCodexHooks({ hooksPath: codexHooksPath, installedHookPath });
+    const count = eventCountFor(minimal);
+    console.log([
+      `레토 훅을 설치했습니다 · ${installedShimPath}`,
+      `  이벤트: ${count}개 — ${reason}`,
+      `  node: ${nodeCommand}`,
+      `  Claude: ${settingsPath}`,
+      `  Codex: ${codexHooksPath}`
+    ].join('\n'));
   }
 } catch (error) {
   console.error(`실패: ${error && error.message ? error.message : error}`);

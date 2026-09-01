@@ -25,24 +25,13 @@ func performUninstall(bundle: Bundle = .main) -> UninstallOutcome {
     let home = fileManager.homeDirectoryForCurrentUser
 
     // 1. 훅 등록. 앱을 지운 뒤에는 번들 안의 설치기를 쓸 수 없으니 이걸 먼저 한다.
-    if let script = bundle.url(forResource: "install", withExtension: "cjs", subdirectory: "hook"),
-       let node = ["/opt/homebrew/bin/node", "/usr/local/bin/node", "/usr/bin/node"]
-           .first(where: { fileManager.isExecutableFile(atPath: $0) }) {
-        let process = Process()
-        process.executableURL = URL(fileURLWithPath: node)
-        process.arguments = [script.path, "--uninstall"]
-        process.standardOutput = Pipe()
-        process.standardError = Pipe()
-        do {
-            try process.run()
-            process.waitUntilExit()
-            if process.terminationStatus == 0 { outcome.ok("Claude·Codex 훅 등록을 뺐습니다") }
-            else { outcome.warn("훅 등록을 빼지 못했습니다 — Claude settings.json과 Codex hooks.json을 확인해 주세요") }
-        } catch {
-            outcome.warn("훅 제거를 실행하지 못했습니다 — Claude settings.json과 Codex hooks.json을 확인해 주세요")
-        }
+    //    node 를 찾는 자리는 「훅 다시 설치」와 같은 곳을 쓴다 — 한쪽만 nvm 을 알아보면
+    //    설치는 되는데 제거는 안 되는 상태가 만들어진다.
+    let installer = runHookInstaller(arguments: ["--uninstall"], bundle: bundle)
+    if installer.ok {
+        outcome.ok("Claude·Codex 훅 등록을 뺐습니다")
     } else {
-        outcome.warn("node 가 없어 훅 등록이 남습니다 — Claude settings.json과 Codex hooks.json을 확인해 주세요")
+        outcome.warn("훅 등록을 빼지 못했습니다 — Claude settings.json과 Codex hooks.json을 확인해 주세요")
     }
 
     // 2. 상태 파일과 설치된 훅. 옛 이름(reto-pet)으로 깔렸던 폴더도 같이 본다.

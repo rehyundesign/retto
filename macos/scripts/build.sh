@@ -8,7 +8,7 @@ APP_ROOT="${PROJECT_DIR:h}"
 ASSETS_DIR="$APP_ROOT/assets"
 BUILD_DIR="$PROJECT_DIR/build"
 DIST_DIR="$APP_ROOT/dist"
-VERSION="0.7.0"
+VERSION="0.8.0"
 APP_NAME="Retto Claude Pet.app"
 # 0.4.0 까지는 "Reto Claude Pet.app" 이었다. 영어 표기를 Retto 로 맞추면서 이름이 바뀌었으니,
 # 설치할 때 옛 이름 앱을 함께 걷어낸다. 그대로 두면 둘이 같이 떠서 말풍선이 두 개가 된다.
@@ -20,10 +20,19 @@ RESOURCES_DIR="$CONTENTS_DIR/Resources"
 ICONSET_DIR="$BUILD_DIR/RettoIcon.iconset"
 
 INSTALL=0
-[[ "${1:-}" == "--install" ]] && INSTALL=1
+KEEP_BUILD=0
+for arg in "$@"; do
+  case "$arg" in
+    --install) INSTALL=1 ;;
+    --keep-build) KEEP_BUILD=1 ;;
+  esac
+done
 
 rm -rf "$BUILD_DIR"
 mkdir -p "$MACOS_DIR" "$RESOURCES_DIR" "$ICONSET_DIR" "$DIST_DIR"
+
+# dist 는 zip 만 두는 자리다. Spotlight 색인에서 빼 둔다.
+touch "$DIST_DIR/.metadata_never_index"
 
 swiftc \
   -O \
@@ -62,7 +71,8 @@ cp "$ASSETS_DIR/NanumMiNiSonGeurSsi.ttf" "$RESOURCES_DIR/NanumMiNiSonGeurSsi.ttf
 # 훅을 앱에 넣어 둔다. 설치기와 「레토 제거」 가 이걸 쓴다.
 rm -rf "$RESOURCES_DIR/hook"
 mkdir -p "$RESOURCES_DIR/hook"
-cp "$APP_ROOT/hook/hook.cjs" "$APP_ROOT/hook/install.cjs" "$RESOURCES_DIR/hook/"
+cp "$APP_ROOT/hook/hook.cjs" "$APP_ROOT/hook/hook.sh" "$APP_ROOT/hook/install.cjs" "$RESOURCES_DIR/hook/"
+chmod +x "$RESOURCES_DIR/hook/hook.sh"
 cp -R "$APP_ROOT/hook/lib" "$RESOURCES_DIR/hook/lib"
 
 for spec in "16 icon_16x16.png" "32 icon_16x16@2x.png" "32 icon_32x32.png" "64 icon_32x32@2x.png" "128 icon_128x128.png" "256 icon_128x128@2x.png" "256 icon_256x256.png" "512 icon_256x256@2x.png" "512 icon_512x512.png" "1024 icon_512x512@2x.png"; do
@@ -76,8 +86,9 @@ codesign --force --deep --sign - "$APP_DIR"
 
 "$MACOS_DIR/RettoClaudePet" --self-test
 
+# dist 에는 zip 만 둔다. 예전에는 앱을 한 벌 더 풀어 뒀는데 쓰는 데가 없었고,
+# Spotlight 에서 레토를 찾으면 설치본과 이것이 같이 떠서 무엇을 눌러야 할지 알 수 없었다.
 rm -rf "$DIST_DIR/$APP_NAME"
-cp -R "$APP_DIR" "$DIST_DIR/$APP_NAME"
 
 # 베타를 남에게 보낼 때 필요한 것을 한 폴더에 담아 zip 하나로 만든다.
 # 애드혹 서명이라 받는 쪽이 격리 딱지를 떼야 열리므로, 그 일을 하는 설치기와
@@ -99,6 +110,9 @@ done
 
 cp "$APP_ROOT/scripts/beta-install.command" "$SHARE_DIR/설치.command"
 chmod +x "$SHARE_DIR/설치.command"
+# 레토가 안 움직일 때 어디서 멈췄는지 받는 쪽이 스스로 확인할 수 있게 같이 넣는다.
+cp "$APP_ROOT/scripts/doctor.command" "$SHARE_DIR/진단.command"
+chmod +x "$SHARE_DIR/진단.command"
 sed "s/__VERSION__/$VERSION/g" "$APP_ROOT/scripts/beta-readme.txt" > "$SHARE_DIR/먼저-읽어주세요.txt"
 rm -f "$DIST_DIR/Retto-Claude-Pet-$VERSION.zip"
 ditto -c -k --sequesterRsrc --keepParent "$SHARE_DIR" "$DIST_DIR/Retto-Claude-Pet-$VERSION.zip"
@@ -124,4 +138,13 @@ if (( INSTALL )); then
   echo "installed: $HOME/Applications/$APP_NAME"
 fi
 
-echo "$APP_DIR"
+# 빌드 자리에 앱을 남겨 두면 Spotlight 에서 레토를 찾았을 때 설치본과 나란히 떠서
+# 무엇을 눌러야 할지 알 수 없다. `.metadata_never_index` 로는 걸러지지 않았다.
+# 보낼 것은 zip 에, 쓸 것은 ~/Applications 에 있으니 여기 남길 이유가 없다.
+# 갓 빌드한 것을 직접 열어 봐야 하면 --keep-build 를 붙인다.
+if (( KEEP_BUILD )); then
+  echo "$APP_DIR"
+else
+  rm -rf "$BUILD_DIR"
+  echo "$DIST_DIR/Retto-Claude-Pet-$VERSION.zip"
+fi

@@ -12,8 +12,8 @@ Claude Code와 Codex 상태에 맞춰 움직이는 랙돌 고양이. 앱 하나�
 apps/retto-pet/
 ├── assets/   스프라이트 아틀라스·손글씨 폰트·아이콘
 ├── macos/    데스크탑 오버레이 (Swift, 모든 Space·전체화면 위에 상주)
-├── hook/     Claude Code·Codex 훅과 설치기
-├── scripts/  훅 설치 래퍼
+├── hook/     Claude Code·Codex 훅(hook.sh·hook.cjs)과 설치기
+├── scripts/  훅 설치 래퍼와 진단기
 └── tools/    에셋 검사·교정 도구
 ```
 
@@ -56,9 +56,15 @@ Codex 의 `event_msg:agent_message` 에도 같은 문장이 있지만 도구 결
 ## macOS 오버레이
 
 ```sh
-apps/retto-pet/macos/scripts/build.sh            # 빌드 + 셀프 테스트 + dist/ 산출
-apps/retto-pet/macos/scripts/build.sh --install  # 위 + ~/Applications 설치 후 재실행
+apps/retto-pet/macos/scripts/build.sh             # 빌드 + 셀프 테스트 + dist/ 에 zip
+apps/retto-pet/macos/scripts/build.sh --install   # 위 + ~/Applications 설치 후 재실행
+apps/retto-pet/macos/scripts/build.sh --keep-build  # macos/build/ 를 치우지 않는다
 ```
+
+빌드가 끝나면 `macos/build/` 를 치운다. 앱을 거기 남겨 두면 Spotlight 에서 레토를 찾았을 때
+설치본과 나란히 떠서 무엇을 눌러야 할지 알 수 없다(`.metadata_never_index` 로는 걸러지지 않았다).
+같은 이유로 `dist/` 에도 zip 만 둔다 — 예전에는 앱을 한 벌 더 풀어 뒀는데 쓰는 데가 없었다.
+보낼 것은 zip 에, 쓸 것은 `~/Applications` 에 있다.
 
 빌드 중 `--self-test` 가 자동으로 돌아 아틀라스 크기, 상태 7종, 딥링크, 배율 프리셋,
 레이아웃 기준값을 검사한다. 하나라도 어긋나면 빌드가 실패한다.
@@ -66,7 +72,7 @@ apps/retto-pet/macos/scripts/build.sh --install  # 위 + ~/Applications 설치 �
 배율별 레이아웃을 화면 없이 확인할 때:
 
 ```sh
-"apps/retto-pet/macos/build/Retto Claude Pet.app/Contents/MacOS/RetoClaudePet" \
+"$HOME/Applications/Retto Claude Pet.app/Contents/MacOS/RettoClaudePet" \
   --render-preview /tmp/reto-scale.png
 ```
 
@@ -315,17 +321,18 @@ VS Code 쪽 `reveal()`(살아 있는 탭 되살리기)과 다른 것 아닌가 �
 
 | 파일 | 줄 | 맡은 일 |
 |---|---:|---|
-| `Uninstall.swift` | 73 | 훅 등록·상태 파일·앱 되돌리기 |
+| `Uninstall.swift` | 62 | 훅 등록·상태 파일·앱 되돌리기 |
 | `main.swift` | 87 | 실행 진입점, 진단 플래그(`--self-test`·`--shape-report`·`--render-preview`) |
-| `OpenTarget.swift` | 97 | 세션을 어디서 열지(VS Code·Claude 앱·Codex)와 딥링크 |
+| `OpenTarget.swift` | 107 | 세션을 어디서 열지(VS Code·Claude 앱·Codex)와 딥링크 |
 | `Tones.swift` | 126 | 뜻 단위 색 넷과 상태별 애니메이션 |
 | `Bubble.swift` | 128 | 동물의 숲 윤곽(Figma 벡터 + 다듬기) |
 | `ClaudeAppNavigator.swift` | 194 | Claude 앱 안에서 세션 찾아가기 |
-| `Geometry.swift` | 260 | 몸/말풍선 크기·자리 계산 |
+| `ClaudeIntegration.swift` | 206 | 훅이 살아 있는지 스스로 확인, 설치기 실행 |
+| `Geometry.swift` | 263 | 몸/말풍선 크기·자리 계산 |
 | `Sessions.swift` | 332 | 훅이 적은 상태 읽기, 우선순위, 두 모양의 트랜스크립트 읽기 |
-| `SelfTest.swift` | 436 | 자체 검사, 배율별 미리보기 |
+| `SelfTest.swift` | 486 | 자체 검사, 배율별 미리보기 |
 | `PetView.swift` | 961 | 그리기와 마우스 |
-| `AppDelegate.swift` | 1,254 | 창·메뉴·세션 감시, 클릭을 동작으로 |
+| `AppDelegate.swift` | 1,397 | 창·메뉴·세션 감시, 클릭을 동작으로 |
 
 최상단 선언만 `internal` 로 열고 멤버의 `private` 는 그대로 뒀다. `build.sh` 는 `Sources/*.swift`
 전체를 넘긴다.
@@ -414,6 +421,8 @@ atime 을 되돌려, 자기가 자기를 읽음 처리하지 않게 한다.
 ```
 Claude Code 이벤트
    ↓  ~/.claude/settings.json 에 등록된 명령
+~/.claude/retto-pet/hook.sh <상태>      ← node 를 찾는다
+   ↓
 node ~/.claude/retto-pet/hook.cjs <상태>
    ↓
 ~/.claude/retto-pet/sessions.json
@@ -421,18 +430,68 @@ node ~/.claude/retto-pet/hook.cjs <상태>
 레토 (그림·색·말풍선)
 ```
 
-설치는 두 가지 일을 한다 — `hook.cjs` 를 `~/.claude/retto-pet/` 로 복사하고,
-`settings.json` 에 이벤트 17개를 등록한다(다른 훅은 건드리지 않고, 고치기 전에 백업하고 최근 5개만 남긴다).
+설치는 세 가지 일을 한다 — `hook.cjs` 와 `hook.sh` 를 `~/.claude/retto-pet/` 로 복사하고,
+`settings.json` 에 이벤트를 등록한다(다른 훅은 건드리지 않고, 고치기 전에 백업하고 최근 5개만 남긴다).
 
 ```sh
 apps/retto-pet/scripts/install-hooks.sh              # 설치·갱신
+apps/retto-pet/scripts/install-hooks.sh --minimal    # 오래된 이벤트 여덟 개만
 apps/retto-pet/scripts/install-hooks.sh --uninstall  # 제거
-cd apps/retto-pet/hook && npm test                   # 훅·설치기 테스트 10개
+apps/retto-pet/scripts/doctor.command                # 어디서 멈췄는지 본다
+cd apps/retto-pet/hook && npm test                   # 훅·설치기 테스트 35개
 ```
 
-`build.sh --install` 이 앱을 깔 때 훅도 함께 갱신한다. 발바닥 메뉴에 같은 항목을 두었다가
-걷어냈다 — 설치 경로 둘이 이미 하는 일이라 누를 일이 없었다. 설정에 박는 node 경로는 버전이 든 실경로(`.../Cellar/node/26.6.0/...`)
-대신 `/opt/homebrew/bin/node` 처럼 안정적인 자리를 고른다 — brew 로 node 를 올려도 훅이 죽지 않게.
+`build.sh --install` 이 앱을 깔 때 훅도 함께 갱신한다.
+
+### 터미널에서는 되는데 앱에서만 안 된다
+
+받아 간 사람에게서 온 말이다. 터미널을 켜면 레토가 따라 움직이고 터미널을 닫으면 자는데,
+Claude 데스크탑 앱에서 작업할 때만 아무 반응이 없었다. 세 가지를 함께 고쳤다.
+
+**하나. 훅을 `command` 한 줄로 적는다.** 0.7.0 까지는 `command: node` + `args: [hook.cjs, 상태]`
+로 나눠 적었는데, 그 모양은 최근 버전에만 있다. 그리고 **데스크탑 앱은 CLI 와 별개로 자기
+claude-code 를 내려받아** `~/Library/Application Support/Claude/claude-code/<버전>/` 에 둔다.
+그래서 한 기계 안에서도 버전이 갈린다 — 이 맥에서는 터미널 2.1.250, 앱 2.1.247 이었다.
+`command` 한 줄은 오래된 규격이라 양쪽에서 다 읽힌다.
+
+**둘. 이벤트를 필수 여덟 개와 선택 아홉 개로 나눈다.** 필수는 오래전부터 있던
+`SessionStart` `UserPromptSubmit` `PreToolUse` `PostToolUse` `Notification` `SubagentStop`
+`Stop` `SessionEnd` 다. 이 여덟 개만으로도 상태 일곱 종이 다 나온다. 나머지
+(`PostToolBatch` `PermissionRequest` `Elicitation` `PostToolUseFailure` `PermissionDenied`
+`SubagentStart` `TaskCreated` `TaskCompleted` `StopFailure`)는 최근에 생긴 것들이라, 모르는
+이벤트 이름 하나가 설정 검증에서 훅 등록 전체를 무시하게 만들 수 있다.
+
+설치기가 터미널과 앱의 claude-code 버전을 읽어 정한다. 둘 중 낮은 쪽이 `2.1.247`(열일곱 개가
+전부 있는 것을 바이너리에서 확인한 가장 낮은 버전)보다 낮으면 필수만 등록한다.
+`--full` · `--minimal` 로 직접 고르면 그 뜻을 지킨다.
+
+**셋. node 경로를 한 곳에 고정하지 않는다.** 설정에 절대경로를 직접 넣었더니 nvm·fnm·volta 로
+버전을 바꾸는 순간 그 경로가 사라져 훅이 한꺼번에 동작을 멈췄다. 이제 `hook.sh` 가 설치할 때
+고른 자리를 먼저 보고, 없으면 흔한 자리와 버전 관리자 자리를 차례로 확인한다. node 가 하나도
+없으면 아무것도 하지 않고 끝낸다 — 훅이 실패하면 Claude Code 가 경고를 띄우는데, 레토 때문에
+남의 작업에 경고가 붙는 것은 과하다.
+
+### 고장인지 아닌지 레토가 말해 준다
+
+훅이 한 번도 돈 적이 없어도 화면은 정상 대기와 똑같았다. 회색으로 자면서
+"Claude Code나 Codex를 켜면 여기서 알려줄게" 라고 말한다. 그래서 받아 간 사람이 알려 줄 수
+있는 건 "쳐다만 보고 있다" 뿐이었고, 어디서 멈췄는지 물어보는 데 카톡을 여러 번 왕복했다.
+Codex 쪽에는 등록 확인이 있었는데 Claude 쪽에는 없었다.
+
+발바닥 메뉴 **「Claude 연동 확인」** 이 셋을 나눠 보여준다. 셋 다 다른 손질이 필요해서 나눈다.
+
+| 보는 것 | 어긋났을 때 |
+| --- | --- |
+| `settings.json` 의 레토 훅 개수 | 다시 설치 (창 안에 단추가 있다) |
+| `hook.sh`·`hook.cjs` 와 node | Node.js 설치 |
+| 채널별 마지막 소식 — VS Code · Claude 앱 · 터미널 · Codex | 그 클라이언트 쪽 문제 |
+
+메뉴 제목에도 상태가 함께 나온다(`— 훅 없음` · `— node 없음` · `— 소식 없음`).
+Claude 앱에서 온 소식이 하나도 없으면 창이 그 이유를 함께 적는다 — 앱에서는 폴더를 열어
+Claude Code 세션을 시작해야 보인다는 것과, 앱이 자기 claude-code 를 따로 쓴다는 것.
+
+앱을 열 수 없는 상황을 위해 같은 내용을 `scripts/doctor.command` 로도 만들어 배포 묶음에
+넣는다(`진단.command`). 아무것도 고치지 않고 읽기만 한다.
 
 ## 지난 구조
 

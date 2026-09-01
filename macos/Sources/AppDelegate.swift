@@ -14,6 +14,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     private var clickThroughItem: NSMenuItem!
     private var followClaudeItem: NSMenuItem!
     private var codexOpenTargetItem: NSMenuItem!
+    private var claudeIntegrationItem: NSMenuItem!
     /// Claude 앱에서 세션까지 따라갈지. 접근성으로 사이드바를 대신 누르는 방식이라,
     /// 앱이 바뀌어 어긋나면 사용자가 여기서 끌 수 있어야 한다.
     private var followsClaudeSession: Bool {
@@ -399,6 +400,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         stateItem.target = self
         menu.addItem(stateItem)
 
+        // 훅이 한 번도 돈 적이 없어도 레토 화면은 정상 대기와 똑같다. 고장인지 아닌지
+        // 사용자가 스스로 확인할 자리를 둔다. 제목에 상태를 함께 적는다.
+        claudeIntegrationItem = NSMenuItem(title: "Claude 연동 확인", action: #selector(showClaudeIntegration), keyEquivalent: "")
+        claudeIntegrationItem.target = self
+        menu.addItem(claudeIntegrationItem)
+        updateClaudeIntegrationItem()
+
         let uninstallItem = NSMenuItem(title: "레토 제거…", action: #selector(uninstallRetto), keyEquivalent: "")
         uninstallItem.target = self
         menu.addItem(uninstallItem)
@@ -548,6 +556,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     }
 
     private func rebuildSessionsMenu() {
+        updateClaudeIntegrationItem()
         sessionsMenu.removeAllItems()
         autoSelectionItem = NSMenuItem(title: "중요한 세션 자동으로 따라가기", action: #selector(selectAutomaticSession), keyEquivalent: "")
         autoSelectionItem.target = self
@@ -889,6 +898,79 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         if alert.runModal() == .alertSecondButtonReturn {
             NSWorkspace.shared.activateFileViewerSelecting([codexHooksURL])
         }
+    }
+
+    private func updateClaudeIntegrationItem() {
+        guard let item = claudeIntegrationItem else { return }
+        item.title = ClaudeIntegration.status(sessions: sessions).menuTitle
+    }
+
+    /// 레토가 Claude Code 소식을 받고 있는지 보여 준다.
+    ///
+    /// 훅이 등록돼 있나 · 그 훅을 돌릴 수 있나 · 소식이 실제로 오나. 셋을 나눠 보여주는 이유는
+    /// 셋 다 다른 손질이 필요해서다. 등록이 없으면 다시 설치, node 가 없으면 Node.js 설치,
+    /// 등록은 됐는데 소식이 없으면 그 클라이언트 쪽 문제다.
+    @objc private func showClaudeIntegration() {
+        let status = ClaudeIntegration.status(sessions: sessions, fresh: true)
+        updateClaudeIntegrationItem()
+
+        var lines: [String] = []
+        if !status.settingsReadable {
+            lines.append("훅 등록      설정 파일을 읽지 못했습니다 — JSON 이 깨졌을 수 있습니다")
+        } else if status.registeredEvents == 0 {
+            lines.append("훅 등록      없음 — 아래 「훅 다시 설치」 를 눌러 주세요")
+        } else {
+            lines.append("훅 등록      \(status.registeredEvents)개 이벤트")
+        }
+        lines.append("훅 파일      " + (status.shimInstalled && status.hookInstalled ? "있음" : "없음 — 다시 설치가 필요합니다"))
+        lines.append("node        " + (status.nodePath ?? "찾지 못했습니다 — nodejs.org 에서 설치해 주세요"))
+        lines.append("")
+        lines.append("마지막 소식")
+        // 알림창은 폭이 고른 서체가 아니라 칸을 맞춰도 줄이 서지 않는다. 가운뎃점으로 잇는다.
+        for channel in NewsChannel.allCases {
+            let when = status.lastNews[channel].map { elapsedLabel(since: $0) } ?? "없음"
+            lines.append("  \(channel.label) · \(when)")
+        }
+
+        // 이게 성연님 상황이었다. 터미널에서는 레토가 움직이는데 앱에서만 멈춰 있었다.
+        if status.registeredEvents > 0, status.lastNews[.claudeApp] == nil {
+            lines.append("")
+            lines.append("Claude 앱에서 온 소식이 아직 없습니다.")
+            lines.append("앱에서는 폴더를 열어 Claude Code 세션을 시작해야 레토가 볼 수 있습니다 —")
+            lines.append("평소 대화창은 Claude Code 세션이 아닙니다.")
+            lines.append("앱은 자기 claude-code 를 따로 내려받아 쓰기 때문에, 터미널만 최신이고")
+            lines.append("앱이 낮은 버전이면 앱 쪽 훅만 동작하지 않을 수 있습니다.")
+        }
+
+        let alert = NSAlert()
+        alert.messageText = status.isHealthy ? "레토가 Claude Code 소식을 받고 있어요" : "Claude 연동을 확인해 주세요"
+        alert.informativeText = lines.joined(separator: "\n")
+        alert.addButton(withTitle: "닫기")
+        alert.addButton(withTitle: "훅 다시 설치")
+        alert.addButton(withTitle: "설정 파일 보기")
+        switch alert.runModal() {
+        case .alertSecondButtonReturn:
+            reinstallHooks()
+        case .alertThirdButtonReturn:
+            NSWorkspace.shared.activateFileViewerSelecting([ClaudeIntegration.settingsURL])
+        default:
+            break
+        }
+    }
+
+    /// 번들에 넣어 둔 설치기를 그대로 돌린다. 설치 경로와 같은 코드를 써야
+    /// 메뉴로 고친 것과 설치기로 고친 것이 갈리지 않는다.
+    private func reinstallHooks() {
+        let result = runHookInstaller(arguments: [])
+        ClaudeIntegration.forgetCachedProbe()
+        updateClaudeIntegrationItem()
+        let alert = NSAlert()
+        alert.messageText = result.ok ? "훅을 다시 설치했습니다" : "훅을 설치하지 못했습니다"
+        alert.informativeText = result.output.isEmpty
+            ? (result.ok ? "" : "Node.js 가 없는지 확인해 주세요 — https://nodejs.org")
+            : result.output
+        alert.addButton(withTitle: "닫기")
+        alert.runModal()
     }
 
     /// 켜짐·꺼짐과 권한 상태를 제목에 함께 보여 준다.
