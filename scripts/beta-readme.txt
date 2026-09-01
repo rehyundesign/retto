@@ -187,7 +187,7 @@ Claude Code와 Codex 상태에 맞춰 움직이는 랙돌 고양이
 ■ 만든 사람
 
   luxia yoon
-  ydh3600@mail.com
+  ydh3600@gmail.com
   https://www.linkedin.com/in/donghyunyoon/
 
   버그나 이상한 점이 보이면 알려 주세요. 베타입니다.

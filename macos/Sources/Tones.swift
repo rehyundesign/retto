@@ -21,7 +21,7 @@ enum Retto {
     static let koreanName = "레토"
     static let character = "luxia yoon 의 랙돌 고양이"
     static let creator = "luxia yoon"
-    static let email = "ydh3600@mail.com"
+    static let email = "ydh3600@gmail.com"
     static let linkedIn = "https://www.linkedin.com/in/donghyunyoon/"
 
     /// 실제 고양이의 신상. 화면 여러 곳에서 같은 값을 써야 하니 여기 한 벌만 둔다.
