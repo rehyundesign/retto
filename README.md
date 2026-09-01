@@ -1,3 +1,28 @@
+# Retto
+
+A desk pet for [Claude Code](https://claude.com/claude-code) and Codex — a macOS overlay cat
+that sits above every Space and full-screen app. It turns green while your agents work, blue
+when one needs your answer, orange when a turn finished and you haven't looked yet, red when
+something failed, and it takes you to that session when you click. One app watches sessions
+coming from VS Code, the Claude desktop app, the terminal, and Codex at once.
+
+Requires an Apple Silicon Mac (macOS 13 or later) and Node.js. Two ways to install:
+
+```sh
+git clone https://github.com/rehyundesign/retto.git
+cd retto && macos/scripts/build.sh --install
+```
+
+or drag `Retto.app` out of the DMG on the [releases page](../../releases). A locally built app
+skips Gatekeeper entirely; the DMG is unsigned, so the first launch needs one trip through
+System Settings → Privacy & Security → "Open Anyway".
+
+**The rest of this document is in Korean** — it is where the reasoning behind each decision
+lives, so a translation would lose most of the point. MIT licensed. Not affiliated with
+Anthropic or OpenAI; Claude and Codex are the products this tool watches, not its makers.
+
+---
+
 # 레토 (Retto)
 > **Retto** · luxia yoon 의 랙돌 고양이
 > 만든 사람 luxia yoon · ydh3600@mail.com · [linkedin.com/in/donghyunyoon](https://www.linkedin.com/in/donghyunyoon/)
@@ -344,8 +369,12 @@ VS Code 쪽 `reveal()`(살아 있는 탭 되살리기)과 다른 것 아닌가 �
 apps/retto-pet/scripts/check.sh    # 빌드 + 자체 검사 + Claude·Codex 훅 테스트
 ```
 
-`.githooks/pre-commit` 이 `apps/retto-pet/` 를 건드린 커밋에서만 이걸 돌린다
-(`git config core.hooksPath .githooks`). 다른 작업 커밋은 그대로 지나간다.
+`.githooks/pre-commit` 이 커밋 전에 이걸 돌린다. 클론한 뒤 한 번 켜 준다.
+
+```sh
+git config core.hooksPath .githooks
+```
+
 급하면 `--no-verify`.
 
 ## 말풍선이 지금 하는 말을 따라가는 법

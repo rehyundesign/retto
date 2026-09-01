@@ -1,0 +1,21 @@
+.DS_Store
+
+# 빌드 산출물. dist 에는 보낼 dmg 만, macos/build 는 빌드가 끝나면 치운다.
+dist/
+macos/build/
+
+# 훅을 레포 안에서 직접 돌리면 그 자리에 세션 기록이 쌓인다(`petDir = __dirname`).
+# 진짜 자리는 ~/.claude/retto-pet/ 이고, 이건 손으로 돌려 본 흔적일 뿐이다.
+hook/sessions.json
+hook/state.json
+hook/.sessions.lock/
+
+# 개인 스킨. 만든 사람 기기에서만 쓰고 레포·배포 묶음에 넣지 않는다.
+# 남의 캐릭터로 만든 것이라 공개 대상이 아니다.
+assets/spritesheet-rilakkuma.webp
+tools/rilakkuma-skin/
+
+# 스킨 생성 중간물. 최종 아틀라스(assets/spritesheet-*.webp)는 커밋되니 결과는 남는다.
+# 한 장에 2~4MB 라 다 담으면 레포가 스킨마다 20MB 씩 늘어난다.
+tools/*-skin/gen-*.png
+tools/*-skin/atlas.png

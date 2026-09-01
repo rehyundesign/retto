@@ -1,0 +1,13 @@
+#!/bin/zsh
+# 커밋 전에 빌드·자체 검사·훅 테스트를 돌린다.
+#
+# 켜는 법:  git config core.hooksPath .githooks
+# 급하면:   git commit --no-verify
+set -euo pipefail
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+
+print -- "레토 검사 중…"
+if ! "$REPO_ROOT/scripts/check.sh"; then
+  print -- "검사가 실패했습니다. 고치거나 --no-verify 로 넘기세요." >&2
+  exit 1
+fi
