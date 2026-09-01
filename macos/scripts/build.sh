@@ -29,12 +29,6 @@ for arg in "$@"; do
   esac
 done
 
-rm -rf "$BUILD_DIR"
-mkdir -p "$MACOS_DIR" "$RESOURCES_DIR" "$ICONSET_DIR" "$DIST_DIR"
-
-# dist 는 보낼 묶음(dmg)만 두는 자리다. Spotlight 색인에서 빼 둔다.
-touch "$DIST_DIR/.metadata_never_index"
-
 # 빌드에 필요한 것을 먼저 확인한다. 없으면 swiftc 가 알 수 없는 오류로 죽거나,
 # macOS 가 설치 창을 띄우고 스크립트는 그대로 실패한다 — 처음 받은 사람에게는
 # 무엇이 없어서 안 되는지가 안 보인다.
@@ -43,6 +37,12 @@ if ! command -v swiftc >/dev/null 2>&1; then
   print -u2 -- "  xcode-select --install"
   exit 1
 fi
+
+rm -rf "$BUILD_DIR"
+mkdir -p "$MACOS_DIR" "$RESOURCES_DIR" "$ICONSET_DIR" "$DIST_DIR"
+
+# dist 는 보낼 묶음(dmg)만 두는 자리다. Spotlight 색인에서 빼 둔다.
+touch "$DIST_DIR/.metadata_never_index"
 
 swiftc \
   -O \
