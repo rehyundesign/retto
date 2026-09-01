@@ -162,22 +162,28 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(screenConfigurationChanged), name: NSApplication.didChangeScreenParametersNotification, object: nil)
     }
 
-    /// Reto → Retto 로 이름을 바로잡으면서 번들 ID 와 설정 키가 함께 바뀌었다.
-    /// macOS 는 번들 ID 로 설정 자리를 잡으므로, 그냥 두면 크기·위치·고정한 세션이 전부 초기값으로 돌아간다.
-    /// 옛 자리에서 한 번만 끌어오고 지운다. 샌드박스가 아니라서 옛 도메인을 직접 읽을 수 있다.
+    /// 이름이 두 번 바뀌었고, 그때마다 번들 ID 가 함께 바뀌었다.
+    ///
+    ///   com.luxia.reto-claude-pet   Reto → Retto (t 하나가 빠져 있었다)
+    ///   com.luxia.retto-claude-pet  Retto Claude Pet → Retto (공개하면서 제품명에서 Claude 를 뺐다)
+    ///
+    /// macOS 는 번들 ID 로 설정 자리를 잡으므로, 그냥 두면 크기·위치·고정한 세션이 전부
+    /// 초기값으로 돌아간다. 옛 자리에서 한 번만 끌어오고 지운다.
+    /// 샌드박스가 아니라서 옛 도메인을 직접 읽을 수 있다.
     private func migrateLegacyDefaults() {
-        let legacyDomain = "com.luxia.reto-claude-pet"
         let defaults = UserDefaults.standard
-        guard let legacy = defaults.persistentDomain(forName: legacyDomain), !legacy.isEmpty else { return }
-
-        for (legacyKey, value) in legacy {
-            // 키 이름도 같이 바뀌었다. 접두사만 갈아 끼우고, 이미 새 값이 있으면 건드리지 않는다.
-            let key = legacyKey.hasPrefix("RetoClaudePet")
-                ? "RettoClaudePet" + legacyKey.dropFirst("RetoClaudePet".count)
-                : legacyKey
-            if defaults.object(forKey: key) == nil { defaults.set(value, forKey: key) }
+        // 오래된 것부터 옮긴다. 뒤엣것이 더 최근이므로 겹치면 뒤엣것이 남아야 한다.
+        for legacyDomain in ["com.luxia.reto-claude-pet", "com.luxia.retto-claude-pet"] {
+            guard let legacy = defaults.persistentDomain(forName: legacyDomain), !legacy.isEmpty else { continue }
+            for (legacyKey, value) in legacy {
+                // 첫 번째 이름 바꿈 때는 키 이름도 같이 바뀌었다. 접두사만 갈아 끼운다.
+                let key = legacyKey.hasPrefix("RetoClaudePet")
+                    ? "RettoClaudePet" + legacyKey.dropFirst("RetoClaudePet".count)
+                    : legacyKey
+                if defaults.object(forKey: key) == nil { defaults.set(value, forKey: key) }
+            }
+            defaults.removePersistentDomain(forName: legacyDomain)
         }
-        defaults.removePersistentDomain(forName: legacyDomain)
     }
 
     private func createPanel(spriteSheet: NSImage) {

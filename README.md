@@ -72,7 +72,7 @@ apps/retto-pet/macos/scripts/build.sh --keep-build  # macos/build/ 를 치우지
 배율별 레이아웃을 화면 없이 확인할 때:
 
 ```sh
-"$HOME/Applications/Retto Claude Pet.app/Contents/MacOS/RettoClaudePet" \
+"$HOME/Applications/Retto.app/Contents/MacOS/Retto" \
   --render-preview /tmp/reto-scale.png
 ```
 
@@ -386,7 +386,7 @@ cwebp -lossless -exact out.png -o assets/spritesheet.webp
 
 ## 남에게 보낼 때
 
-`macos/scripts/build.sh` 가 `dist/Retto-Claude-Pet-<버전>.dmg` 하나를 만든다. 안에는 앱과
+`macos/scripts/build.sh` 가 `dist/Retto-<버전>.dmg` 하나를 만든다. 안에는 앱과
 `Applications` 링크, `먼저-읽어주세요.txt`, `진단.command` 가 있고 Finder 창 배치까지 넣는다.
 
 0.7.0 까지는 zip 에 `설치.command` 를 넣고 "터미널 창으로 끌어다 놓으세요" 라고 했다. 그 파일이
@@ -529,7 +529,7 @@ Codex 쪽에는 등록 확인이 있었는데 Claude 쪽에는 없었다.
 나란히 그려 본다.
 
 ```sh
-"$HOME/Applications/Retto Claude Pet.app/Contents/MacOS/RettoClaudePet" \
+"$HOME/Applications/Retto.app/Contents/MacOS/Retto" \
   --setup-preview /tmp/setup.png
 ```
 

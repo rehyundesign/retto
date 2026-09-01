@@ -300,7 +300,7 @@ final class SetupWindow: NSObject, NSWindowDelegate {
 /// 처음 설정 창을 화면 없이 그림으로 뽑는다. 창은 사람이 눌러야만 뜨는 것이라
 /// 그러지 않으면 시험해 볼 방법이 없다 — 글자가 잘리거나 단추가 겹쳐도 모른다.
 ///
-///     RettoClaudePet --setup-preview /tmp/setup.png
+///     Retto --setup-preview /tmp/setup.png
 func renderSetupPreview(to path: String) -> Int32 {
     // 아직 아무 소식도 없는 첫 실행과, 방금 이어진 순간을 나란히 그린다.
     var blank = ClaudeIntegrationStatus()

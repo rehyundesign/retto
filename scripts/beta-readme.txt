@@ -4,7 +4,7 @@ Claude Code와 Codex 상태에 맞춰 움직이는 랙돌 고양이
 
 ■ 설치
 
-  1. Retto-Claude-Pet-__VERSION__.dmg 를 더블클릭합니다
+  1. Retto-__VERSION__.dmg 를 더블클릭합니다
 
   2. 레토를  Applications  폴더로 끌어다 놓습니다
 
@@ -28,7 +28,7 @@ Claude Code와 Codex 상태에 맞춰 움직이는 랙돌 고양이
 
   1. 뜬 창을 [완료] 나 [취소] 로 닫습니다  ← [휴지통으로 이동] 은 누르지 마세요
   2.  메뉴 > 시스템 설정 > 개인정보 보호 및 보안
-  3. 아래로 내려가면 "Retto Claude Pet 이(가) 차단되었습니다" 줄이 있습니다
+  3. 아래로 내려가면 "Retto 이(가) 차단되었습니다" 줄이 있습니다
   4. 그 옆의 「그래도 열기」를 누르고, 물어보면 맥 암호를 넣습니다
 
   한 번만 하면 됩니다.
@@ -45,7 +45,7 @@ Claude Code와 Codex 상태에 맞춰 움직이는 랙돌 고양이
 
 ■ 무엇을 건드리나요
 
-  · /Applications/Retto Claude Pet.app           앱
+  · /Applications/Retto.app                      앱
   · ~/.claude/retto-pet/                          상태 파일과 훅
   · ~/.claude/settings.json                      훅 등록
   · ~/.codex/hooks.json                          Codex 훅 등록
@@ -171,7 +171,7 @@ Claude Code와 Codex 상태에 맞춰 움직이는 랙돌 고양이
   그때는 이렇게 합니다.
 
     1. 시스템 설정 > 개인정보 보호 및 보안 > 손쉬운 사용
-    2. 「Retto Claude Pet」 을 고르고 − 로 삭제      ← 체크만 껐다 켜면 안 됩니다
+    2. 「Retto」 를 고르고 − 로 삭제                 ← 체크만 껐다 켜면 안 됩니다
     3. 레토 발바닥 메뉴에서 「— 권한 필요」 항목을 클릭
     4. 뜨는 창에서 [설정 열기] → 허용
 

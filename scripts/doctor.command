@@ -15,7 +15,8 @@ print -r -- "macOS $(sw_vers -productVersion) · $(uname -m)"
 
 # dmg 에서 끌어다 놓으면 /Applications, 내가 빌드해 깔면 ~/Applications 다. 둘 다 본다.
 APP=""
-for candidate in "/Applications/Retto Claude Pet.app" "$HOME/Applications/Retto Claude Pet.app"; do
+for candidate in /Applications/Retto.app "$HOME/Applications/Retto.app" \
+  "/Applications/Retto Claude Pet.app" "$HOME/Applications/Retto Claude Pet.app"; do
   [[ -d "$candidate" ]] && APP="$candidate" && break
 done
 if [[ -n "$APP" ]]; then
@@ -23,7 +24,7 @@ if [[ -n "$APP" ]]; then
 else
   print -r -- "앱          ✗ 응용 프로그램 폴더에 없습니다"
 fi
-if pgrep -f "Claude Pet.app/Contents/MacOS" >/dev/null 2>&1; then
+if pgrep -f "Retto.app/Contents/MacOS/Retto" >/dev/null 2>&1 || pgrep -f "Claude Pet.app/Contents/MacOS" >/dev/null 2>&1; then
   print -r -- "실행        돌고 있습니다"
 else
   print -r -- "실행        ✗ 떠 있지 않습니다"

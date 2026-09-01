@@ -137,6 +137,8 @@ let ribbonExpandDelay: TimeInterval = 0.3
 let sectionLabelWidthSample = String(repeating: "가", count: 12)
 /// 이름표 높이 중 말풍선 안으로 들어가는 비율.
 let namePillOverlap: CGFloat = 0.45
+// 설정 키 접두사는 `RettoClaudePet` 그대로 둔다. 앱 이름은 Retto 로 바뀌었지만
+// 이 문자열은 사람이 보는 곳이 아니고, 바꾸면 크기·위치를 또 한 번 옮겨야 한다.
 let seenSessionsDefaultsKey = "RettoClaudePetSeenSessions"
 let cornerDefaultsKey = "RettoClaudePetCorner"
 let followClaudeDefaultsKey = "RettoPetFollowClaudeSession"

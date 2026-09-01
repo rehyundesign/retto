@@ -8,11 +8,12 @@ APP_ROOT="${PROJECT_DIR:h}"
 ASSETS_DIR="$APP_ROOT/assets"
 BUILD_DIR="$PROJECT_DIR/build"
 DIST_DIR="$APP_ROOT/dist"
-VERSION="0.8.0"
-APP_NAME="Retto Claude Pet.app"
-# 0.4.0 까지는 "Reto Claude Pet.app" 이었다. 영어 표기를 Retto 로 맞추면서 이름이 바뀌었으니,
+VERSION="0.9.0"
+APP_NAME="Retto.app"
+# 이름이 두 번 바뀌었다. 0.4.0 까지 "Reto Claude Pet.app", 0.8.0 까지 "Retto Claude Pet.app".
+# 공개하면서 제품명에서 Claude 를 뺐다 — 공식 제품처럼 읽히지 않게.
 # 설치할 때 옛 이름 앱을 함께 걷어낸다. 그대로 두면 둘이 같이 떠서 말풍선이 두 개가 된다.
-LEGACY_APP_NAME="Reto Claude Pet.app"
+LEGACY_APP_NAMES=("Reto Claude Pet.app" "Retto Claude Pet.app")
 APP_DIR="$BUILD_DIR/$APP_NAME"
 CONTENTS_DIR="$APP_DIR/Contents"
 MACOS_DIR="$CONTENTS_DIR/MacOS"
@@ -40,7 +41,7 @@ swiftc \
   -framework AppKit \
   -framework ServiceManagement \
   "$PROJECT_DIR"/Sources/*.swift \
-  -o "$MACOS_DIR/RettoClaudePet"
+  -o "$MACOS_DIR/Retto"
 
 cp "$PROJECT_DIR/Info.plist" "$CONTENTS_DIR/Info.plist"
 
@@ -84,7 +85,7 @@ iconutil -c icns "$ICONSET_DIR" -o "$RESOURCES_DIR/RettoIcon.icns"
 
 codesign --force --deep --sign - "$APP_DIR"
 
-"$MACOS_DIR/RettoClaudePet" --self-test
+"$MACOS_DIR/Retto" --self-test
 
 # dist 에는 dmg 만 둔다. 예전에는 앱을 한 벌 더 풀어 뒀는데 쓰는 데가 없었고,
 # Spotlight 에서 레토를 찾으면 설치본과 이것이 같이 떠서 무엇을 눌러야 할지 알 수 없었다.
@@ -129,7 +130,7 @@ cp "$APP_ROOT/scripts/doctor.command" "$STAGE_DIR/진단.command"
 chmod +x "$STAGE_DIR/진단.command"
 sed "s/__VERSION__/$VERSION/g" "$APP_ROOT/scripts/beta-readme.txt" > "$STAGE_DIR/먼저-읽어주세요.txt"
 
-DMG_PATH="$DIST_DIR/Retto-Claude-Pet-$VERSION.dmg"
+DMG_PATH="$DIST_DIR/Retto-$VERSION.dmg"
 rm -f "$DMG_PATH"
 # 창 배치(아이콘 자리·크기)는 Finder 를 움직여야 정해진다. 자동화 권한이 없으면
 # 그 단계만 건너뛰고 dmg 는 그대로 만든다 — 배치가 없어도 설치는 된다.
@@ -171,18 +172,24 @@ rm -rf "$DIST_DIR/dmg"
 echo "share: $DMG_PATH"
 
 if (( INSTALL )); then
-  # 앱 이름(Reto→Retto)과 실행파일 이름(RetoClaudePet→RettoClaudePet)이 차례로 바뀌었다.
-  # 옛 조합으로 돌고 있는 것까지 내려야 새 것을 덮어쓸 수 있다.
-  pkill -f "Reto Claude Pet.app/Contents/MacOS/RetoClaudePet" || true
-  pkill -f "Retto Claude Pet.app/Contents/MacOS/RetoClaudePet" || true
-  pkill -f "Retto Claude Pet.app/Contents/MacOS/RettoClaudePet" || true
+  # 앱 이름과 실행파일 이름이 차례로 바뀌었다. 옛 조합으로 돌고 있는 것까지 내려야
+  # 새 것을 덮어쓸 수 있다.
+  pkill -f "Claude Pet.app/Contents/MacOS/Ret" || true
+  pkill -f "Retto.app/Contents/MacOS/Retto" || true
   sleep 1
   rm -rf "$HOME/Applications/$APP_NAME"
   cp -R "$APP_DIR" "$HOME/Applications/$APP_NAME"
   # 옛 이름으로 깔려 있던 것을 지운다. 새 것이 제대로 놓인 뒤에만 손댄다.
-  if [[ -d "$HOME/Applications/$LEGACY_APP_NAME" && -d "$HOME/Applications/$APP_NAME" ]]; then
-    rm -rf "$HOME/Applications/$LEGACY_APP_NAME"
-    echo "removed legacy: $HOME/Applications/$LEGACY_APP_NAME"
+  # /Applications 도 본다 — dmg 에서 끌어다 놓으면 그쪽에 들어간다.
+  if [[ -d "$HOME/Applications/$APP_NAME" ]]; then
+    for legacy in "${LEGACY_APP_NAMES[@]}"; do
+      for base in "$HOME/Applications" /Applications; do
+        if [[ -d "$base/$legacy" ]]; then
+          rm -rf "$base/$legacy"
+          echo "removed legacy: $base/$legacy"
+        fi
+      done
+    done
   fi
   # 앱을 새로 깔 때 훅도 같이 최신으로 맞춘다
   "$APP_ROOT/scripts/install-hooks.sh" || echo "훅 설치를 건너뛰었습니다 (node 없음?)"

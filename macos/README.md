@@ -1,4 +1,4 @@
-# Retto Claude Pet — macOS Desktop Overlay
+# Retto — macOS Desktop Overlay
 
 Claude Code와 Codex 상태에 맞춰 움직이며 모든 macOS 데스크탑(Space)과 전체화면 앱 위에 계속 보이는 레토입니다. 별도 앱을 두지 않고 이 오버레이 하나가 두 제품의 세션을 함께 추적합니다.
 
@@ -87,6 +87,6 @@ Claude Code·Codex 세션을 여러 개 열어도 각각 따로 추적합니다.
 
 ## 설치 상태
 
-앱은 `~/Applications/Retto Claude Pet.app`에 설치됩니다. Claude Code와 Codex 상태는 `~/.claude/retto-pet/sessions.json`에서 제품·세션별로 읽으며, 기존 호환을 위해 `state.json`도 함께 유지합니다. 훅 등록은 `~/.claude/settings.json`과 `~/.codex/hooks.json`에 기존 항목을 보존한 채 병합합니다.
+앱은 `~/Applications/Retto.app`(직접 빌드) 또는 `/Applications/Retto.app`(dmg)에 설치됩니다. Claude Code와 Codex 상태는 `~/.claude/retto-pet/sessions.json`에서 제품·세션별로 읽으며, 기존 호환을 위해 `state.json`도 함께 유지합니다. 훅 등록은 `~/.claude/settings.json`과 `~/.codex/hooks.json`에 기존 항목을 보존한 채 병합합니다.
 
 자동 실행은 기본값으로 켜지지 않습니다. 원할 때 메뉴에서 직접 켤 수 있습니다.

@@ -5,17 +5,17 @@
   <key>CFBundleDevelopmentRegion</key>
   <string>ko</string>
   <key>CFBundleDisplayName</key>
-  <string>Retto Claude Pet</string>
+  <string>Retto</string>
   <key>CFBundleExecutable</key>
-  <string>RettoClaudePet</string>
+  <string>Retto</string>
   <key>CFBundleIconFile</key>
   <string>RettoIcon</string>
   <key>CFBundleIdentifier</key>
-  <string>com.luxia.retto-claude-pet</string>
+  <string>com.luxia.retto</string>
   <key>CFBundleInfoDictionaryVersion</key>
   <string>6.0</string>
   <key>CFBundleName</key>
-  <string>Retto Claude Pet</string>
+  <string>Retto</string>
   <key>CFBundlePackageType</key>
   <string>APPL</string>
   <key>CFBundleShortVersionString</key>
