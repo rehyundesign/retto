@@ -6,16 +6,18 @@ when one needs your answer, orange when a turn finished and you haven't looked y
 something failed, and it takes you to that session when you click. One app watches sessions
 coming from VS Code, the Claude desktop app, the terminal, and Codex at once.
 
-Requires an Apple Silicon Mac (macOS 13 or later) and Node.js. Two ways to install:
+Requires an Apple Silicon Mac (macOS 13 or later) and Node.js.
 
 ```sh
-git clone https://github.com/rehyundesign/retto.git
-cd retto && macos/scripts/build.sh --install
+brew tap rehyundesign/retto
+brew install --cask retto
 ```
 
-or drag `Retto.app` out of the DMG on the [releases page](../../releases). A locally built app
-skips Gatekeeper entirely; the DMG is unsigned, so the first launch needs one trip through
-System Settings → Privacy & Security → "Open Anyway".
+You can also build it yourself (`git clone`, then `macos/scripts/build.sh --install` — needs
+Xcode Command Line Tools, `xcode-select --install`), or drag `Retto.app` out of the DMG on the
+[releases page](../../releases). Retto is not signed with an Apple Developer ID, so the DMG route
+needs one trip through System Settings → Privacy & Security → "Open Anyway" on first launch. The
+other two skip Gatekeeper.
 
 **The Korean sections below, and the design notes under [`docs/`](docs/), are in Korean** — that
 is where the reasoning behind each decision lives, so a translation would lose most of the point.
@@ -26,7 +28,7 @@ tool watches, not its makers.
 
 # 레토 (Retto)
 > **Retto** · luxia yoon 의 랙돌 고양이
-> 만든 사람 luxia yoon · ydh3600@mail.com · [linkedin.com/in/donghyunyoon](https://www.linkedin.com/in/donghyunyoon/)
+> 만든 사람 luxia yoon · ydh3600@gmail.com · [linkedin.com/in/donghyunyoon](https://www.linkedin.com/in/donghyunyoon/)
 > 영어 표기는 `t` 를 둘 쓴다 — Reto 가 아니라 **Retto**.
 > 앱에서는 발바닥 메뉴 → **Retto 정보** 에서 같은 내용을 볼 수 있다(메일 주소 복사 버튼 포함).
 
@@ -41,6 +43,7 @@ Claude Code와 Codex 상태에 맞춰 움직이는 랙돌 고양이. 앱 하나�
 ## 설치
 
 Apple Silicon 맥(macOS 13 이상)과 Node.js 가 필요하다.
+직접 빌드하려면 Xcode 명령줄 도구도 있어야 한다(`xcode-select --install`).
 
 ```sh
 brew tap rehyundesign/retto
