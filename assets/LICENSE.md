@@ -20,6 +20,24 @@
 - 2026-08-28: 행 11을 luxia yoon이 제공한 레토 사진을 참고해 OpenAI 내장 이미지 생성으로
   만든 누운 수면 6프레임으로 교체했다. 아틀라스 규격과 무손실 WebP 형식은 유지한다.
 
+## 스킨 아틀라스 — spritesheet-bee · spritesheet-luna · spritesheet-angel
+
+기본 아틀라스(`spritesheet.webp`)의 레토를 재료로 만든 파생 아틀라스다. 규격·그리드·무손실
+WebP 는 기본과 같고, 발바닥 메뉴 **스킨** 이 갈아 끼운다. 셋 다 레포와 배포 묶음에 넣는다.
+
+**특정 캐릭터를 옮긴 것이 없다.** 가져온 것은 누구의 것도 아닌 차림새 셋이다.
+
+| 파일 | 무엇을 입혔나 | 어떻게 |
+| --- | --- | --- |
+| `spritesheet-bee.webp` | 꿀벌 — 곤충 그 자체 | 자세 묶음마다 격자에 넣고 한 번에 옷을 입혔다 (`tools/bee-skin/dress.py`) |
+| `spritesheet-luna.webp` | 마법소녀풍 달 요정 — 장르의 차림새 | 옷이 아니라 몸 색을 바꾼다. 크로마키를 초록으로 쓴 이유는 `tools/luna-skin/README.md` |
+| `spritesheet-angel.webp` | 천사 날개 — 도상 그 자체 | 날개 PNG 세 장(`tools/angel-skin/wings/`)을 자세별로 합성 (`tools/angel-skin/build.py`) |
+
+꿀벌·천사 날개·마법소녀는 어느 작품에도 속하지 않는 일반 도상이라 배포에 포함한다.
+반대로 **리락쿠마 스킨은 남의 캐릭터**라서 만든 사람 기기에서만 쓴다 — 아틀라스를 레포에
+넣지 않고(`.gitignore`), `build.sh` 가 배포 묶음에서도 빼며, 받아 간 쪽 메뉴에는 자물쇠로만
+보인다(`SkinKind.isPersonal`).
+
 ## icon.png
 
 앱 아이콘. 위 스프라이트에서 잘라 만들었다.
