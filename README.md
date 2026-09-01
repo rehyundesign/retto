@@ -322,17 +322,18 @@ VS Code 쪽 `reveal()`(살아 있는 탭 되살리기)과 다른 것 아닌가 �
 | 파일 | 줄 | 맡은 일 |
 |---|---:|---|
 | `Uninstall.swift` | 62 | 훅 등록·상태 파일·앱 되돌리기 |
-| `main.swift` | 87 | 실행 진입점, 진단 플래그(`--self-test`·`--shape-report`·`--render-preview`) |
+| `main.swift` | 91 | 실행 진입점, 진단 플래그(`--self-test`·`--shape-report`·`--render-preview`·`--setup-preview`) |
 | `OpenTarget.swift` | 107 | 세션을 어디서 열지(VS Code·Claude 앱·Codex)와 딥링크 |
 | `Tones.swift` | 126 | 뜻 단위 색 넷과 상태별 애니메이션 |
 | `Bubble.swift` | 128 | 동물의 숲 윤곽(Figma 벡터 + 다듬기) |
 | `ClaudeAppNavigator.swift` | 194 | Claude 앱 안에서 세션 찾아가기 |
-| `ClaudeIntegration.swift` | 206 | 훅이 살아 있는지 스스로 확인, 설치기 실행 |
+| `ClaudeIntegration.swift` | 240 | 훅이 살아 있는지 스스로 확인, 설치기 실행 |
 | `Geometry.swift` | 263 | 몸/말풍선 크기·자리 계산 |
 | `Sessions.swift` | 332 | 훅이 적은 상태 읽기, 우선순위, 두 모양의 트랜스크립트 읽기 |
-| `SelfTest.swift` | 486 | 자체 검사, 배율별 미리보기 |
+| `SetupWindow.swift` | 347 | 처음 설정 창, 무엇이 깔렸는지 살펴보기 |
+| `SelfTest.swift` | 525 | 자체 검사, 배율별 미리보기 |
 | `PetView.swift` | 961 | 그리기와 마우스 |
-| `AppDelegate.swift` | 1,397 | 창·메뉴·세션 감시, 클릭을 동작으로 |
+| `AppDelegate.swift` | 1,388 | 창·메뉴·세션 감시, 클릭을 동작으로 |
 
 최상단 선언만 `internal` 로 열고 멤버의 `private` 는 그대로 뒀다. `build.sh` 는 `Sources/*.swift`
 전체를 넘긴다.
@@ -385,9 +386,22 @@ cwebp -lossless -exact out.png -o assets/spritesheet.webp
 
 ## 남에게 보낼 때
 
-`macos/scripts/build.sh` 가 배포 묶음을 만든다 — `dist/Retto-Claude-Pet-<버전>.zip` 안에
-앱, `설치.command`, `먼저-읽어주세요.txt` 셋이 들어간다. 앱만 보내면 받는 쪽은
-"손상되었습니다" 만 보고 끝난다(애드혹 서명이라 격리 딱지를 떼야 한다). 설치기가 그 일을 한다.
+`macos/scripts/build.sh` 가 `dist/Retto-Claude-Pet-<버전>.dmg` 하나를 만든다. 안에는 앱과
+`Applications` 링크, `먼저-읽어주세요.txt`, `진단.command` 가 있고 Finder 창 배치까지 넣는다.
+
+0.7.0 까지는 zip 에 `설치.command` 를 넣고 "터미널 창으로 끌어다 놓으세요" 라고 했다. 그 파일이
+하던 일은 격리 딱지를 떼는 것 하나였는데, 받는 쪽에서는 그 한 줄이 가장 큰 벽이었다. 이제 맥에서
+늘 하던 대로 끌어다 놓으면 된다.
+
+**남은 한 단계.** 애드혹 서명이라 첫 실행에서 Gatekeeper 가 한 번 막고, macOS 15 부터는
+우클릭 → 열기 우회가 없어져서 시스템 설정 > 개인정보 보호 및 보안 에서 「그래도 열기」를
+눌러야 한다. 이건 애플 개발자 서명(연 $99)과 공증 없이는 없앨 수 없다. `spctl -a -vv` 가
+`rejected` 라고 답하는 것이 이 단계다 — 서명이 깨진 것과는 다르다.
+
+**서명은 스킨을 뺀 뒤에 다시 한다.** 서명은 번들 안의 파일 목록까지 봉인하므로, 개인 스킨을
+빼고 나면 봉인이 어긋나 `codesign --verify` 가 "a sealed resource is missing" 으로 실패한다.
+0.7.0 까지의 zip 이 이 상태였다 — 격리 딱지를 떼도 "손상되었습니다" 가 뜰 수 있었다.
+빌드가 다시 서명하고 검사까지 하며, 검사가 실패하면 빌드를 멈춘다.
 
 받는 쪽에서 확인한 것들.
 
@@ -478,7 +492,8 @@ claude-code 를 내려받아** `~/Library/Application Support/Claude/claude-code
 있는 건 "쳐다만 보고 있다" 뿐이었고, 어디서 멈췄는지 물어보는 데 카톡을 여러 번 왕복했다.
 Codex 쪽에는 등록 확인이 있었는데 Claude 쪽에는 없었다.
 
-발바닥 메뉴 **「Claude 연동 확인」** 이 셋을 나눠 보여준다. 셋 다 다른 손질이 필요해서 나눈다.
+**처음 켜면 저절로 창이 하나 뜬다.** 발바닥 메뉴 **「Claude 연동 확인」** 도 같은 창을 연다 —
+같은 것을 두 벌 만들면 한쪽만 낡는다. 창이 셋을 나눠 보여준다. 셋 다 다른 손질이 필요해서 나눈다.
 
 | 보는 것 | 어긋났을 때 |
 | --- | --- |
@@ -487,8 +502,36 @@ Codex 쪽에는 등록 확인이 있었는데 Claude 쪽에는 없었다.
 | 채널별 마지막 소식 — VS Code · Claude 앱 · 터미널 · Codex | 그 클라이언트 쪽 문제 |
 
 메뉴 제목에도 상태가 함께 나온다(`— 훅 없음` · `— node 없음` · `— 소식 없음`).
-Claude 앱에서 온 소식이 하나도 없으면 창이 그 이유를 함께 적는다 — 앱에서는 폴더를 열어
-Claude Code 세션을 시작해야 보인다는 것과, 앱이 자기 claude-code 를 따로 쓴다는 것.
+
+#### 묻지 않고 살펴본다
+
+"Claude 를 쓰나 Codex 를 쓰나" · "VS Code 인가 Claude 앱인가" 를 물어볼까 하다 뺐다.
+앞엣것은 홈 폴더에 답이 있고(`~/.codex` 가 있나), 뒤엣것은 물으면 오히려 나빠진다 —
+세션마다 어디서 왔는지 훅이 적어 두므로 자동이 항상 맞고, 하나로 고정하면 섞어 쓰는 순간
+절반이 틀린다. 그래서 갈림길 없는 창 하나로 두고, 대신 마지막 안내 줄만 그 사람 것으로 바꾼다.
+
+| 찾은 것 | 하는 말 |
+| --- | --- |
+| `/Applications/Claude.app` | 폴더를 열어 코드 세션을 시작하라고. 평소 대화창은 세션이 아니다 |
+| `Visual Studio Code.app` | 확장이 있으면 열어 보라고, 없으면 확장부터 |
+| `~/.local/share/claude/versions` · `claude` 실행 파일 | 터미널에서 `claude` |
+| `~/.codex` | Codex 를 다시 켜서 훅 승인 화면에서 허용하라고 |
+| 아무것도 없음 | Claude Code 를 먼저 설치하라고. 빈 자리는 고장으로 읽힌다 |
+
+같은 이유로 설치기도 `~/.codex` 가 있는 사람에게만 Codex 훅을 등록한다(`--codex`·`--no-codex`).
+쓰지도 않는 사람 홈에 `~/.codex/hooks.json` 을 새로 만들 이유가 없다.
+
+**처음 켠 사람에게만 저절로 뜬다.** 이미 소식이 오는 사람에게 설정 창이 뜨면 잘 돌고 있는데도
+무언가 잘못된 줄 안다. 첫 소식이 들어오면 그 자리에서 "연결됐어요" 로 바뀌고 스스로 닫힌다 —
+메뉴로 연 창은 사람이 보러 온 것이므로 닫지 않는다.
+
+창은 사람이 눌러야만 뜨는 것이라 그냥 두면 시험해 볼 방법이 없다. 화면 없이 세 상태를
+나란히 그려 본다.
+
+```sh
+"$HOME/Applications/Retto Claude Pet.app/Contents/MacOS/RettoClaudePet" \
+  --setup-preview /tmp/setup.png
+```
 
 앱을 열 수 없는 상황을 위해 같은 내용을 `scripts/doctor.command` 로도 만들어 배포 묶음에
 넣는다(`진단.command`). 아무것도 고치지 않고 읽기만 한다.

@@ -31,7 +31,7 @@ done
 rm -rf "$BUILD_DIR"
 mkdir -p "$MACOS_DIR" "$RESOURCES_DIR" "$ICONSET_DIR" "$DIST_DIR"
 
-# dist 는 zip 만 두는 자리다. Spotlight 색인에서 빼 둔다.
+# dist 는 보낼 묶음(dmg)만 두는 자리다. Spotlight 색인에서 빼 둔다.
 touch "$DIST_DIR/.metadata_never_index"
 
 swiftc \
@@ -86,37 +86,89 @@ codesign --force --deep --sign - "$APP_DIR"
 
 "$MACOS_DIR/RettoClaudePet" --self-test
 
-# dist 에는 zip 만 둔다. 예전에는 앱을 한 벌 더 풀어 뒀는데 쓰는 데가 없었고,
+# dist 에는 dmg 만 둔다. 예전에는 앱을 한 벌 더 풀어 뒀는데 쓰는 데가 없었고,
 # Spotlight 에서 레토를 찾으면 설치본과 이것이 같이 떠서 무엇을 눌러야 할지 알 수 없었다.
 rm -rf "$DIST_DIR/$APP_NAME"
 
-# 베타를 남에게 보낼 때 필요한 것을 한 폴더에 담아 zip 하나로 만든다.
-# 애드혹 서명이라 받는 쪽이 격리 딱지를 떼야 열리므로, 그 일을 하는 설치기와
-# 안내문을 앱과 같이 넣는다. 앱만 보내면 상대는 "손상되었습니다" 만 보고 끝난다.
-SHARE_DIR="$DIST_DIR/share/레토 $VERSION"
-rm -rf "$DIST_DIR/share"
-mkdir -p "$SHARE_DIR"
-cp -R "$APP_DIR" "$SHARE_DIR/$APP_NAME"
+# 베타를 보낼 묶음. dmg 하나다.
+#
+# 예전에는 zip 에 앱과 설치.command 를 넣고 "터미널 창으로 끌어다 놓으세요" 라고 했다.
+# 그 파일이 하던 일은 격리 딱지를 떼는 것 하나였는데, 받는 쪽에서 그 한 줄이 가장 큰 벽이었다.
+# dmg 로 바꾸면 맥에서 늘 하던 대로 끌어다 놓으면 된다.
+#
+# 다만 애드혹 서명이라 첫 실행에서 Gatekeeper 가 한 번 막는다. macOS 15 부터는
+# 우클릭 → 열기 우회가 없어져서, 시스템 설정 > 개인정보 보호 및 보안 에서
+# 「그래도 열기」를 눌러야 한다. 그 단계는 애플 개발자 서명·공증 없이는 없앨 수 없다.
+STAGE_DIR="$DIST_DIR/dmg/레토 $VERSION"
+rm -rf "$DIST_DIR/dmg"
+mkdir -p "$STAGE_DIR"
+cp -R "$APP_DIR" "$STAGE_DIR/$APP_NAME"
 # 개인 스킨은 남에게 보내는 묶음에서 뺀다. 내 기기에서는 그대로 쓴다.
 # 무엇이 개인 것인지는 git 이 안다 — .gitignore 에 올려 둔 에셋이 그것이다.
 # (리락쿠마처럼 남의 캐릭터로 만든 스킨이 여기 해당한다.)
 for skin in "$ASSETS_DIR"/spritesheet-*.webp; do
   [ -f "$skin" ] || continue
   if git -C "$APP_ROOT" check-ignore -q "$skin" 2>/dev/null; then
-    rm -f "$SHARE_DIR/$APP_NAME/Contents/Resources/$(basename "$skin")"
+    rm -f "$STAGE_DIR/$APP_NAME/Contents/Resources/$(basename "$skin")"
     echo "share: 개인 스킨 제외 $(basename "$skin")"
   fi
 done
 
-cp "$APP_ROOT/scripts/beta-install.command" "$SHARE_DIR/설치.command"
-chmod +x "$SHARE_DIR/설치.command"
-# 레토가 안 움직일 때 어디서 멈췄는지 받는 쪽이 스스로 확인할 수 있게 같이 넣는다.
-cp "$APP_ROOT/scripts/doctor.command" "$SHARE_DIR/진단.command"
-chmod +x "$SHARE_DIR/진단.command"
-sed "s/__VERSION__/$VERSION/g" "$APP_ROOT/scripts/beta-readme.txt" > "$SHARE_DIR/먼저-읽어주세요.txt"
-rm -f "$DIST_DIR/Retto-Claude-Pet-$VERSION.zip"
-ditto -c -k --sequesterRsrc --keepParent "$SHARE_DIR" "$DIST_DIR/Retto-Claude-Pet-$VERSION.zip"
-rm -rf "$DIST_DIR/share"
+# 서명은 번들 안의 파일 목록까지 봉인한다. 위에서 스킨을 하나 뺐으므로 다시 서명해야
+# 한다. 이걸 빠뜨리면 받는 쪽에서 "손상되었습니다" 가 뜬다 — 격리 딱지를 떼도 마찬가지다.
+codesign --force --deep --sign - "$STAGE_DIR/$APP_NAME"
+codesign --verify --deep --strict "$STAGE_DIR/$APP_NAME" || {
+  echo "보낼 앱의 서명이 깨졌습니다" >&2
+  exit 1
+}
+
+# 끌어다 놓을 자리. 이 링크가 없으면 어디에 넣어야 하는지 알 수 없다.
+ln -s /Applications "$STAGE_DIR/Applications"
+# 앱이 안 열릴 때 어디서 멈췄는지 볼 수 있게 같이 넣는다.
+cp "$APP_ROOT/scripts/doctor.command" "$STAGE_DIR/진단.command"
+chmod +x "$STAGE_DIR/진단.command"
+sed "s/__VERSION__/$VERSION/g" "$APP_ROOT/scripts/beta-readme.txt" > "$STAGE_DIR/먼저-읽어주세요.txt"
+
+DMG_PATH="$DIST_DIR/Retto-Claude-Pet-$VERSION.dmg"
+rm -f "$DMG_PATH"
+# 창 배치(아이콘 자리·크기)는 Finder 를 움직여야 정해진다. 자동화 권한이 없으면
+# 그 단계만 건너뛰고 dmg 는 그대로 만든다 — 배치가 없어도 설치는 된다.
+RW_DMG="$DIST_DIR/dmg/rw.dmg"
+hdiutil create -volname "레토 $VERSION" -srcfolder "$STAGE_DIR" -ov -format UDRW "$RW_DMG" >/dev/null
+MOUNT_DIR="$(hdiutil attach "$RW_DMG" -nobrowse -noverify -noautoopen | grep -o '/Volumes/.*' | head -1)"
+if [[ -n "$MOUNT_DIR" ]]; then
+  if osascript >/dev/null 2>&1 <<APPLESCRIPT
+tell application "Finder"
+  tell disk "레토 $VERSION"
+    open
+    set current view of container window to icon view
+    set toolbar visible of container window to false
+    set statusbar visible of container window to false
+    set the bounds of container window to {200, 120, 800, 520}
+    set viewOptions to the icon view options of container window
+    set arrangement of viewOptions to not arranged
+    set icon size of viewOptions to 128
+    set position of item "$APP_NAME" of container window to {150, 170}
+    set position of item "Applications" of container window to {450, 170}
+    set position of item "먼저-읽어주세요.txt" of container window to {150, 320}
+    set position of item "진단.command" of container window to {450, 320}
+    close
+    open
+    update without registering applications
+    delay 1
+  end tell
+end tell
+APPLESCRIPT
+  then
+    echo "dmg: 창 배치를 넣었습니다"
+  else
+    echo "dmg: 창 배치는 건너뜁니다 (Finder 자동화 권한 없음) — 설치에는 지장이 없습니다"
+  fi
+  hdiutil detach "$MOUNT_DIR" -quiet || hdiutil detach "$MOUNT_DIR" -force -quiet || true
+fi
+hdiutil convert "$RW_DMG" -format UDZO -imagekey zlib-level=9 -o "$DMG_PATH" >/dev/null
+rm -rf "$DIST_DIR/dmg"
+echo "share: $DMG_PATH"
 
 if (( INSTALL )); then
   # 앱 이름(Reto→Retto)과 실행파일 이름(RetoClaudePet→RettoClaudePet)이 차례로 바뀌었다.
@@ -140,11 +192,11 @@ fi
 
 # 빌드 자리에 앱을 남겨 두면 Spotlight 에서 레토를 찾았을 때 설치본과 나란히 떠서
 # 무엇을 눌러야 할지 알 수 없다. `.metadata_never_index` 로는 걸러지지 않았다.
-# 보낼 것은 zip 에, 쓸 것은 ~/Applications 에 있으니 여기 남길 이유가 없다.
+# 보낼 것은 dmg 에, 쓸 것은 ~/Applications 에 있으니 여기 남길 이유가 없다.
 # 갓 빌드한 것을 직접 열어 봐야 하면 --keep-build 를 붙인다.
 if (( KEEP_BUILD )); then
   echo "$APP_DIR"
 else
   rm -rf "$BUILD_DIR"
-  echo "$DIST_DIR/Retto-Claude-Pet-$VERSION.zip"
+  echo "$DMG_PATH"
 fi

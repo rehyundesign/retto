@@ -69,6 +69,13 @@ func headroomHalo(spriteSheet: NSImage) -> (rows: Int, deepest: Int) {
     return bodyFound ? (rows, deepest) : (rows, deepest)
 }
 
+/// 그 상태에서 창에 어떤 단추가 나오는지. 그림으로는 라벨이 잡히지 않아 이걸로 본다.
+private func setupButtons(for status: ClaudeIntegrationStatus) -> [String] {
+    let window = SetupWindow(firstRun: true, onReinstall: {})
+    window.refresh(status: status, environment: RettoHostEnvironment())
+    return window.visibleButtonTitles
+}
+
 func runSelfTest() -> Int32 {
     let fontOK = registerRettoFont()
     guard let imageURL = Bundle.main.url(forResource: "spritesheet", withExtension: "webp"),
@@ -176,6 +183,38 @@ func runSelfTest() -> Int32 {
         && elapsedLabel(since: Date(timeIntervalSinceNow: -30)) == "방금"
         && elapsedLabel(since: Date(timeIntervalSinceNow: -180)) == "3분 전"
         && elapsedLabel(since: Date(timeIntervalSinceNow: -7200)) == "2시간 전"
+    // 처음 설정 창. 이미 소식이 오는 사람에게 뜨면 잘 돌고 있는데도 고장인 줄 안다.
+    // 안내 문구는 깔려 있는 것만 말해야 한다 — 없는 앱을 켜 보라고 하면 그 줄부터 믿지 않는다.
+    var connected = ClaudeIntegrationStatus()
+    connected.lastNews = [.vscode: Date()]
+    // 훅은 멀쩡한데 아직 소식이 없는 상태. 처음 켠 사람이 보는 화면이다.
+    var blank = ClaudeIntegrationStatus()
+    blank.registeredEvents = 17
+    blank.shimInstalled = true
+    blank.hookInstalled = true
+    blank.nodePath = "/opt/homebrew/bin/node"
+    // 설치기가 node 를 못 찾아 훅을 건너뛴 상태. 고칠 것이 둘이다.
+    let broken = ClaudeIntegrationStatus()
+    var claudeAppOnly = RettoHostEnvironment()
+    claudeAppOnly.hasClaudeApp = true
+    var codexToo = claudeAppOnly
+    codexToo.hasCodex = true
+    let nothing = RettoHostEnvironment()
+    let setupOK = shouldShowSetupOnLaunch(hasSeen: false, status: blank)
+        && !shouldShowSetupOnLaunch(hasSeen: true, status: blank)
+        && !shouldShowSetupOnLaunch(hasSeen: false, status: connected)
+        && claudeAppOnly.whatToTry.count == 1
+        && claudeAppOnly.whatToTry[0].contains("대화창")
+        && !claudeAppOnly.whatToTry.joined().contains("VS Code")
+        && codexToo.whatToTry.count == 2
+        && codexToo.whatToTry.last!.contains("Codex")
+        // 아무것도 못 찾았을 때도 할 말은 있어야 한다. 빈 창은 고장으로 읽힌다.
+        && nothing.whatToTry.count == 1
+        && nothing.whatToTry[0].contains("먼저 설치")
+        // 고칠 것이 있을 때만 단추가 나온다. 멀쩡한데 「훅 지금 붙이기」가 보이면
+        // 눌러야 하는 줄 알고 멀쩡한 설정을 다시 쓴다.
+        && setupButtons(for: blank) == []
+        && setupButtons(for: broken) == ["훅 지금 붙이기", "Node.js 받기"]
     let scalesOK = supportedScales.first == 0.39 && supportedScales.last == 1.4
     // 배율 1에서는 예전 창 크기를 그대로 유지한다.
     let baseline = petLayout(scale: 1)
@@ -412,8 +451,8 @@ func runSelfTest() -> Int32 {
         && !claudeRowMatchesSession(rowLabel: "", sessionTitle: "흠냐링")
         && !claudeRowMatchesSession(rowLabel: "입력 대기 중 흠냐링", sessionTitle: "")
 
-    let ok = claudeRowOK && fallbackOK && cornerOK && lookingOK && sleepRowOK && displayOK && dozeOK && sleepOK && ancientOK && viewedOK && haloOK && assetOK && skinsOK && dragRunOK && behaviorsOK && statesOK && deepLinkOK && clientRoutingOK && codexMenuOK && integrationOK && transcriptShapesOK && scalesOK && baselineOK && decoupledOK && fontOK && priorityOK && registryOK && badgeLayoutOK && clickRoutingOK && gazeStatesOK && expandOK && lineBudgetOK && typefaceOK && textDeltaOK && tonesOK && folderFoldOK && labelOK && doneStaysOK && bubbleShapeOK && seenOK && staleOK
-    print("{\"ok\":\(ok),\"asset\":\"\(Int(image.size.width))x\(Int(image.size.height))\",\"skins\":\(PetSkin.allCases.count),\"skinsOK\":\(skinsOK),\"dragRun\":\(dragRunOK),\"canJoinAllSpaces\":\(behaviorsOK),\"states\":\(animationCatalog.count),\"deepLink\":\(deepLinkOK),\"clientRouting\":\(clientRoutingOK),\"codexMenu\":\(codexMenuOK),\"integration\":\(integrationOK),\"transcriptShapes\":\(transcriptShapesOK),\"sizePresets\":\(supportedScales.count),\"baselineLayout\":\(baselineOK),\"scaleDecoupled\":\(decoupledOK),\"badgePlacement\":\(badgeLayoutOK),\"ribbonExpand\":\(expandOK),\"lineBudget\":\(lineBudgetOK),\"typefaces\":\(PetTypeface.allCases.count),\"typefaceOK\":\(typefaceOK),\"textDelta\":\(textDeltaOK),\"tones\":\(tonesOK),\"folderFold\":\(folderFoldOK),\"doneStays\":\(doneStaysOK),\"bubbleShape\":\(bubbleShapeOK),\"seenRule\":\(seenOK),\"staleWorking\":\(staleOK),\"headroomClean\":\(haloOK),\"viewedElsewhere\":\(viewedOK),\"ancientNews\":\(ancientOK),\"sleeps\":\(sleepOK),\"sleepRow\":\(sleepRow),\"dozes\":\(dozeOK),\"displayState\":\(displayOK),\"seenByLooking\":\(lookingOK),\"corners\":\(cornerOK),\"appFallback\":\(fallbackOK),\"haloRows\":\(halo.rows),\"haloDeepest\":\(halo.deepest),\"haloFaint\":\(haloFaintPixels),\"claudeRow\":\(claudeRowOK),\"font\":\"\(rettoHandwritingFontName)\",\"fontLoaded\":\(fontOK),\"multiSession\":\(registryOK),\"prioritySelection\":\(priorityOK),\"badgeLayout\":\(badgeLayoutOK),\"clickRouting\":\(clickRoutingOK)}")
+    let ok = claudeRowOK && fallbackOK && cornerOK && lookingOK && sleepRowOK && displayOK && dozeOK && sleepOK && ancientOK && viewedOK && haloOK && assetOK && skinsOK && dragRunOK && behaviorsOK && statesOK && deepLinkOK && clientRoutingOK && codexMenuOK && integrationOK && setupOK && transcriptShapesOK && scalesOK && baselineOK && decoupledOK && fontOK && priorityOK && registryOK && badgeLayoutOK && clickRoutingOK && gazeStatesOK && expandOK && lineBudgetOK && typefaceOK && textDeltaOK && tonesOK && folderFoldOK && labelOK && doneStaysOK && bubbleShapeOK && seenOK && staleOK
+    print("{\"ok\":\(ok),\"asset\":\"\(Int(image.size.width))x\(Int(image.size.height))\",\"skins\":\(PetSkin.allCases.count),\"skinsOK\":\(skinsOK),\"dragRun\":\(dragRunOK),\"canJoinAllSpaces\":\(behaviorsOK),\"states\":\(animationCatalog.count),\"deepLink\":\(deepLinkOK),\"clientRouting\":\(clientRoutingOK),\"codexMenu\":\(codexMenuOK),\"integration\":\(integrationOK),\"setup\":\(setupOK),\"transcriptShapes\":\(transcriptShapesOK),\"sizePresets\":\(supportedScales.count),\"baselineLayout\":\(baselineOK),\"scaleDecoupled\":\(decoupledOK),\"badgePlacement\":\(badgeLayoutOK),\"ribbonExpand\":\(expandOK),\"lineBudget\":\(lineBudgetOK),\"typefaces\":\(PetTypeface.allCases.count),\"typefaceOK\":\(typefaceOK),\"textDelta\":\(textDeltaOK),\"tones\":\(tonesOK),\"folderFold\":\(folderFoldOK),\"doneStays\":\(doneStaysOK),\"bubbleShape\":\(bubbleShapeOK),\"seenRule\":\(seenOK),\"staleWorking\":\(staleOK),\"headroomClean\":\(haloOK),\"viewedElsewhere\":\(viewedOK),\"ancientNews\":\(ancientOK),\"sleeps\":\(sleepOK),\"sleepRow\":\(sleepRow),\"dozes\":\(dozeOK),\"displayState\":\(displayOK),\"seenByLooking\":\(lookingOK),\"corners\":\(cornerOK),\"appFallback\":\(fallbackOK),\"haloRows\":\(halo.rows),\"haloDeepest\":\(halo.deepest),\"haloFaint\":\(haloFaintPixels),\"claudeRow\":\(claudeRowOK),\"font\":\"\(rettoHandwritingFontName)\",\"fontLoaded\":\(fontOK),\"multiSession\":\(registryOK),\"prioritySelection\":\(priorityOK),\"badgeLayout\":\(badgeLayoutOK),\"clickRouting\":\(clickRoutingOK)}")
     return ok ? 0 : 1
 }
 

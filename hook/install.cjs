@@ -3,13 +3,15 @@
 //   node install.cjs              설치·갱신
 //   node install.cjs --minimal    오래된 이벤트 여덟 개만 등록
 //   node install.cjs --full       열일곱 개 전부 등록 (버전 확인을 넘긴다)
+//   node install.cjs --codex      Codex 훅을 무조건 등록
+//   node install.cjs --no-codex   Codex 훅을 등록하지 않는다
 //   node install.cjs --uninstall  제거
 //
 // 하는 일 네 가지다.
 //   1. hook.cjs 를 ~/.claude/retto-pet/ 로 복사
 //   2. hook.sh(node 를 찾아 주는 실행기)를 같은 자리에 깔고 실행 권한을 준다
 //   3. ~/.claude/settings.json 에 이벤트를 등록 (다른 훅은 건드리지 않는다)
-//   4. ~/.codex/hooks.json 에 Codex lifecycle 이벤트를 등록 (다른 훅은 건드리지 않는다)
+//   4. ~/.codex/ 를 쓰는 사람에게만 Codex lifecycle 이벤트를 등록 (다른 훅은 건드리지 않는다)
 // 두 설정 파일은 고치기 전에 백업한다.
 
 const fs = require('node:fs');
@@ -60,6 +62,17 @@ function migrateLegacyPetDir() {
 const packagedHookPath = path.join(__dirname, 'hook.cjs');
 const packagedShimPath = path.join(__dirname, 'hook.sh');
 
+/// Codex 를 쓰는 사람인가. 쓰지도 않는 사람 홈에 ~/.codex/hooks.json 을 새로 만들 이유가 없다.
+/// 물어보지 않는 이유는 홈 폴더에 답이 이미 있어서다.
+function decideCodex(argv) {
+  if (argv.includes('--codex')) return { install: true, reason: '--codex 로 지정했습니다' };
+  if (argv.includes('--no-codex')) return { install: false, reason: '--no-codex 로 지정했습니다' };
+  const exists = fs.existsSync(path.join(os.homedir(), '.codex'));
+  return exists
+    ? { install: true, reason: '설치 뒤 Codex 를 한 번 다시 켜서 훅 승인 화면에서 허용해 주세요' }
+    : { install: false, reason: '~/.codex 가 없어 건너뜁니다' };
+}
+
 try {
   migrateLegacyPetDir();
   if (process.argv.includes('--uninstall')) {
@@ -80,14 +93,15 @@ try {
       nodeCommand,
       minimal
     });
-    installCodexHooks({ hooksPath: codexHooksPath, installedHookPath });
+    const codex = decideCodex(process.argv);
+    if (codex.install) installCodexHooks({ hooksPath: codexHooksPath, installedHookPath });
     const count = eventCountFor(minimal);
     console.log([
       `레토 훅을 설치했습니다 · ${installedShimPath}`,
       `  이벤트: ${count}개 — ${reason}`,
       `  node: ${nodeCommand}`,
       `  Claude: ${settingsPath}`,
-      `  Codex: ${codexHooksPath}`
+      `  Codex: ${codex.install ? codexHooksPath : '등록 안 함'} — ${codex.reason}`
     ].join('\n'));
   }
 } catch (error) {

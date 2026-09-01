@@ -13,11 +13,15 @@ setopt null_glob
 print -r -- "── 레토 진단 ──"
 print -r -- "macOS $(sw_vers -productVersion) · $(uname -m)"
 
-APP="$HOME/Applications/Retto Claude Pet.app"
-if [[ -d "$APP" ]]; then
-  print -r -- "앱          $(defaults read "$APP/Contents/Info.plist" CFBundleShortVersionString 2>/dev/null || echo '버전 못 읽음')"
+# dmg 에서 끌어다 놓으면 /Applications, 내가 빌드해 깔면 ~/Applications 다. 둘 다 본다.
+APP=""
+for candidate in "/Applications/Retto Claude Pet.app" "$HOME/Applications/Retto Claude Pet.app"; do
+  [[ -d "$candidate" ]] && APP="$candidate" && break
+done
+if [[ -n "$APP" ]]; then
+  print -r -- "앱          $(defaults read "$APP/Contents/Info.plist" CFBundleShortVersionString 2>/dev/null || echo '버전 못 읽음') · $APP"
 else
-  print -r -- "앱          ✗ ~/Applications 에 없습니다"
+  print -r -- "앱          ✗ 응용 프로그램 폴더에 없습니다"
 fi
 if pgrep -f "Claude Pet.app/Contents/MacOS" >/dev/null 2>&1; then
   print -r -- "실행        돌고 있습니다"
@@ -41,8 +45,9 @@ fi
 
 # 훅 파일과 등록 상태.
 PET="$HOME/.claude/retto-pet"
-[[ -x "$PET/hook.sh" ]] && print -r -- "훅 실행기    있음" || print -r -- "훅 실행기    ✗ 없습니다 — 설치.command 를 다시 실행해 주세요"
-[[ -f "$PET/hook.cjs" ]] && print -r -- "훅 본체      있음" || print -r -- "훅 본체      ✗ 없습니다 — 설치.command 를 다시 실행해 주세요"
+FIXHINT="발바닥 메뉴 > 「Claude 연동 확인」 > 「훅 지금 붙이기」"
+[[ -x "$PET/hook.sh" ]] && print -r -- "훅 실행기    있음" || print -r -- "훅 실행기    ✗ 없습니다 — $FIXHINT"
+[[ -f "$PET/hook.cjs" ]] && print -r -- "훅 본체      있음" || print -r -- "훅 본체      ✗ 없습니다 — $FIXHINT"
 
 if [[ -n "$NODE" ]]; then
   "$NODE" - "$HOME" <<'JS'

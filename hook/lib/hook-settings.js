@@ -252,6 +252,8 @@ function installClaudeHooks({
 }
 
 function uninstallClaudeHooks({ settingsPath, installedHookPath }) {
+  // 없는 파일을 지우려다 빈 파일을 만들지 않는다. 제거가 무언가를 새로 남기면 제거가 아니다.
+  if (!fs.existsSync(settingsPath)) return { settingsPath };
   const settings = readSettings(settingsPath);
   const next = removeRettoHooks(settings, installedHookPath);
   const backupPath = backupSettings(settingsPath);
@@ -267,6 +269,7 @@ function installCodexHooks({ hooksPath, installedHookPath }) {
 }
 
 function uninstallCodexHooks({ hooksPath, installedHookPath }) {
+  if (!fs.existsSync(hooksPath)) return { hooksPath };
   const settings = readSettings(hooksPath);
   const next = removeRettoCodexHooks(settings, installedHookPath);
   const backupPath = backupSettings(hooksPath);

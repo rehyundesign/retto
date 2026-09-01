@@ -154,3 +154,21 @@ test('Codex removal leaves Claude entries alone', () => {
   const kept = removeRettoCodexHooks(claudeOnly, hookPath);
   assert.deepEqual(Object.keys(kept.hooks).sort(), Object.keys(claudeOnly.hooks).sort());
 });
+
+test('uninstall does not create the files it was asked to clean', () => {
+  // 제거가 무언가를 새로 남기면 제거가 아니다. Codex 를 안 쓰는 사람 홈에
+  // ~/.codex/hooks.json 이 생기던 자리다.
+  const fs = require('node:fs');
+  const os = require('node:os');
+  const path = require('node:path');
+  const { uninstallClaudeHooks, uninstallCodexHooks } = require('../lib/hook-settings');
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'retto-uninstall-'));
+  const settingsPath = path.join(directory, 'settings.json');
+  const codexPath = path.join(directory, 'codex', 'hooks.json');
+
+  uninstallClaudeHooks({ settingsPath, installedHookPath: hookPath });
+  uninstallCodexHooks({ hooksPath: codexPath, installedHookPath: hookPath });
+
+  assert.equal(fs.existsSync(settingsPath), false);
+  assert.equal(fs.existsSync(path.dirname(codexPath)), false);
+});

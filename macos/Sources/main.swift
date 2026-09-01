@@ -76,6 +76,10 @@ if CommandLine.arguments.contains("--shape-report") {
     exit(0)
 }
 
+if let index = CommandLine.arguments.firstIndex(of: "--setup-preview"), index + 1 < CommandLine.arguments.count {
+    exit(renderSetupPreview(to: CommandLine.arguments[index + 1]))
+}
+
 if let index = CommandLine.arguments.firstIndex(of: "--render-preview"), index + 1 < CommandLine.arguments.count {
     exit(renderPreview(to: CommandLine.arguments[index + 1]))
 }
