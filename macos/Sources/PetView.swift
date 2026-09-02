@@ -906,6 +906,9 @@ final class StateMonitor {
     private let fallbackStateURL: URL
     private var timer: Timer?
     private var lastData: Data?
+    private var lastSessions: [StatePayload] = []
+    private var lastTranscriptStamps: [String: Double] = [:]
+    private var lastCodexIndexStamp: Double?
     private let onChange: ([StatePayload]) -> Void
 
     init(registryURL: URL, fallbackStateURL: URL, onChange: @escaping ([StatePayload]) -> Void) {
@@ -946,16 +949,44 @@ final class StateMonitor {
             }
             return
         }
-        guard data != lastData else { return }
+        if data == lastData {
+            let stamps = transcriptStamps(in: lastSessions)
+            let codexIndexStamp = codexThreadIndexStamp()
+            guard stamps != lastTranscriptStamps || codexIndexStamp != lastCodexIndexStamp else { return }
+            lastTranscriptStamps = stamps
+            lastCodexIndexStamp = codexIndexStamp
+            onChange(lastSessions)
+            return
+        }
 
         // 훅은 임시 파일에 쓴 뒤 rename 하므로 반쪽 파일이 보일 일은 없다. 그래도 읽지 못한
         // 내용을 기억해 두지는 않는다 — 기억하면 같은 내용이 다시 와도 건너뛰어 굳는다.
         if isRegistry, let registry = try? JSONDecoder().decode(SessionRegistry.self, from: data) {
             lastData = data
-            onChange(Array(registry.sessions.values))
+            lastSessions = Array(registry.sessions.values)
+            lastTranscriptStamps = transcriptStamps(in: lastSessions)
+            lastCodexIndexStamp = codexThreadIndexStamp()
+            onChange(lastSessions)
         } else if let payload = try? JSONDecoder().decode(StatePayload.self, from: data) {
             lastData = data
-            onChange([payload])
+            lastSessions = [payload]
+            lastTranscriptStamps = transcriptStamps(in: lastSessions)
+            lastCodexIndexStamp = codexThreadIndexStamp()
+            onChange(lastSessions)
         }
+    }
+
+    private func transcriptStamps(in sessions: [StatePayload]) -> [String: Double] {
+        Dictionary(uniqueKeysWithValues: sessions.compactMap { payload in
+            guard let path = payload.transcriptPath,
+                  let modified = transcriptModifiedAtMs(path: path) else { return nil }
+            return (path, modified)
+        })
+    }
+
+    private func codexThreadIndexStamp() -> Double? {
+        let index = FileManager.default.homeDirectoryForCurrentUser
+            .appendingPathComponent(".codex/session_index.jsonl").path
+        return transcriptModifiedAtMs(path: index)
     }
 }

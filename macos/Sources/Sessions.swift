@@ -108,7 +108,7 @@ func selectionPriority(state: PetState, isClosed: Bool) -> Int {
 }
 
 struct StatePayload: Decodable {
-    let state: String
+    var state: String
     let updatedAt: String?
     let event: String?
     let sessionId: String?
@@ -120,14 +120,16 @@ struct StatePayload: Decodable {
     let error: String?
     let projectName: String?
     let displayTitle: String?
-    let sessionTitle: String?
+    var sessionTitle: String?
     let transcriptPath: String?
     let lastAssistantMessage: String?
     let activeTaskSubject: String?
     let backgroundTaskCount: Int?
-    let attention: Bool?
+    var attention: Bool?
     let closed: Bool?
-    let updatedAtMs: Double?
+    var updatedAtMs: Double?
+    /// 훅 레지스트리 값인지, Codex 롤아웃에서 보정한 값인지. 파일에는 쓰지 않고 화면 상태에서만 쓴다.
+    var stateSource: String?
     /// 훅이 환경변수에서 읽은 클라이언트 — `vscode` · `claude` · `cli`. 클릭했을 때 어느 앱을 띄울지 정한다.
     let client: String?
 
@@ -151,6 +153,104 @@ struct StatePayload: Decodable {
     }
     var needsAttention: Bool { attention == true && closed != true }
     var isClosed: Bool { closed == true }
+}
+
+enum TaskStateSource: String {
+    case hook
+    case rollout
+}
+
+/// Retto가 화면에 쓰는 Codex task 상태. 훅은 즉시성, 롤아웃은 완료 사실, 인덱스는 제목을 맡는다.
+/// 어느 원천이 마지막 상태를 확인했는지도 함께 남겨 오래된 훅 값과 구분한다.
+struct ReconciledCodexTask {
+    let state: PetState
+    let observedAtMs: Double?
+    let needsAttention: Bool
+    let title: String?
+    let source: TaskStateSource
+}
+
+func reconcileCodexTask(payload: StatePayload, indexTitle: String?, completedAtMs: Double?) -> ReconciledCodexTask {
+    let title = indexTitle?.isEmpty == false ? indexTitle : payload.sessionTitle
+    guard (payload.petState == .running || payload.petState == .review),
+          let completedAtMs,
+          completedAtMs > (payload.updatedAtMs ?? 0) else {
+        return ReconciledCodexTask(
+            state: payload.petState,
+            observedAtMs: payload.updatedAtMs,
+            needsAttention: payload.needsAttention,
+            title: title,
+            source: .hook
+        )
+    }
+    return ReconciledCodexTask(
+        state: .waving,
+        observedAtMs: completedAtMs,
+        needsAttention: true,
+        title: title,
+        source: .rollout
+    )
+}
+
+/// Codex는 제목을 롤아웃이 아니라 별도 인덱스에 쓴다. 같은 task가 완료된 뒤에도
+/// 훅이 다시 오지 않을 수 있으므로, 앱이 인덱스가 바뀔 때 최신 제목을 다시 읽는다.
+func codexThreadTitles(in text: String) -> [String: String] {
+    var titles: [String: String] = [:]
+    for line in text.split(separator: "\n") {
+        guard let data = line.data(using: .utf8),
+              let record = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+              let id = record["id"] as? String,
+              let title = record["thread_name"] as? String,
+              !title.isEmpty else { continue }
+        titles[id] = String(title.prefix(80))
+    }
+    return titles
+}
+
+final class CodexThreadTitleReader {
+    private let indexURL = FileManager.default.homeDirectoryForCurrentUser
+        .appendingPathComponent(".codex/session_index.jsonl")
+    private var cachedModified = Date.distantPast
+    private var cachedSize: UInt64 = 0
+    private var titles: [String: String] = [:]
+
+    func title(for threadId: String) -> String? {
+        refresh()
+        return titles[threadId]
+    }
+
+    private func refresh() {
+        guard let attributes = try? FileManager.default.attributesOfItem(atPath: indexURL.path),
+              let modified = attributes[.modificationDate] as? Date,
+              let size = attributes[.size] as? NSNumber else { return }
+        let bytes = size.uint64Value
+        guard modified != cachedModified || bytes != cachedSize else { return }
+        guard let text = try? String(contentsOf: indexURL, encoding: .utf8) else { return }
+        cachedModified = modified
+        cachedSize = bytes
+        titles = codexThreadTitles(in: text)
+    }
+}
+
+/// Codex의 완료 이벤트는 훅이 아니라 롤아웃에 남는 경우가 있다. 새 요청보다 뒤에 있는
+/// `task_complete`만 완료로 본다. 과거 완료 이벤트가 다음 요청을 완료로 바꾸면 안 된다.
+func codexTaskCompletionAtMs(in text: String) -> Double? {
+    let fractionalFormatter = ISO8601DateFormatter()
+    fractionalFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+    let plainFormatter = ISO8601DateFormatter()
+    plainFormatter.formatOptions = [.withInternetDateTime]
+    var completion: Double?
+    for line in text.split(separator: "\n") {
+        guard let data = line.data(using: .utf8),
+              let record = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+              record["type"] as? String == "event_msg",
+              let payload = record["payload"] as? [String: Any],
+              payload["type"] as? String == "task_complete",
+              let timestamp = record["timestamp"] as? String,
+              let date = fractionalFormatter.date(from: timestamp) ?? plainFormatter.date(from: timestamp) else { continue }
+        completion = max(completion ?? 0, date.timeIntervalSince1970 * 1000)
+    }
+    return completion
 }
 
 struct SessionRegistry: Decodable {
@@ -246,6 +346,7 @@ final class TranscriptReader {
     private var cachedModified = Date.distantPast
     private var cachedText = ""
     private var cachedTitle = ""
+    private var cachedCodexCompletionAtMs: Double?
 
     func latestAssistantText(at path: String?) -> String? {
         refresh(at: path)
@@ -260,18 +361,23 @@ final class TranscriptReader {
         return cachedTitle.isEmpty ? nil : cachedTitle
     }
 
+    func latestCodexCompletionAtMs(at path: String?) -> Double? {
+        refresh(at: path)
+        return cachedCodexCompletionAtMs
+    }
+
     /// 파일이 그대로면 다시 읽지 않는다. 0.25초마다 불리므로 stat 만 보고 넘긴다.
     ///
     /// 읽고 나면 접근 시각(atime)을 원래대로 되돌린다. 레토는 "누가 이 세션을 열어 읽었나" 를
     /// atime 으로 판단하는데, 우리가 읽은 흔적을 남기면 자기가 자기를 읽음 처리해 버린다.
     private func refresh(at path: String?) {
         guard let path, !path.isEmpty else {
-            cachedPath = ""; cachedText = ""; cachedTitle = ""
+            cachedPath = ""; cachedText = ""; cachedTitle = ""; cachedCodexCompletionAtMs = nil
             return
         }
         var info = stat()
         guard stat(path, &info) == 0 else {
-            cachedPath = ""; cachedText = ""; cachedTitle = ""
+            cachedPath = ""; cachedText = ""; cachedTitle = ""; cachedCodexCompletionAtMs = nil
             return
         }
         let size = UInt64(info.st_size)
@@ -288,17 +394,18 @@ final class TranscriptReader {
         cachedModified = modified
         cachedText = parsed.message
         cachedTitle = parsed.title
+        cachedCodexCompletionAtMs = parsed.codexCompletionAtMs
     }
 
-    private static func readTail(path: String, size: UInt64) -> (message: String, title: String) {
-        guard let handle = FileHandle(forReadingAtPath: path) else { return ("", "") }
+    private static func readTail(path: String, size: UInt64) -> (message: String, title: String, codexCompletionAtMs: Double?) {
+        guard let handle = FileHandle(forReadingAtPath: path) else { return ("", "", nil) }
         defer { try? handle.close() }
         let span: UInt64 = 512 * 1024
         if size > span {
             try? handle.seek(toOffset: size - span)
         }
         guard let data = try? handle.readToEnd(),
-              let chunk = String(data: data, encoding: .utf8) else { return ("", "") }
+              let chunk = String(data: data, encoding: .utf8) else { return ("", "", nil) }
 
         var message = ""
         var customTitle: String?
@@ -327,6 +434,6 @@ final class TranscriptReader {
             if !message.isEmpty, customTitle != nil, !aiTitle.isEmpty { break }
         }
         let title = (customTitle?.isEmpty == false ? customTitle! : aiTitle)
-        return (message, String(title.prefix(80)))
+        return (message, String(title.prefix(80)), codexTaskCompletionAtMs(in: chunk))
     }
 }

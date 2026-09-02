@@ -31,6 +31,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     private var sessions: [StatePayload] = []
     private var selectedPayload: StatePayload?
     private let transcriptReader = TranscriptReader()
+    private let codexThreadTitleReader = CodexThreadTitleReader()
     private var clearAttentionItem: NSMenuItem!
     private var typefaceItems: [NSMenuItem] = []
     private var skinItems: [NSMenuItem] = []
@@ -445,7 +446,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     }
 
     private func applySessions(_ incoming: [StatePayload]) {
-        sessions = incoming.sorted {
+        sessions = incoming.map(reconciledCodexPayload).sorted {
             let leftPriority = statePriority($0)
             let rightPriority = statePriority($1)
             if leftPriority != rightPriority { return leftPriority > rightPriority }
@@ -516,6 +517,24 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             isPinned: selectedPayload.id == pinnedSessionId
         )
         rebuildSessionsMenu()
+    }
+
+    /// Codex가 Stop 훅을 보내지 않아도 롤아웃의 task_complete는 남는다. 그 이벤트가
+    /// 레지스트리의 마지막 상태보다 새로우면 완료·읽지 않음으로 보정한다.
+    private func reconciledCodexPayload(_ payload: StatePayload) -> StatePayload {
+        guard payload.source == "codex" || payload.client == "codex" else { return payload }
+        var refreshed = payload
+        let task = reconcileCodexTask(
+            payload: payload,
+            indexTitle: codexThreadTitleReader.title(for: payload.navigationSessionId),
+            completedAtMs: transcriptReader.latestCodexCompletionAtMs(at: payload.transcriptPath)
+        )
+        refreshed.state = task.state.rawValue
+        refreshed.updatedAtMs = task.observedAtMs
+        refreshed.attention = task.needsAttention
+        refreshed.sessionTitle = task.title
+        refreshed.stateSource = task.source.rawValue
+        return refreshed
     }
 
     private func stateMark(for payload: StatePayload) -> String {

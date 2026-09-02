@@ -123,6 +123,36 @@ func runSelfTest() -> Int32 {
     let transcriptShapesOK = assistantText(in: claudeRecord) == "클로드가 하는 말"
         && assistantText(in: codexRecord) == "코덱스가 하는 말"
         && assistantText(in: userRecord).isEmpty
+    let codexTitles = codexThreadTitles(in: [
+        "{\"id\":\"thread-one\",\"thread_name\":\"처음 이름\"}",
+        "{\"id\":\"thread-two\",\"thread_name\":\"다른 작업\"}",
+        "{\"id\":\"thread-one\",\"thread_name\":\"완료된 작업의 최신 이름\"}"
+    ].joined(separator: "\n"))
+    let codexTitleRefreshOK = codexTitles["thread-one"] == "완료된 작업의 최신 이름"
+        && codexTitles["thread-two"] == "다른 작업"
+    let codexCompletionRefreshOK = codexTaskCompletionAtMs(in: [
+        "{\"type\":\"event_msg\",\"payload\":{\"type\":\"item_completed\"},\"timestamp\":\"2026-09-02T05:32:00.000Z\"}",
+        "{\"type\":\"event_msg\",\"payload\":{\"type\":\"task_complete\"},\"timestamp\":\"2026-09-02T05:32:30.178Z\"}"
+    ].joined(separator: "\n")) == 1_788_327_150_178
+        && codexTaskCompletionAtMs(in: "{\"type\":\"event_msg\",\"payload\":{\"type\":\"task_complete\"},\"timestamp\":\"2026-09-02T05:32:30Z\"}") == 1_788_327_150_000
+    let runningCodexPayload = try! JSONDecoder().decode(StatePayload.self, from: "{\"state\":\"running\",\"sessionId\":\"thread-one\",\"source\":\"codex\",\"sessionTitle\":\"예전 제목\",\"updatedAtMs\":1000}".data(using: .utf8)!)
+    let completedCodexTask = reconcileCodexTask(
+        payload: runningCodexPayload,
+        indexTitle: "완료된 task의 현재 제목",
+        completedAtMs: 2000
+    )
+    let restartedCodexTask = reconcileCodexTask(
+        payload: runningCodexPayload,
+        indexTitle: "새 요청의 제목",
+        completedAtMs: 999
+    )
+    let codexStateReconciliationOK = completedCodexTask.state == .waving
+        && completedCodexTask.observedAtMs == 2000
+        && completedCodexTask.needsAttention
+        && completedCodexTask.title == "완료된 task의 현재 제목"
+        && completedCodexTask.source == .rollout
+        && restartedCodexTask.state == .running
+        && restartedCodexTask.source == .hook
 
     let clientRoutingOK = openApp(forClient: "claude") == .claude
         && openApp(forClient: "vscode") == .vscode
@@ -451,7 +481,7 @@ func runSelfTest() -> Int32 {
         && !claudeRowMatchesSession(rowLabel: "", sessionTitle: "흠냐링")
         && !claudeRowMatchesSession(rowLabel: "입력 대기 중 흠냐링", sessionTitle: "")
 
-    let ok = claudeRowOK && fallbackOK && cornerOK && lookingOK && sleepRowOK && displayOK && dozeOK && sleepOK && ancientOK && viewedOK && haloOK && assetOK && skinsOK && dragRunOK && behaviorsOK && statesOK && deepLinkOK && clientRoutingOK && codexMenuOK && integrationOK && setupOK && transcriptShapesOK && scalesOK && baselineOK && decoupledOK && fontOK && priorityOK && registryOK && badgeLayoutOK && clickRoutingOK && gazeStatesOK && expandOK && lineBudgetOK && typefaceOK && textDeltaOK && tonesOK && folderFoldOK && labelOK && doneStaysOK && bubbleShapeOK && seenOK && staleOK
+    let ok = claudeRowOK && fallbackOK && cornerOK && lookingOK && sleepRowOK && displayOK && dozeOK && sleepOK && ancientOK && viewedOK && haloOK && assetOK && skinsOK && dragRunOK && behaviorsOK && statesOK && deepLinkOK && clientRoutingOK && codexMenuOK && integrationOK && setupOK && transcriptShapesOK && codexTitleRefreshOK && codexCompletionRefreshOK && codexStateReconciliationOK && scalesOK && baselineOK && decoupledOK && fontOK && priorityOK && registryOK && badgeLayoutOK && clickRoutingOK && gazeStatesOK && expandOK && lineBudgetOK && typefaceOK && textDeltaOK && tonesOK && folderFoldOK && labelOK && doneStaysOK && bubbleShapeOK && seenOK && staleOK
     print("{\"ok\":\(ok),\"asset\":\"\(Int(image.size.width))x\(Int(image.size.height))\",\"skins\":\(PetSkin.allCases.count),\"skinsOK\":\(skinsOK),\"dragRun\":\(dragRunOK),\"canJoinAllSpaces\":\(behaviorsOK),\"states\":\(animationCatalog.count),\"deepLink\":\(deepLinkOK),\"clientRouting\":\(clientRoutingOK),\"codexMenu\":\(codexMenuOK),\"integration\":\(integrationOK),\"setup\":\(setupOK),\"transcriptShapes\":\(transcriptShapesOK),\"sizePresets\":\(supportedScales.count),\"baselineLayout\":\(baselineOK),\"scaleDecoupled\":\(decoupledOK),\"badgePlacement\":\(badgeLayoutOK),\"ribbonExpand\":\(expandOK),\"lineBudget\":\(lineBudgetOK),\"typefaces\":\(PetTypeface.allCases.count),\"typefaceOK\":\(typefaceOK),\"textDelta\":\(textDeltaOK),\"tones\":\(tonesOK),\"folderFold\":\(folderFoldOK),\"doneStays\":\(doneStaysOK),\"bubbleShape\":\(bubbleShapeOK),\"seenRule\":\(seenOK),\"staleWorking\":\(staleOK),\"headroomClean\":\(haloOK),\"viewedElsewhere\":\(viewedOK),\"ancientNews\":\(ancientOK),\"sleeps\":\(sleepOK),\"sleepRow\":\(sleepRow),\"dozes\":\(dozeOK),\"displayState\":\(displayOK),\"seenByLooking\":\(lookingOK),\"corners\":\(cornerOK),\"appFallback\":\(fallbackOK),\"haloRows\":\(halo.rows),\"haloDeepest\":\(halo.deepest),\"haloFaint\":\(haloFaintPixels),\"claudeRow\":\(claudeRowOK),\"font\":\"\(rettoHandwritingFontName)\",\"fontLoaded\":\(fontOK),\"multiSession\":\(registryOK),\"prioritySelection\":\(priorityOK),\"badgeLayout\":\(badgeLayoutOK),\"clickRouting\":\(clickRoutingOK)}")
     return ok ? 0 : 1
 }
