@@ -108,7 +108,7 @@ func selectionPriority(state: PetState, isClosed: Bool) -> Int {
 }
 
 struct StatePayload: Decodable {
-    let state: String
+    var state: String
     let updatedAt: String?
     let event: String?
     let sessionId: String?
@@ -120,14 +120,16 @@ struct StatePayload: Decodable {
     let error: String?
     let projectName: String?
     let displayTitle: String?
-    let sessionTitle: String?
+    var sessionTitle: String?
     let transcriptPath: String?
     let lastAssistantMessage: String?
     let activeTaskSubject: String?
     let backgroundTaskCount: Int?
-    let attention: Bool?
+    var attention: Bool?
     let closed: Bool?
-    let updatedAtMs: Double?
+    var updatedAtMs: Double?
+    /// 훅 레지스트리 값인지, Codex 롤아웃에서 보정한 값인지. 파일에는 쓰지 않고 화면 상태에서만 쓴다.
+    var stateSource: String?
     /// 훅이 환경변수에서 읽은 클라이언트 — `vscode` · `claude` · `cli`. 클릭했을 때 어느 앱을 띄울지 정한다.
     let client: String?
 
@@ -141,17 +143,18 @@ struct StatePayload: Decodable {
         if let cwd, !cwd.isEmpty { return URL(fileURLWithPath: cwd).lastPathComponent }
         return sourceLabel == "Codex" ? "Codex" : "Claude Code"
     }
-    /// 이름표에 쓰는 이름. Claude Code 가 트랜스크립트에 적어 둔 세션 타이틀이 첫째다.
-    /// 사용자가 직접 바꾼 이름 → Claude 가 붙인 이름 → 진행 중 작업 → 보낸 프롬프트 → 레포 순.
+    /// 이름표에는 확인된 세션 제목만 쓴다. 입력 프롬프트와 진행 중 작업은 제목이 아니므로,
+    /// 자동 제목이 아직 없을 때는 추측하지 않고 `No name`으로 표시한다.
     var title: String {
         if let sessionTitle, !sessionTitle.isEmpty { return sessionTitle }
         if let activeTaskSubject, !activeTaskSubject.isEmpty { return activeTaskSubject }
         // 훅이 대화 도중에 붙은 세션은 그때 친 짧은 답("B"·"재진행")이 displayTitle 로 굳어
-        // 있을 수 있다. 이름표로는 뜻이 없으니 폴더 이름으로 내린다. 훅도 같은 기준으로 거른다.
+        // 있을 수 있다. 이름표로는 뜻이 없으니 이름 없음으로 내린다. 훅도 같은 기준으로 거른다.
         if let displayTitle, displayTitle.trimmingCharacters(in: .whitespacesAndNewlines).count >= sessionNameMinLength {
             return displayTitle
         }
-        return project
+        // 메뉴 줄은 이름 뒤에 폴더를 따로 붙인다. 여기서 폴더를 또 내면 두 번 뜬다.
+        return "No name"
     }
     var needsAttention: Bool { attention == true && closed != true }
     var isClosed: Bool { closed == true }
@@ -159,6 +162,152 @@ struct StatePayload: Decodable {
 
 /// 세션 이름표로 받아들일 최소 길이. hook.cjs 의 NAME_MIN 과 같은 값이어야 한다.
 let sessionNameMinLength = 4
+
+/// 메뉴 막대의 AI 세션 목록과 자동 검사가 같은 문자열을 쓴다. 훅 없이 찾은 Codex task도
+/// 일반 세션과 똑같이 한 행으로 보여야 한다.
+func sessionMenuLabel(for payload: StatePayload) -> String {
+    let stateMark: String
+    switch payload.petState {
+    case .waiting: stateMark = "● 기다림"
+    case .failed: stateMark = "● 실패"
+    case .running, .review: stateMark = "● 작업 중"
+    case .waving: stateMark = "● 완료"
+    default: stateMark = "○ 쉬는 중"
+    }
+    let origin: String
+    switch payload.client {
+    case "vscode": origin = " · VS Code"
+    case "claude": origin = " · Claude 앱"
+    case "cli": origin = " · Claude Code CLI"
+    case "codex": origin = " · Codex"
+    default: origin = payload.sourceLabel == "Codex" ? " · Codex" : ""
+    }
+    return "\(stateMark)  \(String(payload.title.prefix(42))) · \(payload.project)\(origin)"
+}
+
+enum TaskStateSource: String {
+    case hook
+    case rollout
+}
+
+/// Retto가 화면에 쓰는 Codex task 상태. 훅은 즉시성, 롤아웃은 완료 사실, 인덱스는 제목을 맡는다.
+/// 어느 원천이 마지막 상태를 확인했는지도 함께 남겨 오래된 훅 값과 구분한다.
+struct ReconciledCodexTask {
+    let state: PetState
+    let observedAtMs: Double?
+    let needsAttention: Bool
+    let title: String?
+    let source: TaskStateSource
+}
+
+func reconcileCodexTask(payload: StatePayload, indexTitle: String?, transcriptStatus: CodexTranscriptStatus) -> ReconciledCodexTask {
+    let title = indexTitle?.isEmpty == false ? indexTitle : payload.sessionTitle
+    guard (payload.petState == .running || payload.petState == .review),
+          transcriptStatus.isCompletedAfterLatestPrompt,
+          let completedAtMs = transcriptStatus.completedAtMs else {
+        return ReconciledCodexTask(
+            state: payload.petState,
+            observedAtMs: payload.updatedAtMs,
+            needsAttention: payload.needsAttention,
+            title: title,
+            source: .hook
+        )
+    }
+    return ReconciledCodexTask(
+        state: .waving,
+        observedAtMs: completedAtMs,
+        needsAttention: true,
+        title: title,
+        source: .rollout
+    )
+}
+
+/// Codex는 제목을 롤아웃이 아니라 별도 인덱스에 쓴다. 같은 task가 완료된 뒤에도
+/// 훅이 다시 오지 않을 수 있으므로, 앱이 인덱스가 바뀔 때 최신 제목을 다시 읽는다.
+func codexThreadTitles(in text: String) -> [String: String] {
+    var titles: [String: String] = [:]
+    for line in text.split(separator: "\n") {
+        guard let data = line.data(using: .utf8),
+              let record = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+              let id = record["id"] as? String,
+              let title = record["thread_name"] as? String,
+              !title.isEmpty else { continue }
+        titles[id] = String(title.prefix(80))
+    }
+    return titles
+}
+
+final class CodexThreadTitleReader {
+    private let indexURL = FileManager.default.homeDirectoryForCurrentUser
+        .appendingPathComponent(".codex/session_index.jsonl")
+    private var cachedModified = Date.distantPast
+    private var cachedSize: UInt64 = 0
+    private var titles: [String: String] = [:]
+
+    func title(for threadId: String) -> String? {
+        refresh()
+        return titles[threadId]
+    }
+
+    func allTitles() -> [String: String] {
+        refresh()
+        return titles
+    }
+
+    private func refresh() {
+        guard let attributes = try? FileManager.default.attributesOfItem(atPath: indexURL.path),
+              let modified = attributes[.modificationDate] as? Date,
+              let size = attributes[.size] as? NSNumber else { return }
+        let bytes = size.uint64Value
+        guard modified != cachedModified || bytes != cachedSize else { return }
+        guard let text = try? String(contentsOf: indexURL, encoding: .utf8) else { return }
+        cachedModified = modified
+        cachedSize = bytes
+        titles = codexThreadTitles(in: text)
+    }
+}
+
+/// `task_complete`와 사용자 요청의 순서가 훅 콜백의 실행 시각보다 신뢰할 만하다.
+/// 비동기 콜백이 늦게 상태 파일을 덮어써도, 완료 뒤에 새 요청이 있으면 완료로 보지 않는다.
+struct CodexTranscriptStatus {
+    let completedAtMs: Double?
+    let latestPromptAtMs: Double?
+
+    var isCompletedAfterLatestPrompt: Bool {
+        guard let completedAtMs else { return false }
+        return completedAtMs > (latestPromptAtMs ?? 0)
+    }
+}
+
+func codexTranscriptStatus(in text: String) -> CodexTranscriptStatus {
+    let fractionalFormatter = ISO8601DateFormatter()
+    fractionalFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+    let plainFormatter = ISO8601DateFormatter()
+    plainFormatter.formatOptions = [.withInternetDateTime]
+    var completion: Double?
+    var latestPrompt: Double?
+    for line in text.split(separator: "\n") {
+        guard let data = line.data(using: .utf8),
+              let record = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+              let payload = record["payload"] as? [String: Any],
+              let timestamp = record["timestamp"] as? String,
+              let date = fractionalFormatter.date(from: timestamp) ?? plainFormatter.date(from: timestamp) else { continue }
+        let timestampMs = date.timeIntervalSince1970 * 1000
+        if record["type"] as? String == "event_msg", payload["type"] as? String == "task_complete" {
+            completion = max(completion ?? 0, timestampMs)
+        }
+        if record["type"] as? String == "response_item",
+           payload["type"] as? String == "message",
+           payload["role"] as? String == "user" {
+            latestPrompt = max(latestPrompt ?? 0, timestampMs)
+        }
+    }
+    return CodexTranscriptStatus(completedAtMs: completion, latestPromptAtMs: latestPrompt)
+}
+
+func codexTaskCompletionAtMs(in text: String) -> Double? {
+    codexTranscriptStatus(in: text).completedAtMs
+}
 
 struct SessionRegistry: Decodable {
     let sessions: [String: StatePayload]
@@ -336,4 +485,156 @@ final class TranscriptReader {
         let title = (customTitle?.isEmpty == false ? customTitle! : aiTitle)
         return (message, String(title.prefix(80)))
     }
+}
+
+/// 완료 상태를 확인할 때는 화면에 선택된 한 세션만 쓰는 `TranscriptReader` 캐시와 분리한다.
+/// 각 Codex 롤아웃의 크기·나노초 단위 수정 시각을 보관해, 세션이 여러 개여도 바뀐 파일만 다시 읽는다.
+final class CodexTranscriptStatusReader {
+    private struct CachedStatus {
+        let size: UInt64
+        let modifiedAtMs: Double
+        let status: CodexTranscriptStatus
+    }
+
+    private var cache: [String: CachedStatus] = [:]
+
+    func status(at path: String?) -> CodexTranscriptStatus {
+        guard let path, !path.isEmpty else {
+            return CodexTranscriptStatus(completedAtMs: nil, latestPromptAtMs: nil)
+        }
+        var info = stat()
+        guard stat(path, &info) == 0 else {
+            cache.removeValue(forKey: path)
+            return CodexTranscriptStatus(completedAtMs: nil, latestPromptAtMs: nil)
+        }
+        let size = UInt64(info.st_size)
+        let modifiedAtMs = TimeInterval(info.st_mtimespec.tv_sec) * 1000
+            + TimeInterval(info.st_mtimespec.tv_nsec) / 1_000_000
+        if let cached = cache[path], cached.size == size, cached.modifiedAtMs == modifiedAtMs {
+            return cached.status
+        }
+
+        let before = info.st_atimespec
+        let status = Self.readStatusTail(path: path, size: size)
+        var times = [before, info.st_mtimespec]
+        _ = utimensat(AT_FDCWD, path, &times, 0)
+        cache[path] = CachedStatus(size: size, modifiedAtMs: modifiedAtMs, status: status)
+        return status
+    }
+
+    private static func readStatusTail(path: String, size: UInt64) -> CodexTranscriptStatus {
+        guard let handle = FileHandle(forReadingAtPath: path) else {
+            return CodexTranscriptStatus(completedAtMs: nil, latestPromptAtMs: nil)
+        }
+        defer { try? handle.close() }
+        let span: UInt64 = 512 * 1024
+        if size > span { try? handle.seek(toOffset: size - span) }
+        guard let data = try? handle.readToEnd(), let text = String(data: data, encoding: .utf8) else {
+            return CodexTranscriptStatus(completedAtMs: nil, latestPromptAtMs: nil)
+        }
+        return codexTranscriptStatus(in: text)
+    }
+}
+
+/// 훅이 꺼져 있어도 Codex가 남긴 최근 롤아웃에서 task를 찾는다. 훅은 권한 대기·도구 실패처럼
+/// 즉시 알려야 하는 상태를 보강하고, 이 경로는 task 발견·완료 확인을 맡는다.
+final class CodexRolloutDiscovery {
+    private let sessionsURL = FileManager.default.homeDirectoryForCurrentUser
+        .appendingPathComponent(".codex/sessions")
+    private let titles = CodexThreadTitleReader()
+    private let recentWindow: TimeInterval = 24 * 60 * 60
+    private(set) var diagnostic = ""
+
+    func recentTasks(now: Date = Date()) -> [StatePayload] {
+        let knownTitles = titles.allTitles()
+        var tasks: [String: StatePayload] = [:]
+        let paths: [String]
+        do { paths = try FileManager.default.subpathsOfDirectory(atPath: sessionsURL.path) }
+        catch { diagnostic = "\(sessionsURL.path): \(error.localizedDescription)"; return [] }
+        diagnostic = "\(sessionsURL.path): \(paths.count) entries"
+        for relative in paths where relative.hasSuffix(".jsonl") {
+            let url = sessionsURL.appendingPathComponent(relative)
+            guard let attributes = try? FileManager.default.attributesOfItem(atPath: url.path),
+                  let modified = attributes[.modificationDate] as? Date,
+                  now.timeIntervalSince(modified) <= recentWindow,
+                  let task = task(at: url, modifiedAt: modified, titles: knownTitles) else { continue }
+            if let old = tasks[task.id], (old.updatedAtMs ?? 0) >= (task.updatedAtMs ?? 0) { continue }
+            tasks[task.id] = task
+        }
+        return tasks.values.sorted { ($0.updatedAtMs ?? 0) > ($1.updatedAtMs ?? 0) }
+    }
+
+    private func task(at url: URL, modifiedAt: Date, titles: [String: String]) -> StatePayload? {
+        guard let handle = FileHandle(forReadingAtPath: url.path) else { return nil }
+        defer { try? handle.close() }
+        // session_meta 첫 줄에는 기본 지시문이 함께 들어가 16KB를 넘는다. 중간에서 끊어 JSON
+        // 파싱이 실패하면 task ID를 하나도 찾지 못하므로, 첫 줄 전체가 들어올 범위를 읽는다.
+        let metadataData = try? handle.read(upToCount: 512 * 1024)
+        guard let metadataData,
+              let metadata = String(data: metadataData, encoding: .utf8),
+              let firstLine = metadata.split(separator: "\n").first,
+              let data = firstLine.data(using: .utf8),
+              let record = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+              let payload = record["payload"] as? [String: Any],
+              let threadId = (payload["id"] as? String) ?? (payload["session_id"] as? String),
+              !threadId.isEmpty else { return nil }
+
+        let fileSize = (try? FileManager.default.attributesOfItem(atPath: url.path)[.size] as? NSNumber)?.uint64Value ?? 0
+        // 앞에서 session_meta를 읽었으므로 작은 파일도 반드시 처음으로 되돌린다. 안 그러면
+        // 첫 16KB 안의 마지막 사용자 요청을 놓쳐, 오래된 완료를 새 요청의 완료로 오해한다.
+        try? handle.seek(toOffset: fileSize > 512 * 1024 ? fileSize - 512 * 1024 : 0)
+        let tail = (try? handle.readToEnd()).flatMap { String(data: $0, encoding: .utf8) } ?? ""
+        let transcript = codexTranscriptStatus(in: tail)
+        let updatedAtMs = max(
+            transcript.completedAtMs ?? 0,
+            transcript.latestPromptAtMs ?? 0,
+            modifiedAt.timeIntervalSince1970 * 1000
+        )
+        let completed = transcript.isCompletedAfterLatestPrompt
+        let cwd = payload["cwd"] as? String
+        return StatePayload(
+            state: completed ? PetState.waving.rawValue : PetState.running.rawValue,
+            updatedAt: nil,
+            event: completed ? "task_complete" : "rollout",
+            sessionId: "codex:\(threadId)",
+            rawSessionId: threadId,
+            source: "codex",
+            cwd: cwd,
+            toolName: nil,
+            notificationType: nil,
+            error: nil,
+            projectName: nil,
+            displayTitle: nil,
+            sessionTitle: titles[threadId],
+            transcriptPath: url.path,
+            lastAssistantMessage: nil,
+            activeTaskSubject: nil,
+            backgroundTaskCount: nil,
+            attention: completed,
+            closed: false,
+            updatedAtMs: updatedAtMs,
+            stateSource: TaskStateSource.rollout.rawValue,
+            client: "codex"
+        )
+    }
+}
+
+/// 화면이 접근성 트리에 task 목록을 내보내지 않는 환경에서도, 같은 발견 결과를 검증하는
+/// 읽기 전용 진단 출력이다. `Retto --codex-rollouts-json`은 파일을 고치지 않는다.
+func codexRolloutReport() -> String {
+    let discovery = CodexRolloutDiscovery()
+    let tasks = discovery.recentTasks().map { task in
+        [
+            "id": task.id,
+            "navigationId": task.navigationSessionId,
+            "title": task.title,
+            "state": task.state,
+            "source": task.stateSource ?? "rollout"
+        ]
+    }
+    let report: [String: Any] = ["home": FileManager.default.homeDirectoryForCurrentUser.path, "diagnostic": discovery.diagnostic, "tasks": tasks]
+    guard JSONSerialization.isValidJSONObject(report),
+          let data = try? JSONSerialization.data(withJSONObject: report, options: [.sortedKeys]),
+          let text = String(data: data, encoding: .utf8) else { return "[]" }
+    return text
 }

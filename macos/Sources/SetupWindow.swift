@@ -58,8 +58,8 @@ struct RettoHostEnvironment {
             lines.append("터미널에서 claude 를 실행해도 됩니다.")
         }
         if hasCodex {
-            lines.append("Codex 는 한 번 다시 켜서 훅 승인 화면이 나오면 허용해 주세요."
-                + " 승인 전에는 Codex task 가 레토에게 보이지 않습니다.")
+            lines.append("Codex task는 레토가 작업 기록에서 먼저 찾습니다. 실시간 대기·실패 알림까지 받으려면"
+                + " Codex를 다시 켜고 훅 승인 화면에서 허용해 주세요.")
         }
         // 아무것도 못 찾았을 때도 할 말은 있어야 한다. 빈 자리는 고장으로 읽힌다.
         if lines.isEmpty {

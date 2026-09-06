@@ -6,6 +6,10 @@ import Foundation
 import ServiceManagement
 
 final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
+    private struct TaskOpenChoice {
+        let sessionID: String
+        let app: OpenApp
+    }
     private var panel: OverlayPanel!
     private var petView: RettoView!
     private var stateMonitor: StateMonitor!
@@ -33,6 +37,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     private var sessions: [StatePayload] = []
     private var selectedPayload: StatePayload?
     private let transcriptReader = TranscriptReader()
+    private let codexTranscriptStatusReader = CodexTranscriptStatusReader()
+    private let codexThreadTitleReader = CodexThreadTitleReader()
+    private let codexRolloutDiscovery = CodexRolloutDiscovery()
     private var clearAttentionItem: NSMenuItem!
     private var typefaceItems: [NSMenuItem] = []
     private var skinItems: [NSMenuItem] = []
@@ -280,33 +287,40 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         menu.addItem(aboutItem)
         menu.addItem(.separator())
 
+        let displayItem = NSMenuItem(title: "표시", action: nil, keyEquivalent: "")
+        let displayMenu = NSMenu(title: "표시")
+        displayMenu.autoenablesItems = false
         visibilityItem = NSMenuItem(title: "레토 숨기기", action: #selector(toggleVisibility), keyEquivalent: "")
         visibilityItem.target = self
-        menu.addItem(visibilityItem)
+        displayMenu.addItem(visibilityItem)
 
         clickThroughItem = NSMenuItem(title: "클릭 통과 켜기", action: #selector(toggleClickThrough), keyEquivalent: "")
         clickThroughItem.target = self
-        menu.addItem(clickThroughItem)
+        displayMenu.addItem(clickThroughItem)
 
-        followClaudeItem = NSMenuItem(title: "Claude 앱에서 세션까지 따라가기", action: #selector(toggleFollowClaude), keyEquivalent: "")
+        let behaviorItem = NSMenuItem(title: "동작", action: nil, keyEquivalent: "")
+        let behaviorMenu = NSMenu(title: "동작")
+        behaviorMenu.autoenablesItems = false
+
+        followClaudeItem = NSMenuItem(title: "Claude 앱 안에서 세션 선택", action: #selector(toggleFollowClaude), keyEquivalent: "")
         followClaudeItem.target = self
-        menu.addItem(followClaudeItem)
+        behaviorMenu.addItem(followClaudeItem)
         updateFollowClaudeItem()
 
         launchAtLoginItem = NSMenuItem(title: "로그인할 때 자동 실행", action: #selector(toggleLaunchAtLogin), keyEquivalent: "")
         launchAtLoginItem.target = self
         launchAtLoginItem.state = SMAppService.mainApp.status == .enabled ? .on : .off
-        menu.addItem(launchAtLoginItem)
+        behaviorMenu.addItem(launchAtLoginItem)
 
         // 여기부터 세션 묶음. 무엇을 보여줄지 고르는 항목들이다.
         menu.addItem(.separator())
 
-        let sessionsItem = NSMenuItem(title: "AI 세션", action: nil, keyEquivalent: "")
+        let sessionsItem = NSMenuItem(title: "최근 작업", action: nil, keyEquivalent: "")
         sessionsItem.submenu = sessionsMenu
         menu.addItem(sessionsItem)
         rebuildSessionsMenu()
 
-        let openTargetItem = NSMenuItem(title: aiSessionOpenMenuTitle, action: nil, keyEquivalent: "")
+        let openTargetItem = NSMenuItem(title: "기본 열기 방식", action: nil, keyEquivalent: "")
         let openTargetMenu = NSMenu(title: aiSessionOpenMenuTitle)
         openTargetItems = OpenTarget.allCases.map { target in
             let item = NSMenuItem(title: target.label, action: #selector(changeOpenTarget(_:)), keyEquivalent: "")
@@ -316,11 +330,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             openTargetMenu.addItem(item)
             return item
         }
+        // Codex task는 Claude 세션 ID와 호환되지 않아 선택값과 무관하게 Codex 앱에서 연다.
+        // 숨기면 기본 열기 방식에 Codex가 빠진 것처럼 보이므로, 고정 경로도 함께 보여 준다.
         openTargetMenu.addItem(.separator())
-        codexOpenTargetItem = NSMenuItem(title: "Codex task → Codex 앱", action: #selector(showCodexIntegration), keyEquivalent: "")
-        codexOpenTargetItem.target = self
-        openTargetMenu.addItem(codexOpenTargetItem)
-        updateCodexOpenTargetItem()
+        let codexDefaultItem = NSMenuItem(title: "Codex 작업 · Codex 앱에서 열기", action: nil, keyEquivalent: "")
+        codexDefaultItem.isEnabled = false
+        codexDefaultItem.toolTip = "Codex 작업은 항상 Codex 앱에서 열립니다"
+        openTargetMenu.addItem(codexDefaultItem)
         openTargetItem.submenu = openTargetMenu
         menu.addItem(openTargetItem)
 
@@ -355,7 +371,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             return item
         }
         sizeItem.submenu = sizeMenu
-        menu.addItem(sizeItem)
+        displayMenu.addItem(sizeItem)
 
         // 겉모습. 아틀라스만 갈아 끼우므로 상태·말풍선 동작은 그대로다.
         let skinMenu = NSMenu(title: "스킨")
@@ -376,7 +392,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         }
         let skinItem = NSMenuItem(title: "스킨", action: nil, keyEquivalent: "")
         skinItem.submenu = skinMenu
-        menu.addItem(skinItem)
+        displayMenu.addItem(skinItem)
 
         // 손글씨가 예쁘지만 작은 배율에서 읽기 힘들다는 사람이 있다. 골라 쓰게 둔다.
         let typefaceMenu = NSMenu(title: "서체")
@@ -391,7 +407,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         }
         let typefaceItem = NSMenuItem(title: "서체", action: nil, keyEquivalent: "")
         typefaceItem.submenu = typefaceMenu
-        menu.addItem(typefaceItem)
+        displayMenu.addItem(typefaceItem)
 
         let cornerMenu = NSMenu(title: "위치")
         cornerMenu.autoenablesItems = false
@@ -405,21 +421,35 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         }
         let cornerItem = NSMenuItem(title: "위치", action: nil, keyEquivalent: "")
         cornerItem.submenu = cornerMenu
-        menu.addItem(cornerItem)
+        displayMenu.addItem(cornerItem)
+        displayItem.submenu = displayMenu
+        menu.addItem(displayItem)
+        behaviorItem.submenu = behaviorMenu
+        menu.addItem(behaviorItem)
 
         // 여기부터 손볼 일 묶음. 평소에는 누를 일이 없는 항목들이다.
         menu.addItem(.separator())
 
+        let integrationItem = NSMenuItem(title: "연동 및 문제 해결", action: nil, keyEquivalent: "")
+        let integrationMenu = NSMenu(title: "연동 및 문제 해결")
+        integrationMenu.autoenablesItems = false
         let stateItem = NSMenuItem(title: "AI 상태 파일 보기", action: #selector(revealStateFile), keyEquivalent: "")
         stateItem.target = self
-        menu.addItem(stateItem)
+        integrationMenu.addItem(stateItem)
 
         // 훅이 한 번도 돈 적이 없어도 레토 화면은 정상 대기와 똑같다. 고장인지 아닌지
         // 사용자가 스스로 확인할 자리를 둔다. 제목에 상태를 함께 적는다.
         claudeIntegrationItem = NSMenuItem(title: "AI 연동 확인", action: #selector(showClaudeIntegration), keyEquivalent: "")
         claudeIntegrationItem.target = self
-        menu.addItem(claudeIntegrationItem)
+        integrationMenu.addItem(claudeIntegrationItem)
         updateClaudeIntegrationItem()
+
+        codexOpenTargetItem = NSMenuItem(title: "Codex 연결 확인", action: #selector(showCodexIntegration), keyEquivalent: "")
+        codexOpenTargetItem.target = self
+        integrationMenu.addItem(codexOpenTargetItem)
+        updateCodexOpenTargetItem()
+        integrationItem.submenu = integrationMenu
+        menu.addItem(integrationItem)
 
         let uninstallItem = NSMenuItem(title: "레토 제거…", action: #selector(uninstallRetto), keyEquivalent: "")
         uninstallItem.target = self
@@ -450,7 +480,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     }
 
     private func applySessions(_ incoming: [StatePayload]) {
-        sessions = incoming.sorted {
+        var merged = Dictionary(uniqueKeysWithValues: incoming.map { ($0.id, $0) })
+        // 이미 훅으로 받은 task는 더 정밀한 상태가 있으므로 유지한다. 훅에 없는 task만
+        // 롤아웃에서 넣어, 연결을 꺼도 기본 표시가 사라지지 않게 한다.
+        for task in codexRolloutDiscovery.recentTasks() where merged[task.id] == nil {
+            merged[task.id] = task
+        }
+        sessions = merged.values.map(reconciledCodexPayload).sorted {
             let leftPriority = statePriority($0)
             let rightPriority = statePriority($1)
             if leftPriority != rightPriority { return leftPriority > rightPriority }
@@ -523,18 +559,22 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         rebuildSessionsMenu()
     }
 
-    private func stateMark(for payload: StatePayload) -> String {
-        switch payload.petState {
-        case .waiting: return "● 기다림"
-        case .failed: return "● 실패"
-        case .running, .review: return "● 작업 중"
-        case .waving: return "● 완료"
-        default: return "○ 쉬는 중"
-        }
-    }
-
-    private func sessionLabel(for payload: StatePayload) -> String {
-        "\(stateMark(for: payload))  [\(payload.sourceLabel)] \(payload.project) · \(String(payload.title.prefix(42)))"
+    /// Codex가 Stop 훅을 보내지 않아도 롤아웃의 task_complete는 남는다. 그 이벤트가
+    /// 새 사용자 요청보다 뒤에 있는 완료 이벤트면 완료·읽지 않음으로 보정한다.
+    private func reconciledCodexPayload(_ payload: StatePayload) -> StatePayload {
+        guard payload.source == "codex" || payload.client == "codex" else { return payload }
+        var refreshed = payload
+        let task = reconcileCodexTask(
+            payload: payload,
+            indexTitle: codexThreadTitleReader.title(for: payload.navigationSessionId),
+            transcriptStatus: codexTranscriptStatusReader.status(at: payload.transcriptPath)
+        )
+        refreshed.state = task.state.rawValue
+        refreshed.updatedAtMs = task.observedAtMs
+        refreshed.attention = task.needsAttention
+        refreshed.sessionTitle = task.title
+        refreshed.stateSource = task.source.rawValue
+        return refreshed
     }
 
     /// 배지를 누르면 배지가 세던 세션들을 그대로 목록으로 보여준다. 하나뿐이면 묻지 않고 바로 연다.
@@ -554,7 +594,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         menu.addItem(header)
         menu.addItem(.separator())
         for payload in waiting.prefix(12) {
-            let item = NSMenuItem(title: sessionLabel(for: payload), action: #selector(openSessionFromBadge(_:)), keyEquivalent: "")
+            let item = NSMenuItem(title: sessionMenuLabel(for: payload), action: #selector(openSessionFromBadge(_:)), keyEquivalent: "")
             item.target = self
             item.representedObject = payload.id
             menu.addItem(item)
@@ -583,33 +623,58 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         sessionsMenu.addItem(.separator())
 
         let recent = Array(sessions.filter { !$0.isClosed }.prefix(12))
-        let claudeSessions = recent.filter { $0.sourceLabel == "Claude" }
-        let codexSessions = recent.filter { $0.sourceLabel == "Codex" }
-
-        func addGroup(title: String, payloads: [StatePayload], emptyTitle: String) {
-            let header = NSMenuItem(title: title, action: nil, keyEquivalent: "")
-            header.isEnabled = false
-            sessionsMenu.addItem(header)
-
-            if payloads.isEmpty {
-                let emptyItem = NSMenuItem(title: emptyTitle, action: nil, keyEquivalent: "")
-                emptyItem.isEnabled = false
-                sessionsMenu.addItem(emptyItem)
-                return
-            }
-
-            for payload in payloads {
-                let item = NSMenuItem(title: sessionLabel(for: payload), action: #selector(selectSession(_:)), keyEquivalent: "")
-                item.target = self
-                item.representedObject = payload.id
-                item.state = pinnedSessionId == payload.id ? .on : .off
-                sessionsMenu.addItem(item)
-            }
+        let header = NSMenuItem(title: "작업 이름을 고르면 레토가 그 작업을 보여줍니다", action: nil, keyEquivalent: "")
+        header.isEnabled = false
+        sessionsMenu.addItem(header)
+        if recent.isEmpty {
+            let empty = NSMenuItem(title: "최근 작업이 없습니다", action: nil, keyEquivalent: "")
+            empty.isEnabled = false
+            sessionsMenu.addItem(empty)
+            return
         }
+        for payload in recent {
+            let item = NSMenuItem(title: sessionMenuLabel(for: payload), action: nil, keyEquivalent: "")
+            item.submenu = taskMenu(for: payload)
+            sessionsMenu.addItem(item)
+        }
+    }
 
-        addGroup(title: "Claude Code 세션", payloads: claudeSessions, emptyTitle: emptyClaudeSessionLabel)
-        sessionsMenu.addItem(.separator())
-        addGroup(title: "Codex task", payloads: codexSessions, emptyTitle: emptyCodexSessionLabel)
+    /// 최근 작업은 출처별로 나누지 않는다. 고른 작업에서만 실제로 열 수 있는 앱을 보여 준다.
+    private func taskMenu(for payload: StatePayload) -> NSMenu {
+        let menu = NSMenu(title: payload.title)
+        let show = NSMenuItem(title: "레토에서 이 작업 보기", action: #selector(selectSession(_:)), keyEquivalent: "")
+        show.target = self
+        show.representedObject = payload.id
+        show.state = pinnedSessionId == payload.id ? .on : .off
+        menu.addItem(show)
+        menu.addItem(.separator())
+
+        let apps: [OpenApp] = payload.sourceLabel == "Codex" ? [.codex] : [.vscode, .claude]
+        for app in apps where isOpenAppInstalled(app) {
+            let choice = NSMenuItem(title: openTaskMenuTitle(app), action: #selector(openTask(_:)), keyEquivalent: "")
+            choice.target = self
+            choice.representedObject = TaskOpenChoice(sessionID: payload.id, app: app)
+            menu.addItem(choice)
+        }
+        if menu.items.count == 2 {
+            let unavailable = NSMenuItem(title: "열 수 있는 앱을 찾지 못했습니다", action: nil, keyEquivalent: "")
+            unavailable.isEnabled = false
+            menu.addItem(unavailable)
+        }
+        return menu
+    }
+
+    private func isOpenAppInstalled(_ app: OpenApp) -> Bool {
+        NSWorkspace.shared.urlForApplication(withBundleIdentifier: app.bundleIdentifier) != nil
+            || FileManager.default.fileExists(atPath: app.fallbackPath)
+    }
+
+    private func openTaskMenuTitle(_ app: OpenApp) -> String {
+        switch app {
+        case .vscode: return "VS Code에서 열기"
+        case .claude: return "Claude 앱에서 열기"
+        case .codex: return "Codex 앱에서 열기"
+        }
     }
 
     private func initialOrigin(for size: NSSize) -> NSPoint {
@@ -792,9 +857,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     /// 읽음은 "그 세션을 실제로 눈앞에 띄웠을 때" 만 찍는다.
     /// 몸통·말풍선·배지 어느 쪽을 눌렀든 그 세션 탭이 앞으로 왔으면 다녀온 것이다.
     /// 반대로 ⌥(창만 앞으로)나 창을 특정하지 못해 딥링크를 못 보낸 경우는 아직 안 본 것으로 남긴다.
-    private func revealAgentSession(_ payload: StatePayload?, windowOnly: Bool) {
+    private func revealAgentSession(_ payload: StatePayload?, windowOnly: Bool, preferredApp: OpenApp? = nil) {
         let target = payload ?? selectedPayload
-        let app = resolveOpenApp(for: target)
+        let app = preferredApp ?? resolveOpenApp(for: target)
         focusHostApp(for: target, app: app) { [weak self] matchedWindow in
             guard let self, !windowOnly, matchedWindow else { return }
             // 세션을 집어 띄울 길이 없는 앱(Claude 데스크탑)은 앞으로 보낸 것으로 끝낸다.
@@ -854,6 +919,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         panel.orderFrontRegardless()
     }
 
+    @objc private func openTask(_ sender: NSMenuItem) {
+        guard let choice = sender.representedObject as? TaskOpenChoice,
+              let payload = sessions.first(where: { $0.id == choice.sessionID }) else { return }
+        pinnedSessionId = payload.id
+        applySessions(sessions)
+        revealAgentSession(payload, windowOnly: false, preferredApp: choice.app)
+    }
+
     @objc private func toggleVisibility() {
         if panel.isVisible {
             panel.orderOut(nil)
@@ -884,7 +957,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     private func codexHooksRegistered() -> Bool {
         guard let data = try? Data(contentsOf: codexHooksURL),
               let text = String(data: data, encoding: .utf8) else { return false }
-        return text.contains("retto-pet/hook.cjs") && text.contains("codex")
+        return (text.contains("retto-pet/hook.") || text.contains("reto-pet/hook.")) && text.contains("codex")
     }
 
     private func updateCodexOpenTargetItem() {
@@ -900,21 +973,36 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         updateCodexOpenTargetItem()
 
         let alert = NSAlert()
-        alert.messageText = registered ? "Codex 연동 훅이 등록돼 있어요" : "Codex 연동을 확인해 주세요"
+        let hasCodexTask = sessions.contains { $0.sourceLabel == "Codex" }
+        alert.messageText = registered ? "Codex 실시간 연결이 준비됐어요" : "Codex 기본 상태를 직접 확인하고 있어요"
         alert.informativeText = [
             registered
-                ? "Codex task의 상태를 같은 레토 앱에서 받고 있습니다."
-                : "~/.codex/hooks.json에서 레토 훅 항목을 찾지 못했습니다.",
+                ? "최근 Codex 소식도 \(hasCodexTask ? "확인됐습니다." : "아직 없습니다. 새 task를 한 번 시작해 보세요.")"
+                : "훅이 없어도 최근 task와 완료는 표시합니다. 권한 대기·도구 실패 같은 실시간 알림은 받을 수 없습니다.",
             "",
             "Codex task ID는 Claude session ID와 달라서, Codex 세션은 항상 Codex 앱의 해당 task로 엽니다.",
-            "새 Codex task에서 훅 검토 안내가 나타나면 한 번 승인해 주세요.",
+            "「연결 다시 설치」 뒤 Codex를 다시 열고 훅 검토 안내가 나오면 승인해 주세요.",
             "",
             "설정: ~/.codex/hooks.json"
         ].joined(separator: "\n")
-        alert.addButton(withTitle: "닫기")
+        alert.addButton(withTitle: "연결 다시 설치")
         alert.addButton(withTitle: "설정 파일 보기")
-        if alert.runModal() == .alertSecondButtonReturn {
+        alert.addButton(withTitle: "닫기")
+        switch alert.runModal() {
+        case .alertFirstButtonReturn:
+            let result = runHookInstaller(arguments: [])
+            updateCodexOpenTargetItem()
+            if !result.ok {
+                let failure = NSAlert()
+                failure.messageText = "Codex 연결을 다시 설치하지 못했습니다"
+                failure.informativeText = result.output
+                failure.addButton(withTitle: "확인")
+                failure.runModal()
+            }
+        case .alertSecondButtonReturn:
             NSWorkspace.shared.activateFileViewerSelecting([codexHooksURL])
+        default:
+            break
         }
     }
 
@@ -1010,10 +1098,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     private func updateFollowClaudeItem() {
         guard let item = followClaudeItem else { return }
         if ClaudeAppNavigator.isPermitted {
-            item.title = "Claude 앱에서 세션까지 따라가기"
+            item.title = "Claude 앱 안에서 세션 선택"
             item.state = followsClaudeSession ? .on : .off
         } else {
-            item.title = "Claude 앱에서 세션까지 따라가기 — 권한 필요"
+            item.title = "Claude 앱 안에서 세션 선택 — 권한 필요"
             item.state = .off
         }
     }

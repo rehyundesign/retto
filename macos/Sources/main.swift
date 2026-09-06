@@ -15,6 +15,11 @@ if CommandLine.arguments.contains("--self-test") {
     exit(runSelfTest())
 }
 
+if CommandLine.arguments.contains("--codex-rollouts-json") {
+    print(codexRolloutReport())
+    exit(0)
+}
+
 /// 발바닥 메뉴의 「레토 제거」와 같은 코드를 화면 없이 돌린다.
 /// 설치기가 스크립트로 깔아 주므로 지우는 쪽도 스크립트로 되는 편이 맞고,
 /// 알림창을 클릭해야만 도는 코드는 시험해 볼 방법이 없다.

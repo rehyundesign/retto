@@ -13,6 +13,25 @@ let sheetWidth: CGFloat = 1792
 let sheetHeight: CGFloat = 2880
 let rettoHandwritingFontName = "NanumMiNiSonGeurSsi"
 
+/// 기본 스킨은 Retto가 쓰는 8×12 규격이다. 개인 v2 스킨은 Codex 펫 규격(8×11)을
+/// 그대로 읽되, 레토 전용 잠자기 자세는 idle 행과 호흡 효과로 대신 표현한다.
+struct SpriteSheetLayout: Equatable {
+    let cellWidth: CGFloat
+    let cellHeight: CGFloat
+    let rows: Int
+
+    static let retto = SpriteSheetLayout(cellWidth: 224, cellHeight: 240, rows: 12)
+    static let codexV2 = SpriteSheetLayout(cellWidth: 192, cellHeight: 208, rows: 11)
+
+    static func forImage(size: NSSize) -> SpriteSheetLayout? {
+        if Int(size.width) == 1792, Int(size.height) == 2880 { return .retto }
+        if Int(size.width) == 1536, Int(size.height) == 2288 { return .codexV2 }
+        return nil
+    }
+
+    var sheetHeight: CGFloat { cellHeight * CGFloat(rows) }
+}
+
 /// 말풍선에 쓸 글꼴. 손글씨가 기본이고, 읽기 힘들면 시스템 서체로 바꾼다.
 /// 끌고 갈 때 달리는 방향. 화면 기준이다.
 enum DragRun {
