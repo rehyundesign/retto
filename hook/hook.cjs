@@ -6,6 +6,8 @@ const VALID_STATES = new Set(['idle', 'running', 'review', 'waiting', 'failed', 
 const chunks = [];
 const petDir = __dirname;
 const registryPath = path.join(petDir, 'sessions.json');
+/// 세션 이름표로 받아들일 최소 길이. 첫 요청이라도 이보다 짧으면 이름으로 쓰지 않는다.
+const NAME_MIN = 4;
 const legacyStatePath = path.join(petDir, 'state.json');
 const lockPath = path.join(petDir, '.sessions.lock');
 const sleepArray = new Int32Array(new SharedArrayBuffer(4));
@@ -295,6 +297,12 @@ function updateRegistry(input, fallbackState) {
   const error = normalizeError(input.error || input.error_type || input.message
     || (toolResponseFailed(input.tool_response) ? input.tool_response : ''));
   const backgroundTaskCount = Array.isArray(input.background_tasks) ? input.background_tasks.length : 0;
+  // 이름표에 쓸 프롬프트인가. 기준은 길이가 아니라 **세션의 첫 요청인가** 다.
+  // 뒤이어 오는 말은 요청이 아니라 답이고("ㅇㅇ 해결햇어?" 도 8자라 길이로는 안 걸러진다),
+  // 그걸 이름으로 쓰면 세션명 자리가 방금 친 말로 계속 바뀐다 — 그게 이 오류였다.
+  // 훅이 대화 도중에 붙은 세션은 첫 요청을 못 봤으므로 이름을 정하지 않고 폴더 이름으로 둔다.
+  const firstPrompt = event === 'UserPromptSubmit' && !previous.promptedAt;
+  const promptName = firstPrompt && prompt.trim().length >= NAME_MIN ? prompt : '';
   const isClosed = event === 'SessionEnd';
 
   const transcriptPath = input.transcript_path || input.transcriptPath;
@@ -316,7 +324,9 @@ function updateRegistry(input, fallbackState) {
     updatedAtMs: liveRestart ? (previous.updatedAtMs || nowMs) : nowMs,
     cwd,
     projectName: basename(cwd),
-    displayTitle: previous.displayTitle || prompt || taskSubject || basename(cwd),
+    // 폴더 이름은 여기 넣지 않는다. 넣으면 그것이 굳어서 나중에 오는 진짜 프롬프트를 막는다.
+    // 비워 두면 앱이 폴더 이름으로 내려간다.
+    displayTitle: previous.displayTitle || promptName || taskSubject || '',
     sessionTitle: sessionTitle || previous.sessionTitle || '',
     // 앱이 이 파일을 직접 지켜본다. 훅은 도구를 부를 때만 도니, 도구 없이 긴 글을 쓰면
     // 말풍선이 턴 끝까지 안 바뀌었다. 경로를 넘겨 주면 앱이 0.25초마다 새 문장을 집는다.
@@ -338,7 +348,6 @@ function updateRegistry(input, fallbackState) {
     startedAt: previous.startedAt || now.toISOString()
   };
 
-  if (event === 'UserPromptSubmit' && prompt) record.displayTitle = prompt;
   if (event === 'TaskCompleted') record.activeTaskSubject = '';
   if (isClosed) record.closedAt = now.toISOString();
   registry.sessions[sessionId] = record;

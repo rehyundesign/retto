@@ -396,6 +396,19 @@ func runSelfTest() -> Int32 {
                         transcriptModifiedAtMs: 2_000, nowMs: 2_000 + staleWorkingTimeout * 1000 + 1) == .idle
 
     // 깔려 있지 않은 앱으로 보내지 않는지.
+    // 이름표 우선순위: 세션명 > 작업 주제 > 쓸 만한 길이의 프롬프트 > 폴더 이름.
+    // ⚠️ 짧은 답("B"·"재진행")은 이름이 아니다. 훅이 대화 도중 붙으면 그 답이 displayTitle 로
+    // 굳는데, 그대로 띄우면 세션명 자리에 내가 친 답이 뜬다. 실제로 그렇게 났다.
+    func titleOf(_ json: String) -> String {
+        guard let d = json.data(using: .utf8),
+              let p = try? JSONDecoder().decode(StatePayload.self, from: d) else { return "" }
+        return p.title
+    }
+    let titleOK = titleOf("{\"state\":\"running\",\"sessionTitle\":\"서치서울 문서\",\"displayTitle\":\"아주 긴 프롬프트입니다\",\"projectName\":\"planning\"}") == "서치서울 문서"
+        && titleOf("{\"state\":\"running\",\"activeTaskSubject\":\"토큰 정리\",\"displayTitle\":\"아주 긴 프롬프트입니다\",\"projectName\":\"planning\"}") == "토큰 정리"
+        && titleOf("{\"state\":\"running\",\"displayTitle\":\"아주 긴 프롬프트입니다\",\"projectName\":\"planning\"}") == "아주 긴 프롬프트입니다"
+        && titleOf("{\"state\":\"running\",\"displayTitle\":\"B\",\"projectName\":\"planning\"}") == "planning"
+        && titleOf("{\"state\":\"running\",\"displayTitle\":\"재진행\",\"projectName\":\"planning\"}") == "planning"
     let fallbackOK = installedOpenApp(preferred: .vscode) { $0 == .claude } == .claude
         && installedOpenApp(preferred: .claude) { $0 == .vscode } == .vscode
         && installedOpenApp(preferred: .codex) { $0 == .claude } == .claude
@@ -451,8 +464,8 @@ func runSelfTest() -> Int32 {
         && !claudeRowMatchesSession(rowLabel: "", sessionTitle: "흠냐링")
         && !claudeRowMatchesSession(rowLabel: "입력 대기 중 흠냐링", sessionTitle: "")
 
-    let ok = claudeRowOK && fallbackOK && cornerOK && lookingOK && sleepRowOK && displayOK && dozeOK && sleepOK && ancientOK && viewedOK && haloOK && assetOK && skinsOK && dragRunOK && behaviorsOK && statesOK && deepLinkOK && clientRoutingOK && codexMenuOK && integrationOK && setupOK && transcriptShapesOK && scalesOK && baselineOK && decoupledOK && fontOK && priorityOK && registryOK && badgeLayoutOK && clickRoutingOK && gazeStatesOK && expandOK && lineBudgetOK && typefaceOK && textDeltaOK && tonesOK && folderFoldOK && labelOK && doneStaysOK && bubbleShapeOK && seenOK && staleOK
-    print("{\"ok\":\(ok),\"asset\":\"\(Int(image.size.width))x\(Int(image.size.height))\",\"skins\":\(PetSkin.allCases.count),\"skinsOK\":\(skinsOK),\"dragRun\":\(dragRunOK),\"canJoinAllSpaces\":\(behaviorsOK),\"states\":\(animationCatalog.count),\"deepLink\":\(deepLinkOK),\"clientRouting\":\(clientRoutingOK),\"codexMenu\":\(codexMenuOK),\"integration\":\(integrationOK),\"setup\":\(setupOK),\"transcriptShapes\":\(transcriptShapesOK),\"sizePresets\":\(supportedScales.count),\"baselineLayout\":\(baselineOK),\"scaleDecoupled\":\(decoupledOK),\"badgePlacement\":\(badgeLayoutOK),\"ribbonExpand\":\(expandOK),\"lineBudget\":\(lineBudgetOK),\"typefaces\":\(PetTypeface.allCases.count),\"typefaceOK\":\(typefaceOK),\"textDelta\":\(textDeltaOK),\"tones\":\(tonesOK),\"folderFold\":\(folderFoldOK),\"doneStays\":\(doneStaysOK),\"bubbleShape\":\(bubbleShapeOK),\"seenRule\":\(seenOK),\"staleWorking\":\(staleOK),\"headroomClean\":\(haloOK),\"viewedElsewhere\":\(viewedOK),\"ancientNews\":\(ancientOK),\"sleeps\":\(sleepOK),\"sleepRow\":\(sleepRow),\"dozes\":\(dozeOK),\"displayState\":\(displayOK),\"seenByLooking\":\(lookingOK),\"corners\":\(cornerOK),\"appFallback\":\(fallbackOK),\"haloRows\":\(halo.rows),\"haloDeepest\":\(halo.deepest),\"haloFaint\":\(haloFaintPixels),\"claudeRow\":\(claudeRowOK),\"font\":\"\(rettoHandwritingFontName)\",\"fontLoaded\":\(fontOK),\"multiSession\":\(registryOK),\"prioritySelection\":\(priorityOK),\"badgeLayout\":\(badgeLayoutOK),\"clickRouting\":\(clickRoutingOK)}")
+    let ok = claudeRowOK && fallbackOK && cornerOK && lookingOK && sleepRowOK && displayOK && dozeOK && sleepOK && ancientOK && viewedOK && haloOK && assetOK && skinsOK && dragRunOK && behaviorsOK && statesOK && deepLinkOK && clientRoutingOK && codexMenuOK && integrationOK && setupOK && transcriptShapesOK && scalesOK && baselineOK && decoupledOK && fontOK && priorityOK && registryOK && titleOK && badgeLayoutOK && clickRoutingOK && gazeStatesOK && expandOK && lineBudgetOK && typefaceOK && textDeltaOK && tonesOK && folderFoldOK && labelOK && doneStaysOK && bubbleShapeOK && seenOK && staleOK
+    print("{\"ok\":\(ok),\"asset\":\"\(Int(image.size.width))x\(Int(image.size.height))\",\"skins\":\(PetSkin.allCases.count),\"skinsOK\":\(skinsOK),\"dragRun\":\(dragRunOK),\"canJoinAllSpaces\":\(behaviorsOK),\"states\":\(animationCatalog.count),\"deepLink\":\(deepLinkOK),\"clientRouting\":\(clientRoutingOK),\"codexMenu\":\(codexMenuOK),\"integration\":\(integrationOK),\"setup\":\(setupOK),\"transcriptShapes\":\(transcriptShapesOK),\"sizePresets\":\(supportedScales.count),\"baselineLayout\":\(baselineOK),\"scaleDecoupled\":\(decoupledOK),\"badgePlacement\":\(badgeLayoutOK),\"ribbonExpand\":\(expandOK),\"lineBudget\":\(lineBudgetOK),\"typefaces\":\(PetTypeface.allCases.count),\"typefaceOK\":\(typefaceOK),\"textDelta\":\(textDeltaOK),\"tones\":\(tonesOK),\"folderFold\":\(folderFoldOK),\"doneStays\":\(doneStaysOK),\"bubbleShape\":\(bubbleShapeOK),\"seenRule\":\(seenOK),\"staleWorking\":\(staleOK),\"headroomClean\":\(haloOK),\"viewedElsewhere\":\(viewedOK),\"ancientNews\":\(ancientOK),\"sleeps\":\(sleepOK),\"sleepRow\":\(sleepRow),\"dozes\":\(dozeOK),\"displayState\":\(displayOK),\"seenByLooking\":\(lookingOK),\"corners\":\(cornerOK),\"appFallback\":\(fallbackOK),\"haloRows\":\(halo.rows),\"haloDeepest\":\(halo.deepest),\"haloFaint\":\(haloFaintPixels),\"claudeRow\":\(claudeRowOK),\"font\":\"\(rettoHandwritingFontName)\",\"fontLoaded\":\(fontOK),\"multiSession\":\(registryOK),\"sessionTitleFallback\":\(titleOK),\"prioritySelection\":\(priorityOK),\"badgeLayout\":\(badgeLayoutOK),\"clickRouting\":\(clickRoutingOK)}")
     return ok ? 0 : 1
 }
 

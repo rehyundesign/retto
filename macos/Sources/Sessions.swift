@@ -146,12 +146,19 @@ struct StatePayload: Decodable {
     var title: String {
         if let sessionTitle, !sessionTitle.isEmpty { return sessionTitle }
         if let activeTaskSubject, !activeTaskSubject.isEmpty { return activeTaskSubject }
-        if let displayTitle, !displayTitle.isEmpty { return displayTitle }
+        // 훅이 대화 도중에 붙은 세션은 그때 친 짧은 답("B"·"재진행")이 displayTitle 로 굳어
+        // 있을 수 있다. 이름표로는 뜻이 없으니 폴더 이름으로 내린다. 훅도 같은 기준으로 거른다.
+        if let displayTitle, displayTitle.trimmingCharacters(in: .whitespacesAndNewlines).count >= sessionNameMinLength {
+            return displayTitle
+        }
         return project
     }
     var needsAttention: Bool { attention == true && closed != true }
     var isClosed: Bool { closed == true }
 }
+
+/// 세션 이름표로 받아들일 최소 길이. hook.cjs 의 NAME_MIN 과 같은 값이어야 한다.
+let sessionNameMinLength = 4
 
 struct SessionRegistry: Decodable {
     let sessions: [String: StatePayload]

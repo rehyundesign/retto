@@ -363,3 +363,25 @@ test('the shim ends without an error when no node exists at all', async () => {
   // 아무것도 하지 않고 끝났다는 증거. node 가 돌았다면 여기 기록이 생긴다.
   assert.equal(fs.existsSync(path.join(directory, 'sessions.json')), false);
 });
+
+test('names a session by its first request, not by the replies that follow', async () => {
+  // 세션명이 아직 없을 때 쓰는 대타가 displayTitle 이다. 예전에는 프롬프트가 올 때마다
+  // 덮어써서, 이름표 자리에 방금 친 답("B"·"ㅇㅇ 해결햇어?")이 떴다. 길이로는 못 거른다.
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'reto-hook-'));
+  const hookPath = path.join(directory, 'hook.cjs');
+  fs.copyFileSync(path.join(__dirname, '..', 'hook.cjs'), hookPath);
+  const send = (session_id, prompt) => invoke(hookPath, {
+    hook_event_name: 'UserPromptSubmit', session_id, prompt, cwd: '/tmp/planning'
+  }, 'running');
+
+  await send('first', '세션명 오류를 고쳐줘');
+  await send('first', 'B');
+  await send('first', 'ㅇㅇ 해결햇어?');
+  // 첫 입력이 답이면 이름을 정하지 않는다 — 훅이 대화 도중에 붙은 세션이 그렇다.
+  await send('joined', '재진행');
+  await send('joined', '이제 진짜 긴 요청이다');
+
+  const registry = JSON.parse(fs.readFileSync(path.join(directory, 'sessions.json'), 'utf8'));
+  assert.equal(registry.sessions.first.displayTitle, '세션명 오류를 고쳐줘');
+  assert.equal(registry.sessions.joined.displayTitle, '');
+});
