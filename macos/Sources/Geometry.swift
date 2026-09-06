@@ -27,6 +27,7 @@ enum PetSkin: String, CaseIterable {
     case angelWings
     case bee
     case luna
+    case bunny
     case rilakkuma
 
     var label: String {
@@ -35,6 +36,7 @@ enum PetSkin: String, CaseIterable {
         case .angelWings: return "천사 날개"
         case .bee: return "꿀벌"
         case .luna: return "달 고양이"
+        case .bunny: return "토끼"
         case .rilakkuma: return "리락쿠마"
         }
     }
@@ -46,6 +48,7 @@ enum PetSkin: String, CaseIterable {
         case .angelWings: return "spritesheet-angel"
         case .bee: return "spritesheet-bee"
         case .luna: return "spritesheet-luna"
+        case .bunny: return "spritesheet-bunny"
         case .rilakkuma: return "spritesheet-rilakkuma"
         }
     }
