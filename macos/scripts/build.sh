@@ -8,7 +8,7 @@ APP_ROOT="${PROJECT_DIR:h}"
 ASSETS_DIR="$APP_ROOT/assets"
 BUILD_DIR="$PROJECT_DIR/build"
 DIST_DIR="$APP_ROOT/dist"
-VERSION="0.9.0"
+VERSION="0.10.0"
 APP_NAME="Retto.app"
 # 이름이 두 번 바뀌었다. 0.4.0 까지 "Reto Claude Pet.app", 0.8.0 까지 "Retto Claude Pet.app".
 # 공개하면서 제품명에서 Claude 를 뺐다 — 공식 제품처럼 읽히지 않게.
