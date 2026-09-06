@@ -41,6 +41,10 @@ enum NewsChannel: String, CaseIterable {
 struct ClaudeIntegrationStatus {
     /// settings.json 에 등록된 레토 훅 개수. 0 이면 설치가 안 됐거나 다른 것이 지웠다.
     var registeredEvents: Int = 0
+    /// 그중 0.7.0 까지의 `command` + `args` 모양인 것. 이 모양은 최근 버전만 읽는다 —
+    /// 데스크탑 앱이 CLI 보다 낮은 claude-code 를 쓰면 앱에서만 훅이 돌지 않는다.
+    /// 하나라도 있으면 다시 깔아 `command` 한 줄로 바꿔야 한다.
+    var outdatedEvents: Int = 0
     /// settings.json 을 읽을 수 있었나. JSON 이 깨져 있으면 Claude Code 도 이 파일을 못 읽는다.
     var settingsReadable: Bool = true
     /// 훅을 부르는 실행기(hook.sh)와 본체(hook.cjs)가 제자리에 있나.
@@ -48,21 +52,37 @@ struct ClaudeIntegrationStatus {
     var hookInstalled: Bool = false
     /// hook.sh 가 찾아낼 node. 없으면 훅이 등록돼 있어도 아무 일도 하지 않는다.
     var nodePath: String?
+    /// Codex 설정에 등록된 레토 훅 개수. Claude 쪽 이벤트가 있다고 Codex 훅까지
+    /// 정상이라는 뜻은 아니므로 따로 확인한다.
+    var codexRegisteredEvents: Int = 0
+    var codexSettingsReadable: Bool = true
+    /// 설치기가 hook.cjs 를 마지막으로 복사한 시각. Codex 는 이 뒤에 새 이벤트를
+    /// 한 번 받아야 현재 설치본이 실제로 실행된 것으로 본다.
+    var hookUpdatedAt: Date?
     /// 채널별 마지막 소식 시각.
     var lastNews: [NewsChannel: Date] = [:]
 
+    var hasCurrentCodexNews: Bool {
+        guard let codexNews = lastNews[.codex] else { return false }
+        guard let hookUpdatedAt else { return true }
+        return codexNews >= hookUpdatedAt
+    }
+
     var isHealthy: Bool {
-        registeredEvents > 0 && shimInstalled && hookInstalled && nodePath != nil && !lastNews.isEmpty
+        registeredEvents > 0 && outdatedEvents == 0
+            && shimInstalled && hookInstalled && nodePath != nil && !lastNews.isEmpty
     }
 
     /// 메뉴에 걸 제목. 무엇이 어긋났는지 한 마디로 말한다.
     var menuTitle: String {
-        let base = "Claude 연동 확인"
+        let base = "AI 연동 확인"
         if !settingsReadable { return base + " — 설정 파일 문제" }
         if registeredEvents == 0 { return base + " — 훅 없음" }
+        if outdatedEvents > 0 { return base + " — 훅 갱신 필요" }
         if !shimInstalled || !hookInstalled { return base + " — 훅 파일 없음" }
         if nodePath == nil { return base + " — node 없음" }
         if lastNews.isEmpty { return base + " — 소식 없음" }
+        if codexRegisteredEvents > 0 && !hasCurrentCodexNews { return base + " — Codex 확인 필요" }
         return base
     }
 }
@@ -74,6 +94,10 @@ enum ClaudeIntegration {
 
     static var petDirectoryURL: URL {
         FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent(".claude/retto-pet")
+    }
+
+    static var codexSettingsURL: URL {
+        FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent(".codex/hooks.json")
     }
 
     /// hook.sh 가 훑는 자리와 같은 순서다. 둘이 어긋나면 여기서는 있다고 하는데
@@ -98,19 +122,21 @@ enum ClaudeIntegration {
 
     /// settings.json 안에서 우리 훅이 몇 개인지 센다. 다른 훅의 내용은 해석하지 않는다.
     /// 0.7.0 까지의 `args` 모양과 지금의 `command` 한 줄을 함께 알아본다.
-    static func countRegisteredEvents(in settings: [String: Any]) -> Int {
-        guard let hooks = settings["hooks"] as? [String: Any] else { return 0 }
-        var count = 0
+    static func countRegisteredEvents(in settings: [String: Any]) -> (total: Int, outdated: Int) {
+        guard let hooks = settings["hooks"] as? [String: Any] else { return (0, 0) }
+        var total = 0
+        var outdated = 0
         for (_, value) in hooks {
             guard let groups = value as? [[String: Any]] else { continue }
             for group in groups {
                 guard let handlers = group["hooks"] as? [[String: Any]] else { continue }
                 for handler in handlers where mentionsRetto(handler) {
-                    count += 1
+                    total += 1
+                    if handler["args"] is [Any] { outdated += 1 }
                 }
             }
         }
-        return count
+        return (total, outdated)
     }
 
     private static func mentionsRetto(_ handler: [String: Any]) -> Bool {
@@ -129,14 +155,37 @@ enum ClaudeIntegration {
         return false
     }
 
+    /// Codex용 항목은 같은 hook.sh 를 호출해도 끝 인자가 `codex` 여야 한다.
+    static func countRegisteredCodexEvents(in settings: [String: Any]) -> Int {
+        guard let hooks = settings["hooks"] as? [String: Any] else { return 0 }
+        var total = 0
+        for (_, value) in hooks {
+            guard let groups = value as? [[String: Any]] else { continue }
+            for group in groups {
+                guard let handlers = group["hooks"] as? [[String: Any]] else { continue }
+                for handler in handlers where mentionsRetto(handler) {
+                    guard let command = handler["command"] as? String else { continue }
+                    let parts = command.components(separatedBy: CharacterSet.whitespacesAndNewlines
+                        .union(CharacterSet(charactersIn: "'\"")))
+                    if parts.contains("codex") { total += 1 }
+                }
+            }
+        }
+        return total
+    }
+
     /// 디스크에서 읽어야 아는 것들. 세션이 갱신될 때마다 메뉴 제목을 다시 짓는데,
     /// 작업 중에는 그게 1초에 여러 번이다. 설정 파일과 node 를 그때마다 훑을 이유는 없다.
     private struct DiskProbe {
         var registeredEvents = 0
+        var outdatedEvents = 0
         var settingsReadable = true
         var shimInstalled = false
         var hookInstalled = false
         var nodePath: String?
+        var codexRegisteredEvents = 0
+        var codexSettingsReadable = true
+        var hookUpdatedAt: Date?
     }
 
     private static var cachedProbe: (at: Date, probe: DiskProbe)?
@@ -151,7 +200,9 @@ enum ClaudeIntegration {
 
         if let data = try? Data(contentsOf: settingsURL) {
             if let object = try? JSONSerialization.jsonObject(with: data) as? [String: Any] {
-                probe.registeredEvents = countRegisteredEvents(in: object)
+                let counted = countRegisteredEvents(in: object)
+                probe.registeredEvents = counted.total
+                probe.outdatedEvents = counted.outdated
             } else {
                 probe.settingsReadable = false
             }
@@ -160,8 +211,20 @@ enum ClaudeIntegration {
         }
 
         probe.shimInstalled = manager.isExecutableFile(atPath: petDirectoryURL.appendingPathComponent("hook.sh").path)
-        probe.hookInstalled = manager.fileExists(atPath: petDirectoryURL.appendingPathComponent("hook.cjs").path)
+        let hookURL = petDirectoryURL.appendingPathComponent("hook.cjs")
+        probe.hookInstalled = manager.fileExists(atPath: hookURL.path)
+        probe.hookUpdatedAt = (try? hookURL.resourceValues(forKeys: [.contentModificationDateKey]))?.contentModificationDate
         probe.nodePath = resolveNodePath()
+
+        if let data = try? Data(contentsOf: codexSettingsURL) {
+            if let object = try? JSONSerialization.jsonObject(with: data) as? [String: Any] {
+                probe.codexRegisteredEvents = countRegisteredCodexEvents(in: object)
+            } else {
+                probe.codexSettingsReadable = false
+            }
+        } else if manager.fileExists(atPath: codexSettingsURL.path) {
+            probe.codexSettingsReadable = false
+        }
         cachedProbe = (Date(), probe)
         return probe
     }
@@ -178,10 +241,14 @@ enum ClaudeIntegration {
         let disk = probe(force: fresh)
         var status = ClaudeIntegrationStatus()
         status.registeredEvents = disk.registeredEvents
+        status.outdatedEvents = disk.outdatedEvents
         status.settingsReadable = disk.settingsReadable
         status.shimInstalled = disk.shimInstalled
         status.hookInstalled = disk.hookInstalled
         status.nodePath = disk.nodePath
+        status.codexRegisteredEvents = disk.codexRegisteredEvents
+        status.codexSettingsReadable = disk.codexSettingsReadable
+        status.hookUpdatedAt = disk.hookUpdatedAt
         status.lastNews = lastNews(in: sessions)
         return status
     }

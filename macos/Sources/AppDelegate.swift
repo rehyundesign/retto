@@ -16,6 +16,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     private var codexOpenTargetItem: NSMenuItem!
     private var claudeIntegrationItem: NSMenuItem!
     private var setupWindow: SetupWindow?
+    /// 켤 때 스스로 정리한 것. 설정 창이 이걸 그대로 보여준다.
+    private var tidyNotes: [String] = []
     /// Claude 앱에서 세션까지 따라갈지. 접근성으로 사이드바를 대신 누르는 방식이라,
     /// 앱이 바뀌어 어긋나면 사용자가 여기서 끌 수 있어야 한다.
     private var followsClaudeSession: Bool {
@@ -158,7 +160,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         createMenuBarItem()
         startStateMonitor()
         // 상태 파일을 한 번 읽고 나서 정한다. 곧바로 보면 소식이 있는 사람에게도 창이 뜬다.
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in self?.showSetupIfNeeded() }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
+            self?.tidyLegacyInstall()
+            self?.showSetupIfNeeded()
+        }
         NotificationCenter.default.addObserver(self, selector: #selector(screenConfigurationChanged), name: NSApplication.didChangeScreenParametersNotification, object: nil)
     }
 
@@ -411,7 +416,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
 
         // 훅이 한 번도 돈 적이 없어도 레토 화면은 정상 대기와 똑같다. 고장인지 아닌지
         // 사용자가 스스로 확인할 자리를 둔다. 제목에 상태를 함께 적는다.
-        claudeIntegrationItem = NSMenuItem(title: "Claude 연동 확인", action: #selector(showClaudeIntegration), keyEquivalent: "")
+        claudeIntegrationItem = NSMenuItem(title: "AI 연동 확인", action: #selector(showClaudeIntegration), keyEquivalent: "")
         claudeIntegrationItem.target = self
         menu.addItem(claudeIntegrationItem)
         updateClaudeIntegrationItem()
@@ -926,6 +931,35 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         presentSetup(firstRun: false)
     }
 
+    /// 옛 이름으로 깔린 앱을 걷어내고, 훅이 없거나 옛 형식이면 다시 깐다.
+    ///
+    /// dmg 는 그냥 끌어다 놓는 것이라 설치 스크립트가 없다. 그래서 이 일을 앱이 켤 때 한다.
+    /// 그러지 않으면 두 가지가 남는다 — 고양이가 두 마리 뜨고, 훅은 0.7.0 형식 그대로다.
+    /// 옛 형식(`command` + `args`)은 최근 claude-code 만 읽는데, 데스크탑 앱은 CLI 와 별개로
+    /// 자기 버전을 쓰기 때문에 그 형식으로는 앱에서만 훅이 돌지 않는 일이 생긴다.
+    ///
+    /// 옛 앱의 「레토 제거」를 부르지 않는 이유는 Legacy.swift 에 적어 두었다.
+    private func tidyLegacyInstall() {
+        let moved = removeLegacyApps()
+        if !moved.isEmpty {
+            tidyNotes.append("옛 버전을 휴지통으로 옮겼습니다 — " + moved.joined(separator: " · "))
+        }
+
+        let status = ClaudeIntegration.status(sessions: sessions, fresh: true)
+        let needsHooks = status.registeredEvents == 0 || !status.shimInstalled || !status.hookInstalled
+        let outdated = status.outdatedEvents > 0
+        guard needsHooks || outdated else { return }
+
+        let result = runHookInstaller(arguments: [])
+        ClaudeIntegration.forgetCachedProbe()
+        updateClaudeIntegrationItem()
+        if result.ok {
+            tidyNotes.append(outdated && !needsHooks ? "훅을 새 형식으로 다시 등록했습니다" : "훅을 등록했습니다")
+        } else {
+            tidyNotes.append("훅을 등록하지 못했습니다 — " + (status.nodePath == nil ? "Node.js 가 필요합니다" : "아래 단추로 다시 시도해 주세요"))
+        }
+    }
+
     /// 처음 켠 사람에게만 저절로 띄운다. 이미 소식이 오는 사람에게 설정 창이 뜨면
     /// 잘 돌고 있는데도 무언가 잘못된 줄 안다 — 업데이트로 새로 깐 경우가 그렇다.
     private func showSetupIfNeeded() {
@@ -945,6 +979,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             return
         }
         let window = SetupWindow(firstRun: firstRun) { [weak self] in self?.reinstallHooks() }
+        window.notes = tidyNotes
         setupWindow = window
         window.refresh(status: ClaudeIntegration.status(sessions: sessions, fresh: true),
                        environment: RettoHostEnvironment.detect())

@@ -289,21 +289,26 @@ function updateRegistry(input, fallbackState) {
   registry.sessions = registry.sessions && typeof registry.sessions === 'object' ? registry.sessions : {};
   const previous = registry.sessions[sessionId] || {};
   const liveRestart = isLiveRestart(event, previous, nowMs);
-  const state = liveRestart ? previous.state : eventState(input, fallbackState);
+  // 사용자 확인이 필요한 상태 뒤의 SessionEnd 는 새 상태가 아니라 프로세스가 내려갔다는 뜻이다.
+  // 완료·실패·입력 대기를 닫아 버리면 화면에서 함께 빠진다. 이미 확인한 시각도 유지해야
+  // 다음 폴링에서 안 읽음 알림으로 되살아나지 않는다.
+  const preserveAttention = event === 'SessionEnd' && previous.attention === true;
+  const preservePrevious = liveRestart || preserveAttention;
+  const state = preservePrevious ? previous.state : eventState(input, fallbackState);
   const cwd = text(input.cwd, 500) || previous.cwd || '';
   const prompt = text(input.prompt, 80);
-  const taskSubject = text(input.task_subject || input.subject, 100);
-  const lastAssistantMessage = text(input.last_assistant_message, 400);
-  const error = normalizeError(input.error || input.error_type || input.message
-    || (toolResponseFailed(input.tool_response) ? input.tool_response : ''));
-  const backgroundTaskCount = Array.isArray(input.background_tasks) ? input.background_tasks.length : 0;
   // 이름표에 쓸 프롬프트인가. 기준은 길이가 아니라 **세션의 첫 요청인가** 다.
   // 뒤이어 오는 말은 요청이 아니라 답이고("ㅇㅇ 해결햇어?" 도 8자라 길이로는 안 걸러진다),
   // 그걸 이름으로 쓰면 세션명 자리가 방금 친 말로 계속 바뀐다 — 그게 이 오류였다.
   // 훅이 대화 도중에 붙은 세션은 첫 요청을 못 봤으므로 이름을 정하지 않고 폴더 이름으로 둔다.
   const firstPrompt = event === 'UserPromptSubmit' && !previous.promptedAt;
   const promptName = firstPrompt && prompt.trim().length >= NAME_MIN ? prompt : '';
-  const isClosed = event === 'SessionEnd';
+  const taskSubject = text(input.task_subject || input.subject, 100);
+  const lastAssistantMessage = text(input.last_assistant_message, 400);
+  const error = normalizeError(input.error || input.error_type || input.message
+    || (toolResponseFailed(input.tool_response) ? input.tool_response : ''));
+  const backgroundTaskCount = Array.isArray(input.background_tasks) ? input.background_tasks.length : 0;
+  const isClosed = event === 'SessionEnd' && !preserveAttention;
 
   const transcriptPath = input.transcript_path || input.transcriptPath;
   const sessionTitle = eventSource === 'codex'
@@ -319,9 +324,9 @@ function updateRegistry(input, fallbackState) {
     state,
     // 살아 있는 세션에 프로세스가 다시 붙은 것뿐이면 시각도 그대로 둔다.
     // 시각을 밀면 이미 읽은 완료 알림이 안 읽음으로 되살아난다(읽음 판정이 이 시각을 본다).
-    event: liveRestart ? (previous.event || event) : event,
-    updatedAt: liveRestart ? (previous.updatedAt || now.toISOString()) : now.toISOString(),
-    updatedAtMs: liveRestart ? (previous.updatedAtMs || nowMs) : nowMs,
+    event: preservePrevious ? (previous.event || event) : event,
+    updatedAt: preservePrevious ? (previous.updatedAt || now.toISOString()) : now.toISOString(),
+    updatedAtMs: preservePrevious ? (previous.updatedAtMs || nowMs) : nowMs,
     cwd,
     projectName: basename(cwd),
     // 폴더 이름은 여기 넣지 않는다. 넣으면 그것이 굳어서 나중에 오는 진짜 프롬프트를 막는다.
@@ -339,7 +344,7 @@ function updateRegistry(input, fallbackState) {
       : (liveMessage || lastAssistantMessage || previous.lastAssistantMessage || ''),
     activeTaskSubject: taskSubject || previous.activeTaskSubject || '',
     backgroundTaskCount,
-    attention: liveRestart ? previous.attention === true : attentionFor(state, event),
+    attention: preservePrevious ? previous.attention === true : attentionFor(state, event),
     closed: isClosed,
     client: eventSource === 'codex' ? 'codex' : (detectClient() || previous.client || ''),
     entrypoint: text(process.env.CLAUDE_CODE_ENTRYPOINT, 40) || previous.entrypoint || '',

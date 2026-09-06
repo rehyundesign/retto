@@ -115,6 +115,12 @@ final class SetupWindow: NSObject, NSWindowDelegate {
     private let footer = NSTextField(wrappingLabelWithString: "")
     private let fixButton = NSButton()
     private let nodeButton = NSButton()
+    private let tidyLabel = NSTextField(wrappingLabelWithString: "")
+    /// 앱이 켤 때 스스로 정리한 것. 무엇을 했는지 말하지 않으면 남의 기기에서
+    /// 앱을 휴지통에 넣은 것이 몰래 한 일이 된다.
+    var notes: [String] = [] {
+        didSet { applyNotes() }
+    }
     /// 처음 켜서 저절로 뜬 창만 첫 소식이 오면 스스로 닫는다.
     /// 메뉴로 연 창은 사람이 보러 온 것이므로 마음대로 닫지 않는다.
     private let closesOnFirstNews: Bool
@@ -132,7 +138,7 @@ final class SetupWindow: NSObject, NSWindowDelegate {
         )
         super.init()
 
-        window.title = firstRun ? "레토와 Claude Code 잇기" : "Claude 연동 확인"
+        window.title = firstRun ? "레토와 AI 코딩 도구 잇기" : "AI 연동 확인"
         window.delegate = self
         window.isReleasedWhenClosed = false
         window.center()
@@ -144,6 +150,10 @@ final class SetupWindow: NSObject, NSWindowDelegate {
         guidance.font = NSFont.systemFont(ofSize: 12)
         guidance.textColor = .secondaryLabelColor
         guidance.preferredMaxLayoutWidth = setupWindowWidth - 44
+
+        tidyLabel.font = NSFont.systemFont(ofSize: 12)
+        tidyLabel.preferredMaxLayoutWidth = setupWindowWidth - 44
+        tidyLabel.isHidden = true
 
         footer.font = NSFont.systemFont(ofSize: 11)
         footer.textColor = .tertiaryLabelColor
@@ -163,7 +173,7 @@ final class SetupWindow: NSObject, NSWindowDelegate {
         buttonRow.orientation = .horizontal
         buttonRow.spacing = 8
 
-        let content = NSStackView(views: [rows, guidance, buttonRow, footer])
+        let content = NSStackView(views: [rows, tidyLabel, guidance, buttonRow, footer])
         content.orientation = .vertical
         content.alignment = .leading
         content.spacing = 14
@@ -184,6 +194,12 @@ final class SetupWindow: NSObject, NSWindowDelegate {
         window.contentView = host
     }
 
+    private func applyNotes() {
+        tidyLabel.stringValue = notes.map { "· " + $0 }.joined(separator: "\n")
+        tidyLabel.isHidden = notes.isEmpty
+        window.setContentSize(window.contentView?.fittingSize ?? window.frame.size)
+    }
+
     var isOpen: Bool { !closed && window.isVisible }
 
     func show() {
@@ -199,7 +215,7 @@ final class SetupWindow: NSObject, NSWindowDelegate {
     /// 상태가 바뀔 때마다 부른다. 세션이 갱신될 때와 창을 열 때 모두 여기로 온다.
     func refresh(status: ClaudeIntegrationStatus, environment: RettoHostEnvironment) {
         rows.arrangedSubviews.forEach { $0.removeFromSuperview() }
-        for row in steps(status: status) { rows.addArrangedSubview(view(for: row)) }
+        for row in steps(status: status, environment: environment) { rows.addArrangedSubview(view(for: row)) }
 
         let connected = !status.lastNews.isEmpty
         if connected {
@@ -207,23 +223,28 @@ final class SetupWindow: NSObject, NSWindowDelegate {
                 .sorted { $0.key.label < $1.key.label }
                 .map { "\($0.key.label) · \(elapsedLabel(since: $0.value))" }
                 .joined(separator: "     ")
-            footer.stringValue = "발바닥 메뉴 > 「Claude 연동 확인」에서 언제든 다시 볼 수 있습니다."
+            footer.stringValue = "발바닥 메뉴 > 「AI 연동 확인」에서 언제든 다시 볼 수 있습니다."
         } else {
             guidance.stringValue = environment.whatToTry.map { "· " + $0 }.joined(separator: "\n")
             footer.stringValue = "레토가 첫 소식을 받으면 이 창이 알려줍니다."
         }
 
-        fixButton.isHidden = status.registeredEvents > 0 && status.shimInstalled && status.hookInstalled
+        fixButton.isHidden = status.registeredEvents > 0 && status.outdatedEvents == 0
+            && status.shimInstalled && status.hookInstalled
+            && (!environment.hasCodex || (status.codexSettingsReadable && status.codexRegisteredEvents > 0))
         nodeButton.isHidden = status.nodePath != nil
         window.setContentSize(window.contentView?.fittingSize ?? window.frame.size)
 
-        if connected, closesOnFirstNews, !closed {
+        // Codex 를 함께 쓰는 환경에서는 다른 클라이언트의 소식만으로 창을 닫지 않는다.
+        // 새로 설치한 Codex 훅이 실제로 한 번 실행됐는지 확인해야 한다.
+        let receivedRequiredNews = connected && (!environment.hasCodex || status.hasCurrentCodexNews)
+        if receivedRequiredNews, closesOnFirstNews, !closed {
             // 사람이 읽을 틈은 준다. 곧바로 닫으면 무엇이 지나갔는지 알 수 없다.
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) { [weak self] in self?.close() }
         }
     }
 
-    private func steps(status: ClaudeIntegrationStatus) -> [StepRow] {
+    private func steps(status: ClaudeIntegrationStatus, environment: RettoHostEnvironment) -> [StepRow] {
         var list: [StepRow] = []
 
         if !status.settingsReadable {
@@ -233,12 +254,27 @@ final class SetupWindow: NSObject, NSWindowDelegate {
             list.append(StepRow(mark: .warn, title: "훅 연결", detail: "아직 등록되지 않았습니다"))
         } else if !status.shimInstalled || !status.hookInstalled {
             list.append(StepRow(mark: .warn, title: "훅 연결", detail: "등록은 됐는데 훅 파일이 없습니다"))
+        } else if status.outdatedEvents > 0 {
+            list.append(StepRow(mark: .warn, title: "훅 연결",
+                                detail: "\(status.outdatedEvents)개가 옛 형식입니다 — 다시 등록해야 합니다"))
         } else {
             list.append(StepRow(mark: .ok, title: "훅 연결", detail: "\(status.registeredEvents)개 이벤트"))
         }
 
         list.append(status.nodePath.map { StepRow(mark: .ok, title: "node", detail: $0) }
             ?? StepRow(mark: .warn, title: "node", detail: "찾지 못했습니다 — 훅이 이걸로 돕니다"))
+
+        if environment.hasCodex {
+            if !status.codexSettingsReadable {
+                list.append(StepRow(mark: .warn, title: "Codex 훅", detail: "설정 파일을 읽지 못했습니다"))
+            } else if status.codexRegisteredEvents == 0 {
+                list.append(StepRow(mark: .warn, title: "Codex 훅", detail: "등록되지 않았습니다 — 훅을 다시 설치해 주세요"))
+            } else if status.hasCurrentCodexNews, let date = status.lastNews[.codex] {
+                list.append(StepRow(mark: .ok, title: "Codex", detail: "실시간 이벤트 확인 · \(elapsedLabel(since: date))"))
+            } else {
+                list.append(StepRow(mark: .waiting, title: "Codex 확인", detail: "새 task에서 메시지를 한 번 보내 실시간 이벤트를 확인해 주세요"))
+            }
+        }
 
         list.append(status.lastNews.isEmpty
             ? StepRow(mark: .waiting, title: "첫 소식", detail: "기다리는 중…")

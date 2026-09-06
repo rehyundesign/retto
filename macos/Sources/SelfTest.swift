@@ -151,6 +151,15 @@ func runSelfTest() -> Int32 {
         ]]],
         "PreToolUse": [["hooks": [["type": "command", "command": "/Users/x/.claude/reto-pet/hook.cjs"]]]]
     ]]
+    let codexHookFixture: [String: Any] = ["hooks": [
+        "SessionStart": [["hooks": [
+            ["type": "command", "command": "'/Users/x/.claude/retto-pet/hook.sh' 'idle' 'codex'"]
+        ]]],
+        "Stop": [["hooks": [
+            ["type": "command", "command": "'/Users/x/.claude/retto-pet/hook.sh' 'waving' 'codex'"],
+            ["type": "command", "command": "'/Users/x/.claude/retto-pet/hook.sh' 'waving'"]
+        ]]]
+    ]]
     let newsFixture = [
         "{\"state\":\"running\",\"sessionId\":\"a\",\"client\":\"vscode\",\"updatedAtMs\":1000}",
         "{\"state\":\"idle\",\"sessionId\":\"b\",\"client\":\"vscode\",\"updatedAtMs\":5000}",
@@ -166,8 +175,22 @@ func runSelfTest() -> Int32 {
     quiet.registeredEvents = 17
     var healthy = quiet
     healthy.lastNews = [.vscode: Date()]
-    let integrationOK = ClaudeIntegration.countRegisteredEvents(in: hookFixture) == 3
-        && ClaudeIntegration.countRegisteredEvents(in: ["hooks": [String: Any]()]) == 0
+    var outdated = quiet
+    outdated.outdatedEvents = 1
+    let countedHooks = ClaudeIntegration.countRegisteredEvents(in: hookFixture)
+    let emptyHooks = ClaudeIntegration.countRegisteredEvents(in: ["hooks": [String: Any]()])
+    let countedCodexHooks = ClaudeIntegration.countRegisteredCodexEvents(in: codexHookFixture)
+    var currentCodex = healthy
+    currentCodex.codexRegisteredEvents = 9
+    currentCodex.lastNews = [.codex: Date(timeIntervalSinceNow: -5)]
+    currentCodex.hookUpdatedAt = Date(timeIntervalSinceNow: -10)
+    var staleCodex = currentCodex
+    staleCodex.hookUpdatedAt = Date()
+    let integrationOK = countedHooks.total == 3
+        && countedHooks.outdated == 1
+        && emptyHooks.total == 0
+        && emptyHooks.outdated == 0
+        && countedCodexHooks == 2
         && NewsChannel.of(client: "claude", source: nil) == .claudeApp
         && NewsChannel.of(client: "cli", source: nil) == .cli
         && NewsChannel.of(client: "vscode", source: "codex") == .codex
@@ -176,10 +199,13 @@ func runSelfTest() -> Int32 {
         && news.count == 2
         && news[.vscode] == Date(timeIntervalSince1970: 5)
         && news[.claudeApp] == nil
-        && missingHooks.menuTitle == "Claude 연동 확인 — 훅 없음"
-        && quiet.menuTitle == "Claude 연동 확인 — 소식 없음"
-        && healthy.menuTitle == "Claude 연동 확인"
-        && healthy.isHealthy && !quiet.isHealthy
+        && missingHooks.menuTitle == "AI 연동 확인 — 훅 없음"
+        && quiet.menuTitle == "AI 연동 확인 — 소식 없음"
+        && outdated.menuTitle == "AI 연동 확인 — 훅 갱신 필요"
+        && healthy.menuTitle == "AI 연동 확인"
+        && healthy.isHealthy && !quiet.isHealthy && !outdated.isHealthy
+        && currentCodex.hasCurrentCodexNews && !staleCodex.hasCurrentCodexNews
+        && staleCodex.menuTitle == "AI 연동 확인 — Codex 확인 필요"
         && elapsedLabel(since: Date(timeIntervalSinceNow: -30)) == "방금"
         && elapsedLabel(since: Date(timeIntervalSinceNow: -180)) == "3분 전"
         && elapsedLabel(since: Date(timeIntervalSinceNow: -7200)) == "2시간 전"
@@ -215,6 +241,15 @@ func runSelfTest() -> Int32 {
         // 눌러야 하는 줄 알고 멀쩡한 설정을 다시 쓴다.
         && setupButtons(for: blank) == []
         && setupButtons(for: broken) == ["훅 지금 붙이기", "Node.js 받기"]
+    // 옛 앱 정리. 자기 자신을 옛 것으로 보면 켜자마자 자기를 종료하고 휴지통에 넣는다 —
+    // 이름이나 번들 ID 를 또 바꿀 때 여기서 걸려야 한다.
+    let legacyOK = !legacyAppNames.contains(Bundle.main.bundleURL.lastPathComponent)
+        && !legacyBundleIdentifiers.contains(Bundle.main.bundleIdentifier ?? "")
+        && legacyAppNames.allSatisfy { $0.hasSuffix(".app") }
+        && legacyBundleIdentifiers.allSatisfy { $0.hasPrefix("com.luxia.") }
+        // 지금 이름이 옛 목록에 없다는 것만으로는 부족하다. 옛 이름 둘을 실제로 들고 있어야
+        // 0.7.0 을 쓰던 사람의 앱이 걷힌다.
+        && legacyAppNames.count == 2 && legacyBundleIdentifiers.count == 2
     let scalesOK = supportedScales.first == 0.39 && supportedScales.last == 1.4
     // 배율 1에서는 예전 창 크기를 그대로 유지한다.
     let baseline = petLayout(scale: 1)
@@ -370,6 +405,19 @@ func runSelfTest() -> Int32 {
         && deepestAncestor("/b/other") == nil
     let registryFixture = "{\"sessions\":{\"one\":{\"state\":\"running\",\"sessionId\":\"one\",\"displayTitle\":\"A\"},\"two\":{\"state\":\"waiting\",\"sessionId\":\"two\",\"displayTitle\":\"B\"}}}".data(using: .utf8)!
     let registryOK = (try? JSONDecoder().decode(SessionRegistry.self, from: registryFixture).sessions.count) == 2
+    // 이름표 우선순위: 세션명 > 작업 주제 > 쓸 만한 길이의 프롬프트 > 폴더 이름.
+    // ⚠️ 짧은 답("B"·"재진행")은 이름이 아니다. 훅이 대화 도중 붙으면 그 답이 displayTitle 로
+    // 굳는데, 그대로 띄우면 세션명 자리에 내가 친 답이 뜬다. 실제로 그렇게 났다.
+    func titleOf(_ json: String) -> String {
+        guard let d = json.data(using: .utf8),
+              let p = try? JSONDecoder().decode(StatePayload.self, from: d) else { return "" }
+        return p.title
+    }
+    let titleOK = titleOf("{\"state\":\"running\",\"sessionTitle\":\"서치서울 문서\",\"displayTitle\":\"아주 긴 프롬프트입니다\",\"projectName\":\"planning\"}") == "서치서울 문서"
+        && titleOf("{\"state\":\"running\",\"activeTaskSubject\":\"토큰 정리\",\"displayTitle\":\"아주 긴 프롬프트입니다\",\"projectName\":\"planning\"}") == "토큰 정리"
+        && titleOf("{\"state\":\"running\",\"displayTitle\":\"아주 긴 프롬프트입니다\",\"projectName\":\"planning\"}") == "아주 긴 프롬프트입니다"
+        && titleOf("{\"state\":\"running\",\"displayTitle\":\"B\",\"projectName\":\"planning\"}") == "planning"
+        && titleOf("{\"state\":\"running\",\"displayTitle\":\"재진행\",\"projectName\":\"planning\"}") == "planning"
     // 레토를 누르지 않고 직접 세션에 들어가 읽은 경우를 접근 시각으로 잡아내는지.
     let viewedOK = wasViewedElsewhere(accessedAtMs: 10_000, updatedAtMs: 5_000)
         && !wasViewedElsewhere(accessedAtMs: 6_000, updatedAtMs: 5_000)   // 2초 여유 안쪽은 훅이 읽은 것
@@ -396,19 +444,6 @@ func runSelfTest() -> Int32 {
                         transcriptModifiedAtMs: 2_000, nowMs: 2_000 + staleWorkingTimeout * 1000 + 1) == .idle
 
     // 깔려 있지 않은 앱으로 보내지 않는지.
-    // 이름표 우선순위: 세션명 > 작업 주제 > 쓸 만한 길이의 프롬프트 > 폴더 이름.
-    // ⚠️ 짧은 답("B"·"재진행")은 이름이 아니다. 훅이 대화 도중 붙으면 그 답이 displayTitle 로
-    // 굳는데, 그대로 띄우면 세션명 자리에 내가 친 답이 뜬다. 실제로 그렇게 났다.
-    func titleOf(_ json: String) -> String {
-        guard let d = json.data(using: .utf8),
-              let p = try? JSONDecoder().decode(StatePayload.self, from: d) else { return "" }
-        return p.title
-    }
-    let titleOK = titleOf("{\"state\":\"running\",\"sessionTitle\":\"서치서울 문서\",\"displayTitle\":\"아주 긴 프롬프트입니다\",\"projectName\":\"planning\"}") == "서치서울 문서"
-        && titleOf("{\"state\":\"running\",\"activeTaskSubject\":\"토큰 정리\",\"displayTitle\":\"아주 긴 프롬프트입니다\",\"projectName\":\"planning\"}") == "토큰 정리"
-        && titleOf("{\"state\":\"running\",\"displayTitle\":\"아주 긴 프롬프트입니다\",\"projectName\":\"planning\"}") == "아주 긴 프롬프트입니다"
-        && titleOf("{\"state\":\"running\",\"displayTitle\":\"B\",\"projectName\":\"planning\"}") == "planning"
-        && titleOf("{\"state\":\"running\",\"displayTitle\":\"재진행\",\"projectName\":\"planning\"}") == "planning"
     let fallbackOK = installedOpenApp(preferred: .vscode) { $0 == .claude } == .claude
         && installedOpenApp(preferred: .claude) { $0 == .vscode } == .vscode
         && installedOpenApp(preferred: .codex) { $0 == .claude } == .claude
@@ -464,8 +499,8 @@ func runSelfTest() -> Int32 {
         && !claudeRowMatchesSession(rowLabel: "", sessionTitle: "흠냐링")
         && !claudeRowMatchesSession(rowLabel: "입력 대기 중 흠냐링", sessionTitle: "")
 
-    let ok = claudeRowOK && fallbackOK && cornerOK && lookingOK && sleepRowOK && displayOK && dozeOK && sleepOK && ancientOK && viewedOK && haloOK && assetOK && skinsOK && dragRunOK && behaviorsOK && statesOK && deepLinkOK && clientRoutingOK && codexMenuOK && integrationOK && setupOK && transcriptShapesOK && scalesOK && baselineOK && decoupledOK && fontOK && priorityOK && registryOK && titleOK && badgeLayoutOK && clickRoutingOK && gazeStatesOK && expandOK && lineBudgetOK && typefaceOK && textDeltaOK && tonesOK && folderFoldOK && labelOK && doneStaysOK && bubbleShapeOK && seenOK && staleOK
-    print("{\"ok\":\(ok),\"asset\":\"\(Int(image.size.width))x\(Int(image.size.height))\",\"skins\":\(PetSkin.allCases.count),\"skinsOK\":\(skinsOK),\"dragRun\":\(dragRunOK),\"canJoinAllSpaces\":\(behaviorsOK),\"states\":\(animationCatalog.count),\"deepLink\":\(deepLinkOK),\"clientRouting\":\(clientRoutingOK),\"codexMenu\":\(codexMenuOK),\"integration\":\(integrationOK),\"setup\":\(setupOK),\"transcriptShapes\":\(transcriptShapesOK),\"sizePresets\":\(supportedScales.count),\"baselineLayout\":\(baselineOK),\"scaleDecoupled\":\(decoupledOK),\"badgePlacement\":\(badgeLayoutOK),\"ribbonExpand\":\(expandOK),\"lineBudget\":\(lineBudgetOK),\"typefaces\":\(PetTypeface.allCases.count),\"typefaceOK\":\(typefaceOK),\"textDelta\":\(textDeltaOK),\"tones\":\(tonesOK),\"folderFold\":\(folderFoldOK),\"doneStays\":\(doneStaysOK),\"bubbleShape\":\(bubbleShapeOK),\"seenRule\":\(seenOK),\"staleWorking\":\(staleOK),\"headroomClean\":\(haloOK),\"viewedElsewhere\":\(viewedOK),\"ancientNews\":\(ancientOK),\"sleeps\":\(sleepOK),\"sleepRow\":\(sleepRow),\"dozes\":\(dozeOK),\"displayState\":\(displayOK),\"seenByLooking\":\(lookingOK),\"corners\":\(cornerOK),\"appFallback\":\(fallbackOK),\"haloRows\":\(halo.rows),\"haloDeepest\":\(halo.deepest),\"haloFaint\":\(haloFaintPixels),\"claudeRow\":\(claudeRowOK),\"font\":\"\(rettoHandwritingFontName)\",\"fontLoaded\":\(fontOK),\"multiSession\":\(registryOK),\"sessionTitleFallback\":\(titleOK),\"prioritySelection\":\(priorityOK),\"badgeLayout\":\(badgeLayoutOK),\"clickRouting\":\(clickRoutingOK)}")
+    let ok = claudeRowOK && fallbackOK && cornerOK && lookingOK && sleepRowOK && displayOK && dozeOK && sleepOK && ancientOK && viewedOK && haloOK && assetOK && skinsOK && dragRunOK && behaviorsOK && statesOK && deepLinkOK && clientRoutingOK && codexMenuOK && integrationOK && setupOK && legacyOK && transcriptShapesOK && scalesOK && baselineOK && decoupledOK && fontOK && priorityOK && registryOK && titleOK && badgeLayoutOK && clickRoutingOK && gazeStatesOK && expandOK && lineBudgetOK && typefaceOK && textDeltaOK && tonesOK && folderFoldOK && labelOK && doneStaysOK && bubbleShapeOK && seenOK && staleOK
+    print("{\"ok\":\(ok),\"asset\":\"\(Int(image.size.width))x\(Int(image.size.height))\",\"skins\":\(PetSkin.allCases.count),\"skinsOK\":\(skinsOK),\"dragRun\":\(dragRunOK),\"canJoinAllSpaces\":\(behaviorsOK),\"states\":\(animationCatalog.count),\"deepLink\":\(deepLinkOK),\"clientRouting\":\(clientRoutingOK),\"codexMenu\":\(codexMenuOK),\"integration\":\(integrationOK),\"setup\":\(setupOK),\"legacy\":\(legacyOK),\"transcriptShapes\":\(transcriptShapesOK),\"sizePresets\":\(supportedScales.count),\"baselineLayout\":\(baselineOK),\"scaleDecoupled\":\(decoupledOK),\"badgePlacement\":\(badgeLayoutOK),\"ribbonExpand\":\(expandOK),\"lineBudget\":\(lineBudgetOK),\"typefaces\":\(PetTypeface.allCases.count),\"typefaceOK\":\(typefaceOK),\"textDelta\":\(textDeltaOK),\"tones\":\(tonesOK),\"folderFold\":\(folderFoldOK),\"doneStays\":\(doneStaysOK),\"bubbleShape\":\(bubbleShapeOK),\"seenRule\":\(seenOK),\"staleWorking\":\(staleOK),\"headroomClean\":\(haloOK),\"viewedElsewhere\":\(viewedOK),\"ancientNews\":\(ancientOK),\"sleeps\":\(sleepOK),\"sleepRow\":\(sleepRow),\"dozes\":\(dozeOK),\"displayState\":\(displayOK),\"seenByLooking\":\(lookingOK),\"corners\":\(cornerOK),\"appFallback\":\(fallbackOK),\"haloRows\":\(halo.rows),\"haloDeepest\":\(halo.deepest),\"haloFaint\":\(haloFaintPixels),\"claudeRow\":\(claudeRowOK),\"font\":\"\(rettoHandwritingFontName)\",\"fontLoaded\":\(fontOK),\"multiSession\":\(registryOK),\"sessionTitleFallback\":\(titleOK),\"prioritySelection\":\(priorityOK),\"badgeLayout\":\(badgeLayoutOK),\"clickRouting\":\(clickRoutingOK)}")
     return ok ? 0 : 1
 }
 

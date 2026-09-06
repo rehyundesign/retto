@@ -173,6 +173,43 @@ test('a restart right after Stop keeps the completion notice', async () => {
   assert.equal(after.attention, true);
 });
 
+test('ending right after Stop keeps the completion notice until it is seen', async () => {
+  const directory = freshHook('retto-hook-end-done-');
+  const hookPath = path.join(directory, 'hook.cjs');
+
+  await invoke(hookPath, { hook_event_name: 'UserPromptSubmit', session_id: 's', prompt: '해줘' }, 'running', DESKTOP);
+  await invoke(hookPath, { hook_event_name: 'Stop', session_id: 's' }, 'waving', DESKTOP);
+  const completed = registry(directory).s;
+  await invoke(hookPath, { hook_event_name: 'SessionEnd', session_id: 's' }, 'idle', DESKTOP);
+
+  const after = registry(directory).s;
+  assert.equal(after.state, 'waving');
+  assert.equal(after.attention, true);
+  assert.equal(after.closed, false);
+  assert.equal(after.updatedAtMs, completed.updatedAtMs);
+});
+
+test('ending after a failure or input request keeps the attention state', async () => {
+  for (const [event, fallback, expected] of [
+    ['StopFailure', 'failed', 'failed'],
+    ['PermissionRequest', 'waiting', 'waiting']
+  ]) {
+    const directory = freshHook(`retto-hook-end-${expected}-`);
+    const hookPath = path.join(directory, 'hook.cjs');
+
+    await invoke(hookPath, { hook_event_name: 'UserPromptSubmit', session_id: 's', prompt: '해줘' }, 'running', DESKTOP);
+    await invoke(hookPath, { hook_event_name: event, session_id: 's' }, fallback, DESKTOP);
+    const attention = registry(directory).s;
+    await invoke(hookPath, { hook_event_name: 'SessionEnd', session_id: 's' }, 'idle', DESKTOP);
+
+    const after = registry(directory).s;
+    assert.equal(after.state, expected);
+    assert.equal(after.attention, true);
+    assert.equal(after.closed, false);
+    assert.equal(after.updatedAtMs, attention.updatedAtMs);
+  }
+});
+
 /// 오래 쉰 세션을 진짜로 되살린 것은 반겨야 한다. 유예를 통째로 무시하면 그게 사라진다.
 test('a restart on a long-quiet session still greets', async () => {
   const directory = freshHook('reto-hook-restart-old-');
