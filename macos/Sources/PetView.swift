@@ -9,6 +9,9 @@ final class RettoView: NSView {
     var spriteSheet: NSImage {
         didSet { needsDisplay = true }
     }
+    private var spriteLayout: SpriteSheetLayout {
+        SpriteSheetLayout.forImage(size: spriteSheet.size) ?? .retto
+    }
     private let onOpenClaude: (StatePayload?, Bool) -> Void
     private let onOpenAttention: (NSPoint) -> Void
     private var payload: StatePayload?
@@ -447,14 +450,16 @@ final class RettoView: NSView {
             row = direction < 8 ? 9 : 10
             column = direction < 8 ? direction : direction - 8
         } else {
-            row = animation.row
+            // v2 개인 스킨은 11행이라 레토 전용 잠자기 행이 없다. idle 자세에 호흡 효과를
+            // 더해 잠든 모습을 유지한다. 나머지 상태와 시선 행은 같은 순서다.
+            row = visibleState == .sleeping && spriteLayout.rows == 11 ? 0 : animation.row
             column = frameIndex
         }
         let sourceRect = NSRect(
-            x: CGFloat(column) * cellWidth,
-            y: sheetHeight - CGFloat(row + 1) * cellHeight,
-            width: cellWidth,
-            height: cellHeight
+            x: CGFloat(column) * spriteLayout.cellWidth,
+            y: spriteLayout.sheetHeight - CGFloat(row + 1) * spriteLayout.cellHeight,
+            width: spriteLayout.cellWidth,
+            height: spriteLayout.cellHeight
         )
 
         // 발밑 바닥 그림자. 예전에는 실루엣 드롭 섀도(blur 16)를 썼는데, 흐림이 사방으로
@@ -909,6 +914,9 @@ final class StateMonitor {
     private var lastSessions: [StatePayload] = []
     private var lastTranscriptStamps: [String: Double] = [:]
     private var lastCodexIndexStamp: Double?
+    /// 훅이 꺼진 Codex task도 롤아웃 파일은 계속 자란다. 인덱스만 보면 같은 task 안의
+    /// 새 요청·완료를 놓치므로, 낮은 빈도로 목록을 다시 만들 기회를 준다.
+    private var lastCodexRolloutRefresh = Date.distantPast
     private let onChange: ([StatePayload]) -> Void
 
     init(registryURL: URL, fallbackStateURL: URL, onChange: @escaping ([StatePayload]) -> Void) {
@@ -947,14 +955,23 @@ final class StateMonitor {
                 lastData = nil
                 onChange([])
             }
+            let codexIndexStamp = codexThreadIndexStamp()
+            let needsCodexRefresh = Date().timeIntervalSince(lastCodexRolloutRefresh) >= 3
+            if codexIndexStamp != lastCodexIndexStamp || needsCodexRefresh {
+                lastCodexIndexStamp = codexIndexStamp
+                lastCodexRolloutRefresh = Date()
+                onChange([])
+            }
             return
         }
         if data == lastData {
             let stamps = transcriptStamps(in: lastSessions)
             let codexIndexStamp = codexThreadIndexStamp()
-            guard stamps != lastTranscriptStamps || codexIndexStamp != lastCodexIndexStamp else { return }
+            let needsCodexRefresh = Date().timeIntervalSince(lastCodexRolloutRefresh) >= 3
+            guard stamps != lastTranscriptStamps || codexIndexStamp != lastCodexIndexStamp || needsCodexRefresh else { return }
             lastTranscriptStamps = stamps
             lastCodexIndexStamp = codexIndexStamp
+            lastCodexRolloutRefresh = Date()
             onChange(lastSessions)
             return
         }
@@ -966,22 +983,26 @@ final class StateMonitor {
             lastSessions = Array(registry.sessions.values)
             lastTranscriptStamps = transcriptStamps(in: lastSessions)
             lastCodexIndexStamp = codexThreadIndexStamp()
+            lastCodexRolloutRefresh = Date()
             onChange(lastSessions)
         } else if let payload = try? JSONDecoder().decode(StatePayload.self, from: data) {
             lastData = data
             lastSessions = [payload]
             lastTranscriptStamps = transcriptStamps(in: lastSessions)
             lastCodexIndexStamp = codexThreadIndexStamp()
+            lastCodexRolloutRefresh = Date()
             onChange(lastSessions)
         }
     }
 
     private func transcriptStamps(in sessions: [StatePayload]) -> [String: Double] {
-        Dictionary(uniqueKeysWithValues: sessions.compactMap { payload in
+        var stamps: [String: Double] = [:]
+        for payload in sessions {
             guard let path = payload.transcriptPath,
-                  let modified = transcriptModifiedAtMs(path: path) else { return nil }
-            return (path, modified)
-        })
+                  let modified = transcriptModifiedAtMs(path: path) else { continue }
+            stamps[path] = max(stamps[path] ?? 0, modified)
+        }
+        return stamps
     }
 
     private func codexThreadIndexStamp() -> Double? {

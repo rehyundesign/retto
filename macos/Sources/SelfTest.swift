@@ -83,14 +83,16 @@ func runSelfTest() -> Int32 {
         fputs("{\"ok\":false,\"error\":\"missing spritesheet\"}\n", stderr)
         return 1
     }
-    let assetOK = Int(image.size.width) == Int(sheetWidth) && Int(image.size.height) == Int(sheetHeight)
-    // 스킨 아틀라스는 기본과 칸 규격이 같아야 한다. 크기가 다르면 그리는 자리가 통째로 어긋난다.
+    let assetOK = SpriteSheetLayout.forImage(size: image.size) == .retto
+    // 기본 스킨은 레토 규격이고, 개인 스킨은 Codex v2 규격도 쓸 수 있다.
     // 번들에 없는 스킨은 앱이 기본으로 물러나므로 통과로 본다.
     let skinsOK = PetSkin.allCases.allSatisfy { skin in
         guard let url = Bundle.main.url(forResource: skin.resourceName, withExtension: "webp"),
               let sheet = NSImage(contentsOf: url) else { return skin != .classic }
-        return Int(sheet.size.width) == Int(sheetWidth) && Int(sheet.size.height) == Int(sheetHeight)
+        return SpriteSheetLayout.forImage(size: sheet.size) != nil
     }
+    let personalV2LayoutOK = SpriteSheetLayout.forImage(size: NSSize(width: 1536, height: 2288)) == .codexV2
+        && SpriteSheetLayout.codexV2.rows == 11
     // 자는 행이 실제로 아틀라스에 있는지. 행을 새로 붙였는데 sheetHeight 를 안 고치면
     // 엉뚱한 자리를 그린다.
     let sleepRow = animationCatalog[.sleeping]?.row ?? -1
@@ -135,16 +137,47 @@ func runSelfTest() -> Int32 {
         "{\"type\":\"event_msg\",\"payload\":{\"type\":\"task_complete\"},\"timestamp\":\"2026-09-02T05:32:30.178Z\"}"
     ].joined(separator: "\n")) == 1_788_327_150_178
         && codexTaskCompletionAtMs(in: "{\"type\":\"event_msg\",\"payload\":{\"type\":\"task_complete\"},\"timestamp\":\"2026-09-02T05:32:30Z\"}") == 1_788_327_150_000
+    let completedTranscriptStatus = codexTranscriptStatus(in: [
+        "{\"type\":\"response_item\",\"payload\":{\"type\":\"message\",\"role\":\"user\"},\"timestamp\":\"2026-09-02T05:31:00Z\"}",
+        "{\"type\":\"event_msg\",\"payload\":{\"type\":\"task_complete\"},\"timestamp\":\"2026-09-02T05:32:30Z\"}"
+    ].joined(separator: "\n"))
+    let restartedTranscriptStatus = codexTranscriptStatus(in: [
+        "{\"type\":\"event_msg\",\"payload\":{\"type\":\"task_complete\"},\"timestamp\":\"2026-09-02T05:32:30Z\"}",
+        "{\"type\":\"response_item\",\"payload\":{\"type\":\"message\",\"role\":\"user\"},\"timestamp\":\"2026-09-02T05:33:00Z\"}"
+    ].joined(separator: "\n"))
+    let codexTranscriptOrderingOK = completedTranscriptStatus.isCompletedAfterLatestPrompt
+        && !restartedTranscriptStatus.isCompletedAfterLatestPrompt
+    let discoveredCodexTask = StatePayload(
+        state: PetState.waving.rawValue, updatedAt: nil, event: "task_complete",
+        sessionId: "codex:thread-one", rawSessionId: "thread-one", source: "codex", cwd: "/tmp/project",
+        toolName: nil, notificationType: nil, error: nil, projectName: nil, displayTitle: nil,
+        sessionTitle: "훅 없이 찾은 task", transcriptPath: "/tmp/rollout.jsonl", lastAssistantMessage: nil,
+        activeTaskSubject: nil, backgroundTaskCount: nil, attention: true, closed: false,
+        updatedAtMs: 2000, stateSource: "rollout", client: "codex"
+    )
+    let rolloutDiscoveryPayloadOK = discoveredCodexTask.sourceLabel == "Codex"
+        && discoveredCodexTask.navigationSessionId == "thread-one"
+        && discoveredCodexTask.needsAttention
+        && sessionMenuLabel(for: discoveredCodexTask) == "● 완료  훅 없이 찾은 task · project · Codex"
+    let unnamedPayload = StatePayload(
+        state: PetState.running.rawValue, updatedAt: nil, event: nil,
+        sessionId: "unnamed", rawSessionId: nil, source: "claude", cwd: "/tmp/project",
+        toolName: nil, notificationType: nil, error: nil, projectName: nil,
+        displayTitle: "사용자가 입력한 프롬프트", sessionTitle: nil, transcriptPath: nil,
+        lastAssistantMessage: nil, activeTaskSubject: "진행 중 작업", backgroundTaskCount: nil,
+        attention: nil, closed: false, updatedAtMs: nil, stateSource: nil, client: "cli"
+    )
+    let unnamedTitleOK = unnamedPayload.title == "No name"
     let runningCodexPayload = try! JSONDecoder().decode(StatePayload.self, from: "{\"state\":\"running\",\"sessionId\":\"thread-one\",\"source\":\"codex\",\"sessionTitle\":\"예전 제목\",\"updatedAtMs\":1000}".data(using: .utf8)!)
     let completedCodexTask = reconcileCodexTask(
         payload: runningCodexPayload,
         indexTitle: "완료된 task의 현재 제목",
-        completedAtMs: 2000
+        transcriptStatus: CodexTranscriptStatus(completedAtMs: 2000, latestPromptAtMs: 1000)
     )
     let restartedCodexTask = reconcileCodexTask(
         payload: runningCodexPayload,
         indexTitle: "새 요청의 제목",
-        completedAtMs: 999
+        transcriptStatus: CodexTranscriptStatus(completedAtMs: 999, latestPromptAtMs: 1000)
     )
     let codexStateReconciliationOK = completedCodexTask.state == .waving
         && completedCodexTask.observedAtMs == 2000
@@ -153,6 +186,7 @@ func runSelfTest() -> Int32 {
         && completedCodexTask.source == .rollout
         && restartedCodexTask.state == .running
         && restartedCodexTask.source == .hook
+        && codexTranscriptOrderingOK
 
     let clientRoutingOK = openApp(forClient: "claude") == .claude
         && openApp(forClient: "vscode") == .vscode
@@ -163,11 +197,11 @@ func runSelfTest() -> Int32 {
     // 창을 먼저 앞으로 보내는 단계는 VS Code 에만 있다. Claude 앱에서 이걸 켜면 딥링크가 영영 안 나간다.
         && OpenApp.vscode.needsWindowFocusFirst && !OpenApp.claude.needsWindowFocusFirst && !OpenApp.codex.needsWindowFocusFirst
         && OpenTarget.allCases.map(\.rawValue) == ["auto", "vscode", "claude"]
-    let codexMenuOK = aiSessionOpenMenuTitle == "AI 세션 열 곳"
+    let codexMenuOK = aiSessionOpenMenuTitle == "기본 열기 방식"
         && emptyClaudeSessionLabel == "Claude · 실행 중인 세션 없음"
         && emptyCodexSessionLabel == "Codex · 실행 중인 task 없음"
-        && codexOpenTargetMenuLabel(isRegistered: true) == "Codex task → Codex 앱 · 자동"
-        && codexOpenTargetMenuLabel(isRegistered: false) == "Codex task → Codex 앱 · 훅 확인 필요"
+        && codexOpenTargetMenuLabel(isRegistered: true) == "Codex 연결 확인 · 실시간 연결됨"
+        && codexOpenTargetMenuLabel(isRegistered: false) == "Codex 연결 확인 · 기본 표시 중"
     // 연동 확인이 실제로 셋을 가려내는지. 이게 틀리면 "정상" 이라고 말해 놓고 아무 소식도 안 온다.
     // 훅 세는 규칙은 지금의 command 한 줄과 0.7.0 까지의 command+args 를 함께 알아봐야 한다 —
     // 갱신 전에 열어 본 사람에게 "훅 없음" 이라고 말하면 안 된다.
@@ -481,7 +515,7 @@ func runSelfTest() -> Int32 {
         && !claudeRowMatchesSession(rowLabel: "", sessionTitle: "흠냐링")
         && !claudeRowMatchesSession(rowLabel: "입력 대기 중 흠냐링", sessionTitle: "")
 
-    let ok = claudeRowOK && fallbackOK && cornerOK && lookingOK && sleepRowOK && displayOK && dozeOK && sleepOK && ancientOK && viewedOK && haloOK && assetOK && skinsOK && dragRunOK && behaviorsOK && statesOK && deepLinkOK && clientRoutingOK && codexMenuOK && integrationOK && setupOK && transcriptShapesOK && codexTitleRefreshOK && codexCompletionRefreshOK && codexStateReconciliationOK && scalesOK && baselineOK && decoupledOK && fontOK && priorityOK && registryOK && badgeLayoutOK && clickRoutingOK && gazeStatesOK && expandOK && lineBudgetOK && typefaceOK && textDeltaOK && tonesOK && folderFoldOK && labelOK && doneStaysOK && bubbleShapeOK && seenOK && staleOK
+    let ok = claudeRowOK && fallbackOK && cornerOK && lookingOK && sleepRowOK && displayOK && dozeOK && sleepOK && ancientOK && viewedOK && haloOK && assetOK && skinsOK && personalV2LayoutOK && dragRunOK && behaviorsOK && statesOK && deepLinkOK && clientRoutingOK && codexMenuOK && integrationOK && setupOK && transcriptShapesOK && codexTitleRefreshOK && codexCompletionRefreshOK && codexStateReconciliationOK && rolloutDiscoveryPayloadOK && unnamedTitleOK && scalesOK && baselineOK && decoupledOK && fontOK && priorityOK && registryOK && badgeLayoutOK && clickRoutingOK && gazeStatesOK && expandOK && lineBudgetOK && typefaceOK && textDeltaOK && tonesOK && folderFoldOK && labelOK && doneStaysOK && bubbleShapeOK && seenOK && staleOK
     print("{\"ok\":\(ok),\"asset\":\"\(Int(image.size.width))x\(Int(image.size.height))\",\"skins\":\(PetSkin.allCases.count),\"skinsOK\":\(skinsOK),\"dragRun\":\(dragRunOK),\"canJoinAllSpaces\":\(behaviorsOK),\"states\":\(animationCatalog.count),\"deepLink\":\(deepLinkOK),\"clientRouting\":\(clientRoutingOK),\"codexMenu\":\(codexMenuOK),\"integration\":\(integrationOK),\"setup\":\(setupOK),\"transcriptShapes\":\(transcriptShapesOK),\"sizePresets\":\(supportedScales.count),\"baselineLayout\":\(baselineOK),\"scaleDecoupled\":\(decoupledOK),\"badgePlacement\":\(badgeLayoutOK),\"ribbonExpand\":\(expandOK),\"lineBudget\":\(lineBudgetOK),\"typefaces\":\(PetTypeface.allCases.count),\"typefaceOK\":\(typefaceOK),\"textDelta\":\(textDeltaOK),\"tones\":\(tonesOK),\"folderFold\":\(folderFoldOK),\"doneStays\":\(doneStaysOK),\"bubbleShape\":\(bubbleShapeOK),\"seenRule\":\(seenOK),\"staleWorking\":\(staleOK),\"headroomClean\":\(haloOK),\"viewedElsewhere\":\(viewedOK),\"ancientNews\":\(ancientOK),\"sleeps\":\(sleepOK),\"sleepRow\":\(sleepRow),\"dozes\":\(dozeOK),\"displayState\":\(displayOK),\"seenByLooking\":\(lookingOK),\"corners\":\(cornerOK),\"appFallback\":\(fallbackOK),\"haloRows\":\(halo.rows),\"haloDeepest\":\(halo.deepest),\"haloFaint\":\(haloFaintPixels),\"claudeRow\":\(claudeRowOK),\"font\":\"\(rettoHandwritingFontName)\",\"fontLoaded\":\(fontOK),\"multiSession\":\(registryOK),\"prioritySelection\":\(priorityOK),\"badgeLayout\":\(badgeLayoutOK),\"clickRouting\":\(clickRoutingOK)}")
     return ok ? 0 : 1
 }

@@ -43,14 +43,13 @@ enum OpenApp {
     var hasSessionDeepLink: Bool { self != .claude }
 }
 
-let aiSessionOpenMenuTitle = "AI 세션 열 곳"
+let aiSessionOpenMenuTitle = "기본 열기 방식"
 let emptyClaudeSessionLabel = "Claude · 실행 중인 세션 없음"
 let emptyCodexSessionLabel = "Codex · 실행 중인 task 없음"
 
-/// Codex task는 다른 앱으로 보낼 수 없으므로 선택값이 아니라 고정 목적지로 보여 준다.
-/// 실제 실행 허용 여부는 Codex가 관리하므로 여기서는 hooks.json 등록 여부만 덧붙인다.
+/// Codex 훅의 등록 상태는 연결 메뉴에서만 보여 준다. task를 여는 앱은 개별 task 메뉴가 정한다.
 func codexOpenTargetMenuLabel(isRegistered: Bool) -> String {
-    isRegistered ? "Codex task → Codex 앱 · 자동" : "Codex task → Codex 앱 · 훅 확인 필요"
+    isRegistered ? "Codex 연결 확인 · 실시간 연결됨" : "Codex 연결 확인 · 기본 표시 중"
 }
 
 /// 훅이 적어 둔 클라이언트를 앱으로 옮긴다. 모르면 VS Code — 훅이 이 값을 적기 전에 시작된 세션들이다.
