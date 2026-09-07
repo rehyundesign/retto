@@ -48,6 +48,7 @@ enum PetSkin: String, CaseIterable {
     case luna
     case bunny
     case rilakkuma
+    case rilakkumaCape
 
     var label: String {
         switch self {
@@ -55,8 +56,9 @@ enum PetSkin: String, CaseIterable {
         case .angelWings: return "천사 날개"
         case .bee: return "꿀벌"
         case .luna: return "달 고양이"
-        case .bunny: return "토끼"
+        case .bunny: return "딸기 토끼"
         case .rilakkuma: return "리락쿠마"
+        case .rilakkumaCape: return "리락쿠마 망토"
         }
     }
 
@@ -69,6 +71,7 @@ enum PetSkin: String, CaseIterable {
         case .luna: return "spritesheet-luna"
         case .bunny: return "spritesheet-bunny"
         case .rilakkuma: return "spritesheet-rilakkuma"
+        case .rilakkumaCape: return "spritesheet-rilakkuma-cape"
         }
     }
 
@@ -76,7 +79,7 @@ enum PetSkin: String, CaseIterable {
     /// 받아 간 쪽에서는 파일이 없으므로 메뉴에 자물쇠로 뜨고 고를 수 없다.
     var isPersonal: Bool {
         switch self {
-        case .rilakkuma: return true
+        case .rilakkuma, .rilakkumaCape: return true
         default: return false
         }
     }
