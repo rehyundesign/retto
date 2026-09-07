@@ -16,6 +16,15 @@ assets/spritesheet-rilakkuma.webp
 tools/rilakkuma-skin/
 
 # 스킨 생성 중간물. 최종 아틀라스(assets/spritesheet-*.webp)는 커밋되니 결과는 남는다.
-# 한 장에 2~4MB 라 다 담으면 레포가 스킨마다 20MB 씩 늘어난다.
+# 한 장에 2~4MB 라 다 담으면 레포가 스킨마다 20MB 씩 늘어난다 (토끼 스킨 기준 47MB).
 tools/*-skin/gen-*.png
+tools/*-skin/gen-*.jpg
+tools/*-skin/gen-*/
+tools/*-skin/grid-*.png
 tools/*-skin/atlas.png
+
+# 스킨 도구가 쓰는 파이썬 환경 (pillow·numpy·scipy). 만드는 법은 tools/bunny-skin/README.md
+.venv/
+
+# 파이썬 캐시
+__pycache__/

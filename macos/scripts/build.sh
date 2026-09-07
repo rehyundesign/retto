@@ -8,7 +8,7 @@ APP_ROOT="${PROJECT_DIR:h}"
 ASSETS_DIR="$APP_ROOT/assets"
 BUILD_DIR="$PROJECT_DIR/build"
 DIST_DIR="$APP_ROOT/dist"
-VERSION="0.9.0"
+VERSION="0.10.0"
 APP_NAME="Retto.app"
 # 이름이 두 번 바뀌었다. 0.4.0 까지 "Reto Claude Pet.app", 0.8.0 까지 "Retto Claude Pet.app".
 # 공개하면서 제품명에서 Claude 를 뺐다 — 공식 제품처럼 읽히지 않게.
@@ -74,7 +74,7 @@ BUILD_STAMP="$(date '+%Y-%m-%d %H:%M') · $GIT_SHA"
 echo "stamp: $VERSION ($BUILD_NUMBER) · $BUILD_STAMP"
 cp "$ASSETS_DIR/spritesheet.webp" "$RESOURCES_DIR/spritesheet.webp"
 # 스킨 아틀라스. 발바닥 메뉴 "스킨" 이 이걸 갈아 끼운다. 없으면 기본 스킨만 뜬다.
-for skin in spritesheet-angel spritesheet-bee spritesheet-luna spritesheet-rilakkuma; do
+for skin in spritesheet-angel spritesheet-bee spritesheet-luna spritesheet-bunny spritesheet-rilakkuma; do
   [ -f "$ASSETS_DIR/$skin.webp" ] && cp "$ASSETS_DIR/$skin.webp" "$RESOURCES_DIR/$skin.webp"
 done
 cp "$ASSETS_DIR/NanumMiNiSonGeurSsi.ttf" "$RESOURCES_DIR/NanumMiNiSonGeurSsi.ttf"

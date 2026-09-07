@@ -7,6 +7,16 @@ APP_ROOT="${SCRIPT_DIR:h}"
 print -- "› Swift 빌드와 자체 검사"
 "$APP_ROOT/macos/scripts/build.sh" >/dev/null
 
+print -- "› 자체 검사 항목이 다 보이는가"
+for candidate in /opt/homebrew/bin/node /usr/local/bin/node /usr/bin/node; do
+  [[ -x "$candidate" ]] && NODE_BIN="$candidate" && break
+done
+if [[ -n "${NODE_BIN:-}" ]]; then
+  "$NODE_BIN" "$APP_ROOT/scripts/selftest-flags.mjs" || exit 1
+else
+  print -- "  node 가 없어 건너뜁니다" >&2
+fi
+
 print -- "› 훅 테스트"
 for candidate in /opt/homebrew/bin/node /usr/local/bin/node /usr/bin/node; do
   [[ -x "$candidate" ]] && NODE="$candidate" && break

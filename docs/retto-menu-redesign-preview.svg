@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1540" height="1060" viewBox="0 0 1540 1060">
+  <defs>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="20" stdDeviation="26" flood-color="#172016" flood-opacity=".20"/></filter>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="8" stdDeviation="13" flood-color="#1d251b" flood-opacity=".18"/></filter>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#f6f3ea"/><stop offset="1" stop-color="#e9efe1"/></linearGradient>
+    <linearGradient id="menu" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#ffffff" stop-opacity=".97"/><stop offset="1" stop-color="#f6f7f2" stop-opacity=".97"/></linearGradient>
+  </defs>
+  <rect width="1540" height="1060" fill="url(#bg)"/>
+  <path d="M0 150C240 70 380 210 620 124s395-42 580 12 250 30 340-15v939H0Z" fill="#dfe8d3" opacity=".5"/>
+  <text x="110" y="136" font-family="-apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', sans-serif" font-size="23" font-weight="700" fill="#556050">레토 · 메뉴 개편 최종 시안</text>
+  <text x="110" y="174" font-family="-apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', sans-serif" font-size="16" fill="#747c70">작업 이름을 먼저 보고, 확인된 출처와 실제로 가능한 열기 방법만 보여줍니다.</text>
+
+  <g filter="url(#shadow)">
+    <rect x="310" y="220" width="570" height="738" rx="22" fill="url(#menu)" stroke="#d6dbd0"/>
+  </g>
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', sans-serif">
+    <text x="342" y="269" font-size="20" font-weight="700" fill="#20241f">레토</text>
+    <circle cx="842" cy="262" r="10" fill="#9aac90"/><circle cx="842" cy="262" r="4" fill="#fff"/>
+    <line x1="332" y1="290" x2="858" y2="290" stroke="#e3e6df"/>
+
+    <text x="342" y="327" font-size="13" font-weight="700" letter-spacing="1.1" fill="#899186">최근 작업</text>
+
+    <rect x="332" y="343" width="526" height="92" rx="13" fill="#e7f1df"/>
+    <circle cx="365" cy="376" r="17" fill="#d4e5ca"/><path d="M358 376l5 5 10-12" fill="none" stroke="#45753d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="398" y="373" font-size="17" font-weight="700" fill="#222820">레토 CLI 상태 개선안 정리</text>
+    <text x="398" y="401" font-size="13" fill="#667062">retto · 방금 완료</text>
+    <rect x="684" y="381" width="114" height="25" rx="12" fill="#d6e6fb"/>
+    <text x="741" y="399" text-anchor="middle" font-size="12" font-weight="700" fill="#315f8e">Codex CLI</text>
+    <text x="828" y="393" text-anchor="middle" font-size="24" fill="#52634d">›</text>
+
+    <circle cx="365" cy="470" r="17" fill="#fcdf9f"/><path d="M365 460v11l7 5" fill="none" stroke="#8e671b" stroke-width="3" stroke-linecap="round"/>
+    <text x="398" y="467" font-size="17" font-weight="650" fill="#252925">A11y 개발 계획</text>
+    <text x="398" y="495" font-size="13" fill="#667062">chainshift-ui · 작업 중</text>
+    <rect x="710" y="475" width="88" height="25" rx="12" fill="#ece8fb"/>
+    <text x="754" y="493" text-anchor="middle" font-size="12" font-weight="700" fill="#66538d">VS Code</text>
+    <text x="828" y="487" text-anchor="middle" font-size="24" fill="#52634d">›</text>
+
+    <circle cx="365" cy="564" r="17" fill="#e8ebE5"/><circle cx="365" cy="564" r="6" fill="#9aa196"/>
+    <text x="398" y="561" font-size="17" font-weight="650" fill="#252925">백오피스 화면 정리</text>
+    <text x="398" y="589" font-size="13" fill="#667062">planning · 최근 작업</text>
+    <text x="828" y="581" text-anchor="middle" font-size="24" fill="#52634d">›</text>
+
+    <line x1="342" y1="622" x2="848" y2="622" stroke="#e3e6df"/>
+    <text x="342" y="657" font-size="13" font-weight="700" letter-spacing="1.1" fill="#899186">기본 열기 방식</text>
+    <text x="342" y="692" font-size="16" fill="#20241f">자동</text>
+    <text x="342" y="716" font-size="13" fill="#697367">확인된 출처가 있으면 원래 작업 앱에서 엽니다</text>
+    <circle cx="830" cy="690" r="11" fill="#4c7b45"/><circle cx="830" cy="690" r="4" fill="#fff"/>
+
+    <line x1="342" y1="742" x2="848" y2="742" stroke="#e3e6df"/>
+    <text x="342" y="777" font-size="13" font-weight="700" letter-spacing="1.1" fill="#899186">표시</text>
+    <text x="342" y="815" font-size="16" fill="#20241f">레토 표시</text><text x="830" y="818" text-anchor="middle" font-size="20" fill="#4c7b45">✓</text>
+    <text x="342" y="854" font-size="16" fill="#20241f">클릭 통과</text><text x="830" y="857" text-anchor="middle" font-size="20" fill="#a3aaa0">–</text>
+    <text x="342" y="906" font-size="16" fill="#20241f">연동 및 문제 해결</text><text x="830" y="906" text-anchor="middle" font-size="24" fill="#52634d">›</text>
+  </g>
+
+  <g filter="url(#soft)"><rect x="895" y="343" width="355" height="278" rx="18" fill="#fff" stroke="#d6dbd0"/></g>
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', sans-serif">
+    <text x="923" y="383" font-size="14" font-weight="700" letter-spacing="1" fill="#889184">“레토 CLI 상태 개선안 정리” 열기</text>
+    <rect x="913" y="402" width="319" height="54" rx="10" fill="#e7f1df"/>
+    <text x="940" y="436" font-size="16" font-weight="700" fill="#20251f">Codex 앱에서 열기</text>
+    <text x="1205" y="436" text-anchor="middle" font-size="17" fill="#4c7b45">✓</text>
+    <text x="940" y="486" font-size="16" fill="#a1a7a0">VS Code에서 열기</text>
+    <text x="940" y="528" font-size="16" fill="#a1a7a0">Claude 앱에서 열기</text>
+    <line x1="923" y1="552" x2="1222" y2="552" stroke="#e5e7e2"/>
+    <text x="940" y="586" font-size="14" fill="#697367">이 작업은 Codex CLI 출처가 확인됐습니다.</text>
+  </g>
+  <text x="310" y="1010" font-family="-apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', sans-serif" font-size="14" fill="#6e7868">원칙: 출처는 확인됐을 때만 표시 · 열기 선택지는 실제 가능한 앱만 활성화</text>
+</svg>

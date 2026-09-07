@@ -173,6 +173,43 @@ test('a restart right after Stop keeps the completion notice', async () => {
   assert.equal(after.attention, true);
 });
 
+test('ending right after Stop keeps the completion notice until it is seen', async () => {
+  const directory = freshHook('retto-hook-end-done-');
+  const hookPath = path.join(directory, 'hook.cjs');
+
+  await invoke(hookPath, { hook_event_name: 'UserPromptSubmit', session_id: 's', prompt: '해줘' }, 'running', DESKTOP);
+  await invoke(hookPath, { hook_event_name: 'Stop', session_id: 's' }, 'waving', DESKTOP);
+  const completed = registry(directory).s;
+  await invoke(hookPath, { hook_event_name: 'SessionEnd', session_id: 's' }, 'idle', DESKTOP);
+
+  const after = registry(directory).s;
+  assert.equal(after.state, 'waving');
+  assert.equal(after.attention, true);
+  assert.equal(after.closed, false);
+  assert.equal(after.updatedAtMs, completed.updatedAtMs);
+});
+
+test('ending after a failure or input request keeps the attention state', async () => {
+  for (const [event, fallback, expected] of [
+    ['StopFailure', 'failed', 'failed'],
+    ['PermissionRequest', 'waiting', 'waiting']
+  ]) {
+    const directory = freshHook(`retto-hook-end-${expected}-`);
+    const hookPath = path.join(directory, 'hook.cjs');
+
+    await invoke(hookPath, { hook_event_name: 'UserPromptSubmit', session_id: 's', prompt: '해줘' }, 'running', DESKTOP);
+    await invoke(hookPath, { hook_event_name: event, session_id: 's' }, fallback, DESKTOP);
+    const attention = registry(directory).s;
+    await invoke(hookPath, { hook_event_name: 'SessionEnd', session_id: 's' }, 'idle', DESKTOP);
+
+    const after = registry(directory).s;
+    assert.equal(after.state, expected);
+    assert.equal(after.attention, true);
+    assert.equal(after.closed, false);
+    assert.equal(after.updatedAtMs, attention.updatedAtMs);
+  }
+});
+
 /// 오래 쉰 세션을 진짜로 되살린 것은 반겨야 한다. 유예를 통째로 무시하면 그게 사라진다.
 test('a restart on a long-quiet session still greets', async () => {
   const directory = freshHook('reto-hook-restart-old-');
@@ -362,4 +399,26 @@ test('the shim ends without an error when no node exists at all', async () => {
   assert.equal(code, 0);
   // 아무것도 하지 않고 끝났다는 증거. node 가 돌았다면 여기 기록이 생긴다.
   assert.equal(fs.existsSync(path.join(directory, 'sessions.json')), false);
+});
+
+test('names a session by its first request, not by the replies that follow', async () => {
+  // 세션명이 아직 없을 때 쓰는 대타가 displayTitle 이다. 예전에는 프롬프트가 올 때마다
+  // 덮어써서, 이름표 자리에 방금 친 답("B"·"ㅇㅇ 해결햇어?")이 떴다. 길이로는 못 거른다.
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'reto-hook-'));
+  const hookPath = path.join(directory, 'hook.cjs');
+  fs.copyFileSync(path.join(__dirname, '..', 'hook.cjs'), hookPath);
+  const send = (session_id, prompt) => invoke(hookPath, {
+    hook_event_name: 'UserPromptSubmit', session_id, prompt, cwd: '/tmp/planning'
+  }, 'running');
+
+  await send('first', '세션명 오류를 고쳐줘');
+  await send('first', 'B');
+  await send('first', 'ㅇㅇ 해결햇어?');
+  // 첫 입력이 답이면 이름을 정하지 않는다 — 훅이 대화 도중에 붙은 세션이 그렇다.
+  await send('joined', '재진행');
+  await send('joined', '이제 진짜 긴 요청이다');
+
+  const registry = JSON.parse(fs.readFileSync(path.join(directory, 'sessions.json'), 'utf8'));
+  assert.equal(registry.sessions.first.displayTitle, '세션명 오류를 고쳐줘');
+  assert.equal(registry.sessions.joined.displayTitle, '');
 });
