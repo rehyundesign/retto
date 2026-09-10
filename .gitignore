@@ -14,6 +14,8 @@ hook/.sessions.lock/
 # 남의 캐릭터로 만든 것이라 공개 대상이 아니다.
 assets/spritesheet-rilakkuma.webp
 assets/spritesheet-rilakkuma-cape.webp
+assets/spritesheet-magical-heart.png
+assets/spritesheet-magical-heart.webp
 tools/rilakkuma-skin/
 tools/strawberry-bunny-skin/
 

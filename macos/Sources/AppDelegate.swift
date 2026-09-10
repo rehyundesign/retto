@@ -225,6 +225,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         petView = RettoView(
             frame: NSRect(origin: .zero, size: size),
             spriteSheet: spriteSheet,
+            skin: skin,
             onOpenClaude: { [weak self] payload, windowOnly in
                 self?.revealAgentSession(payload, windowOnly: windowOnly)
             },
@@ -480,10 +481,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     }
 
     private func applySessions(_ incoming: [StatePayload]) {
-        var merged = Dictionary(uniqueKeysWithValues: incoming.map { ($0.id, $0) })
+        // 훅이 갱신하기 전 기존 레지스트리에 남아 있을 수 있는 worker 기록도 여기서
+        // 걸러야, 앱을 다시 열었을 때 한 번이라도 말풍선·클릭 대상으로 돌아오지 않는다.
+        var merged = Dictionary(uniqueKeysWithValues: incoming
+            .filter(\.isRettoVisibleTask)
+            .map { ($0.id, $0) })
         // 이미 훅으로 받은 task는 더 정밀한 상태가 있으므로 유지한다. 훅에 없는 task만
         // 롤아웃에서 넣어, 연결을 꺼도 기본 표시가 사라지지 않게 한다.
-        for task in codexRolloutDiscovery.recentTasks() where merged[task.id] == nil {
+        for task in codexRolloutDiscovery.recentTasks() where task.isRettoVisibleTask && merged[task.id] == nil {
             merged[task.id] = task
         }
         sessions = merged.values.map(reconciledCodexPayload).sorted {
@@ -884,6 +889,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         guard let sheet = loadSpriteSheet(next) else { return }
         skin = next
         petView.spriteSheet = sheet
+        petView.skin = next
         for item in skinItems {
             item.state = (item.representedObject as? String) == raw ? .on : .off
         }
