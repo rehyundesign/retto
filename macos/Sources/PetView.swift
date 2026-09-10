@@ -9,6 +9,10 @@ final class RettoView: NSView {
     var spriteSheet: NSImage {
         didSet { needsDisplay = true }
     }
+    /// 아틀라스만으로는 표현하기 어려운 스킨 전용 효과를 고른다.
+    var skin: PetSkin {
+        didSet { needsDisplay = true }
+    }
     private var spriteLayout: SpriteSheetLayout {
         SpriteSheetLayout.forImage(size: spriteSheet.size) ?? .retto
     }
@@ -21,6 +25,8 @@ final class RettoView: NSView {
     private var animationTimer: Timer?
     private var trackingAreaRef: NSTrackingArea?
     private var lookDirection: Int?
+    /// 시선 행은 방향별 정지 그림 한 장이다. 커서가 멈춘 뒤에도 계속 쓰면 펫까지 멈춘 것처럼 보인다.
+    private var gazeResetTimer: Timer?
     private var dragStartMouseLocation: NSPoint?
     private var dragStartWindowOrigin: NSPoint?
     private var pressedTarget: PetClickTarget?
@@ -96,10 +102,12 @@ final class RettoView: NSView {
     init(
         frame frameRect: NSRect,
         spriteSheet: NSImage,
+        skin: PetSkin = .classic,
         onOpenClaude: @escaping (StatePayload?, Bool) -> Void,
         onOpenAttention: @escaping (NSPoint) -> Void
     ) {
         self.spriteSheet = spriteSheet
+        self.skin = skin
         self.onOpenClaude = onOpenClaude
         self.onOpenAttention = onOpenAttention
         super.init(frame: frameRect)
@@ -114,6 +122,7 @@ final class RettoView: NSView {
 
     deinit {
         animationTimer?.invalidate()
+        gazeResetTimer?.invalidate()
         badgeAnimator?.invalidate()
         ribbonExpandTimer?.invalidate()
         typeTimer?.invalidate()
@@ -156,7 +165,7 @@ final class RettoView: NSView {
             spriteRestState = nil
             frameIndex = 0
             completedCycles = 0
-            lookDirection = nil
+            clearGaze()
             restartAnimation()
         }
         restartTypingIfNeeded()
@@ -258,7 +267,7 @@ final class RettoView: NSView {
     private func playReaction() {
         spriteRestState = nil
         transientState = .jumping
-        lookDirection = nil
+        clearGaze()
         frameIndex = 0
         completedCycles = 0
         restartAnimation()
@@ -307,6 +316,26 @@ final class RettoView: NSView {
         guard hypot(dx, dy) > 22 * petScale else { return }
         let degrees = (atan2(dx, dy) * 180 / .pi + 360).truncatingRemainder(dividingBy: 360)
         lookDirection = Int((degrees / 22.5).rounded()) % 16
+        scheduleGazeReset()
+        needsDisplay = true
+    }
+
+    /// 시선은 짧은 반응으로만 보이고, 커서가 멈추면 원래 idle 모션을 계속한다.
+    private func scheduleGazeReset() {
+        gazeResetTimer?.invalidate()
+        let timer = Timer(timeInterval: gazeHoldDuration, repeats: false) { [weak self] _ in
+            self?.clearGaze()
+        }
+        gazeResetTimer = timer
+        RunLoop.main.add(timer, forMode: .common)
+    }
+
+    private func clearGaze() {
+        gazeResetTimer?.invalidate()
+        gazeResetTimer = nil
+        guard lookDirection != nil else { return }
+        lookDirection = nil
+        frameIndex = 0
         needsDisplay = true
     }
 
@@ -347,9 +376,7 @@ final class RettoView: NSView {
             startBadgeAnimator()
         }
         NSCursor.arrow.set()
-        lookDirection = nil
-        frameIndex = 0
-        needsDisplay = true
+        clearGaze()
     }
 
     override func mouseDown(with event: NSEvent) {
@@ -386,7 +413,7 @@ final class RettoView: NSView {
         if next != dragRun {
             dragRun = next
             // 시선 추적은 끄는 동안 쉰다. 손을 놓으면 다시 따라간다.
-            lookDirection = nil
+            clearGaze()
             frameIndex = 0
             completedCycles = 0
             restartAnimation()
@@ -476,11 +503,65 @@ final class RettoView: NSView {
         spriteSheet.draw(in: petRect, from: sourceRect, operation: .sourceOver, fraction: 1, respectFlipped: false, hints: [.interpolation: NSImageInterpolation.high])
         NSGraphicsContext.restoreGraphicsState()
 
+        if skin == .magicalHeart {
+            drawMagicalHeartEffects(petRect: petRect, scale: uiScale, frame: frameIndex)
+        }
+
         if visibleState == .sleeping {
             drawSleepBreath(petRect: petRect, scale: uiScale)
         }
 
         drawStatusRibbon(statusAnimation, layout: layout)
+    }
+
+    /// 매지컬 하트는 장식이 아닌 마법 반응이 보이도록 몸 주변의 별빛만 별도 레이어로 둔다.
+    /// 프레임 순서에 따라 밝기와 크기가 달라져, 앉아 있거나 움직일 때에도 반짝임이 이어진다.
+    private func drawMagicalHeartEffects(petRect: NSRect, scale: CGFloat, frame: Int) {
+        let phase = CGFloat(frame % 8) / 8
+        let pulse = 0.72 + 0.28 * sin(phase * .pi * 2)
+        let activeMagic: Bool
+        switch visibleState {
+        case .waving, .jumping, .running, .waiting:
+            activeMagic = true
+        default:
+            activeMagic = false
+        }
+        let drift = activeMagic ? sin(phase * .pi * 2) * 0.035 : 0
+        let points: [(x: CGFloat, y: CGFloat, size: CGFloat, color: NSColor)] = [
+            (0.09, 0.78, 7, NSColor(calibratedRed: 1.0, green: 0.45, blue: 0.70, alpha: 0.88)),
+            (0.91, 0.72, 7, NSColor(calibratedRed: 1.0, green: 0.78, blue: 0.36, alpha: 0.86)),
+            (0.04, 0.51, 5, NSColor(calibratedRed: 1.0, green: 0.70, blue: 0.86, alpha: 0.84)),
+            (0.96, 0.47, 6, NSColor(calibratedRed: 1.0, green: 0.52, blue: 0.74, alpha: 0.88)),
+            (0.18, 0.26, 5, NSColor(calibratedRed: 1.0, green: 0.78, blue: 0.36, alpha: 0.80)),
+            (0.83, 0.25, 5, NSColor(calibratedRed: 1.0, green: 0.68, blue: 0.88, alpha: 0.82))
+        ]
+        for (index, point) in points.enumerated() {
+            let offset = index.isMultiple(of: 2) ? pulse : (1.45 - pulse)
+            let center = NSPoint(
+                x: petRect.minX + petRect.width * (point.x + (index.isMultiple(of: 2) ? drift : -drift)),
+                y: petRect.minY + petRect.height * (point.y + (activeMagic ? drift * 0.55 : 0))
+            )
+            let emphasis: CGFloat = activeMagic && index < 4 ? 1.25 : 1
+            drawMagicSparkle(center: center, radius: point.size * scale * offset * emphasis, color: point.color)
+        }
+    }
+
+    private func drawMagicSparkle(center: NSPoint, radius: CGFloat, color: NSColor) {
+        let path = NSBezierPath()
+        path.move(to: NSPoint(x: center.x, y: center.y + radius))
+        path.line(to: NSPoint(x: center.x + radius * 0.32, y: center.y + radius * 0.32))
+        path.line(to: NSPoint(x: center.x + radius, y: center.y))
+        path.line(to: NSPoint(x: center.x + radius * 0.32, y: center.y - radius * 0.32))
+        path.line(to: NSPoint(x: center.x, y: center.y - radius))
+        path.line(to: NSPoint(x: center.x - radius * 0.32, y: center.y - radius * 0.32))
+        path.line(to: NSPoint(x: center.x - radius, y: center.y))
+        path.line(to: NSPoint(x: center.x - radius * 0.32, y: center.y + radius * 0.32))
+        path.close()
+        color.setFill()
+        path.fill()
+        NSColor.white.withAlphaComponent(0.92).setStroke()
+        path.lineWidth = max(0.8, radius * 0.12)
+        path.stroke()
     }
 
     /// 이름표 오른쪽 위에 걸터앉는 알림 배지. 흰 테두리로 이름표 색과 분리한다.
