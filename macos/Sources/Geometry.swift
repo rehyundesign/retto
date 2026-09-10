@@ -21,10 +21,13 @@ struct SpriteSheetLayout: Equatable {
     let rows: Int
 
     static let retto = SpriteSheetLayout(cellWidth: 224, cellHeight: 240, rows: 12)
+    /// 고해상도 개인 스킨도 같은 8×12 프레임 수를 쓰고, 소스 이미지만 2배로 읽는다.
+    static let retto2x = SpriteSheetLayout(cellWidth: 448, cellHeight: 480, rows: 12)
     static let codexV2 = SpriteSheetLayout(cellWidth: 192, cellHeight: 208, rows: 11)
 
     static func forImage(size: NSSize) -> SpriteSheetLayout? {
         if Int(size.width) == 1792, Int(size.height) == 2880 { return .retto }
+        if Int(size.width) == 3584, Int(size.height) == 5760 { return .retto2x }
         if Int(size.width) == 1536, Int(size.height) == 2288 { return .codexV2 }
         return nil
     }
@@ -49,6 +52,7 @@ enum PetSkin: String, CaseIterable {
     case bunny
     case rilakkuma
     case rilakkumaCape
+    case magicalHeart
 
     var label: String {
         switch self {
@@ -59,6 +63,7 @@ enum PetSkin: String, CaseIterable {
         case .bunny: return "딸기 토끼"
         case .rilakkuma: return "리락쿠마"
         case .rilakkumaCape: return "리락쿠마 망토"
+        case .magicalHeart: return "매지컬 하트"
         }
     }
 
@@ -72,6 +77,7 @@ enum PetSkin: String, CaseIterable {
         case .bunny: return "spritesheet-bunny"
         case .rilakkuma: return "spritesheet-rilakkuma"
         case .rilakkumaCape: return "spritesheet-rilakkuma-cape"
+        case .magicalHeart: return "spritesheet-magical-heart"
         }
     }
 
@@ -79,7 +85,7 @@ enum PetSkin: String, CaseIterable {
     /// 받아 간 쪽에서는 파일이 없으므로 메뉴에 자물쇠로 뜨고 고를 수 없다.
     var isPersonal: Bool {
         switch self {
-        case .rilakkuma, .rilakkumaCape: return true
+        case .rilakkuma, .rilakkumaCape, .magicalHeart: return true
         default: return false
         }
     }
@@ -247,6 +253,9 @@ func petClickTarget(layout: PetLayout, badgeFrame: NSRect, point: NSPoint, atten
 
 /// 코덱스 펫은 idle·running·waving 에서만 시선을 따라간다. 나머지 상태에서는 자기 애니메이션을 지킨다.
 let gazeStates: Set<PetState> = [.idle, .running, .waving]
+
+/// 방향별 시선 칸은 정지 그림이므로, 이 시간 뒤 기본 모션으로 돌아간다.
+let gazeHoldDuration: TimeInterval = 0.8
 
 /// 레토를 화면 어디에 둘지. 자유 위치는 끌어다 놓은 자리를 그대로 쓴다.
 enum PetCorner: String, CaseIterable {
