@@ -89,6 +89,12 @@ if let index = CommandLine.arguments.firstIndex(of: "--render-preview"), index +
     exit(renderPreview(to: CommandLine.arguments[index + 1]))
 }
 
+if let index = CommandLine.arguments.firstIndex(of: "--render-skin-preview"),
+   index + 2 < CommandLine.arguments.count,
+   let skin = PetSkin(rawValue: CommandLine.arguments[index + 1]) {
+    exit(renderPreview(to: CommandLine.arguments[index + 2], skin: skin))
+}
+
 let app = NSApplication.shared
 let delegate = AppDelegate()
 app.setActivationPolicy(.accessory)
