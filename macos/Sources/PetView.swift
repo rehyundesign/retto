@@ -16,6 +16,10 @@ final class RettoView: NSView {
     private var spriteLayout: SpriteSheetLayout {
         SpriteSheetLayout.forImage(size: spriteSheet.size) ?? .retto
     }
+    /// 변신 효과는 캐릭터 아틀라스와 같은 칸·행을 쓰는 별도 투명 레이어다.
+    /// 뒤 레이어 → 레토 → 앞 레이어 순서로 그려서 마법진은 몸 뒤에, 리본 끝은 앞에 남긴다.
+    private lazy var magicalHeartEffectsBack = Self.loadEffectSheet("spritesheet-magical-heart-effects-back")
+    private lazy var magicalHeartEffectsFront = Self.loadEffectSheet("spritesheet-magical-heart-effects-front")
     private let onOpenClaude: (StatePayload?, Bool) -> Void
     private let onOpenAttention: (NSPoint) -> Void
     private var payload: StatePayload?
@@ -233,7 +237,13 @@ final class RettoView: NSView {
     /// 지금 그려야 하는 동작. 끄는 중이면 달리기가 상태를 이긴다.
     private var currentAnimation: Animation? {
         if let dragRun { return dragRunAnimations[dragRun] }
-        return animationCatalog[visibleState]
+        guard let animation = animationCatalog[visibleState] else { return nil }
+        // 매지컬 하트의 첫 running 컷은 효과 없는 대기 포즈라 변신 루프에서는 쓰지 않는다.
+        // 아틀라스 원본은 보존하고, 2~6번 컷만 5프레임으로 순환한다.
+        if skin == .magicalHeart && visibleState == .running {
+            return Animation(row: animation.row, frames: 5, interval: animation.interval, cycleLimit: animation.cycleLimit, kicker: animation.kicker, title: animation.title, tone: animation.tone)
+        }
+        return animation
     }
 
     private func restartAnimation() {
@@ -488,7 +498,7 @@ final class RettoView: NSView {
             // v2 개인 스킨은 11행이라 레토 전용 잠자기 행이 없다. idle 자세에 호흡 효과를
             // 더해 잠든 모습을 유지한다. 나머지 상태와 시선 행은 같은 순서다.
             row = visibleState == .sleeping && spriteLayout.rows == 11 ? 0 : animation.row
-            column = frameIndex
+            column = frameIndex + (skin == .magicalHeart && visibleState == .running ? 1 : 0)
         }
         let sourceRect = NSRect(
             x: CGFloat(column) * spriteLayout.cellWidth,
@@ -498,9 +508,7 @@ final class RettoView: NSView {
         )
 
         let isTransforming = skin == .magicalHeart && visibleState == .running
-        if isTransforming {
-            drawTransformationBackdrop(petRect: petRect, scale: uiScale, frame: frameIndex)
-        }
+        if isTransforming { drawTransformationEffect(magicalHeartEffectsBack, in: petRect, sourceRect: sourceRect) }
 
         // 발밑 바닥 그림자. 예전에는 실루엣 드롭 섀도(blur 16)를 썼는데, 흐림이 사방으로
         // 퍼져 머리 위에도 회색 안개가 생겼다. 흰 배경에서는 그게 투명한 사각형처럼 보였다.
@@ -518,7 +526,7 @@ final class RettoView: NSView {
 
         if skin == .magicalHeart {
             if isTransforming {
-                drawTransformationForeground(petRect: petRect, scale: uiScale, frame: frameIndex)
+                drawTransformationEffect(magicalHeartEffectsFront, in: petRect, sourceRect: sourceRect)
             } else {
                 drawMagicalHeartAmbientEffects(petRect: petRect, scale: uiScale, frame: frameIndex)
             }
@@ -531,83 +539,101 @@ final class RettoView: NSView {
         drawStatusRibbon(statusAnimation, layout: layout)
     }
 
+    private static func loadEffectSheet(_ resource: String) -> NSImage? {
+        guard let url = Bundle.main.url(forResource: resource, withExtension: "webp") else { return nil }
+        return NSImage(contentsOf: url)
+    }
+
+    private func drawTransformationEffect(_ effectSheet: NSImage?, in petRect: NSRect, sourceRect: NSRect) {
+        guard let effectSheet else { return }
+        effectSheet.draw(in: petRect, from: sourceRect, operation: .sourceOver, fraction: 1, respectFlipped: false, hints: [.interpolation: NSImageInterpolation.high])
+    }
+
     /// 변신은 확정한 여섯 포즈 위에만 그린다. 원본 스프라이트에는 효과를 굽지 않아
     /// 포즈·신체 검수가 이펙트에 가려지지 않고, 런타임에서 앞뒤 레이어를 나눌 수 있다.
     private func drawTransformationBackdrop(petRect: NSRect, scale: CGFloat, frame: Int) {
         let stage = min(max(frame, 0), 5)
         guard stage > 0 else { return }
-        let center = magicPoint(petRect, x: 0.5, y: 0.50)
+        // 가슴 장신구의 중심. 화면 가운데가 아니라, 실제 스프라이트의 흉부에 고정한다.
+        let center = magicPoint(petRect, x: 0.5, y: 0.37)
 
-        if stage >= 1 {
-            let radius = petRect.width * (stage == 1 ? 0.19 : (stage == 2 ? 0.37 : 0.46))
-            drawMagicCircle(center: center, radius: radius, alpha: stage == 1 ? 0.46 : 0.70, scale: scale, detailed: stage >= 3)
+        if stage == 1 {
+            let radius = petRect.width * 0.28
+            drawMagicGlow(center: center, radius: radius * 0.72, color: NSColor(calibratedRed: 1, green: 0.22, blue: 0.62, alpha: 1), alpha: 0.18)
+            drawMagicCircle(center: center, radius: radius, alpha: 0.72, scale: scale, detailed: false)
+        } else if stage >= 3 {
+            let radius = petRect.width * 0.56
+            drawMagicGlow(center: center, radius: radius * 0.72, color: NSColor(calibratedRed: 1, green: 0.22, blue: 0.62, alpha: 1), alpha: 0.30)
+            drawMagicCircle(center: center, radius: radius, alpha: 0.94, scale: scale, detailed: true)
         }
 
         if stage >= 2 {
-            let alpha: CGFloat = stage == 2 ? 0.44 : 0.62
+            let alpha: CGFloat = stage == 2 ? 0.86 : 0.92
             drawMagicRibbon(
                 petRect: petRect,
-                y: 0.42,
-                tilt: -0.13,
+                y: 0.40,
+                tilt: -0.16,
                 alpha: alpha,
                 scale: scale,
                 behind: true
             )
         }
 
-        if stage >= 3 {
+        if stage >= 2 {
             drawMagicRibbon(
                 petRect: petRect,
-                y: 0.28,
-                tilt: 0.16,
-                alpha: stage == 3 ? 0.42 : 0.58,
+                y: 0.25,
+                tilt: 0.18,
+                alpha: stage == 2 ? 0.74 : (stage == 3 ? 0.84 : 0.92),
                 scale: scale,
                 behind: true
             )
         }
 
         if stage == 5 {
-            drawTransformationBurst(center: center, radius: petRect.width * 0.49, alpha: 0.58, scale: scale)
+            drawTransformationBurst(center: center, radius: petRect.width * 0.58, alpha: 0.82, scale: scale)
         }
     }
 
     private func drawTransformationForeground(petRect: NSRect, scale: CGFloat, frame: Int) {
         let stage = min(max(frame, 0), 5)
         guard stage > 0 else { return }
-        let center = magicPoint(petRect, x: 0.5, y: 0.50)
+        let center = magicPoint(petRect, x: 0.5, y: 0.37)
         let pink = NSColor(calibratedRed: 1.0, green: 0.32, blue: 0.63, alpha: 1)
         let gold = NSColor(calibratedRed: 1.0, green: 0.78, blue: 0.32, alpha: 1)
 
         if stage == 1 {
-            drawMagicHeart(center: center, radius: 8 * scale, color: pink.withAlphaComponent(0.92))
-            drawMagicSparkle(center: magicPoint(petRect, x: 0.36, y: 0.60), radius: 4 * scale, color: pink.withAlphaComponent(0.8))
-            drawMagicSparkle(center: magicPoint(petRect, x: 0.64, y: 0.60), radius: 4 * scale, color: gold.withAlphaComponent(0.8))
+            drawMagicGlow(center: center, radius: 20 * scale, color: pink, alpha: 0.48)
+            drawMagicHeart(center: center, radius: 10 * scale, color: pink.withAlphaComponent(0.98))
+            drawMagicSparkle(center: magicPoint(petRect, x: 0.31, y: 0.53), radius: 5 * scale, color: pink.withAlphaComponent(0.96))
+            drawMagicSparkle(center: magicPoint(petRect, x: 0.69, y: 0.53), radius: 5 * scale, color: gold.withAlphaComponent(0.96))
             return
         }
 
         let sparkles: [(CGFloat, CGFloat, CGFloat, NSColor)] = stage == 2
-            ? [(0.20, 0.65, 5, pink), (0.79, 0.63, 5, gold), (0.29, 0.34, 4, pink)]
-            : [(0.14, 0.73, 5, pink), (0.86, 0.70, 6, gold), (0.18, 0.36, 5, gold), (0.82, 0.34, 5, pink), (0.50, 0.88, 4, pink)]
+            ? [(0.17, 0.65, 7, pink), (0.83, 0.64, 7, gold), (0.23, 0.34, 5, pink), (0.77, 0.36, 5, gold)]
+            : [(0.10, 0.73, 7, pink), (0.90, 0.70, 8, gold), (0.16, 0.32, 6, gold), (0.84, 0.31, 6, pink), (0.50, 0.89, 6, pink)]
         for (x, y, radius, color) in sparkles {
             drawMagicSparkle(center: magicPoint(petRect, x: x, y: y), radius: radius * scale * (stage == 5 ? 1.28 : 1), color: color.withAlphaComponent(stage == 2 ? 0.76 : 0.94))
         }
 
         if stage >= 3 {
             let hearts: [(CGFloat, CGFloat, CGFloat)] = stage == 3
-                ? [(0.16, 0.52, 7), (0.84, 0.52, 7), (0.50, 0.82, 6)]
-                : [(0.13, 0.57, 7), (0.87, 0.58, 7), (0.28, 0.82, 6), (0.72, 0.82, 6)]
+                ? [(0.12, 0.52, 10), (0.88, 0.52, 10), (0.50, 0.83, 8)]
+                : [(0.10, 0.57, 10), (0.90, 0.58, 10), (0.25, 0.82, 8), (0.75, 0.82, 8)]
             for (x, y, radius) in hearts {
                 drawMagicHeart(center: magicPoint(petRect, x: x, y: y), radius: radius * scale, color: pink.withAlphaComponent(stage == 5 ? 0.92 : 0.80))
             }
         }
 
-        if stage >= 4 {
-            drawMagicRibbon(petRect: petRect, y: 0.56, tilt: -0.18, alpha: stage == 4 ? 0.72 : 0.86, scale: scale, behind: false)
+        if stage >= 3 {
+            drawMagicRibbon(petRect: petRect, y: 0.28, tilt: -0.16, alpha: stage == 3 ? 0.80 : 0.95, scale: scale, behind: false)
         }
 
         if stage == 5 {
-            drawMagicHeart(center: center, radius: 13 * scale, color: NSColor.white.withAlphaComponent(0.94))
-            drawMagicHeart(center: center, radius: 9 * scale, color: pink.withAlphaComponent(0.98))
+            drawMagicGlow(center: center, radius: 38 * scale, color: NSColor.white, alpha: 0.62)
+            drawMagicHeart(center: center, radius: 15 * scale, color: NSColor.white.withAlphaComponent(0.98))
+            drawMagicHeart(center: center, radius: 10 * scale, color: pink.withAlphaComponent(1))
         }
     }
 
@@ -616,43 +642,70 @@ final class RettoView: NSView {
     }
 
     private func drawMagicCircle(center: NSPoint, radius: CGFloat, alpha: CGFloat, scale: CGFloat, detailed: Bool) {
+        drawMagicGlow(center: center, radius: radius * 0.38, color: NSColor(calibratedRed: 1, green: 0.25, blue: 0.63, alpha: 1), alpha: alpha * 0.30)
         let outer = NSBezierPath(ovalIn: NSRect(x: center.x - radius, y: center.y - radius, width: radius * 2, height: radius * 2))
-        NSColor(calibratedRed: 1.0, green: 0.36, blue: 0.67, alpha: alpha).setStroke()
-        outer.lineWidth = max(1.1, 1.7 * scale)
+        NSGraphicsContext.saveGraphicsState()
+        let shadow = NSShadow()
+        shadow.shadowColor = NSColor(calibratedRed: 1, green: 0.14, blue: 0.56, alpha: alpha * 0.95)
+        shadow.shadowBlurRadius = 10 * scale
+        shadow.set()
+        NSColor(calibratedRed: 1.0, green: 0.30, blue: 0.64, alpha: alpha).setStroke()
+        outer.lineWidth = max(2.1, 3.4 * scale)
         outer.stroke()
+        NSGraphicsContext.restoreGraphicsState()
         let innerRadius = radius * 0.84
         let inner = NSBezierPath(ovalIn: NSRect(x: center.x - innerRadius, y: center.y - innerRadius, width: innerRadius * 2, height: innerRadius * 2))
-        NSColor.white.withAlphaComponent(alpha * 0.72).setStroke()
-        inner.lineWidth = max(0.7, scale)
+        NSColor.white.withAlphaComponent(alpha * 0.92).setStroke()
+        inner.lineWidth = max(1.0, 1.7 * scale)
         inner.stroke()
         guard detailed else { return }
         for index in 0..<8 {
             let angle = CGFloat(index) * .pi / 4 + .pi / 8
             let point = NSPoint(x: center.x + cos(angle) * radius, y: center.y + sin(angle) * radius)
-            drawMagicHeart(center: point, radius: 3.1 * scale, color: NSColor.white.withAlphaComponent(alpha * 0.92))
+            drawMagicHeart(center: point, radius: 4.2 * scale, color: NSColor.white.withAlphaComponent(alpha * 0.98))
         }
     }
 
     private func drawMagicRibbon(petRect: NSRect, y: CGFloat, tilt: CGFloat, alpha: CGFloat, scale: CGFloat, behind: Bool) {
         let start = magicPoint(petRect, x: 0.08, y: y - tilt)
         let end = magicPoint(petRect, x: 0.92, y: y + tilt)
+        let band = max(5.5, 13 * scale)
         let path = NSBezierPath()
-        path.move(to: start)
-        path.curve(to: end,
-                   controlPoint1: magicPoint(petRect, x: 0.31, y: y + 0.20),
-                   controlPoint2: magicPoint(petRect, x: 0.69, y: y - 0.20))
+        path.move(to: NSPoint(x: start.x, y: start.y + band / 2))
+        path.curve(to: NSPoint(x: end.x, y: end.y + band / 2),
+                   controlPoint1: NSPoint(x: magicPoint(petRect, x: 0.31, y: y + 0.20).x, y: magicPoint(petRect, x: 0.31, y: y + 0.20).y + band / 2),
+                   controlPoint2: NSPoint(x: magicPoint(petRect, x: 0.69, y: y - 0.20).x, y: magicPoint(petRect, x: 0.69, y: y - 0.20).y + band / 2))
+        path.line(to: NSPoint(x: end.x, y: end.y - band / 2))
+        path.curve(to: NSPoint(x: start.x, y: start.y - band / 2),
+                   controlPoint1: NSPoint(x: magicPoint(petRect, x: 0.69, y: y - 0.20).x, y: magicPoint(petRect, x: 0.69, y: y - 0.20).y - band / 2),
+                   controlPoint2: NSPoint(x: magicPoint(petRect, x: 0.31, y: y + 0.20).x, y: magicPoint(petRect, x: 0.31, y: y + 0.20).y - band / 2))
+        path.close()
         let color = behind
             ? NSColor(calibratedRed: 1.0, green: 0.45, blue: 0.72, alpha: alpha)
             : NSColor(calibratedRed: 1.0, green: 0.32, blue: 0.62, alpha: alpha)
-        color.setStroke()
-        path.lineWidth = max(2.2, 5.2 * scale)
+        NSGraphicsContext.saveGraphicsState()
+        let shadow = NSShadow()
+        shadow.shadowColor = color.withAlphaComponent(alpha * 0.92)
+        shadow.shadowBlurRadius = 11 * scale
+        shadow.set()
+        color.setFill()
+        path.fill()
+        NSGraphicsContext.restoreGraphicsState()
+        NSColor(calibratedRed: 1, green: 0.80, blue: 0.91, alpha: alpha * 0.96).setStroke()
+        path.lineWidth = max(1.0, 1.5 * scale)
         path.stroke()
-        NSColor.white.withAlphaComponent(alpha * 0.68).setStroke()
-        path.lineWidth = max(0.7, 1.15 * scale)
-        path.stroke()
+        let highlight = NSBezierPath()
+        highlight.move(to: start)
+        highlight.curve(to: end,
+                        controlPoint1: magicPoint(petRect, x: 0.31, y: y + 0.20),
+                        controlPoint2: magicPoint(petRect, x: 0.69, y: y - 0.20))
+        NSColor.white.withAlphaComponent(alpha * 0.78).setStroke()
+        highlight.lineWidth = max(0.9, 1.8 * scale)
+        highlight.stroke()
     }
 
     private func drawTransformationBurst(center: NSPoint, radius: CGFloat, alpha: CGFloat, scale: CGFloat) {
+        drawMagicGlow(center: center, radius: radius * 0.68, color: NSColor(calibratedRed: 1, green: 0.36, blue: 0.72, alpha: 1), alpha: alpha * 0.42)
         for index in 0..<12 {
             let angle = CGFloat(index) * .pi / 6
             let start = NSPoint(x: center.x + cos(angle) * radius * 0.14, y: center.y + sin(angle) * radius * 0.14)
@@ -661,7 +714,7 @@ final class RettoView: NSView {
             ray.move(to: start)
             ray.line(to: end)
             NSColor(calibratedRed: 1.0, green: 0.72, blue: 0.90, alpha: alpha * (index.isMultiple(of: 2) ? 1 : 0.58)).setStroke()
-            ray.lineWidth = max(0.8, (index.isMultiple(of: 2) ? 2.2 : 1.1) * scale)
+            ray.lineWidth = max(1.0, (index.isMultiple(of: 2) ? 3.4 : 1.8) * scale)
             ray.stroke()
         }
     }
@@ -681,11 +734,27 @@ final class RettoView: NSView {
         path.curve(to: NSPoint(x: center.x, y: center.y - radius * 0.82),
                    controlPoint1: NSPoint(x: center.x + radius, y: center.y + radius * 0.58),
                    controlPoint2: NSPoint(x: center.x + radius * 0.78, y: center.y - radius * 0.18))
+        NSGraphicsContext.saveGraphicsState()
+        let shadow = NSShadow()
+        shadow.shadowColor = color.withAlphaComponent(color.alphaComponent * 0.92)
+        shadow.shadowBlurRadius = max(2, radius * 0.62)
+        shadow.set()
         color.setFill()
         path.fill()
+        NSGraphicsContext.restoreGraphicsState()
         NSColor.white.withAlphaComponent(color.alphaComponent * 0.88).setStroke()
         path.lineWidth = max(0.55, radius * 0.12)
         path.stroke()
+    }
+
+    private func drawMagicGlow(center: NSPoint, radius: CGFloat, color: NSColor, alpha: CGFloat) {
+        guard radius > 0, alpha > 0 else { return }
+        for fraction in stride(from: CGFloat(1), through: CGFloat(0.20), by: -0.20) {
+            let current = radius * fraction
+            let glow = NSBezierPath(ovalIn: NSRect(x: center.x - current, y: center.y - current, width: current * 2, height: current * 2))
+            color.withAlphaComponent(alpha * (1 - fraction) * 0.36).setFill()
+            glow.fill()
+        }
     }
 
     /// 변신 이외 상태에서는 가벼운 별빛만 유지한다.
