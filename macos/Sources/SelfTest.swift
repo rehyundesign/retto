@@ -159,6 +159,25 @@ func runSelfTest() -> Int32 {
         && discoveredCodexTask.navigationSessionId == "thread-one"
         && discoveredCodexTask.needsAttention
         && sessionMenuLabel(for: discoveredCodexTask) == "● 완료  훅 없이 찾은 task · project · Codex"
+        && discoveredCodexTask.isRettoVisibleTask
+        && isCodexSubagentTranscript(path: "/tmp/rollout-parent_12345678-1234-1234-1234-123456789abc.jsonl")
+        && !isCodexSubagentTranscript(path: "/tmp/rollout-parent.jsonl")
+        && !(StatePayload(
+            state: PetState.running.rawValue, updatedAt: nil, event: nil,
+            sessionId: "codex:unnamed", rawSessionId: "unnamed", source: "codex", cwd: nil,
+            toolName: nil, notificationType: nil, error: nil, projectName: nil, displayTitle: "첫 요청",
+            sessionTitle: nil, transcriptPath: "/tmp/rollout.jsonl", lastAssistantMessage: nil,
+            activeTaskSubject: nil, backgroundTaskCount: nil, attention: nil, closed: false,
+            updatedAtMs: nil, stateSource: nil, client: "codex"
+        ).isRettoVisibleTask)
+        && StatePayload(
+            state: PetState.running.rawValue, updatedAt: nil, event: nil,
+            sessionId: "codex:previously-recorded", rawSessionId: "previously-recorded", source: "codex", cwd: nil,
+            toolName: nil, notificationType: nil, error: nil, projectName: nil, displayTitle: nil,
+            sessionTitle: "상위 작업", transcriptPath: "/tmp/rollout-parent_12345678-1234-1234-1234-123456789abc.jsonl", lastAssistantMessage: nil,
+            activeTaskSubject: nil, backgroundTaskCount: nil, attention: nil, closed: false,
+            updatedAtMs: nil, stateSource: nil, client: "codex"
+        ).isRettoVisibleTask
     let unnamedPayload = StatePayload(
         state: PetState.running.rawValue, updatedAt: nil, event: nil,
         sessionId: "unnamed", rawSessionId: nil, source: "claude", cwd: "/tmp/project",
@@ -342,8 +361,11 @@ func runSelfTest() -> Int32 {
         && zip(supportedScales, supportedScales.dropFirst()).allSatisfy { small, large in
             petLayout(scale: large).ribbonRect.height > petLayout(scale: small).ribbonRect.height + 1
         }
+    // 완료는 모션을 유지하고, 시선 행으로 완료 자세를 덮으면 안 된다.
     // 시선은 코덱스와 같은 세 상태에서만 걸린다.
     let gazeStatesOK = gazeStates == [.idle, .running, .waving]
+        && gazeHoldDuration > 0
+        && gazeHoldDuration <= 1
     // 배지는 말풍선 오른쪽 위에 고정이고, 왼쪽 이름표와 같은 만큼 위로 솟는다.
     let badge = attentionBadgeRect(ribbon: baseline.ribbonRect, scale: baseline.chromeScale)
     let badgeLayoutOK = badge.width == attentionBadgeSide * baseline.chromeScale
@@ -577,9 +599,9 @@ func runSelfTest() -> Int32 {
 }
 
 /// 배율별 레이아웃을 화면 없이 PNG 한 장으로 뽑는다. 몸과 리본이 따로 자라는지 눈으로 확인하는 용도.
-func renderPreview(to path: String) -> Int32 {
+func renderPreview(to path: String, skin: PetSkin = .classic) -> Int32 {
     registerRettoFont()
-    guard let imageURL = Bundle.main.url(forResource: "spritesheet", withExtension: "webp"),
+    guard let imageURL = Bundle.main.url(forResource: skin.resourceName, withExtension: "webp"),
           let spriteSheet = NSImage(contentsOf: imageURL) else { return 1 }
     let scales: [CGFloat] = [0.39, 0.5, 0.65, 1.0, 1.4]
     // 칸마다 다른 상태로 그려 색 넷이 한 장에서 비교되게 한다.
@@ -606,7 +628,7 @@ func renderPreview(to path: String) -> Int32 {
     NSRect(x: 0, y: bandOrigin, width: totalWidth, height: bandHeight).fill()
     var x = gap
     for (index, (scale, layout)) in zip(scales, layouts).enumerated() {
-        let view = RettoView(frame: NSRect(origin: .zero, size: layout.windowSize), spriteSheet: spriteSheet, onOpenClaude: { _, _ in }, onOpenAttention: { _ in })
+        let view = RettoView(frame: NSRect(origin: .zero, size: layout.windowSize), spriteSheet: spriteSheet, skin: skin, onOpenClaude: { _, _ in }, onOpenAttention: { _ in })
         // 서체를 바꿔 놓고 미리보기를 뽑아 눈으로 비교할 수 있어야 한다.
         view.typeface = PetTypeface(rawValue: UserDefaults.standard.string(forKey: typefaceDefaultsKey) ?? "") ?? .handwriting
         view.petScale = scale

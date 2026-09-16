@@ -66,6 +66,29 @@ test('stores Codex beside Claude and keeps the raw thread id for deep links', as
   assert.equal(sessions['thread-same'].source, 'claude');
 });
 
+test('does not let a Codex worker rollout replace its parent task', async () => {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'retto-hook-codex-worker-'));
+  const hookPath = path.join(directory, 'hook.cjs');
+  fs.copyFileSync(path.join(__dirname, '..', 'hook.cjs'), hookPath);
+  const parentTranscript = path.join(directory, 'rollout-parent.jsonl');
+  const workerTranscript = path.join(directory, 'rollout-parent_12345678-1234-1234-1234-123456789abc.jsonl');
+  fs.writeFileSync(parentTranscript, '');
+  fs.writeFileSync(workerTranscript, '');
+
+  await invoke(hookPath, {
+    hook_event_name: 'UserPromptSubmit', session_id: 'parent', transcript_path: parentTranscript,
+    prompt: '스킨을 추가해줘'
+  }, 'running', {}, 'codex');
+  await invoke(hookPath, {
+    hook_event_name: 'PostToolUse', session_id: 'parent', transcript_path: workerTranscript,
+    tool_name: 'Bash'
+  }, 'running', {}, 'codex');
+
+  const session = registry(directory)['codex:parent'];
+  assert.equal(session.transcriptPath, parentTranscript);
+  assert.equal(session.toolName, '');
+});
+
 test('maps a failed Codex tool result to failed', async () => {
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'retto-hook-codex-failure-'));
   const hookPath = path.join(directory, 'hook.cjs');

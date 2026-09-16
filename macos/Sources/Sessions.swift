@@ -158,10 +158,23 @@ struct StatePayload: Decodable {
     }
     var needsAttention: Bool { attention == true && closed != true }
     var isClosed: Bool { closed == true }
+    /// Codex worker 로그와 자동 제목 전의 이름 없는 task는 레토의 표시 대상에서 뺀다.
+    var isRettoVisibleTask: Bool {
+        guard source == "codex" || client == "codex" else { return true }
+        return sessionTitle?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false
+    }
 }
 
 /// 세션 이름표로 받아들일 최소 길이. hook.cjs 의 NAME_MIN 과 같은 값이어야 한다.
 let sessionNameMinLength = 4
+
+/// Codex는 상위 작업의 롤아웃 옆에 worker 전용 JSONL을 `<parent>_<UUID>.jsonl`로 남긴다.
+/// worker를 세션으로 읽으면 레토의 제목과 상태가 상위 작업에서 worker로 바뀐다.
+func isCodexSubagentTranscript(path: String) -> Bool {
+    let name = URL(fileURLWithPath: path).deletingPathExtension().lastPathComponent
+    let pattern = "_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+    return name.range(of: pattern, options: .regularExpression) != nil
+}
 
 /// 메뉴 막대의 AI 세션 목록과 자동 검사가 같은 문자열을 쓴다. 훅 없이 찾은 Codex task도
 /// 일반 세션과 똑같이 한 행으로 보여야 한다.
@@ -269,13 +282,20 @@ final class CodexThreadTitleReader {
 
 /// `task_complete`와 사용자 요청의 순서가 훅 콜백의 실행 시각보다 신뢰할 만하다.
 /// 비동기 콜백이 늦게 상태 파일을 덮어써도, 완료 뒤에 새 요청이 있으면 완료로 보지 않는다.
-struct CodexTranscriptStatus {
+struct CodexTranscriptStatus: Codable {
     let completedAtMs: Double?
     let latestPromptAtMs: Double?
 
     var isCompletedAfterLatestPrompt: Bool {
         guard let completedAtMs else { return false }
         return completedAtMs > (latestPromptAtMs ?? 0)
+    }
+
+    func merged(with newer: CodexTranscriptStatus) -> CodexTranscriptStatus {
+        CodexTranscriptStatus(
+            completedAtMs: max(completedAtMs ?? 0, newer.completedAtMs ?? 0),
+            latestPromptAtMs: max(latestPromptAtMs ?? 0, newer.latestPromptAtMs ?? 0)
+        )
     }
 }
 
@@ -497,6 +517,7 @@ final class CodexTranscriptStatusReader {
     }
 
     private var cache: [String: CachedStatus] = [:]
+    private let lifecycleIndex = CodexLifecycleIndex()
 
     func status(at path: String?) -> CodexTranscriptStatus {
         guard let path, !path.isEmpty else {
@@ -514,11 +535,17 @@ final class CodexTranscriptStatusReader {
             return cached.status
         }
 
+        if let indexed = lifecycleIndex.status(path: path, size: size, modifiedAtMs: modifiedAtMs) {
+            cache[path] = CachedStatus(size: size, modifiedAtMs: modifiedAtMs, status: indexed)
+            return indexed
+        }
+
         let before = info.st_atimespec
         let status = Self.readStatusTail(path: path, size: size)
         var times = [before, info.st_mtimespec]
         _ = utimensat(AT_FDCWD, path, &times, 0)
         cache[path] = CachedStatus(size: size, modifiedAtMs: modifiedAtMs, status: status)
+        lifecycleIndex.refresh(path: path, size: size, modifiedAtMs: modifiedAtMs, fallback: status)
         return status
     }
 
@@ -533,6 +560,73 @@ final class CodexTranscriptStatusReader {
             return CodexTranscriptStatus(completedAtMs: nil, latestPromptAtMs: nil)
         }
         return codexTranscriptStatus(in: text)
+    }
+}
+
+/// 파일 끝 일부에 없는 종료 이벤트도 잃지 않도록, 작업별 lifecycle을 로컬에 보관한다.
+/// 첫 색인은 백그라운드에서 읽고 이후에는 마지막 64KB를 겹쳐 새로 추가된 JSONL만 반영한다.
+final class CodexLifecycleIndex {
+    private struct Entry: Codable {
+        let size: UInt64
+        let modifiedAtMs: Double
+        let status: CodexTranscriptStatus
+    }
+    private struct Store: Codable { var entries: [String: Entry] }
+
+    private let storeURL = FileManager.default.homeDirectoryForCurrentUser
+        .appendingPathComponent(".claude/retto-pet/codex-lifecycle.json")
+    private let stateQueue = DispatchQueue(label: "retto.codex-lifecycle.state")
+    private let scanQueue = DispatchQueue(label: "retto.codex-lifecycle.scan")
+    private var entries: [String: Entry]
+    private var pending: Set<String> = []
+
+    init() {
+        let stored = (try? Data(contentsOf: storeURL))
+            .flatMap { try? JSONDecoder().decode(Store.self, from: $0) }
+        entries = stored?.entries ?? [:]
+    }
+
+    func status(path: String, size: UInt64, modifiedAtMs: Double) -> CodexTranscriptStatus? {
+        stateQueue.sync {
+            guard let entry = entries[path], entry.size == size, entry.modifiedAtMs == modifiedAtMs else { return nil }
+            return entry.status
+        }
+    }
+
+    func refresh(path: String, size: UInt64, modifiedAtMs: Double, fallback: CodexTranscriptStatus) {
+        let request = stateQueue.sync { () -> (accepted: Bool, previous: Entry?) in
+            if pending.contains(path) { return (false, nil) }
+            pending.insert(path)
+            return (true, entries[path])
+        }
+        guard request.accepted else { return }
+        scanQueue.async { [weak self] in
+            guard let self else { return }
+            let scanned = Self.scan(path: path, from: request.previous?.size, previous: request.previous?.status ?? fallback)
+            self.stateQueue.sync {
+                self.entries[path] = Entry(size: size, modifiedAtMs: modifiedAtMs, status: scanned)
+                self.pending.remove(path)
+                self.save()
+            }
+        }
+    }
+
+    private static func scan(path: String, from previousSize: UInt64?, previous: CodexTranscriptStatus) -> CodexTranscriptStatus {
+        guard let handle = FileHandle(forReadingAtPath: path) else { return previous }
+        defer { try? handle.close() }
+        if let previousSize, previousSize > 0 {
+            let overlap: UInt64 = 64 * 1024
+            try? handle.seek(toOffset: previousSize > overlap ? previousSize - overlap : 0)
+        }
+        guard let data = try? handle.readToEnd(), let text = String(data: data, encoding: .utf8) else { return previous }
+        return previous.merged(with: codexTranscriptStatus(in: text))
+    }
+
+    private func save() {
+        let directory = storeURL.deletingLastPathComponent()
+        try? FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+        guard let data = try? JSONEncoder().encode(Store(entries: entries)) else { return }
+        try? data.write(to: storeURL, options: .atomic)
     }
 }
 
@@ -554,6 +648,9 @@ final class CodexRolloutDiscovery {
         diagnostic = "\(sessionsURL.path): \(paths.count) entries"
         for relative in paths where relative.hasSuffix(".jsonl") {
             let url = sessionsURL.appendingPathComponent(relative)
+            // 하위 에이전트는 상위 작업과 동일한 ID를 기록한다. 이 파일을 읽으면 최신
+            // 수정 시각 때문에 상위 대화가 worker 실행 내역으로 바뀐다.
+            guard !isCodexSubagentTranscript(path: url.path) else { continue }
             guard let attributes = try? FileManager.default.attributesOfItem(atPath: url.path),
                   let modified = attributes[.modificationDate] as? Date,
                   now.timeIntervalSince(modified) <= recentWindow,
@@ -577,7 +674,8 @@ final class CodexRolloutDiscovery {
               let record = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
               let payload = record["payload"] as? [String: Any],
               let threadId = (payload["id"] as? String) ?? (payload["session_id"] as? String),
-              !threadId.isEmpty else { return nil }
+              !threadId.isEmpty,
+              let title = titles[threadId], !title.isEmpty else { return nil }
 
         let fileSize = (try? FileManager.default.attributesOfItem(atPath: url.path)[.size] as? NSNumber)?.uint64Value ?? 0
         // 앞에서 session_meta를 읽었으므로 작은 파일도 반드시 처음으로 되돌린다. 안 그러면
@@ -605,7 +703,7 @@ final class CodexRolloutDiscovery {
             error: nil,
             projectName: nil,
             displayTitle: nil,
-            sessionTitle: titles[threadId],
+            sessionTitle: title,
             transcriptPath: url.path,
             lastAssistantMessage: nil,
             activeTaskSubject: nil,

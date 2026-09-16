@@ -199,6 +199,14 @@ function codexThreadNameFrom(threadId) {
   }
 }
 
+/// Codex 는 하위 에이전트 기록을 상위 작업 id 뒤에 `_하위에이전트id`를 붙인 별도
+/// 롤아웃 파일로 남긴다. 이 파일은 사람에게 보이는 대화가 아니라 worker 의 도구·중간
+/// 출력이라, 레토의 말풍선과 클릭 대상에 섞으면 상위 작업을 눌러도 worker 화면으로 보인다.
+function isCodexSubagentTranscript(transcriptPath) {
+  if (!transcriptPath) return false;
+  return /_[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}\.jsonl$/i.test(path.basename(transcriptPath));
+}
+
 function lastAssistantTextFrom(transcriptPath) {
   if (!transcriptPath) return '';
   let fd;
@@ -378,6 +386,10 @@ process.stdin.on('data', (chunk) => chunks.push(chunk));
 process.stdin.on('end', () => {
   let input = {};
   try { input = JSON.parse(chunks.join('') || '{}'); } catch {}
+  const transcriptPath = input.transcript_path || input.transcriptPath;
+  // 하위 에이전트는 상위 작업과 같은 session_id 로 훅을 부른다. 그대로 쓰면 상위
+  // 작업의 기록을 worker 롤아웃 경로로 덮어쓴다.
+  if (eventSource === 'codex' && isCodexSubagentTranscript(transcriptPath)) return;
   try { withRegistryLock(() => updateRegistry(input, process.argv[2])); } catch {}
 });
 
