@@ -95,6 +95,10 @@ if let index = CommandLine.arguments.firstIndex(of: "--render-skin-preview"),
     exit(renderPreview(to: CommandLine.arguments[index + 2], skin: skin))
 }
 
+if let index = CommandLine.arguments.firstIndex(of: "--render-magical-heart-transformation-preview"), index + 1 < CommandLine.arguments.count {
+    exit(renderMagicalHeartTransformationPreview(to: CommandLine.arguments[index + 1]))
+}
+
 let app = NSApplication.shared
 let delegate = AppDelegate()
 app.setActivationPolicy(.accessory)

@@ -211,6 +211,14 @@ final class RettoView: NSView {
         needsDisplay = true
     }
 
+    /// 효과와 포즈를 함께 검수하는 오프스크린 시트용 프레임 고정값이다.
+    /// 실제 타이머·상태 전환에는 쓰지 않는다.
+    func setFrameForPreview(_ frame: Int) {
+        let count = max(1, currentAnimation?.frames ?? 1)
+        frameIndex = min(max(frame, 0), count - 1)
+        needsDisplay = true
+    }
+
     private func updateAccessibility() {
         let animation = animationCatalog[state] ?? animationCatalog[.idle]!
         let selection = isPinned ? "고정한 세션" : "자동 선택 세션"

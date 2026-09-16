@@ -665,3 +665,55 @@ func renderPreview(to path: String, skin: PetSkin = .classic) -> Int32 {
     print(path)
     return 0
 }
+
+/// 진행중 변신 여섯 컷은 효과가 포즈를 가리지 않는지 따로 한 장에 그린다.
+func renderMagicalHeartTransformationPreview(to path: String) -> Int32 {
+    registerRettoFont()
+    guard let imageURL = Bundle.main.url(forResource: PetSkin.magicalHeart.resourceName, withExtension: "webp"),
+          let spriteSheet = NSImage(contentsOf: imageURL) else { return 1 }
+    let layout = petLayout(scale: 1)
+    let columns = 3
+    let gap: CGFloat = 28
+    let labelHeight: CGFloat = 24
+    let cardSize = layout.windowSize
+    let totalWidth = gap + (cardSize.width + gap) * CGFloat(columns)
+    let totalHeight = gap + (cardSize.height + labelHeight + gap) * 2
+    let sheet = NSImage(size: NSSize(width: totalWidth, height: totalHeight))
+    sheet.lockFocus()
+    NSColor(calibratedRed: 0.035, green: 0.07, blue: 0.23, alpha: 1).setFill()
+    NSRect(origin: .zero, size: sheet.size).fill()
+
+    for frame in 0..<6 {
+        let column = frame % columns
+        let row = frame / columns
+        let x = gap + CGFloat(column) * (cardSize.width + gap)
+        let y = totalHeight - gap - CGFloat(row + 1) * (cardSize.height + labelHeight) - CGFloat(row) * gap + labelHeight
+        let card = NSRect(x: x, y: y, width: cardSize.width, height: cardSize.height)
+        NSColor.white.withAlphaComponent(0.055).setFill()
+        NSBezierPath(roundedRect: card, xRadius: 18, yRadius: 18).fill()
+
+        let view = RettoView(frame: NSRect(origin: .zero, size: cardSize), spriteSheet: spriteSheet, skin: .magicalHeart, onOpenClaude: { _, _ in }, onOpenAttention: { _ in })
+        let fixture = "{\"state\":\"running\",\"sessionId\":\"preview\",\"projectName\":\"Retto\",\"displayTitle\":\"매지컬 하트 변신\"}".data(using: .utf8)!
+        guard let payload = try? JSONDecoder().decode(StatePayload.self, from: fixture) else { continue }
+        view.apply(payload, sessionCount: 1, attentionCount: 0, attentionState: nil, isPinned: false)
+        view.settleAnimations()
+        view.setFrameForPreview(frame)
+        NSGraphicsContext.saveGraphicsState()
+        let transform = NSAffineTransform()
+        transform.translateX(by: card.minX, yBy: card.minY)
+        transform.concat()
+        view.draw(view.bounds)
+        NSGraphicsContext.restoreGraphicsState()
+        ("진행중  \(frame + 1) / 6" as NSString).draw(at: NSPoint(x: x + 8, y: y - labelHeight + 5), withAttributes: [
+            .foregroundColor: NSColor.white.withAlphaComponent(0.9),
+            .font: NSFont.boldSystemFont(ofSize: 12)
+        ])
+    }
+    sheet.unlockFocus()
+    guard let tiff = sheet.tiffRepresentation,
+          let rep = NSBitmapImageRep(data: tiff),
+          let png = rep.representation(using: .png, properties: [:]) else { return 1 }
+    do { try png.write(to: URL(fileURLWithPath: path)) } catch { return 1 }
+    print(path)
+    return 0
+}
