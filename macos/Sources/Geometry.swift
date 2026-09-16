@@ -85,7 +85,7 @@ enum PetSkin: String, CaseIterable {
     /// 받아 간 쪽에서는 파일이 없으므로 메뉴에 자물쇠로 뜨고 고를 수 없다.
     var isPersonal: Bool {
         switch self {
-        case .rilakkuma, .rilakkumaCape, .magicalHeart: return true
+        case .rilakkuma, .rilakkumaCape: return true
         default: return false
         }
     }
