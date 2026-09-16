@@ -77,6 +77,10 @@ cp "$ASSETS_DIR/spritesheet.webp" "$RESOURCES_DIR/spritesheet.webp"
 for skin in spritesheet-angel spritesheet-bee spritesheet-bunny spritesheet-luna spritesheet-rilakkuma spritesheet-rilakkuma-cape spritesheet-magical-heart; do
   [ -f "$ASSETS_DIR/$skin.webp" ] && cp "$ASSETS_DIR/$skin.webp" "$RESOURCES_DIR/$skin.webp"
 done
+# 매지컬 하트의 진행 중 변신 이펙트는 캐릭터와 분리한 앞·뒤 투명 아틀라스다.
+for effect in spritesheet-magical-heart-effects-back spritesheet-magical-heart-effects-front; do
+  [ -f "$ASSETS_DIR/$effect.webp" ] && cp "$ASSETS_DIR/$effect.webp" "$RESOURCES_DIR/$effect.webp"
+done
 cp "$ASSETS_DIR/NanumMiNiSonGeurSsi.ttf" "$RESOURCES_DIR/NanumMiNiSonGeurSsi.ttf"
 # 훅을 앱에 넣어 둔다. 설치기와 「레토 제거」 가 이걸 쓴다.
 rm -rf "$RESOURCES_DIR/hook"
