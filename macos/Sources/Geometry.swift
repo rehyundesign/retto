@@ -8,9 +8,9 @@ import Foundation
 // 고양이를 줄여야 했다. 여백은 투명이라 hitTest 가 클릭을 통과시킨다.
 let cellWidth: CGFloat = 224
 // 칸은 머리 위로도 여유를 둔다. 스킨의 후드 귀나 날개 끝이 여기로 들어간다.
-let cellHeight: CGFloat = 240
+let cellHeight: CGFloat = 320
 let sheetWidth: CGFloat = 1792
-let sheetHeight: CGFloat = 2880
+let sheetHeight: CGFloat = 3840
 let rettoHandwritingFontName = "NanumMiNiSonGeurSsi"
 
 /// 기본 스킨은 Retto가 쓰는 8×12 규격이다. 개인 v2 스킨은 Codex 펫 규격(8×11)을
@@ -20,14 +20,14 @@ struct SpriteSheetLayout: Equatable {
     let cellHeight: CGFloat
     let rows: Int
 
-    static let retto = SpriteSheetLayout(cellWidth: 224, cellHeight: 240, rows: 12)
+    static let retto = SpriteSheetLayout(cellWidth: 224, cellHeight: 320, rows: 12)
     /// 고해상도 개인 스킨도 같은 8×12 프레임 수를 쓰고, 소스 이미지만 2배로 읽는다.
-    static let retto2x = SpriteSheetLayout(cellWidth: 448, cellHeight: 480, rows: 12)
+    static let retto2x = SpriteSheetLayout(cellWidth: 448, cellHeight: 640, rows: 12)
     static let codexV2 = SpriteSheetLayout(cellWidth: 192, cellHeight: 208, rows: 11)
 
     static func forImage(size: NSSize) -> SpriteSheetLayout? {
-        if Int(size.width) == 1792, Int(size.height) == 2880 { return .retto }
-        if Int(size.width) == 3584, Int(size.height) == 5760 { return .retto2x }
+        if Int(size.width) == 1792, Int(size.height) == 3840 { return .retto }
+        if Int(size.width) == 3584, Int(size.height) == 7680 { return .retto2x }
         if Int(size.width) == 1536, Int(size.height) == 2288 { return .codexV2 }
         return nil
     }
@@ -43,7 +43,7 @@ enum DragRun {
 }
 
 /// 레토의 겉모습. 아틀라스 파일을 통째로 갈아 끼운다.
-/// 스킨마다 칸 규격(224x240, 8x12)은 같아야 한다 — 그리는 자리 계산이 공용이다.
+/// 스킨마다 칸 규격(224x320, 8x12)은 같아야 한다 — 그리는 자리 계산이 공용이다.
 enum PetSkin: String, CaseIterable {
     case classic
     case angelWings
