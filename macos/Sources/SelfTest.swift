@@ -666,24 +666,26 @@ func renderPreview(to path: String, skin: PetSkin = .classic) -> Int32 {
     return 0
 }
 
-/// 진행중 변신 여섯 컷은 효과가 포즈를 가리지 않는지 따로 한 장에 그린다.
+/// 진행중 변신 다섯 컷은 효과가 포즈를 가리지 않는지 따로 한 장에 그린다.
 func renderMagicalHeartTransformationPreview(to path: String) -> Int32 {
     registerRettoFont()
     guard let imageURL = Bundle.main.url(forResource: PetSkin.magicalHeart.resourceName, withExtension: "webp"),
           let spriteSheet = NSImage(contentsOf: imageURL) else { return 1 }
     let layout = petLayout(scale: 1)
     let columns = 3
+    let frameCount = 5
     let gap: CGFloat = 28
     let labelHeight: CGFloat = 24
     let cardSize = layout.windowSize
     let totalWidth = gap + (cardSize.width + gap) * CGFloat(columns)
-    let totalHeight = gap + (cardSize.height + labelHeight + gap) * 2
+    let rows = Int(ceil(CGFloat(frameCount) / CGFloat(columns)))
+    let totalHeight = gap + (cardSize.height + labelHeight + gap) * CGFloat(rows)
     let sheet = NSImage(size: NSSize(width: totalWidth, height: totalHeight))
     sheet.lockFocus()
     NSColor(calibratedRed: 0.035, green: 0.07, blue: 0.23, alpha: 1).setFill()
     NSRect(origin: .zero, size: sheet.size).fill()
 
-    for frame in 0..<6 {
+    for frame in 0..<frameCount {
         let column = frame % columns
         let row = frame / columns
         let x = gap + CGFloat(column) * (cardSize.width + gap)
@@ -704,7 +706,7 @@ func renderMagicalHeartTransformationPreview(to path: String) -> Int32 {
         transform.concat()
         view.draw(view.bounds)
         NSGraphicsContext.restoreGraphicsState()
-        ("진행중  \(frame + 1) / 6" as NSString).draw(at: NSPoint(x: x + 8, y: y - labelHeight + 5), withAttributes: [
+        ("진행중  \(frame + 1) / \(frameCount)" as NSString).draw(at: NSPoint(x: x + 8, y: y - labelHeight + 5), withAttributes: [
             .foregroundColor: NSColor.white.withAlphaComponent(0.9),
             .font: NSFont.boldSystemFont(ofSize: 12)
         ])
