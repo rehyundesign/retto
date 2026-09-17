@@ -238,11 +238,6 @@ final class RettoView: NSView {
     private var currentAnimation: Animation? {
         if let dragRun { return dragRunAnimations[dragRun] }
         guard let animation = animationCatalog[visibleState] else { return nil }
-        // 매지컬 하트의 첫 running 컷은 효과 없는 대기 포즈라 변신 루프에서는 쓰지 않는다.
-        // 아틀라스 원본은 보존하고, 2~6번 컷만 5프레임으로 순환한다.
-        if skin == .magicalHeart && visibleState == .running {
-            return Animation(row: animation.row, frames: 5, interval: animation.interval, cycleLimit: animation.cycleLimit, kicker: animation.kicker, title: animation.title, tone: animation.tone)
-        }
         return animation
     }
 
@@ -498,7 +493,7 @@ final class RettoView: NSView {
             // v2 개인 스킨은 11행이라 레토 전용 잠자기 행이 없다. idle 자세에 호흡 효과를
             // 더해 잠든 모습을 유지한다. 나머지 상태와 시선 행은 같은 순서다.
             row = visibleState == .sleeping && spriteLayout.rows == 11 ? 0 : animation.row
-            column = frameIndex + (skin == .magicalHeart && visibleState == .running ? 1 : 0)
+            column = frameIndex
         }
         let sourceRect = NSRect(
             x: CGFloat(column) * spriteLayout.cellWidth,
@@ -507,8 +502,7 @@ final class RettoView: NSView {
             height: spriteLayout.cellHeight
         )
 
-        let isTransforming = skin == .magicalHeart && visibleState == .running
-        if isTransforming { drawTransformationEffect(magicalHeartEffectsBack, in: petRect, sourceRect: sourceRect) }
+        let hasBakedTransformation = skin == .magicalHeart && visibleState == .running
 
         // 발밑 바닥 그림자. 예전에는 실루엣 드롭 섀도(blur 16)를 썼는데, 흐림이 사방으로
         // 퍼져 머리 위에도 회색 안개가 생겼다. 흰 배경에서는 그게 투명한 사각형처럼 보였다.
@@ -525,9 +519,7 @@ final class RettoView: NSView {
         NSGraphicsContext.restoreGraphicsState()
 
         if skin == .magicalHeart {
-            if isTransforming {
-                drawTransformationEffect(magicalHeartEffectsFront, in: petRect, sourceRect: sourceRect)
-            } else {
+            if !hasBakedTransformation {
                 drawMagicalHeartAmbientEffects(petRect: petRect, scale: uiScale, frame: frameIndex)
             }
         }

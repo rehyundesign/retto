@@ -95,8 +95,8 @@ let dragRunAnimations: [DragRun: Animation] = [
 
 let animationCatalog: [PetState: Animation] = [
     .idle: Animation(row: 0, frames: 6, interval: 0.23, cycleLimit: nil, kicker: "RESTING", title: "조용히 곁을 지키는 중", tone: toneQuiet),
-    // 매지컬 하트의 진행 중 행은 변신 연출을 읽을 수 있게 6프레임을 1.5초에 한 바퀴 돌린다.
-    .running: Animation(row: 7, frames: 6, interval: 0.25, cycleLimit: nil, kicker: "THINKING", title: "AI가 생각중…", tone: toneWorking),
+    // 매지컬 하트의 진행 중 행은 8프레임 변신 연출을 2초에 한 바퀴 돌린다.
+    .running: Animation(row: 7, frames: 8, interval: 0.25, cycleLimit: nil, kicker: "THINKING", title: "AI가 생각중…", tone: toneWorking),
     .review: Animation(row: 8, frames: 6, interval: 0.155, cycleLimit: nil, kicker: "USING A TOOL", title: "도구를 쓰는 중", tone: toneWorking),
     .waiting: Animation(row: 6, frames: 6, interval: 0.31, cycleLimit: nil, kicker: "NEEDS YOU", title: "네 결정을 기다리는 중", tone: toneNeedsYou),
     .failed: Animation(row: 5, frames: 8, interval: 0.18, cycleLimit: nil, kicker: "OOPS", title: "잠깐 발이 꼬였어", tone: toneFailed),
