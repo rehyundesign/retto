@@ -666,14 +666,14 @@ func renderPreview(to path: String, skin: PetSkin = .classic) -> Int32 {
     return 0
 }
 
-/// 진행중 변신 다섯 컷은 효과가 포즈를 가리지 않는지 따로 한 장에 그린다.
+/// 진행중 변신 여덟 컷을 런타임 순서로 한 장에 그린다.
 func renderMagicalHeartTransformationPreview(to path: String) -> Int32 {
     registerRettoFont()
     guard let imageURL = Bundle.main.url(forResource: PetSkin.magicalHeart.resourceName, withExtension: "webp"),
           let spriteSheet = NSImage(contentsOf: imageURL) else { return 1 }
     let layout = petLayout(scale: 1)
     let columns = 3
-    let frameCount = 5
+    let frameCount = 8
     let gap: CGFloat = 28
     let labelHeight: CGFloat = 24
     let cardSize = layout.windowSize
