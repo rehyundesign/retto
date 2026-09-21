@@ -223,6 +223,12 @@ final class RettoView: NSView {
         needsDisplay = true
     }
 
+    /// 시선 행을 실제 렌더 경로로 점검하는 오프스크린 미리보기 전용 설정값이다.
+    func setGazeDirectionForPreview(_ direction: Int) {
+        lookDirection = min(max(direction, 0), gazeDirectionCount - 1)
+        needsDisplay = true
+    }
+
     private func updateAccessibility() {
         let animation = animationCatalog[state] ?? animationCatalog[.idle]!
         let selection = isPinned ? "고정한 세션" : "자동 선택 세션"
@@ -327,8 +333,7 @@ final class RettoView: NSView {
         let dx = point.x - petRect.midX
         let dy = point.y - petRect.midY
         guard hypot(dx, dy) > 22 * petScale else { return }
-        let degrees = (atan2(dx, dy) * 180 / .pi + 360).truncatingRemainder(dividingBy: 360)
-        lookDirection = Int((degrees / 22.5).rounded()) % 16
+        lookDirection = gazeDirection(dx: dx, dy: dy, previous: lookDirection)
         scheduleGazeReset()
         needsDisplay = true
     }
