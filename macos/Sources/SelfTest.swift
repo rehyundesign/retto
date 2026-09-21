@@ -366,6 +366,15 @@ func runSelfTest() -> Int32 {
     let gazeStatesOK = gazeStates == [.idle, .running, .waving]
         && gazeHoldDuration > 0
         && gazeHoldDuration <= 1
+        && gazeDirectionCount == 16
+        && gazeDirection(dx: 0, dy: 1, previous: nil) == 0
+        && gazeDirection(dx: 1, dy: 0, previous: nil) == 4
+        && gazeDirection(dx: 0, dy: -1, previous: nil) == 8
+        && gazeDirection(dx: -1, dy: 0, previous: nil) == 12
+        // 11.25도 경계 바로 옆의 미세한 이동은 현재 고개 방향을 유지한다.
+        && gazeDirection(dx: 0.22, dy: 1, previous: 0) == 0
+        // 히스테리시스 바깥에서는 다음 방향으로 넘어간다.
+        && gazeDirection(dx: 0.34, dy: 1, previous: 0) == 1
     // 배지는 말풍선 오른쪽 위에 고정이고, 왼쪽 이름표와 같은 만큼 위로 솟는다.
     let badge = attentionBadgeRect(ribbon: baseline.ribbonRect, scale: baseline.chromeScale)
     let badgeLayoutOK = badge.width == attentionBadgeSide * baseline.chromeScale
@@ -707,6 +716,59 @@ func renderMagicalHeartTransformationPreview(to path: String) -> Int32 {
         view.draw(view.bounds)
         NSGraphicsContext.restoreGraphicsState()
         ("진행중  \(frame + 1) / \(frameCount)" as NSString).draw(at: NSPoint(x: x + 8, y: y - labelHeight + 5), withAttributes: [
+            .foregroundColor: NSColor.white.withAlphaComponent(0.9),
+            .font: NSFont.boldSystemFont(ofSize: 12)
+        ])
+    }
+    sheet.unlockFocus()
+    guard let tiff = sheet.tiffRepresentation,
+          let rep = NSBitmapImageRep(data: tiff),
+          let png = rep.representation(using: .png, properties: [:]) else { return 1 }
+    do { try png.write(to: URL(fileURLWithPath: path)) } catch { return 1 }
+    print(path)
+    return 0
+}
+
+/// 매지컬 하트의 16방향 고개가 실제 뷰의 좌표 변환으로 모두 맞는지 확인하는 런타임 보드다.
+func renderMagicalHeartGazePreview(to path: String) -> Int32 {
+    registerRettoFont()
+    guard let imageURL = Bundle.main.url(forResource: PetSkin.magicalHeart.resourceName, withExtension: "webp"),
+          let spriteSheet = NSImage(contentsOf: imageURL) else { return 1 }
+    let layout = petLayout(scale: 1)
+    let columns = 4
+    let gap: CGFloat = 20
+    let labelHeight: CGFloat = 24
+    let rows = Int(ceil(CGFloat(gazeDirectionCount) / CGFloat(columns)))
+    let cardSize = layout.windowSize
+    let size = NSSize(
+        width: gap + (cardSize.width + gap) * CGFloat(columns),
+        height: gap + (cardSize.height + labelHeight + gap) * CGFloat(rows)
+    )
+    let sheet = NSImage(size: size)
+    sheet.lockFocus()
+    NSColor(calibratedRed: 0.035, green: 0.07, blue: 0.23, alpha: 1).setFill()
+    NSRect(origin: .zero, size: size).fill()
+    for direction in 0..<gazeDirectionCount {
+        let column = direction % columns
+        let row = direction / columns
+        let x = gap + CGFloat(column) * (cardSize.width + gap)
+        let y = size.height - gap - CGFloat(row + 1) * (cardSize.height + labelHeight) - CGFloat(row) * gap + labelHeight
+        let card = NSRect(x: x, y: y, width: cardSize.width, height: cardSize.height)
+        NSColor.white.withAlphaComponent(0.055).setFill()
+        NSBezierPath(roundedRect: card, xRadius: 18, yRadius: 18).fill()
+        let view = RettoView(frame: NSRect(origin: .zero, size: cardSize), spriteSheet: spriteSheet, skin: .magicalHeart, onOpenClaude: { _, _ in }, onOpenAttention: { _ in })
+        let fixture = "{\"state\":\"idle\",\"sessionId\":\"preview\",\"projectName\":\"Retto\",\"displayTitle\":\"매지컬 하트\"}".data(using: .utf8)!
+        guard let payload = try? JSONDecoder().decode(StatePayload.self, from: fixture) else { continue }
+        view.apply(payload, sessionCount: 1, attentionCount: 0, attentionState: nil, isPinned: false)
+        view.settleAnimations()
+        view.setGazeDirectionForPreview(direction)
+        NSGraphicsContext.saveGraphicsState()
+        let transform = NSAffineTransform()
+        transform.translateX(by: card.minX, yBy: card.minY)
+        transform.concat()
+        view.draw(view.bounds)
+        NSGraphicsContext.restoreGraphicsState()
+        ("방향  \(direction + 1) / \(gazeDirectionCount)" as NSString).draw(at: NSPoint(x: x + 8, y: y - labelHeight + 5), withAttributes: [
             .foregroundColor: NSColor.white.withAlphaComponent(0.9),
             .font: NSFont.boldSystemFont(ofSize: 12)
         ])
