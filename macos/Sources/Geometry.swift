@@ -257,6 +257,25 @@ let gazeStates: Set<PetState> = [.idle, .running, .waving]
 /// 방향별 시선 칸은 정지 그림이므로, 이 시간 뒤 기본 모션으로 돌아간다.
 let gazeHoldDuration: TimeInterval = 0.8
 
+/// 시선 아틀라스는 위쪽부터 시계 방향으로 16개 머리 방향을 담는다.
+let gazeDirectionCount = 16
+
+/// 인접 방향의 경계에서 커서가 조금 흔들려도 고개가 매 이벤트마다 바뀌지 않게 남기는 여유 각도.
+let gazeDirectionHysteresisDegrees: CGFloat = 4
+
+/// 커서 위치를 시선 아틀라스의 열로 바꾼다. 기존 방향이 있으면 경계 바깥까지 그 방향을 유지한다.
+func gazeDirection(dx: CGFloat, dy: CGFloat, previous: Int?) -> Int {
+    let sectorDegrees = 360 / CGFloat(gazeDirectionCount)
+    let halfSector = sectorDegrees / 2
+    let degrees = (atan2(dx, dy) * 180 / .pi + 360).truncatingRemainder(dividingBy: 360)
+    let nearest = Int((degrees / sectorDegrees).rounded()) % gazeDirectionCount
+    guard let previous else { return nearest }
+
+    let previousCenter = CGFloat(previous) * sectorDegrees
+    let offset = abs((degrees - previousCenter + 540).truncatingRemainder(dividingBy: 360) - 180)
+    return offset <= halfSector + gazeDirectionHysteresisDegrees ? previous : nearest
+}
+
 /// 레토를 화면 어디에 둘지. 자유 위치는 끌어다 놓은 자리를 그대로 쓴다.
 enum PetCorner: String, CaseIterable {
     case free

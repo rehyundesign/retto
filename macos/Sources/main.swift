@@ -99,6 +99,10 @@ if let index = CommandLine.arguments.firstIndex(of: "--render-magical-heart-tran
     exit(renderMagicalHeartTransformationPreview(to: CommandLine.arguments[index + 1]))
 }
 
+if let index = CommandLine.arguments.firstIndex(of: "--render-magical-heart-gaze-preview"), index + 1 < CommandLine.arguments.count {
+    exit(renderMagicalHeartGazePreview(to: CommandLine.arguments[index + 1]))
+}
+
 let app = NSApplication.shared
 let delegate = AppDelegate()
 app.setActivationPolicy(.accessory)
