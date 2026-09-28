@@ -11,7 +11,14 @@ final class RettoView: NSView {
     }
     /// 아틀라스만으로는 표현하기 어려운 스킨 전용 효과를 고른다.
     var skin: PetSkin {
-        didSet { needsDisplay = true }
+        didSet {
+            guard skin != oldValue else { return }
+            // 매지컬 하트(8칸)에서 일반 스킨(6칸)으로 바꾸는 순간에도 이전의
+            // 6·7번 프레임을 한 번 그리지 않도록, 즉시 첫 프레임부터 시작한다.
+            frameIndex = 0
+            completedCycles = 0
+            restartAnimation()
+        }
     }
     private var spriteLayout: SpriteSheetLayout {
         SpriteSheetLayout.forImage(size: spriteSheet.size) ?? .retto
@@ -244,7 +251,19 @@ final class RettoView: NSView {
     private var currentAnimation: Animation? {
         if let dragRun { return dragRunAnimations[dragRun] }
         guard let animation = animationCatalog[visibleState] else { return nil }
-        return animation
+        // 기존 스킨의 진행 중 행은 여섯 칸만 쓴다. 매지컬 하트만 여덟 칸 전체를
+        // 변신 연출로 채웠는데, 공용 8프레임 값을 그대로 읽으면 일반 스킨에서 뒤의
+        // 두 투명 칸까지 재생되어 몸이 끊겨 보인다.
+        guard skin != .magicalHeart, visibleState == .running else { return animation }
+        return Animation(
+            row: animation.row,
+            frames: 6,
+            interval: animation.interval,
+            cycleLimit: animation.cycleLimit,
+            kicker: animation.kicker,
+            title: animation.title,
+            tone: animation.tone
+        )
     }
 
     private func restartAnimation() {

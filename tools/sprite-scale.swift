@@ -12,9 +12,9 @@ import CoreGraphics
 import Foundation
 
 let cellWidth = 224
-let cellHeight = 240
+let cellHeight = 320
 let columns = 8
-let rows = 11
+let rows = 12
 
 struct CellMetrics {
     let row: Int
