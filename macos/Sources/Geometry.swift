@@ -48,7 +48,6 @@ enum PetSkin: String, CaseIterable {
     case classic
     case angelWings
     case bee
-    case luna
     case bunny
     case rilakkuma
     case rilakkumaCape
@@ -59,7 +58,6 @@ enum PetSkin: String, CaseIterable {
         case .classic: return "기본"
         case .angelWings: return "천사 날개"
         case .bee: return "꿀벌"
-        case .luna: return "달 고양이"
         case .bunny: return "딸기 토끼"
         case .rilakkuma: return "리락쿠마"
         case .rilakkumaCape: return "리락쿠마 망토"
@@ -73,7 +71,6 @@ enum PetSkin: String, CaseIterable {
         case .classic: return "spritesheet"
         case .angelWings: return "spritesheet-angel"
         case .bee: return "spritesheet-bee"
-        case .luna: return "spritesheet-luna"
         case .bunny: return "spritesheet-bunny"
         case .rilakkuma: return "spritesheet-rilakkuma"
         case .rilakkumaCape: return "spritesheet-rilakkuma-cape"
