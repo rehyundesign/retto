@@ -101,6 +101,10 @@ if let index = CommandLine.arguments.firstIndex(of: "--setup-preview"), index + 
     exit(renderSetupPreview(to: CommandLine.arguments[index + 1]))
 }
 
+if let index = CommandLine.arguments.firstIndex(of: "--render-christmas16-preview"), index + 1 < CommandLine.arguments.count {
+    exit(renderChristmas16Preview(to: CommandLine.arguments[index + 1]))
+}
+
 if let index = CommandLine.arguments.firstIndex(of: "--render-preview"), index + 1 < CommandLine.arguments.count {
     exit(renderPreview(to: CommandLine.arguments[index + 1]))
 }

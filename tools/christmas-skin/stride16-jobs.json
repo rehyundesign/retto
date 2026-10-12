@@ -1,0 +1,314 @@
+[
+  {
+    "id": "moveRight-stride-00",
+    "group": "moveRight",
+    "canonical_pose": "moveRight-0",
+    "whole_pose": true,
+    "stride": true,
+    "phase": 0,
+    "reference": "gen-smooth16/moveRight-stride-00-source.png",
+    "description": "Near LEFT forepaw planted forward; far RIGHT hindpaw planted under hip. Far RIGHT foreleg lifts under chest, near LEFT hindleg swings forward under belly.",
+    "source_directory": "gen-smooth16",
+    "profile": "grounded-diagonal-trot-shared-scale",
+    "near_contact_baseline": 620,
+    "pose_references": [
+      0
+    ],
+    "generation_mode": "built-in image_gen",
+    "generated_source_path": "/Users/luxia/.codex/generated_images/01a119f8-a205-7da2-b34f-b0a1d6ade04b/exec-255caf0d-81b0-4410-ab1d-41ceb5307c6c.png",
+    "prompt": "Edit the reference into ONE independent transparent Christmas Retto full-body motion frame. Keep EXACT same character identity, face/eye size, compact SHORT kitten trunk, head width, head view, fluffy grey-brown tail shape, Santa cap, TWO gold buttons, brown belt, red plush coat/white collar and cuffs. Keep the same canvas framing, lighting/material, scale, horizontal shoulder/hip positions, and near/far ground depths. Only four leg articulations and adjoining sleeves/fur change for a slow GROUNDED alternating diagonal-pair trot. Full coherent whole cat; no frozen-head pasted composite. Near LEFT legs are closer to viewer, far RIGHT legs behind with clear anatomical occlusion. HINDLEGS bare cream fur; coat sleeves only FORELEGS. At least one diagonal pair supports the body; no flying/bunny hopping/both front paws synchronized. Natural flexed elbows/knees, compact paws. Near-depth contact toes match reference planted near forepaw's baseline; far-depth contact toes match its far supporting hindpaw baseline. Body moves forward only conceptually: no screen sliding, body enlargement or tail swing. No effects, dust, shadows, ground lines, smears, ghosts, labels, opaque patches or strips. Output only one crisp full character at same scale with true transparent alpha. Near LEFT forepaw planted forward; far RIGHT hindpaw planted under hip. Far RIGHT foreleg lifts under chest, near LEFT hindleg swings forward under belly."
+  },
+  {
+    "id": "moveRight-stride-01",
+    "group": "moveRight",
+    "canonical_pose": "moveRight-0",
+    "whole_pose": true,
+    "stride": true,
+    "phase": 0.0625,
+    "reference": "gen-smooth16/moveRight-stride-00-source.png",
+    "description": "Independent midpoint between grounded anchors 0 and 1",
+    "source_directory": "gen-smooth16",
+    "profile": "grounded-diagonal-trot-shared-scale",
+    "near_contact_baseline": 620,
+    "pose_references": [
+      0,
+      2
+    ],
+    "generation_mode": "built-in image_gen",
+    "generated_source_path": "/Users/luxia/.codex/generated_images/01a119f8-a205-7da2-b34f-b0a1d6ade04b/exec-442f6170-4512-4939-b8c5-f72b4fdf1bba.png",
+    "prompt": "Generate ONE independently drawn whole-character in-between pose for this grounded Christmas Retto trot. Reference1 is the exact previous pose; reference2 the exact next pose. Construct the four leg articulations halfway between the endpoints, preserving weight-bearing diagonal pair and near/far depth. Keep head, trunk, face size, cap/pompom, tail profile, two gold buttons, belt, camera, lighting/material, canvas placement and scale consistent with these endpoints. Supporting toes follow their reference contact plane; no new crouch, no airborne hop, no paired foreleg movement. Far limbs behind near limbs and hindlegs bare cream fur. This is a real intermediate leg/posture drawing, NOT a blend, morph, warp or cut-and-paste. No ghosting, effects, ground, shadows, text, labels, opaque patches, extra limbs or strip. One crisp full character with true alpha. Keep near/far foot paths continuous from previous to next and keep head/trunk at the corresponding midpoint height."
+  },
+  {
+    "id": "moveRight-stride-02",
+    "group": "moveRight",
+    "canonical_pose": "moveRight-0",
+    "whole_pose": true,
+    "stride": true,
+    "phase": 0.125,
+    "reference": "gen-smooth16/moveRight-stride-00-source.png",
+    "description": "Near LEFT forepaw rolls backward in support; far RIGHT hindpaw pushes backward. Opposite pair passes under shoulder and hip, just above ground.",
+    "source_directory": "gen-smooth16",
+    "profile": "grounded-diagonal-trot-shared-scale",
+    "near_contact_baseline": 620,
+    "pose_references": [
+      0
+    ],
+    "generation_mode": "built-in image_gen",
+    "generated_source_path": "/Users/luxia/.codex/generated_images/01a119f8-a205-7da2-b34f-b0a1d6ade04b/exec-0ae32027-8d26-4da7-a100-172b634a6c97.png",
+    "prompt": "Edit the reference into ONE independent transparent Christmas Retto full-body motion frame. Keep EXACT same character identity, face/eye size, compact SHORT kitten trunk, head width, head view, fluffy grey-brown tail shape, Santa cap, TWO gold buttons, brown belt, red plush coat/white collar and cuffs. Keep the same canvas framing, lighting/material, scale, horizontal shoulder/hip positions, and near/far ground depths. Only four leg articulations and adjoining sleeves/fur change for a slow GROUNDED alternating diagonal-pair trot. Full coherent whole cat; no frozen-head pasted composite. Near LEFT legs are closer to viewer, far RIGHT legs behind with clear anatomical occlusion. HINDLEGS bare cream fur; coat sleeves only FORELEGS. At least one diagonal pair supports the body; no flying/bunny hopping/both front paws synchronized. Natural flexed elbows/knees, compact paws. Near-depth contact toes match reference planted near forepaw's baseline; far-depth contact toes match its far supporting hindpaw baseline. Body moves forward only conceptually: no screen sliding, body enlargement or tail swing. No effects, dust, shadows, ground lines, smears, ghosts, labels, opaque patches or strips. Output only one crisp full character at same scale with true transparent alpha. Near LEFT forepaw rolls backward in support; far RIGHT hindpaw pushes backward. Opposite pair passes under shoulder and hip, just above ground."
+  },
+  {
+    "id": "moveRight-stride-03",
+    "group": "moveRight",
+    "canonical_pose": "moveRight-0",
+    "whole_pose": true,
+    "stride": true,
+    "phase": 0.1875,
+    "reference": "gen-smooth16/moveRight-stride-00-source.png",
+    "description": "Independent midpoint between grounded anchors 1 and 2",
+    "source_directory": "gen-smooth16",
+    "profile": "grounded-diagonal-trot-shared-scale",
+    "near_contact_baseline": 620,
+    "pose_references": [
+      2,
+      4
+    ],
+    "generation_mode": "built-in image_gen",
+    "generated_source_path": "/Users/luxia/.codex/generated_images/01a119f8-a205-7da2-b34f-b0a1d6ade04b/exec-7d1af8ec-c490-405c-8473-a650f777409c.png",
+    "prompt": "Generate ONE independently drawn whole-character in-between pose for this grounded Christmas Retto trot. Reference1 is the exact previous pose; reference2 the exact next pose. Construct the four leg articulations halfway between the endpoints, preserving weight-bearing diagonal pair and near/far depth. Keep head, trunk, face size, cap/pompom, tail profile, two gold buttons, belt, camera, lighting/material, canvas placement and scale consistent with these endpoints. Supporting toes follow their reference contact plane; no new crouch, no airborne hop, no paired foreleg movement. Far limbs behind near limbs and hindlegs bare cream fur. This is a real intermediate leg/posture drawing, NOT a blend, morph, warp or cut-and-paste. No ghosting, effects, ground, shadows, text, labels, opaque patches, extra limbs or strip. One crisp full character with true alpha. Keep near/far foot paths continuous from previous to next and keep head/trunk at the corresponding midpoint height."
+  },
+  {
+    "id": "moveRight-stride-04",
+    "group": "moveRight",
+    "canonical_pose": "moveRight-0",
+    "whole_pose": true,
+    "stride": true,
+    "phase": 0.25,
+    "reference": "gen-smooth16/moveRight-stride-00-source.png",
+    "description": "Supporting near LEFT forepaw and far RIGHT hindpaw pass beneath shoulder/hip. Swinging far RIGHT forepaw and near LEFT hindpaw reach forward, almost landing.",
+    "source_directory": "gen-smooth16",
+    "profile": "grounded-diagonal-trot-shared-scale",
+    "near_contact_baseline": 620,
+    "pose_references": [
+      0
+    ],
+    "generation_mode": "built-in image_gen",
+    "generated_source_path": "/Users/luxia/.codex/generated_images/01a119f8-a205-7da2-b34f-b0a1d6ade04b/exec-3e9bb21a-ec34-4168-a613-630ec8a01d30.png",
+    "prompt": "Edit the reference into ONE independent transparent Christmas Retto full-body motion frame. Keep EXACT same character identity, face/eye size, compact SHORT kitten trunk, head width, head view, fluffy grey-brown tail shape, Santa cap, TWO gold buttons, brown belt, red plush coat/white collar and cuffs. Keep the same canvas framing, lighting/material, scale, horizontal shoulder/hip positions, and near/far ground depths. Only four leg articulations and adjoining sleeves/fur change for a slow GROUNDED alternating diagonal-pair trot. Full coherent whole cat; no frozen-head pasted composite. Near LEFT legs are closer to viewer, far RIGHT legs behind with clear anatomical occlusion. HINDLEGS bare cream fur; coat sleeves only FORELEGS. At least one diagonal pair supports the body; no flying/bunny hopping/both front paws synchronized. Natural flexed elbows/knees, compact paws. Near-depth contact toes match reference planted near forepaw's baseline; far-depth contact toes match its far supporting hindpaw baseline. Body moves forward only conceptually: no screen sliding, body enlargement or tail swing. No effects, dust, shadows, ground lines, smears, ghosts, labels, opaque patches or strips. Output only one crisp full character at same scale with true transparent alpha. Supporting near LEFT forepaw and far RIGHT hindpaw pass beneath shoulder/hip. Swinging far RIGHT forepaw and near LEFT hindpaw reach forward, almost landing."
+  },
+  {
+    "id": "moveRight-stride-05",
+    "group": "moveRight",
+    "canonical_pose": "moveRight-0",
+    "whole_pose": true,
+    "stride": true,
+    "phase": 0.3125,
+    "reference": "gen-smooth16/moveRight-stride-00-source.png",
+    "description": "Independent midpoint between grounded anchors 2 and 3",
+    "source_directory": "gen-smooth16",
+    "profile": "grounded-diagonal-trot-shared-scale",
+    "near_contact_baseline": 620,
+    "pose_references": [
+      4,
+      6
+    ],
+    "generation_mode": "built-in image_gen",
+    "generated_source_path": "/Users/luxia/.codex/generated_images/01a119f8-a205-7da2-b34f-b0a1d6ade04b/exec-e2bed4c3-f6d0-4ee8-a5a7-87b63cdb1a5d.png",
+    "prompt": "Generate ONE independently drawn whole-character in-between pose for this grounded Christmas Retto trot. Reference1 is the exact previous pose; reference2 the exact next pose. Construct the four leg articulations halfway between the endpoints, preserving weight-bearing diagonal pair and near/far depth. Keep head, trunk, face size, cap/pompom, tail profile, two gold buttons, belt, camera, lighting/material, canvas placement and scale consistent with these endpoints. Supporting toes follow their reference contact plane; no new crouch, no airborne hop, no paired foreleg movement. Far limbs behind near limbs and hindlegs bare cream fur. This is a real intermediate leg/posture drawing, NOT a blend, morph, warp or cut-and-paste. No ghosting, effects, ground, shadows, text, labels, opaque patches, extra limbs or strip. One crisp full character with true alpha. Keep near/far foot paths continuous from previous to next and keep head/trunk at the corresponding midpoint height."
+  },
+  {
+    "id": "moveRight-stride-06",
+    "group": "moveRight",
+    "canonical_pose": "moveRight-0",
+    "whole_pose": true,
+    "stride": true,
+    "phase": 0.375,
+    "reference": "gen-smooth16/moveRight-stride-00-source.png",
+    "description": "Transfer support smoothly: far RIGHT forepaw lands forward, near LEFT hindpaw lands under hip. Previous supporting diagonal begins toe-off, no jump.",
+    "source_directory": "gen-smooth16",
+    "profile": "grounded-diagonal-trot-shared-scale",
+    "near_contact_baseline": 620,
+    "pose_references": [
+      0
+    ],
+    "generation_mode": "built-in image_gen",
+    "generated_source_path": "/Users/luxia/.codex/generated_images/01a119f8-a205-7da2-b34f-b0a1d6ade04b/exec-54675e73-738f-41aa-9fc2-6508f6e6a021.png",
+    "prompt": "Edit the reference into ONE independent transparent Christmas Retto full-body motion frame. Keep EXACT same character identity, face/eye size, compact SHORT kitten trunk, head width, head view, fluffy grey-brown tail shape, Santa cap, TWO gold buttons, brown belt, red plush coat/white collar and cuffs. Keep the same canvas framing, lighting/material, scale, horizontal shoulder/hip positions, and near/far ground depths. Only four leg articulations and adjoining sleeves/fur change for a slow GROUNDED alternating diagonal-pair trot. Full coherent whole cat; no frozen-head pasted composite. Near LEFT legs are closer to viewer, far RIGHT legs behind with clear anatomical occlusion. HINDLEGS bare cream fur; coat sleeves only FORELEGS. At least one diagonal pair supports the body; no flying/bunny hopping/both front paws synchronized. Natural flexed elbows/knees, compact paws. Near-depth contact toes match reference planted near forepaw's baseline; far-depth contact toes match its far supporting hindpaw baseline. Body moves forward only conceptually: no screen sliding, body enlargement or tail swing. No effects, dust, shadows, ground lines, smears, ghosts, labels, opaque patches or strips. Output only one crisp full character at same scale with true transparent alpha. Transfer support smoothly: far RIGHT forepaw lands forward, near LEFT hindpaw lands under hip. Previous supporting diagonal begins toe-off, no jump."
+  },
+  {
+    "id": "moveRight-stride-07",
+    "group": "moveRight",
+    "canonical_pose": "moveRight-0",
+    "whole_pose": true,
+    "stride": true,
+    "phase": 0.4375,
+    "reference": "gen-smooth16/moveRight-stride-00-source.png",
+    "description": "Independent midpoint between grounded anchors 3 and 4",
+    "source_directory": "gen-smooth16",
+    "profile": "grounded-diagonal-trot-shared-scale",
+    "near_contact_baseline": 620,
+    "pose_references": [
+      6,
+      8
+    ],
+    "generation_mode": "built-in image_gen",
+    "generated_source_path": "/Users/luxia/.codex/generated_images/01a119f8-a205-7da2-b34f-b0a1d6ade04b/exec-ba24e395-9f91-467c-a7c4-147316f616f1.png",
+    "prompt": "Generate ONE independently drawn whole-character in-between pose for this grounded Christmas Retto trot. Reference1 is the exact previous pose; reference2 the exact next pose. Construct the four leg articulations halfway between the endpoints, preserving weight-bearing diagonal pair and near/far depth. Keep head, trunk, face size, cap/pompom, tail profile, two gold buttons, belt, camera, lighting/material, canvas placement and scale consistent with these endpoints. Supporting toes follow their reference contact plane; no new crouch, no airborne hop, no paired foreleg movement. Far limbs behind near limbs and hindlegs bare cream fur. This is a real intermediate leg/posture drawing, NOT a blend, morph, warp or cut-and-paste. No ghosting, effects, ground, shadows, text, labels, opaque patches, extra limbs or strip. One crisp full character with true alpha. Keep near/far foot paths continuous from previous to next and keep head/trunk at the corresponding midpoint height."
+  },
+  {
+    "id": "moveRight-stride-08",
+    "group": "moveRight",
+    "canonical_pose": "moveRight-0",
+    "whole_pose": true,
+    "stride": true,
+    "phase": 0.5,
+    "reference": "gen-smooth16/moveRight-stride-00-source.png",
+    "description": "Far RIGHT forepaw supports forward, near LEFT hindpaw supports under hip. Near LEFT foreleg flexes under chest and lifts; far RIGHT hindleg swings forward.",
+    "source_directory": "gen-smooth16",
+    "profile": "grounded-diagonal-trot-shared-scale",
+    "near_contact_baseline": 620,
+    "pose_references": [
+      0
+    ],
+    "generation_mode": "built-in image_gen",
+    "generated_source_path": "/Users/luxia/.codex/generated_images/01a119f8-a205-7da2-b34f-b0a1d6ade04b/exec-2ec34f11-33a8-4892-a9c4-4906f36d4b9c.png",
+    "prompt": "Edit the reference into ONE independent transparent Christmas Retto full-body motion frame. Keep EXACT same character identity, face/eye size, compact SHORT kitten trunk, head width, head view, fluffy grey-brown tail shape, Santa cap, TWO gold buttons, brown belt, red plush coat/white collar and cuffs. Keep the same canvas framing, lighting/material, scale, horizontal shoulder/hip positions, and near/far ground depths. Only four leg articulations and adjoining sleeves/fur change for a slow GROUNDED alternating diagonal-pair trot. Full coherent whole cat; no frozen-head pasted composite. Near LEFT legs are closer to viewer, far RIGHT legs behind with clear anatomical occlusion. HINDLEGS bare cream fur; coat sleeves only FORELEGS. At least one diagonal pair supports the body; no flying/bunny hopping/both front paws synchronized. Natural flexed elbows/knees, compact paws. Near-depth contact toes match reference planted near forepaw's baseline; far-depth contact toes match its far supporting hindpaw baseline. Body moves forward only conceptually: no screen sliding, body enlargement or tail swing. No effects, dust, shadows, ground lines, smears, ghosts, labels, opaque patches or strips. Output only one crisp full character at same scale with true transparent alpha. Far RIGHT forepaw supports forward, near LEFT hindpaw supports under hip. Near LEFT foreleg flexes under chest and lifts; far RIGHT hindleg swings forward."
+  },
+  {
+    "id": "moveRight-stride-09",
+    "group": "moveRight",
+    "canonical_pose": "moveRight-0",
+    "whole_pose": true,
+    "stride": true,
+    "phase": 0.5625,
+    "reference": "gen-smooth16/moveRight-stride-00-source.png",
+    "description": "Independent midpoint between grounded anchors 4 and 5",
+    "source_directory": "gen-smooth16",
+    "profile": "grounded-diagonal-trot-shared-scale",
+    "near_contact_baseline": 620,
+    "pose_references": [
+      8,
+      10
+    ],
+    "generation_mode": "built-in image_gen",
+    "generated_source_path": "/Users/luxia/.codex/generated_images/01a119f8-a205-7da2-b34f-b0a1d6ade04b/exec-44b094fb-55f2-42da-b9f0-c8217a903012.png",
+    "prompt": "Generate ONE independently drawn whole-character in-between pose for this grounded Christmas Retto trot. Reference1 is the exact previous pose; reference2 the exact next pose. Construct the four leg articulations halfway between the endpoints, preserving weight-bearing diagonal pair and near/far depth. Keep head, trunk, face size, cap/pompom, tail profile, two gold buttons, belt, camera, lighting/material, canvas placement and scale consistent with these endpoints. Supporting toes follow their reference contact plane; no new crouch, no airborne hop, no paired foreleg movement. Far limbs behind near limbs and hindlegs bare cream fur. This is a real intermediate leg/posture drawing, NOT a blend, morph, warp or cut-and-paste. No ghosting, effects, ground, shadows, text, labels, opaque patches, extra limbs or strip. One crisp full character with true alpha. Keep near/far foot paths continuous from previous to next and keep head/trunk at the corresponding midpoint height."
+  },
+  {
+    "id": "moveRight-stride-10",
+    "group": "moveRight",
+    "canonical_pose": "moveRight-0",
+    "whole_pose": true,
+    "stride": true,
+    "phase": 0.625,
+    "reference": "gen-smooth16/moveRight-stride-00-source.png",
+    "description": "Far RIGHT forepaw rolls backward in support; near LEFT hindpaw pushes backward. Near LEFT forepaw and far RIGHT hindpaw pass low beneath body.",
+    "source_directory": "gen-smooth16",
+    "profile": "grounded-diagonal-trot-shared-scale",
+    "near_contact_baseline": 620,
+    "pose_references": [
+      0
+    ],
+    "generation_mode": "built-in image_gen",
+    "generated_source_path": "/Users/luxia/.codex/generated_images/01a119f8-a205-7da2-b34f-b0a1d6ade04b/exec-7e9fcca7-6b86-4a8d-85fc-664aec2be920.png",
+    "prompt": "Edit the reference into ONE independent transparent Christmas Retto full-body motion frame. Keep EXACT same character identity, face/eye size, compact SHORT kitten trunk, head width, head view, fluffy grey-brown tail shape, Santa cap, TWO gold buttons, brown belt, red plush coat/white collar and cuffs. Keep the same canvas framing, lighting/material, scale, horizontal shoulder/hip positions, and near/far ground depths. Only four leg articulations and adjoining sleeves/fur change for a slow GROUNDED alternating diagonal-pair trot. Full coherent whole cat; no frozen-head pasted composite. Near LEFT legs are closer to viewer, far RIGHT legs behind with clear anatomical occlusion. HINDLEGS bare cream fur; coat sleeves only FORELEGS. At least one diagonal pair supports the body; no flying/bunny hopping/both front paws synchronized. Natural flexed elbows/knees, compact paws. Near-depth contact toes match reference planted near forepaw's baseline; far-depth contact toes match its far supporting hindpaw baseline. Body moves forward only conceptually: no screen sliding, body enlargement or tail swing. No effects, dust, shadows, ground lines, smears, ghosts, labels, opaque patches or strips. Output only one crisp full character at same scale with true transparent alpha. Independent midpoint between keyframes 08 and 12."
+  },
+  {
+    "id": "moveRight-stride-11",
+    "group": "moveRight",
+    "canonical_pose": "moveRight-0",
+    "whole_pose": true,
+    "stride": true,
+    "phase": 0.6875,
+    "reference": "gen-smooth16/moveRight-stride-00-source.png",
+    "description": "Independent midpoint between grounded anchors 5 and 6",
+    "source_directory": "gen-smooth16",
+    "profile": "grounded-diagonal-trot-shared-scale",
+    "near_contact_baseline": 620,
+    "pose_references": [
+      10,
+      12
+    ],
+    "generation_mode": "built-in image_gen",
+    "generated_source_path": "/Users/luxia/.codex/generated_images/01a119f8-a205-7da2-b34f-b0a1d6ade04b/exec-923f0d63-5b6d-4342-a662-987dbbadfd62.png",
+    "prompt": "Generate ONE independently drawn whole-character in-between pose for this grounded Christmas Retto trot. Reference1 is the exact previous pose; reference2 the exact next pose. Construct the four leg articulations halfway between the endpoints, preserving weight-bearing diagonal pair and near/far depth. Keep head, trunk, face size, cap/pompom, tail profile, two gold buttons, belt, camera, lighting/material, canvas placement and scale consistent with these endpoints. Supporting toes follow their reference contact plane; no new crouch, no airborne hop, no paired foreleg movement. Far limbs behind near limbs and hindlegs bare cream fur. This is a real intermediate leg/posture drawing, NOT a blend, morph, warp or cut-and-paste. No ghosting, effects, ground, shadows, text, labels, opaque patches, extra limbs or strip. One crisp full character with true alpha. Keep near/far foot paths continuous from previous to next and keep head/trunk at the corresponding midpoint height."
+  },
+  {
+    "id": "moveRight-stride-12",
+    "group": "moveRight",
+    "canonical_pose": "moveRight-0",
+    "whole_pose": true,
+    "stride": true,
+    "phase": 0.75,
+    "reference": "gen-smooth16/moveRight-stride-00-source.png",
+    "description": "Supporting far RIGHT forepaw and near LEFT hindpaw pass beneath shoulder/hip; near LEFT forepaw and far RIGHT hindpaw reach forward, almost landing.",
+    "source_directory": "gen-smooth16",
+    "profile": "grounded-diagonal-trot-shared-scale",
+    "near_contact_baseline": 620,
+    "pose_references": [
+      0
+    ],
+    "generation_mode": "built-in image_gen",
+    "generated_source_path": "/Users/luxia/.codex/generated_images/01a119f8-a205-7da2-b34f-b0a1d6ade04b/exec-c4bd7e02-9872-41ec-b337-2e6f32f41511.png",
+    "prompt": "Edit the reference into ONE independent transparent Christmas Retto full-body motion frame. Keep EXACT same character identity, face/eye size, compact SHORT kitten trunk, head width, head view, fluffy grey-brown tail shape, Santa cap, TWO gold buttons, brown belt, red plush coat/white collar and cuffs. Keep the same canvas framing, lighting/material, scale, horizontal shoulder/hip positions, and near/far ground depths. Only four leg articulations and adjoining sleeves/fur change for a slow GROUNDED alternating diagonal-pair trot. Full coherent whole cat; no frozen-head pasted composite. Near LEFT legs are closer to viewer, far RIGHT legs behind with clear anatomical occlusion. HINDLEGS bare cream fur; coat sleeves only FORELEGS. At least one diagonal pair supports the body; no flying/bunny hopping/both front paws synchronized. Natural flexed elbows/knees, compact paws. Near-depth contact toes match reference planted near forepaw's baseline; far-depth contact toes match its far supporting hindpaw baseline. Body moves forward only conceptually: no screen sliding, body enlargement or tail swing. No effects, dust, shadows, ground lines, smears, ghosts, labels, opaque patches or strips. Output only one crisp full character at same scale with true transparent alpha. Supporting far RIGHT forepaw and near LEFT hindpaw pass beneath shoulder/hip; near LEFT forepaw and far RIGHT hindpaw reach forward, almost landing."
+  },
+  {
+    "id": "moveRight-stride-13",
+    "group": "moveRight",
+    "canonical_pose": "moveRight-0",
+    "whole_pose": true,
+    "stride": true,
+    "phase": 0.8125,
+    "reference": "gen-smooth16/moveRight-stride-00-source.png",
+    "description": "Independent midpoint between grounded anchors 6 and 7",
+    "source_directory": "gen-smooth16",
+    "profile": "grounded-diagonal-trot-shared-scale",
+    "near_contact_baseline": 620,
+    "pose_references": [
+      12,
+      14
+    ],
+    "generation_mode": "built-in image_gen",
+    "generated_source_path": "/Users/luxia/.codex/generated_images/01a119f8-a205-7da2-b34f-b0a1d6ade04b/exec-4c5d13b7-02ff-46d5-9092-998b473b6d29.png",
+    "prompt": "Generate ONE independently drawn whole-character in-between pose for this grounded Christmas Retto trot. Reference1 is the exact previous pose; reference2 the exact next pose. Construct the four leg articulations halfway between the endpoints, preserving weight-bearing diagonal pair and near/far depth. Keep head, trunk, face size, cap/pompom, tail profile, two gold buttons, belt, camera, lighting/material, canvas placement and scale consistent with these endpoints. Supporting toes follow their reference contact plane; no new crouch, no airborne hop, no paired foreleg movement. Far limbs behind near limbs and hindlegs bare cream fur. This is a real intermediate leg/posture drawing, NOT a blend, morph, warp or cut-and-paste. No ghosting, effects, ground, shadows, text, labels, opaque patches, extra limbs or strip. One crisp full character with true alpha. Keep near/far foot paths continuous from previous to next and keep head/trunk at the corresponding midpoint height."
+  },
+  {
+    "id": "moveRight-stride-14",
+    "group": "moveRight",
+    "canonical_pose": "moveRight-0",
+    "whole_pose": true,
+    "stride": true,
+    "phase": 0.875,
+    "reference": "gen-smooth16/moveRight-stride-00-source.png",
+    "description": "Near LEFT forepaw lands forward and far RIGHT hindpaw lands under hip, gradually shifting support back to the first diagonal. Far RIGHT forepaw and near LEFT hindpaw lift. This leads continuously into phase 0.",
+    "source_directory": "gen-smooth16",
+    "profile": "grounded-diagonal-trot-shared-scale",
+    "near_contact_baseline": 620,
+    "pose_references": [
+      0
+    ],
+    "generation_mode": "built-in image_gen",
+    "generated_source_path": "/Users/luxia/.codex/generated_images/01a119f8-a205-7da2-b34f-b0a1d6ade04b/exec-f7b06e2f-48cd-4512-a11c-376fbeafe8f7.png",
+    "prompt": "Edit the reference into ONE independent transparent Christmas Retto full-body motion frame. Keep EXACT same character identity, face/eye size, compact SHORT kitten trunk, head width, head view, fluffy grey-brown tail shape, Santa cap, TWO gold buttons, brown belt, red plush coat/white collar and cuffs. Keep the same canvas framing, lighting/material, scale, horizontal shoulder/hip positions, and near/far ground depths. Only four leg articulations and adjoining sleeves/fur change for a slow GROUNDED alternating diagonal-pair trot. Full coherent whole cat; no frozen-head pasted composite. Near LEFT legs are closer to viewer, far RIGHT legs behind with clear anatomical occlusion. HINDLEGS bare cream fur; coat sleeves only FORELEGS. At least one diagonal pair supports the body; no flying/bunny hopping/both front paws synchronized. Natural flexed elbows/knees, compact paws. Near-depth contact toes match reference planted near forepaw's baseline; far-depth contact toes match its far supporting hindpaw baseline. Body moves forward only conceptually: no screen sliding, body enlargement or tail swing. No effects, dust, shadows, ground lines, smears, ghosts, labels, opaque patches or strips. Output only one crisp full character at same scale with true transparent alpha. Near LEFT forepaw lands forward and far RIGHT hindpaw lands under hip, gradually shifting support back to the first diagonal. Far RIGHT forepaw and near LEFT hindpaw lift. This leads continuously into phase 0."
+  },
+  {
+    "id": "moveRight-stride-15",
+    "group": "moveRight",
+    "canonical_pose": "moveRight-0",
+    "whole_pose": true,
+    "stride": true,
+    "phase": 0.9375,
+    "reference": "gen-smooth16/moveRight-stride-00-source.png",
+    "description": "Independent midpoint between grounded anchors 7 and 0",
+    "source_directory": "gen-smooth16",
+    "profile": "grounded-diagonal-trot-shared-scale",
+    "near_contact_baseline": 620,
+    "pose_references": [
+      14,
+      0
+    ],
+    "generation_mode": "built-in image_gen",
+    "generated_source_path": "/Users/luxia/.codex/generated_images/01a119f8-a205-7da2-b34f-b0a1d6ade04b/exec-62b9a5a0-bf21-40d4-b347-df66dd3beb5c.png",
+    "prompt": "Generate ONE independently drawn whole-character in-between pose for this grounded Christmas Retto trot. Reference1 is the exact previous pose; reference2 the exact next pose. Construct the four leg articulations halfway between the endpoints, preserving weight-bearing diagonal pair and near/far depth. Keep head, trunk, face size, cap/pompom, tail profile, two gold buttons, belt, camera, lighting/material, canvas placement and scale consistent with these endpoints. Supporting toes follow their reference contact plane; no new crouch, no airborne hop, no paired foreleg movement. Far limbs behind near limbs and hindlegs bare cream fur. This is a real intermediate leg/posture drawing, NOT a blend, morph, warp or cut-and-paste. No ghosting, effects, ground, shadows, text, labels, opaque patches, extra limbs or strip. One crisp full character with true alpha. Keep near/far foot paths continuous from previous to next and keep head/trunk at the corresponding midpoint height."
+  }
+]

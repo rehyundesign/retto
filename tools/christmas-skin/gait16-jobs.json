@@ -1,0 +1,490 @@
+[
+  {
+    "id": "moveRight-gait-00",
+    "group": "moveRight",
+    "canonical_pose": "moveRight-0",
+    "reference": "/Users/luxia/.codex/worktrees/5553/retto/tools/christmas-skin/gen-production/moveRight-0-character.png",
+    "phase": 0,
+    "phase_description": "extended flight",
+    "paw_targets": {
+      "front_left_near": [
+        395,
+        574
+      ],
+      "front_right_far": [
+        349,
+        552
+      ],
+      "rear_left_near": [
+        45,
+        576
+      ],
+      "rear_right_far": [
+        153,
+        576
+      ]
+    },
+    "generation_mode": "built-in image_gen",
+    "generated_source_path": "/Users/luxia/.codex/generated_images/01a119f8-a205-7da2-b34f-b0a1d6ade04b/exec-8cc28f9b-47b8-4a5f-b16e-4c7adc2a190f.png",
+    "prompt_base": "Edit the reference Christmas Retto cat as ONE independent transparent sprite cell, NOT a strip. Keep camera angle, head position, cream face and blue eyes, fluffy tail, Santa cap, red plush coat/white trim, TWO gold buttons, brown belt and plush rendering identical. Keep character position/proportions, large empty upper canvas and transparent margins. Change only the four legs and adjoining sleeve folds for a right-running gallop. Paw coordinates refer to the input's 448x640 canvas; scale them with canvas, never shift head to fit. Shoulder anchors (285,500)/(324,515); hip anchors (130,505)/(171,516). Exactly four anatomically attached feline limbs, far legs behind near legs with plausible occlusion. Smooth bent elbows/knees, natural paw orientation and garments wrapping each leg. No extra paws, detached fragments, motion blur, ghosting, snow, effects, shadows, props or text. Actual transparent background."
+  },
+  {
+    "id": "moveRight-gait-01",
+    "group": "moveRight",
+    "canonical_pose": "moveRight-0",
+    "reference": "/Users/luxia/.codex/worktrees/5553/retto/tools/christmas-skin/gen-production/moveRight-0-character.png",
+    "phase": 0.0625,
+    "phase_description": "front paws lowering for landing",
+    "paw_targets": {
+      "front_left_near": [
+        390,
+        590
+      ],
+      "front_right_far": [
+        360,
+        564
+      ],
+      "rear_left_near": [
+        64,
+        562
+      ],
+      "rear_right_far": [
+        161,
+        583
+      ]
+    },
+    "generation_mode": "built-in image_gen",
+    "generated_source_path": "/Users/luxia/.codex/generated_images/01a119f8-a205-7da2-b34f-b0a1d6ade04b/exec-7f92762d-ea1d-4660-8b0e-c202e8172c8d.png",
+    "prompt_base": "Edit the reference Christmas Retto cat as ONE independent transparent sprite cell, NOT a strip. Keep camera angle, head position, cream face and blue eyes, fluffy tail, Santa cap, red plush coat/white trim, TWO gold buttons, brown belt and plush rendering identical. Keep character position/proportions, large empty upper canvas and transparent margins. Change only the four legs and adjoining sleeve folds for a right-running gallop. Paw coordinates refer to the input's 448x640 canvas; scale them with canvas, never shift head to fit. Shoulder anchors (285,500)/(324,515); hip anchors (130,505)/(171,516). Exactly four anatomically attached feline limbs, far legs behind near legs with plausible occlusion. Smooth bent elbows/knees, natural paw orientation and garments wrapping each leg. No extra paws, detached fragments, motion blur, ghosting, snow, effects, shadows, props or text. Actual transparent background."
+  },
+  {
+    "id": "moveRight-gait-02",
+    "group": "moveRight",
+    "canonical_pose": "moveRight-0",
+    "reference": "/Users/luxia/.codex/worktrees/5553/retto/tools/christmas-skin/gen-production/moveRight-0-character.png",
+    "phase": 0.125,
+    "phase_description": "front paw landing",
+    "paw_targets": {
+      "front_left_near": [
+        372,
+        606
+      ],
+      "front_right_far": [
+        373,
+        591
+      ],
+      "rear_left_near": [
+        90,
+        550
+      ],
+      "rear_right_far": [
+        181,
+        575
+      ]
+    },
+    "generation_mode": "built-in image_gen",
+    "generated_source_path": "/Users/luxia/.codex/generated_images/01a119f8-a205-7da2-b34f-b0a1d6ade04b/exec-5432f9bf-a4af-472e-8e97-8a0ab9e37c1f.png",
+    "prompt_base": "Edit the reference Christmas Retto cat as ONE independent transparent sprite cell, NOT a strip. Keep camera angle, head position, cream face and blue eyes, fluffy tail, Santa cap, red plush coat/white trim, TWO gold buttons, brown belt and plush rendering identical. Keep character position/proportions, large empty upper canvas and transparent margins. Change only the four legs and adjoining sleeve folds for a right-running gallop. Paw coordinates refer to the input's 448x640 canvas; scale them with canvas, never shift head to fit. Shoulder anchors (285,500)/(324,515); hip anchors (130,505)/(171,516). Exactly four anatomically attached feline limbs, far legs behind near legs with plausible occlusion. Smooth bent elbows/knees, natural paw orientation and garments wrapping each leg. No extra paws, detached fragments, motion blur, ghosting, snow, effects, shadows, props or text. Actual transparent background.",
+    "endpoint_pair": [
+      1,
+      3
+    ],
+    "fraction": 0.5,
+    "description": "Independent halfway pose between registered neighboring endpoints; hind legs remain bare cream fur."
+  },
+  {
+    "id": "moveRight-gait-03",
+    "group": "moveRight",
+    "canonical_pose": "moveRight-0",
+    "reference": "/Users/luxia/.codex/worktrees/5553/retto/tools/christmas-skin/gen-production/moveRight-0-character.png",
+    "phase": 0.1875,
+    "phase_description": "forelegs accepting weight; hindlegs folding forward",
+    "paw_targets": {
+      "front_left_near": [
+        347,
+        610
+      ],
+      "front_right_far": [
+        358,
+        606
+      ],
+      "rear_left_near": [
+        138,
+        548
+      ],
+      "rear_right_far": [
+        192,
+        572
+      ]
+    },
+    "generation_mode": "built-in image_gen",
+    "generated_source_path": "/Users/luxia/.codex/generated_images/01a119f8-a205-7da2-b34f-b0a1d6ade04b/exec-4ba9b78f-457f-4f9a-840c-e1cdb75240bd.png",
+    "prompt_base": "Edit the reference Christmas Retto cat as ONE independent transparent sprite cell, NOT a strip. Keep camera angle, head position, cream face and blue eyes, fluffy tail, Santa cap, red plush coat/white trim, TWO gold buttons, brown belt and plush rendering identical. Keep character position/proportions, large empty upper canvas and transparent margins. Change only the four legs and adjoining sleeve folds for a right-running gallop. Paw coordinates refer to the input's 448x640 canvas; scale them with canvas, never shift head to fit. Shoulder anchors (285,500)/(324,515); hip anchors (130,505)/(171,516). Exactly four anatomically attached feline limbs, far legs behind near legs with plausible occlusion. Smooth bent elbows/knees, natural paw orientation and garments wrapping each leg. No extra paws, detached fragments, motion blur, ghosting, snow, effects, shadows, props or text. Actual transparent background."
+  },
+  {
+    "id": "moveRight-gait-04",
+    "group": "moveRight",
+    "canonical_pose": "moveRight-0",
+    "reference": "/Users/luxia/.codex/worktrees/5553/retto/tools/christmas-skin/gen-production/moveRight-0-character.png",
+    "phase": 0.25,
+    "phase_description": "forelegs supporting; hindlegs tucked forward",
+    "paw_targets": {
+      "front_left_near": [
+        323,
+        610
+      ],
+      "front_right_far": [
+        336,
+        610
+      ],
+      "rear_left_near": [
+        180,
+        550
+      ],
+      "rear_right_far": [
+        194,
+        570
+      ]
+    },
+    "generation_mode": "built-in image_gen",
+    "generated_source_path": "/Users/luxia/.codex/generated_images/01a119f8-a205-7da2-b34f-b0a1d6ade04b/exec-1d5d69ba-afb8-4263-8e5e-ae5329d946f3.png",
+    "prompt_base": "Edit the reference Christmas Retto cat as ONE independent transparent sprite cell, NOT a strip. Keep camera angle, head position, cream face and blue eyes, fluffy tail, Santa cap, red plush coat/white trim, TWO gold buttons, brown belt and plush rendering identical. Keep character position/proportions, large empty upper canvas and transparent margins. Change only the four legs and adjoining sleeve folds for a right-running gallop. Paw coordinates refer to the input's 448x640 canvas; scale them with canvas, never shift head to fit. Shoulder anchors (285,500)/(324,515); hip anchors (130,505)/(171,516). Exactly four anatomically attached feline limbs, far legs behind near legs with plausible occlusion. Smooth bent elbows/knees, natural paw orientation and garments wrapping each leg. No extra paws, detached fragments, motion blur, ghosting, snow, effects, shadows, props or text. Actual transparent background."
+  },
+  {
+    "id": "moveRight-gait-05",
+    "group": "moveRight",
+    "canonical_pose": "moveRight-0",
+    "reference": "/Users/luxia/.codex/worktrees/5553/retto/tools/christmas-skin/gen-production/moveRight-0-character.png",
+    "phase": 0.3125,
+    "phase_description": "foreleg push; rear paws reaching ground",
+    "paw_targets": {
+      "front_left_near": [
+        299,
+        610
+      ],
+      "front_right_far": [
+        315,
+        609
+      ],
+      "rear_left_near": [
+        192,
+        571
+      ],
+      "rear_right_far": [
+        195,
+        593
+      ]
+    },
+    "generation_mode": "built-in image_gen",
+    "generated_source_path": "/Users/luxia/.codex/generated_images/01a119f8-a205-7da2-b34f-b0a1d6ade04b/exec-18efe3c9-86d8-41d7-b7fd-bc04a7763370.png",
+    "prompt_base": "Edit the reference Christmas Retto cat as ONE independent transparent sprite cell, NOT a strip. Keep camera angle, head position, cream face and blue eyes, fluffy tail, Santa cap, red plush coat/white trim, TWO gold buttons, brown belt and plush rendering identical. Keep character position/proportions, large empty upper canvas and transparent margins. Change only the four legs and adjoining sleeve folds for a right-running gallop. Paw coordinates refer to the input's 448x640 canvas; scale them with canvas, never shift head to fit. Shoulder anchors (285,500)/(324,515); hip anchors (130,505)/(171,516). Exactly four anatomically attached feline limbs, far legs behind near legs with plausible occlusion. Smooth bent elbows/knees, natural paw orientation and garments wrapping each leg. No extra paws, detached fragments, motion blur, ghosting, snow, effects, shadows, props or text. Actual transparent background.",
+    "endpoint_pair": [
+      4,
+      6
+    ],
+    "fraction": 0.5,
+    "description": "Independent halfway pose between registered neighboring endpoints; hind legs remain bare cream fur."
+  },
+  {
+    "id": "moveRight-gait-06",
+    "group": "moveRight",
+    "canonical_pose": "moveRight-0",
+    "reference": "/Users/luxia/.codex/worktrees/5553/retto/tools/christmas-skin/gen-production/moveRight-0-character.png",
+    "phase": 0.375,
+    "phase_description": "rear paws landing; forelegs lifting",
+    "paw_targets": {
+      "front_left_near": [
+        278,
+        597
+      ],
+      "front_right_far": [
+        295,
+        610
+      ],
+      "rear_left_near": [
+        192,
+        596
+      ],
+      "rear_right_far": [
+        177,
+        609
+      ]
+    },
+    "generation_mode": "built-in image_gen",
+    "generated_source_path": "/Users/luxia/.codex/generated_images/01a119f8-a205-7da2-b34f-b0a1d6ade04b/exec-d79680cc-d35e-4789-88c7-6be753068682.png",
+    "prompt_base": "Edit the reference Christmas Retto cat as ONE independent transparent sprite cell, NOT a strip. Keep camera angle, head position, cream face and blue eyes, fluffy tail, Santa cap, red plush coat/white trim, TWO gold buttons, brown belt and plush rendering identical. Keep character position/proportions, large empty upper canvas and transparent margins. Change only the four legs and adjoining sleeve folds for a right-running gallop. Paw coordinates refer to the input's 448x640 canvas; scale them with canvas, never shift head to fit. Shoulder anchors (285,500)/(324,515); hip anchors (130,505)/(171,516). Exactly four anatomically attached feline limbs, far legs behind near legs with plausible occlusion. Smooth bent elbows/knees, natural paw orientation and garments wrapping each leg. No extra paws, detached fragments, motion blur, ghosting, snow, effects, shadows, props or text. Actual transparent background."
+  },
+  {
+    "id": "moveRight-gait-07",
+    "group": "moveRight",
+    "canonical_pose": "moveRight-0",
+    "reference": "/Users/luxia/.codex/worktrees/5553/retto/tools/christmas-skin/gen-production/moveRight-0-character.png",
+    "phase": 0.4375,
+    "phase_description": "rear support; front paws folding underneath",
+    "paw_targets": {
+      "front_left_near": [
+        260,
+        571
+      ],
+      "front_right_far": [
+        277,
+        589
+      ],
+      "rear_left_near": [
+        168,
+        610
+      ],
+      "rear_right_far": [
+        159,
+        610
+      ]
+    },
+    "generation_mode": "built-in image_gen",
+    "generated_source_path": "/Users/luxia/.codex/generated_images/01a119f8-a205-7da2-b34f-b0a1d6ade04b/exec-ac515c46-0207-4194-951c-f4431a584f56.png",
+    "prompt_base": "Edit the reference Christmas Retto cat as ONE independent transparent sprite cell, NOT a strip. Keep camera angle, head position, cream face and blue eyes, fluffy tail, Santa cap, red plush coat/white trim, TWO gold buttons, brown belt and plush rendering identical. Keep character position/proportions, large empty upper canvas and transparent margins. Change only the four legs and adjoining sleeve folds for a right-running gallop. Paw coordinates refer to the input's 448x640 canvas; scale them with canvas, never shift head to fit. Shoulder anchors (285,500)/(324,515); hip anchors (130,505)/(171,516). Exactly four anatomically attached feline limbs, far legs behind near legs with plausible occlusion. Smooth bent elbows/knees, natural paw orientation and garments wrapping each leg. No extra paws, detached fragments, motion blur, ghosting, snow, effects, shadows, props or text. Actual transparent background."
+  },
+  {
+    "id": "moveRight-gait-08",
+    "group": "moveRight",
+    "canonical_pose": "moveRight-0",
+    "reference": "/Users/luxia/.codex/worktrees/5553/retto/tools/christmas-skin/gen-production/moveRight-0-character.png",
+    "phase": 0.5,
+    "phase_description": "rear support/push; forelegs tucked",
+    "paw_targets": {
+      "front_left_near": [
+        280,
+        551
+      ],
+      "front_right_far": [
+        263,
+        568
+      ],
+      "rear_left_near": [
+        145,
+        610
+      ],
+      "rear_right_far": [
+        137,
+        603
+      ]
+    },
+    "generation_mode": "built-in image_gen",
+    "generated_source_path": "/Users/luxia/.codex/generated_images/01a119f8-a205-7da2-b34f-b0a1d6ade04b/exec-c5c52ee4-7a86-4594-8b2e-fef183943009.png",
+    "prompt_base": "Edit the reference Christmas Retto cat as ONE independent transparent sprite cell, NOT a strip. Keep camera angle, head position, cream face and blue eyes, fluffy tail, Santa cap, red plush coat/white trim, TWO gold buttons, brown belt and plush rendering identical. Keep character position/proportions, large empty upper canvas and transparent margins. Change only the four legs and adjoining sleeve folds for a right-running gallop. Paw coordinates refer to the input's 448x640 canvas; scale them with canvas, never shift head to fit. Shoulder anchors (285,500)/(324,515); hip anchors (130,505)/(171,516). Exactly four anatomically attached feline limbs, far legs behind near legs with plausible occlusion. Smooth bent elbows/knees, natural paw orientation and garments wrapping each leg. No extra paws, detached fragments, motion blur, ghosting, snow, effects, shadows, props or text. Actual transparent background."
+  },
+  {
+    "id": "moveRight-gait-09",
+    "group": "moveRight",
+    "canonical_pose": "moveRight-0",
+    "reference": "/Users/luxia/.codex/worktrees/5553/retto/tools/christmas-skin/gen-production/moveRight-0-character.png",
+    "phase": 0.5625,
+    "phase_description": "rear push; forelegs lifting ahead",
+    "paw_targets": {
+      "front_left_near": [
+        300,
+        542
+      ],
+      "front_right_far": [
+        278,
+        551
+      ],
+      "rear_left_near": [
+        124,
+        610
+      ],
+      "rear_right_far": [
+        112,
+        588
+      ]
+    },
+    "generation_mode": "built-in image_gen",
+    "generated_source_path": "/Users/luxia/.codex/generated_images/01a119f8-a205-7da2-b34f-b0a1d6ade04b/exec-09789fad-f583-48a9-8a2d-ed2c992cc8ba.png",
+    "prompt_base": "Edit the reference Christmas Retto cat as ONE independent transparent sprite cell, NOT a strip. Keep camera angle, head position, cream face and blue eyes, fluffy tail, Santa cap, red plush coat/white trim, TWO gold buttons, brown belt and plush rendering identical. Keep character position/proportions, large empty upper canvas and transparent margins. Change only the four legs and adjoining sleeve folds for a right-running gallop. Paw coordinates refer to the input's 448x640 canvas; scale them with canvas, never shift head to fit. Shoulder anchors (285,500)/(324,515); hip anchors (130,505)/(171,516). Exactly four anatomically attached feline limbs, far legs behind near legs with plausible occlusion. Smooth bent elbows/knees, natural paw orientation and garments wrapping each leg. No extra paws, detached fragments, motion blur, ghosting, snow, effects, shadows, props or text. Actual transparent background."
+  },
+  {
+    "id": "moveRight-gait-10",
+    "group": "moveRight",
+    "canonical_pose": "moveRight-0",
+    "reference": "/Users/luxia/.codex/worktrees/5553/retto/tools/christmas-skin/gen-production/moveRight-0-character.png",
+    "phase": 0.625,
+    "phase_description": "rear paws leaving ground; forelegs reaching ahead",
+    "paw_targets": {
+      "front_left_near": [
+        328,
+        543
+      ],
+      "front_right_far": [
+        300,
+        543
+      ],
+      "rear_left_near": [
+        108,
+        598
+      ],
+      "rear_right_far": [
+        88,
+        573
+      ]
+    },
+    "generation_mode": "built-in image_gen",
+    "generated_source_path": "/Users/luxia/.codex/generated_images/01a119f8-a205-7da2-b34f-b0a1d6ade04b/exec-1d98a8a5-e387-448d-b65d-05ebcaf4d4c9.png",
+    "prompt_base": "Edit the reference Christmas Retto cat as ONE independent transparent sprite cell, NOT a strip. Keep camera angle, head position, cream face and blue eyes, fluffy tail, Santa cap, red plush coat/white trim, TWO gold buttons, brown belt and plush rendering identical. Keep character position/proportions, large empty upper canvas and transparent margins. Change only the four legs and adjoining sleeve folds for a right-running gallop. Paw coordinates refer to the input's 448x640 canvas; scale them with canvas, never shift head to fit. Shoulder anchors (285,500)/(324,515); hip anchors (130,505)/(171,516). Exactly four anatomically attached feline limbs, far legs behind near legs with plausible occlusion. Smooth bent elbows/knees, natural paw orientation and garments wrapping each leg. No extra paws, detached fragments, motion blur, ghosting, snow, effects, shadows, props or text. Actual transparent background.",
+    "endpoint_pair": [
+      9,
+      11
+    ],
+    "fraction": 0.5,
+    "description": "Independent halfway pose between registered neighboring endpoints; hind legs remain bare cream fur."
+  },
+  {
+    "id": "moveRight-gait-11",
+    "group": "moveRight",
+    "canonical_pose": "moveRight-0",
+    "reference": "/Users/luxia/.codex/worktrees/5553/retto/tools/christmas-skin/gen-production/moveRight-0-character.png",
+    "phase": 0.6875,
+    "phase_description": "airborne; forelegs extending",
+    "paw_targets": {
+      "front_left_near": [
+        350,
+        550
+      ],
+      "front_right_far": [
+        329,
+        546
+      ],
+      "rear_left_near": [
+        81,
+        580
+      ],
+      "rear_right_far": [
+        60,
+        559
+      ]
+    },
+    "generation_mode": "built-in image_gen",
+    "generated_source_path": "/Users/luxia/.codex/generated_images/01a119f8-a205-7da2-b34f-b0a1d6ade04b/exec-b91eb615-2c14-4ca2-907f-74ae352e4b85.png",
+    "prompt_base": "Edit the reference Christmas Retto cat as ONE independent transparent sprite cell, NOT a strip. Keep camera angle, head position, cream face and blue eyes, fluffy tail, Santa cap, red plush coat/white trim, TWO gold buttons, brown belt and plush rendering identical. Keep character position/proportions, large empty upper canvas and transparent margins. Change only the four legs and adjoining sleeve folds for a right-running gallop. Paw coordinates refer to the input's 448x640 canvas; scale them with canvas, never shift head to fit. Shoulder anchors (285,500)/(324,515); hip anchors (130,505)/(171,516). Exactly four anatomically attached feline limbs, far legs behind near legs with plausible occlusion. Smooth bent elbows/knees, natural paw orientation and garments wrapping each leg. No extra paws, detached fragments, motion blur, ghosting, snow, effects, shadows, props or text. Actual transparent background."
+  },
+  {
+    "id": "moveRight-gait-12",
+    "group": "moveRight",
+    "canonical_pose": "moveRight-0",
+    "reference": "/Users/luxia/.codex/worktrees/5553/retto/tools/christmas-skin/gen-production/moveRight-0-character.png",
+    "phase": 0.75,
+    "phase_description": "airborne extension",
+    "paw_targets": {
+      "front_left_near": [
+        374,
+        555
+      ],
+      "front_right_far": [
+        348,
+        550
+      ],
+      "rear_left_near": [
+        64,
+        569
+      ],
+      "rear_right_far": [
+        59,
+        562
+      ]
+    },
+    "generation_mode": "built-in image_gen",
+    "generated_source_path": "/Users/luxia/.codex/generated_images/01a119f8-a205-7da2-b34f-b0a1d6ade04b/exec-9ecbad85-dad6-4d75-a717-22c42fd7733c.png",
+    "prompt_base": "Edit the reference Christmas Retto cat as ONE independent transparent sprite cell, NOT a strip. Keep camera angle, head position, cream face and blue eyes, fluffy tail, Santa cap, red plush coat/white trim, TWO gold buttons, brown belt and plush rendering identical. Keep character position/proportions, large empty upper canvas and transparent margins. Change only the four legs and adjoining sleeve folds for a right-running gallop. Paw coordinates refer to the input's 448x640 canvas; scale them with canvas, never shift head to fit. Shoulder anchors (285,500)/(324,515); hip anchors (130,505)/(171,516). Exactly four anatomically attached feline limbs, far legs behind near legs with plausible occlusion. Smooth bent elbows/knees, natural paw orientation and garments wrapping each leg. No extra paws, detached fragments, motion blur, ghosting, snow, effects, shadows, props or text. Actual transparent background."
+  },
+  {
+    "id": "moveRight-gait-13",
+    "group": "moveRight",
+    "canonical_pose": "moveRight-0",
+    "reference": "/Users/luxia/.codex/worktrees/5553/retto/tools/christmas-skin/gen-production/moveRight-0-character.png",
+    "phase": 0.8125,
+    "phase_description": "forelegs reaching farther; hindlegs extending behind",
+    "paw_targets": {
+      "front_left_near": [
+        396,
+        560
+      ],
+      "front_right_far": [
+        371,
+        553
+      ],
+      "rear_left_near": [
+        48,
+        561
+      ],
+      "rear_right_far": [
+        77,
+        564
+      ]
+    },
+    "generation_mode": "built-in image_gen",
+    "generated_source_path": "/Users/luxia/.codex/generated_images/01a119f8-a205-7da2-b34f-b0a1d6ade04b/exec-45318627-867f-4a9e-80e2-ab0aee0847e6.png",
+    "prompt_base": "Edit the reference Christmas Retto cat as ONE independent transparent sprite cell, NOT a strip. Keep camera angle, head position, cream face and blue eyes, fluffy tail, Santa cap, red plush coat/white trim, TWO gold buttons, brown belt and plush rendering identical. Keep character position/proportions, large empty upper canvas and transparent margins. Change only the four legs and adjoining sleeve folds for a right-running gallop. Paw coordinates refer to the input's 448x640 canvas; scale them with canvas, never shift head to fit. Shoulder anchors (285,500)/(324,515); hip anchors (130,505)/(171,516). Exactly four anatomically attached feline limbs, far legs behind near legs with plausible occlusion. Smooth bent elbows/knees, natural paw orientation and garments wrapping each leg. No extra paws, detached fragments, motion blur, ghosting, snow, effects, shadows, props or text. Actual transparent background."
+  },
+  {
+    "id": "moveRight-gait-14",
+    "group": "moveRight",
+    "canonical_pose": "moveRight-0",
+    "reference": "/Users/luxia/.codex/worktrees/5553/retto/tools/christmas-skin/gen-production/moveRight-0-character.png",
+    "phase": 0.875,
+    "phase_description": "maximum extension",
+    "paw_targets": {
+      "front_left_near": [
+        410,
+        563
+      ],
+      "front_right_far": [
+        392,
+        559
+      ],
+      "rear_left_near": [
+        37,
+        565
+      ],
+      "rear_right_far": [
+        95,
+        569
+      ]
+    },
+    "generation_mode": "built-in image_gen",
+    "generated_source_path": "/Users/luxia/.codex/generated_images/01a119f8-a205-7da2-b34f-b0a1d6ade04b/exec-ccf0fb6e-e601-4419-9058-1040473426f7.png",
+    "prompt_base": "Edit the reference Christmas Retto cat as ONE independent transparent sprite cell, NOT a strip. Keep camera angle, head position, cream face and blue eyes, fluffy tail, Santa cap, red plush coat/white trim, TWO gold buttons, brown belt and plush rendering identical. Keep character position/proportions, large empty upper canvas and transparent margins. Change only the four legs and adjoining sleeve folds for a right-running gallop. Paw coordinates refer to the input's 448x640 canvas; scale them with canvas, never shift head to fit. Shoulder anchors (285,500)/(324,515); hip anchors (130,505)/(171,516). Exactly four anatomically attached feline limbs, far legs behind near legs with plausible occlusion. Smooth bent elbows/knees, natural paw orientation and garments wrapping each leg. No extra paws, detached fragments, motion blur, ghosting, snow, effects, shadows, props or text. Actual transparent background."
+  },
+  {
+    "id": "moveRight-gait-15",
+    "group": "moveRight",
+    "canonical_pose": "moveRight-0",
+    "reference": "/Users/luxia/.codex/worktrees/5553/retto/tools/christmas-skin/gen-production/moveRight-0-character.png",
+    "phase": 0.9375,
+    "phase_description": "extension easing into phase zero",
+    "paw_targets": {
+      "front_left_near": [
+        405,
+        568
+      ],
+      "front_right_far": [
+        373,
+        556
+      ],
+      "rear_left_near": [
+        37,
+        571
+      ],
+      "rear_right_far": [
+        125,
+        575
+      ]
+    },
+    "generation_mode": "built-in image_gen",
+    "generated_source_path": "/Users/luxia/.codex/generated_images/01a119f8-a205-7da2-b34f-b0a1d6ade04b/exec-2b5d5c5e-eaa9-4bb3-9b13-d1d53a060cb6.png",
+    "prompt_base": "Edit the reference Christmas Retto cat as ONE independent transparent sprite cell, NOT a strip. Keep camera angle, head position, cream face and blue eyes, fluffy tail, Santa cap, red plush coat/white trim, TWO gold buttons, brown belt and plush rendering identical. Keep character position/proportions, large empty upper canvas and transparent margins. Change only the four legs and adjoining sleeve folds for a right-running gallop. Paw coordinates refer to the input's 448x640 canvas; scale them with canvas, never shift head to fit. Shoulder anchors (285,500)/(324,515); hip anchors (130,505)/(171,516). Exactly four anatomically attached feline limbs, far legs behind near legs with plausible occlusion. Smooth bent elbows/knees, natural paw orientation and garments wrapping each leg. No extra paws, detached fragments, motion blur, ghosting, snow, effects, shadows, props or text. Actual transparent background.",
+    "endpoint_pair": [
+      14,
+      0
+    ],
+    "fraction": 0.5,
+    "description": "Independent halfway pose between registered neighboring endpoints; hind legs remain bare cream fur."
+  }
+]

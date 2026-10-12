@@ -91,6 +91,23 @@ func runSelfTest() -> Int32 {
               let sheet = NSImage(contentsOf: url) else { return skin != .classic }
         return SpriteSheetLayout.forImage(size: sheet.size) != nil
     }
+    let christmasTimingOK = (Array(animationCatalog.values) + Array(dragRunAnimations.values)).allSatisfy { original in
+        let extended = skinAnimation(original, skin: .christmas, columns: 16)
+        let legacy = skinAnimation(original, skin: .christmas, columns: 8)
+        let other = skinAnimation(original, skin: .classic, columns: 16)
+        return extended.frames == 16
+            && Christmas16Timing.duration(row: original.row) != nil
+            && abs(extended.interval * 16 - (Christmas16Timing.duration(row: original.row) ?? 0)) < 0.000001
+            && extended.interval >= 0.04
+            && Christmas16Timing.frameDurations(row: original.row)?.count == 16
+            && abs((Christmas16Timing.frameDurations(row: original.row) ?? []).reduce(0, +) - extended.interval * 16) < 0.000001
+            && (Christmas16Timing.frameDurations(row: original.row) ?? []).allSatisfy { $0 >= 0.04 }
+            && abs(legacy.interval - original.interval) < 0.000001
+            && abs(other.interval - original.interval) < 0.000001
+            && extended.cycleLimit == original.cycleLimit
+            && legacy.frames == original.frames && other.frames == original.frames
+    }
+    let christmasOK = christmasTimingOK && christmasEffectsSelfTest()
     let personalV2LayoutOK = SpriteSheetLayout.forImage(size: NSSize(width: 1536, height: 2288)) == .codexV2
         && SpriteSheetLayout.codexV2.rows == 11
     // 자는 행이 실제로 아틀라스에 있는지. 행을 새로 붙였는데 sheetHeight 를 안 고치면
@@ -363,7 +380,26 @@ func runSelfTest() -> Int32 {
         }
     // 완료는 모션을 유지하고, 시선 행으로 완료 자세를 덮으면 안 된다.
     // 시선은 코덱스와 같은 세 상태에서만 걸린다.
-    let gazeStatesOK = gazeStates == [.idle, .running, .waving]
+    let gazePathsOK = (0..<gazeDirectionCount).allSatisfy { start in
+        (0..<gazeDirectionCount).allSatisfy { target in
+            var current = start
+            var steps = 0
+            while current != target && steps <= gazeDirectionCount / 2 {
+                let next = nextGazeDirection(from: current, toward: target)
+                let distance = (next - current + gazeDirectionCount) % gazeDirectionCount
+                guard distance == 1 || distance == gazeDirectionCount - 1 else { return false }
+                current = next
+                steps += 1
+            }
+            let clockwise = (target - start + gazeDirectionCount) % gazeDirectionCount
+            return current == target && steps == min(clockwise, gazeDirectionCount - clockwise)
+        }
+    }
+    let gazeStatesOK = gazePathsOK && gazeStates == [.idle, .running, .waving]
+        && christmasGazeStepDuration * Double(gazeDirectionCount / 2) < gazeHoldDuration
+        && nextGazeDirection(from: 15, toward: 1) == 0
+        && nextGazeDirection(from: 1, toward: 15) == 0
+        && nextGazeDirection(from: 3, toward: 3) == 3
         && gazeHoldDuration > 0
         && gazeHoldDuration <= 1
         && gazeDirectionCount == 16
@@ -602,8 +638,8 @@ func runSelfTest() -> Int32 {
     // ⚠️ ok 에 넣은 항목은 아래 print 에도 반드시 넣는다. 안 그러면 그 항목이 실패해도
     // ok:false 만 뜨고 무엇이 깨졌는지 알 수 없다 — 실제로 두 번 헤맸다.
     // scripts/check.sh 가 두 줄을 대조해서 빠진 게 있으면 막는다.
-    let ok = claudeRowOK && fallbackOK && cornerOK && lookingOK && sleepRowOK && displayOK && dozeOK && sleepOK && ancientOK && viewedOK && haloOK && assetOK && skinsOK && dragRunOK && behaviorsOK && statesOK && deepLinkOK && clientRoutingOK && codexMenuOK && integrationOK && setupOK && legacyOK && transcriptShapesOK && scalesOK && baselineOK && decoupledOK && fontOK && priorityOK && registryOK && titleOK && badgeLayoutOK && clickRoutingOK && gazeStatesOK && expandOK && lineBudgetOK && typefaceOK && textDeltaOK && tonesOK && folderFoldOK && labelOK && doneStaysOK && bubbleShapeOK && seenOK && staleOK && personalV2LayoutOK && codexTitleRefreshOK && codexCompletionRefreshOK && codexStateReconciliationOK && rolloutDiscoveryPayloadOK && unnamedTitleOK
-    print("{\"ok\":\(ok),\"asset\":\"\(Int(image.size.width))x\(Int(image.size.height))\",\"skins\":\(PetSkin.allCases.count),\"skinsOK\":\(skinsOK),\"dragRun\":\(dragRunOK),\"canJoinAllSpaces\":\(behaviorsOK),\"states\":\(animationCatalog.count),\"deepLink\":\(deepLinkOK),\"clientRouting\":\(clientRoutingOK),\"codexMenu\":\(codexMenuOK),\"integration\":\(integrationOK),\"setup\":\(setupOK),\"legacy\":\(legacyOK),\"transcriptShapes\":\(transcriptShapesOK),\"sizePresets\":\(supportedScales.count),\"baselineLayout\":\(baselineOK),\"scaleDecoupled\":\(decoupledOK),\"badgePlacement\":\(badgeLayoutOK),\"ribbonExpand\":\(expandOK),\"lineBudget\":\(lineBudgetOK),\"typefaces\":\(PetTypeface.allCases.count),\"typefaceOK\":\(typefaceOK),\"textDelta\":\(textDeltaOK),\"tones\":\(tonesOK),\"folderFold\":\(folderFoldOK),\"doneStays\":\(doneStaysOK),\"bubbleShape\":\(bubbleShapeOK),\"seenRule\":\(seenOK),\"staleWorking\":\(staleOK),\"headroomClean\":\(haloOK),\"viewedElsewhere\":\(viewedOK),\"ancientNews\":\(ancientOK),\"sleeps\":\(sleepOK),\"sleepRow\":\(sleepRow),\"dozes\":\(dozeOK),\"displayState\":\(displayOK),\"seenByLooking\":\(lookingOK),\"corners\":\(cornerOK),\"appFallback\":\(fallbackOK),\"haloRows\":\(halo.rows),\"haloDeepest\":\(halo.deepest),\"haloFaint\":\(haloFaintPixels),\"claudeRow\":\(claudeRowOK),\"font\":\"\(rettoHandwritingFontName)\",\"fontLoaded\":\(fontOK),\"multiSession\":\(registryOK),\"sessionTitleFallback\":\(titleOK),\"prioritySelection\":\(priorityOK),\"badgeLayout\":\(badgeLayoutOK),\"clickRouting\":\(clickRoutingOK),\"sleepRowOK\":\(sleepRowOK),\"assetOK\":\(assetOK),\"statesOK\":\(statesOK),\"scales\":\(scalesOK),\"gazeStates\":\(gazeStatesOK),\"label\":\(labelOK),\"personalV2Layout\":\(personalV2LayoutOK),\"codexTitleRefresh\":\(codexTitleRefreshOK),\"codexCompletionRefresh\":\(codexCompletionRefreshOK),\"codexStateReconciliation\":\(codexStateReconciliationOK),\"rolloutDiscoveryPayload\":\(rolloutDiscoveryPayloadOK),\"unnamedTitle\":\(unnamedTitleOK)}")
+    let ok = christmasOK && claudeRowOK && fallbackOK && cornerOK && lookingOK && sleepRowOK && displayOK && dozeOK && sleepOK && ancientOK && viewedOK && haloOK && assetOK && skinsOK && dragRunOK && behaviorsOK && statesOK && deepLinkOK && clientRoutingOK && codexMenuOK && integrationOK && setupOK && legacyOK && transcriptShapesOK && scalesOK && baselineOK && decoupledOK && fontOK && priorityOK && registryOK && titleOK && badgeLayoutOK && clickRoutingOK && gazeStatesOK && expandOK && lineBudgetOK && typefaceOK && textDeltaOK && tonesOK && folderFoldOK && labelOK && doneStaysOK && bubbleShapeOK && seenOK && staleOK && personalV2LayoutOK && codexTitleRefreshOK && codexCompletionRefreshOK && codexStateReconciliationOK && rolloutDiscoveryPayloadOK && unnamedTitleOK
+    print("{\"ok\":\(ok),\"asset\":\"\(Int(image.size.width))x\(Int(image.size.height))\",\"skins\":\(PetSkin.allCases.count),\"skinsOK\":\(skinsOK),\"christmasEffects\":\(christmasOK),\"dragRun\":\(dragRunOK),\"canJoinAllSpaces\":\(behaviorsOK),\"states\":\(animationCatalog.count),\"deepLink\":\(deepLinkOK),\"clientRouting\":\(clientRoutingOK),\"codexMenu\":\(codexMenuOK),\"integration\":\(integrationOK),\"setup\":\(setupOK),\"legacy\":\(legacyOK),\"transcriptShapes\":\(transcriptShapesOK),\"sizePresets\":\(supportedScales.count),\"baselineLayout\":\(baselineOK),\"scaleDecoupled\":\(decoupledOK),\"badgePlacement\":\(badgeLayoutOK),\"ribbonExpand\":\(expandOK),\"lineBudget\":\(lineBudgetOK),\"typefaces\":\(PetTypeface.allCases.count),\"typefaceOK\":\(typefaceOK),\"textDelta\":\(textDeltaOK),\"tones\":\(tonesOK),\"folderFold\":\(folderFoldOK),\"doneStays\":\(doneStaysOK),\"bubbleShape\":\(bubbleShapeOK),\"seenRule\":\(seenOK),\"staleWorking\":\(staleOK),\"headroomClean\":\(haloOK),\"viewedElsewhere\":\(viewedOK),\"ancientNews\":\(ancientOK),\"sleeps\":\(sleepOK),\"sleepRow\":\(sleepRow),\"dozes\":\(dozeOK),\"displayState\":\(displayOK),\"seenByLooking\":\(lookingOK),\"corners\":\(cornerOK),\"appFallback\":\(fallbackOK),\"haloRows\":\(halo.rows),\"haloDeepest\":\(halo.deepest),\"haloFaint\":\(haloFaintPixels),\"claudeRow\":\(claudeRowOK),\"font\":\"\(rettoHandwritingFontName)\",\"fontLoaded\":\(fontOK),\"multiSession\":\(registryOK),\"sessionTitleFallback\":\(titleOK),\"prioritySelection\":\(priorityOK),\"badgeLayout\":\(badgeLayoutOK),\"clickRouting\":\(clickRoutingOK),\"sleepRowOK\":\(sleepRowOK),\"assetOK\":\(assetOK),\"statesOK\":\(statesOK),\"scales\":\(scalesOK),\"gazeStates\":\(gazeStatesOK),\"label\":\(labelOK),\"personalV2Layout\":\(personalV2LayoutOK),\"codexTitleRefresh\":\(codexTitleRefreshOK),\"codexCompletionRefresh\":\(codexCompletionRefreshOK),\"codexStateReconciliation\":\(codexStateReconciliationOK),\"rolloutDiscoveryPayload\":\(rolloutDiscoveryPayloadOK),\"unnamedTitle\":\(unnamedTitleOK)}")
     return ok ? 0 : 1
 }
 
@@ -648,6 +684,7 @@ func renderPreview(to path: String, skin: PetSkin = .classic) -> Int32 {
         view.apply(payload, sessionCount: 3, attentionCount: 2, attentionState: .waiting, isPinned: true)
         view.setExpandedForPreview(expandedFlags[index])
         view.settleAnimations()
+        if skin == .christmas { view.setChristmasTimeForPreview(0.37) }
         // 실제 창은 투명하므로 캐시 캡처(불투명 배경) 대신 뷰를 직접 그린다.
         let card = NSRect(x: x, y: bandOrigin + gap + 22, width: layout.windowSize.width, height: layout.windowSize.height)
         band.card.setFill()
@@ -779,5 +816,43 @@ func renderMagicalHeartGazePreview(to path: String) -> Int32 {
           let png = rep.representation(using: .png, properties: [:]) else { return 1 }
     do { try png.write(to: URL(fileURLWithPath: path)) } catch { return 1 }
     print(path)
+    return 0
+}
+
+/// 16컷의 처음·중간·마지막을 모든 상태와 좌우 이동에서 실제 PetView로 확인한다.
+func renderChristmas16Preview(to path: String) -> Int32 {
+    registerRettoFont()
+    guard let url = Bundle.main.url(forResource: PetSkin.christmas.resourceName, withExtension: "webp"),
+          let atlas = NSImage(contentsOf: url) else { return 1 }
+    let states = PetState.allCases
+    let samples: [(PetState, DragRun?)] = states.map { ($0, nil) } + [(.idle, .right), (.idle, .left)]
+    let layout = petLayout(scale: 0.65), gap: CGFloat = 18, label: CGFloat = 22
+    let size = NSSize(width: (layout.windowSize.width + gap) * 4 + gap,
+                      height: (layout.windowSize.height + label + gap) * CGFloat(samples.count) + gap)
+    let board = NSImage(size: size); board.lockFocus()
+    NSColor(calibratedWhite: 0.95, alpha: 1).setFill(); NSRect(origin: .zero, size: size).fill()
+    for (row, sample) in samples.enumerated() {
+        for (column, index) in [0, 5, 10, 15].enumerated() {
+            let view = RettoView(frame: NSRect(origin: .zero, size: layout.windowSize), spriteSheet: atlas,
+                                 skin: .christmas, onOpenClaude: { _, _ in }, onOpenAttention: { _ in })
+            view.petScale = 0.65
+            let fixture = "{\"state\":\"\(sample.0.rawValue)\",\"sessionId\":\"preview\",\"projectName\":\"Retto\",\"displayTitle\":\"크리스마스 16프레임\"}".data(using: .utf8)!
+            guard let payload = try? JSONDecoder().decode(StatePayload.self, from: fixture) else { continue }
+            view.apply(payload, sessionCount: 1, attentionCount: 0, attentionState: nil, isPinned: false)
+            view.settleAnimations()
+            if let drag = sample.1 { view.setDragRunForPreview(drag) }
+            view.setFrameForPreview(index); view.setChristmasTimeForPreview(Double(index) * 0.06)
+            let x = gap + CGFloat(column) * (layout.windowSize.width + gap)
+            let y = size.height - gap - CGFloat(row + 1) * (layout.windowSize.height + label + gap)
+            NSGraphicsContext.saveGraphicsState(); let tr = NSAffineTransform(); tr.translateX(by: x, yBy: y + label); tr.concat()
+            view.draw(view.bounds); NSGraphicsContext.restoreGraphicsState()
+            let title = "\(sample.1.map { String(describing: $0) } ?? sample.0.rawValue) · \(index + 1)/16"
+            (title as NSString).draw(at: NSPoint(x: x, y: y), withAttributes: [.font: NSFont.systemFont(ofSize: 12), .foregroundColor: NSColor.black])
+        }
+    }
+    board.unlockFocus()
+    guard let tiff = board.tiffRepresentation, let rep = NSBitmapImageRep(data: tiff),
+          let png = rep.representation(using: .png, properties: [:]) else { return 1 }
+    do { try png.write(to: URL(fileURLWithPath: path)) } catch { return 1 }
     return 0
 }
