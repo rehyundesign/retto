@@ -19,15 +19,25 @@ struct SpriteSheetLayout: Equatable {
     let cellWidth: CGFloat
     let cellHeight: CGFloat
     let rows: Int
+    let columns: Int
+
+    init(cellWidth: CGFloat, cellHeight: CGFloat, rows: Int, columns: Int = 8) {
+        self.cellWidth = cellWidth
+        self.cellHeight = cellHeight
+        self.rows = rows
+        self.columns = columns
+    }
 
     static let retto = SpriteSheetLayout(cellWidth: 224, cellHeight: 320, rows: 12)
     /// 고해상도 개인 스킨도 같은 8×12 프레임 수를 쓰고, 소스 이미지만 2배로 읽는다.
     static let retto2x = SpriteSheetLayout(cellWidth: 448, cellHeight: 640, rows: 12)
+    static let retto16 = SpriteSheetLayout(cellWidth: 448, cellHeight: 640, rows: 12, columns: 16)
     static let codexV2 = SpriteSheetLayout(cellWidth: 192, cellHeight: 208, rows: 11)
 
     static func forImage(size: NSSize) -> SpriteSheetLayout? {
         if Int(size.width) == 1792, Int(size.height) == 3840 { return .retto }
         if Int(size.width) == 3584, Int(size.height) == 7680 { return .retto2x }
+        if Int(size.width) == 7168, Int(size.height) == 7680 { return .retto16 }
         if Int(size.width) == 1536, Int(size.height) == 2288 { return .codexV2 }
         return nil
     }
@@ -53,6 +63,7 @@ enum PetSkin: String, CaseIterable {
     case rilakkuma
     case rilakkumaCape
     case magicalHeart
+    case christmas
 
     var label: String {
         switch self {
@@ -64,6 +75,7 @@ enum PetSkin: String, CaseIterable {
         case .rilakkuma: return "리락쿠마"
         case .rilakkumaCape: return "리락쿠마 망토"
         case .magicalHeart: return "매지컬 하트"
+        case .christmas: return "크리스마스"
         }
     }
 
@@ -78,6 +90,7 @@ enum PetSkin: String, CaseIterable {
         case .rilakkuma: return "spritesheet-rilakkuma"
         case .rilakkumaCape: return "spritesheet-rilakkuma-cape"
         case .magicalHeart: return "spritesheet-magical-heart"
+        case .christmas: return "spritesheet-christmas-16-character"
         }
     }
 
@@ -259,6 +272,16 @@ let gazeHoldDuration: TimeInterval = 0.8
 
 /// 시선 아틀라스는 위쪽부터 시계 방향으로 16개 머리 방향을 담는다.
 let gazeDirectionCount = 16
+
+/// 크리스마스 시선은 가장 짧은 경로로 인접 방향을 한 컷씩 표시한다.
+let christmasGazeStepDuration: TimeInterval = 0.06
+
+func nextGazeDirection(from current: Int, toward target: Int) -> Int {
+    let clockwise = (target - current + gazeDirectionCount) % gazeDirectionCount
+    guard clockwise != 0 else { return current }
+    let step = clockwise <= gazeDirectionCount / 2 ? 1 : -1
+    return (current + step + gazeDirectionCount) % gazeDirectionCount
+}
 
 /// 인접 방향의 경계에서 커서가 조금 흔들려도 고개가 매 이벤트마다 바뀌지 않게 남기는 여유 각도.
 let gazeDirectionHysteresisDegrees: CGFloat = 4
