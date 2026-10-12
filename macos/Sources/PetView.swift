@@ -11,7 +11,15 @@ final class RettoView: NSView {
     }
     /// 아틀라스만으로는 표현하기 어려운 스킨 전용 효과를 고른다.
     var skin: PetSkin {
-        didSet { needsDisplay = true }
+        didSet {
+            if skin != oldValue, skin == .jeanne || oldValue == .jeanne {
+                frameIndex = 0
+                completedCycles = 0
+                clearGaze()
+                restartAnimation()
+            }
+            needsDisplay = true
+        }
     }
     private var spriteLayout: SpriteSheetLayout {
         SpriteSheetLayout.forImage(size: spriteSheet.size) ?? .retto
@@ -27,6 +35,9 @@ final class RettoView: NSView {
     private var frameIndex = 0
     private var completedCycles = 0
     private var animationTimer: Timer?
+    private var jeannePoseEpoch = ProcessInfo.processInfo.systemUptime
+    private let jeanneEffectEpoch = ProcessInfo.processInfo.systemUptime
+    private var jeannePreviewTime: TimeInterval?
     private var trackingAreaRef: NSTrackingArea?
     private var lookDirection: Int?
     /// 시선 행은 방향별 정지 그림 한 장이다. 커서가 멈춘 뒤에도 계속 쓰면 펫까지 멈춘 것처럼 보인다.
@@ -229,6 +240,18 @@ final class RettoView: NSView {
         needsDisplay = true
     }
 
+    func setJeanneTimeForPreview(_ time: TimeInterval) {
+        jeannePreviewTime = time
+        needsDisplay = true
+    }
+
+    func setDragRunForPreview(_ direction: DragRun?) {
+        dragRun = direction
+        frameIndex = 0
+        completedCycles = 0
+        restartAnimation()
+    }
+
     private func updateAccessibility() {
         let animation = animationCatalog[state] ?? animationCatalog[.idle]!
         let selection = isPinned ? "고정한 세션" : "자동 선택 세션"
@@ -242,15 +265,15 @@ final class RettoView: NSView {
 
     /// 지금 그려야 하는 동작. 끄는 중이면 달리기가 상태를 이긴다.
     private var currentAnimation: Animation? {
-        if let dragRun { return dragRunAnimations[dragRun] }
-        guard let animation = animationCatalog[visibleState] else { return nil }
-        return animation
+        guard let animation = dragRun.flatMap({ dragRunAnimations[$0] }) ?? animationCatalog[visibleState] else { return nil }
+        return skin == .jeanne ? JeanneMotion.animation(animation) : animation
     }
 
     private func restartAnimation() {
         animationTimer?.invalidate()
+        jeannePoseEpoch = ProcessInfo.processInfo.systemUptime
         guard let animation = currentAnimation else { return }
-        let timer = Timer(timeInterval: animation.interval, repeats: true) { [weak self] _ in
+        let timer = Timer(timeInterval: skin == .jeanne ? 1.0 / 60 : animation.interval, repeats: true) { [weak self] _ in
             self?.advanceFrame()
         }
         animationTimer = timer
@@ -259,9 +282,19 @@ final class RettoView: NSView {
     }
 
     private func advanceFrame() {
-        guard dragRun != nil || lookDirection == nil, let animation = currentAnimation else { return }
-        frameIndex = (frameIndex + 1) % animation.frames
-        if frameIndex == 0 { completedCycles += 1 }
+        guard let animation = currentAnimation else { return }
+        if skin == .jeanne {
+            needsDisplay = true
+            guard dragRun != nil || lookDirection == nil else { return }
+            let position = JeanneMotion.position(elapsed: ProcessInfo.processInfo.systemUptime - jeannePoseEpoch,
+                                                 interval: animation.interval)
+            frameIndex = position.frame
+            completedCycles = position.cycles
+        } else {
+            guard dragRun != nil || lookDirection == nil else { return }
+            frameIndex = (frameIndex + 1) % animation.frames
+            if frameIndex == 0 { completedCycles += 1 }
+        }
         // 반응은 한 바퀴만 돌고 실제 상태로 돌아간다.
         if transientState != nil, completedCycles >= 1 {
             transientState = nil
@@ -514,14 +547,29 @@ final class RettoView: NSView {
         // 동물의 숲처럼 발밑에만 타원을 깔고, 몸에는 아주 얕은 그림자만 남긴다.
         drawGroundShadow(petRect: petRect, scale: uiScale)
 
+        let jeanneTime = jeannePreviewTime ?? (ProcessInfo.processInfo.systemUptime - jeanneEffectEpoch)
+        if skin == .jeanne {
+            JeanneEffects.draw(state: visibleState, drag: dragRun, in: petRect,
+                               time: jeanneTime, frame: frameIndex, front: false)
+        }
+
         NSGraphicsContext.saveGraphicsState()
         let shadow = NSShadow()
         shadow.shadowColor = NSColor.black.withAlphaComponent(0.16)
         shadow.shadowBlurRadius = 5 * uiScale
         shadow.shadowOffset = NSSize(width: 0, height: -2 * uiScale)
         shadow.set()
-        spriteSheet.draw(in: petRect, from: sourceRect, operation: .sourceOver, fraction: 1, respectFlipped: false, hints: [.interpolation: NSImageInterpolation.high])
+        if skin == .jeanne {
+            _ = JeanneFrames.draw(row: row, frame: column, in: petRect)
+        } else {
+            spriteSheet.draw(in: petRect, from: sourceRect, operation: .sourceOver, fraction: 1, respectFlipped: false, hints: [.interpolation: NSImageInterpolation.high])
+        }
         NSGraphicsContext.restoreGraphicsState()
+
+        if skin == .jeanne {
+            JeanneEffects.draw(state: visibleState, drag: dragRun, in: petRect,
+                               time: jeanneTime, frame: frameIndex, front: true)
+        }
 
         if skin == .magicalHeart {
             if !hasBakedTransformation {
@@ -529,7 +577,7 @@ final class RettoView: NSView {
             }
         }
 
-        if visibleState == .sleeping {
+        if visibleState == .sleeping, skin != .jeanne {
             drawSleepBreath(petRect: petRect, scale: uiScale)
         }
 

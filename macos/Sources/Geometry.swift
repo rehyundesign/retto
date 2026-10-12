@@ -23,11 +23,13 @@ struct SpriteSheetLayout: Equatable {
     static let retto = SpriteSheetLayout(cellWidth: 224, cellHeight: 320, rows: 12)
     /// 고해상도 개인 스킨도 같은 8×12 프레임 수를 쓰고, 소스 이미지만 2배로 읽는다.
     static let retto2x = SpriteSheetLayout(cellWidth: 448, cellHeight: 640, rows: 12)
+    static let retto16 = SpriteSheetLayout(cellWidth: 448, cellHeight: 640, rows: 12)
     static let codexV2 = SpriteSheetLayout(cellWidth: 192, cellHeight: 208, rows: 11)
 
     static func forImage(size: NSSize) -> SpriteSheetLayout? {
         if Int(size.width) == 1792, Int(size.height) == 3840 { return .retto }
         if Int(size.width) == 3584, Int(size.height) == 7680 { return .retto2x }
+        if Int(size.width) == 7168, Int(size.height) == 7680 { return .retto16 }
         if Int(size.width) == 1536, Int(size.height) == 2288 { return .codexV2 }
         return nil
     }
@@ -53,6 +55,7 @@ enum PetSkin: String, CaseIterable {
     case rilakkuma
     case rilakkumaCape
     case magicalHeart
+    case jeanne
 
     var label: String {
         switch self {
@@ -64,6 +67,7 @@ enum PetSkin: String, CaseIterable {
         case .rilakkuma: return "리락쿠마"
         case .rilakkumaCape: return "리락쿠마 망토"
         case .magicalHeart: return "매지컬 하트"
+        case .jeanne: return "신의괴도 잔느"
         }
     }
 
@@ -78,6 +82,7 @@ enum PetSkin: String, CaseIterable {
         case .rilakkuma: return "spritesheet-rilakkuma"
         case .rilakkumaCape: return "spritesheet-rilakkuma-cape"
         case .magicalHeart: return "spritesheet-magical-heart"
+        case .jeanne: return "spritesheet-jeanne"
         }
     }
 
@@ -92,7 +97,10 @@ enum PetSkin: String, CaseIterable {
 
     /// 이 기기의 앱 번들에 아틀라스가 실제로 들어 있는지.
     var isAvailable: Bool {
-        Bundle.main.url(forResource: resourceName, withExtension: "webp") != nil
+        if self == .jeanne {
+            return Bundle.main.url(forResource: resourceName, withExtension: "webp") != nil && JeanneFrames.hasAllFrames
+        }
+        return Bundle.main.url(forResource: resourceName, withExtension: "webp") != nil
     }
 }
 

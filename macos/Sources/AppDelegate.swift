@@ -140,6 +140,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     /// 스킨의 아틀라스를 읽는다. 파일이 없으면 기본 스킨으로 물러난다 —
     /// 옛 앱에 새 스킨 설정만 남아 있는 경우에도 레토가 사라지지 않게.
     private func loadSpriteSheet(_ skin: PetSkin) -> NSImage? {
+        if skin == .jeanne, skin.isAvailable { return JeanneFrames.placeholder }
         if let url = Bundle.main.url(forResource: skin.resourceName, withExtension: "webp"),
            let image = NSImage(contentsOf: url) { return image }
         guard skin != .classic else { return nil }
