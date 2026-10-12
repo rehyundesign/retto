@@ -125,3 +125,34 @@ enum OpenTarget: String, CaseIterable {
 }
 
 /// 실제로 띄우는 앱. `auto` 를 세션의 클라이언트로 풀어낸 결과라 여기엔 `auto` 가 없다.
+
+/// 확장 크리스마스의 동작 시간. 이미지 제작과 웹 미리보기도 같은 설정을 사용한다.
+enum Christmas16Timing {
+    private struct Settings: Decodable {
+        let cycle_seconds: [String: Double]
+        let effect_periods: [String: Double]
+        let frame_seconds: [String: [Double]]?
+    }
+    private static let values: Settings? = {
+        guard let url = Bundle.main.url(forResource: "christmas-16-timing", withExtension: "json"),
+              let data = try? Data(contentsOf: url),
+              let decoded = try? JSONDecoder().decode(Settings.self, from: data) else { return nil }
+        return decoded
+    }()
+    static func duration(row: Int) -> Double? { values?.cycle_seconds[String(row)] }
+    static func effectPeriod(_ id: String) -> Double? { values?.effect_periods[id] }
+    static func frameDurations(row: Int) -> [Double]? { values?.frame_seconds?[String(row)] }
+    static func frameDuration(row: Int, frame: Int) -> Double? {
+        guard let times = frameDurations(row: row), times.indices.contains(frame) else { return nil }
+        return times[frame]
+    }
+}
+
+/// 각 제스처의 변화 폭에 맞춰 재생한다. 다른 스킨의 시간은 유지한다.
+func skinAnimation(_ animation: Animation, skin: PetSkin, columns: Int) -> Animation {
+    guard skin == .christmas, columns == 16 else { return animation }
+    return Animation(row: animation.row, frames: 16,
+                     interval: (Christmas16Timing.duration(row: animation.row) ?? animation.interval * Double(animation.frames)) / 16,
+                     cycleLimit: animation.cycleLimit, kicker: animation.kicker,
+                     title: animation.title, tone: animation.tone)
+}

@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ko">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>크리스마스 레토 · 움직임</title>
+<style>
+  :root{font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif;color:#533b30;background:#fffaf2;--stage:#fff;--scale:1}
+  *{box-sizing:border-box}body{margin:0;padding:26px 20px 48px}main{max-width:900px;margin:auto}header{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:22px}h1{font-size:25px;margin:0 0 6px;font-weight:700}p{margin:0;color:#8e7363;font-size:14px}
+  .controls{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin-bottom:18px}button,select{font:inherit;font-size:13px;border:1px solid #dccbb9;background:#fff;color:#533b30;border-radius:8px;padding:9px 12px}button{cursor:pointer;min-width:83px}label{display:flex;align-items:center;gap:6px;font-size:12px;color:#8e7363}button:focus-visible,select:focus-visible{outline:3px solid #dbb477;outline-offset:2px}
+  .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.card{border:1px solid #e6d7c7;border-radius:14px;background:var(--stage);overflow:hidden;text-align:center;min-width:0}.stage{height:calc(320px * var(--scale));display:flex;align-items:center;justify-content:center}.stage img,.stage canvas{width:calc(224px * var(--scale));height:calc(320px * var(--scale));object-fit:contain;max-width:none}.card h2{font-size:14px;margin:0;padding:13px 8px 15px;border-top:1px solid #eadfd3;color:#704b35;background:#fffaf2}.focused-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.single{grid-template-columns:1fr}.single .card{max-width:660px;width:100%;margin:auto}#loading{font-size:14px;color:#8e7363;padding:40px 0}.dark{--stage:#1e2531}.dark .card{border-color:#465061}
+  @media(max-width:650px){.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}body{padding:20px 12px}.single{grid-template-columns:1fr}:root{--scale:.75}header{display:block}.controls{gap:6px}}
+</style>
+<style>
+.stage{position:relative}.stage img,.stage canvas{position:relative;z-index:2}.effect-layer{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:calc(224px * var(--scale));height:calc(320px * var(--scale));pointer-events:none}.effect-back{z-index:1}.effect-front{z-index:3}.effect-layer svg{display:block;width:100%;height:100%}
+</style>
+<main>
+  <header><div><h1>크리스마스 레토 🎄</h1><p>상태별 16프레임 · 완료 인사와 시선 16방향 · 크리스마스 이펙트</p></div></header>
+  <div class="controls">
+    <button id="play" type="button" aria-pressed="false">멈추기</button>
+    <label>상태 <select id="state" aria-label="상태"><option value="all">전체 보기</option></select></label>
+    <label>속도 <select id="speed" aria-label="속도"><option value=".5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option></select></label>
+    <label>크기 <select id="size" aria-label="크기"><option value=".75">0.75×</option><option value="1" selected>1×</option><option value="1.5">1.5×</option></select></label>
+    <label>배경 <select id="background" aria-label="배경"><option value="light">밝게</option><option value="dark">어둡게</option></select></label>
+    <label>시선 <select id="gaze" aria-label="시선"><option value="off">기본 동작</option></select></label>
+    <label><input id="follow" type="checkbox"> 마우스 따라보기</label>
+  </div>
+  <p id="loading" role="status">움직임을 불러오는 중…</p>
+  <div id="grid" class="grid" aria-label="상태별 움직임"></div>
+  <section id="gazeSection" style="margin-top:28px"><h2 style="font-size:19px">시선 16방향</h2><p style="margin-bottom:14px">위쪽부터 시계 방향으로 고개를 돌려요. 기본·생각 중·완료에서 시선을 시험할 수 있어요.</p><div id="gazeGrid" class="grid" aria-label="시선 16방향"></div></section>
+</main>
+<script type="module">
+  import { festiveEffects } from '../festive-effects.mjs?v=25';
+  import { updateGazeMotion } from '../gaze-motion.mjs?v=25';
+  const config = await fetch('../smooth16-map.json?v=25').then(r => {if(!r.ok)throw new Error('설정을 불러오지 못했습니다');return r.json()});
+  const grid=document.querySelector('#grid'),state=document.querySelector('#state'),cards=[],speed=document.querySelector('#speed');
+  const repairedOption=document.createElement('option');repairedOption.value='repaired';repairedOption.textContent='좌우 이동·완료 수정본';state.append(repairedOption);
+  const movementOption=document.createElement('option');movementOption.value='movement';movementOption.textContent='좌우 이동만';state.append(movementOption);
+  const secondaryOption=document.createElement('option');secondaryOption.value='secondary';secondaryOption.textContent='귀·방울·배경 수정본';state.append(secondaryOption);
+  let playing=true,elapsed=0,last=performance.now(),lastEffectRender=-Infinity;
+  const imagePromises=[],gazeFrames=[],gazeSelect=document.querySelector('#gaze'),follow=document.querySelector('#follow'),gazeSection=document.querySelector('#gazeSection'),gazeGrid=document.querySelector('#gazeGrid');
+  const gazeStates=new Set(['idle','thinking','waving']),idleGroup=config.groups.find(g=>g.id==='idle');
+  for(const group of config.groups){
+    const frames=[];
+    for(let i=0;i<group.frames;i++){
+      const image=new Image();image.src=`../gen-smooth16/${group.id}-${i}-character.png?v=25`;
+      imagePromises.push(image.decode());frames.push(image);
+    }
+    const card=document.createElement('article');card.className='card';card.dataset.state=group.id;
+    const stage=document.createElement('div');stage.className='stage';
+    const back=document.createElement('div');back.className='effect-layer effect-back';back.setAttribute('aria-hidden','true');stage.append(back);
+    const image=document.createElement('canvas');image.setAttribute('role','img');image.setAttribute('aria-label',group.label);image.width=448;image.height=640;stage.append(image);const context=image.getContext('2d');
+    const front=document.createElement('div');front.className='effect-layer effect-front';front.setAttribute('aria-hidden','true');stage.append(front);
+    const title=document.createElement('h2');title.textContent=`${group.label} · ${group.frames}프레임`;card.append(stage,title);grid.append(card);
+    const option=document.createElement('option');option.value=group.id;option.textContent=group.label;state.append(option);
+    const durations=group.frame_durations??Array(group.frames).fill(group.interval);
+    const item={group,frames,card,image,context,durations,cycle:durations.reduce((a,b)=>a+b,0),drawn:null,back,front,index:0,look:null,lookUntil:0};cards.push(item);
+    stage.addEventListener('pointermove',event=>{
+      if(!follow.checked||!gazeStates.has(group.id))return;
+      const rect=stage.getBoundingClientRect(),dx=event.clientX-(rect.left+rect.width/2),dy=(rect.top+rect.height*.47)-event.clientY;
+      if(Math.hypot(dx,dy)<8)return;
+      const degrees=(Math.atan2(dx,dy)*180/Math.PI+360)%360,nearest=Math.round(degrees/22.5)%16;
+      const offset=item.look===null||performance.now()>=item.lookUntil?Infinity:Math.abs((degrees-item.look*22.5+540)%360-180);
+      if(offset>15.25)item.look=nearest;
+      item.lookUntil=performance.now()+800;
+    });
+  }
+  for(let i=0;i<16;i++){
+    const image=new Image();image.src=`../gen-smooth16/gaze-${i}-character.png?v=25`;imagePromises.push(image.decode());gazeFrames.push(image);
+    const option=document.createElement('option');option.value=String(i);option.textContent=`${i} · ${i*22.5}°`;gazeSelect.append(option);
+    const card=document.createElement('article');card.className='card';const stage=document.createElement('div');stage.className='stage';const still=document.createElement('img');still.src=image.src;still.alt=`시선 ${i} · ${i*22.5}도`;still.width=224;still.height=320;stage.append(still);const title=document.createElement('h2');title.textContent=`시선 ${i} · ${i*22.5}°`;card.append(stage,title);gazeGrid.append(card);
+  }
+  const gazeOption=document.createElement('option');gazeOption.value='gazes';gazeOption.textContent='시선 16방향';state.append(gazeOption);
+  function tick(now){
+    if(playing)elapsed+=(now-last)/1000*Number(speed.value);last=now;
+    for(const item of cards){
+      if(grid.hidden||item.card.hidden)continue;
+      const durations=item.durations;let phase=elapsed%item.cycle,index=0;
+      while(index<durations.length-1&&phase>=durations[index]){phase-=durations[index];index++;}
+      const look=gazeStates.has(item.group.id)?(gazeSelect.value!=='off'?Number(gazeSelect.value):follow.checked&&now<item.lookUntil?item.look:null):null;
+      const shownLook=updateGazeMotion(item,look,elapsed);
+      const frame=shownLook===null?item.frames[index]:gazeFrames[shownLook];
+      if(item.drawn!==frame){item.context.clearRect(0,0,448,640);item.context.drawImage(frame,0,0,448,640);item.drawn=frame;item.card.dataset.characterUpdates=String(Number(item.card.dataset.characterUpdates??0)+1);}item.card.dataset.frame=String(index);item.index=index;item.activeLook=shownLook;
+    }
+    if((playing||lastEffectRender===-Infinity)&&now-lastEffectRender>=50){
+      for(const item of cards){if(grid.hidden||item.card.hidden)continue;const effectGroup=item.activeLook===null?item.group:idleGroup;item.back.innerHTML=festiveEffects(effectGroup,elapsed,false,item.index);item.front.innerHTML=festiveEffects(effectGroup,elapsed,true,item.index);item.card.dataset.effectUpdates=String(Number(item.card.dataset.effectUpdates??0)+1);}
+      lastEffectRender=now;
+    }
+    requestAnimationFrame(tick);
+  }
+  document.addEventListener('visibilitychange',()=>{last=performance.now();});
+  document.querySelector('#play').addEventListener('click',event=>{playing=!playing;event.currentTarget.textContent=playing?'멈추기':'재생';event.currentTarget.setAttribute('aria-pressed',String(!playing));});
+  state.addEventListener('change',()=>{lastEffectRender=-Infinity;grid.classList.toggle('focused-grid',state.value==='secondary');grid.classList.toggle('single',!['all','repaired','movement','secondary'].includes(state.value));grid.hidden=state.value==='gazes';gazeSection.hidden=state.value!=='all'&&state.value!=='gazes';const ids=state.value==='repaired'?['moveRight','moveLeft','waving']:state.value==='movement'?['moveRight','moveLeft']:state.value==='secondary'?['idle','waving','thinking','review']:null;for(const item of cards)item.card.hidden=ids?!ids.includes(item.group.id):state.value!=='all'&&item.group.id!==state.value;});
+  document.querySelector('#size').addEventListener('change',event=>document.documentElement.style.setProperty('--scale',event.target.value));
+  document.querySelector('#background').addEventListener('change',event=>document.body.classList.toggle('dark',event.target.value==='dark'));
+  await Promise.all(imagePromises);document.querySelector('#loading').hidden=true;last=performance.now();
+  requestAnimationFrame(tick);
+</script>
+</html>

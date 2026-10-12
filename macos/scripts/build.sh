@@ -22,10 +22,12 @@ ICONSET_DIR="$BUILD_DIR/RettoIcon.iconset"
 
 INSTALL=0
 KEEP_BUILD=0
+APP_ONLY=0
 for arg in "$@"; do
   case "$arg" in
     --install) INSTALL=1 ;;
     --keep-build) KEEP_BUILD=1 ;;
+    --app-only) APP_ONLY=1; KEEP_BUILD=1 ;;
   esac
 done
 
@@ -74,13 +76,15 @@ BUILD_STAMP="$(date '+%Y-%m-%d %H:%M') · $GIT_SHA"
 echo "stamp: $VERSION ($BUILD_NUMBER) · $BUILD_STAMP"
 cp "$ASSETS_DIR/spritesheet.webp" "$RESOURCES_DIR/spritesheet.webp"
 # 스킨 아틀라스. 발바닥 메뉴 "스킨" 이 이걸 갈아 끼운다. 없으면 기본 스킨만 뜬다.
-for skin in spritesheet-angel spritesheet-bee spritesheet-bunny spritesheet-luna spritesheet-rilakkuma spritesheet-rilakkuma-cape spritesheet-magical-heart; do
+for skin in spritesheet-angel spritesheet-bee spritesheet-bunny spritesheet-luna spritesheet-rilakkuma spritesheet-rilakkuma-cape spritesheet-magical-heart spritesheet-christmas-character spritesheet-christmas-16-character; do
   [ -f "$ASSETS_DIR/$skin.webp" ] && cp "$ASSETS_DIR/$skin.webp" "$RESOURCES_DIR/$skin.webp"
 done
 # 매지컬 하트의 진행 중 변신 이펙트는 캐릭터와 분리한 앞·뒤 투명 아틀라스다.
 for effect in spritesheet-magical-heart-effects-back spritesheet-magical-heart-effects-front; do
   [ -f "$ASSETS_DIR/$effect.webp" ] && cp "$ASSETS_DIR/$effect.webp" "$RESOURCES_DIR/$effect.webp"
 done
+[ -f "$ASSETS_DIR/christmas-16-attachments.json" ] && cp "$ASSETS_DIR/christmas-16-attachments.json" "$RESOURCES_DIR/"
+[ -f "$ASSETS_DIR/christmas-16-timing.json" ] && cp "$ASSETS_DIR/christmas-16-timing.json" "$RESOURCES_DIR/"
 cp "$ASSETS_DIR/NanumMiNiSonGeurSsi.ttf" "$RESOURCES_DIR/NanumMiNiSonGeurSsi.ttf"
 # 훅을 앱에 넣어 둔다. 설치기와 「레토 제거」 가 이걸 쓴다.
 rm -rf "$RESOURCES_DIR/hook"
@@ -100,6 +104,7 @@ codesign --force --deep --sign - "$APP_DIR"
 
 "$MACOS_DIR/Retto" --self-test
 
+if (( ! APP_ONLY )); then
 # dist 에는 dmg 만 둔다. 예전에는 앱을 한 벌 더 풀어 뒀는데 쓰는 데가 없었고,
 # Spotlight 에서 레토를 찾으면 설치본과 이것이 같이 떠서 무엇을 눌러야 할지 알 수 없었다.
 rm -rf "$DIST_DIR/$APP_NAME"
@@ -183,8 +188,16 @@ fi
 hdiutil convert "$RW_DMG" -format UDZO -imagekey zlib-level=9 -o "$DMG_PATH" >/dev/null
 rm -rf "$DIST_DIR/dmg"
 echo "share: $DMG_PATH"
+fi
 
 if (( INSTALL )); then
+  # 이 체크아웃에 없는 개인 스킨도 기존 로컬 설치본에서 보존한다.
+  for skin in spritesheet-rilakkuma spritesheet-rilakkuma-cape; do
+    if [[ ! -f "$RESOURCES_DIR/$skin.webp" && -f "$HOME/Applications/$APP_NAME/Contents/Resources/$skin.webp" ]]; then
+      cp "$HOME/Applications/$APP_NAME/Contents/Resources/$skin.webp" "$RESOURCES_DIR/$skin.webp"
+    fi
+  done
+  codesign --force --deep --sign - "$APP_DIR"
   # 앱 이름과 실행파일 이름이 차례로 바뀌었다. 옛 조합으로 돌고 있는 것까지 내려야
   # 새 것을 덮어쓸 수 있다.
   pkill -f "Claude Pet.app/Contents/MacOS/Ret" || true
