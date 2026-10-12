@@ -1,0 +1,206 @@
+{
+  "count": 16,
+  "originalSourcesUnchanged": true,
+  "reviewCell": [
+    640,
+    930
+  ],
+  "previousReviewCell": [
+    360,
+    520
+  ],
+  "images": [
+    {
+      "id": "01-idle",
+      "size": [
+        1049,
+        1500
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "status": "static concept; production character/effect separation and base registration pending"
+    },
+    {
+      "id": "02-running",
+      "size": [
+        1060,
+        1484
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "status": "static concept; production character/effect separation and base registration pending"
+    },
+    {
+      "id": "03-review",
+      "size": [
+        1049,
+        1500
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "status": "static concept; production character/effect separation and base registration pending"
+    },
+    {
+      "id": "04-waiting",
+      "size": [
+        1049,
+        1500
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "status": "static concept; production character/effect separation and base registration pending"
+    },
+    {
+      "id": "05-failed",
+      "size": [
+        1049,
+        1500
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "status": "static concept; production character/effect separation and base registration pending"
+    },
+    {
+      "id": "06-waving",
+      "size": [
+        1049,
+        1500
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "status": "static concept; production character/effect separation and base registration pending"
+    },
+    {
+      "id": "07-jumping",
+      "size": [
+        1049,
+        1500
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "status": "static concept; production character/effect separation and base registration pending"
+    },
+    {
+      "id": "08-sleeping",
+      "size": [
+        1049,
+        1500
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "status": "static concept; production character/effect separation and base registration pending"
+    },
+    {
+      "id": "09-drag-right",
+      "size": [
+        1049,
+        1500
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "status": "static concept; production character/effect separation and base registration pending"
+    },
+    {
+      "id": "10-drag-left",
+      "size": [
+        1049,
+        1500
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "status": "static concept; production character/effect separation and base registration pending"
+    },
+    {
+      "id": "11-running-charge",
+      "size": [
+        1049,
+        1500
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "status": "static concept; production character/effect separation and base registration pending"
+    },
+    {
+      "id": "12-running-release",
+      "size": [
+        1049,
+        1500
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "status": "static concept; production character/effect separation and base registration pending"
+    },
+    {
+      "id": "13-review-focus",
+      "size": [
+        1049,
+        1500
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "status": "static concept; production character/effect separation and base registration pending"
+    },
+    {
+      "id": "14-waving-bow",
+      "size": [
+        1049,
+        1500
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "status": "static concept; production character/effect separation and base registration pending"
+    },
+    {
+      "id": "15-jump-prep",
+      "size": [
+        1049,
+        1500
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "status": "static concept; production character/effect separation and base registration pending"
+    },
+    {
+      "id": "16-sleep-settle",
+      "size": [
+        1061,
+        1482
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "status": "static concept; production character/effect separation and base registration pending"
+    }
+  ]
+}

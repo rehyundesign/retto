@@ -1,0 +1,213 @@
+{
+  "stage": "16 static visual concepts complete; not registered production cells",
+  "checks": [
+    {
+      "id": "01-idle",
+      "dimensions": [
+        1049,
+        1500
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "visualReview": "concept anatomy and costume reviewed; base landmark registration pending",
+      "layers": "combined concept only; production character/effect separation pending"
+    },
+    {
+      "id": "02-running",
+      "dimensions": [
+        1060,
+        1484
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "visualReview": "concept anatomy and costume reviewed; base landmark registration pending",
+      "layers": "combined concept only; production character/effect separation pending"
+    },
+    {
+      "id": "03-review",
+      "dimensions": [
+        1049,
+        1499
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "visualReview": "concept anatomy and costume reviewed; base landmark registration pending",
+      "layers": "combined concept only; production character/effect separation pending"
+    },
+    {
+      "id": "04-waiting",
+      "dimensions": [
+        1049,
+        1500
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "visualReview": "concept anatomy and costume reviewed; base landmark registration pending",
+      "layers": "combined concept only; production character/effect separation pending"
+    },
+    {
+      "id": "05-failed",
+      "dimensions": [
+        1049,
+        1499
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "visualReview": "concept anatomy and costume reviewed; base landmark registration pending",
+      "layers": "combined concept only; production character/effect separation pending"
+    },
+    {
+      "id": "06-waving",
+      "dimensions": [
+        1049,
+        1499
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "visualReview": "concept anatomy and costume reviewed; base landmark registration pending",
+      "layers": "combined concept only; production character/effect separation pending"
+    },
+    {
+      "id": "07-jumping",
+      "dimensions": [
+        1049,
+        1500
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "visualReview": "concept anatomy and costume reviewed; base landmark registration pending",
+      "layers": "combined concept only; production character/effect separation pending"
+    },
+    {
+      "id": "08-sleeping",
+      "dimensions": [
+        1049,
+        1499
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "visualReview": "concept anatomy and costume reviewed; base landmark registration pending",
+      "layers": "combined concept only; production character/effect separation pending"
+    },
+    {
+      "id": "09-drag-right",
+      "dimensions": [
+        1049,
+        1500
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "visualReview": "concept anatomy and costume reviewed; base landmark registration pending",
+      "layers": "combined concept only; production character/effect separation pending"
+    },
+    {
+      "id": "10-drag-left",
+      "dimensions": [
+        1049,
+        1499
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "visualReview": "concept anatomy and costume reviewed; base landmark registration pending",
+      "layers": "combined concept only; production character/effect separation pending"
+    },
+    {
+      "id": "11-running-charge",
+      "dimensions": [
+        1049,
+        1500
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "visualReview": "concept anatomy and costume reviewed; base landmark registration pending",
+      "layers": "combined concept only; production character/effect separation pending"
+    },
+    {
+      "id": "12-running-release",
+      "dimensions": [
+        1049,
+        1499
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "visualReview": "concept anatomy and costume reviewed; base landmark registration pending",
+      "layers": "combined concept only; production character/effect separation pending"
+    },
+    {
+      "id": "13-review-focus",
+      "dimensions": [
+        1049,
+        1500
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "visualReview": "concept anatomy and costume reviewed; base landmark registration pending",
+      "layers": "combined concept only; production character/effect separation pending"
+    },
+    {
+      "id": "14-waving-bow",
+      "dimensions": [
+        1049,
+        1500
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "visualReview": "concept anatomy and costume reviewed; base landmark registration pending",
+      "layers": "combined concept only; production character/effect separation pending"
+    },
+    {
+      "id": "15-jump-prep",
+      "dimensions": [
+        1049,
+        1499
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "visualReview": "concept anatomy and costume reviewed; base landmark registration pending",
+      "layers": "combined concept only; production character/effect separation pending"
+    },
+    {
+      "id": "16-sleep-settle",
+      "dimensions": [
+        1062,
+        1482
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "visualReview": "concept anatomy and costume reviewed; base landmark registration pending",
+      "layers": "combined concept only; production character/effect separation pending"
+    }
+  ]
+}
