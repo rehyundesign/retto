@@ -1,0 +1,408 @@
+[
+  {
+    "id": "moveRight-new-0",
+    "group": "moveRight",
+    "reference": "/Users/luxia/.codex/worktrees/5553/retto/tools/christmas-skin/gen-production/moveRight-0-character.png",
+    "description": "Anatomical halfway pose between consecutive approved endpoints; upper character registered to approved master.",
+    "endpoint_pair": [
+      "moveRight-0",
+      "moveRight-1"
+    ],
+    "fraction": 0.5
+  },
+  {
+    "id": "moveRight-new-1",
+    "group": "moveRight",
+    "reference": "/Users/luxia/.codex/worktrees/5553/retto/tools/christmas-skin/gen-production/moveRight-0-character.png",
+    "description": "Anatomical halfway pose between consecutive approved endpoints; upper character registered to approved master.",
+    "endpoint_pair": [
+      "moveRight-1",
+      "moveRight-2"
+    ],
+    "fraction": 0.5
+  },
+  {
+    "id": "moveRight-new-2",
+    "group": "moveRight",
+    "reference": "/Users/luxia/.codex/worktrees/5553/retto/tools/christmas-skin/gen-production/moveRight-0-character.png",
+    "description": "Anatomical halfway pose between consecutive approved endpoints; upper character registered to approved master.",
+    "endpoint_pair": [
+      "moveRight-2",
+      "moveRight-3"
+    ],
+    "fraction": 0.5
+  },
+  {
+    "id": "moveRight-new-3",
+    "group": "moveRight",
+    "reference": "/Users/luxia/.codex/worktrees/5553/retto/tools/christmas-skin/gen-production/moveRight-0-character.png",
+    "description": "Anatomical halfway pose between consecutive approved endpoints; upper character registered to approved master.",
+    "endpoint_pair": [
+      "moveRight-3",
+      "moveRight-4"
+    ],
+    "fraction": 0.5
+  },
+  {
+    "id": "moveRight-new-4",
+    "group": "moveRight",
+    "reference": "/Users/luxia/.codex/worktrees/5553/retto/tools/christmas-skin/gen-production/moveRight-0-character.png",
+    "description": "Anatomical halfway pose between consecutive approved endpoints; upper character registered to approved master.",
+    "endpoint_pair": [
+      "moveRight-4",
+      "moveRight-5"
+    ],
+    "fraction": 0.5
+  },
+  {
+    "id": "moveRight-new-5",
+    "group": "moveRight",
+    "reference": "/Users/luxia/.codex/worktrees/5553/retto/tools/christmas-skin/gen-production/moveRight-0-character.png",
+    "description": "Anatomical halfway pose between consecutive approved endpoints; upper character registered to approved master.",
+    "endpoint_pair": [
+      "moveRight-5",
+      "moveRight-6"
+    ],
+    "fraction": 0.5
+  },
+  {
+    "id": "moveRight-new-6",
+    "group": "moveRight",
+    "reference": "/Users/luxia/.codex/worktrees/5553/retto/tools/christmas-skin/gen-production/moveRight-0-character.png",
+    "description": "Anatomical halfway pose between consecutive approved endpoints; upper character registered to approved master.",
+    "endpoint_pair": [
+      "moveRight-6",
+      "moveRight-7"
+    ],
+    "fraction": 0.5
+  },
+  {
+    "id": "moveRight-new-7",
+    "group": "moveRight",
+    "reference": "/Users/luxia/.codex/worktrees/5553/retto/tools/christmas-skin/gen-production/moveRight-0-character.png",
+    "description": "Anatomical halfway pose between consecutive approved endpoints; upper character registered to approved master.",
+    "endpoint_pair": [
+      "moveRight-7",
+      "moveRight-0"
+    ],
+    "fraction": 0.5
+  },
+  {
+    "id": "waving-new-0",
+    "group": "waving",
+    "reference": "/Users/luxia/.codex/worktrees/5553/retto/tools/christmas-skin/gen-production/waving-0-character.png",
+    "description": "Anatomical in-between from two chronological endpoints; final placement and playback order reviewed separately.",
+    "endpoint_pair": [
+      "waving-3",
+      "waving-0"
+    ],
+    "fraction": 0.75
+  },
+  {
+    "id": "waving-new-1",
+    "group": "waving",
+    "reference": "/Users/luxia/.codex/worktrees/5553/retto/tools/christmas-skin/gen-production/waving-0-character.png",
+    "description": "Anatomical in-between from two chronological endpoints; final placement and playback order reviewed separately.",
+    "endpoint_pair": [
+      "waving-0",
+      "waving-1"
+    ],
+    "fraction": 0.3333333333333333
+  },
+  {
+    "id": "waving-new-2",
+    "group": "waving",
+    "reference": "/Users/luxia/.codex/worktrees/5553/retto/tools/christmas-skin/gen-production/waving-0-character.png",
+    "description": "Anatomical in-between from two chronological endpoints; final placement and playback order reviewed separately.",
+    "endpoint_pair": [
+      "waving-0",
+      "waving-1"
+    ],
+    "fraction": 0.6666666666666666
+  },
+  {
+    "id": "waiting-new-0",
+    "group": "waiting",
+    "reference": "/Users/luxia/.codex/worktrees/5553/retto/tools/christmas-skin/gen-production/waiting-0-character.png",
+    "description": "Anatomical in-between from two chronological endpoints; final placement and playback order reviewed separately.",
+    "endpoint_pair": [
+      "waiting-0",
+      "waiting-1"
+    ],
+    "fraction": 0.3333333333333333
+  },
+  {
+    "id": "waiting-new-1",
+    "group": "waiting",
+    "reference": "/Users/luxia/.codex/worktrees/5553/retto/tools/christmas-skin/gen-production/waiting-0-character.png",
+    "description": "Anatomical in-between from two chronological endpoints; final placement and playback order reviewed separately.",
+    "endpoint_pair": [
+      "waiting-0",
+      "waiting-1"
+    ],
+    "fraction": 0.6666666666666666
+  },
+  {
+    "id": "waiting-new-2",
+    "group": "waiting",
+    "reference": "/Users/luxia/.codex/worktrees/5553/retto/tools/christmas-skin/gen-production/waiting-0-character.png",
+    "description": "Anatomical in-between from two chronological endpoints; final placement and playback order reviewed separately.",
+    "endpoint_pair": [
+      "waiting-0",
+      "waiting-3"
+    ],
+    "fraction": 0.3333333333333333
+  },
+  {
+    "id": "waiting-new-3",
+    "group": "waiting",
+    "reference": "/Users/luxia/.codex/worktrees/5553/retto/tools/christmas-skin/gen-production/waiting-0-character.png",
+    "description": "Anatomical in-between from two chronological endpoints; final placement and playback order reviewed separately.",
+    "endpoint_pair": [
+      "waiting-0",
+      "waiting-3"
+    ],
+    "fraction": 0.6666666666666666
+  },
+  {
+    "id": "thinking-new-0",
+    "group": "thinking",
+    "reference": "/Users/luxia/.codex/worktrees/5553/retto/tools/christmas-skin/gen-production/thinking-0-character.png",
+    "description": "Anatomical in-between from two chronological endpoints; final placement and playback order reviewed separately.",
+    "endpoint_pair": [
+      "thinking-0",
+      "thinking-1"
+    ],
+    "fraction": 0.3333333333333333
+  },
+  {
+    "id": "thinking-new-1",
+    "group": "thinking",
+    "reference": "/Users/luxia/.codex/worktrees/5553/retto/tools/christmas-skin/gen-production/thinking-0-character.png",
+    "description": "Anatomical in-between from two chronological endpoints; final placement and playback order reviewed separately.",
+    "endpoint_pair": [
+      "thinking-0",
+      "thinking-1"
+    ],
+    "fraction": 0.6666666666666666
+  },
+  {
+    "id": "thinking-new-2",
+    "group": "thinking",
+    "reference": "/Users/luxia/.codex/worktrees/5553/retto/tools/christmas-skin/gen-production/thinking-0-character.png",
+    "description": "Anatomical in-between from two chronological endpoints; final placement and playback order reviewed separately.",
+    "endpoint_pair": [
+      "thinking-0",
+      "thinking-2"
+    ],
+    "fraction": 0.3333333333333333
+  },
+  {
+    "id": "thinking-new-3",
+    "group": "thinking",
+    "reference": "/Users/luxia/.codex/worktrees/5553/retto/tools/christmas-skin/gen-production/thinking-0-character.png",
+    "description": "Anatomical in-between from two chronological endpoints; final placement and playback order reviewed separately.",
+    "endpoint_pair": [
+      "thinking-0",
+      "thinking-2"
+    ],
+    "fraction": 0.6666666666666666
+  },
+  {
+    "id": "review-new-0",
+    "group": "review",
+    "reference": "/Users/luxia/.codex/worktrees/5553/retto/tools/christmas-skin/gen-production/review-0-character.png",
+    "description": "Anatomical in-between from two chronological endpoints; final placement and playback order reviewed separately.",
+    "endpoint_pair": [
+      "review-0",
+      "review-1"
+    ],
+    "fraction": 0.3333333333333333
+  },
+  {
+    "id": "review-new-1",
+    "group": "review",
+    "reference": "/Users/luxia/.codex/worktrees/5553/retto/tools/christmas-skin/gen-production/review-0-character.png",
+    "description": "Anatomical in-between from two chronological endpoints; final placement and playback order reviewed separately.",
+    "endpoint_pair": [
+      "review-0",
+      "review-1"
+    ],
+    "fraction": 0.6666666666666666
+  },
+  {
+    "id": "review-new-2",
+    "group": "review",
+    "reference": "/Users/luxia/.codex/worktrees/5553/retto/tools/christmas-skin/gen-production/review-0-character.png",
+    "description": "Anatomical in-between from two chronological endpoints; final placement and playback order reviewed separately.",
+    "endpoint_pair": [
+      "review-1",
+      "review-2"
+    ],
+    "fraction": 0.3333333333333333
+  },
+  {
+    "id": "review-new-3",
+    "group": "review",
+    "reference": "/Users/luxia/.codex/worktrees/5553/retto/tools/christmas-skin/gen-production/review-0-character.png",
+    "description": "Anatomical in-between from two chronological endpoints; final placement and playback order reviewed separately.",
+    "endpoint_pair": [
+      "review-1",
+      "review-2"
+    ],
+    "fraction": 0.6666666666666666
+  },
+  {
+    "id": "failed-new-0",
+    "group": "failed",
+    "reference": "/Users/luxia/.codex/worktrees/5553/retto/tools/christmas-skin/gen-production/failed-0-character.png",
+    "description": "Anatomical in-between from two chronological endpoints; final placement and playback order reviewed separately.",
+    "endpoint_pair": [
+      "failed-0",
+      "failed-1"
+    ],
+    "fraction": 0.3333333333333333
+  },
+  {
+    "id": "failed-new-1",
+    "group": "failed",
+    "reference": "/Users/luxia/.codex/worktrees/5553/retto/tools/christmas-skin/gen-production/failed-1-character.png",
+    "description": "Anatomical in-between from two chronological endpoints; final placement and playback order reviewed separately.",
+    "endpoint_pair": [
+      "failed-0",
+      "failed-1"
+    ],
+    "fraction": 0.6666666666666666
+  },
+  {
+    "id": "failed-new-2",
+    "group": "failed",
+    "reference": "/Users/luxia/.codex/worktrees/5553/retto/tools/christmas-skin/gen-production/failed-4-character.png",
+    "description": "Anatomical in-between from two chronological endpoints; final placement and playback order reviewed separately.",
+    "endpoint_pair": [
+      "failed-0",
+      "failed-4"
+    ],
+    "fraction": 0.3333333333333333
+  },
+  {
+    "id": "failed-new-3",
+    "group": "failed",
+    "reference": "/Users/luxia/.codex/worktrees/5553/retto/tools/christmas-skin/gen-production/failed-4-character.png",
+    "description": "Anatomical in-between from two chronological endpoints; final placement and playback order reviewed separately.",
+    "endpoint_pair": [
+      "failed-0",
+      "failed-4"
+    ],
+    "fraction": 0.6666666666666666
+  },
+  {
+    "id": "idle-new-0",
+    "group": "idle",
+    "reference": "/Users/luxia/.codex/worktrees/5553/retto/tools/christmas-skin/gen-production/idle-0-character.png",
+    "description": "Blink eyelids only: both eyes 25 percent closed. Iris colour unchanged. All other pixels exact reference."
+  },
+  {
+    "id": "idle-new-1",
+    "group": "idle",
+    "reference": "/Users/luxia/.codex/worktrees/5553/retto/tools/christmas-skin/gen-production/idle-0-character.png",
+    "description": "Blink eyelids only: both eyes 75 percent closed. All other pixels exact reference."
+  },
+  {
+    "id": "sleeping-new-0",
+    "group": "sleeping",
+    "reference": "/Users/luxia/.codex/worktrees/5553/retto/tools/christmas-skin/gen-production/sleeping-0-character.png",
+    "description": "Sleeping shallow inhale: a very small naturally drawn expansion of chest/back fur and coat folds (about 2 pixels at cell size); head closed eyes feet tail fixed."
+  },
+  {
+    "id": "sleeping-new-1",
+    "group": "sleeping",
+    "reference": "/Users/luxia/.codex/worktrees/5553/retto/tools/christmas-skin/gen-production/sleeping-0-character.png",
+    "description": "Sleeping deeper inhale: small naturally drawn expansion of chest/back coat folds (about 4 pixels); head closed eyes feet tail fixed."
+  },
+  {
+    "id": "jumping-new-0",
+    "group": "jumping",
+    "reference": "/Users/luxia/.codex/worktrees/5553/retto/tools/christmas-skin/gen-production/jumping-0-character.png",
+    "description": "Pre-jump compress: forepaws lower 8 pixels toward chest, knees bend slightly, four attached limbs. No props."
+  },
+  {
+    "id": "jumping-new-1",
+    "group": "jumping",
+    "reference": "/Users/luxia/.codex/worktrees/5553/retto/tools/christmas-skin/gen-production/jumping-1-character.png",
+    "description": "Taking off: forepaws tuck 6 pixels toward chest, rear legs begin extending below hips. Four attached limbs. No props.",
+    "canonical_pose": "jumping-1"
+  },
+  {
+    "id": "jumping-new-2",
+    "group": "jumping",
+    "reference": "/Users/luxia/.codex/worktrees/5553/retto/tools/christmas-skin/gen-production/jumping-2-character.png",
+    "description": "Airborne: forepaws tuck close chest, rear legs gently flex under hips, four attached limbs. No props.",
+    "canonical_pose": "jumping-2"
+  },
+  {
+    "id": "jumping-new-3",
+    "group": "jumping",
+    "reference": "/Users/luxia/.codex/worktrees/5553/retto/tools/christmas-skin/gen-production/jumping-0-character.png",
+    "description": "Landing preparation: forepaws extend down 8 pixels, rear paws prepare ground contact, four attached limbs. No props."
+  },
+  {
+    "id": "waving-new-3",
+    "group": "waving",
+    "reference": "/Users/luxia/.codex/worktrees/5553/retto/tools/christmas-skin/gen-production/waving-3-character.png",
+    "description": "Anatomical in-between from two chronological endpoints; final placement and playback order reviewed separately.",
+    "endpoint_pair": [
+      "waving-3",
+      "waving-0"
+    ],
+    "fraction": 0.25
+  },
+  {
+    "id": "waving-new-4",
+    "group": "waving",
+    "reference": "/Users/luxia/.codex/worktrees/5553/retto/tools/christmas-skin/gen-production/waving-0-character.png",
+    "description": "Anatomical in-between from two chronological endpoints; final placement and playback order reviewed separately.",
+    "endpoint_pair": [
+      "waving-3",
+      "waving-0"
+    ],
+    "fraction": 0.5
+  },
+  {
+    "id": "waving-new-5",
+    "group": "waving",
+    "reference": "/Users/luxia/.codex/worktrees/5553/retto/tools/christmas-skin/gen-production/waving-3-character.png",
+    "endpoint_pair": [
+      "waving-3",
+      "waving-new-3"
+    ],
+    "fraction": 0.5,
+    "description": "Small first arm lift from resting position to the curled lifted paw."
+  },
+  {
+    "id": "jumping-new-4",
+    "group": "jumping",
+    "reference": "/Users/luxia/.codex/worktrees/5553/retto/tools/christmas-skin/gen-production/jumping-0-character.png",
+    "whole_pose": true,
+    "canonical_pose": "jumping-0",
+    "endpoint_pair": [
+      "jumping-0",
+      "jumping-1"
+    ],
+    "fraction": 0.3333333333333333,
+    "description": "Coherent complete takeoff pose, with torso extension between crouched and airborne endpoints."
+  },
+  {
+    "id": "jumping-new-5",
+    "group": "jumping",
+    "reference": "/Users/luxia/.codex/worktrees/5553/retto/tools/christmas-skin/gen-production/jumping-0-character.png",
+    "whole_pose": true,
+    "canonical_pose": "jumping-0",
+    "endpoint_pair": [
+      "jumping-0",
+      "jumping-1"
+    ],
+    "fraction": 0.6666666666666666,
+    "description": "Coherent complete takeoff pose, with torso extension between crouched and airborne endpoints."
+  }
+]
