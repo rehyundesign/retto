@@ -7,11 +7,11 @@ import Foundation
 final class RettoView: NSView {
     /// 지금 그리는 아틀라스. 스킨을 고르면 앱이 갈아 끼운다.
     var spriteSheet: NSImage {
-        didSet { needsDisplay = true }
+        didSet { christmasSheetImage = nil; christmasCellImages.removeAll(); frameIndex = 0; completedCycles = 0; restartAnimation(); needsDisplay = true }
     }
     /// 아틀라스만으로는 표현하기 어려운 스킨 전용 효과를 고른다.
     var skin: PetSkin {
-        didSet { needsDisplay = true }
+        didSet { clearGaze(); frameIndex = 0; completedCycles = 0; restartAnimation(); restartChristmasEffects(); needsDisplay = true }
     }
     private var spriteLayout: SpriteSheetLayout {
         SpriteSheetLayout.forImage(size: spriteSheet.size) ?? .retto
@@ -27,10 +27,39 @@ final class RettoView: NSView {
     private var frameIndex = 0
     private var completedCycles = 0
     private var animationTimer: Timer?
+    private var christmasAnimationStart = ProcessInfo.processInfo.systemUptime
+    private var christmasSheetImage: CGImage?
+    private var christmasCellImages: [Int: NSImage] = [:]
+
+    private func drawCachedChristmasCell(row: Int, frame: Int, in rect: NSRect) -> Bool {
+        guard skin == .christmas, spriteLayout.columns == 16 else { return false }
+        let key = row * spriteLayout.columns + frame
+        if christmasCellImages[key] == nil {
+            if christmasSheetImage == nil {
+                christmasSheetImage = spriteSheet.cgImage(forProposedRect: nil, context: nil, hints: nil)
+            }
+            guard let sheet = christmasSheetImage else { return false }
+            let width = sheet.width / spriteLayout.columns
+            let height = sheet.height / spriteLayout.rows
+            guard let cell = sheet.cropping(to: CGRect(x: frame * width, y: row * height, width: width, height: height)) else { return false }
+            christmasCellImages[key] = NSImage(cgImage: cell, size: NSSize(width: spriteLayout.cellWidth, height: spriteLayout.cellHeight))
+        }
+        guard let image = christmasCellImages[key] else { return false }
+        image.draw(in: rect, from: NSRect(origin: .zero, size: image.size), operation: .sourceOver, fraction: 1, respectFlipped: false, hints: [.interpolation: NSImageInterpolation.high])
+        return true
+    }
+
+
+    private var christmasEffectsTimer: Timer?
+    private var christmasEffectsStart = ProcessInfo.processInfo.systemUptime
+    private var christmasPreviewTime: TimeInterval?
+    private var christmasEffectState: String?
     private var trackingAreaRef: NSTrackingArea?
     private var lookDirection: Int?
     /// 시선 행은 방향별 정지 그림 한 장이다. 커서가 멈춘 뒤에도 계속 쓰면 펫까지 멈춘 것처럼 보인다.
     private var gazeResetTimer: Timer?
+    private var gazeTransitionTimer: Timer?
+    private var gazeTargetDirection: Int?
     private var dragStartMouseLocation: NSPoint?
     private var dragStartWindowOrigin: NSPoint?
     private var pressedTarget: PetClickTarget?
@@ -120,13 +149,16 @@ final class RettoView: NSView {
         setAccessibilityRole(.group)
         setAccessibilityLabel("Claude Code와 Codex 상태를 보여주는 " + Retto.character + " " + Retto.koreanName)
         restartAnimation()
+        restartChristmasEffects()
     }
 
     required init?(coder: NSCoder) { nil }
 
     deinit {
         animationTimer?.invalidate()
+        christmasEffectsTimer?.invalidate()
         gazeResetTimer?.invalidate()
+        gazeTransitionTimer?.invalidate()
         badgeAnimator?.invalidate()
         ribbonExpandTimer?.invalidate()
         typeTimer?.invalidate()
@@ -242,26 +274,68 @@ final class RettoView: NSView {
 
     /// 지금 그려야 하는 동작. 끄는 중이면 달리기가 상태를 이긴다.
     private var currentAnimation: Animation? {
-        if let dragRun { return dragRunAnimations[dragRun] }
+        if let dragRun, let animation = dragRunAnimations[dragRun] { return skinAnimation(animation, skin: skin, columns: spriteLayout.columns) }
         guard let animation = animationCatalog[visibleState] else { return nil }
-        return animation
+        return skinAnimation(animation, skin: skin, columns: spriteLayout.columns)
     }
 
     private func restartAnimation() {
+        let effectState = dragRun.map { String(describing: $0) } ?? visibleState.rawValue
+        if effectState != christmasEffectState {
+            christmasEffectState = effectState
+            christmasEffectsStart = ProcessInfo.processInfo.systemUptime
+        }
         animationTimer?.invalidate()
         guard let animation = currentAnimation else { return }
-        let timer = Timer(timeInterval: animation.interval, repeats: true) { [weak self] _ in
+        let timedChristmas = skin == .christmas && spriteLayout.columns == 16
+        let durations = timedChristmas ? Christmas16Timing.frameDurations(row: animation.row) : nil
+        let poseTiming = timedChristmas ? Christmas16Timing.frameDuration(row: animation.row, frame: frameIndex) : nil
+        if let durations {
+            christmasAnimationStart = ProcessInfo.processInfo.systemUptime
+                - Double(completedCycles) * durations.reduce(0, +)
+                - durations.prefix(frameIndex).reduce(0, +)
+        }
+        let timer = Timer(timeInterval: durations != nil ? 1.0 / 60 : (poseTiming ?? animation.interval), repeats: durations != nil || poseTiming == nil) { [weak self] _ in
             self?.advanceFrame()
+            if poseTiming != nil && durations == nil { self?.restartAnimation() }
         }
         animationTimer = timer
         RunLoop.main.add(timer, forMode: .common)
         needsDisplay = true
     }
 
+    private func restartChristmasEffects() {
+        christmasEffectsTimer?.invalidate()
+        christmasEffectsTimer = nil
+        guard skin == .christmas else { return }
+        christmasEffectsStart = ProcessInfo.processInfo.systemUptime
+        let timer = Timer(timeInterval: 0.05, repeats: true) { [weak self] _ in self?.needsDisplay = true }
+        christmasEffectsTimer = timer
+        RunLoop.main.add(timer, forMode: .common)
+    }
+
+    func setDragRunForPreview(_ direction: DragRun) {
+        dragRun = direction
+        restartAnimation()
+    }
+
+    func setChristmasTimeForPreview(_ time: TimeInterval) {
+        christmasPreviewTime = time
+        needsDisplay = true
+    }
+
     private func advanceFrame() {
         guard dragRun != nil || lookDirection == nil, let animation = currentAnimation else { return }
-        frameIndex = (frameIndex + 1) % animation.frames
-        if frameIndex == 0 { completedCycles += 1 }
+        let previousFrame = frameIndex
+        if skin == .christmas, spriteLayout.columns == 16,
+           let durations = Christmas16Timing.frameDurations(row: animation.row) {
+            let position = ChristmasMotion.position(elapsed: ProcessInfo.processInfo.systemUptime - christmasAnimationStart, durations: durations)
+            frameIndex = position.frame
+            completedCycles = position.cycles
+        } else {
+            frameIndex = (frameIndex + 1) % animation.frames
+            if frameIndex == 0 { completedCycles += 1 }
+        }
         // 반응은 한 바퀴만 돌고 실제 상태로 돌아간다.
         if transientState != nil, completedCycles >= 1 {
             transientState = nil
@@ -278,7 +352,7 @@ final class RettoView: NSView {
             restartAnimation()
             return
         }
-        needsDisplay = true
+        if skin != .christmas || frameIndex != previousFrame { needsDisplay = true }
     }
 
     /// 몸통을 눌렀을 때의 반응. 코덱스 펫이 마우스를 올릴 때 쓰는 jumping 을 클릭 반응으로 쓴다.
@@ -333,7 +407,8 @@ final class RettoView: NSView {
         let dx = point.x - petRect.midX
         let dy = point.y - petRect.midY
         guard hypot(dx, dy) > 22 * petScale else { return }
-        lookDirection = gazeDirection(dx: dx, dy: dy, previous: lookDirection)
+        let direction = gazeDirection(dx: dx, dy: dy, previous: gazeTargetDirection ?? lookDirection)
+        updateGaze(toward: direction)
         scheduleGazeReset()
         needsDisplay = true
     }
@@ -348,12 +423,36 @@ final class RettoView: NSView {
         RunLoop.main.add(timer, forMode: .common)
     }
 
+    private func updateGaze(toward direction: Int) {
+        gazeTargetDirection = direction
+        guard skin == .christmas, spriteLayout.columns == 16, lookDirection != nil else {
+            lookDirection = direction
+            return
+        }
+        guard lookDirection != direction, gazeTransitionTimer == nil else { return }
+        let timer = Timer(timeInterval: christmasGazeStepDuration, repeats: true) { [weak self] _ in
+            guard let self, let current = self.lookDirection, let target = self.gazeTargetDirection else { return }
+            self.lookDirection = nextGazeDirection(from: current, toward: target)
+            self.needsDisplay = true
+            if self.lookDirection == target {
+                self.gazeTransitionTimer?.invalidate()
+                self.gazeTransitionTimer = nil
+            }
+        }
+        gazeTransitionTimer = timer
+        RunLoop.main.add(timer, forMode: .common)
+    }
+
     private func clearGaze() {
         gazeResetTimer?.invalidate()
         gazeResetTimer = nil
+        gazeTransitionTimer?.invalidate()
+        gazeTransitionTimer = nil
+        gazeTargetDirection = nil
         guard lookDirection != nil else { return }
         lookDirection = nil
         frameIndex = 0
+        if skin == .christmas { restartAnimation() }
         needsDisplay = true
     }
 
@@ -514,14 +613,27 @@ final class RettoView: NSView {
         // 동물의 숲처럼 발밑에만 타원을 깔고, 몸에는 아주 얕은 그림자만 남긴다.
         drawGroundShadow(petRect: petRect, scale: uiScale)
 
+        let christmasTime = christmasPreviewTime ?? (ProcessInfo.processInfo.systemUptime - christmasEffectsStart)
+        if skin == .christmas {
+            drawChristmasEffects(state: visibleState, drag: dragRun, gaze: lookDirection != nil,
+                                 in: petRect, time: christmasTime, frame: frameIndex, front: false)
+        }
+
         NSGraphicsContext.saveGraphicsState()
         let shadow = NSShadow()
         shadow.shadowColor = NSColor.black.withAlphaComponent(0.16)
         shadow.shadowBlurRadius = 5 * uiScale
         shadow.shadowOffset = NSSize(width: 0, height: -2 * uiScale)
         shadow.set()
-        spriteSheet.draw(in: petRect, from: sourceRect, operation: .sourceOver, fraction: 1, respectFlipped: false, hints: [.interpolation: NSImageInterpolation.high])
+        if !drawCachedChristmasCell(row: row, frame: column, in: petRect) {
+            spriteSheet.draw(in: petRect, from: sourceRect, operation: .sourceOver, fraction: 1, respectFlipped: false, hints: [.interpolation: NSImageInterpolation.high])
+        }
         NSGraphicsContext.restoreGraphicsState()
+
+        if skin == .christmas {
+            drawChristmasEffects(state: visibleState, drag: dragRun, gaze: lookDirection != nil,
+                                 in: petRect, time: christmasTime, frame: frameIndex, front: true)
+        }
 
         if skin == .magicalHeart {
             if !hasBakedTransformation {
