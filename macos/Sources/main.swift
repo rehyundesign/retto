@@ -15,6 +15,22 @@ if CommandLine.arguments.contains("--self-test") {
     exit(runSelfTest())
 }
 
+if CommandLine.arguments.contains("--self-test-jeanne-clock") {
+    exit(runJeanneClockSelfTest())
+}
+
+if CommandLine.arguments.contains("--self-test-jeanne-resources") {
+    exit(runJeanneResourceSelfTest())
+}
+
+if let index = CommandLine.arguments.firstIndex(of: "--render-jeanne-motion-preview"), index + 1 < CommandLine.arguments.count {
+    exit(renderJeanneMotionPreview(to: CommandLine.arguments[index + 1]))
+}
+
+if let index = CommandLine.arguments.firstIndex(of: "--render-jeanne-gaze-preview"), index + 1 < CommandLine.arguments.count {
+    exit(renderJeanneMotionPreview(to: CommandLine.arguments[index + 1], gaze: true))
+}
+
 if CommandLine.arguments.contains("--codex-rollouts-json") {
     print(codexRolloutReport())
     exit(0)
