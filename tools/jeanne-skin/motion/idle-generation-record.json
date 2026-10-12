@@ -1,0 +1,90 @@
+{
+  "status": "idle review candidate, not full-skin completion or registration pass",
+  "drawings": [
+    {
+      "file": "tools/jeanne-skin/motion/independent-idle/idle-00.png",
+      "sourceHash": "9e122d21278307cb2d6659b07572702b7c5e6cf05cf1df475503fb154f592ba6",
+      "decodedHash": "232bf0b30800ac2204d17dd0e7577e3b7b9170a56111ccdc6dd733a4fb2f1ddc"
+    },
+    {
+      "file": "tools/jeanne-skin/motion/independent-idle/idle-01.png",
+      "sourceHash": "4388c098fbd7137e805031faffec1a67c167065752bac352cf819738432a52fe",
+      "decodedHash": "8028fdf4e13bccf1eabcaaf521683ba66d40639e7acb6701250fa4728193a4f1"
+    },
+    {
+      "file": "tools/jeanne-skin/motion/independent-idle/idle-02.png",
+      "sourceHash": "140fb6b52c4fca8dc9b0f601cade3ae26ff2ae3e61feb704e3e5b3454d651573",
+      "decodedHash": "e59eeec3a0e0ea99fabbbc3a8d0128070de03536fac6388a247238651795742a"
+    },
+    {
+      "file": "tools/jeanne-skin/motion/independent-idle/idle-03.png",
+      "sourceHash": "9db50093176ebea67efa142eeb5e7cfa2f9eb9be0580911bba1768594527b9bf",
+      "decodedHash": "e57efa4bfef4f6edab17750bcce0da7aa03cdf4259ae7d3b45d609d038341627"
+    },
+    {
+      "file": "tools/jeanne-skin/motion/independent-idle/idle-04.png",
+      "sourceHash": "3c461091700e0a81521a6e7b82474fc6cabec53e8e7ed2e69abe78208581f276",
+      "decodedHash": "5775d51a2dc2ccebe5ba5b9884cb117278164c5c432d9bedb6b51f7ee160fb35"
+    },
+    {
+      "file": "tools/jeanne-skin/motion/independent-idle/idle-05.png",
+      "sourceHash": "6149a5c35740aba34514c4307bff5d50b3da174cbfb82a8621c680a4f5ee8250",
+      "decodedHash": "7cefb3f4c1bba19b7fb7715de464f5d7d33ec0a4ef4454d3416c0dfa1c637831"
+    },
+    {
+      "file": "tools/jeanne-skin/motion/independent-idle/idle-06.png",
+      "sourceHash": "58b1422a08d2a2f6672e689c60252cdf38a44a5f630056e50a5ed73b2e83de93",
+      "decodedHash": "ac75d27afee1a075467f05f25173608fbd36b51d5706bdf97159ee84c5cdf9db"
+    },
+    {
+      "file": "tools/jeanne-skin/motion/independent-idle/idle-07.png",
+      "sourceHash": "cf7d630a4e99ee48463eb400f11e1edfd2a67225706b084670d60d1454b42aa3",
+      "decodedHash": "7ab74e79c46f8be0b901560cc87317ff852047503ba50a6b6ab5c3a3956b4d9c"
+    },
+    {
+      "file": "tools/jeanne-skin/motion/independent-idle/idle-08-v2.png",
+      "sourceHash": "a4f4c75518157a0d3eb596e574d487ab747839f8016442a39d7abea630517961",
+      "decodedHash": "94ec409bc997e5f283924799a5b38615b2f580bf0d64018d72d6dedbee55fa4b"
+    },
+    {
+      "file": "tools/jeanne-skin/motion/independent-idle/idle-09-v2.png",
+      "sourceHash": "ba9c195ea2fc90afa2f48c6a3af344f80c6bbc78bcdcf7c08f9a2487f5cab11c",
+      "decodedHash": "410eed56d6e19e6dfadb079accc7c9bc641ce18f7a358a1cf990e5cde4906148"
+    },
+    {
+      "file": "tools/jeanne-skin/motion/independent-idle/idle-10.png",
+      "sourceHash": "606cfc7addafb64c06b14288db23d53a5078d8af47c06782858f49294f3ef2a7",
+      "decodedHash": "35acf9f739ea1ef81c4acec94e62d83027196328b119c8254c43db2c0ccd47e1"
+    },
+    {
+      "file": "tools/jeanne-skin/motion/independent-idle/idle-11.png",
+      "sourceHash": "ea019d6e8b1ad1e0e4a3b8ddb06e5521fb02f504a809135a8e7f77864ca57766",
+      "decodedHash": "7513f00972523306355ab02fa7789e5e733cb1c6b704e40a5ecadfabbcc0e510"
+    },
+    {
+      "file": "tools/jeanne-skin/motion/independent-idle/idle-12.png",
+      "sourceHash": "6c661a4ac5bb0c50ebdbab9fc8bfaca9035af10dc56ba1470143d0a9d91ccbf2",
+      "decodedHash": "0ede1422f9b6c4940d29d0646f58e6974132736a2eac5f3ca884384914aefbb8"
+    },
+    {
+      "file": "tools/jeanne-skin/motion/independent-idle/idle-13.png",
+      "sourceHash": "324464e97cf1085e1c06f83c1796236049d53907b2cbc71d6da6208ed027493a",
+      "decodedHash": "f6d0c0178a8e85d3a30019db4931d998419ce3a04f9e74aa9fdec332a8ca8bb2"
+    },
+    {
+      "file": "tools/jeanne-skin/motion/independent-idle/idle-14.png",
+      "sourceHash": "3483975dda249a9a667ec44152286d1b8f436a3b0475cf0e36b037780b4c7832",
+      "decodedHash": "91c35b2f453e94add8c2e777ab6508be20171be0e936614dc09b5e47840c2139"
+    },
+    {
+      "file": "tools/jeanne-skin/motion/independent-idle/idle-15.png",
+      "sourceHash": "30ba59904813835181009c6e7c0f1235a6b01880b1e3083b249809a976e51768",
+      "decodedHash": "8cfcd3752105e1f598407f6b7f85f0900c8d1fd7433b355aed73b3187f524398"
+    }
+  ],
+  "uniqueSources": 16,
+  "uniqueDecoded": 16,
+  "cycleSeconds": 3.2,
+  "originalRegistration": "unverified; approved master proportions retained",
+  "browserQA": "blocked file URL policy"
+}

@@ -27,6 +27,9 @@ final class RettoView: NSView {
     private var frameIndex = 0
     private var completedCycles = 0
     private var animationTimer: Timer?
+    private var jeannePoseEpoch = ProcessInfo.processInfo.systemUptime
+    private let jeanneEffectEpoch = ProcessInfo.processInfo.systemUptime
+    private var jeannePreviewTime: TimeInterval?
     private var christmasAnimationStart = ProcessInfo.processInfo.systemUptime
     private var christmasSheetImage: CGImage?
     private var christmasCellImages: [Int: NSImage] = [:]
@@ -261,6 +264,18 @@ final class RettoView: NSView {
         needsDisplay = true
     }
 
+    func setJeanneTimeForPreview(_ time: TimeInterval) {
+        jeannePreviewTime = time
+        needsDisplay = true
+    }
+
+    func setDragRunForPreview(_ direction: DragRun?) {
+        dragRun = direction
+        frameIndex = 0
+        completedCycles = 0
+        restartAnimation()
+    }
+
     private func updateAccessibility() {
         let animation = animationCatalog[state] ?? animationCatalog[.idle]!
         let selection = isPinned ? "고정한 세션" : "자동 선택 세션"
@@ -274,9 +289,8 @@ final class RettoView: NSView {
 
     /// 지금 그려야 하는 동작. 끄는 중이면 달리기가 상태를 이긴다.
     private var currentAnimation: Animation? {
-        if let dragRun, let animation = dragRunAnimations[dragRun] { return skinAnimation(animation, skin: skin, columns: spriteLayout.columns) }
-        guard let animation = animationCatalog[visibleState] else { return nil }
-        return skinAnimation(animation, skin: skin, columns: spriteLayout.columns)
+        guard let animation = dragRun.flatMap({ dragRunAnimations[$0] }) ?? animationCatalog[visibleState] else { return nil }
+        return skin == .jeanne ? JeanneMotion.animation(animation) : skinAnimation(animation, skin: skin, columns: spriteLayout.columns)
     }
 
     private func restartAnimation() {
@@ -286,6 +300,7 @@ final class RettoView: NSView {
             christmasEffectsStart = ProcessInfo.processInfo.systemUptime
         }
         animationTimer?.invalidate()
+        jeannePoseEpoch = ProcessInfo.processInfo.systemUptime
         guard let animation = currentAnimation else { return }
         let timedChristmas = skin == .christmas && spriteLayout.columns == 16
         let durations = timedChristmas ? Christmas16Timing.frameDurations(row: animation.row) : nil
@@ -295,7 +310,7 @@ final class RettoView: NSView {
                 - Double(completedCycles) * durations.reduce(0, +)
                 - durations.prefix(frameIndex).reduce(0, +)
         }
-        let timer = Timer(timeInterval: durations != nil ? 1.0 / 60 : (poseTiming ?? animation.interval), repeats: durations != nil || poseTiming == nil) { [weak self] _ in
+        let timer = Timer(timeInterval: skin == .jeanne || durations != nil ? 1.0 / 60 : (poseTiming ?? animation.interval), repeats: durations != nil || poseTiming == nil) { [weak self] _ in
             self?.advanceFrame()
             if poseTiming != nil && durations == nil { self?.restartAnimation() }
         }
@@ -314,20 +329,22 @@ final class RettoView: NSView {
         RunLoop.main.add(timer, forMode: .common)
     }
 
-    func setDragRunForPreview(_ direction: DragRun) {
-        dragRun = direction
-        restartAnimation()
-    }
-
     func setChristmasTimeForPreview(_ time: TimeInterval) {
         christmasPreviewTime = time
         needsDisplay = true
     }
 
     private func advanceFrame() {
-        guard dragRun != nil || lookDirection == nil, let animation = currentAnimation else { return }
+        guard let animation = currentAnimation else { return }
+        if skin == .jeanne { needsDisplay = true }
+        guard dragRun != nil || lookDirection == nil else { return }
         let previousFrame = frameIndex
-        if skin == .christmas, spriteLayout.columns == 16,
+        if skin == .jeanne {
+            let position = JeanneMotion.position(elapsed: ProcessInfo.processInfo.systemUptime - jeannePoseEpoch,
+                                                 interval: animation.interval)
+            frameIndex = position.frame
+            completedCycles = position.cycles
+        } else if skin == .christmas, spriteLayout.columns == 16,
            let durations = Christmas16Timing.frameDurations(row: animation.row) {
             let position = ChristmasMotion.position(elapsed: ProcessInfo.processInfo.systemUptime - christmasAnimationStart, durations: durations)
             frameIndex = position.frame
@@ -613,6 +630,11 @@ final class RettoView: NSView {
         // 동물의 숲처럼 발밑에만 타원을 깔고, 몸에는 아주 얕은 그림자만 남긴다.
         drawGroundShadow(petRect: petRect, scale: uiScale)
 
+        let jeanneTime = jeannePreviewTime ?? (ProcessInfo.processInfo.systemUptime - jeanneEffectEpoch)
+        if skin == .jeanne {
+            JeanneEffects.draw(state: visibleState, drag: dragRun, in: petRect,
+                               time: jeanneTime, frame: frameIndex, front: false)
+        }
         let christmasTime = christmasPreviewTime ?? (ProcessInfo.processInfo.systemUptime - christmasEffectsStart)
         if skin == .christmas {
             drawChristmasEffects(state: visibleState, drag: dragRun, gaze: lookDirection != nil,
@@ -625,11 +647,17 @@ final class RettoView: NSView {
         shadow.shadowBlurRadius = 5 * uiScale
         shadow.shadowOffset = NSSize(width: 0, height: -2 * uiScale)
         shadow.set()
-        if !drawCachedChristmasCell(row: row, frame: column, in: petRect) {
+        if skin == .jeanne {
+            _ = JeanneFrames.draw(row: row, frame: column, in: petRect)
+        } else if !drawCachedChristmasCell(row: row, frame: column, in: petRect) {
             spriteSheet.draw(in: petRect, from: sourceRect, operation: .sourceOver, fraction: 1, respectFlipped: false, hints: [.interpolation: NSImageInterpolation.high])
         }
         NSGraphicsContext.restoreGraphicsState()
 
+        if skin == .jeanne {
+            JeanneEffects.draw(state: visibleState, drag: dragRun, in: petRect,
+                               time: jeanneTime, frame: frameIndex, front: true)
+        }
         if skin == .christmas {
             drawChristmasEffects(state: visibleState, drag: dragRun, gaze: lookDirection != nil,
                                  in: petRect, time: christmasTime, frame: frameIndex, front: true)
@@ -641,7 +669,7 @@ final class RettoView: NSView {
             }
         }
 
-        if visibleState == .sleeping {
+        if visibleState == .sleeping, skin != .jeanne {
             drawSleepBreath(petRect: petRect, scale: uiScale)
         }
 

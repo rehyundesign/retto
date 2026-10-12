@@ -1,0 +1,128 @@
+{
+  "scope": "approved v2 artwork → independent character motion and separate continuous effects preview; no installation",
+  "characterMode": "registered-character",
+  "sourceRegistration": "approved concept proportions; original Retto pixel registration still to verify",
+  "layout": {
+    "cell": [
+      448,
+      640
+    ],
+    "columns": 16,
+    "rows": 12
+  },
+  "gaze": {
+    "rows": [
+      9,
+      10
+    ],
+    "count": 16,
+    "status": "required separate body-locked drawings, pending"
+  },
+  "states": [
+    {
+      "id": "idle",
+      "label": "기본 대기",
+      "row": 0,
+      "cycle": 3.2,
+      "anchor": "01-idle",
+      "drawings": 16,
+      "interval": 0.2
+    },
+    {
+      "id": "running",
+      "label": "작업 · 봉인",
+      "row": 7,
+      "cycle": 2.4,
+      "anchor": "02-running",
+      "drawings": 16,
+      "interval": 0.15
+    },
+    {
+      "id": "review",
+      "label": "검토 · 체크메이트",
+      "row": 8,
+      "cycle": 3.2,
+      "anchor": "03-review",
+      "drawings": 16,
+      "interval": 0.2
+    },
+    {
+      "id": "waiting",
+      "label": "입력 대기",
+      "row": 6,
+      "cycle": 3.2,
+      "anchor": "04-waiting",
+      "drawings": 16,
+      "interval": 0.2
+    },
+    {
+      "id": "failed",
+      "label": "오류 · 봉인 실패",
+      "row": 5,
+      "cycle": 3.2,
+      "anchor": "05-failed",
+      "drawings": 16,
+      "interval": 0.2
+    },
+    {
+      "id": "waving",
+      "label": "완료 · 승리 인사",
+      "row": 3,
+      "cycle": 2.4,
+      "anchor": "06-waving",
+      "drawings": 16,
+      "interval": 0.15
+    },
+    {
+      "id": "jumping",
+      "label": "점프 · 도약",
+      "row": 4,
+      "cycle": 2.4,
+      "anchor": "07-jumping",
+      "drawings": 16,
+      "interval": 0.15
+    },
+    {
+      "id": "sleeping",
+      "label": "수면",
+      "row": 11,
+      "cycle": 6.4,
+      "anchor": "08-sleeping",
+      "drawings": 16,
+      "interval": 0.4
+    },
+    {
+      "id": "drag-right",
+      "label": "이동 · 오른쪽",
+      "row": 1,
+      "cycle": 1.6,
+      "anchor": "09-drag-right",
+      "drawings": 16,
+      "interval": 0.1
+    },
+    {
+      "id": "drag-left",
+      "label": "이동 · 왼쪽",
+      "row": 2,
+      "cycle": 1.6,
+      "anchor": "10-drag-left",
+      "drawings": 16,
+      "interval": 0.1
+    }
+  ],
+  "effect": {
+    "period": 8,
+    "samplingHz": 10,
+    "independentClock": true
+  },
+  "review": {
+    "runtime": [
+      224,
+      320
+    ],
+    "large": [
+      448,
+      640
+    ]
+  }
+}

@@ -63,6 +63,7 @@ enum PetSkin: String, CaseIterable {
     case rilakkuma
     case rilakkumaCape
     case magicalHeart
+    case jeanne
     case christmas
 
     var label: String {
@@ -75,6 +76,7 @@ enum PetSkin: String, CaseIterable {
         case .rilakkuma: return "리락쿠마"
         case .rilakkumaCape: return "리락쿠마 망토"
         case .magicalHeart: return "매지컬 하트"
+        case .jeanne: return "신의괴도 잔느"
         case .christmas: return "크리스마스"
         }
     }
@@ -90,6 +92,7 @@ enum PetSkin: String, CaseIterable {
         case .rilakkuma: return "spritesheet-rilakkuma"
         case .rilakkumaCape: return "spritesheet-rilakkuma-cape"
         case .magicalHeart: return "spritesheet-magical-heart"
+        case .jeanne: return "spritesheet-jeanne"
         case .christmas: return "spritesheet-christmas-16-character"
         }
     }
@@ -105,7 +108,10 @@ enum PetSkin: String, CaseIterable {
 
     /// 이 기기의 앱 번들에 아틀라스가 실제로 들어 있는지.
     var isAvailable: Bool {
-        Bundle.main.url(forResource: resourceName, withExtension: "webp") != nil
+        if self == .jeanne {
+            return Bundle.main.url(forResource: resourceName, withExtension: "webp") != nil && JeanneFrames.hasAllFrames
+        }
+        return Bundle.main.url(forResource: resourceName, withExtension: "webp") != nil
     }
 }
 
