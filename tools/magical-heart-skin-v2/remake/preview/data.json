@@ -1,0 +1,142 @@
+{
+  "status": "themed-static-review",
+  "animated_character_sequences_completed": 0,
+  "items": [
+    {
+      "id": "idle-anchor",
+      "state": "idle",
+      "frame": 0,
+      "label": "브로치를 바라보며 숨 고르기",
+      "src": "assets/integrated-idle-anchor.png",
+      "review": "크기·연결 검수 중"
+    },
+    {
+      "id": "drag-right-anchor",
+      "state": "drag-right",
+      "frame": 0,
+      "label": "오른쪽으로 마법 궤적 안내",
+      "src": "assets/integrated-drag-right-anchor.png",
+      "review": "크기·연결 검수 중"
+    },
+    {
+      "id": "drag-left-anchor",
+      "state": "drag-left",
+      "frame": 0,
+      "label": "왼쪽으로 마법 궤적 안내",
+      "src": "assets/integrated-drag-left-anchor.png",
+      "review": "크기·연결 검수 중"
+    },
+    {
+      "id": "waving-anchor",
+      "state": "waving",
+      "frame": 0,
+      "label": "키스 준비",
+      "src": "assets/integrated-waving-anchor.png",
+      "review": "크기·연결 검수 중"
+    },
+    {
+      "id": "jumping-anchor",
+      "state": "jumping",
+      "frame": 0,
+      "label": "마법 점프 준비",
+      "src": "assets/integrated-jumping-anchor.png",
+      "review": "크기·연결 검수 중"
+    },
+    {
+      "id": "failed-anchor",
+      "state": "failed",
+      "frame": 0,
+      "label": "실패한 마법에 놀라기",
+      "src": "assets/integrated-failed-anchor.png",
+      "review": "크기·연결 검수 중"
+    },
+    {
+      "id": "waiting-anchor",
+      "state": "waiting",
+      "frame": 0,
+      "label": "브로치를 만지며 초대",
+      "src": "assets/integrated-waiting-anchor.png",
+      "review": "크기·연결 검수 중"
+    },
+    {
+      "id": "running-anchor",
+      "state": "running",
+      "frame": 0,
+      "label": "두 앞발로 마법 모으기",
+      "src": "assets/integrated-running-anchor.png",
+      "review": "크기·연결 검수 중"
+    },
+    {
+      "id": "review-anchor",
+      "state": "review",
+      "frame": 0,
+      "label": "브로치의 보석 확인",
+      "src": "assets/integrated-review-anchor.png",
+      "review": "크기·연결 검수 중"
+    },
+    {
+      "id": "sleeping-anchor",
+      "state": "sleeping",
+      "frame": 0,
+      "label": "몸을 말고 잠들기",
+      "src": "assets/integrated-sleeping-anchor.png",
+      "review": "크기·연결 검수 중"
+    },
+    {
+      "id": "idle-key-08",
+      "state": "idle",
+      "frame": 8,
+      "label": "느린 눈 깜박임",
+      "src": "assets/integrated-idle-key-08.png",
+      "review": "크기·연결 검수 중"
+    },
+    {
+      "id": "running-key-10",
+      "state": "running",
+      "frame": 10,
+      "label": "앞발을 펼쳐 마법 전달",
+      "src": "assets/integrated-running-key-10.png",
+      "review": "크기·연결 검수 중"
+    },
+    {
+      "id": "waving-key-10",
+      "state": "waving",
+      "frame": 10,
+      "label": "키스 보내기",
+      "src": "assets/integrated-waving-key-10.png",
+      "review": "크기·연결 검수 중"
+    },
+    {
+      "id": "jumping-key-07",
+      "state": "jumping",
+      "frame": 7,
+      "label": "공중에서 마법 발사",
+      "src": "assets/integrated-jumping-key-07.png",
+      "review": "크기·연결 검수 중"
+    },
+    {
+      "id": "failed-key-10",
+      "state": "failed",
+      "frame": 10,
+      "label": "하트 장식을 감싸며 회복",
+      "src": "assets/integrated-failed-key-10.png",
+      "review": "크기·연결 검수 중"
+    },
+    {
+      "id": "waiting-key-10",
+      "state": "waiting",
+      "frame": 10,
+      "label": "앞발을 모으며 기다리기",
+      "src": "assets/integrated-waiting-key-10.png",
+      "review": "크기·연결 검수 중"
+    }
+  ],
+  "effects": {
+    "state_count": 8,
+    "directional_interaction_count": 2,
+    "preview_card_count": 10,
+    "character": "static",
+    "native_app_applied": false,
+    "shared_preview_loop_seconds": 19.2
+  }
+}

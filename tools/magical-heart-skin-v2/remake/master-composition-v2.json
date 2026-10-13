@@ -1,0 +1,9 @@
+{
+  "base_atlas": {
+    "path": "/Users/luxia/Documents/ChatGPT/retto/tools/magical-heart-skin-v2/remake/reference/base-front.png"
+  },
+  "composition": {
+    "mode": "overlay-only",
+    "front_layer": "/Users/luxia/Documents/ChatGPT/retto/tools/magical-heart-skin-v2/remake/costume-overlay-v2.png"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "source_original": "assets/spritesheet.webp",
+  "canonical_cell": [
+    0,
+    0
+  ],
+  "face_identity_mode": "original base pixels with independent garment overlay",
+  "protected_face_mask": "master-protected-face-mask.png",
+  "protected_face_changed": false,
+  "four_limb_verdict": {
+    "front_right": "grounded, bracelet limb on viewer left",
+    "front_left": "grounded on viewer right",
+    "rear_right": "visible behind near hip, grounded",
+    "rear_left": "occluded by torso and right foreleg; attaches at far hip"
+  },
+  "head_torso_baseline": "original pixel chassis preserved; new garment expansion excluded",
+  "costume_review": "ear bows, petal panels, clasp and cuff attached; rear bow/tails need pose-specific depth in next anchors",
+  "master_sha256": "57afc5639f2c37a44d3bc516c0faad7d00934b60c46016ea9b1e8c4dea33dadd",
+  "protected_face_changed_pixels": 0,
+  "review_status": "identity and original chassis retained; minor detached garment fragment repair pending"
+}

@@ -1,0 +1,10 @@
+{
+  "base_atlas": {
+    "path": "/Users/luxia/Documents/ChatGPT/retto/tools/magical-heart-skin-v2/remake/reference/base-front.png",
+    "face_mask": "/Users/luxia/Documents/ChatGPT/retto/tools/magical-heart-skin-v2/remake/master-protected-face-mask.png"
+  },
+  "composition": {
+    "mode": "registered-character",
+    "registered_character_atlas": "/Users/luxia/Documents/ChatGPT/retto/tools/magical-heart-skin-v2/remake/costume-master.png"
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "character_hashes_unchanged": true,
+  "character_motion_sequences_completed": 0,
+  "export": {
+    "sampling_hz": 10,
+    "duration_seconds": 19.2,
+    "loop": true
+  },
+  "html": {
+    "clock": "requestAnimationFrame elapsed time",
+    "character": "static",
+    "pause_and_visibility_controls": true
+  },
+  "effect_targets": [
+    {
+      "state": "idle",
+      "cycle_seconds": 3.2,
+      "changing_effect_samples": 3,
+      "character_pose": "static",
+      "front_face_exclusion": "passed"
+    },
+    {
+      "state": "running",
+      "cycle_seconds": 2.4,
+      "changing_effect_samples": 3,
+      "character_pose": "static",
+      "front_face_exclusion": "passed"
+    },
+    {
+      "state": "review",
+      "cycle_seconds": 3.2,
+      "changing_effect_samples": 3,
+      "character_pose": "static",
+      "front_face_exclusion": "passed"
+    },
+    {
+      "state": "waiting",
+      "cycle_seconds": 3.2,
+      "changing_effect_samples": 3,
+      "character_pose": "static",
+      "front_face_exclusion": "passed"
+    },
+    {
+      "state": "failed",
+      "cycle_seconds": 3.2,
+      "changing_effect_samples": 3,
+      "character_pose": "static",
+      "front_face_exclusion": "passed"
+    },
+    {
+      "state": "waving",
+      "cycle_seconds": 2.4,
+      "changing_effect_samples": 3,
+      "character_pose": "static",
+      "front_face_exclusion": "passed"
+    },
+    {
+      "state": "jumping",
+      "cycle_seconds": 2.4,
+      "changing_effect_samples": 3,
+      "character_pose": "static",
+      "front_face_exclusion": "passed"
+    },
+    {
+      "state": "sleeping",
+      "cycle_seconds": 6.4,
+      "changing_effect_samples": 3,
+      "character_pose": "static",
+      "front_face_exclusion": "not applicable"
+    },
+    {
+      "state": "drag-right",
+      "cycle_seconds": 1.6,
+      "changing_effect_samples": 3,
+      "character_pose": "static",
+      "front_face_exclusion": "not applicable"
+    },
+    {
+      "state": "drag-left",
+      "cycle_seconds": 1.6,
+      "changing_effect_samples": 3,
+      "character_pose": "static",
+      "front_face_exclusion": "not applicable"
+    }
+  ],
+  "state_count": 8,
+  "directional_interaction_count": 2,
+  "style_version": 3,
+  "shared_loop_endpoints_match": true,
+  "style_reference_features": [
+    "pink activation rays with white cores",
+    "pearl/crystal heart highlights",
+    "white cross glints with pink/cyan bloom",
+    "soft heart bokeh",
+    "luminous rings and petals"
+  ],
+  "character_and_costume_changed": false,
+  "browser_ui_validation": "not run; local file browser automation restricted"
+}
