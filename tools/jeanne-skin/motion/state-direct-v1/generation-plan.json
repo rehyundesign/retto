@@ -1,0 +1,112 @@
+{
+  "status": "generation in progress; drawings require visual review",
+  "production": "each frame generated as one complete cat-costume-pose-Finn image; no anatomy or clothing assembly",
+  "scope": "9 missing state/drag sequences; retain existing idle sources",
+  "targets": {
+    "running": {
+      "frameCount": 16,
+      "keyDescriptions": [
+        "forepaw touching pendant, sealing preparation",
+        "forepaw opens forward slowly to present small pink sealing jewel, eyes focused",
+        "forepaw extends toward viewer with sealing jewel, determined mild smile, Finn points ahead",
+        "forepaw returns through chest toward pendant, relaxed recovery"
+      ],
+      "poseGroup": "canonical original running",
+      "cycle": 2.4
+    },
+    "review": {
+      "frameCount": 16,
+      "keyDescriptions": [
+        "low attentive pendant inspection, chin lowered",
+        "one forepaw lowers to touch pendant, eyes following it, Finn leans slightly",
+        "paw carefully checks lower gold charm, focused small ear tilt",
+        "paw retracts to grounded position, head gently lifts to neutral"
+      ],
+      "poseGroup": "canonical original review",
+      "cycle": 3.2
+    },
+    "waiting": {
+      "frameCount": 16,
+      "keyDescriptions": [
+        "neutral seated looking slightly toward Finn",
+        "one forepaw lightly touches rosario as a signal, Finn gestures softly",
+        "paw opens sideways slightly asking for attention, eyes look toward Finn",
+        "paw returns to ground, gaze returns forward"
+      ],
+      "poseGroup": "canonical original waiting",
+      "cycle": 3.2
+    },
+    "failed": {
+      "frameCount": 16,
+      "keyDescriptions": [
+        "small startled crouch, ears mildly outward",
+        "soft recoil only head/shoulders 3 pixels back, concerned eyes, Finn moves closer",
+        "recover with gentle lowered head to Finn, comfort gesture with one real forepaw",
+        "rise calmly back to original preparation stance, reassured expression"
+      ],
+      "poseGroup": "canonical original failed",
+      "cycle": 3.2
+    },
+    "waving": {
+      "frameCount": 16,
+      "keyDescriptions": [
+        "one forepaw begins lifting above sash",
+        "paw raised near cheek, pads face viewer, cheerful mouth, Finn waves",
+        "paw makes small wrist wave, head tilts 3 degrees, Finn wing response",
+        "paw lowers through chest, shallow polite bow then returns"
+      ],
+      "poseGroup": "canonical original waving",
+      "cycle": 2.4
+    },
+    "jumping": {
+      "frameCount": 16,
+      "keyDescriptions": [
+        "four paws planted compact preparatory crouch",
+        "hind paws push off, front paws rise, real anatomy shifts upward 6 runtime pixels",
+        "airborne apex 12 pixels above initial stance, forepaws curl inward and hind paws tuck, Finn rises softly",
+        "four paws landing, shoulders compress 3 pixels, then recover to preparation"
+      ],
+      "poseGroup": "canonical original jumping",
+      "cycle": 2.4
+    },
+    "sleeping": {
+      "frameCount": 16,
+      "keyDescriptions": [
+        "curled resting with closed eyes and four folded attached paws",
+        "quiet inhale, thorax rises 1 runtime pixel, head and paws remain settled",
+        "quiet exhale, thorax lowers 1 runtime pixel, one tiny ear twitch, Finn drowsy wings",
+        "head settles 1 pixel and Finn nestles back, tail tip tiny adjustment"
+      ],
+      "poseGroup": "canonical original sleeping",
+      "cycle": 6.4
+    },
+    "drag-right": {
+      "frameCount": 16,
+      "keyDescriptions": [
+        "right-facing diagonal gait contact: front-left and rear-right touch ground, other diagonal begins lifting",
+        "passing weight transfer: front-left retracts, rear-right advances, opposite diagonal moving forward",
+        "opposite diagonal contact: front-right and rear-left touch ground, other diagonal lifted",
+        "opposite passing phase returning toward initial contact, no horizontal sliding or size change"
+      ],
+      "poseGroup": "canonical original drag-right",
+      "cycle": 1.6
+    },
+    "drag-left": {
+      "frameCount": 16,
+      "keyDescriptions": [
+        "left-facing diagonal gait contact: front-right and rear-left touch ground, other diagonal begins lifting",
+        "passing weight transfer: front-right retracts, rear-left advances, opposite diagonal moving forward",
+        "opposite diagonal contact: front-left and rear-right touch ground, other diagonal lifted",
+        "opposite passing phase returning toward initial contact, preserve costume asymmetry"
+      ],
+      "poseGroup": "canonical original drag-left",
+      "cycle": 1.6
+    }
+  },
+  "interpolationApproach": "Generate halfway drawings from only neighboring endpoint images first; inspect half-step boards before quarter steps. Do not pass full action vocabulary to an intermediate prompt.",
+  "repairs": {
+    "running": "frames01,02,03,13,14,15 regenerated to keep actual rise/recovery phases",
+    "review": "frames09,10,11,13,14,15 regenerated to lift/lower head and forepaw gradually"
+  },
+  "visualStatus": "source review ongoing; original registration and real browser playback not certified"
+}

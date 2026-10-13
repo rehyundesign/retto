@@ -1,0 +1,898 @@
+{
+  "records": [
+    {
+      "source": "idle-direct-v5/idle-00.png",
+      "hash": "37035eeda37f579430a6e80b0d5d3cb748f422b336a4969acd894975d3c66868",
+      "preview": "latest-preview-assets/idle/0.png"
+    },
+    {
+      "source": "idle-direct-v5/idle-01.png",
+      "hash": "ded437fad5e3f57e5a62d54f127068d910f792a2d0d3a6d55529494bfc5ccffb",
+      "preview": "latest-preview-assets/idle/1.png"
+    },
+    {
+      "source": "idle-direct-v5/idle-02.png",
+      "hash": "b8158975b4ceb6c86020e0d4220f6564c8927adef91d14d8804d0589e1789343",
+      "preview": "latest-preview-assets/idle/2.png"
+    },
+    {
+      "source": "idle-direct-v5/idle-03.png",
+      "hash": "30121d76564c29bfa688338571194ee9d255836df21b45b3d25f1b160bad51da",
+      "preview": "latest-preview-assets/idle/3.png"
+    },
+    {
+      "source": "idle-direct-v5/idle-04.png",
+      "hash": "e372e506d77130bac2d69e0b986cf5d65a11a388af43f31645c1788f5635e6bc",
+      "preview": "latest-preview-assets/idle/4.png"
+    },
+    {
+      "source": "idle-direct-v5/idle-05.png",
+      "hash": "0745e7de13d5c599e10a079280891e467894ef41d58c8a786420a86f279d51c2",
+      "preview": "latest-preview-assets/idle/5.png"
+    },
+    {
+      "source": "idle-direct-v5/idle-06.png",
+      "hash": "25fc41b58a84de40b0b1c8e7d7466933d5b22f37331f5364406ec29a826ae1a7",
+      "preview": "latest-preview-assets/idle/6.png"
+    },
+    {
+      "source": "idle-direct-v5/idle-07.png",
+      "hash": "c7181f7de01a7dac33ea1d4311280442e19a399e0ec899b11f971017327c3ac0",
+      "preview": "latest-preview-assets/idle/7.png"
+    },
+    {
+      "source": "idle-direct-v5/idle-08.png",
+      "hash": "bda39c6706d2b2ff79552230470dc9f90919f679d932e41136c1275b6f0aec70",
+      "preview": "latest-preview-assets/idle/8.png"
+    },
+    {
+      "source": "idle-direct-v5/idle-09.png",
+      "hash": "052e75b431213705ef4d636ed2f37375786e2fd9dc3f9be47a034cfc5922713d",
+      "preview": "latest-preview-assets/idle/9.png"
+    },
+    {
+      "source": "idle-direct-v5/idle-10.png",
+      "hash": "5e393d6faf68c821339cd95884b8763946e3b7cdb9ca38371b6a1d936477072c",
+      "preview": "latest-preview-assets/idle/10.png"
+    },
+    {
+      "source": "idle-direct-v5/idle-11.png",
+      "hash": "eb9dc6825cd09d0b754ecda475b534066eda31ffd12102a73bebb10eab0567f5",
+      "preview": "latest-preview-assets/idle/11.png"
+    },
+    {
+      "source": "idle-direct-v5/idle-12.png",
+      "hash": "d89e99e0ecbf48d7e18868231222993c5c1946b7bd9cc092561221e5e45775c3",
+      "preview": "latest-preview-assets/idle/12.png"
+    },
+    {
+      "source": "idle-direct-v5/idle-13.png",
+      "hash": "1f81423196db05c88e95ba68b0c456aceef42a9bcf0e01578a6050016d2bb126",
+      "preview": "latest-preview-assets/idle/13.png"
+    },
+    {
+      "source": "idle-direct-v5/idle-14.png",
+      "hash": "451f5c92243c6c9e9559adbf49224ba383bdf1275de32c8cc2d5a68e732ffbbc",
+      "preview": "latest-preview-assets/idle/14.png"
+    },
+    {
+      "source": "idle-direct-v5/idle-15.png",
+      "hash": "725e8e1656b19ebeb5d1af87c39d57b70bc9a3e9b079337bb9cfd0677f6953b4",
+      "preview": "latest-preview-assets/idle/15.png"
+    },
+    {
+      "source": "state-direct-v1/running/00.png",
+      "hash": "74d2c2ecbefbe2c9408ff189c4117a309340a32bc4375fa7fdf2075333b80769",
+      "preview": "latest-preview-assets/running/00.png"
+    },
+    {
+      "source": "state-direct-v1/running/01.png",
+      "hash": "a354ecc6e74b4b5dadf7dfc9620d739a4ab6e99bfa9d6b9b2eabf28c7ac9fe46",
+      "preview": "latest-preview-assets/running/01.png"
+    },
+    {
+      "source": "state-direct-v1/running/02.png",
+      "hash": "737a31a40583abf2b4cea9614ceee5c4216d7e5d16106a597615564b72f63d82",
+      "preview": "latest-preview-assets/running/02.png"
+    },
+    {
+      "source": "state-direct-v1/running/03.png",
+      "hash": "72badc1325b092cbc49a7d7d81efdd4a22f3f27b549adbf104b7c5f122585684",
+      "preview": "latest-preview-assets/running/03.png"
+    },
+    {
+      "source": "state-direct-v1/running/04.png",
+      "hash": "2c196fc06c230d68291907b3dd312f00f56ce12f00d75db4fe164efd52eec728",
+      "preview": "latest-preview-assets/running/04.png"
+    },
+    {
+      "source": "state-direct-v1/running/05.png",
+      "hash": "a4c3eae4bd0c4504c549b490e62ecf2a7402acba0ba0dcbb192dc55d6d92e1be",
+      "preview": "latest-preview-assets/running/05.png"
+    },
+    {
+      "source": "state-direct-v1/running/06.png",
+      "hash": "0008ccf815aacbfde99f6567f70d0ac1ef35f2ea2acc1adb3cfcfba3c5376614",
+      "preview": "latest-preview-assets/running/06.png"
+    },
+    {
+      "source": "state-direct-v1/running/07.png",
+      "hash": "0e3458bcd7b5b2a60e4533147bb71c6ad77426cd0618b542a09f329566cc46c0",
+      "preview": "latest-preview-assets/running/07.png"
+    },
+    {
+      "source": "state-direct-v1/running/08.png",
+      "hash": "c65534b8bc91242d26650036e801dcf42375eaea89ab3a619c95c143bfe30847",
+      "preview": "latest-preview-assets/running/08.png"
+    },
+    {
+      "source": "state-direct-v1/running/09.png",
+      "hash": "2346917ac0c6a1036b4c0528594b98fc7c05747828cd82ed37baac55e598e279",
+      "preview": "latest-preview-assets/running/09.png"
+    },
+    {
+      "source": "state-direct-v1/running/10.png",
+      "hash": "3fdb5b34eb1087a3b910a9032da796773b9faf4997a06f9bb334b327f388f813",
+      "preview": "latest-preview-assets/running/10.png"
+    },
+    {
+      "source": "state-direct-v1/running/11.png",
+      "hash": "c8cbd1265335988f669d7dac5cc249830606bcea6285d2a08f196b34295961cc",
+      "preview": "latest-preview-assets/running/11.png"
+    },
+    {
+      "source": "state-direct-v1/running/12.png",
+      "hash": "6aa6d14d1bc8e0589eae6e5f6229d327dd019d78db623885e3725b9d59925797",
+      "preview": "latest-preview-assets/running/12.png"
+    },
+    {
+      "source": "state-direct-v1/running/13.png",
+      "hash": "20e666b55a691bdbe705387f6b221bc8ee0f0c5af546a6d964a95ee8eef227df",
+      "preview": "latest-preview-assets/running/13.png"
+    },
+    {
+      "source": "state-direct-v1/running/14.png",
+      "hash": "718d849c6e0ad81cfe811b74809e6529449e594f0d1b9229b658fc6c5ee827e5",
+      "preview": "latest-preview-assets/running/14.png"
+    },
+    {
+      "source": "state-direct-v1/running/15.png",
+      "hash": "bef656386c2c35b51621395d53c44429d1682ba6d19b8856ecff61f7aea1fc70",
+      "preview": "latest-preview-assets/running/15.png"
+    },
+    {
+      "source": "production-raw/running-00.png",
+      "hash": "78fcf8b7fd70320780691043e63fca07eb3a6f0aaa068bf76d73db9a44716ca3",
+      "preview": "latest-preview-assets/running/trial-0.png"
+    },
+    {
+      "source": "production-raw/running-01.png",
+      "hash": "803a0d9894fd6fa09bcd591b5e77ee2642534a7ba26e350f088270d3cf6f5995",
+      "preview": "latest-preview-assets/running/trial-1.png"
+    },
+    {
+      "source": "production-raw/running-02.png",
+      "hash": "7739a5a566f0d58128e82f7fb7ebb2d88473f84ac8b4bf24dbd506ffa14c84e4",
+      "preview": "latest-preview-assets/running/trial-2.png"
+    },
+    {
+      "source": "production-raw/running-03.png",
+      "hash": "24d23287132279455b758fdc98b03efd3479fef1cd7dfd05bc8326a29fc21047",
+      "preview": "latest-preview-assets/running/trial-3.png"
+    },
+    {
+      "source": "state-direct-v1/review/00.png",
+      "hash": "2df10a8e5765ca6af65a078932198c80f9df38fdbc719bcbfdf74afb2b332d5b",
+      "preview": "latest-preview-assets/review/00.png"
+    },
+    {
+      "source": "state-direct-v1/review/01.png",
+      "hash": "4688f5fab3b0b70e8e02d7ae1edd8158abeb95a67a51ac0ddbdf3c6ecf01d76c",
+      "preview": "latest-preview-assets/review/01.png"
+    },
+    {
+      "source": "state-direct-v1/review/02.png",
+      "hash": "50fbef32469f39b4f4dca3061d81017cd8d95618c8250e4772c15693cfc6f8dc",
+      "preview": "latest-preview-assets/review/02.png"
+    },
+    {
+      "source": "state-direct-v1/review/03.png",
+      "hash": "d8338e67eae082e651d23d967ee79bd2541a171b8990d0dd162546fc05cdf861",
+      "preview": "latest-preview-assets/review/03.png"
+    },
+    {
+      "source": "state-direct-v1/review/04.png",
+      "hash": "7c2f49e766aacfcd5ab36eca94b23d5205220cfd33d2edb8ae6f9b13a229471e",
+      "preview": "latest-preview-assets/review/04.png"
+    },
+    {
+      "source": "state-direct-v1/review/05.png",
+      "hash": "df64fade9ae027a4052dfa0fe1930e898d0cc0f4300b3e9dfecc70a7ae2ab3d5",
+      "preview": "latest-preview-assets/review/05.png"
+    },
+    {
+      "source": "state-direct-v1/review/06.png",
+      "hash": "b1d76bdb11486f38afd1a8383bd4b1e438155956575a6cd8631e44845c0fdab0",
+      "preview": "latest-preview-assets/review/06.png"
+    },
+    {
+      "source": "state-direct-v1/review/07.png",
+      "hash": "6421ecee05acff0dde5ba24905c565260d0cf8d14b2761a4ef9016e4436f5679",
+      "preview": "latest-preview-assets/review/07.png"
+    },
+    {
+      "source": "state-direct-v1/review/08.png",
+      "hash": "1ed2ef64bdad41bc7c500dd417f3942e887452fcba7e7924c5d5eef360ba430c",
+      "preview": "latest-preview-assets/review/08.png"
+    },
+    {
+      "source": "state-direct-v1/review/09.png",
+      "hash": "20c840ec7036ba5a73667be9c5d1defa42ba53e00b0a9105625fa459af3edb6e",
+      "preview": "latest-preview-assets/review/09.png"
+    },
+    {
+      "source": "state-direct-v1/review/10.png",
+      "hash": "bc2e834043ea037d9f2392d05eab85725e57c38c81c87043bc98ddffca551eb3",
+      "preview": "latest-preview-assets/review/10.png"
+    },
+    {
+      "source": "state-direct-v1/review/11.png",
+      "hash": "1b5be0bcc725cc5bc4e58c27929c8411b69250e189980f7be0b03012d7c5ef90",
+      "preview": "latest-preview-assets/review/11.png"
+    },
+    {
+      "source": "state-direct-v1/review/12.png",
+      "hash": "e1e09478ac412ce67b4dabe32a2ee4709b2d4b7f1c656180c959a023c686ba93",
+      "preview": "latest-preview-assets/review/12.png"
+    },
+    {
+      "source": "state-direct-v1/review/13.png",
+      "hash": "e7f50e276cdff038fafbcfe52ab70c5bcb7ed5ec074c24df43efaef8e4de8403",
+      "preview": "latest-preview-assets/review/13.png"
+    },
+    {
+      "source": "state-direct-v1/review/14.png",
+      "hash": "33cb454368a490e55978dca8b3c8bca5264a568c747e04c1fbf1738a294d4fa5",
+      "preview": "latest-preview-assets/review/14.png"
+    },
+    {
+      "source": "state-direct-v1/review/15.png",
+      "hash": "8698888acd8eb01aab1071d7a215a97e3a5bb551fe8bd45b16411518e920ca96",
+      "preview": "latest-preview-assets/review/15.png"
+    },
+    {
+      "source": "production-raw/review-00.png",
+      "hash": "aaf305574079ef462953c7edd6a64cbb49204f75a45fd111a2e52e32f6a89718",
+      "preview": "latest-preview-assets/review/trial-0.png"
+    },
+    {
+      "source": "production-raw/review-01.png",
+      "hash": "67153029691b4824824a714912e21c70ebfb604c388fd4cc09d211cb094a0daa",
+      "preview": "latest-preview-assets/review/trial-1.png"
+    },
+    {
+      "source": "production-raw/review-02.png",
+      "hash": "70183ca72072cdfea0a5b789923fb17a001b6705c670352b0ed7304ea735c115",
+      "preview": "latest-preview-assets/review/trial-2.png"
+    },
+    {
+      "source": "production-raw/review-03.png",
+      "hash": "a87178a724c6f2c7cb6bc813784346a1d4591d1d491cf72d1f47623057b31a3e",
+      "preview": "latest-preview-assets/review/trial-3.png"
+    },
+    {
+      "source": "state-direct-v1/waiting/00.png",
+      "hash": "52a5961ac4b9a0b901de2071914d1654bb3be686f543ccb9d3e953cfaaab37de",
+      "preview": "latest-preview-assets/waiting/00.png"
+    },
+    {
+      "source": "state-direct-v1/waiting/01.png",
+      "hash": "6d255256a7e0af060602339654fb8aedc8497886c1c637f5a1c320fa8b8710b3",
+      "preview": "latest-preview-assets/waiting/01.png"
+    },
+    {
+      "source": "state-direct-v1/waiting/02.png",
+      "hash": "688e07142afd42426e84bcdfc4a7123ed7965b162fd22d7c37c453b54e158d5d",
+      "preview": "latest-preview-assets/waiting/02.png"
+    },
+    {
+      "source": "state-direct-v1/waiting/03.png",
+      "hash": "ba041adcb74f4c0d6e16643ccb5b69e4745e3187ead88397b0d625bba19ac3bb",
+      "preview": "latest-preview-assets/waiting/03.png"
+    },
+    {
+      "source": "state-direct-v1/waiting/04.png",
+      "hash": "26e099ddc4edd62ace9b9e85a074bb9b9e724b3448fed0509752651c03813322",
+      "preview": "latest-preview-assets/waiting/04.png"
+    },
+    {
+      "source": "state-direct-v1/waiting/05.png",
+      "hash": "f9c56a5ecebd7a193c450a8d9a5cf50e022ab8106f8498d8fc88e8b9a46608de",
+      "preview": "latest-preview-assets/waiting/05.png"
+    },
+    {
+      "source": "state-direct-v1/waiting/06.png",
+      "hash": "ced24e0242cbae309e614a030e99eb1ccf20e395ad100d67d6e3ce8fedc3ed6c",
+      "preview": "latest-preview-assets/waiting/06.png"
+    },
+    {
+      "source": "state-direct-v1/waiting/07.png",
+      "hash": "8f75b673c612508e1f42353493d0c5f0c4e355983d9985eac26079f40ef80a3d",
+      "preview": "latest-preview-assets/waiting/07.png"
+    },
+    {
+      "source": "state-direct-v1/waiting/08.png",
+      "hash": "7b716eaff66b5a79e338b3816e325d1647cee878e37e89330c1c1e957422f379",
+      "preview": "latest-preview-assets/waiting/08.png"
+    },
+    {
+      "source": "state-direct-v1/waiting/09.png",
+      "hash": "d30e7f8a93ea63c208d6af907c6c00f0479660b31e7e17ec356a40bae531dada",
+      "preview": "latest-preview-assets/waiting/09.png"
+    },
+    {
+      "source": "state-direct-v1/waiting/10.png",
+      "hash": "f621d9941f019739e5c47daa8fa247510c53d48e365c72c0e6eaeeef281c877d",
+      "preview": "latest-preview-assets/waiting/10.png"
+    },
+    {
+      "source": "state-direct-v1/waiting/11.png",
+      "hash": "3be747b1ef883f0c798096a3e6b3ae7bfa11a6ee9e3a612859207989bc11d6eb",
+      "preview": "latest-preview-assets/waiting/11.png"
+    },
+    {
+      "source": "state-direct-v1/waiting/12.png",
+      "hash": "0e240a092a1a31a13910c2476ca38215df56b1e1d3aa5bd162a584788a7daed4",
+      "preview": "latest-preview-assets/waiting/12.png"
+    },
+    {
+      "source": "state-direct-v1/waiting/13.png",
+      "hash": "99a506c07bf95bce2eb9a92abd83657226281eba116eb31c51dfba29b196b780",
+      "preview": "latest-preview-assets/waiting/13.png"
+    },
+    {
+      "source": "state-direct-v1/waiting/14.png",
+      "hash": "9abcfb3b9920d8e6955dc343ed4853c332ecf5c0036016136d22fd404adfdcfe",
+      "preview": "latest-preview-assets/waiting/14.png"
+    },
+    {
+      "source": "state-direct-v1/waiting/15.png",
+      "hash": "3a18b892c8a08c57bf975401bc1f0c4d46ea5537b444855a9a156a07a2f47888",
+      "preview": "latest-preview-assets/waiting/15.png"
+    },
+    {
+      "source": "production-raw/waiting-00.png",
+      "hash": "0528fc822b3cc4fbf26dfc21e98a81621d50780d3fe8ed70c5376a293027595a",
+      "preview": "latest-preview-assets/waiting/trial-0.png"
+    },
+    {
+      "source": "production-raw/waiting-01.png",
+      "hash": "cae0c44bc73eca4dd42e85c1b485846724df055a1df0f6d20c3b0a2466901f4a",
+      "preview": "latest-preview-assets/waiting/trial-1.png"
+    },
+    {
+      "source": "production-raw/waiting-02.png",
+      "hash": "c3cd5acab5eadcd5af763a7f8a717be5e7f17b8290bd78f4345c7fddb67b60b0",
+      "preview": "latest-preview-assets/waiting/trial-2.png"
+    },
+    {
+      "source": "production-raw/waiting-03.png",
+      "hash": "ffe90e782cd7497da9af10abff13e182be65155955531c46721ff6425e8db5a5",
+      "preview": "latest-preview-assets/waiting/trial-3.png"
+    },
+    {
+      "source": "state-direct-v1/failed/00.png",
+      "hash": "d853fd5bb9a3186496b012d0e7b86f2be333f1a8145ea53657c0daea6df56ff5",
+      "preview": "latest-preview-assets/failed/00.png"
+    },
+    {
+      "source": "state-direct-v1/failed/01.png",
+      "hash": "9ea409e35ae534cfb507e1f21b2b9a1f81cd4e738c85886218a733b5da114a0d",
+      "preview": "latest-preview-assets/failed/01.png"
+    },
+    {
+      "source": "state-direct-v1/failed/02.png",
+      "hash": "9d3b36dd54d571ae5422cc33918070d6c925253f21aea800db5bb1027d10cda7",
+      "preview": "latest-preview-assets/failed/02.png"
+    },
+    {
+      "source": "state-direct-v1/failed/03.png",
+      "hash": "be51ab944338391072a1df878f7e260e5b9e06c055a871855a0524038732b070",
+      "preview": "latest-preview-assets/failed/03.png"
+    },
+    {
+      "source": "state-direct-v1/failed/04.png",
+      "hash": "4207194ba6d549605a52bdc596e8fad390ff43fc7195e5cc47a432811d57f32d",
+      "preview": "latest-preview-assets/failed/04.png"
+    },
+    {
+      "source": "state-direct-v1/failed/05.png",
+      "hash": "f5a81b042ff1dc3d73ae4b3c9332879e9d3ca8bd9f1e5936c662b944b9dd5b04",
+      "preview": "latest-preview-assets/failed/05.png"
+    },
+    {
+      "source": "state-direct-v1/failed/06.png",
+      "hash": "ce9ab8030c34f2de34be2853d4505088256d31b2085760e1bb0bdebc6fe6b12d",
+      "preview": "latest-preview-assets/failed/06.png"
+    },
+    {
+      "source": "state-direct-v1/failed/07.png",
+      "hash": "aac03be85a10c521efb4d70021332fa0d20f0b091ab45e41f948568ae77a126b",
+      "preview": "latest-preview-assets/failed/07.png"
+    },
+    {
+      "source": "state-direct-v1/failed/08.png",
+      "hash": "d0a28c222cf504750256997e41d4effa509769fa57a5daab585c155deca6eb61",
+      "preview": "latest-preview-assets/failed/08.png"
+    },
+    {
+      "source": "state-direct-v1/failed/09.png",
+      "hash": "0d3e4aee504827ff7a92146d89d0017e81b5b476d7900ec1b6de1d2c1c7e1294",
+      "preview": "latest-preview-assets/failed/09.png"
+    },
+    {
+      "source": "state-direct-v1/failed/10.png",
+      "hash": "4b57fff4f44bfb39fce8e78526fb4afc36e2299038f301e3ed5f8448d034bbe4",
+      "preview": "latest-preview-assets/failed/10.png"
+    },
+    {
+      "source": "state-direct-v1/failed/11.png",
+      "hash": "07e1a2ee88cbb6b57696b7e72a37f2c9ac02a1644f0b5bdae8e16e262d4eda15",
+      "preview": "latest-preview-assets/failed/11.png"
+    },
+    {
+      "source": "state-direct-v1/failed/12.png",
+      "hash": "7c8433cd3bb21b82460a9e7b9f71071d8ea158ed34df06aa47920073aee82a4d",
+      "preview": "latest-preview-assets/failed/12.png"
+    },
+    {
+      "source": "state-direct-v1/failed/13.png",
+      "hash": "c2754b62770e1ca37e8456692676eee9ce485547a82905674ec4ca3ab4117b92",
+      "preview": "latest-preview-assets/failed/13.png"
+    },
+    {
+      "source": "state-direct-v1/failed/14.png",
+      "hash": "05e8245fe9d1c708e29fb616e14d72868aa01a5d1cb7b920a1546f323f451630",
+      "preview": "latest-preview-assets/failed/14.png"
+    },
+    {
+      "source": "state-direct-v1/failed/15.png",
+      "hash": "c66e8e0963ec16c5a8c690e348714785609a846ff3b43b5572d8d048adcbbeaf",
+      "preview": "latest-preview-assets/failed/15.png"
+    },
+    {
+      "source": "state-direct-v1/waving/00.png",
+      "hash": "4fb9ebdb112fbc2ca0b23c1cc70020bee69aa48a9074b3b27c434f8954605154",
+      "preview": "latest-preview-assets/waving/00.png"
+    },
+    {
+      "source": "state-direct-v1/waving/01.png",
+      "hash": "94e8d4a63ca51925c676cb65920677896930c26abc747fe9ebfb4aa662365e88",
+      "preview": "latest-preview-assets/waving/01.png"
+    },
+    {
+      "source": "state-direct-v1/waving/02.png",
+      "hash": "73bbaf4a2eac04a88afd661a1ac34c552d3397ed757900a8ca0f34e13a774593",
+      "preview": "latest-preview-assets/waving/02.png"
+    },
+    {
+      "source": "state-direct-v1/waving/03.png",
+      "hash": "faeb658983a879c40932a16e16a179607bd1952cf2da69eff7e24f4e4105ea4f",
+      "preview": "latest-preview-assets/waving/03.png"
+    },
+    {
+      "source": "state-direct-v1/waving/04.png",
+      "hash": "dbbd46162a35c28d5986615ce91dc4e9e4df4b4c6cd8111e5ffff42c15f073bd",
+      "preview": "latest-preview-assets/waving/04.png"
+    },
+    {
+      "source": "state-direct-v1/waving/05.png",
+      "hash": "1852dc12efb95636a1b34e68d82fe054907210183a161191f2cb2e10318b3215",
+      "preview": "latest-preview-assets/waving/05.png"
+    },
+    {
+      "source": "state-direct-v1/waving/06.png",
+      "hash": "dc58bbffc619bdb82f7d7fbc708fb9002abe04c641a569f5b0019f4591fd4717",
+      "preview": "latest-preview-assets/waving/06.png"
+    },
+    {
+      "source": "state-direct-v1/waving/07.png",
+      "hash": "9eca40759de305915657aea1ac671ba4a9fa812cac5f213c7baad5350a490f95",
+      "preview": "latest-preview-assets/waving/07.png"
+    },
+    {
+      "source": "state-direct-v1/waving/08.png",
+      "hash": "8eff3adbc7fdec4d6c534134e32f282270d1dc56de4f5c77911d433e99c35af4",
+      "preview": "latest-preview-assets/waving/08.png"
+    },
+    {
+      "source": "state-direct-v1/waving/09.png",
+      "hash": "6e532c4cdb4d464e10bfe7c8c45c347a2c6d36040b3696cf00f4f5606bb2017b",
+      "preview": "latest-preview-assets/waving/09.png"
+    },
+    {
+      "source": "state-direct-v1/waving/10.png",
+      "hash": "9036d989ca3e1c2ce8aacd1578a8528d972e6374ba6a68c870d8444162e33e00",
+      "preview": "latest-preview-assets/waving/10.png"
+    },
+    {
+      "source": "state-direct-v1/waving/11.png",
+      "hash": "2b2387ec8cf31193536686cdb2ef801147d9a52cb1088f979a9aae61d865ce33",
+      "preview": "latest-preview-assets/waving/11.png"
+    },
+    {
+      "source": "state-direct-v1/waving/12.png",
+      "hash": "7685c871e7a693f6f2e9a8a59db88083571dd826990f85faf869f913913abe90",
+      "preview": "latest-preview-assets/waving/12.png"
+    },
+    {
+      "source": "state-direct-v1/waving/13.png",
+      "hash": "e0b07ba71813a1ff5f5677e05c944ea06baac97ee43f734abf477e2a4819948e",
+      "preview": "latest-preview-assets/waving/13.png"
+    },
+    {
+      "source": "state-direct-v1/waving/14.png",
+      "hash": "8bef5965e763288f53cc84b01c02b2eb8c8cf0d9473e60a573b9423ba8005daa",
+      "preview": "latest-preview-assets/waving/14.png"
+    },
+    {
+      "source": "state-direct-v1/waving/15.png",
+      "hash": "63efcb658da0c4766c5965ecbd952f9a5cb720913668f2d947d43482abef173d",
+      "preview": "latest-preview-assets/waving/15.png"
+    },
+    {
+      "source": "state-direct-v1/jumping/00.png",
+      "hash": "f0db56e4497d7fc2378e55738c20a5b78df8d52b3882116ff47670f7ceaddff7",
+      "preview": "latest-preview-assets/jumping/00.png"
+    },
+    {
+      "source": "state-direct-v1/jumping/01.png",
+      "hash": "4eaec1ce21244313ba25dffebf169a889a1d7d9ff661f653b58cf2e241f9a8f5",
+      "preview": "latest-preview-assets/jumping/01.png"
+    },
+    {
+      "source": "state-direct-v1/jumping/02.png",
+      "hash": "365650aa2c722b6f3c04b8514c993e26c960780ea24e7498880509ac4b7597b2",
+      "preview": "latest-preview-assets/jumping/02.png"
+    },
+    {
+      "source": "state-direct-v1/jumping/03.png",
+      "hash": "19672ad15e17e1e2c6ea16ae3147ddacee13c5213a054804848d9d625266ff8e",
+      "preview": "latest-preview-assets/jumping/03.png"
+    },
+    {
+      "source": "state-direct-v1/jumping/04.png",
+      "hash": "fa9c007c490eb7b9118d4dcc6e9d03e596cf883f1bd5d527129efc42399b0343",
+      "preview": "latest-preview-assets/jumping/04.png"
+    },
+    {
+      "source": "state-direct-v1/jumping/05.png",
+      "hash": "68ad3aee3466fa4861ac3485f9173e666351b3bdcc010d384641cf53f03ecaab",
+      "preview": "latest-preview-assets/jumping/05.png"
+    },
+    {
+      "source": "state-direct-v1/jumping/06.png",
+      "hash": "604006654241f4dc459dda7a90ae0c521699b6873e184e077b8d62ca34c87b47",
+      "preview": "latest-preview-assets/jumping/06.png"
+    },
+    {
+      "source": "state-direct-v1/jumping/07.png",
+      "hash": "08dc13fb257d793cee1c42774dc8b7b90e61a158340d2b701ea0ee13b203a55b",
+      "preview": "latest-preview-assets/jumping/07.png"
+    },
+    {
+      "source": "state-direct-v1/jumping/08.png",
+      "hash": "90a203134dcc3b849801d70d7d6775ee536ab81a7de862e55172af2afa2a19b0",
+      "preview": "latest-preview-assets/jumping/08.png"
+    },
+    {
+      "source": "state-direct-v1/jumping/09.png",
+      "hash": "e5b4299395ef8034e97cb8decdf1be8f984927d0ac76e07f3c725f103b09fa6a",
+      "preview": "latest-preview-assets/jumping/09.png"
+    },
+    {
+      "source": "state-direct-v1/jumping/10.png",
+      "hash": "7b1be841a4c186b29329ad39d641163c4b6cecf491c3c226db2deec820a89c1f",
+      "preview": "latest-preview-assets/jumping/10.png"
+    },
+    {
+      "source": "state-direct-v1/jumping/11.png",
+      "hash": "be9351dc7a696755ac4b851e8c16ca5e1a114f6c505e888494a7bc6856e4c21e",
+      "preview": "latest-preview-assets/jumping/11.png"
+    },
+    {
+      "source": "state-direct-v1/jumping/12.png",
+      "hash": "2f49ee5f07ff602115f03545f91b37af3578b393d3e59121c6d4e6ce7877b60b",
+      "preview": "latest-preview-assets/jumping/12.png"
+    },
+    {
+      "source": "state-direct-v1/jumping/13.png",
+      "hash": "520d2d78ce285ce71c8be676e5c226330a7b91de371d7e037fc8d462b52164f0",
+      "preview": "latest-preview-assets/jumping/13.png"
+    },
+    {
+      "source": "state-direct-v1/jumping/14.png",
+      "hash": "302e46aadb567b4f5eb36105ee565e0b0cb8836e96e4fb2305691f3adba65296",
+      "preview": "latest-preview-assets/jumping/14.png"
+    },
+    {
+      "source": "state-direct-v1/jumping/15.png",
+      "hash": "37c18ec72046499c8655427afe011d523dce8ace4f539abf61405853df38316f",
+      "preview": "latest-preview-assets/jumping/15.png"
+    },
+    {
+      "source": "state-direct-v1/sleeping/00.png",
+      "hash": "3f19f7eb32e9e703ec44a49f84be8b06078973738f41ea3285e36007854c6a3d",
+      "preview": "latest-preview-assets/sleeping/00.png"
+    },
+    {
+      "source": "state-direct-v1/sleeping/01.png",
+      "hash": "8c6bb6462e0328d83926759fd70ddf0c34faa7ab093d7f0ac9a40a6514e84af7",
+      "preview": "latest-preview-assets/sleeping/01.png"
+    },
+    {
+      "source": "state-direct-v1/sleeping/02.png",
+      "hash": "dc2d074d05488fd460338f91ae74018b330f3c0d9ea4dd25b357b354a50dc70a",
+      "preview": "latest-preview-assets/sleeping/02.png"
+    },
+    {
+      "source": "state-direct-v1/sleeping/03.png",
+      "hash": "8f905ab6ec306c9b175b6a9aa7ffafcf1ed69819d53e26ba708fd6d494b331bb",
+      "preview": "latest-preview-assets/sleeping/03.png"
+    },
+    {
+      "source": "state-direct-v1/sleeping/04.png",
+      "hash": "3b19e6d2e75f540d5fe8f13ede1e2ec39e55a0f1d17bf53dcc43ce914c473fff",
+      "preview": "latest-preview-assets/sleeping/04.png"
+    },
+    {
+      "source": "state-direct-v1/sleeping/05.png",
+      "hash": "34d2120d95d0196c9d2a73129fd217b97e50f19681ef899f387d1c24aefb5b17",
+      "preview": "latest-preview-assets/sleeping/05.png"
+    },
+    {
+      "source": "state-direct-v1/sleeping/06.png",
+      "hash": "bdaaaf323b77c47fb8fef51474a5a958661e8a3b2ce352b2258ed6eb30d808bc",
+      "preview": "latest-preview-assets/sleeping/06.png"
+    },
+    {
+      "source": "state-direct-v1/sleeping/07.png",
+      "hash": "d3a2015330bc815952e60e4e22c538e76f6b58f997d77a577a30c7bcdd98a1e7",
+      "preview": "latest-preview-assets/sleeping/07.png"
+    },
+    {
+      "source": "state-direct-v1/sleeping/08.png",
+      "hash": "88ef9f3448c34407ebb8e27135396fd77eaab201c472c9a25ee2158ba3cdd570",
+      "preview": "latest-preview-assets/sleeping/08.png"
+    },
+    {
+      "source": "state-direct-v1/sleeping/09.png",
+      "hash": "097b26c30106788afd6c7e9eb69b64260c3363d59fb3ee5a27d295cc357d0ce0",
+      "preview": "latest-preview-assets/sleeping/09.png"
+    },
+    {
+      "source": "state-direct-v1/sleeping/10.png",
+      "hash": "f8261088ce26dccc909fe1e27f9b4be8a778082ff1f1813c0d3555af4d5ae474",
+      "preview": "latest-preview-assets/sleeping/10.png"
+    },
+    {
+      "source": "state-direct-v1/sleeping/11.png",
+      "hash": "ace75454ac204ce43fb3f2efc11c3e45b897f514d145dee83635bcfbf953ef3d",
+      "preview": "latest-preview-assets/sleeping/11.png"
+    },
+    {
+      "source": "state-direct-v1/sleeping/12.png",
+      "hash": "b01099da8e8f0aa2268518a70f53d5ad4a12c174b0a8eb69716cc64e6bf2697e",
+      "preview": "latest-preview-assets/sleeping/12.png"
+    },
+    {
+      "source": "state-direct-v1/sleeping/13.png",
+      "hash": "c46840ba7b52dc2a5af02fce843e012ec01de7c44870e76f99bcb50526433eb9",
+      "preview": "latest-preview-assets/sleeping/13.png"
+    },
+    {
+      "source": "state-direct-v1/sleeping/14.png",
+      "hash": "7a87e59f0a9bddebeb86001652b30d4e6438402811319cd41e1c655bf5e8ad92",
+      "preview": "latest-preview-assets/sleeping/14.png"
+    },
+    {
+      "source": "state-direct-v1/sleeping/15.png",
+      "hash": "eec103e1746b6b4414cf9cd28166c14d0eb0c05dc22b6c0dfb19cb61f8f5849f",
+      "preview": "latest-preview-assets/sleeping/15.png"
+    },
+    {
+      "source": "state-direct-v1/drag-right/00.png",
+      "hash": "44a94d0e4c32499bc526052353870fef0cd9f2df1a09b5f22b576d2e22f26006",
+      "preview": "latest-preview-assets/drag-right/00.png"
+    },
+    {
+      "source": "state-direct-v1/drag-right/01.png",
+      "hash": "3bbb0e9e88534d8fc8499f8951ab40562c36d93ed92af8ab14eeff7db649ecd9",
+      "preview": "latest-preview-assets/drag-right/01.png"
+    },
+    {
+      "source": "state-direct-v1/drag-right/02.png",
+      "hash": "7ac9899eab09e161cccf424ad82e4f96d1f48beb13975f8287e06d55611d6d47",
+      "preview": "latest-preview-assets/drag-right/02.png"
+    },
+    {
+      "source": "state-direct-v1/drag-right/03.png",
+      "hash": "c0012fa88f4ff7b49cbc415c6f17d92ca47c2fdb5527cf29d94536fe572a52fa",
+      "preview": "latest-preview-assets/drag-right/03.png"
+    },
+    {
+      "source": "state-direct-v1/drag-right/04.png",
+      "hash": "f2166c8e245d0791526e97523c2b05675718a48c11404e3e29c59b00e7670754",
+      "preview": "latest-preview-assets/drag-right/04.png"
+    },
+    {
+      "source": "state-direct-v1/drag-right/05.png",
+      "hash": "751f1eb81ba39e454bda7761dba223fe1473229c8ee30af1251716f28e731a6f",
+      "preview": "latest-preview-assets/drag-right/05.png"
+    },
+    {
+      "source": "state-direct-v1/drag-right/06.png",
+      "hash": "74e3f710a718ebe9b312f6c448a32743376f8ed43d0242c7bc5e285356aa5593",
+      "preview": "latest-preview-assets/drag-right/06.png"
+    },
+    {
+      "source": "state-direct-v1/drag-right/07.png",
+      "hash": "28266f8b478e18ba325b9fb24bf1a6fd2df298773ae76f6bf872eb5232cb5e70",
+      "preview": "latest-preview-assets/drag-right/07.png"
+    },
+    {
+      "source": "state-direct-v1/drag-right/08.png",
+      "hash": "965eaa816acf9b7d753b0692531c1fa3e6fa687226565438b67f20fa83cd09b7",
+      "preview": "latest-preview-assets/drag-right/08.png"
+    },
+    {
+      "source": "state-direct-v1/drag-right/09.png",
+      "hash": "ce27887431f261b8df1b5bd0c22981a9195fe9df169b0882b21168305a814d83",
+      "preview": "latest-preview-assets/drag-right/09.png"
+    },
+    {
+      "source": "state-direct-v1/drag-right/10.png",
+      "hash": "cc8185db24117a2725c519bdc01bd500b16a17046a6ecba4a9306bb746e84f3a",
+      "preview": "latest-preview-assets/drag-right/10.png"
+    },
+    {
+      "source": "state-direct-v1/drag-right/11.png",
+      "hash": "b5b9e370d57fa9388d9839641160cb89176988d50906d8af6ff2b197df10da1b",
+      "preview": "latest-preview-assets/drag-right/11.png"
+    },
+    {
+      "source": "state-direct-v1/drag-right/12.png",
+      "hash": "c5160ac916439e73be1a8a6412eab39fe88049684a0d813a9fb779967c46fc6c",
+      "preview": "latest-preview-assets/drag-right/12.png"
+    },
+    {
+      "source": "state-direct-v1/drag-right/13.png",
+      "hash": "48a67647efad22c69a947fe80fc52849b1dee32daf9a700c6e5b632aeec5adf6",
+      "preview": "latest-preview-assets/drag-right/13.png"
+    },
+    {
+      "source": "state-direct-v1/drag-right/14.png",
+      "hash": "9407a52e7d0fc30bff5bff3114a5d39a541aca4f35625fb8dff311edf2d7207e",
+      "preview": "latest-preview-assets/drag-right/14.png"
+    },
+    {
+      "source": "state-direct-v1/drag-right/15.png",
+      "hash": "5ef576c80c80ec2323b1b224bf3d53d865616a4dd2bb67a1ccd95d0cd20c3c4e",
+      "preview": "latest-preview-assets/drag-right/15.png"
+    },
+    {
+      "source": "state-direct-v1/drag-left/00.png",
+      "hash": "e4986ffb888cdeb10ad3da3c116ab231596c1ac2ab9d726455fa8b2a97ecb6f4",
+      "preview": "latest-preview-assets/drag-left/00.png"
+    },
+    {
+      "source": "state-direct-v1/drag-left/01.png",
+      "hash": "8887ff9fd4eef5cec406ed6ad28ac6158a8e669932cac3239f7939e88889c372",
+      "preview": "latest-preview-assets/drag-left/01.png"
+    },
+    {
+      "source": "state-direct-v1/drag-left/02.png",
+      "hash": "6ac8eb011027c8fe1eb6d212386250abe243be90a15856dfb1b20d6702b70573",
+      "preview": "latest-preview-assets/drag-left/02.png"
+    },
+    {
+      "source": "state-direct-v1/drag-left/03.png",
+      "hash": "a3258a5524dffdf7dd2bcffe5a6854583f996865c1fa5dc120e75544a0faca57",
+      "preview": "latest-preview-assets/drag-left/03.png"
+    },
+    {
+      "source": "state-direct-v1/drag-left/04.png",
+      "hash": "e1b306225292cf1661dd47eb2f8a01ab7e8b3af019c4b7c40f408b8e7f7c491e",
+      "preview": "latest-preview-assets/drag-left/04.png"
+    },
+    {
+      "source": "state-direct-v1/drag-left/05.png",
+      "hash": "36473418dcd60f6b84a528850ebcfb1f9770c059be8851b2d22aa59c939445f3",
+      "preview": "latest-preview-assets/drag-left/05.png"
+    },
+    {
+      "source": "state-direct-v1/drag-left/06.png",
+      "hash": "d60230d63f6453b06e321020919f9923fe8a0f14f7e5f71e0f09b8944d748db8",
+      "preview": "latest-preview-assets/drag-left/06.png"
+    },
+    {
+      "source": "state-direct-v1/drag-left/07.png",
+      "hash": "0e5baf2843fc2e82ec48b3ba37f704a73108094d5c2e7745e23d8d4b79c01274",
+      "preview": "latest-preview-assets/drag-left/07.png"
+    },
+    {
+      "source": "state-direct-v1/drag-left/08.png",
+      "hash": "a1360b29e0bc334f65fe117292e9e2b1a97509ab6b02ffd4f7aae2032bdfd97f",
+      "preview": "latest-preview-assets/drag-left/08.png"
+    },
+    {
+      "source": "state-direct-v1/drag-left/09.png",
+      "hash": "69143c5bfbabf51a7fdaac7678d18621b760a276e818c6714ee97df03d8faa39",
+      "preview": "latest-preview-assets/drag-left/09.png"
+    },
+    {
+      "source": "state-direct-v1/drag-left/10.png",
+      "hash": "d21900c2e8f127a518d0bf9ee7b9507f86dad19035a9455f04d95624d8acc292",
+      "preview": "latest-preview-assets/drag-left/10.png"
+    },
+    {
+      "source": "state-direct-v1/drag-left/11.png",
+      "hash": "83fe96f97a7541c1d68cb8a4cba4d28d3ca27f1adede1eeed92beacd3a82c0ce",
+      "preview": "latest-preview-assets/drag-left/11.png"
+    },
+    {
+      "source": "state-direct-v1/drag-left/12.png",
+      "hash": "18480a6a88ced549e3b17ee820e40625300cbc562a2261c10335022852992986",
+      "preview": "latest-preview-assets/drag-left/12.png"
+    },
+    {
+      "source": "state-direct-v1/drag-left/13.png",
+      "hash": "8318bccb0c75eafd13517ed85cc26356f95f7e0aa6a2e85f54bdbee687aa4ff2",
+      "preview": "latest-preview-assets/drag-left/13.png"
+    },
+    {
+      "source": "state-direct-v1/drag-left/14.png",
+      "hash": "9a382189fac23b4afb78c589fb2bd9d3abba0a3efd9d1f2767c2fcbe6ae40c74",
+      "preview": "latest-preview-assets/drag-left/14.png"
+    },
+    {
+      "source": "state-direct-v1/drag-left/15.png",
+      "hash": "12c0f867da9816d2312fafca0a2ff4cc5d2c48b8d632898d56c3991aa51a8939",
+      "preview": "latest-preview-assets/drag-left/15.png"
+    },
+    {
+      "source": "masters/11-running-charge.png",
+      "hash": "0dc4a5b89ec4a66fbd13798922e497fb57d17a0330eb1eb7dc37e1948783a4cd",
+      "preview": "latest-preview-assets/charge/0.png"
+    },
+    {
+      "source": "masters/12-running-release.png",
+      "hash": "cad473c6ac92df7a9219a73b1597d98e750a30c4d3d31ab45fe777d83a5997c4",
+      "preview": "latest-preview-assets/release/0.png"
+    },
+    {
+      "source": "masters/13-review-focus.png",
+      "hash": "42d96c2b66e101c7a42bd4b8b828874611edfdd7bf911249a4765211ed965759",
+      "preview": "latest-preview-assets/focus/0.png"
+    },
+    {
+      "source": "masters/14-waving-bow.png",
+      "hash": "ed082f158f43fe539c4e4b7ed59305734a38e4125d97c8993f8c17be5eaa9499",
+      "preview": "latest-preview-assets/bow/0.png"
+    },
+    {
+      "source": "masters/15-jump-prep.png",
+      "hash": "23da4fc8469c87f7c8a2e5ca35639092cd38f2e8c5b6ba01755f075edafdd3e2",
+      "preview": "latest-preview-assets/jump-prep/0.png"
+    },
+    {
+      "source": "masters/16-sleep-settle.png",
+      "hash": "9baa6129e320ba6c3dd89fd8fff5927be53c9508aba3bcf592d6431cba8583d0",
+      "preview": "latest-preview-assets/sleep-settle/0.png"
+    }
+  ],
+  "characterSourcesUnchanged": true,
+  "blinkSeconds": 0.41000000000000003,
+  "idleCycleSeconds": 3.2,
+  "tailRepair": "16 complete whole drawings ready for visual review"
+}
