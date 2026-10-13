@@ -15,6 +15,14 @@ if CommandLine.arguments.contains("--self-test") {
     exit(runSelfTest())
 }
 
+if CommandLine.arguments.contains("--self-test-magical-heart-clock") {
+    exit(runMagicalHeartClockSelfTest())
+}
+
+if let index = CommandLine.arguments.firstIndex(of: "--render-magical-heart-motion-preview"), index + 1 < CommandLine.arguments.count {
+    exit(renderMagicalHeartMotionPreview(to: CommandLine.arguments[index + 1]))
+}
+
 if CommandLine.arguments.contains("--self-test-jeanne-clock") {
     exit(runJeanneClockSelfTest())
 }

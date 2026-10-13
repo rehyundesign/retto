@@ -82,6 +82,9 @@ done
 if [[ -d "$ASSETS_DIR/jeanne-frames" ]]; then
   cp -R "$ASSETS_DIR/jeanne-frames" "$RESOURCES_DIR/JeanneFrames"
 fi
+if [[ -d "$ASSETS_DIR/magical-heart-frames" ]]; then
+  cp -R "$ASSETS_DIR/magical-heart-frames" "$RESOURCES_DIR/MagicalHeartFrames"
+fi
 # 매지컬 하트의 진행 중 변신 이펙트는 캐릭터와 분리한 앞·뒤 투명 아틀라스다.
 for effect in spritesheet-magical-heart-effects-back spritesheet-magical-heart-effects-front; do
   [ -f "$ASSETS_DIR/$effect.webp" ] && cp "$ASSETS_DIR/$effect.webp" "$RESOURCES_DIR/$effect.webp"

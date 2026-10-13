@@ -7,7 +7,7 @@ import Foundation
 final class RettoView: NSView {
     /// 지금 그리는 아틀라스. 스킨을 고르면 앱이 갈아 끼운다.
     var spriteSheet: NSImage {
-        didSet { christmasSheetImage = nil; christmasCellImages.removeAll(); frameIndex = 0; completedCycles = 0; restartAnimation(); needsDisplay = true }
+        didSet { christmasSheetImage = nil; christmasCellImages.removeAll(); magicalHeartSheetImage = nil; magicalHeartCellImages.removeAll(); frameIndex = 0; completedCycles = 0; restartAnimation(); needsDisplay = true }
     }
     /// 아틀라스만으로는 표현하기 어려운 스킨 전용 효과를 고른다.
     var skin: PetSkin {
@@ -31,8 +31,37 @@ final class RettoView: NSView {
     private let jeanneEffectEpoch = ProcessInfo.processInfo.systemUptime
     private var jeannePreviewTime: TimeInterval?
     private var christmasAnimationStart = ProcessInfo.processInfo.systemUptime
+    private var magicalHeartPoseEpoch = ProcessInfo.processInfo.systemUptime
+    private let magicalHeartEffectEpoch = ProcessInfo.processInfo.systemUptime
+    private var magicalHeartPreviewTime: TimeInterval?
+    private var magicalHeartSpriteOnlyPreview = false
+    private var magicalHeartSheetImage: CGImage?
+    private var magicalHeartCellImages: [Int: NSImage] = [:]
     private var christmasSheetImage: CGImage?
     private var christmasCellImages: [Int: NSImage] = [:]
+
+    private func drawCachedMagicalHeartCell(row: Int, frame: Int, in rect: NSRect) -> Bool {
+        guard skin == .magicalHeart else { return false }
+        if spriteLayout.columns == 16, MagicalHeartFrames.draw(row: row, frame: frame, in: rect) { return true }
+        let key = row * spriteLayout.columns + frame
+        if magicalHeartCellImages[key] == nil {
+            if magicalHeartSheetImage == nil {
+                magicalHeartSheetImage = spriteSheet.cgImage(forProposedRect: nil, context: nil, hints: nil)
+            }
+            guard let sheet = magicalHeartSheetImage else { return false }
+            let width = sheet.width / spriteLayout.columns
+            let height = sheet.height / spriteLayout.rows
+            guard let cell = sheet.cropping(to: CGRect(x: frame * width, y: row * height, width: width, height: height)) else { return false }
+            if magicalHeartCellImages.count >= 48, let oldest = magicalHeartCellImages.keys.min() {
+                magicalHeartCellImages.removeValue(forKey: oldest)
+            }
+            magicalHeartCellImages[key] = NSImage(cgImage: cell, size: NSSize(width: spriteLayout.cellWidth, height: spriteLayout.cellHeight))
+        }
+        guard let image = magicalHeartCellImages[key] else { return false }
+        image.draw(in: rect, from: NSRect(origin: .zero, size: image.size), operation: .sourceOver, fraction: 1,
+                   respectFlipped: false, hints: [.interpolation: NSImageInterpolation.high])
+        return true
+    }
 
     private func drawCachedChristmasCell(row: Int, frame: Int, in rect: NSRect) -> Bool {
         guard skin == .christmas, spriteLayout.columns == 16 else { return false }
@@ -269,6 +298,15 @@ final class RettoView: NSView {
         needsDisplay = true
     }
 
+    func setMagicalHeartTimeForPreview(_ time: TimeInterval) {
+        magicalHeartPreviewTime = time
+        needsDisplay = true
+    }
+
+    func setMagicalHeartSpriteOnlyForPreview() {
+        magicalHeartSpriteOnlyPreview = true
+    }
+
     func setDragRunForPreview(_ direction: DragRun?) {
         dragRun = direction
         frameIndex = 0
@@ -301,6 +339,7 @@ final class RettoView: NSView {
         }
         animationTimer?.invalidate()
         jeannePoseEpoch = ProcessInfo.processInfo.systemUptime
+        magicalHeartPoseEpoch = ProcessInfo.processInfo.systemUptime
         guard let animation = currentAnimation else { return }
         let timedChristmas = skin == .christmas && spriteLayout.columns == 16
         let durations = timedChristmas ? Christmas16Timing.frameDurations(row: animation.row) : nil
@@ -310,7 +349,7 @@ final class RettoView: NSView {
                 - Double(completedCycles) * durations.reduce(0, +)
                 - durations.prefix(frameIndex).reduce(0, +)
         }
-        let timer = Timer(timeInterval: skin == .jeanne || durations != nil ? 1.0 / 60 : (poseTiming ?? animation.interval), repeats: durations != nil || poseTiming == nil) { [weak self] _ in
+        let timer = Timer(timeInterval: skin == .jeanne || skin == .magicalHeart || durations != nil ? 1.0 / 60 : (poseTiming ?? animation.interval), repeats: durations != nil || poseTiming == nil) { [weak self] _ in
             self?.advanceFrame()
             if poseTiming != nil && durations == nil { self?.restartAnimation() }
         }
@@ -336,12 +375,17 @@ final class RettoView: NSView {
 
     private func advanceFrame() {
         guard let animation = currentAnimation else { return }
-        if skin == .jeanne { needsDisplay = true }
+        if skin == .jeanne || skin == .magicalHeart { needsDisplay = true }
         guard dragRun != nil || lookDirection == nil else { return }
         let previousFrame = frameIndex
         if skin == .jeanne {
             let position = JeanneMotion.position(elapsed: ProcessInfo.processInfo.systemUptime - jeannePoseEpoch,
                                                  interval: animation.interval)
+            frameIndex = position.frame
+            completedCycles = position.cycles
+        } else if skin == .magicalHeart {
+            let position = MagicalHeartMotion.position(elapsed: ProcessInfo.processInfo.systemUptime - magicalHeartPoseEpoch,
+                                                       frames: animation.frames, interval: animation.interval)
             frameIndex = position.frame
             completedCycles = position.cycles
         } else if skin == .christmas, spriteLayout.columns == 16,
@@ -469,7 +513,7 @@ final class RettoView: NSView {
         guard lookDirection != nil else { return }
         lookDirection = nil
         frameIndex = 0
-        if skin == .christmas { restartAnimation() }
+        if skin == .christmas || skin == .magicalHeart { restartAnimation() }
         needsDisplay = true
     }
 
@@ -623,12 +667,15 @@ final class RettoView: NSView {
             height: spriteLayout.cellHeight
         )
 
-        let hasBakedTransformation = skin == .magicalHeart && visibleState == .running
+        let magicalHeartTime = magicalHeartPreviewTime ?? (ProcessInfo.processInfo.systemUptime - magicalHeartEffectEpoch)
 
         // 발밑 바닥 그림자. 예전에는 실루엣 드롭 섀도(blur 16)를 썼는데, 흐림이 사방으로
         // 퍼져 머리 위에도 회색 안개가 생겼다. 흰 배경에서는 그게 투명한 사각형처럼 보였다.
         // 동물의 숲처럼 발밑에만 타원을 깔고, 몸에는 아주 얕은 그림자만 남긴다.
         drawGroundShadow(petRect: petRect, scale: uiScale)
+        if skin == .magicalHeart {
+            MagicalHeartEffects.draw(state: visibleState, drag: dragRun, in: petRect, time: magicalHeartTime, front: false)
+        }
 
         let jeanneTime = jeannePreviewTime ?? (ProcessInfo.processInfo.systemUptime - jeanneEffectEpoch)
         if skin == .jeanne {
@@ -649,7 +696,8 @@ final class RettoView: NSView {
         shadow.set()
         if skin == .jeanne {
             _ = JeanneFrames.draw(row: row, frame: column, in: petRect)
-        } else if !drawCachedChristmasCell(row: row, frame: column, in: petRect) {
+        } else if !drawCachedMagicalHeartCell(row: row, frame: column, in: petRect),
+                  !drawCachedChristmasCell(row: row, frame: column, in: petRect) {
             spriteSheet.draw(in: petRect, from: sourceRect, operation: .sourceOver, fraction: 1, respectFlipped: false, hints: [.interpolation: NSImageInterpolation.high])
         }
         NSGraphicsContext.restoreGraphicsState()
@@ -664,16 +712,16 @@ final class RettoView: NSView {
         }
 
         if skin == .magicalHeart {
-            if !hasBakedTransformation {
-                drawMagicalHeartAmbientEffects(petRect: petRect, scale: uiScale, frame: frameIndex)
-            }
+            MagicalHeartEffects.draw(state: visibleState, drag: dragRun, in: petRect, time: magicalHeartTime, front: true)
         }
 
         if visibleState == .sleeping, skin != .jeanne {
             drawSleepBreath(petRect: petRect, scale: uiScale)
         }
 
-        drawStatusRibbon(statusAnimation, layout: layout)
+        if skin != .magicalHeart || !magicalHeartSpriteOnlyPreview {
+            drawStatusRibbon(statusAnimation, layout: layout)
+        }
     }
 
     private static func loadEffectSheet(_ resource: String) -> NSImage? {
