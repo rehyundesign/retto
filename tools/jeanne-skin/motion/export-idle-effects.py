@@ -49,8 +49,14 @@ for f in files:
     im.thumbnail((224,320))
     cell=Image.new('RGBA',(224,320));cell.alpha_composite(im,((224-im.width)//2,(320-im.height)//2));characters.append(cell)
 assert len(set(r['decoded'] for r in records))==16
+palette_board=Image.new('RGB',(448,320),'#181827')
+palette_board.paste(characters[0].convert('RGB'),(0,0))
+palette_board.paste(characters[0].crop((65,90,86,110)).convert('RGB').resize((224,160)),(224,0))
+palette_board.paste(characters[0].convert('RGB').resize((224,160)),(224,160))
+export_palette=palette_board.quantize(colors=256,method=Image.Quantize.MEDIANCUT)
 for name,color in [('dark','#181827'),('white','#fffdf8')]:
     frames=[]
+    full_color_frames=[]
     for tick in range(160):
         t=tick*.1;back,front=effects(t)
         cell=Image.new('RGBA',(224,320),color)
@@ -58,7 +64,9 @@ for name,color in [('dark','#181827'),('white','#fffdf8')]:
         cell=Image.alpha_composite(cell,characters[(tick//2)%16])
         cell=Image.alpha_composite(cell,front)
         if tick==0:cell.save(ROOT/f'idle-effects-v2-{name}.png')
-        frames.append(cell.convert('RGB'))
+        full_color_frames.append(cell.convert('RGB'))
+        frames.append(cell.convert('RGB').quantize(palette=export_palette,dither=Image.Dither.FLOYDSTEINBERG))
+    full_color_frames[0].save(ROOT/f'idle-effects-v2-{name}.webp',save_all=True,append_images=full_color_frames[1:],duration=100,loop=0,lossless=True,quality=100,method=4)
     frames[0].save(ROOT/f'idle-effects-v2-{name}.gif',save_all=True,append_images=frames[1:],duration=100,loop=0)
 before=effects(.1);after=effects(.9)
 assert before[1].tobytes()!=after[1].tobytes()

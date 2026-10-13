@@ -1,0 +1,128 @@
+[
+  {
+    "state": "running",
+    "theme": "dark",
+    "encodedFrames": 480,
+    "durationMs": 24000,
+    "losslessEndpointPixels": true
+  },
+  {
+    "state": "running",
+    "theme": "white",
+    "encodedFrames": 480,
+    "durationMs": 24000,
+    "losslessEndpointPixels": true
+  },
+  {
+    "state": "review",
+    "theme": "dark",
+    "encodedFrames": 320,
+    "durationMs": 16000,
+    "losslessEndpointPixels": true
+  },
+  {
+    "state": "review",
+    "theme": "white",
+    "encodedFrames": 320,
+    "durationMs": 16000,
+    "losslessEndpointPixels": true
+  },
+  {
+    "state": "waiting",
+    "theme": "dark",
+    "encodedFrames": 320,
+    "durationMs": 16000,
+    "losslessEndpointPixels": true
+  },
+  {
+    "state": "waiting",
+    "theme": "white",
+    "encodedFrames": 320,
+    "durationMs": 16000,
+    "losslessEndpointPixels": true
+  },
+  {
+    "state": "failed",
+    "theme": "dark",
+    "encodedFrames": 320,
+    "durationMs": 16000,
+    "losslessEndpointPixels": true
+  },
+  {
+    "state": "failed",
+    "theme": "white",
+    "encodedFrames": 320,
+    "durationMs": 16000,
+    "losslessEndpointPixels": true
+  },
+  {
+    "state": "waving",
+    "theme": "dark",
+    "encodedFrames": 480,
+    "durationMs": 24000,
+    "losslessEndpointPixels": true
+  },
+  {
+    "state": "waving",
+    "theme": "white",
+    "encodedFrames": 480,
+    "durationMs": 24000,
+    "losslessEndpointPixels": true
+  },
+  {
+    "state": "jumping",
+    "theme": "dark",
+    "encodedFrames": 480,
+    "durationMs": 24000,
+    "losslessEndpointPixels": true
+  },
+  {
+    "state": "jumping",
+    "theme": "white",
+    "encodedFrames": 480,
+    "durationMs": 24000,
+    "losslessEndpointPixels": true
+  },
+  {
+    "state": "sleeping",
+    "theme": "dark",
+    "encodedFrames": 640,
+    "durationMs": 32000,
+    "losslessEndpointPixels": true
+  },
+  {
+    "state": "sleeping",
+    "theme": "white",
+    "encodedFrames": 640,
+    "durationMs": 32000,
+    "losslessEndpointPixels": true
+  },
+  {
+    "state": "drag-right",
+    "theme": "dark",
+    "encodedFrames": 160,
+    "durationMs": 8000,
+    "losslessEndpointPixels": true
+  },
+  {
+    "state": "drag-right",
+    "theme": "white",
+    "encodedFrames": 160,
+    "durationMs": 8000,
+    "losslessEndpointPixels": true
+  },
+  {
+    "state": "drag-left",
+    "theme": "dark",
+    "encodedFrames": 160,
+    "durationMs": 8000,
+    "losslessEndpointPixels": true
+  },
+  {
+    "state": "drag-left",
+    "theme": "white",
+    "encodedFrames": 160,
+    "durationMs": 8000,
+    "losslessEndpointPixels": true
+  }
+]

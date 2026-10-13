@@ -1,0 +1,41 @@
+{
+  "scope": "legacy Magical Heart renderer and continuous effects; costume candidate separate",
+  "compile": "pass",
+  "app_self_test": "pass",
+  "clock_self_test": "pass",
+  "native_boards": 80,
+  "preview_sampling_hz": 10,
+  "native_redraw_driver_hz": 60,
+  "distinct_character_drawings_added": 0,
+  "source_art_unchanged": true,
+  "pose_intervals": "existing intervals preserved",
+  "frozen_gaze_checks": [
+    {
+      "background": "white",
+      "gaze_cell": 10,
+      "effect_pixels_change": true,
+      "face_patch_unchanged": true
+    },
+    {
+      "background": "white",
+      "gaze_cell": 11,
+      "effect_pixels_change": true,
+      "face_patch_unchanged": true
+    },
+    {
+      "background": "dark",
+      "gaze_cell": 10,
+      "effect_pixels_change": true,
+      "face_patch_unchanged": true
+    },
+    {
+      "background": "dark",
+      "gaze_cell": 11,
+      "effect_pixels_change": true,
+      "face_patch_unchanged": true
+    }
+  ],
+  "full_16_drawing_upgrade": "not produced; costume choice pending",
+  "native_installed": false,
+  "costume_candidate": "not atlas-ready; original registration not approved"
+}

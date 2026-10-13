@@ -19,22 +19,23 @@
     const x1=d===1?45:179,x2=d===1?128:96,x3=d===1?174:50;
     return `<path d="M${x1},${n(255+offset)} C${n(x1+d*24)},${n(273-offset)} ${x2},${n(266+offset)} ${x3},${n(253-offset)}" fill="none" stroke="#c62943" stroke-width="3.3" opacity="${n(opacity)}"/><path d="M${x1},${n(254.4+offset)} C${n(x1+d*24)},${n(272.4-offset)} ${x2},${n(265.4+offset)} ${x3},${n(252.4-offset)}" fill="none" stroke="#f0c679" stroke-width=".55" opacity="${n(opacity*.75)}"/>`;
   }
-  function render(state,time,frame) {
+  function render(state,time,frame,attachment) {
     const phase=wrap(time/8),a=phase*TAU,pulse=.65+.25*Math.sin(a);
+    const gx=attachment?.x??104,gy=attachment?.y??177;
     let back='',front='',dir=state==='drag-left'?-1:1;
     if (state==='running') {
-      const x=104+Math.cos(a)*14,y=175+Math.sin(a)*7;
-      front+=seal(x,y,7,a,pulse,false)+star(98,178,3,pulse);
-      back+=`<path d="M172,112 Q${n(145+Math.sin(a)*5)},150 102,178" fill="none" stroke="#edce80" stroke-width=".7" opacity="${n(pulse*.55)}"/>`;
-    } else if(state==='review') front+=seal(58,145,8,a,pulse,false);
+      const x=(attachment?gx:104)+Math.cos(a)*14,y=(attachment?gy:175)+Math.sin(a)*7;
+      front+=seal(x,y,7,a,pulse,false)+star(attachment?gx-6:98,attachment?gy+3:178,3,pulse);
+      back+=`<path d="M172,112 Q${n(145+Math.sin(a)*5)},150 ${attachment?n(gx):102},${attachment?n(gy):178}" fill="none" stroke="#edce80" stroke-width=".7" opacity="${n(pulse*.55)}"/>`;
+    } else if(state==='review') front+=seal(attachment?gx-40:58,attachment?gy+28:145,8,a,pulse,false);
     else if(state==='waiting') {
       const radius=4+wrap(phase*2)*9;
-      front+=seal(104,177,radius,0,1-wrap(phase*2),false);
+      front+=seal(attachment?gx:104,attachment?gy:177,radius,0,1-wrap(phase*2),false);
     } else if(state==='failed') {
       const q=wrap(phase*2);
-      front+=seal(52-q*5,208-q*4,6+q*3,a,(1-q)*.6,true);
+      front+=seal((attachment?gx-36:52)-q*5,(attachment?gy+34:208)-q*4,6+q*3,a,(1-q)*.6,true);
     } else if(state==='waving') {
-      front+=seal(61,150,7,a,pulse,false)+star(169,118,4,pulse);
+      front+=seal(attachment?gx-40:61,attachment?gy+32:150,7,a,pulse,false)+star(169,118,4,pulse);
     } else if(state==='jumping') {
       const landing=Math.max(0,Math.sin((frame/16)*TAU-Math.PI/2));
       back+=`<ellipse cx="100" cy="281" rx="${n(13+landing*12)}" ry="${n(3+landing*2)}" fill="none" stroke="#e8c56e" stroke-width=".8" opacity="${n(landing*.7)}"/>`;
@@ -48,7 +49,7 @@
       back+=feather(x,y,Math.sin(q*TAU)*22,.25+.35*Math.sin(q*Math.PI));
     }
     for(let i=0;i<3;i++) {
-      const q=wrap(phase+i*.31),x=48+i*56+Math.sin(q*TAU)*4,y=(state==='sleeping'?248:242)-Math.sin(q*TAU)*5;
+      const q=wrap(phase+i*.31),x=48+i*56+Math.sin(q*TAU)*4,y=(state==='sleeping'?248:attachment?Math.min(292,gy+24):242)-Math.sin(q*TAU)*5;
       front+=star(x,y,1.4+Math.sin(q*Math.PI),state==='sleeping'?.25:.25+.4*Math.sin(q*Math.PI));
     }
     return {back:svg(back),front:svg(front)};

@@ -1,0 +1,56 @@
+{
+  "sampling": "simulated 60Hz using actual HTML frameAt",
+  "browserFPS": "not measured",
+  "states": [
+    {
+      "state": "idle",
+      "seen": 16,
+      "cycleSeconds": 3.2
+    },
+    {
+      "state": "running",
+      "seen": 16,
+      "cycleSeconds": 2.4
+    },
+    {
+      "state": "review",
+      "seen": 16,
+      "cycleSeconds": 3.2
+    },
+    {
+      "state": "waiting",
+      "seen": 16,
+      "cycleSeconds": 3.2
+    },
+    {
+      "state": "failed",
+      "seen": 16,
+      "cycleSeconds": 3.2
+    },
+    {
+      "state": "waving",
+      "seen": 8,
+      "cycleSeconds": 2.4
+    },
+    {
+      "state": "jumping",
+      "seen": 8,
+      "cycleSeconds": 2.4
+    },
+    {
+      "state": "sleeping",
+      "seen": 8,
+      "cycleSeconds": 6.4
+    },
+    {
+      "state": "drag-right",
+      "seen": 8,
+      "cycleSeconds": 1.6
+    },
+    {
+      "state": "drag-left",
+      "seen": 8,
+      "cycleSeconds": 1.6
+    }
+  ]
+}

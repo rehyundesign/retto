@@ -150,6 +150,7 @@ enum Christmas16Timing {
 
 /// 각 제스처의 변화 폭에 맞춰 재생한다. 다른 스킨의 시간은 유지한다.
 func skinAnimation(_ animation: Animation, skin: PetSkin, columns: Int) -> Animation {
+    if skin == .magicalHeart { return MagicalHeartMotion.animation(animation, columns: columns) }
     guard skin == .christmas, columns == 16 else { return animation }
     return Animation(row: animation.row, frames: 16,
                      interval: (Christmas16Timing.duration(row: animation.row) ?? animation.interval * Double(animation.frames)) / 16,

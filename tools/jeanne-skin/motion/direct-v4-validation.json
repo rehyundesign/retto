@@ -1,0 +1,131 @@
+{
+  "scope": "idle only",
+  "records": [
+    {
+      "frame": 0,
+      "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/idle-direct-v4/idle-00.png",
+      "sourceHash": "37035eeda37f579430a6e80b0d5d3cb748f422b336a4969acd894975d3c66868",
+      "decodedHash": "47efab015a337493dcc57e482d63f97293eaea9f25e5b54b0b325da7e98ac7d1",
+      "production": "single complete image generation; no clothing or anatomy patch composition"
+    },
+    {
+      "frame": 1,
+      "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/idle-direct-v4/idle-01-refined.png",
+      "sourceHash": "f6fd8573213d83f9632ccc459b340d2ab97be9cb903144cb169d6af3fc6e6ceb",
+      "decodedHash": "f72d231f440fe2a197e4994745009a23e94a0ab30f2dc79e7b17525398bc1616",
+      "production": "single complete image generation; no clothing or anatomy patch composition"
+    },
+    {
+      "frame": 2,
+      "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/idle-direct-v4/idle-02-refined.png",
+      "sourceHash": "48db42154aba8f74a0724194838fb4d183f2d9b1dc6c7395c15bf6455d1bb984",
+      "decodedHash": "dc1963552aa49f244656f89f08cf6de205dbcd4a01c90cae12d6b78fb87c39a4",
+      "production": "single complete image generation; no clothing or anatomy patch composition"
+    },
+    {
+      "frame": 3,
+      "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/idle-direct-v4/idle-03.png",
+      "sourceHash": "48bd01f30e0000e9fb236bac90f8aa01ab1cfa447dff52f2dd3f37d42ea08de5",
+      "decodedHash": "a9532181ec5bcfa829acd8439e49ef5ed89201320cde7900abf18448cd85f2f0",
+      "production": "single complete image generation; no clothing or anatomy patch composition"
+    },
+    {
+      "frame": 4,
+      "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/idle-direct-v4/idle-04.png",
+      "sourceHash": "72ec41b0fbe591e7913d5853a2d63c40bf278ab36aa7147a4a843ac3f012faa4",
+      "decodedHash": "31be944afccbc8a50f2ca8b26cf2da8bd20ae21258e3629c16ccde023b9a7d4c",
+      "production": "single complete image generation; no clothing or anatomy patch composition"
+    },
+    {
+      "frame": 5,
+      "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/idle-direct-v4/idle-05.png",
+      "sourceHash": "0fcf22e546fe5a11e91e9c4af24a5dca3f6ac26bffa48a285f30e97b622854cf",
+      "decodedHash": "6acb4c0a4e7c0df7d3e58e2f2bd768eddbb3aa485817ddabcdc5a9c2525dad7e",
+      "production": "single complete image generation; no clothing or anatomy patch composition"
+    },
+    {
+      "frame": 6,
+      "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/idle-direct-v4/idle-06.png",
+      "sourceHash": "78283b166ad4104cf523b6ed87e3d7833c006a5f7a4236e061b2da683313b281",
+      "decodedHash": "b8133bd36c6ce335f3183ed0d53a11eb35b71abb74cebf2ab1705cfdf5261f0b",
+      "production": "single complete image generation; no clothing or anatomy patch composition"
+    },
+    {
+      "frame": 7,
+      "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/idle-direct-v4/idle-07.png",
+      "sourceHash": "579bf21162fae9e852b7208850f7494d7870505e3b134d176afa7008caacfe65",
+      "decodedHash": "f60847079410e471cd998de029eb68ff8e41dc5c441c0225a61541ee4a6ce55b",
+      "production": "single complete image generation; no clothing or anatomy patch composition"
+    },
+    {
+      "frame": 8,
+      "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/idle-direct-v4/idle-08.png",
+      "sourceHash": "c46d1215b0742dc0e46632a740ed55e5e1e9a06cdda0a954261cda95b35d1f17",
+      "decodedHash": "d1f370563b93829711a8cb0782227d9f9caed1c92555e07f19120fe50284d0f3",
+      "production": "single complete image generation; no clothing or anatomy patch composition"
+    },
+    {
+      "frame": 9,
+      "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/idle-direct-v4/idle-09.png",
+      "sourceHash": "ed654c5c4621ac2c4487f086877006b0bbe8876850ea95324cc90576ed356150",
+      "decodedHash": "30b7de52c6526a2bc55dd9556cb23f0d01b400c06afa654ff0de33bd365e3e20",
+      "production": "single complete image generation; no clothing or anatomy patch composition"
+    },
+    {
+      "frame": 10,
+      "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/idle-direct-v4/idle-10.png",
+      "sourceHash": "8f12818f78aa231b762018767a2c33cb989294af97fa8ff655bef97f229566de",
+      "decodedHash": "08f15de7b03287430f6e038962b5c471e19d47dfb906aaaf146e0bd9584ed434",
+      "production": "single complete image generation; no clothing or anatomy patch composition"
+    },
+    {
+      "frame": 11,
+      "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/idle-direct-v4/idle-11.png",
+      "sourceHash": "945ed24a4bc1eac54881bc05d21dbbe8d575c090f07ac2b21696be981a19b652",
+      "decodedHash": "4d407cfbd327a38175761a36d87f102b5d3f7f2cdbd8108b4a0be8ff8f1ea030",
+      "production": "single complete image generation; no clothing or anatomy patch composition"
+    },
+    {
+      "frame": 12,
+      "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/idle-direct-v4/idle-12.png",
+      "sourceHash": "1eb5b9d4520db7bfdec182fbb9f28f5208f1cc3f72f2c94a4fae345cb3877641",
+      "decodedHash": "222fd5d504d2eb4defe8be97e3240a820e17aa841f569ff171d018e310a58d27",
+      "production": "single complete image generation; no clothing or anatomy patch composition"
+    },
+    {
+      "frame": 13,
+      "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/idle-direct-v4/idle-13.png",
+      "sourceHash": "152b704acf0f75742e9d911e646b895216167963148dc0121c9176203bedf793",
+      "decodedHash": "247e53725ab847292ed99088c421e0f87f25fe927491abd71c90ff2dcca8484c",
+      "production": "single complete image generation; no clothing or anatomy patch composition"
+    },
+    {
+      "frame": 14,
+      "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/idle-direct-v4/idle-14.png",
+      "sourceHash": "f73f6135fd4008dcee3728877f279eaddb92ce48bed1220ba4b2b273a66ba39c",
+      "decodedHash": "26a2d612ba4de3536df8fd0014b1d7335849c340de6f96d8891488b6c97a2310",
+      "production": "single complete image generation; no clothing or anatomy patch composition"
+    },
+    {
+      "frame": 15,
+      "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/idle-direct-v4/idle-15.png",
+      "sourceHash": "0c94edb8250b4db34d4461e0000a0eeb5d84e1820232869f422833d480effe8a",
+      "decodedHash": "af9491f519e7a5e9a99d9f515345145c8409ca5976b584981e9053e8af55783b",
+      "production": "single complete image generation; no clothing or anatomy patch composition"
+    }
+  ],
+  "independentDrawings": 16,
+  "characterCycleSeconds": 3.2,
+  "effectCycleSeconds": 8,
+  "effectSamplesHz": 10,
+  "exportSeconds": 16,
+  "characterSourcesUnchanged": true,
+  "fixedPoseEffectProgression": true,
+  "originalRegistration": "whole generated cells require visual measurement; not proved by hashes",
+  "installation": "not requested or performed",
+  "visualReview": {
+    "characterLightAndDark1x": "reviewed all 16",
+    "allStateHanaFloor": "not claimed; idle-only candidate, registration and native review incomplete",
+    "productionMode": "complete dressed character drawn in one image, no wardrobe/pose or anatomy-patch composition"
+  }
+}

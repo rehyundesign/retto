@@ -1,0 +1,92 @@
+{
+  "characterSources": [
+    {
+      "file": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/idle-sky/idle-00.png",
+      "sha256": "bdf85503db94f45a5dc7d5e4b3800daf0ee12a8bcf8884c54e9e2d3701a9add0",
+      "decoded": "df45d2ca2d106b068fd24213145e24d65470b7fbb6fda19974062056a4f08570"
+    },
+    {
+      "file": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/idle-sky/idle-01.png",
+      "sha256": "fb4d27f7ec136bcd2066d29ebb052d818339457baa464223f4487d385c9525c5",
+      "decoded": "031e136641b8bbaa889369016858956c0d361c9ba40c07c91f3236910bb9d18c"
+    },
+    {
+      "file": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/idle-sky/idle-02.png",
+      "sha256": "685ebdc312ae3eac2ac0380aaff6d5643f98f63deb21e063c039765b37778efc",
+      "decoded": "a47f7f328e2a17cfedc525923ce52eaa78940ad70d412a9535c6a8da226890b1"
+    },
+    {
+      "file": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/idle-sky/idle-03.png",
+      "sha256": "75ea1a386ee5f1a107a52a2f0fe975fd42695469df7f44a3c75f649879ef2277",
+      "decoded": "ed0d31bafac2bf2ec0e695adc3e850ac1c8269d9b104a7b9498e47d36ea943fe"
+    },
+    {
+      "file": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/idle-sky/idle-04.png",
+      "sha256": "8ba392d70f55fc33378b45de3767a142547d193a59d30c7e8ee625055a16bcd1",
+      "decoded": "9de5c96079171d4fe47e876e2aa1fa06a77f0d9c628b7e7e5eec5ae0fcf22440"
+    },
+    {
+      "file": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/idle-sky/idle-05.png",
+      "sha256": "388c5ba2f1e93b28b218e577f6efeb2c7bb81056ea3ef89cd5eea43c0d3adc63",
+      "decoded": "4518fa0c3e440a0f3d45bfe966bcdf04b8d5ec3ba19bc612ef1107404805b64b"
+    },
+    {
+      "file": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/idle-sky/idle-06.png",
+      "sha256": "b4ba53e13fb9ca177e4996f68a69d465c3ef3c149d6b1ee48144f08c38be2840",
+      "decoded": "47f2ffc11a2b99d45652b9e0ef2648143f000a4974a14eb913daddbd7ecb0e72"
+    },
+    {
+      "file": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/idle-sky/idle-07.png",
+      "sha256": "cf7d630a4e99ee48463eb400f11e1edfd2a67225706b084670d60d1454b42aa3",
+      "decoded": "7ab74e79c46f8be0b901560cc87317ff852047503ba50a6b6ab5c3a3956b4d9c"
+    },
+    {
+      "file": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/idle-sky/idle-08.png",
+      "sha256": "e6f6f7a055d0aa34065db01f237fadee2b435ac49e2589622aef48d99af7cc35",
+      "decoded": "681d4e0451a433f5d8e8da5c4144faabbbadef975e3a3eab742a3ad9c4885f3e"
+    },
+    {
+      "file": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/idle-sky/idle-09.png",
+      "sha256": "2190019668932663b7085c722328350ab4768f6e4b53c536fab6eba085ee9add",
+      "decoded": "98a78b5ff746df272e2374cbe3ec87b99867aaa8c9da15c48230d44c13a739f5"
+    },
+    {
+      "file": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/idle-sky/idle-10.png",
+      "sha256": "91c6269202f92b9f7baac2aa20978d6a386b6541e6b0d64b51949172fbea60ca",
+      "decoded": "6a59cd7f3d0e4be91f30575990a1d9e9386958f7db04a163624b9e993674570f"
+    },
+    {
+      "file": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/idle-sky/idle-11.png",
+      "sha256": "8e4d97d75da0e31cc07ce58d7b3bfa0884de1d4b47f6fc4dcb61ce57ef5e92a1",
+      "decoded": "a35dd8ba0d3f02de0a243c19f136aa11ac3e11c13ca33df283db7ed9371588d3"
+    },
+    {
+      "file": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/idle-sky/idle-12.png",
+      "sha256": "b79bc1ee71680961d61d424f44e5bcf8d3ae5d12c80294110fef08760bab71bd",
+      "decoded": "dcda0a3becdbdd4d9d930f7c719e8afe07a29a5816c1734298aa5e7df4dd0f67"
+    },
+    {
+      "file": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/idle-sky/idle-13.png",
+      "sha256": "6289bc6113bc3a1f4e13f8f3492b3487dc57603b407a60fa58d2cd28f119d830",
+      "decoded": "9310217fd3bee2b058b3050b278e4989b78f449e9bb6ea6e9189dc6e3fc1251d"
+    },
+    {
+      "file": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/idle-sky/idle-14.png",
+      "sha256": "9c579ecf1972444239372a23831ab44ddc9e2b5bf8857ca2b2dc5ed5282317eb",
+      "decoded": "6a9da5a74c59cea7de2dad430d2dd26916eef112f873f6a737a2555a2c4cc88e"
+    },
+    {
+      "file": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/idle-sky/idle-15.png",
+      "sha256": "3d16eb62b1d5df116b8739faa4635430928798babe0fee89f6e14190a8522302",
+      "decoded": "e0cd8e07fa2e2d80f7938004aa7fc98680fdb76ca72650fd9cbb71d5d6045c52"
+    }
+  ],
+  "drawings": 16,
+  "characterCycleSeconds": 3.2,
+  "effectCycleSeconds": 8,
+  "exportSeconds": 16,
+  "effectSamplesPerSecond": 10,
+  "fixedPoseEffectsChange": true,
+  "browserValidation": "not run; file URL access blocked",
+  "visualStatus": "review candidate; original registration unverified"
+}

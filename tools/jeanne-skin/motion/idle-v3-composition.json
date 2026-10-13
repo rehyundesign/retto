@@ -1,0 +1,117 @@
+{
+  "status": "review candidate",
+  "mode": "overlay-only with independent anatomical ear tail blink wing drawings",
+  "originalBodySource": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-base-reference.png",
+  "bodySizeAndPosition": "unchanged from actual original atlas cell",
+  "registrationLimits": "ear/tail moving regions require visual review; not an all-state release pass",
+  "frames": [
+    {
+      "frame": 0,
+      "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/idle-v3-raw/idle-00.png",
+      "sourceHash": "dc0ab23af7eaae8877809068ddc0688dc39b4b3f529a0550201faf8d7ae0f6f9",
+      "decodedHash": "be380fbc5a60ab395e8907e1b4a85cffdd13e1043a2d6fdf5f6854c528594915",
+      "outsideMovingMaskChanged": false,
+      "bodyAndSupportedFeet": "immutable original Retto body plus fixed clothing",
+      "fourLimbs": "original seated forelegs; rear pair occluded by seated torso and skirt"
+    },
+    {
+      "frame": 1,
+      "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/idle-v3-raw/idle-01.png",
+      "sourceHash": "b7b90b850b36d0cca435aec724a3d2eb12e26d792fc4f9d55e7030b78f653eaa",
+      "decodedHash": "625887b49ba2d729bb88ba666bd85ef99b6a70c3f6a7d331187971ec1cf5345f",
+      "outsideMovingMaskChanged": false,
+      "bodyAndSupportedFeet": "immutable original Retto body plus fixed clothing",
+      "fourLimbs": "original seated forelegs; rear pair occluded by seated torso and skirt"
+    },
+    {
+      "frame": 2,
+      "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/idle-v3-raw/idle-02.png",
+      "sourceHash": "df604c51d09476c2062d33e881efef76853a76bdffb13bfacff7bc5371be7b50",
+      "decodedHash": "970172070aa604b8d29774a9f51d8340fbdc937ac726ddc88d214946eb4f196e",
+      "outsideMovingMaskChanged": false,
+      "bodyAndSupportedFeet": "immutable original Retto body plus fixed clothing",
+      "fourLimbs": "original seated forelegs; rear pair occluded by seated torso and skirt"
+    },
+    {
+      "frame": 3,
+      "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/idle-v3-raw/idle-03.png",
+      "sourceHash": "a3a72c54806f043b8b0abbaaa8daf67a1df38224057c4597f78400eade8cfbf8",
+      "decodedHash": "b5f6059c5cd69da839c51152130e82032c5b1a92fe8306f608eba147d67bbcc4",
+      "outsideMovingMaskChanged": false,
+      "bodyAndSupportedFeet": "immutable original Retto body plus fixed clothing",
+      "fourLimbs": "original seated forelegs; rear pair occluded by seated torso and skirt"
+    },
+    {
+      "frame": 4,
+      "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/idle-v3-raw/idle-04.png",
+      "sourceHash": "200f527440ad1b4c62b6fcc3a3d7cc3b1ea6e6a8583c1c7710f531bd7c0962de",
+      "decodedHash": "32b938e27e6eff7cc235cb49a6184e48a435c685f827b3bbe1b92a1f69a4bc17",
+      "outsideMovingMaskChanged": false,
+      "bodyAndSupportedFeet": "immutable original Retto body plus fixed clothing",
+      "fourLimbs": "original seated forelegs; rear pair occluded by seated torso and skirt"
+    },
+    {
+      "frame": 5,
+      "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/idle-v3-raw/idle-05.png",
+      "sourceHash": "1e79e11ffe94342efdf7c1d25047a6827f1a4f643f52dea2f619398f9f294aef",
+      "decodedHash": "b78097767e92419e0a415ad8e2994429792f106c62e39368125d6352e2fa5060",
+      "outsideMovingMaskChanged": false,
+      "bodyAndSupportedFeet": "immutable original Retto body plus fixed clothing",
+      "fourLimbs": "original seated forelegs; rear pair occluded by seated torso and skirt"
+    },
+    {
+      "frame": 6,
+      "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/idle-v3-raw/idle-06.png",
+      "sourceHash": "db534e98c22bc597d38e24ddcbe45d53abaae277a81aad513937cba2345d2412",
+      "decodedHash": "657c03739dfa0d34ed56a8825fb3536bea27f3929bafcc9a8396610a70b23221",
+      "outsideMovingMaskChanged": false,
+      "bodyAndSupportedFeet": "immutable original Retto body plus fixed clothing",
+      "fourLimbs": "original seated forelegs; rear pair occluded by seated torso and skirt"
+    },
+    {
+      "frame": 7,
+      "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/idle-v3-raw/idle-07.png",
+      "sourceHash": "b09515a0f07d500726630ac08bc0218a58ec60ee7984eb5b7b33c3fece492e9d",
+      "decodedHash": "49d8bd691183cfe6a39253e9a5f3470b499fa8985c98c6a549775d6f5fffd69d",
+      "outsideMovingMaskChanged": false,
+      "bodyAndSupportedFeet": "immutable original Retto body plus fixed clothing",
+      "fourLimbs": "original seated forelegs; rear pair occluded by seated torso and skirt"
+    },
+    {
+      "frame": 8,
+      "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/idle-v3-raw/idle-08.png",
+      "sourceHash": "b878a3c4f329af97665ac864eae41b2ddf6a8919fd1b1427fbedd762ca9f625f",
+      "decodedHash": "3ec882abf925db7ab09664a3c7d7f576e6f92e2b7d51842fc6709a28abdc6e7b",
+      "outsideMovingMaskChanged": false,
+      "bodyAndSupportedFeet": "immutable original Retto body plus fixed clothing",
+      "fourLimbs": "original seated forelegs; rear pair occluded by seated torso and skirt"
+    },
+    {
+      "frame": 9,
+      "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/idle-v3-raw/idle-09.png",
+      "sourceHash": "118b0fdc1378fc6bf279374cf797bf4b82510b342cd4095b2ceb95188c2e915c",
+      "decodedHash": "ea73671fd39e416599f58e7364c8b97d0404da64d540a72caded86995bb34e26",
+      "outsideMovingMaskChanged": false,
+      "bodyAndSupportedFeet": "immutable original Retto body plus fixed clothing",
+      "fourLimbs": "original seated forelegs; rear pair occluded by seated torso and skirt"
+    },
+    {
+      "frame": 10,
+      "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/idle-v3-raw/idle-10.png",
+      "sourceHash": "6469a717e426a25740b8695c4683f7839288607aae637999b623c553cedf81aa",
+      "decodedHash": "39b039c237df1f74f36a66cf27544a32c1515c464371f2324186f67639a0ba9c",
+      "outsideMovingMaskChanged": false,
+      "bodyAndSupportedFeet": "immutable original Retto body plus fixed clothing",
+      "fourLimbs": "original seated forelegs; rear pair occluded by seated torso and skirt"
+    },
+    {
+      "frame": 11,
+      "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/idle-v3-raw/idle-11.png",
+      "sourceHash": "41884402ea2bc16bcc2d801a3bba2c9106ee0f5045ce0cad1fd0fa16c38e92a4",
+      "decodedHash": "054b49c005a585f84cc04e49709d3310eeaf2890591efe0319f59c88656a9dfa",
+      "outsideMovingMaskChanged": false,
+      "bodyAndSupportedFeet": "immutable original Retto body plus fixed clothing",
+      "fourLimbs": "original seated forelegs; rear pair occluded by seated torso and skirt"
+    }
+  ]
+}
