@@ -76,6 +76,43 @@ private func setupButtons(for status: ClaudeIntegrationStatus) -> [String] {
     return window.visibleButtonTitles
 }
 
+/// 일반 파일명으로 저장된 내부 검토도 제외하고, 같은 제목의 사용자 대화는 유지한다.
+func codexInternalSessionFilterSelfTest() -> Bool {
+    let directory = FileManager.default.temporaryDirectory.appendingPathComponent("retto-codex-filter-\(UUID().uuidString)")
+    do { try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true) }
+    catch { return false }
+    defer { try? FileManager.default.removeItem(at: directory) }
+
+    func fixture(_ name: String, source: Any) -> String? {
+        let url = directory.appendingPathComponent("rollout-\(name).jsonl")
+        let record: [String: Any] = ["type": "session_meta", "payload": [
+            "id": name, "source": source, "base_instructions": String(repeating: "가", count: 60000)
+        ]]
+        guard let data = try? JSONSerialization.data(withJSONObject: record, options: [.sortedKeys]),
+              (try? (data + Data("\n".utf8)).write(to: url)) != nil else { return nil }
+        return url.path
+    }
+    func visible(_ path: String, source: String = "codex") -> Bool {
+        let record: [String: Any] = ["state": "waving", "source": source,
+            "sessionTitle": "Guardian review", "transcriptPath": path, "attention": true]
+        guard let data = try? JSONSerialization.data(withJSONObject: record),
+              let payload = try? JSONDecoder().decode(StatePayload.self, from: data) else { return false }
+        return payload.isRettoVisibleTask
+    }
+
+    guard let guardian = fixture("guardian", source: ["subagent": ["other": "guardian"]]),
+          let worker = fixture("worker", source: ["subagent": ["thread_spawn": ["parent_thread_id": "parent"]]]),
+          let legacy = fixture("legacy", source: "subagent"),
+          let user = fixture("user", source: "vscode") else { return false }
+    return isCodexSubagentTranscript(path: guardian)
+        && isCodexSubagentTranscript(path: worker)
+        && isCodexSubagentTranscript(path: legacy)
+        && !isCodexSubagentTranscript(path: user)
+        && !isCodexSubagentTranscript(path: directory.appendingPathComponent("missing.jsonl").path)
+        && !visible(guardian) && !visible(worker) && !visible(legacy)
+        && visible(user) && visible(guardian, source: "claude")
+}
+
 func runSelfTest() -> Int32 {
     let fontOK = registerRettoFont()
     guard let imageURL = Bundle.main.url(forResource: "spritesheet", withExtension: "webp"),
@@ -172,7 +209,8 @@ func runSelfTest() -> Int32 {
         activeTaskSubject: nil, backgroundTaskCount: nil, attention: true, closed: false,
         updatedAtMs: 2000, stateSource: "rollout", client: "codex"
     )
-    let rolloutDiscoveryPayloadOK = discoveredCodexTask.sourceLabel == "Codex"
+    let rolloutDiscoveryPayloadOK = codexInternalSessionFilterSelfTest()
+        && discoveredCodexTask.sourceLabel == "Codex"
         && discoveredCodexTask.navigationSessionId == "thread-one"
         && discoveredCodexTask.needsAttention
         && sessionMenuLabel(for: discoveredCodexTask) == "● 완료  훅 없이 찾은 task · project · Codex"
@@ -187,7 +225,7 @@ func runSelfTest() -> Int32 {
             activeTaskSubject: nil, backgroundTaskCount: nil, attention: nil, closed: false,
             updatedAtMs: nil, stateSource: nil, client: "codex"
         ).isRettoVisibleTask)
-        && StatePayload(
+        && !StatePayload(
             state: PetState.running.rawValue, updatedAt: nil, event: nil,
             sessionId: "codex:previously-recorded", rawSessionId: "previously-recorded", source: "codex", cwd: nil,
             toolName: nil, notificationType: nil, error: nil, projectName: nil, displayTitle: nil,
