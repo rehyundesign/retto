@@ -1,0 +1,16 @@
+{
+  "installed": "/Users/luxia/Applications/Retto.app",
+  "version": 40,
+  "protectedResources": 8465,
+  "protectedResourcesUnchanged": true,
+  "nativeChecksPassed": true,
+  "legacyGazePreserved": true,
+  "backup": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/native-v40-final-install/installed-before-v40.zip",
+  "stoppedPIDs": [
+    28184
+  ],
+  "time": 1792383843.99996,
+  "baselineMachineCodeMatchesPreviousInstall": false,
+  "selectedSkin": "jeanne",
+  "nativeVisualChecked": true
+}
