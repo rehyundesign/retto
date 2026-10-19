@@ -1,0 +1,49 @@
+[
+  {
+    "state": "running",
+    "previewFiles": [
+      "latest-preview-assets/running/00.png",
+      "latest-preview-assets/running/01.png",
+      "latest-preview-assets/running/02.png",
+      "latest-preview-assets/running/03.png",
+      "latest-preview-assets/running/04.png",
+      "latest-preview-assets/running/05.png",
+      "latest-preview-assets/running/06.png",
+      "latest-preview-assets/running/07.png",
+      "latest-preview-assets/running/08.png",
+      "latest-preview-assets/running/09.png",
+      "latest-preview-assets/running/10.png",
+      "latest-preview-assets/running/11.png",
+      "latest-preview-assets/running/12.png",
+      "latest-preview-assets/running/13.png",
+      "latest-preview-assets/running/14.png",
+      "latest-preview-assets/running/15.png"
+    ],
+    "previewHashes": [
+      "3d94e1975257b01d8e33cea49420f2a932d4eff80b42e22a9fb30395d2950393",
+      "3d5ff5a7b84434ef8f7ada7576dc0e61774f5ec5b28c10f6faa9172ecdb0e232",
+      "ac374444aa56edbed95d326f0b39ea27e5767937dc22e3541d6e0ba8304104d9",
+      "5eb02d2e43d6e009e981f109c200b1000a324088b4be62cff3bb45dd712c0fbe",
+      "e788a2b58032d7accd4441b2dfec096171f5b7ccaefd2b0a25211095ff57d412",
+      "46e3a6b705ecd2bcf931b2cc3c9ee47c8db1eb61fdf31e475bd662bc3559c162",
+      "84cb2d8b2a476a23d567855492dc156cd204766b2d1deb0e1d83fbfe526587e0",
+      "d01b173202cf0dc70269e5b14125332ae578071af129828d2b277f8433918cd5",
+      "17c1eef4d0219686f43babc0e333a9d0fa51fd4670db6c9daf32ca9d6243415a",
+      "c41db5af3dbd3736c2b3c034092045477fe229931fb28e4d215bd889c0e6dbd3",
+      "c0877c22870a60ad2a6027c9aab9460577664b61df56c27f3c468fea191fb94f",
+      "f81a66615df0acc20a712502f582bc8785a937eb4cd7a4a27ac41cc541d6c526",
+      "d1997a87a34f7e30dd87c208172342886087cc379fcfe388c02dcb59607e6d92",
+      "ae91e7b320d21da770c8a30b486b0082de477a48dd8ae1fe90c70030b4d2b997",
+      "80df8e08b562502e843dd0a31c5d041fa3200ac1791d5ec43ad719b204e1b71f",
+      "e2647959a8185918cc458d4a1ff0bd2d0958dc36f06025d2ac0fac1a6bd08fdd"
+    ],
+    "drawings": 16,
+    "decodedUnique": 16,
+    "cycleSeconds": 2.4,
+    "exportSeconds": 24,
+    "exportHz": 20,
+    "frozenPoseEffectProgression": true,
+    "visualApproval": "pending",
+    "originalRegistration": "not certified"
+  }
+]
