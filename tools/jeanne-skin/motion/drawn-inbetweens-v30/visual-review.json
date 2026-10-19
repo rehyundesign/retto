@@ -1,0 +1,17 @@
+{
+  "waving": {
+    "frames": 16,
+    "durationMs": 2400,
+    "edgePixels": []
+  },
+  "waiting": {
+    "frames": 16,
+    "durationMs": 3200,
+    "edgePixels": []
+  },
+  "visualReview": "Contact sheets reviewed at 224x320: paw lift, bend, pendant contact and lowering; ribbon decay and expression cleanup reviewed. Small generative position/scale variation remains.",
+  "limitations": [
+    "Native timed playback not verified",
+    "Absolute original character registration not certified"
+  ]
+}

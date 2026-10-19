@@ -1,0 +1,19 @@
+{
+  "phase": "obsolete pilot branch; superseded by completed integrated-repair-v27",
+  "states": [
+    "waving",
+    "waiting"
+  ],
+  "pilotFiles": [
+    "waving/06-pilot.png",
+    "waiting/12-pilot.png",
+    "waiting/12-four-limb-pilot.png"
+  ],
+  "findings": {
+    "waving": "Single baseline improves placement, but slight size/support/Finn variation remains; not certified.",
+    "waiting": "First trial keeps4groundfeet plus2raisedarms: rejected. Original4limb reference trial has correct4limbs but changes seated chassis to upright stance and shifts head/Finn: rejected."
+  },
+  "currentPreview": "state-integrated-v27.html",
+  "method": "User expressly requires complete integrated Retto/costume/Finn/effect drawings; no separated-layer postprocessing",
+  "latestCheckpoint": "../integrated-repair-v27/checkpoint.json"
+}

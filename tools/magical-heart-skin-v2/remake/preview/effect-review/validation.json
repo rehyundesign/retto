@@ -1,17 +1,5 @@
 {
-  "character_hashes_unchanged": true,
-  "character_motion_sequences_completed": 0,
-  "export": {
-    "sampling_hz": 10,
-    "duration_seconds": 19.2,
-    "loop": true
-  },
-  "html": {
-    "clock": "requestAnimationFrame elapsed time",
-    "character": "static",
-    "pause_and_visibility_controls": true
-  },
-  "effect_targets": [
+  "states": [
     {
       "state": "idle",
       "cycle_seconds": 3.2,
@@ -83,17 +71,23 @@
       "front_face_exclusion": "not applicable"
     }
   ],
-  "state_count": 8,
-  "directional_interaction_count": 2,
-  "style_version": 3,
-  "shared_loop_endpoints_match": true,
-  "style_reference_features": [
-    "pink activation rays with white cores",
-    "pearl/crystal heart highlights",
-    "white cross glints with pink/cyan bloom",
-    "soft heart bokeh",
-    "luminous rings and petals"
+  "material_assets": [
+    "heart",
+    "petal",
+    "star",
+    "moon",
+    "scene"
   ],
-  "character_and_costume_changed": false,
-  "browser_ui_validation": "not run; local file browser automation restricted"
+  "character_hashes_unchanged": true,
+  "character_motion_sequences_completed": 0,
+  "export": {
+    "sampling_hz": 10,
+    "duration_seconds": 19.2,
+    "loop": true
+  },
+  "html": {
+    "clock": "requestAnimationFrame elapsed time",
+    "character": "static",
+    "pause_and_visibility_controls": true
+  }
 }

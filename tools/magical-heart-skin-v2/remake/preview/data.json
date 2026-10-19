@@ -55,7 +55,7 @@
       "state": "waiting",
       "frame": 0,
       "label": "브로치를 만지며 초대",
-      "src": "assets/integrated-waiting-anchor.png",
+      "src": "assets/integrated-waiting-anchor-four-limbs.png",
       "review": "크기·연결 검수 중"
     },
     {
@@ -127,7 +127,7 @@
       "state": "waiting",
       "frame": 10,
       "label": "앞발을 모으며 기다리기",
-      "src": "assets/integrated-waiting-key-10.png",
+      "src": "assets/integrated-waiting-key-10-four-limbs.png",
       "review": "크기·연결 검수 중"
     }
   ],

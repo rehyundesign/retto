@@ -1,0 +1,67 @@
+{
+  "state": "drag-right",
+  "independentDrawings": 8,
+  "cycle": 1.6,
+  "durationsMs": [
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200
+  ],
+  "frames": [
+    {
+      "frame": 0,
+      "source": "pose-v24/original-gait/drag-right/00-source.png",
+      "sha256": "1beb358ca6f0bd9b4a4b2203a69a145d7477b36defe67e927559600788d6060b",
+      "originalPose": "registered-v23/base/drag-right-0.png"
+    },
+    {
+      "frame": 1,
+      "source": "pose-v24/original-gait/drag-right/01-source.png",
+      "sha256": "a7dae65c87851c58e3a780c34109578fe2145265ff9f8658691d910b88a88e67",
+      "originalPose": "registered-v23/base/drag-right-1.png"
+    },
+    {
+      "frame": 2,
+      "source": "pose-v24/original-gait/drag-right/02-source.png",
+      "sha256": "d4fd237f4de66792e0c9f481d797ee1df5659a224fa749ab9e51a862e71d7a7e",
+      "originalPose": "registered-v23/base/drag-right-2.png"
+    },
+    {
+      "frame": 3,
+      "source": "pose-v24/original-gait/drag-right/03-source.png",
+      "sha256": "f3f1848679e2e3ae9af2f145334102a44a849dd4ba35d3a1b53477aece0ce0fc",
+      "originalPose": "registered-v23/base/drag-right-3.png"
+    },
+    {
+      "frame": 4,
+      "source": "pose-v24/original-gait/drag-right/04-source.png",
+      "sha256": "f123923fa3df9ad9ac383c3ae18f712ff4e4f97c8a38d333abf47f42b5724857",
+      "originalPose": "registered-v23/base/drag-right-4.png"
+    },
+    {
+      "frame": 5,
+      "source": "pose-v24/original-gait/drag-right/05-source.png",
+      "sha256": "91b928b41cfdecaeb601855a66842b5a7c90c54d09dfe4f4037388a34fc024c4",
+      "originalPose": "registered-v23/base/drag-right-5.png"
+    },
+    {
+      "frame": 6,
+      "source": "pose-v24/original-gait/drag-right/06-source.png",
+      "sha256": "7ffc4a70074fc671d3926ea1a7aab192675d6d37163776edd859a857f67f571b",
+      "originalPose": "registered-v23/base/drag-right-6.png"
+    },
+    {
+      "frame": 7,
+      "source": "pose-v24/original-gait/drag-right/07-source.png",
+      "sha256": "c2f114dfc575be9ed00e00d31ef7c89cf187437029691385c1a57bd70a7ad1a1",
+      "originalPose": "registered-v23/base/drag-right-7.png"
+    }
+  ],
+  "registration": "Original pose references used. Absolute original registration not certified.",
+  "integrated": true
+}

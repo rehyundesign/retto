@@ -1,0 +1,29 @@
+{
+  "status": "comparison ready; not approved for production",
+  "localExecutionVerified": [
+    "RIFE4.6 CPU",
+    "RIFE-anime CPU pilot",
+    "FILM CPU"
+  ],
+  "defaultModel": "FILM",
+  "reviewed": [
+    "all32 FILM midpoints at224x320",
+    "dark andwhite backgrounds",
+    "loop seams",
+    "RIFE full midpoint boards"
+  ],
+  "issues": {
+    "waving": [
+      "silk changes smear between poses3-4,4-5,7-8",
+      "paw/cuff double contour around9-12"
+    ],
+    "waiting": [
+      "paw/cuff blur while raising and lowering",
+      "silk glow blur in several large-change pairs"
+    ]
+  },
+  "originalFramesModified": false,
+  "independentDrawingsPerState": 16,
+  "inferredMidpointsPerState": 16,
+  "nativeAppPlayback": "not checked"
+}

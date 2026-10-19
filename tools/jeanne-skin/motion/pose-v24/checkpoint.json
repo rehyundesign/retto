@@ -1,0 +1,27 @@
+{
+  "updatedAt": "2026-10-14T06:54:33.132Z",
+  "preview": "state-integrated-v24.html",
+  "sources": {
+    "waving": 16,
+    "jumping": 16,
+    "drag-right": 8,
+    "drag-left": 8
+  },
+  "cycles": {
+    "waving": 2.4,
+    "jumping": 2.4,
+    "drag-right": 1.6,
+    "drag-left": 1.6
+  },
+  "completeGeneration": true,
+  "failures": [],
+  "preservedOtherStates": 6,
+  "visualReview": {
+    "allChangedCells": "Reviewed at 224x320 on dark and white boards. Corrected completion final-frame raised-paw error.",
+    "nativePlayback": "not checked; computer-use access denied earlier",
+    "originalAbsoluteRegistration": "not certified",
+    "hanaQualityFloor": "not certified by actual app playback",
+    "frozenPoseEffects": "Baked integrated effects stop on held frame by user-approved production approach"
+  },
+  "exportAndHtmlChecks": "passed"
+}

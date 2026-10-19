@@ -1,0 +1,46 @@
+{
+  "fixes": [
+    {
+      "id": "drag-left",
+      "index": 10,
+      "previous": "state-integrated-v19/drag-soft/drag-left/10.png",
+      "source": "drag-left-10-locked-source.png",
+      "sha256": "732e31feaac858c53a6efd8c728b9a5e6c95bca70b6d8aec1fe7f607fa8faf4b",
+      "review": "visually closer to pose reference; strict original registration not certified"
+    },
+    {
+      "id": "drag-left",
+      "index": 11,
+      "previous": "state-integrated-v19/drag-soft/drag-left/11.png",
+      "source": "drag-left-11-locked-source.png",
+      "sha256": "70e1a8e03ebaa025f60153c4d8c0e59499bd0380cde3395f379cc05019a54ec2",
+      "review": "visually closer to pose reference; strict original registration not certified"
+    },
+    {
+      "id": "running",
+      "index": 8,
+      "previous": "sealing-integrated-v18/08.png",
+      "source": "running-08-source.png",
+      "sha256": "4f4c9cd635e80b59fba4dbec37a4a064dd0b17a2bb3c9fd874c5f34c4d08e821",
+      "review": "visually closer to pose reference; strict original registration not certified"
+    },
+    {
+      "id": "review",
+      "index": 4,
+      "previous": "state-integrated-v19/review/04.png",
+      "source": "review-04-source.png",
+      "sha256": "b8047fe4755ff1a6a8cf5249d5750bd26f5948f5f46df5e7520c4d937cea9dba",
+      "review": "visually closer to pose reference; strict original registration not certified"
+    },
+    {
+      "id": "waiting",
+      "index": 9,
+      "previous": "state-integrated-v19/waiting/09.png",
+      "source": "waiting-09-source.png",
+      "sha256": "f5544fa3f6a2412b4f631c7274e92b6fee6cbddb74680a07cb26e9e299617029",
+      "review": "visually closer to pose reference; strict original registration not certified"
+    }
+  ],
+  "preservedOtherFrames": 155,
+  "registration": "not fully certified"
+}

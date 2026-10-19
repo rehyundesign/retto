@@ -1,0 +1,18 @@
+{
+  "signature": "verified",
+  "unchangedResourceFiles": 8626,
+  "installedExecutableMatchesBuild": true,
+  "backup": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/native-v34-application-check/before-gaze-audit.zip",
+  "runningSkin": "jeanne; live app visually observed",
+  "actualViewChecks": [
+    "all eight states persist across 3 cycles",
+    "running/error row identity",
+    "completion persists",
+    "click jump returns to completion",
+    "both drag directions use 8 frames",
+    "16 gaze directions active in idle only",
+    "doze and wake preserve correct animation",
+    "no duplicate sleep z"
+  ],
+  "artScope": "No art or timing changed; original anatomy registration not newly certified"
+}

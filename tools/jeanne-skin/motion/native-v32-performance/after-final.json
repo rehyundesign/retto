@@ -1,0 +1,9 @@
+{
+  "pid": "22236",
+  "intervalSeconds": 3,
+  "cpuPercentOneCore": [
+    36.86,
+    15.96
+  ],
+  "mean": 26.41
+}

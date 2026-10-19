@@ -199,12 +199,37 @@ function codexThreadNameFrom(threadId) {
   }
 }
 
-/// Codex 는 하위 에이전트 기록을 상위 작업 id 뒤에 `_하위에이전트id`를 붙인 별도
-/// 롤아웃 파일로 남긴다. 이 파일은 사람에게 보이는 대화가 아니라 worker 의 도구·중간
-/// 출력이라, 레토의 말풍선과 클릭 대상에 섞으면 상위 작업을 눌러도 worker 화면으로 보인다.
+/// Codex 하위 에이전트는 `_하위에이전트id` 파일명 또는 session_meta.source 로 구분한다.
+/// Guardian 내부 검토는 일반 롤아웃 파일명을 쓰므로 메타데이터도 확인해야 한다.
+/// 세션 제목은 사용자가 정할 수 있어 제외 기준으로 쓰지 않는다.
 function isCodexSubagentTranscript(transcriptPath) {
   if (!transcriptPath) return false;
-  return /_[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}\.jsonl$/i.test(path.basename(transcriptPath));
+  if (/_[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}\.jsonl$/i.test(path.basename(transcriptPath))) return true;
+  let fd;
+  try {
+    fd = fs.openSync(transcriptPath, 'r');
+    // 첫 줄의 instructions 가 커도 source 를 확인한다. 최대 512KiB 까지만 읽는다.
+    const buffer = Buffer.alloc(524288);
+    let length = 0;
+    while (length < buffer.length) {
+      const read = fs.readSync(fd, buffer, length, Math.min(16384, buffer.length - length), length);
+      if (read === 0) break;
+      const newline = buffer.subarray(length, length + read).indexOf(10);
+      length += newline >= 0 ? newline : read;
+      if (newline >= 0) break;
+    }
+    const record = JSON.parse(buffer.subarray(0, length).toString('utf8'));
+    if (record.type !== 'session_meta') return false;
+    const source = record.payload && record.payload.source;
+    return source === 'subagent'
+      || Boolean(source && typeof source === 'object'
+        && Object.prototype.hasOwnProperty.call(source, 'subagent'));
+  } catch {
+    // 경로나 메타데이터가 없는 기존 훅도 계속 처리한다.
+  } finally {
+    if (fd !== undefined) { try { fs.closeSync(fd); } catch {} }
+  }
+  return false;
 }
 
 function lastAssistantTextFrom(transcriptPath) {

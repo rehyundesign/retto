@@ -1,7 +1,8 @@
 // Execute the standalone HTML's scripts in an isolated DOM test double.
 // No browser navigation, URL loading or external resource requests are used.
 const fs=require('fs'),vm=require('vm'),assert=require('assert/strict'),crypto=require('crypto');
-const {createCanvas}=require('@napi-rs/canvas');
+const {createCanvas,Image}=require('@napi-rs/canvas');
+async function main(){
 const html=fs.readFileSync(__dirname+'/index.html','utf8');
 assert(!/<script[^>]+src=/.test(html),'Effect renderer must be embedded');
 const elements=[];
@@ -13,14 +14,15 @@ class Element{
 }
 const ids={};
 for(const match of html.matchAll(/<(\w+)[^>]*\bid="([^"]+)"[^>]*>/g))ids[match[2]]=new Element(match[1]);
-ids['preview-data'].textContent=html.match(/<script id="preview-data" type="application\/json">([\s\S]*?)<\/script>/)[1];
+for(const match of html.matchAll(/<script id="([^"]+)" type="application\/json">([\s\S]*?)<\/script>/g))ids[match[1]].textContent=match[2];
 const main=new Element('main'),backgrounds=['','dark','checker'].map(bg=>{const element=new Element('button');element.dataset.bg=bg;return element;});
 const document={getElementById:id=>{assert(ids[id],'Unknown HTML element: '+id);return ids[id];},createElement:tag=>new Element(tag),querySelector:()=>main,querySelectorAll:selector=>selector==='[data-bg]'?backgrounds:selector==='[data-id]'?elements.filter(element=>element.dataset.id):[]};
 const callbacks=[];
-const sandbox={document,console,performance:{now:()=>0},requestAnimationFrame:callback=>callbacks.push(callback)};
+const sandbox={document,console,Image,performance:{now:()=>0},requestAnimationFrame:callback=>callbacks.push(callback)};
 sandbox.window=sandbox;
 vm.createContext(sandbox);
 for(const match of html.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/g))if(!match[1].includes('application/json'))vm.runInContext(match[2],sandbox);
+const loadingStarted=Date.now();while(!callbacks.length&&Date.now()-loadingStarted<3000)await new Promise(resolve=>setTimeout(resolve,5));assert(callbacks.length,'Embedded material textures must decode and start rendering');
 assert.equal(ids.states.children.length,8);
 assert.equal(ids['drag-controls'].children.length,2);
 assert.equal(ids['state-previews'].children.length,8);
@@ -46,3 +48,6 @@ for(const card of [...ids['state-previews'].children,...ids['drag-previews'].chi
 }
 assert.equal(ids['effect-status'].textContent,'이펙트 재생 중');
 console.log('PASS: standalone inline scripts initialize without external JS; 8 state controls/cards + 2 directional controls/cards; 22 effect canvases paint; play/pause/resume/off/on work. DOM/canvas checks, not browser UI verification.');
+
+}
+main().catch(error=>{console.error(error);process.exit(1);});

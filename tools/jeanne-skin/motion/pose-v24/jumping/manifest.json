@@ -1,0 +1,123 @@
+{
+  "state": "jumping",
+  "independentDrawings": 16,
+  "cycle": 2.4,
+  "durationsMs": [
+    150,
+    150,
+    150,
+    150,
+    150,
+    150,
+    150,
+    150,
+    150,
+    150,
+    150,
+    150,
+    150,
+    150,
+    150,
+    150
+  ],
+  "frames": [
+    {
+      "frame": 0,
+      "source": "pose-v24/jumping/00-source.png",
+      "sha256": "c017c21f6bdf6aa526dfc1d08faebacc825a1e19b51ebb2aa532eaba7d68fc8c",
+      "originalPose": null
+    },
+    {
+      "frame": 1,
+      "source": "pose-v24/jumping/01-source.png",
+      "sha256": "0bc1b01102f9167856b208b39c2454d3e1227f0d5201d9ddd8e5864f57e52f8e",
+      "originalPose": null
+    },
+    {
+      "frame": 2,
+      "source": "pose-v24/jumping/02-source.png",
+      "sha256": "1a03973e9e0c4313c910727f04c1cb1d3121be066dddb9973e04e65e29761d38",
+      "originalPose": null
+    },
+    {
+      "frame": 3,
+      "source": "pose-v24/jumping/03-source.png",
+      "sha256": "ebdabcc406ea4e32620417da1065da6aad5dadd96a33cf577b023bc95d537749",
+      "originalPose": null
+    },
+    {
+      "frame": 4,
+      "source": "pose-v24/jumping/04-source.png",
+      "sha256": "8d9a9e702704acaf14ee88dbf389ccb52d8d1f1a5a6f02e12d7e4bb1fb024c84",
+      "originalPose": null
+    },
+    {
+      "frame": 5,
+      "source": "pose-v24/jumping/05-source.png",
+      "sha256": "d993dd5ac7b961763382ffdaf255346290303187a0faf42ac91da4f9574c5dd9",
+      "originalPose": null
+    },
+    {
+      "frame": 6,
+      "source": "pose-v24/jumping/06-source.png",
+      "sha256": "9a9dbbf50687879ba29ce88f2136beb80a8a20d798d6859f89669341de84b4e7",
+      "originalPose": null
+    },
+    {
+      "frame": 7,
+      "source": "pose-v24/jumping/07-source.png",
+      "sha256": "e0903641b49be348f8b136dbdc9cccd16f055616900534735a79631bcf4504cb",
+      "originalPose": null
+    },
+    {
+      "frame": 8,
+      "source": "pose-v24/jumping/08-source.png",
+      "sha256": "a10f897ee9e42c2f7d41a4a0eed0989c9fa8d66a262369cc0c6ec18c8e140541",
+      "originalPose": null
+    },
+    {
+      "frame": 9,
+      "source": "pose-v24/jumping/09-source.png",
+      "sha256": "4d27bd8e0bb7d825be171eaa9a2058219fe42b6bd98b07368f322d4b3c1fafb8",
+      "originalPose": null
+    },
+    {
+      "frame": 10,
+      "source": "pose-v24/jumping/10-source.png",
+      "sha256": "e136e8210739db3c3f67df09fe87cd21a297917f87d6f2e9259d2888a4c1e92b",
+      "originalPose": null
+    },
+    {
+      "frame": 11,
+      "source": "pose-v24/jumping/11-source.png",
+      "sha256": "2e0469fddd9290572a497e398e72514f2f507b9d42683218048ad26f877e10f5",
+      "originalPose": null
+    },
+    {
+      "frame": 12,
+      "source": "pose-v24/jumping/12-source.png",
+      "sha256": "07939f8e876715ba188e7ec83b93613f2d0ee3583b94ffdcf0a07f0f1f307b40",
+      "originalPose": null
+    },
+    {
+      "frame": 13,
+      "source": "pose-v24/jumping/13-source.png",
+      "sha256": "e1ef2f2f1020a907b599bf0b1a2ad1833a00a7e4104dd8ee832b58a4c8f32c55",
+      "originalPose": null
+    },
+    {
+      "frame": 14,
+      "source": "pose-v24/jumping/14-source.png",
+      "sha256": "57809b856d5e6546486894736376326575f28450e94924b2f3eddd9a3958255a",
+      "originalPose": null
+    },
+    {
+      "frame": 15,
+      "source": "pose-v24/jumping/15-source.png",
+      "sha256": "e1141e124c159e9becdc78a20a6bb7a95247b8c2c598bca1a7a7d1c1699f6f2b",
+      "originalPose": null
+    }
+  ],
+  "registration": "Original pose references used. Absolute original registration not certified.",
+  "integrated": true
+}

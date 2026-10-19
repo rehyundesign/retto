@@ -158,22 +158,46 @@ struct StatePayload: Decodable {
     }
     var needsAttention: Bool { attention == true && closed != true }
     var isClosed: Bool { closed == true }
-    /// Codex worker 로그와 자동 제목 전의 이름 없는 task는 레토의 표시 대상에서 뺀다.
+    /// 내부 Codex 세션은 기존 훅 레지스트리에 남아 있어도 표시 대상에서 뺀다.
     var isRettoVisibleTask: Bool {
         guard source == "codex" || client == "codex" else { return true }
-        return sessionTitle?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false
+        guard sessionTitle?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false else { return false }
+        return !isCodexSubagentTranscript(path: transcriptPath ?? "")
     }
 }
 
 /// 세션 이름표로 받아들일 최소 길이. hook.cjs 의 NAME_MIN 과 같은 값이어야 한다.
 let sessionNameMinLength = 4
 
-/// Codex는 상위 작업의 롤아웃 옆에 worker 전용 JSONL을 `<parent>_<UUID>.jsonl`로 남긴다.
-/// worker를 세션으로 읽으면 레토의 제목과 상태가 상위 작업에서 worker로 바뀐다.
+private let codexSubagentCache: NSCache<NSString, NSNumber> = {
+    let cache = NSCache<NSString, NSNumber>()
+    cache.countLimit = 256
+    return cache
+}()
+
+/// 이전 worker 파일명과 session_meta의 source를 함께 확인한다. Guardian 검토는 일반
+/// 파일명으로 저장되므로 제목 대신 출처로 구분해야 같은 제목의 사용자 대화도 유지된다.
 func isCodexSubagentTranscript(path: String) -> Bool {
+    guard !path.isEmpty else { return false }
     let name = URL(fileURLWithPath: path).deletingPathExtension().lastPathComponent
     let pattern = "_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-    return name.range(of: pattern, options: .regularExpression) != nil
+    if name.range(of: pattern, options: .regularExpression) != nil { return true }
+
+    var info = stat()
+    guard stat(path, &info) == 0 else { return false }
+    let key = "\(path):\(info.st_ino):\(info.st_size):\(info.st_mtimespec.tv_sec):\(info.st_mtimespec.tv_nsec)" as NSString
+    if let cached = codexSubagentCache.object(forKey: key) { return cached.boolValue }
+    guard let handle = FileHandle(forReadingAtPath: path) else { return false }
+    defer { try? handle.close() }
+    // 기본 지시문이 긴 기록도 읽되 첫 줄만 파싱하고, 전체 대화는 읽지 않는다.
+    guard let data = try? handle.read(upToCount: 512 * 1024),
+          let record = try? JSONSerialization.jsonObject(with: Data(data.prefix { $0 != 10 })) as? [String: Any],
+          record["type"] as? String == "session_meta",
+          let metadata = record["payload"] as? [String: Any] else { return false }
+    let source = metadata["source"]
+    let isSubagent = source as? String == "subagent" || (source as? [String: Any])?["subagent"] != nil
+    codexSubagentCache.setObject(NSNumber(value: isSubagent), forKey: key)
+    return isSubagent
 }
 
 /// 메뉴 막대의 AI 세션 목록과 자동 검사가 같은 문자열을 쓴다. 훅 없이 찾은 Codex task도
@@ -648,12 +672,10 @@ final class CodexRolloutDiscovery {
         diagnostic = "\(sessionsURL.path): \(paths.count) entries"
         for relative in paths where relative.hasSuffix(".jsonl") {
             let url = sessionsURL.appendingPathComponent(relative)
-            // 하위 에이전트는 상위 작업과 동일한 ID를 기록한다. 이 파일을 읽으면 최신
-            // 수정 시각 때문에 상위 대화가 worker 실행 내역으로 바뀐다.
-            guard !isCodexSubagentTranscript(path: url.path) else { continue }
             guard let attributes = try? FileManager.default.attributesOfItem(atPath: url.path),
                   let modified = attributes[.modificationDate] as? Date,
                   now.timeIntervalSince(modified) <= recentWindow,
+                  !isCodexSubagentTranscript(path: url.path),
                   let task = task(at: url, modifiedAt: modified, titles: knownTitles) else { continue }
             if let old = tasks[task.id], (old.updatedAtMs ?? 0) >= (task.updatedAtMs ?? 0) { continue }
             tasks[task.id] = task

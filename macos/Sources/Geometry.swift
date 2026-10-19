@@ -76,7 +76,7 @@ enum PetSkin: String, CaseIterable {
         case .rilakkuma: return "리락쿠마"
         case .rilakkumaCape: return "리락쿠마 망토"
         case .magicalHeart: return "매지컬 하트"
-        case .jeanne: return "신의괴도 잔느"
+        case .jeanne: return "잔느 · 핀"
         case .christmas: return "크리스마스"
         }
     }

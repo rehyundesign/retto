@@ -1,0 +1,35 @@
+{
+  "approvedFrames": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "nativeReady": true,
+  "approval": "internal visual anatomy review; not user approval",
+  "visiblePawsPerFrame": 4,
+  "limbInventory": {
+    "frontLeft": "one raised arm with gesture",
+    "frontRight": "single grounded straight leg and cuffed forepaw",
+    "rearLeft": "small bare paw emerging behind left skirt at hip; no long forearm or cuff",
+    "rearRight": "small paw partially behind grounded foreleg"
+  },
+  "scope": "running row7 only",
+  "review": "Complete cells reviewed at224x320 on white and dark. Removed duplicate lower-left cuffed foreleg without hiding left hind paw. Actual lowering poses repaired in6,7.",
+  "limitations": [
+    "Not a new certification of original Retto absolute registration",
+    "Browser timed playback not inspected"
+  ]
+}

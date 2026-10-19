@@ -1,0 +1,8 @@
+{
+  "model": "Doubiiu/tooncrafter",
+  "phase": "failed",
+  "generatedFrames": 0,
+  "steps": 20,
+  "errorType": "AppError",
+  "error": "'You have exceeded your ZeroGPU quota (180s requested vs. 173s left). Try again in 23:59:17. Authenticate with a Hugging Face token for more quota - https://huggingface.co/settings/tokens'"
+}

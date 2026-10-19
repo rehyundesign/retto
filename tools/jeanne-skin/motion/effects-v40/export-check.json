@@ -1,0 +1,13 @@
+[
+  {
+    "state": "running",
+    "characterCount": 16,
+    "characterCycle": 2.4,
+    "effectCycle": 4.8,
+    "effectFps": 20,
+    "exportFrames": 96,
+    "exportDurationMs": 4800,
+    "frozenPoseEffectProgression": true,
+    "nativeInstallation": "not performed"
+  }
+]

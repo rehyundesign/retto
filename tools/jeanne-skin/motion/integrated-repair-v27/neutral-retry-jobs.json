@@ -1,0 +1,26 @@
+[
+  {
+    "state": "waving",
+    "i": 0,
+    "ref": "completion-v26/00.png",
+    "prompt": "Edit only the little white feather near Finn: rotate it slightly downward and move its tip 2 pixels. Everything else unchanged, especially the four grounded paws, neutral seated cat, face, Finn, costume and camera. No gesture or posture changes. One complete transparent image same canvas."
+  },
+  {
+    "state": "waving",
+    "i": 15,
+    "ref": "completion-v26/00.png",
+    "prompt": "Edit only Finn wing feathers into a slightly folded position, and make the tiny gold sparkle dimmer. Cat remains EXACTLY unchanged: neutral seated reference, paws all on floor, head straight and blue eyes open. Keep Finn face size and center unchanged. Complete transparent image, same camera and canvas. No hand gesture."
+  },
+  {
+    "state": "waiting",
+    "i": 0,
+    "ref": "state-integrated-v19/waiting/00.png",
+    "prompt": "Edit only tiny floating ivory feather near Finn: rotate downward 5 degrees and move 2 pixels. Keep entire cat exactly unchanged with all four paws on floor, seated 3/4 gaze toward Finn, identical costume, tail, face and composition. Keep Finn same size and position, slight wingtip curl. One integrated transparent image, same canvas."
+  },
+  {
+    "state": "waiting",
+    "i": 15,
+    "ref": "state-integrated-v19/waiting/00.png",
+    "prompt": "Edit only floating feather near Finn to drift 2 pixels lower, and pendant highlight slightly brighter. Keep entire cat exactly unchanged: same neutral seated 3/4 pose, ALL PAWS ON FLOOR, head gaze toward Finn, face size/camera/costume/tail unchanged. Finn same size and center with wing feathers subtly settled. Complete transparent image, no gesture."
+  }
+]

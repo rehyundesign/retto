@@ -1,0 +1,7 @@
+{
+  "model": "Doubiiu/tooncrafter",
+  "phase": "failed",
+  "generatedFrames": 0,
+  "errorType": "AppError",
+  "error": "'GPU task aborted'"
+}

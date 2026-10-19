@@ -1,0 +1,418 @@
+{
+  "sleeping": {
+    "method": "same-master facial-patch normalized correlation, only within-row drift estimate; not original registration",
+    "frames": [
+      {
+        "frame": 1,
+        "dxNative": 0,
+        "dyNative": 0,
+        "correlation": 0.9964
+      },
+      {
+        "frame": 2,
+        "dxNative": 0,
+        "dyNative": 0,
+        "correlation": 0.9873
+      },
+      {
+        "frame": 3,
+        "dxNative": 0,
+        "dyNative": 0,
+        "correlation": 0.9702
+      },
+      {
+        "frame": 4,
+        "dxNative": 0,
+        "dyNative": 0,
+        "correlation": 0.9959
+      },
+      {
+        "frame": 5,
+        "dxNative": 0,
+        "dyNative": 0,
+        "correlation": 0.9812
+      },
+      {
+        "frame": 6,
+        "dxNative": 0,
+        "dyNative": 0,
+        "correlation": 0.9883
+      },
+      {
+        "frame": 7,
+        "dxNative": 0,
+        "dyNative": 0,
+        "correlation": 0.9864
+      },
+      {
+        "frame": 8,
+        "dxNative": 0,
+        "dyNative": 0,
+        "correlation": 0.9916
+      },
+      {
+        "frame": 9,
+        "dxNative": 0,
+        "dyNative": 0,
+        "correlation": 0.995
+      },
+      {
+        "frame": 10,
+        "dxNative": 0,
+        "dyNative": 0,
+        "correlation": 0.978
+      },
+      {
+        "frame": 11,
+        "dxNative": 0,
+        "dyNative": 0,
+        "correlation": 0.9947
+      },
+      {
+        "frame": 12,
+        "dxNative": 0,
+        "dyNative": 0,
+        "correlation": 0.9974
+      },
+      {
+        "frame": 13,
+        "dxNative": 0,
+        "dyNative": 0,
+        "correlation": 0.9942
+      },
+      {
+        "frame": 14,
+        "dxNative": 0,
+        "dyNative": 0,
+        "correlation": 0.9963
+      },
+      {
+        "frame": 15,
+        "dxNative": 1,
+        "dyNative": 0,
+        "correlation": 0.9707
+      },
+      {
+        "frame": 16,
+        "dxNative": 0,
+        "dyNative": 0,
+        "correlation": 0.9952
+      }
+    ],
+    "maxDx": 1,
+    "maxDy": 0,
+    "minimumCorrelation": 0.9702
+  },
+  "drag-right": {
+    "method": "same-master facial-patch normalized correlation, only within-row drift estimate; not original registration",
+    "frames": [
+      {
+        "frame": 1,
+        "dxNative": 1,
+        "dyNative": 0,
+        "correlation": 0.9927
+      },
+      {
+        "frame": 2,
+        "dxNative": 1,
+        "dyNative": 0,
+        "correlation": 0.955
+      },
+      {
+        "frame": 3,
+        "dxNative": 1,
+        "dyNative": -1,
+        "correlation": 0.9629
+      },
+      {
+        "frame": 4,
+        "dxNative": 1,
+        "dyNative": 1,
+        "correlation": 0.9546
+      },
+      {
+        "frame": 5,
+        "dxNative": 1,
+        "dyNative": 0,
+        "correlation": 0.9609
+      },
+      {
+        "frame": 6,
+        "dxNative": 1,
+        "dyNative": 0,
+        "correlation": 0.9501
+      },
+      {
+        "frame": 7,
+        "dxNative": 0,
+        "dyNative": 0,
+        "correlation": 0.9652
+      },
+      {
+        "frame": 8,
+        "dxNative": 0,
+        "dyNative": 0,
+        "correlation": 0.9852
+      },
+      {
+        "frame": 9,
+        "dxNative": 0,
+        "dyNative": 0,
+        "correlation": 0.975
+      },
+      {
+        "frame": 10,
+        "dxNative": 0,
+        "dyNative": 0,
+        "correlation": 0.9726
+      },
+      {
+        "frame": 11,
+        "dxNative": 0,
+        "dyNative": 0,
+        "correlation": 0.9943
+      },
+      {
+        "frame": 12,
+        "dxNative": 0,
+        "dyNative": 0,
+        "correlation": 0.9889
+      },
+      {
+        "frame": 13,
+        "dxNative": 2,
+        "dyNative": 0,
+        "correlation": 0.9597
+      },
+      {
+        "frame": 14,
+        "dxNative": 0,
+        "dyNative": 0,
+        "correlation": 0.9865
+      },
+      {
+        "frame": 15,
+        "dxNative": 2,
+        "dyNative": 0,
+        "correlation": 0.9652
+      },
+      {
+        "frame": 16,
+        "dxNative": 1,
+        "dyNative": 0,
+        "correlation": 0.9843
+      }
+    ],
+    "maxDx": 2,
+    "maxDy": 1,
+    "minimumCorrelation": 0.9501
+  },
+  "drag-left": {
+    "method": "same-master facial-patch normalized correlation, only within-row drift estimate; not original registration",
+    "frames": [
+      {
+        "frame": 1,
+        "dxNative": 0,
+        "dyNative": 0,
+        "correlation": 0.9886
+      },
+      {
+        "frame": 2,
+        "dxNative": -1,
+        "dyNative": -1,
+        "correlation": 0.9498
+      },
+      {
+        "frame": 3,
+        "dxNative": 0,
+        "dyNative": -2,
+        "correlation": 0.9703
+      },
+      {
+        "frame": 4,
+        "dxNative": 0,
+        "dyNative": 0,
+        "correlation": 0.9554
+      },
+      {
+        "frame": 5,
+        "dxNative": -3,
+        "dyNative": -1,
+        "correlation": 0.964
+      },
+      {
+        "frame": 6,
+        "dxNative": -4,
+        "dyNative": -2,
+        "correlation": 0.9049
+      },
+      {
+        "frame": 7,
+        "dxNative": -5,
+        "dyNative": -1,
+        "correlation": 0.9464
+      },
+      {
+        "frame": 8,
+        "dxNative": -1,
+        "dyNative": 0,
+        "correlation": 0.9768
+      },
+      {
+        "frame": 9,
+        "dxNative": 0,
+        "dyNative": 0,
+        "correlation": 0.9661
+      },
+      {
+        "frame": 10,
+        "dxNative": 0,
+        "dyNative": 0,
+        "correlation": 0.9861
+      },
+      {
+        "frame": 11,
+        "dxNative": -2,
+        "dyNative": -2,
+        "correlation": 0.9418
+      },
+      {
+        "frame": 12,
+        "dxNative": 0,
+        "dyNative": 0,
+        "correlation": 0.9891
+      },
+      {
+        "frame": 13,
+        "dxNative": 0,
+        "dyNative": -2,
+        "correlation": 0.9434
+      },
+      {
+        "frame": 14,
+        "dxNative": 0,
+        "dyNative": -1,
+        "correlation": 0.9729
+      },
+      {
+        "frame": 15,
+        "dxNative": -2,
+        "dyNative": 0,
+        "correlation": 0.9492
+      },
+      {
+        "frame": 16,
+        "dxNative": -1,
+        "dyNative": 0,
+        "correlation": 0.9648
+      }
+    ],
+    "maxDx": 5,
+    "maxDy": 2,
+    "minimumCorrelation": 0.9049
+  },
+  "review": {
+    "method": "same-master facial-patch normalized correlation, only within-row drift estimate; not original registration",
+    "frames": [
+      {
+        "frame": 1,
+        "dxNative": -1,
+        "dyNative": -9,
+        "correlation": 0.7876
+      },
+      {
+        "frame": 2,
+        "dxNative": 0,
+        "dyNative": -5,
+        "correlation": 0.8038
+      },
+      {
+        "frame": 3,
+        "dxNative": 1,
+        "dyNative": -9,
+        "correlation": 0.7824
+      },
+      {
+        "frame": 4,
+        "dxNative": -1,
+        "dyNative": -9,
+        "correlation": 0.8052
+      },
+      {
+        "frame": 5,
+        "dxNative": 0,
+        "dyNative": -7,
+        "correlation": 0.8219
+      },
+      {
+        "frame": 6,
+        "dxNative": 1,
+        "dyNative": -10,
+        "correlation": 0.6971
+      },
+      {
+        "frame": 7,
+        "dxNative": 1,
+        "dyNative": -7,
+        "correlation": 0.7996
+      },
+      {
+        "frame": 8,
+        "dxNative": 0,
+        "dyNative": -2,
+        "correlation": 0.8788
+      },
+      {
+        "frame": 9,
+        "dxNative": 2,
+        "dyNative": -9,
+        "correlation": 0.8235
+      },
+      {
+        "frame": 10,
+        "dxNative": 0,
+        "dyNative": -4,
+        "correlation": 0.8172
+      },
+      {
+        "frame": 11,
+        "dxNative": -4,
+        "dyNative": -10,
+        "correlation": 0.4647
+      },
+      {
+        "frame": 12,
+        "dxNative": 0,
+        "dyNative": -5,
+        "correlation": 0.8514
+      },
+      {
+        "frame": 13,
+        "dxNative": 0,
+        "dyNative": -10,
+        "correlation": 0.6957
+      },
+      {
+        "frame": 14,
+        "dxNative": -1,
+        "dyNative": -8,
+        "correlation": 0.7263
+      },
+      {
+        "frame": 15,
+        "dxNative": 0,
+        "dyNative": -7,
+        "correlation": 0.8181
+      },
+      {
+        "frame": 16,
+        "dxNative": 1,
+        "dyNative": -9,
+        "correlation": 0.7599
+      }
+    ],
+    "maxDx": 4,
+    "maxDy": 10,
+    "minimumCorrelation": 0.4647
+  }
+}

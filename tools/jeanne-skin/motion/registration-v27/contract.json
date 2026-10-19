@@ -1,0 +1,21 @@
+{
+  "states": [
+    "waving",
+    "waiting"
+  ],
+  "scope": "Retto and Finn scale/position consistency; preserve current choreography/effect vocabulary",
+  "method": "Each frame regenerated complete with same full state baseline as first reference; partial pose guide gives orientation only, no body/feet camera reference from a competing full picture.",
+  "baseline": {
+    "waving": "completion-v26/00.png",
+    "waiting": "state-integrated-v19/waiting/00.png"
+  },
+  "integrated": true,
+  "forbidden": [
+    "piece compositing",
+    "mesh deformation",
+    "whole cat+FX translation/alpha-fitting",
+    "repeated pose padding"
+  ],
+  "phase": "two representative repairs before expansion",
+  "originalAbsoluteRegistration": "not certified; these are within-state references"
+}

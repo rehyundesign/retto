@@ -1,0 +1,68 @@
+{
+  "exports": [
+    {
+      "state": "waving",
+      "file": "animation-dark.gif",
+      "frames": 16,
+      "totalMs": 2400,
+      "distinctDecodedFrames": 16
+    },
+    {
+      "state": "waving",
+      "file": "animation-dark.webp",
+      "frames": 16,
+      "totalMs": 2400,
+      "distinctDecodedFrames": 16
+    },
+    {
+      "state": "waving",
+      "file": "animation-white.gif",
+      "frames": 16,
+      "totalMs": 2400,
+      "distinctDecodedFrames": 16
+    },
+    {
+      "state": "waving",
+      "file": "animation-white.webp",
+      "frames": 16,
+      "totalMs": 2400,
+      "distinctDecodedFrames": 16
+    },
+    {
+      "state": "waiting",
+      "file": "animation-dark.gif",
+      "frames": 16,
+      "totalMs": 3200,
+      "distinctDecodedFrames": 16
+    },
+    {
+      "state": "waiting",
+      "file": "animation-dark.webp",
+      "frames": 16,
+      "totalMs": 3200,
+      "distinctDecodedFrames": 16
+    },
+    {
+      "state": "waiting",
+      "file": "animation-white.gif",
+      "frames": 16,
+      "totalMs": 3200,
+      "distinctDecodedFrames": 16
+    },
+    {
+      "state": "waiting",
+      "file": "animation-white.webp",
+      "frames": 16,
+      "totalMs": 3200,
+      "distinctDecodedFrames": 16
+    }
+  ],
+  "visibleEdgePixels": 0,
+  "review": [
+    "all32 frames dark/white at224x320",
+    "four-limb support and companion position",
+    "13-14-15-0-1 loops"
+  ],
+  "nativePlayback": "not checked",
+  "originalAbsoluteRegistration": "not certified"
+}

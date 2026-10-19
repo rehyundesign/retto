@@ -1,0 +1,49 @@
+[
+  {
+    "state": "review",
+    "previewFiles": [
+      "latest-preview-assets/review/00.png",
+      "latest-preview-assets/review/01.png",
+      "latest-preview-assets/review/02.png",
+      "latest-preview-assets/review/03.png",
+      "latest-preview-assets/review/04.png",
+      "latest-preview-assets/review/05.png",
+      "latest-preview-assets/review/06.png",
+      "latest-preview-assets/review/07.png",
+      "latest-preview-assets/review/08.png",
+      "latest-preview-assets/review/09.png",
+      "latest-preview-assets/review/10.png",
+      "latest-preview-assets/review/11.png",
+      "latest-preview-assets/review/12.png",
+      "latest-preview-assets/review/13.png",
+      "latest-preview-assets/review/14.png",
+      "latest-preview-assets/review/15.png"
+    ],
+    "previewHashes": [
+      "537209a6134f32f4b78f24abcf76c0e792f204efc669049171930ee68ac3a63a",
+      "f438f28dcfb27f7c26de1b5ad3b486caffcbf879b6d2b4fa02f92662e31bad51",
+      "b9674a6fe66dd156bddd7cc4f5a3108f5619298ca9fd2d02e5e4b156160a40fa",
+      "40457a178055a1854d10c8ad747246a269f5b8eff07b6e4a20097e1f836040a3",
+      "903b2b336ca08e0b1cf34fef45d0fe0fe985dbb1a2154f0a37867b4065967a76",
+      "770370d2c47280fd8a5f132a909030567be43524ef75cb71d15a468bc4d2739d",
+      "243d4a9753767a8f315f1eef11cd0dc42f37d7d59abf8fde7ed586aeb1b7e0c8",
+      "a04b08b5fc0025c780f09ea343af9eddaa5eeb638a699172ced9b23a17a96020",
+      "af7ecd0136e35d36e3f5264d347a8e9f8b90e3f99a147ffddbba2a00e5118ee4",
+      "ebb41339b7dd7ef47ff7206894ccddd94a9ca674957e5790bac051dd06d78e44",
+      "f72bcfb4bc7f4e3c134e01293e30dd16a33d8d225b15e50a2db986a1ffe426bd",
+      "572aa8a6b3ea533a49839c4e646fd755684eb0c3af65986ab730434ccd87378b",
+      "24b2310125feed1fc61f1133cfbec0f334c3147558de23a09a7e1945e77ec2c9",
+      "df95d3720a86cadb8107843154fe5ce993a0ebe43f2e11e0647285463f384f70",
+      "608a92dc8ebb1d9bbb86a604260b93a9dd14a99dc9b8df03f6737623fe301e9f",
+      "95af75dbd0695712971ee54730e5993fada8b8ba862480f0cdc9f5810858b4ac"
+    ],
+    "drawings": 16,
+    "decodedUnique": 16,
+    "cycleSeconds": 3.2,
+    "exportSeconds": 16,
+    "exportHz": 20,
+    "frozenPoseEffectProgression": true,
+    "visualApproval": "pending",
+    "originalRegistration": "not certified"
+  }
+]

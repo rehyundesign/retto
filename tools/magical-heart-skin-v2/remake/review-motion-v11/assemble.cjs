@@ -1,0 +1,12 @@
+const fs=require('fs'),path=require('path'),crypto=require('crypto');const {createCanvas,loadImage}=require('@napi-rs/canvas');
+const root=__dirname;const H=b=>crypto.createHash('sha256').update(b).digest('hex');
+(async()=>{const masterPath=path.join(root,'../preview/assets/integrated-review-anchor.png'),master=await loadImage(masterPath),before=H(fs.readFileSync(masterPath));let records=[];const baseline=createCanvas(448,640),bc=baseline.getContext('2d');bc.drawImage(master,0,0);const basePixels=bc.getImageData(0,0,448,640).data;
+for(let i=0;i<16;i++){const id=String(i).padStart(2,'0'),source=path.join(root,'sources',id+'.png'),img=await loadImage(source),c=createCanvas(448,640),ctx=c.getContext('2d');ctx.drawImage(master,0,0);
+// Only the foreleg/cape-contact edit region is taken from the independently drawn cell.
+ctx.save();ctx.beginPath();ctx.rect(68,385,151,170);ctx.clip();ctx.clearRect(68,385,151,170);ctx.drawImage(img,0,0,448,640);ctx.restore();
+const pixels=ctx.getImageData(0,0,448,640).data;for(let y=0;y<640;y++)for(let x=0;x<448;x++){if(x>=68&&x<219&&y>=385&&y<555)continue;const o=(y*448+x)*4;for(let ch=0;ch<4;ch++)if(pixels[o+ch]!==basePixels[o+ch])throw Error('Changed protected pixel at '+i+' '+x+','+y);}
+const output=path.join(root,'frames',id+'.png');fs.writeFileSync(output,c.toBuffer('image/png'));records.push({frame:i,source:path.relative(root,source),source_hash:H(fs.readFileSync(source)),cell:path.relative(root,output),cell_hash:H(ctx.getImageData(0,0,448,640).data),edit_region:[68,385,151,170]});}
+if(new Set(records.map(r=>r.source_hash)).size!==16||new Set(records.map(r=>r.cell_hash)).size!==16)throw Error('Duplicate frame');
+if(before!==H(fs.readFileSync(masterPath)))throw Error('Master changed');
+fs.writeFileSync(path.join(root,'manifest.json'),JSON.stringify({state:'review',cycle_seconds:3.2,independent_drawings:16,playback_slots:16,original_registration:'not approved; retains current candidate master outside foreleg edit',character_master_hash:before,records},null,2));
+const board=createCanvas(896,1320),b=board.getContext('2d');b.fillStyle='#25232c';b.fillRect(0,0,896,1320);for(let i=0;i<16;i++){b.drawImage(await loadImage(path.join(root,'frames',String(i).padStart(2,'0')+'.png')),(i%4)*224,Math.floor(i/4)*330,224,320);b.fillStyle='#fff';b.font='12px sans-serif';b.fillText(String(i),i%4*224+10,Math.floor(i/4)*330+325);}fs.writeFileSync(path.join(root,'character-board.png'),board.toBuffer('image/png'));console.log('16 independent cells assembled; master unchanged outside foreleg edit region.');})();

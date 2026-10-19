@@ -1,0 +1,36 @@
+{
+  "updatedAt": "2026-10-14T05:28:31.738Z",
+  "completed": [
+    "idle",
+    "review",
+    "failed",
+    "waving",
+    "jumping",
+    "sleeping",
+    "drag-right",
+    "drag-left"
+  ],
+  "expected": [
+    "idle",
+    "jumping",
+    "drag-right",
+    "drag-left",
+    "review",
+    "waving",
+    "failed",
+    "sleeping"
+  ],
+  "counts": {
+    "idle": 16,
+    "jumping": 16,
+    "drag-right": 16,
+    "drag-left": 16,
+    "review": 16,
+    "waving": 16,
+    "failed": 16,
+    "sleeping": 16
+  },
+  "visualAcceptance": "preview candidate, not native/original registration approval",
+  "visualFrameReview": "All changed source cells inspected on dark and white boards",
+  "nativePlayback": "blocked by CUA app access restriction"
+}

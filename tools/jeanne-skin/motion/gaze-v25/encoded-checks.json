@@ -1,0 +1,16 @@
+[
+  {
+    "theme": "dark",
+    "distinctDecodedFrames": 16,
+    "intervalMs": 200,
+    "scanCycleMs": 3200,
+    "nativePlayback": "not tested"
+  },
+  {
+    "theme": "white",
+    "distinctDecodedFrames": 16,
+    "intervalMs": 200,
+    "scanCycleMs": 3200,
+    "nativePlayback": "not tested"
+  }
+]

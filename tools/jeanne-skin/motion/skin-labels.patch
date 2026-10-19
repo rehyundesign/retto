@@ -1,0 +1,14 @@
+# 로컬 통합 빌드의 Sources/Geometry.swift 표시명 변경을 보존한다.
+# 기본 macos/Sources에는 pichiPitch 스킨이 아직 등록되어 있지 않다.
+# 기존 이름을 쓰는 통합 빌드 디렉터리에서 patch -p1 < ../skin-labels.patch 로 적용한다.
+--- a/Sources/Geometry.swift
++++ b/Sources/Geometry.swift
+@@ -81,6 +81,6 @@
+         case .christmas: return "크리스마스"
+         case .hana: return "하나 · 토토"
+-        case .pichiPitch: return "피치피치핏치"
+-        case .jeanne: return "신의괴도 잔느"
++        case .pichiPitch: return "피치핏치"
++        case .jeanne: return "잔느 · 핀"
+         }
+     }

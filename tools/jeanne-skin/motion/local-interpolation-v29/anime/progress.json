@@ -1,0 +1,34 @@
+{
+  "phase": "pilot",
+  "model": "rife-anime",
+  "completedPairs": [
+    {
+      "state": "waving",
+      "between": [
+        1,
+        2
+      ],
+      "midpoint": "03.png",
+      "sourceHashes": [
+        "ed0923125fdf73d3e99af00c7d0b3175b03de55970750bc5ee6cf43e18cb1f22",
+        "0aaad13c25b9888bd9a1057fd649b560e76d3888625e0ca56e6670b38886f134"
+      ],
+      "method": "RIFE4.6 CPU midpoint + paired black/white alpha reconstruction",
+      "independentlyDrawn": false
+    },
+    {
+      "state": "waiting",
+      "between": [
+        8,
+        9
+      ],
+      "midpoint": "17.png",
+      "sourceHashes": [
+        "5fd920bb1243e048005ad763cc612e58230ec2a4d3a52b002dcf18081f9a744c",
+        "5458d50f53a7634eb7a641bdf9752c44e90ed2fab255de29c97a25d097fe2693"
+      ],
+      "method": "RIFE4.6 CPU midpoint + paired black/white alpha reconstruction",
+      "independentlyDrawn": false
+    }
+  ]
+}

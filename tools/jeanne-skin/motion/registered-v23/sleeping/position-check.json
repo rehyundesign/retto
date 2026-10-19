@@ -1,0 +1,103 @@
+{
+  "method": "normalized correlation of same master facial patch; not original Retto registration",
+  "frames": [
+    {
+      "frame": 1,
+      "facePatchDxNative": 0,
+      "facePatchDyNative": 0,
+      "correlation": 0.9964
+    },
+    {
+      "frame": 2,
+      "facePatchDxNative": 0,
+      "facePatchDyNative": 0,
+      "correlation": 0.9873
+    },
+    {
+      "frame": 3,
+      "facePatchDxNative": 0,
+      "facePatchDyNative": 0,
+      "correlation": 0.9702
+    },
+    {
+      "frame": 4,
+      "facePatchDxNative": 0,
+      "facePatchDyNative": 0,
+      "correlation": 0.9959
+    },
+    {
+      "frame": 5,
+      "facePatchDxNative": 0,
+      "facePatchDyNative": 0,
+      "correlation": 0.9812
+    },
+    {
+      "frame": 6,
+      "facePatchDxNative": 0,
+      "facePatchDyNative": 0,
+      "correlation": 0.9883
+    },
+    {
+      "frame": 7,
+      "facePatchDxNative": 0,
+      "facePatchDyNative": 0,
+      "correlation": 0.9864
+    },
+    {
+      "frame": 8,
+      "facePatchDxNative": 0,
+      "facePatchDyNative": 0,
+      "correlation": 0.9916
+    },
+    {
+      "frame": 9,
+      "facePatchDxNative": 0,
+      "facePatchDyNative": 0,
+      "correlation": 0.995
+    },
+    {
+      "frame": 10,
+      "facePatchDxNative": 0,
+      "facePatchDyNative": 0,
+      "correlation": 0.978
+    },
+    {
+      "frame": 11,
+      "facePatchDxNative": 0,
+      "facePatchDyNative": 0,
+      "correlation": 0.9947
+    },
+    {
+      "frame": 12,
+      "facePatchDxNative": 0,
+      "facePatchDyNative": 0,
+      "correlation": 0.9974
+    },
+    {
+      "frame": 13,
+      "facePatchDxNative": 0,
+      "facePatchDyNative": 0,
+      "correlation": 0.9942
+    },
+    {
+      "frame": 14,
+      "facePatchDxNative": 0,
+      "facePatchDyNative": 0,
+      "correlation": 0.9963
+    },
+    {
+      "frame": 15,
+      "facePatchDxNative": 1,
+      "facePatchDyNative": 0,
+      "correlation": 0.9707
+    },
+    {
+      "frame": 16,
+      "facePatchDxNative": 0,
+      "facePatchDyNative": 0,
+      "correlation": 0.9952
+    }
+  ],
+  "maxDx": 1,
+  "maxDy": 0
+}

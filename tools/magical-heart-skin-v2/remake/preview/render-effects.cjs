@@ -10,6 +10,7 @@ const states=Object.keys(fx.cycles);
 const hash=bytes=>crypto.createHash('sha256').update(bytes).digest('hex');
 const labels={idle:'기본',running:'작업',review:'검토',waiting:'대기',failed:'실패',waving:'완료',jumping:'점프',sleeping:'수면','drag-right':'오른쪽 이동','drag-left':'왼쪽 이동'};
 async function main(){
+  const materialImages=await Promise.all(['heart','petal','star','moon'].map(async key=>[key,await loadImage(path.join(__dirname,'material-assets',key+'.png'))]));materialImages.push(['scene',await loadImage(path.join(__dirname,'style-review-v9/effect.png'))]);fx.setTextures(Object.fromEntries(materialImages));
   const images=await Promise.all(states.map(state=>loadImage(path.join(__dirname,data.items.find(item=>item.state===state).src))));
   const artHashes=data.items.map(item=>({id:item.id,hash:hash(fs.readFileSync(path.join(__dirname,item.src)))}));
   const records=[];
@@ -38,7 +39,7 @@ async function main(){
       ctx.fillText('Magical Heart · 정적 캐릭터 · 8개 상태 + 좌우 이동 이펙트',16,25);
       for(let i=0;i<states.length;i++){
         ctx.save();ctx.translate((i%5)*224,38+Math.floor(i/5)*346);
-        const options=states[i]==='review'?{jewel:[103,210]}:{};
+        const options=states[i]==='review'?{jewel:[95,206]}:states[i]==='waiting'?{jewel:[102,200]}:{};
         fx.draw(ctx,states[i],tick*interval,false,options);
         ctx.drawImage(images[i],0,0,224,320);
         fx.draw(ctx,states[i],tick*interval,true,options);
@@ -50,7 +51,7 @@ async function main(){
   }
   const afterHashes=data.items.map(item=>({id:item.id,hash:hash(fs.readFileSync(path.join(__dirname,item.src)))}));
   if(JSON.stringify(artHashes)!==JSON.stringify(afterHashes))throw new Error('Character art changed');
-  fs.writeFileSync(path.join(output,'validation.json'),JSON.stringify({states:records,character_hashes_unchanged:true,character_motion_sequences_completed:0,export:{sampling_hz:10,duration_seconds:19.2,loop:true},html:{clock:'requestAnimationFrame elapsed time',character:'static',pause_and_visibility_controls:true}},null,2));
+  fs.writeFileSync(path.join(output,'validation.json'),JSON.stringify({states:records,material_assets:materialImages.map(entry=>entry[0]),character_hashes_unchanged:true,character_motion_sequences_completed:0,export:{sampling_hz:10,duration_seconds:19.2,loop:true},html:{clock:'requestAnimationFrame elapsed time',character:'static',pause_and_visibility_controls:true}},null,2));
   console.log('PASS: 8 state and 2 directional effects progress with frozen character; front face exclusion; character hashes unchanged; 384 light/dark review boards exported.');
 }
 main().catch(error=>{console.error(error);process.exit(1);});

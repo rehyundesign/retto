@@ -1,0 +1,123 @@
+{
+  "state": "waving",
+  "independentDrawings": 16,
+  "cycle": 2.4,
+  "durationsMs": [
+    150,
+    150,
+    150,
+    150,
+    150,
+    150,
+    150,
+    150,
+    150,
+    150,
+    150,
+    150,
+    150,
+    150,
+    150,
+    150
+  ],
+  "frames": [
+    {
+      "frame": 0,
+      "source": "pose-v24/completion/00-source.png",
+      "sha256": "67d2fd021caca5cb8ed0f047b3b516621134557f588114186412e63b7d78bdbd",
+      "originalPose": null
+    },
+    {
+      "frame": 1,
+      "source": "pose-v24/completion/01-source.png",
+      "sha256": "f12d01803ad37b639a510f6fae67d889cdb45d4ded9e3bcac1bba6f294d9ebf2",
+      "originalPose": null
+    },
+    {
+      "frame": 2,
+      "source": "pose-v24/completion/02-source.png",
+      "sha256": "e8ea463d93d7373195bac09213bd26c93a5e8d11550c6b24e0395f0693c51c0c",
+      "originalPose": null
+    },
+    {
+      "frame": 3,
+      "source": "pose-v24/completion/03-source.png",
+      "sha256": "f90e63c5815ae8fd9d3f4efc78dae8a72b3af7e55d692008bf6a1f403db1a5cc",
+      "originalPose": null
+    },
+    {
+      "frame": 4,
+      "source": "pose-v24/completion/04-source.png",
+      "sha256": "c3cff15b4072bcf7d7bb870181d8b7f5bda7fdcedd32ab5b74518a1ab0a44bbf",
+      "originalPose": null
+    },
+    {
+      "frame": 5,
+      "source": "pose-v24/completion/05-source.png",
+      "sha256": "dec1f0096e8f66af1822e1982fbaa54549d1f0459cd0f7178b3bcb5214c2f44e",
+      "originalPose": null
+    },
+    {
+      "frame": 6,
+      "source": "pose-v24/completion/06-source.png",
+      "sha256": "599498504060b2b0925c3053f3d982893496ba002f8e165057c9b8cc1a2e8d94",
+      "originalPose": null
+    },
+    {
+      "frame": 7,
+      "source": "pose-v24/completion/07-source.png",
+      "sha256": "24d5352e3d780f0e74cf2c8854e96669ecae6e331720d569412c1304e991482c",
+      "originalPose": null
+    },
+    {
+      "frame": 8,
+      "source": "pose-v24/completion/08-source.png",
+      "sha256": "ff2944a8c5da9ffba5916a27e8abe7ecb8007a67dec3f54dde299a46b5191da2",
+      "originalPose": null
+    },
+    {
+      "frame": 9,
+      "source": "pose-v24/completion/09-source.png",
+      "sha256": "18a90128981595bd2a5770ed27e28157dbc3209d4af1c7cf47c5f334a659b967",
+      "originalPose": null
+    },
+    {
+      "frame": 10,
+      "source": "pose-v24/completion/10-source.png",
+      "sha256": "2c212c5979e0fc06c3d77e922a0aae99d388c39e49a4a404fa15ff85d62cea02",
+      "originalPose": null
+    },
+    {
+      "frame": 11,
+      "source": "pose-v24/completion/11-source.png",
+      "sha256": "3906c91fafa5ae9a667a7c2a8cb561f6f44523a2b974fb6ec524a4b61c96c750",
+      "originalPose": null
+    },
+    {
+      "frame": 12,
+      "source": "pose-v24/completion/12-source.png",
+      "sha256": "e5235be41a247474b9a4820799687aa22b2b78c9afe6638a57b13cd5ccaec19b",
+      "originalPose": null
+    },
+    {
+      "frame": 13,
+      "source": "pose-v24/completion/13-source.png",
+      "sha256": "21c3e70fb2a5ccc72150d84369f84a8eb757c22446aa01e6918faea7ab120289",
+      "originalPose": null
+    },
+    {
+      "frame": 14,
+      "source": "pose-v24/completion/14-source.png",
+      "sha256": "7e34eb1debf194edc9f3e63d094e0a2075d889a7b55428e26b2cf0a04e414111",
+      "originalPose": null
+    },
+    {
+      "frame": 15,
+      "source": "pose-v24/completion/15-source.png",
+      "sha256": "f291e54696ba2a01e1edd134997e730a57e1e71ecb3d5a62dcb51d667b245e5d",
+      "originalPose": null
+    }
+  ],
+  "registration": "Original pose references used. Absolute original registration not certified.",
+  "integrated": true
+}

@@ -1,0 +1,87 @@
+{
+  "states": [
+    {
+      "state": "idle",
+      "row": 0,
+      "frames": 16,
+      "cycle": 3.2,
+      "sourceImageHashes": "match v31",
+      "stateMapping": "pass"
+    },
+    {
+      "state": "running",
+      "row": 7,
+      "frames": 16,
+      "cycle": 2.4,
+      "sourceImageHashes": "match v31",
+      "stateMapping": "pass"
+    },
+    {
+      "state": "review",
+      "row": 8,
+      "frames": 16,
+      "cycle": 3.2,
+      "sourceImageHashes": "match v31",
+      "stateMapping": "pass"
+    },
+    {
+      "state": "waiting",
+      "row": 6,
+      "frames": 16,
+      "cycle": 3.2,
+      "sourceImageHashes": "match v31",
+      "stateMapping": "pass"
+    },
+    {
+      "state": "failed",
+      "row": 5,
+      "frames": 16,
+      "cycle": 3.2,
+      "sourceImageHashes": "match v31",
+      "stateMapping": "pass"
+    },
+    {
+      "state": "waving",
+      "row": 3,
+      "frames": 16,
+      "cycle": 2.4,
+      "sourceImageHashes": "match v31",
+      "stateMapping": "pass"
+    },
+    {
+      "state": "jumping",
+      "row": 4,
+      "frames": 16,
+      "cycle": 2.4,
+      "sourceImageHashes": "match v31",
+      "stateMapping": "pass"
+    },
+    {
+      "state": "sleeping",
+      "row": 11,
+      "frames": 16,
+      "cycle": 6.4,
+      "sourceImageHashes": "match v31",
+      "stateMapping": "pass"
+    },
+    {
+      "state": "drag-right",
+      "row": 1,
+      "frames": 8,
+      "cycle": 1.6,
+      "sourceImageHashes": "match v31",
+      "stateMapping": "pass"
+    },
+    {
+      "state": "drag-left",
+      "row": 2,
+      "frames": 8,
+      "cycle": 1.6,
+      "sourceImageHashes": "match v31",
+      "stateMapping": "pass"
+    }
+  ],
+  "gazeSources": 16,
+  "completion": "waving remains waving after 3 cycles; user acknowledgement may still legitimately yield idle",
+  "sleep": "baked sleep effects only; duplicate procedural z disabled for Jeanne"
+}

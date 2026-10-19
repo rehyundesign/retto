@@ -1,0 +1,194 @@
+[
+  {
+    "state": "waving",
+    "pair": 0,
+    "model": "FILM",
+    "device": "cpu"
+  },
+  {
+    "state": "waving",
+    "pair": 1,
+    "model": "FILM",
+    "device": "cpu"
+  },
+  {
+    "state": "waving",
+    "pair": 2,
+    "model": "FILM",
+    "device": "cpu"
+  },
+  {
+    "state": "waving",
+    "pair": 3,
+    "model": "FILM",
+    "device": "cpu"
+  },
+  {
+    "state": "waving",
+    "pair": 4,
+    "model": "FILM",
+    "device": "cpu"
+  },
+  {
+    "state": "waving",
+    "pair": 5,
+    "model": "FILM",
+    "device": "cpu"
+  },
+  {
+    "state": "waving",
+    "pair": 6,
+    "model": "FILM",
+    "device": "cpu"
+  },
+  {
+    "state": "waving",
+    "pair": 7,
+    "model": "FILM",
+    "device": "cpu"
+  },
+  {
+    "state": "waving",
+    "pair": 8,
+    "model": "FILM",
+    "device": "cpu"
+  },
+  {
+    "state": "waving",
+    "pair": 9,
+    "model": "FILM",
+    "device": "cpu"
+  },
+  {
+    "state": "waving",
+    "pair": 10,
+    "model": "FILM",
+    "device": "cpu"
+  },
+  {
+    "state": "waving",
+    "pair": 11,
+    "model": "FILM",
+    "device": "cpu"
+  },
+  {
+    "state": "waving",
+    "pair": 12,
+    "model": "FILM",
+    "device": "cpu"
+  },
+  {
+    "state": "waving",
+    "pair": 13,
+    "model": "FILM",
+    "device": "cpu"
+  },
+  {
+    "state": "waving",
+    "pair": 14,
+    "model": "FILM",
+    "device": "cpu"
+  },
+  {
+    "state": "waving",
+    "pair": 15,
+    "model": "FILM",
+    "device": "cpu"
+  },
+  {
+    "state": "waiting",
+    "pair": 0,
+    "model": "FILM",
+    "device": "cpu"
+  },
+  {
+    "state": "waiting",
+    "pair": 1,
+    "model": "FILM",
+    "device": "cpu"
+  },
+  {
+    "state": "waiting",
+    "pair": 2,
+    "model": "FILM",
+    "device": "cpu"
+  },
+  {
+    "state": "waiting",
+    "pair": 3,
+    "model": "FILM",
+    "device": "cpu"
+  },
+  {
+    "state": "waiting",
+    "pair": 4,
+    "model": "FILM",
+    "device": "cpu"
+  },
+  {
+    "state": "waiting",
+    "pair": 5,
+    "model": "FILM",
+    "device": "cpu"
+  },
+  {
+    "state": "waiting",
+    "pair": 6,
+    "model": "FILM",
+    "device": "cpu"
+  },
+  {
+    "state": "waiting",
+    "pair": 7,
+    "model": "FILM",
+    "device": "cpu"
+  },
+  {
+    "state": "waiting",
+    "pair": 8,
+    "model": "FILM",
+    "device": "cpu"
+  },
+  {
+    "state": "waiting",
+    "pair": 9,
+    "model": "FILM",
+    "device": "cpu"
+  },
+  {
+    "state": "waiting",
+    "pair": 10,
+    "model": "FILM",
+    "device": "cpu"
+  },
+  {
+    "state": "waiting",
+    "pair": 11,
+    "model": "FILM",
+    "device": "cpu"
+  },
+  {
+    "state": "waiting",
+    "pair": 12,
+    "model": "FILM",
+    "device": "cpu"
+  },
+  {
+    "state": "waiting",
+    "pair": 13,
+    "model": "FILM",
+    "device": "cpu"
+  },
+  {
+    "state": "waiting",
+    "pair": 14,
+    "model": "FILM",
+    "device": "cpu"
+  },
+  {
+    "state": "waiting",
+    "pair": 15,
+    "model": "FILM",
+    "device": "cpu"
+  }
+]

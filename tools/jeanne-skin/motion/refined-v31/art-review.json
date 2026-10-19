@@ -1,0 +1,25 @@
+{
+  "waving": {
+    "4": {
+      "visibleBorderPixels": 0,
+      "sha256": "0d31c8198143708714591f39697b8ad554cf221257b7aa5cafa6abcfca1980f6"
+    },
+    "9": {
+      "visibleBorderPixels": 0,
+      "sha256": "d16c5b6d2b0f92a6c3159f5d34b4a76f68be35ba53f98a49e46edbb3d110f512"
+    }
+  },
+  "waiting": {
+    "4": {
+      "visibleBorderPixels": 0,
+      "sha256": "eef81272d83ebc83de65acbaa03fd3d8be43c2a66cc296f6a4bebc5f64e5a983"
+    },
+    "11": {
+      "visibleBorderPixels": 0,
+      "sha256": "41e13da0386fdd49226fdcf905dc1e382f5714fd55932d42079e0cea9bf5404a"
+    }
+  },
+  "unchangedV30Frames": 28,
+  "visualReview": "Four replacement drawings compared to master and prior version at 224x320. Ground support and face/Finn placement improved by visual comparison; exact original registration tolerances not certified. Review boards and final-to-first seam inspected. All effects integrated per user request.",
+  "nativePlayback": "Not inspected: file URL blocked by browser security policy."
+}
