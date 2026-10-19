@@ -30,3 +30,8 @@ tools/*-skin/atlas.png
 
 # 파이썬 캐시
 __pycache__/
+
+# 로컬 실험용 다운로드와 앱 빌드 복사본은 업로드하지 않는다.
+/tools/jeanne-skin/motion/native-v*/Retto.app/
+/tools/jeanne-skin/motion/local-interpolation-v29/vendor/
+/tools/jeanne-skin/motion/native-v31/before-v31.zip
