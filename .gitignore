@@ -35,3 +35,11 @@ __pycache__/
 /tools/jeanne-skin/motion/native-v*/Retto.app/
 /tools/jeanne-skin/motion/local-interpolation-v29/vendor/
 /tools/jeanne-skin/motion/native-v31/before-v31.zip
+
+# 네이티브 설치 스냅샷의 소스와 검사 기록만 보존한다.
+/tools/jeanne-skin/motion/native-build/Retto.app/
+/tools/magical-heart-skin-v2/native/Retto.app/
+/tools/jeanne-skin/motion/native-v*/module-cache/
+/tools/jeanne-skin/motion/native-v*/baseline/
+/tools/jeanne-skin/motion/native-v*/installed-before*.zip
+/tools/jeanne-skin/motion/native-v*/installed-before.json
