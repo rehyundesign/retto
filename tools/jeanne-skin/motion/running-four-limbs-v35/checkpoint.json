@@ -1,0 +1,26 @@
+{
+  "phase": "running16 repaired, anatomy reviewed and installed",
+  "generatedRearRepairs": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "pending": [],
+  "anatomy": "four visible paws: raised image-left front; planted image-right front; small bare image-left rear under outer skirt; small image-right rear behind front",
+  "rejectedApproach": "Hiding left rear failed user feedback; keep rear foot visible. Do not restore duplicate cuff at x42%,y81%.",
+  "activeToolCell": "172",
+  "installedApp": "Only row7 image cells replaced; actual installed resource/state tests passed"
+}

@@ -1,0 +1,170 @@
+[
+  {
+    "state": "waving",
+    "theme": "dark",
+    "frames": 16,
+    "durationsMs": [
+      150,
+      150,
+      150,
+      150,
+      150,
+      150,
+      150,
+      150,
+      150,
+      150,
+      150,
+      150,
+      150,
+      150,
+      150,
+      150
+    ],
+    "cycleMs": 2400,
+    "distinctDecodedFrames": 16
+  },
+  {
+    "state": "waving",
+    "theme": "white",
+    "frames": 16,
+    "durationsMs": [
+      150,
+      150,
+      150,
+      150,
+      150,
+      150,
+      150,
+      150,
+      150,
+      150,
+      150,
+      150,
+      150,
+      150,
+      150,
+      150
+    ],
+    "cycleMs": 2400,
+    "distinctDecodedFrames": 16
+  },
+  {
+    "state": "jumping",
+    "theme": "dark",
+    "frames": 16,
+    "durationsMs": [
+      150,
+      150,
+      150,
+      150,
+      150,
+      150,
+      150,
+      150,
+      150,
+      150,
+      150,
+      150,
+      150,
+      150,
+      150,
+      150
+    ],
+    "cycleMs": 2400,
+    "distinctDecodedFrames": 16
+  },
+  {
+    "state": "jumping",
+    "theme": "white",
+    "frames": 16,
+    "durationsMs": [
+      150,
+      150,
+      150,
+      150,
+      150,
+      150,
+      150,
+      150,
+      150,
+      150,
+      150,
+      150,
+      150,
+      150,
+      150,
+      150
+    ],
+    "cycleMs": 2400,
+    "distinctDecodedFrames": 16
+  },
+  {
+    "state": "drag-right",
+    "theme": "dark",
+    "frames": 8,
+    "durationsMs": [
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200
+    ],
+    "cycleMs": 1600,
+    "distinctDecodedFrames": 8
+  },
+  {
+    "state": "drag-right",
+    "theme": "white",
+    "frames": 8,
+    "durationsMs": [
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200
+    ],
+    "cycleMs": 1600,
+    "distinctDecodedFrames": 8
+  },
+  {
+    "state": "drag-left",
+    "theme": "dark",
+    "frames": 8,
+    "durationsMs": [
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200
+    ],
+    "cycleMs": 1600,
+    "distinctDecodedFrames": 8
+  },
+  {
+    "state": "drag-left",
+    "theme": "white",
+    "frames": 8,
+    "durationsMs": [
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200
+    ],
+    "cycleMs": 1600,
+    "distinctDecodedFrames": 8
+  }
+]

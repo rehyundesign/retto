@@ -1,0 +1,75 @@
+{
+  "htmlScripts": "syntax passed",
+  "stateImageAndAnimationPaths": "passed",
+  "stateCounts": "10 states;8 frames per drag direction,16 for other states",
+  "timing": "waving16x150ms=2.4sec;cycle boundaries passed",
+  "alphaEdge": [
+    {
+      "frame": 0,
+      "visibleEdgePixels": 0
+    },
+    {
+      "frame": 1,
+      "visibleEdgePixels": 0
+    },
+    {
+      "frame": 2,
+      "visibleEdgePixels": 0
+    },
+    {
+      "frame": 3,
+      "visibleEdgePixels": 0
+    },
+    {
+      "frame": 4,
+      "visibleEdgePixels": 0
+    },
+    {
+      "frame": 5,
+      "visibleEdgePixels": 0
+    },
+    {
+      "frame": 6,
+      "visibleEdgePixels": 0
+    },
+    {
+      "frame": 7,
+      "visibleEdgePixels": 0
+    },
+    {
+      "frame": 8,
+      "visibleEdgePixels": 0
+    },
+    {
+      "frame": 9,
+      "visibleEdgePixels": 0
+    },
+    {
+      "frame": 10,
+      "visibleEdgePixels": 0
+    },
+    {
+      "frame": 11,
+      "visibleEdgePixels": 0
+    },
+    {
+      "frame": 12,
+      "visibleEdgePixels": 0
+    },
+    {
+      "frame": 13,
+      "visibleEdgePixels": 0
+    },
+    {
+      "frame": 14,
+      "visibleEdgePixels": 0
+    },
+    {
+      "frame": 15,
+      "visibleEdgePixels": 0
+    }
+  ],
+  "sourceHashLocks": "16 new sources;144 unaffectedimagesverifiedbyencode.py",
+  "visualReview": "All16 full integrated cells on dark/white boards reviewed. Original-scale and actual browser/native playback remain unverified.",
+  "integration": "Each selectedframe independently generated complete cat/costume/Finn/FX. No moving still,mesh,parts or generated-sheet slicing."
+}

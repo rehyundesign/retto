@@ -1,0 +1,29 @@
+{
+  "completed": [
+    "idle",
+    "running",
+    "review",
+    "waiting",
+    "failed",
+    "waving",
+    "jumping",
+    "sleeping",
+    "drag-right",
+    "drag-left"
+  ],
+  "newStates": 9,
+  "expectedNewStates": 9,
+  "newFrames": 144,
+  "cycleSeconds": {
+    "idle": 3.2,
+    "running": 2.4,
+    "review": 3.2,
+    "waiting": 3.2,
+    "failed": 3.2,
+    "waving": 2.4,
+    "jumping": 2.4,
+    "sleeping": 6.4,
+    "drag-right": 1.6,
+    "drag-left": 1.6
+  }
+}

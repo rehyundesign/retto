@@ -1,0 +1,41 @@
+{
+  "updatedAt": "2026-10-14T07:31:27.810Z",
+  "scope": "16 independent integrated cursor-gaze stills;144 existing state sources preserved",
+  "savedDirections": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "pendingDirections": [],
+  "completeGeneration": true,
+  "preview": "state-integrated-v25.html",
+  "checks": {
+    "sources": 16,
+    "decodedFrames": 16,
+    "alphaAndSize": "passed448x640",
+    "darkAndWhiteReview": "all16 cells reviewed",
+    "previous144SourceHashes": "unchanged",
+    "directionSectorMath": "16 sectors and4degree hysteresis passed",
+    "controls": "simulated DOM buttons/pointer/deadzone/200ms scan passed",
+    "htmlPathsAndScripts": "passed"
+  },
+  "limitations": {
+    "actualBrowserPlayback": "not checked",
+    "nativePlayback": "not checked due previous computer-use access restriction",
+    "originalAbsoluteRegistration": "not certified"
+  },
+  "installation": "not performed"
+}

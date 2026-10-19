@@ -1,0 +1,539 @@
+{
+  "preview": "state-integrated-v25.html",
+  "mode": "complete integrated image per source",
+  "cell": [
+    448,
+    640
+  ],
+  "runtimeDisplay": [
+    224,
+    320
+  ],
+  "motionSourceDrawings": 144,
+  "gazeSourceDrawings": 16,
+  "states": [
+    {
+      "id": "idle",
+      "row": 0,
+      "sourceDrawings": 16,
+      "cycle": 3.2,
+      "files": [
+        "registered-v23/idle/00.png",
+        "registered-v23/idle/01.png",
+        "registered-v23/idle/02.png",
+        "registered-v23/idle/03.png",
+        "registered-v23/idle/04.png",
+        "registered-v23/idle/05.png",
+        "registered-v23/idle/06.png",
+        "registered-v23/idle/07.png",
+        "registered-v23/idle/08.png",
+        "registered-v23/idle/09.png",
+        "registered-v23/idle/10.png",
+        "registered-v23/idle/11.png",
+        "registered-v23/idle/12.png",
+        "registered-v23/idle/13.png",
+        "registered-v23/idle/14.png",
+        "registered-v23/idle/15.png"
+      ],
+      "native16SlotMap": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ]
+    },
+    {
+      "id": "running",
+      "row": 7,
+      "sourceDrawings": 16,
+      "cycle": 2.4,
+      "files": [
+        "sealing-integrated-v18/00.png",
+        "sealing-integrated-v18/01.png",
+        "sealing-integrated-v18/02.png",
+        "sealing-integrated-v18/03.png",
+        "sealing-integrated-v18/04.png",
+        "sealing-integrated-v18/05.png",
+        "sealing-integrated-v18/06.png",
+        "sealing-integrated-v18/07.png",
+        "registration-v22/running-08.png",
+        "sealing-integrated-v18/09.png",
+        "sealing-integrated-v18/10.png",
+        "sealing-integrated-v18/11.png",
+        "sealing-integrated-v18/12.png",
+        "sealing-integrated-v18/13.png",
+        "sealing-integrated-v18/14.png",
+        "sealing-integrated-v18/15.png"
+      ],
+      "native16SlotMap": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ]
+    },
+    {
+      "id": "review",
+      "row": 8,
+      "sourceDrawings": 16,
+      "cycle": 3.2,
+      "files": [
+        "registered-v23/review/00.png",
+        "registered-v23/review/01.png",
+        "registered-v23/review/02.png",
+        "registered-v23/review/03.png",
+        "registered-v23/review/04.png",
+        "registered-v23/review/05.png",
+        "registered-v23/review/06.png",
+        "registered-v23/review/07.png",
+        "registered-v23/review/08.png",
+        "registered-v23/review/09.png",
+        "registered-v23/review/10.png",
+        "registered-v23/review/11.png",
+        "registered-v23/review/12.png",
+        "registered-v23/review/13.png",
+        "registered-v23/review/14.png",
+        "registered-v23/review/15.png"
+      ],
+      "native16SlotMap": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ]
+    },
+    {
+      "id": "waiting",
+      "row": 6,
+      "sourceDrawings": 16,
+      "cycle": 3.2,
+      "files": [
+        "state-integrated-v19/waiting/00.png",
+        "state-integrated-v19/waiting/01.png",
+        "state-integrated-v19/waiting/02.png",
+        "state-integrated-v19/waiting/03.png",
+        "state-integrated-v19/waiting/04.png",
+        "state-integrated-v19/waiting/05.png",
+        "state-integrated-v19/waiting/06.png",
+        "state-integrated-v19/waiting/07.png",
+        "state-integrated-v19/waiting/08.png",
+        "registration-v22/waiting-09.png",
+        "state-integrated-v19/waiting/10.png",
+        "state-integrated-v19/waiting/11.png",
+        "state-integrated-v19/waiting/12.png",
+        "state-integrated-v19/waiting/13.png",
+        "state-integrated-v19/waiting/14.png",
+        "state-integrated-v19/waiting/15.png"
+      ],
+      "native16SlotMap": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ]
+    },
+    {
+      "id": "failed",
+      "row": 5,
+      "sourceDrawings": 16,
+      "cycle": 3.2,
+      "files": [
+        "registered-v23/failed/00.png",
+        "registered-v23/failed/01.png",
+        "registered-v23/failed/02.png",
+        "registered-v23/failed/03.png",
+        "registered-v23/failed/04.png",
+        "registered-v23/failed/05.png",
+        "registered-v23/failed/06.png",
+        "registered-v23/failed/07.png",
+        "registered-v23/failed/08.png",
+        "registered-v23/failed/09.png",
+        "registered-v23/failed/10.png",
+        "registered-v23/failed/11.png",
+        "registered-v23/failed/12.png",
+        "registered-v23/failed/13.png",
+        "registered-v23/failed/14.png",
+        "registered-v23/failed/15.png"
+      ],
+      "native16SlotMap": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ]
+    },
+    {
+      "id": "waving",
+      "row": 3,
+      "sourceDrawings": 16,
+      "cycle": 2.4,
+      "files": [
+        "pose-v24/completion/00.png",
+        "pose-v24/completion/01.png",
+        "pose-v24/completion/02.png",
+        "pose-v24/completion/03.png",
+        "pose-v24/completion/04.png",
+        "pose-v24/completion/05.png",
+        "pose-v24/completion/06.png",
+        "pose-v24/completion/07.png",
+        "pose-v24/completion/08.png",
+        "pose-v24/completion/09.png",
+        "pose-v24/completion/10.png",
+        "pose-v24/completion/11.png",
+        "pose-v24/completion/12.png",
+        "pose-v24/completion/13.png",
+        "pose-v24/completion/14.png",
+        "pose-v24/completion/15.png"
+      ],
+      "native16SlotMap": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ]
+    },
+    {
+      "id": "jumping",
+      "row": 4,
+      "sourceDrawings": 16,
+      "cycle": 2.4,
+      "files": [
+        "pose-v24/jumping/00.png",
+        "pose-v24/jumping/01.png",
+        "pose-v24/jumping/02.png",
+        "pose-v24/jumping/03.png",
+        "pose-v24/jumping/04.png",
+        "pose-v24/jumping/05.png",
+        "pose-v24/jumping/06.png",
+        "pose-v24/jumping/07.png",
+        "pose-v24/jumping/08.png",
+        "pose-v24/jumping/09.png",
+        "pose-v24/jumping/10.png",
+        "pose-v24/jumping/11.png",
+        "pose-v24/jumping/12.png",
+        "pose-v24/jumping/13.png",
+        "pose-v24/jumping/14.png",
+        "pose-v24/jumping/15.png"
+      ],
+      "native16SlotMap": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ]
+    },
+    {
+      "id": "sleeping",
+      "row": 11,
+      "sourceDrawings": 16,
+      "cycle": 6.4,
+      "files": [
+        "registered-v23/sleeping/00.png",
+        "registered-v23/sleeping/01.png",
+        "registered-v23/sleeping/02.png",
+        "registered-v23/sleeping/03.png",
+        "registered-v23/sleeping/04.png",
+        "registered-v23/sleeping/05.png",
+        "registered-v23/sleeping/06.png",
+        "registered-v23/sleeping/07.png",
+        "registered-v23/sleeping/08.png",
+        "registered-v23/sleeping/09.png",
+        "registered-v23/sleeping/10.png",
+        "registered-v23/sleeping/11.png",
+        "registered-v23/sleeping/12.png",
+        "registered-v23/sleeping/13.png",
+        "registered-v23/sleeping/14.png",
+        "registered-v23/sleeping/15.png"
+      ],
+      "native16SlotMap": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ]
+    },
+    {
+      "id": "drag-right",
+      "row": 1,
+      "sourceDrawings": 8,
+      "cycle": 1.6,
+      "files": [
+        "pose-v24/original-gait/drag-right/00.png",
+        "pose-v24/original-gait/drag-right/01.png",
+        "pose-v24/original-gait/drag-right/02.png",
+        "pose-v24/original-gait/drag-right/03.png",
+        "pose-v24/original-gait/drag-right/04.png",
+        "pose-v24/original-gait/drag-right/05.png",
+        "pose-v24/original-gait/drag-right/06.png",
+        "pose-v24/original-gait/drag-right/07.png"
+      ],
+      "native16SlotMap": [
+        0,
+        0,
+        1,
+        1,
+        2,
+        2,
+        3,
+        3,
+        4,
+        4,
+        5,
+        5,
+        6,
+        6,
+        7,
+        7
+      ]
+    },
+    {
+      "id": "drag-left",
+      "row": 2,
+      "sourceDrawings": 8,
+      "cycle": 1.6,
+      "files": [
+        "pose-v24/original-gait/drag-left/00.png",
+        "pose-v24/original-gait/drag-left/01.png",
+        "pose-v24/original-gait/drag-left/02.png",
+        "pose-v24/original-gait/drag-left/03.png",
+        "pose-v24/original-gait/drag-left/04.png",
+        "pose-v24/original-gait/drag-left/05.png",
+        "pose-v24/original-gait/drag-left/06.png",
+        "pose-v24/original-gait/drag-left/07.png"
+      ],
+      "native16SlotMap": [
+        0,
+        0,
+        1,
+        1,
+        2,
+        2,
+        3,
+        3,
+        4,
+        4,
+        5,
+        5,
+        6,
+        6,
+        7,
+        7
+      ]
+    }
+  ],
+  "gaze": {
+    "rows": [
+      9,
+      10
+    ],
+    "count": 16,
+    "mapping": [
+      {
+        "direction": 0,
+        "row": 9,
+        "column": 0,
+        "file": "gaze-v25/00.png"
+      },
+      {
+        "direction": 1,
+        "row": 9,
+        "column": 1,
+        "file": "gaze-v25/01.png"
+      },
+      {
+        "direction": 2,
+        "row": 9,
+        "column": 2,
+        "file": "gaze-v25/02.png"
+      },
+      {
+        "direction": 3,
+        "row": 9,
+        "column": 3,
+        "file": "gaze-v25/03.png"
+      },
+      {
+        "direction": 4,
+        "row": 9,
+        "column": 4,
+        "file": "gaze-v25/04.png"
+      },
+      {
+        "direction": 5,
+        "row": 9,
+        "column": 5,
+        "file": "gaze-v25/05.png"
+      },
+      {
+        "direction": 6,
+        "row": 9,
+        "column": 6,
+        "file": "gaze-v25/06.png"
+      },
+      {
+        "direction": 7,
+        "row": 9,
+        "column": 7,
+        "file": "gaze-v25/07.png"
+      },
+      {
+        "direction": 8,
+        "row": 10,
+        "column": 0,
+        "file": "gaze-v25/08.png"
+      },
+      {
+        "direction": 9,
+        "row": 10,
+        "column": 1,
+        "file": "gaze-v25/09.png"
+      },
+      {
+        "direction": 10,
+        "row": 10,
+        "column": 2,
+        "file": "gaze-v25/10.png"
+      },
+      {
+        "direction": 11,
+        "row": 10,
+        "column": 3,
+        "file": "gaze-v25/11.png"
+      },
+      {
+        "direction": 12,
+        "row": 10,
+        "column": 4,
+        "file": "gaze-v25/12.png"
+      },
+      {
+        "direction": 13,
+        "row": 10,
+        "column": 5,
+        "file": "gaze-v25/13.png"
+      },
+      {
+        "direction": 14,
+        "row": 10,
+        "column": 6,
+        "file": "gaze-v25/14.png"
+      },
+      {
+        "direction": 15,
+        "row": 10,
+        "column": 7,
+        "file": "gaze-v25/15.png"
+      }
+    ]
+  },
+  "effects": {
+    "bakedIntoSource": true,
+    "continueWhenPoseHeld": false
+  },
+  "acceptance": {
+    "drag": "v24 accepted provisionally; quality improvement still desired",
+    "otherStates": "Existing v24 candidates retained, no new approval implied",
+    "gaze": "new visual review candidate"
+  },
+  "native": {
+    "installed": false,
+    "playbackVerified": false,
+    "originalAbsoluteRegistrationCertified": false
+  }
+}

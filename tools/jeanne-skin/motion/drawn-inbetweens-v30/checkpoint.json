@@ -1,0 +1,50 @@
+{
+  "phase": "PNG GIF and HTML candidate exported; contact sheets reviewed",
+  "states": [
+    "waving",
+    "waiting"
+  ],
+  "targetFramesPerState": 16,
+  "preservedKeys": {
+    "waving": [
+      0,
+      3,
+      6,
+      7,
+      12,
+      13,
+      14,
+      15
+    ],
+    "waiting": [
+      0,
+      6,
+      8,
+      9,
+      10,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  "method": "new crisp anatomical drawings using full-image pose construction guides;no optical-flow frames",
+  "previousCandidate": "v29 rejected by user; do not use as final",
+  "priorAutomation": "tooncrafter removed because prior experimental pipeline is superseded",
+  "guidePlan": "guided-jobs.json",
+  "passingRepresentativeDrawings": [
+    "waving/01-source.png",
+    "waving/04-source.png",
+    "waiting/03-source.png",
+    "waiting/11-source.png"
+  ],
+  "notes": "Review generated paw height before assigning order;guide artwork never appears in final frames",
+  "selectedOriginalDrawings": 17,
+  "selectedNewDrawings": 15,
+  "frameCounts": {
+    "waving": 16,
+    "waiting": 16
+  },
+  "preservedDrawingManifest": "preserved-keys.json",
+  "selectedPoseOrder": "selected-pose-order.json"
+}

@@ -1,0 +1,106 @@
+{
+  "id": "drag-left",
+  "cycle": 1.6,
+  "times": null,
+  "frames": [
+    {
+      "frame": 0,
+      "source": "00-source.png",
+      "sha256": "7c0eb78716f978a51977ef1260b35769159b3d83eda52343643e1f7ca825aca3"
+    },
+    {
+      "frame": 1,
+      "source": "01-source.png",
+      "sha256": "b96ebcced4b09df5ac25e01f69774bd3315fa7b41e9a18effff501dc4421465e"
+    },
+    {
+      "frame": 2,
+      "source": "02-source.png",
+      "sha256": "6f04c621ae7dcbae730a771a91dc755fe2de95fbde7f8d03be201569d5388f60"
+    },
+    {
+      "frame": 3,
+      "source": "03-source.png",
+      "sha256": "6cac9d9603eefd256ff2ba60813ab372fd499bc3e3eb990fd042a54d1d860c91"
+    },
+    {
+      "frame": 4,
+      "source": "04-source.png",
+      "sha256": "121b16c5407c3dc8fa4cb2420bb05f618e6fec1842486de7d3e7d575b7e92a07"
+    },
+    {
+      "frame": 5,
+      "source": "05-source.png",
+      "sha256": "82c31ab3a109ab44b1bb83086082f56e91772c83b3e12758cfb1bc876566e187"
+    },
+    {
+      "frame": 6,
+      "source": "06-source.png",
+      "sha256": "597178f52464a061876b5d9d054a4bc147f7acc929c7b19897627e45dcbe4182"
+    },
+    {
+      "frame": 7,
+      "source": "07-source.png",
+      "sha256": "1862aa16ef194e32f18ebc9e17ad469745519bfc4176ecbec110d15127080703"
+    },
+    {
+      "frame": 8,
+      "source": "08-source.png",
+      "sha256": "d1759c8b4b29c12f3f353ed5863cb245d6a39f0520894c4e8a75b21d26e69059"
+    },
+    {
+      "frame": 9,
+      "source": "09-source.png",
+      "sha256": "c71fc0e55a5d5c4acd55a66596332cdc441357afa30c3fa3ba5f42f9683dc066"
+    },
+    {
+      "frame": 10,
+      "source": "10-source.png",
+      "sha256": "a372351d8bf0d0d53148096a9af17add5f0611778b793caa1f411c7a6bfb0af3"
+    },
+    {
+      "frame": 11,
+      "source": "11-source.png",
+      "sha256": "d0f5faea83b92e68f546588b2f846efbc6eacfa0c5cd8af2ec0a0bdbcaa3c0c0"
+    },
+    {
+      "frame": 12,
+      "source": "12-source.png",
+      "sha256": "089fb3906b278e97b1815214b9e9949c015453cf810b1671d59aa081915dedf9"
+    },
+    {
+      "frame": 13,
+      "source": "13-source.png",
+      "sha256": "348ebe9496d299dbb6bc7090dee80bbd1ef6e5daff1a377223b34f9dacb03704"
+    },
+    {
+      "frame": 14,
+      "source": "14-source.png",
+      "sha256": "68b886b8a5d831b074e4f49c4dc159852f4424ec70a30469aee4b91dc0096072"
+    },
+    {
+      "frame": 15,
+      "source": "15-source.png",
+      "sha256": "31e2e63da71c9c1b008607f12fc75cb6a8533f58fab30ee34ec5cc4c437e86a5"
+    }
+  ],
+  "playbackOrder": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "originalRegistration": "not certified"
+}

@@ -1,0 +1,61 @@
+{
+  "updatedAt": "2026-10-14T02:58:09.210Z",
+  "generationComplete": true,
+  "selectedStates": [
+    {
+      "id": "idle",
+      "frames": 16,
+      "cycle": 3.2
+    },
+    {
+      "id": "running",
+      "frames": 16,
+      "cycle": 2.4
+    },
+    {
+      "id": "review",
+      "frames": 16,
+      "cycle": 3.2
+    },
+    {
+      "id": "waiting",
+      "frames": 16,
+      "cycle": 3.2
+    },
+    {
+      "id": "failed",
+      "frames": 16,
+      "cycle": 3.2
+    },
+    {
+      "id": "waving",
+      "frames": 16,
+      "cycle": 2.4
+    },
+    {
+      "id": "jumping",
+      "frames": 16,
+      "cycle": 2.4
+    },
+    {
+      "id": "sleeping",
+      "frames": 16,
+      "cycle": 6.4
+    },
+    {
+      "id": "drag-right",
+      "frames": 16,
+      "cycle": 1.6
+    },
+    {
+      "id": "drag-left",
+      "frames": 16,
+      "cycle": 1.6
+    }
+  ],
+  "newFrames": 144,
+  "approvedSealingFrames": 16,
+  "dragEffects": "approximately half; drag-soft selected",
+  "visualStatus": "preview candidate; original registration and live playback not certified",
+  "waitingEffectRepair": "refined-locked frames 0-6 selected"
+}

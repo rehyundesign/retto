@@ -1,0 +1,1297 @@
+[
+  {
+    "id": "idle",
+    "label": "기본 대기",
+    "state": "idle",
+    "files": [
+      "registered-v23/idle/00.png",
+      "registered-v23/idle/01.png",
+      "registered-v23/idle/02.png",
+      "registered-v23/idle/03.png",
+      "registered-v23/idle/04.png",
+      "registered-v23/idle/05.png",
+      "registered-v23/idle/06.png",
+      "registered-v23/idle/07.png",
+      "registered-v23/idle/08.png",
+      "registered-v23/idle/09.png",
+      "registered-v23/idle/10.png",
+      "registered-v23/idle/11.png",
+      "registered-v23/idle/12.png",
+      "registered-v23/idle/13.png",
+      "registered-v23/idle/14.png",
+      "registered-v23/idle/15.png"
+    ],
+    "trials": [],
+    "times": [
+      0.2,
+      0.2,
+      0.2,
+      0.2,
+      0.2,
+      0.2,
+      0.2,
+      0.2,
+      0.2,
+      0.2,
+      0.2,
+      0.2,
+      0.2,
+      0.2,
+      0.2,
+      0.2
+    ],
+    "cycle": 3.2,
+    "kind": "state",
+    "status": "전체 16장 다시 생성 · 위치/동작 검토 후보",
+    "note": "모든 프레임을 0.2초씩 재생하며 짧게 눈을 감았다 뜹니다.",
+    "anchors": [
+      {
+        "x": 97,
+        "y": 220.5,
+        "visible": true
+      },
+      {
+        "x": 97,
+        "y": 217,
+        "visible": true
+      },
+      {
+        "x": 97,
+        "y": 219.5,
+        "visible": true
+      },
+      {
+        "x": 97,
+        "y": 219.5,
+        "visible": true
+      },
+      {
+        "x": 98,
+        "y": 216.5,
+        "visible": true
+      },
+      {
+        "x": 98.5,
+        "y": 219,
+        "visible": true
+      },
+      {
+        "x": 98.5,
+        "y": 219.5,
+        "visible": true
+      },
+      {
+        "x": 98,
+        "y": 218,
+        "visible": true
+      },
+      {
+        "x": 98,
+        "y": 218.5,
+        "visible": true
+      },
+      {
+        "x": 97,
+        "y": 219.5,
+        "visible": true
+      },
+      {
+        "x": 98.5,
+        "y": 218,
+        "visible": true
+      },
+      {
+        "x": 97.5,
+        "y": 216,
+        "visible": true
+      },
+      {
+        "x": 92.5,
+        "y": 212.5,
+        "visible": true
+      },
+      {
+        "x": 98,
+        "y": 218.5,
+        "visible": true
+      },
+      {
+        "x": 104.5,
+        "y": 220,
+        "visible": true
+      },
+      {
+        "x": 98.5,
+        "y": 218.5,
+        "visible": true
+      }
+    ],
+    "trialAnchors": [],
+    "animations": [
+      {
+        "theme": "dark",
+        "file": "registered-v23/idle/animation-dark.webp"
+      },
+      {
+        "theme": "white",
+        "file": "registered-v23/idle/animation-white.webp"
+      }
+    ]
+  },
+  {
+    "id": "running",
+    "label": "작업 · 봉인",
+    "state": "running",
+    "files": [
+      "sealing-integrated-v18/00.png",
+      "sealing-integrated-v18/01.png",
+      "sealing-integrated-v18/02.png",
+      "sealing-integrated-v18/03.png",
+      "sealing-integrated-v18/04.png",
+      "sealing-integrated-v18/05.png",
+      "sealing-integrated-v18/06.png",
+      "sealing-integrated-v18/07.png",
+      "registration-v22/running-08.png",
+      "sealing-integrated-v18/09.png",
+      "sealing-integrated-v18/10.png",
+      "sealing-integrated-v18/11.png",
+      "sealing-integrated-v18/12.png",
+      "sealing-integrated-v18/13.png",
+      "sealing-integrated-v18/14.png",
+      "sealing-integrated-v18/15.png"
+    ],
+    "trials": [
+      "latest-preview-assets/running/trial-0.png",
+      "latest-preview-assets/running/trial-1.png",
+      "latest-preview-assets/running/trial-2.png",
+      "latest-preview-assets/running/trial-3.png"
+    ],
+    "times": null,
+    "cycle": 2.4,
+    "kind": "state",
+    "status": "위치 수정본 포함 · 16장",
+    "note": "원본 포즈를 기준으로 위치 변화가 큰 프레임을 통합 이미지로 다시 생성했습니다. 엄격한 원본 등록 검증은 남아 있습니다.",
+    "anchors": [
+      {
+        "x": 97,
+        "y": 219.5,
+        "visible": true
+      },
+      {
+        "x": 99,
+        "y": 217.5,
+        "visible": true
+      },
+      {
+        "x": 99,
+        "y": 220.5,
+        "visible": true
+      },
+      {
+        "x": 99,
+        "y": 221,
+        "visible": true
+      },
+      {
+        "x": 99.5,
+        "y": 221.5,
+        "visible": true
+      },
+      {
+        "x": 99,
+        "y": 213.5,
+        "visible": true
+      },
+      {
+        "x": 98.5,
+        "y": 218.5,
+        "visible": true
+      },
+      {
+        "x": 100.5,
+        "y": 215.5,
+        "visible": true
+      },
+      {
+        "x": 101.5,
+        "y": 220,
+        "visible": true
+      },
+      {
+        "x": 102.5,
+        "y": 219.5,
+        "visible": true
+      },
+      {
+        "x": 94,
+        "y": 220.5,
+        "visible": true
+      },
+      {
+        "x": 99,
+        "y": 223,
+        "visible": true
+      },
+      {
+        "x": 98.5,
+        "y": 216,
+        "visible": true
+      },
+      {
+        "x": 98.5,
+        "y": 217.5,
+        "visible": true
+      },
+      {
+        "x": 99,
+        "y": 217.5,
+        "visible": true
+      },
+      {
+        "x": 100,
+        "y": 217.5,
+        "visible": true
+      }
+    ],
+    "trialAnchors": [
+      {
+        "x": 85.5,
+        "y": 225,
+        "visible": true
+      },
+      {
+        "x": 82.5,
+        "y": 222.5,
+        "visible": true
+      },
+      {
+        "x": 81,
+        "y": 225,
+        "visible": true
+      },
+      {
+        "x": 114.5,
+        "y": 231.5,
+        "visible": true
+      }
+    ],
+    "animations": [
+      {
+        "file": "registration-v22/running/animation-dark.webp",
+        "theme": "dark"
+      },
+      {
+        "file": "registration-v22/running/animation-white.webp",
+        "theme": "white"
+      }
+    ]
+  },
+  {
+    "id": "review",
+    "label": "검토 · 체크메이트",
+    "state": "review",
+    "files": [
+      "registered-v23/review/00.png",
+      "registered-v23/review/01.png",
+      "registered-v23/review/02.png",
+      "registered-v23/review/03.png",
+      "registered-v23/review/04.png",
+      "registered-v23/review/05.png",
+      "registered-v23/review/06.png",
+      "registered-v23/review/07.png",
+      "registered-v23/review/08.png",
+      "registered-v23/review/09.png",
+      "registered-v23/review/10.png",
+      "registered-v23/review/11.png",
+      "registered-v23/review/12.png",
+      "registered-v23/review/13.png",
+      "registered-v23/review/14.png",
+      "registered-v23/review/15.png"
+    ],
+    "trials": [
+      "latest-preview-assets/review/trial-0.png",
+      "latest-preview-assets/review/trial-1.png",
+      "latest-preview-assets/review/trial-2.png",
+      "latest-preview-assets/review/trial-3.png"
+    ],
+    "times": null,
+    "cycle": 3.2,
+    "kind": "state",
+    "status": "전체 16장 다시 생성 · 위치/동작 검토 후보",
+    "note": "지지 자세를 유지하면서 앞발로 로사리오를 만집니다.",
+    "anchors": [
+      {
+        "x": 105,
+        "y": 213.5,
+        "visible": true
+      },
+      {
+        "x": 103,
+        "y": 214,
+        "visible": true
+      },
+      {
+        "x": 102.5,
+        "y": 214,
+        "visible": true
+      },
+      {
+        "x": 103.5,
+        "y": 215.5,
+        "visible": true
+      },
+      {
+        "x": 103.5,
+        "y": 215.5,
+        "visible": true
+      },
+      {
+        "x": 101.5,
+        "y": 214.5,
+        "visible": true
+      },
+      {
+        "x": 102,
+        "y": 213,
+        "visible": true
+      },
+      {
+        "x": 105.5,
+        "y": 216,
+        "visible": true
+      },
+      {
+        "x": 103,
+        "y": 213,
+        "visible": true
+      },
+      {
+        "x": 103.5,
+        "y": 210.5,
+        "visible": true
+      },
+      {
+        "x": 103.5,
+        "y": 208.5,
+        "visible": true
+      },
+      {
+        "x": 104,
+        "y": 208.5,
+        "visible": true
+      },
+      {
+        "x": 105.5,
+        "y": 211.5,
+        "visible": true
+      },
+      {
+        "x": 105.5,
+        "y": 211,
+        "visible": true
+      },
+      {
+        "x": 105.5,
+        "y": 211,
+        "visible": true
+      },
+      {
+        "x": 104.5,
+        "y": 212,
+        "visible": true
+      }
+    ],
+    "trialAnchors": [
+      {
+        "x": 106,
+        "y": 215.5,
+        "visible": true
+      },
+      {
+        "x": 113,
+        "y": 217,
+        "visible": true
+      },
+      {
+        "x": 113,
+        "y": 212.5,
+        "visible": true
+      },
+      {
+        "x": 109.5,
+        "y": 221,
+        "visible": true
+      }
+    ],
+    "animations": [
+      {
+        "theme": "dark",
+        "file": "registered-v23/review/animation-dark.webp"
+      },
+      {
+        "theme": "white",
+        "file": "registered-v23/review/animation-white.webp"
+      }
+    ]
+  },
+  {
+    "id": "waiting",
+    "label": "입력 대기",
+    "state": "waiting",
+    "files": [
+      "state-integrated-v19/waiting/00.png",
+      "state-integrated-v19/waiting/01.png",
+      "state-integrated-v19/waiting/02.png",
+      "state-integrated-v19/waiting/03.png",
+      "state-integrated-v19/waiting/04.png",
+      "state-integrated-v19/waiting/05.png",
+      "state-integrated-v19/waiting/06.png",
+      "state-integrated-v19/waiting/07.png",
+      "state-integrated-v19/waiting/08.png",
+      "registration-v22/waiting-09.png",
+      "state-integrated-v19/waiting/10.png",
+      "state-integrated-v19/waiting/11.png",
+      "state-integrated-v19/waiting/12.png",
+      "state-integrated-v19/waiting/13.png",
+      "state-integrated-v19/waiting/14.png",
+      "state-integrated-v19/waiting/15.png"
+    ],
+    "trials": [
+      "latest-preview-assets/waiting/trial-0.png",
+      "latest-preview-assets/waiting/trial-1.png",
+      "latest-preview-assets/waiting/trial-2.png",
+      "latest-preview-assets/waiting/trial-3.png"
+    ],
+    "times": null,
+    "cycle": 3.2,
+    "kind": "state",
+    "status": "위치 수정본 포함 · 16장",
+    "note": "원본 포즈를 기준으로 위치 변화가 큰 프레임을 통합 이미지로 다시 생성했습니다. 엄격한 원본 등록 검증은 남아 있습니다.",
+    "anchors": [
+      {
+        "x": 105,
+        "y": 208,
+        "visible": true
+      },
+      {
+        "x": 107.5,
+        "y": 212.5,
+        "visible": true
+      },
+      {
+        "x": 107.5,
+        "y": 213.5,
+        "visible": true
+      },
+      {
+        "x": 105,
+        "y": 217.5,
+        "visible": true
+      },
+      {
+        "x": 108,
+        "y": 206.5,
+        "visible": true
+      },
+      {
+        "x": 109.5,
+        "y": 200,
+        "visible": true
+      },
+      {
+        "x": 107.5,
+        "y": 204,
+        "visible": true
+      },
+      {
+        "x": 100.5,
+        "y": 209.5,
+        "visible": true
+      },
+      {
+        "x": 106.5,
+        "y": 203.5,
+        "visible": true
+      },
+      {
+        "x": 105.5,
+        "y": 203.5,
+        "visible": true
+      },
+      {
+        "x": 105.5,
+        "y": 205,
+        "visible": true
+      },
+      {
+        "x": 107,
+        "y": 205,
+        "visible": true
+      },
+      {
+        "x": 105.5,
+        "y": 209,
+        "visible": true
+      },
+      {
+        "x": 111,
+        "y": 206.5,
+        "visible": true
+      },
+      {
+        "x": 112,
+        "y": 207.5,
+        "visible": true
+      },
+      {
+        "x": 107.5,
+        "y": 210,
+        "visible": true
+      }
+    ],
+    "trialAnchors": [
+      {
+        "x": 111,
+        "y": 207.5,
+        "visible": true
+      },
+      {
+        "x": 115.5,
+        "y": 205.5,
+        "visible": true
+      },
+      {
+        "x": 111,
+        "y": 206.5,
+        "visible": true
+      },
+      {
+        "x": 111,
+        "y": 207.5,
+        "visible": true
+      }
+    ],
+    "animations": [
+      {
+        "file": "registration-v22/waiting/animation-dark.webp",
+        "theme": "dark"
+      },
+      {
+        "file": "registration-v22/waiting/animation-white.webp",
+        "theme": "white"
+      }
+    ]
+  },
+  {
+    "id": "failed",
+    "label": "오류 · 봉인 실패",
+    "state": "failed",
+    "files": [
+      "registered-v23/failed/00.png",
+      "registered-v23/failed/01.png",
+      "registered-v23/failed/02.png",
+      "registered-v23/failed/03.png",
+      "registered-v23/failed/04.png",
+      "registered-v23/failed/05.png",
+      "registered-v23/failed/06.png",
+      "registered-v23/failed/07.png",
+      "registered-v23/failed/08.png",
+      "registered-v23/failed/09.png",
+      "registered-v23/failed/10.png",
+      "registered-v23/failed/11.png",
+      "registered-v23/failed/12.png",
+      "registered-v23/failed/13.png",
+      "registered-v23/failed/14.png",
+      "registered-v23/failed/15.png"
+    ],
+    "trials": [],
+    "times": null,
+    "cycle": 3.2,
+    "kind": "state",
+    "status": "전체 16장 다시 생성 · 위치/동작 검토 후보",
+    "note": "핀을 향해 앞발을 뻗었다 회복하는 작은 위로 동작입니다.",
+    "anchors": [
+      {
+        "x": 86,
+        "y": 227,
+        "visible": true
+      },
+      {
+        "x": 88.5,
+        "y": 222,
+        "visible": true
+      },
+      {
+        "x": 91,
+        "y": 220.5,
+        "visible": true
+      },
+      {
+        "x": 89,
+        "y": 217,
+        "visible": true
+      },
+      {
+        "x": 87,
+        "y": 219,
+        "visible": true
+      },
+      {
+        "x": 82,
+        "y": 225.5,
+        "visible": true
+      },
+      {
+        "x": 82.5,
+        "y": 226.5,
+        "visible": true
+      },
+      {
+        "x": 92.5,
+        "y": 223,
+        "visible": true
+      },
+      {
+        "x": 93,
+        "y": 224,
+        "visible": true
+      },
+      {
+        "x": 81.5,
+        "y": 216,
+        "visible": true
+      },
+      {
+        "x": 81.5,
+        "y": 221,
+        "visible": true
+      },
+      {
+        "x": 89.5,
+        "y": 221.5,
+        "visible": true
+      },
+      {
+        "x": 90,
+        "y": 219,
+        "visible": true
+      },
+      {
+        "x": 89,
+        "y": 224,
+        "visible": true
+      },
+      {
+        "x": 89,
+        "y": 224,
+        "visible": true
+      },
+      {
+        "x": 89,
+        "y": 224,
+        "visible": true
+      }
+    ],
+    "trialAnchors": [],
+    "animations": [
+      {
+        "theme": "dark",
+        "file": "registered-v23/failed/animation-dark.webp"
+      },
+      {
+        "theme": "white",
+        "file": "registered-v23/failed/animation-white.webp"
+      }
+    ]
+  },
+  {
+    "id": "waving",
+    "label": "완료 · 승리 인사",
+    "state": "waving",
+    "files": [
+      "pose-v24/completion/00.png",
+      "pose-v24/completion/01.png",
+      "pose-v24/completion/02.png",
+      "pose-v24/completion/03.png",
+      "pose-v24/completion/04.png",
+      "pose-v24/completion/05.png",
+      "pose-v24/completion/06.png",
+      "pose-v24/completion/07.png",
+      "pose-v24/completion/08.png",
+      "pose-v24/completion/09.png",
+      "pose-v24/completion/10.png",
+      "pose-v24/completion/11.png",
+      "pose-v24/completion/12.png",
+      "pose-v24/completion/13.png",
+      "pose-v24/completion/14.png",
+      "pose-v24/completion/15.png"
+    ],
+    "trials": [],
+    "cycle": 2.4,
+    "kind": "state",
+    "status": "전체 16장 · 동작/이펙트 수정",
+    "note": "같은 앞발이 바닥 → 인사 → 바닥으로 이어지고 다른 발은 몸을 지지합니다.",
+    "anchors": [
+      {
+        "x": 100.5,
+        "y": 199.5,
+        "visible": true
+      },
+      {
+        "x": 94.5,
+        "y": 206.5,
+        "visible": true
+      },
+      {
+        "x": 96,
+        "y": 206,
+        "visible": true
+      },
+      {
+        "x": 94,
+        "y": 205.5,
+        "visible": true
+      },
+      {
+        "x": 95,
+        "y": 207.5,
+        "visible": true
+      },
+      {
+        "x": 97.5,
+        "y": 202,
+        "visible": true
+      },
+      {
+        "x": 92.5,
+        "y": 205.5,
+        "visible": true
+      },
+      {
+        "x": 95,
+        "y": 205,
+        "visible": true
+      },
+      {
+        "x": 94.5,
+        "y": 204.5,
+        "visible": true
+      },
+      {
+        "x": 93,
+        "y": 206.5,
+        "visible": true
+      },
+      {
+        "x": 94.5,
+        "y": 207,
+        "visible": true
+      },
+      {
+        "x": 101.5,
+        "y": 199,
+        "visible": true
+      },
+      {
+        "x": 101,
+        "y": 208,
+        "visible": true
+      },
+      {
+        "x": 99.5,
+        "y": 200.5,
+        "visible": true
+      },
+      {
+        "x": 100.5,
+        "y": 201.5,
+        "visible": true
+      },
+      {
+        "x": 93,
+        "y": 208,
+        "visible": true
+      }
+    ],
+    "trialAnchors": [],
+    "animations": [
+      {
+        "theme": "dark",
+        "file": "pose-v24/completion/animation-dark.webp"
+      },
+      {
+        "theme": "white",
+        "file": "pose-v24/completion/animation-white.webp"
+      }
+    ]
+  },
+  {
+    "id": "jumping",
+    "label": "점프 · 도약",
+    "state": "jumping",
+    "files": [
+      "pose-v24/jumping/00.png",
+      "pose-v24/jumping/01.png",
+      "pose-v24/jumping/02.png",
+      "pose-v24/jumping/03.png",
+      "pose-v24/jumping/04.png",
+      "pose-v24/jumping/05.png",
+      "pose-v24/jumping/06.png",
+      "pose-v24/jumping/07.png",
+      "pose-v24/jumping/08.png",
+      "pose-v24/jumping/09.png",
+      "pose-v24/jumping/10.png",
+      "pose-v24/jumping/11.png",
+      "pose-v24/jumping/12.png",
+      "pose-v24/jumping/13.png",
+      "pose-v24/jumping/14.png",
+      "pose-v24/jumping/15.png"
+    ],
+    "trials": [],
+    "cycle": 2.4,
+    "kind": "state",
+    "status": "전체 16장 · 동작/이펙트 수정",
+    "note": "승인한 도약 동작을 참고해 주변 이펙트를 약 1/3로 줄였습니다.",
+    "anchors": [
+      {
+        "x": 153,
+        "y": 238.5,
+        "visible": true
+      },
+      {
+        "x": 155.5,
+        "y": 224,
+        "visible": true
+      },
+      {
+        "x": 151.5,
+        "y": 230.5,
+        "visible": true
+      },
+      {
+        "x": 153.5,
+        "y": 225.5,
+        "visible": true
+      },
+      {
+        "x": 162.5,
+        "y": 235.5,
+        "visible": true
+      },
+      {
+        "x": 162,
+        "y": 225,
+        "visible": true
+      },
+      {
+        "x": 150,
+        "y": 227.5,
+        "visible": true
+      },
+      {
+        "x": 157,
+        "y": 229.5,
+        "visible": true
+      },
+      {
+        "x": 149,
+        "y": 228.5,
+        "visible": true
+      },
+      {
+        "x": 159,
+        "y": 239.5,
+        "visible": true
+      },
+      {
+        "x": 160,
+        "y": 238,
+        "visible": true
+      },
+      {
+        "x": 144,
+        "y": 235,
+        "visible": true
+      },
+      {
+        "x": 158.5,
+        "y": 241,
+        "visible": true
+      },
+      {
+        "x": 144.5,
+        "y": 248,
+        "visible": true
+      },
+      {
+        "x": 155,
+        "y": 241.5,
+        "visible": true
+      },
+      {
+        "x": 145.5,
+        "y": 244,
+        "visible": true
+      }
+    ],
+    "trialAnchors": [],
+    "animations": [
+      {
+        "theme": "dark",
+        "file": "pose-v24/jumping/animation-dark.webp"
+      },
+      {
+        "theme": "white",
+        "file": "pose-v24/jumping/animation-white.webp"
+      }
+    ]
+  },
+  {
+    "id": "sleeping",
+    "label": "수면",
+    "state": "sleeping",
+    "files": [
+      "registered-v23/sleeping/00.png",
+      "registered-v23/sleeping/01.png",
+      "registered-v23/sleeping/02.png",
+      "registered-v23/sleeping/03.png",
+      "registered-v23/sleeping/04.png",
+      "registered-v23/sleeping/05.png",
+      "registered-v23/sleeping/06.png",
+      "registered-v23/sleeping/07.png",
+      "registered-v23/sleeping/08.png",
+      "registered-v23/sleeping/09.png",
+      "registered-v23/sleeping/10.png",
+      "registered-v23/sleeping/11.png",
+      "registered-v23/sleeping/12.png",
+      "registered-v23/sleeping/13.png",
+      "registered-v23/sleeping/14.png",
+      "registered-v23/sleeping/15.png"
+    ],
+    "trials": [],
+    "times": null,
+    "cycle": 6.4,
+    "kind": "state",
+    "status": "전체 16장 다시 생성 · 위치/동작 검토 후보",
+    "note": "작은 호흡을 표현하며 얼굴·발·꼬리의 큰 위치 변화를 줄였습니다.",
+    "anchors": [
+      {
+        "x": 140.5,
+        "y": 274,
+        "visible": true
+      },
+      {
+        "x": 139.5,
+        "y": 272.5,
+        "visible": true
+      },
+      {
+        "x": 142,
+        "y": 272,
+        "visible": true
+      },
+      {
+        "x": 142,
+        "y": 271.5,
+        "visible": true
+      },
+      {
+        "x": 142,
+        "y": 272,
+        "visible": true
+      },
+      {
+        "x": 141,
+        "y": 272,
+        "visible": true
+      },
+      {
+        "x": 141.5,
+        "y": 272,
+        "visible": true
+      },
+      {
+        "x": 141.5,
+        "y": 271,
+        "visible": true
+      },
+      {
+        "x": 141,
+        "y": 274,
+        "visible": true
+      },
+      {
+        "x": 141.5,
+        "y": 274.5,
+        "visible": true
+      },
+      {
+        "x": 141.5,
+        "y": 274,
+        "visible": true
+      },
+      {
+        "x": 139.5,
+        "y": 271,
+        "visible": true
+      },
+      {
+        "x": 142,
+        "y": 273,
+        "visible": true
+      },
+      {
+        "x": 141.5,
+        "y": 272.5,
+        "visible": true
+      },
+      {
+        "x": 141.5,
+        "y": 272.5,
+        "visible": true
+      },
+      {
+        "x": 141.5,
+        "y": 273,
+        "visible": true
+      }
+    ],
+    "trialAnchors": [],
+    "animations": [
+      {
+        "theme": "dark",
+        "file": "registered-v23/sleeping/animation-dark.webp"
+      },
+      {
+        "theme": "white",
+        "file": "registered-v23/sleeping/animation-white.webp"
+      }
+    ]
+  },
+  {
+    "id": "drag-right",
+    "label": "이동 · 오른쪽",
+    "state": "drag-right",
+    "files": [
+      "pose-v24/original-gait/drag-right/00.png",
+      "pose-v24/original-gait/drag-right/01.png",
+      "pose-v24/original-gait/drag-right/02.png",
+      "pose-v24/original-gait/drag-right/03.png",
+      "pose-v24/original-gait/drag-right/04.png",
+      "pose-v24/original-gait/drag-right/05.png",
+      "pose-v24/original-gait/drag-right/06.png",
+      "pose-v24/original-gait/drag-right/07.png"
+    ],
+    "trials": [],
+    "cycle": 1.6,
+    "kind": "state",
+    "status": "원본 8개 보행 자세 · 8장 독립 생성",
+    "note": "원본 오른쪽 8개 보행 자세를 사용합니다. 그림당 0.2초, 이펙트는 작은 깃털과 리본입니다.",
+    "anchors": [
+      {
+        "x": 144.5,
+        "y": 251.5,
+        "visible": true
+      },
+      {
+        "x": 146,
+        "y": 230.5,
+        "visible": true
+      },
+      {
+        "x": 146,
+        "y": 228.5,
+        "visible": true
+      },
+      {
+        "x": 140,
+        "y": 261,
+        "visible": true
+      },
+      {
+        "x": 151.5,
+        "y": 249.5,
+        "visible": true
+      },
+      {
+        "x": 151,
+        "y": 255,
+        "visible": true
+      },
+      {
+        "x": 128,
+        "y": 238,
+        "visible": true
+      },
+      {
+        "x": 156,
+        "y": 263.5,
+        "visible": true
+      },
+      {
+        "x": 128,
+        "y": 250,
+        "visible": true
+      },
+      {
+        "x": 135.5,
+        "y": 242,
+        "visible": true
+      },
+      {
+        "x": 131,
+        "y": 242,
+        "visible": true
+      },
+      {
+        "x": 130.5,
+        "y": 242,
+        "visible": true
+      },
+      {
+        "x": 136.5,
+        "y": 255,
+        "visible": true
+      },
+      {
+        "x": 137.5,
+        "y": 250,
+        "visible": true
+      },
+      {
+        "x": 145.5,
+        "y": 229.5,
+        "visible": true
+      },
+      {
+        "x": 146,
+        "y": 229,
+        "visible": true
+      }
+    ],
+    "trialAnchors": [],
+    "animations": [
+      {
+        "theme": "dark",
+        "file": "pose-v24/original-gait/drag-right/animation-dark.webp"
+      },
+      {
+        "theme": "white",
+        "file": "pose-v24/original-gait/drag-right/animation-white.webp"
+      }
+    ]
+  },
+  {
+    "id": "drag-left",
+    "label": "이동 · 왼쪽",
+    "state": "drag-left",
+    "files": [
+      "pose-v24/original-gait/drag-left/00.png",
+      "pose-v24/original-gait/drag-left/01.png",
+      "pose-v24/original-gait/drag-left/02.png",
+      "pose-v24/original-gait/drag-left/03.png",
+      "pose-v24/original-gait/drag-left/04.png",
+      "pose-v24/original-gait/drag-left/05.png",
+      "pose-v24/original-gait/drag-left/06.png",
+      "pose-v24/original-gait/drag-left/07.png"
+    ],
+    "trials": [],
+    "cycle": 1.6,
+    "kind": "state",
+    "status": "원본 8개 보행 자세 · 8장 독립 생성",
+    "note": "원본 왼쪽 8개 보행 자세를 사용합니다. 그림당 0.2초, 이펙트는 작은 깃털과 리본입니다.",
+    "anchors": [
+      {
+        "x": 68.5,
+        "y": 238.5,
+        "visible": true
+      },
+      {
+        "x": 70.5,
+        "y": 230.5,
+        "visible": true
+      },
+      {
+        "x": 53,
+        "y": 240.5,
+        "visible": true
+      },
+      {
+        "x": 67,
+        "y": 231,
+        "visible": true
+      },
+      {
+        "x": 55,
+        "y": 245.5,
+        "visible": true
+      },
+      {
+        "x": 71.5,
+        "y": 256.5,
+        "visible": true
+      },
+      {
+        "x": 66,
+        "y": 235.5,
+        "visible": true
+      },
+      {
+        "x": 51,
+        "y": 239.5,
+        "visible": true
+      },
+      {
+        "x": 68.5,
+        "y": 237.5,
+        "visible": true
+      },
+      {
+        "x": 70.5,
+        "y": 234,
+        "visible": true
+      },
+      {
+        "x": 66.5,
+        "y": 233,
+        "visible": true
+      },
+      {
+        "x": 66.5,
+        "y": 230.5,
+        "visible": true
+      },
+      {
+        "x": 68.5,
+        "y": 240,
+        "visible": true
+      },
+      {
+        "x": 70,
+        "y": 231.5,
+        "visible": true
+      },
+      {
+        "x": 69,
+        "y": 233,
+        "visible": true
+      },
+      {
+        "x": 66.5,
+        "y": 230.5,
+        "visible": true
+      }
+    ],
+    "trialAnchors": [],
+    "animations": [
+      {
+        "theme": "dark",
+        "file": "pose-v24/original-gait/drag-left/animation-dark.webp"
+      },
+      {
+        "theme": "white",
+        "file": "pose-v24/original-gait/drag-left/animation-white.webp"
+      }
+    ]
+  }
+]
