@@ -1,0 +1,46 @@
+{
+  "before": {
+    "pid": "13190",
+    "intervalSeconds": 3,
+    "cpuPercentOneCore": [
+      73.92,
+      84.38
+    ],
+    "mean": 79.15
+  },
+  "after": {
+    "pid": "20003",
+    "intervalSeconds": 3,
+    "cpuPercentOneCore": [
+      55.54,
+      64.17
+    ],
+    "mean": 59.855000000000004
+  },
+  "after-final": {
+    "pid": "22236",
+    "intervalSeconds": 3,
+    "cpuPercentOneCore": [
+      36.86,
+      15.96
+    ],
+    "mean": 26.41
+  },
+  "after-warm": {
+    "pid": "22236",
+    "intervalSeconds": 3,
+    "cpuPercentOneCore": [
+      32.55,
+      16.62
+    ],
+    "mean": 24.585
+  },
+  "changes": [
+    "Redraw Jeanne only when pose changes",
+    "Reuse message fit for unchanged attributed text and layout",
+    "Reuse parsed task when file size, modification time and title are unchanged"
+  ],
+  "preserved": "All 8626 resource files unchanged; art and timing unchanged",
+  "visual": "Native fixture pixels identical to v31; live installed Jeanne appearance observed",
+  "limits": "CPU samples are short intervals with live changing sessions, not a controlled benchmark; no frame-drop count measured; artwork cadence remains unchanged"
+}

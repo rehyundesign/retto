@@ -1,0 +1,12 @@
+{
+  "installed": "/Users/luxia/Applications/Retto.app",
+  "backup": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/native-v31/before-v31.zip",
+  "preservedResources": 8465,
+  "jeanneResourcesVerified": 161,
+  "signature": "verified",
+  "binarySha256": "04b87c3132e8394c00e0c7fdf0f229d5b04e00b794f2f351c33af5bfbcac1b8e",
+  "runningSelection": "jeanne: selected through native app menu and visually observed",
+  "nativeVisual": "Live Retto screenshot shows Jeanne costume, Finn and integrated effects",
+  "sourceBinaryTextMatchesPreviousInstall": true,
+  "installedBinaryMatchesStaged": true
+}

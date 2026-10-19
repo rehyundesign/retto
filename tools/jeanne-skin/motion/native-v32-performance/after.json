@@ -1,0 +1,9 @@
+{
+  "pid": "20003",
+  "intervalSeconds": 3,
+  "cpuPercentOneCore": [
+    55.54,
+    64.17
+  ],
+  "mean": 59.855000000000004
+}
