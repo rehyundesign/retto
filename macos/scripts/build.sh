@@ -109,6 +109,7 @@ iconutil -c icns "$ICONSET_DIR" -o "$RESOURCES_DIR/RettoIcon.icns"
 codesign --force --deep --sign - "$APP_DIR"
 
 "$MACOS_DIR/Retto" --self-test
+"$MACOS_DIR/Retto" --self-test-slack
 
 if (( ! APP_ONLY )); then
 # dist 에는 dmg 만 둔다. 예전에는 앱을 한 벌 더 풀어 뒀는데 쓰는 데가 없었고,
