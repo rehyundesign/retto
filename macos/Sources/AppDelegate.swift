@@ -20,6 +20,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     private var codexOpenTargetItem: NSMenuItem!
     private var claudeIntegrationItem: NSMenuItem!
     private var setupWindow: SetupWindow?
+    private let slack = SlackIntegration()
+    private var slackSettings: SlackSettingsWindow?
     /// 켤 때 스스로 정리한 것. 설정 창이 이걸 그대로 보여준다.
     private var tidyNotes: [String] = []
     /// Claude 앱에서 세션까지 따라갈지. 접근성으로 사이드바를 대신 누르는 방식이라,
@@ -32,7 +34,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     private var sizeItems: [NSMenuItem] = []
     private var openTargetItems: [NSMenuItem] = []
     private var currentScale: CGFloat = 1.0
-    private var sessionsMenu = NSMenu(title: "AI 세션")
+    private var sessionsMenu = NSMenu(title: "작업·알림")
     private var autoSelectionItem: NSMenuItem!
     private var sessions: [StatePayload] = []
     private var selectedPayload: StatePayload?
@@ -68,7 +70,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     }
 
     private func markSeen(_ payload: StatePayload?) {
-        guard let payload, !payload.id.isEmpty else { return }
+        guard let payload, !payload.id.isEmpty, payload.petState != .waiting else { return }
         var seen = seenSessions
         seen[payload.id] = max(payload.updatedAtMs ?? 0, Date().timeIntervalSince1970 * 1000)
         // 닫힌 세션 기록은 버린다
@@ -89,6 +91,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     }
 
     private func needsAttention(_ payload: StatePayload) -> Bool {
+        if payload.petState == .waiting, !payload.isClosed { return true }
         guard payload.needsAttention else { return false }
         if isSeen(updatedAtMs: payload.updatedAtMs, seenAtMs: seenSessions[payload.id]) { return false }
         // 앱이 켜지기 한참 전에 끝난 일은 조용히 읽음으로 넘긴다. 첫 설치나 재시작 뒤에
@@ -116,11 +119,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         seenSessions = seen
     }
 
-    /// 배지가 세는 집합. 배지를 눌렀을 때 나오는 목록도 반드시 같은 집합이어야 한다.
-    /// 예전에는 배지는 완료만 세고 목록은 대기·실패까지 보여줘서, 배지에 1 이 떴는데
-    /// 목록에 셋이 나오고 엉뚱한 세션이 열리는 일이 있었다.
+    /// 입력 대기가 있으면 해당 집합을 표시하고, 없으면 완료·Slack 알림을 표시한다.
+    /// 배지 숫자와 클릭했을 때 나오는 목록은 같은 집합을 사용한다.
     private func badgeSessions() -> [StatePayload] {
-        sessions.filter { !$0.isClosed && needsAttention($0) && effectiveState($0) == .waving }
+        attentionBadgeSessions(sessions, needsAttention: needsAttention)
     }
 
     private var pinnedSessionId: String? {
@@ -168,6 +170,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         createPanel(spriteSheet: spriteSheet)
         createMenuBarItem()
         startStateMonitor()
+        slack.onChange = { [weak self] in
+            guard let self else { return }
+            self.slackSettings?.refresh()
+            self.applySessions(self.sessions)
+        }
+        slack.restore()
         // 상태 파일을 한 번 읽고 나서 정한다. 곧바로 보면 소식이 있는 사람에게도 창이 뜬다.
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
             self?.tidyLegacyInstall()
@@ -318,7 +326,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         // 여기부터 세션 묶음. 무엇을 보여줄지 고르는 항목들이다.
         menu.addItem(.separator())
 
-        let sessionsItem = NSMenuItem(title: "최근 작업", action: nil, keyEquivalent: "")
+        let sessionsItem = NSMenuItem(title: "최근 작업·알림", action: nil, keyEquivalent: "")
         sessionsItem.submenu = sessionsMenu
         menu.addItem(sessionsItem)
         rebuildSessionsMenu()
@@ -345,7 +353,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
 
         // 레토를 누르지 않고 세션에 직접 다녀오는 경우가 있다. 그때 손으로 지울 길을 둔다.
         // 시간이 지나면 저절로 조용해지게 하지는 않는다 — 돌려놓고 한참 뒤에 오는 게 배지의 쓸모다.
-        clearAttentionItem = NSMenuItem(title: "완료 표시 지우기", action: #selector(markAllSeen), keyEquivalent: "")
+        clearAttentionItem = NSMenuItem(title: "완료·알림 표시 지우기", action: #selector(markAllSeen), keyEquivalent: "")
         clearAttentionItem.target = self
         menu.addItem(clearAttentionItem)
 
@@ -454,6 +462,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         integrationItem.submenu = integrationMenu
         menu.addItem(integrationItem)
 
+        let slackItem = NSMenuItem(title: "Slack 설정…", action: #selector(showSlackSettings), keyEquivalent: "")
+        slackItem.target = self
+        menu.addItem(slackItem)
+
         let uninstallItem = NSMenuItem(title: "레토 제거…", action: #selector(uninstallRetto), keyEquivalent: "")
         uninstallItem.target = self
         menu.addItem(uninstallItem)
@@ -464,6 +476,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         menu.addItem(quitItem)
         statusItem.menu = menu
         petView.menu = menu
+    }
+
+    @objc private func showSlackSettings() {
+        if slackSettings == nil { slackSettings = SlackSettingsWindow(integration: slack) }
+        slackSettings?.show()
     }
 
     private func startStateMonitor() {
@@ -479,20 +496,26 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     }
 
     private func statePriority(_ payload: StatePayload) -> Int {
-        selectionPriority(state: effectiveState(payload), isClosed: payload.isClosed)
+        selectionPriority(state: effectiveState(payload), isClosed: payload.isClosed, source: payload.source)
     }
 
     private func applySessions(_ incoming: [StatePayload]) {
         // 훅이 갱신하기 전 기존 레지스트리에 남아 있을 수 있는 worker 기록도 여기서
         // 걸러야, 앱을 다시 열었을 때 한 번이라도 말풍선·클릭 대상으로 돌아오지 않는다.
         var merged = Dictionary(uniqueKeysWithValues: incoming
-            .filter(\.isRettoVisibleTask)
+            .filter { $0.isRettoVisibleTask && $0.source != "slack" }
             .map { ($0.id, $0) })
         // 이미 훅으로 받은 task는 더 정밀한 상태가 있으므로 유지한다. 훅에 없는 task만
         // 롤아웃에서 넣어, 연결을 꺼도 기본 표시가 사라지지 않게 한다.
         for task in codexRolloutDiscovery.recentTasks() where task.isRettoVisibleTask && merged[task.id] == nil {
             merged[task.id] = task
         }
+        for notice in slack.payloads { merged[notice.id] = notice }
+        let monitoringSince = Date().timeIntervalSince1970 * 1000 - 24 * 60 * 60 * 1000
+        let monitored = merged.values.filter {
+            !$0.isClosed && ($0.petState == .waiting || ($0.updatedAtMs ?? 0) >= monitoringSince)
+        }
+        codexTranscriptStatusReader.retainTrackedPaths(Set(monitored.compactMap(\.transcriptPath)))
         sessions = merged.values.map(reconciledCodexPayload).sorted {
             let leftPriority = statePriority($0)
             let rightPriority = statePriority($1)
@@ -506,7 +529,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             // 고정은 지켜주되, 손이 필요한 세션이 생기면 그쪽을 먼저 보여준다.
             // Claude 사이드바에 파란 숫자가 떴는데 레토가 딴 데를 보고 있으면 배지가 무슨 뜻이 없다.
             // openSessions 는 이미 우선순위대로 정렬돼 있어 첫 항목이 가장 급한 세션이다.
-            selectedPayload = needsAttention(pinned) ? pinned : (attentionSessions.first ?? pinned)
+            selectedPayload = preferredPinnedSession(pinned, attention: attentionSessions, priority: statePriority, needsAttention: needsAttention)
+        } else if let previous = selectedPayload,
+                  let waiting = openSessions.first(where: { $0.id == previous.id && $0.petState == .waiting }) {
+            // 다른 알림이나 새 입력 대기가 와도 현재 입력 대기는 답변할 때까지 유지한다.
+            selectedPayload = waiting
         } else {
             if pinnedSessionId != nil { self.pinnedSessionId = nil }
             selectedPayload = openSessions.first ?? sessions.first
@@ -524,16 +551,17 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
                     liveTitle: Retto.koreanName,
                     sessionCount: 0,
                     attentionCount: 0,
+                    connectionStatus: nil,
                     isPinned: false
                 )
             }
             rebuildSessionsMenu()
             return
         }
-        // 배지는 "답변이 끝났는데 아직 안 본" 세션만 센다. 대기·실패는 이름표 색이 이미 말해 준다.
+        // 입력 대기는 답변할 때까지 유지하고, 완료·Slack 알림만 읽음 처리한다.
         markSeenByLooking()
         let attention = badgeSessions()
-        updateClearAttentionItem(count: attention.count)
+        updateClearAttentionItem(count: sessions.filter { !$0.isClosed && needsAttention($0) && effectiveState($0) == .waving }.count)
         // 전부 회색인 채로 10분이 지나면 레토도 잔다. 그때는 세션 이름 대신 레토 이름을 걸고
         // 말풍선에도 잠꼬대만 남긴다 — 보여 줄 새 소식이 없다는 뜻이다.
         let nowMs = Date().timeIntervalSince1970 * 1000
@@ -561,15 +589,25 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             sessionCount: openSessions.count,
             attentionCount: attention.count,
             attentionState: attention.max(by: { statePriority($0) < statePriority($1) })?.petState,
+            attentionSource: attention.first?.source,
+            inputCount: attention.filter { $0.petState == .waiting }.count,
+            connectionStatus: taskConnectionNotice(for: selectedPayload,
+                unreadablePaths: codexTranscriptStatusReader.unreadablePaths, slackNotice: slack.connectionIssue),
             isPinned: selectedPayload.id == pinnedSessionId
         )
         rebuildSessionsMenu()
     }
 
+    private var connectionNotice: String? {
+        let issues = [slack.connectionIssue, codexTranscriptStatusReader.connectionIssue,
+                      codexRolloutDiscovery.connectionIssue].compactMap { $0 }
+        return issues.isEmpty ? nil : issues.joined(separator: " · ")
+    }
+
     /// Codex가 Stop 훅을 보내지 않아도 롤아웃의 task_complete는 남는다. 그 이벤트가
     /// 새 사용자 요청보다 뒤에 있는 완료 이벤트면 완료·읽지 않음으로 보정한다.
     private func reconciledCodexPayload(_ payload: StatePayload) -> StatePayload {
-        guard payload.source == "codex" || payload.client == "codex" else { return payload }
+        guard !payload.isClosed, payload.source == "codex" || payload.client == "codex" else { return payload }
         var refreshed = payload
         let task = reconcileCodexTask(
             payload: payload,
@@ -595,12 +633,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             revealAgentSession(first, windowOnly: false)
             return
         }
-        let menu = NSMenu(title: "손이 필요한 세션")
-        let header = NSMenuItem(title: "\(waiting.count)개 세션이 기다려요", action: nil, keyEquivalent: "")
+        let menu = NSMenu(title: "새 알림")
+        let header = NSMenuItem(title: attentionSummary(waiting), action: nil, keyEquivalent: "")
         header.isEnabled = false
         menu.addItem(header)
         menu.addItem(.separator())
-        for payload in waiting.prefix(12) {
+        for payload in waiting {
             let item = NSMenuItem(title: sessionMenuLabel(for: payload), action: #selector(openSessionFromBadge(_:)), keyEquivalent: "")
             item.target = self
             item.representedObject = payload.id
@@ -618,11 +656,18 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
 
     private func rebuildSessionsMenu() {
         updateClaudeIntegrationItem()
+        statusItem.button?.toolTip = connectionNotice ?? "레토 · 연결된 작업과 새 알림 확인"
         if let open = setupWindow, open.isOpen {
             open.refresh(status: ClaudeIntegration.status(sessions: sessions),
                          environment: RettoHostEnvironment.detect())
         }
         sessionsMenu.removeAllItems()
+        if let connectionNotice {
+            let item = NSMenuItem(title: connectionNotice, action: nil, keyEquivalent: "")
+            item.isEnabled = false
+            sessionsMenu.addItem(item)
+            sessionsMenu.addItem(.separator())
+        }
         autoSelectionItem = NSMenuItem(title: "중요한 세션 자동으로 따라가기", action: #selector(selectAutomaticSession), keyEquivalent: "")
         autoSelectionItem.target = self
         autoSelectionItem.state = pinnedSessionId == nil ? .on : .off
@@ -649,13 +694,20 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     /// 최근 작업은 출처별로 나누지 않는다. 고른 작업에서만 실제로 열 수 있는 앱을 보여 준다.
     private func taskMenu(for payload: StatePayload) -> NSMenu {
         let menu = NSMenu(title: payload.title)
-        let show = NSMenuItem(title: "레토에서 이 작업 보기", action: #selector(selectSession(_:)), keyEquivalent: "")
+        let show = NSMenuItem(title: payload.source == "slack" ? "레토에서 이 메시지 보기" : "레토에서 이 작업 보기", action: #selector(selectSession(_:)), keyEquivalent: "")
         show.target = self
         show.representedObject = payload.id
         show.state = pinnedSessionId == payload.id ? .on : .off
         menu.addItem(show)
         menu.addItem(.separator())
 
+        if payload.source == "slack" {
+            let open = NSMenuItem(title: "Slack에서 메시지 열기", action: #selector(openSessionFromBadge(_:)), keyEquivalent: "")
+            open.target = self
+            open.representedObject = payload.id
+            menu.addItem(open)
+            return menu
+        }
         let apps: [OpenApp] = payload.sourceLabel == "Codex" ? [.codex] : [.vscode, .claude]
         for app in apps where isOpenAppInstalled(app) {
             let choice = NSMenuItem(title: openTaskMenuTitle(app), action: #selector(openTask(_:)), keyEquivalent: "")
@@ -866,6 +918,32 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     /// 반대로 ⌥(창만 앞으로)나 창을 특정하지 못해 딥링크를 못 보낸 경우는 아직 안 본 것으로 남긴다.
     private func revealAgentSession(_ payload: StatePayload?, windowOnly: Bool, preferredApp: OpenApp? = nil) {
         let target = payload ?? selectedPayload
+        if let target, target.source == "slack" {
+            guard let notice = slack.notices.first(where: { $0.id == target.id }) else { return }
+            let reportFailure: (Error) -> Void = { error in
+                let alert = NSAlert()
+                alert.messageText = "Slack 메시지를 열지 못했습니다"
+                alert.informativeText = error.localizedDescription + " 알림은 읽지 않은 상태로 유지됩니다."
+                alert.runModal()
+            }
+            do {
+                let url = try slack.nativeMessageURL(for: notice)
+                guard let appURL = NSWorkspace.shared.urlForApplication(withBundleIdentifier: "com.tinyspeck.slackmacgap") else {
+                    throw NSError(domain: "RettoSlack", code: 1,
+                                  userInfo: [NSLocalizedDescriptionKey: "Slack 데스크톱 앱을 설치해 주세요."])
+                }
+                let configuration = NSWorkspace.OpenConfiguration()
+                configuration.activates = true
+                NSWorkspace.shared.open([url], withApplicationAt: appURL, configuration: configuration) { [weak self] app, error in
+                    DispatchQueue.main.async {
+                        if let error { reportFailure(error) }
+                        else if app != nil { self?.markSeen(target) }
+                        else { reportFailure(SlackFailure.response) }
+                    }
+                }
+            } catch { reportFailure(error) }
+            return
+        }
         let app = preferredApp ?? resolveOpenApp(for: target)
         focusHostApp(for: target, app: app) { [weak self] matchedWindow in
             guard let self, !windowOnly, matchedWindow else { return }
@@ -1303,7 +1381,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     /// 창 제목을 읽지 못하는 환경에서는 아무 일도 하지 않고 수동 지우기만 남는다.
     private func markSeenByLooking() {
         // 지울 것이 없으면 창 목록을 뒤질 이유가 없다. 0.25초마다 도는 자리다.
-        let waiting = badgeSessions()
+        let waiting = badgeSessions().filter { $0.petState != .waiting }
         guard !waiting.isEmpty else {
             lookingSince = nil
             lookingApp = nil
@@ -1323,7 +1401,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         guard let since = lookingSince, Date().timeIntervalSince(since) >= lookingDwell else { return }
         guard let title = frontWindowTitle(pid: front.processIdentifier), !title.isEmpty else { return }
 
-        for payload in waiting where resolveOpenApp(for: payload).bundleIdentifier == bundleId {
+        for payload in waiting where payload.source != "slack" && resolveOpenApp(for: payload).bundleIdentifier == bundleId {
             let folder = payload.cwd.map { ($0 as NSString).lastPathComponent }
             guard windowShowsSession(windowTitle: title, sessionTitle: payload.title, folderName: folder) else { continue }
             recordSeenFromAccess(payload)
@@ -1359,13 +1437,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     /// 지울 것이 몇 개인지 메뉴에 그대로 보여 준다. 없으면 흐리게 둔다.
     private func updateClearAttentionItem(count: Int) {
         guard let item = clearAttentionItem else { return }
-        item.title = count > 0 ? "완료 표시 지우기 (\(count)개)" : "완료 표시 지우기"
+        item.title = count > 0 ? "완료·알림 표시 지우기 (\(count)개)" : "완료·알림 표시 지우기"
         item.isEnabled = count > 0
     }
 
     /// 배지가 세는 세션(답이 끝났는데 아직 안 본 것)을 모두 읽음으로 옮긴다.
     @objc private func markAllSeen() {
-        let targets = badgeSessions()
+        let targets = sessions.filter { !$0.isClosed && needsAttention($0) && effectiveState($0) == .waving }
         guard !targets.isEmpty else { return }
         var seen = seenSessions
         let now = Date().timeIntervalSince1970 * 1000

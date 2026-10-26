@@ -74,6 +74,12 @@ let toneDone = StatusTone(key: "done", background: hexColor(0xF06200), text: hex
 let toneFailed = StatusTone(key: "failed", background: hexColor(0xDC0714), text: hexColor(0xFFF499))     // 4.57:1
 let toneQuiet = StatusTone(key: "quiet", background: hexColor(0x757575), text: hexColor(0xFFFFFF))       // 4.61:1
 
+let toneSlack = StatusTone(key: "slack", background: hexColor(0x7C3AED), text: hexColor(0xFFFFFF))
+
+func notificationTone(source: String?, state: PetState, fallback: StatusTone) -> StatusTone {
+    source == "slack" && state == .waving ? toneSlack : fallback
+}
+
 struct Animation {
     let row: Int
     let frames: Int
