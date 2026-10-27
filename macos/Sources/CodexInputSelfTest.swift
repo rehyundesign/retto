@@ -59,6 +59,47 @@ func runCodexInputSelfTest() -> Int32 {
     check(cancelled.merged(with: tagged).pendingInputAtMs == nil, "overlap cannot restore cancelled question")
     let unrelatedAbort = event(5, ["type": "turn_aborted", "turn_id": "turn-b"])
     check(tagged.merged(with: codexTranscriptStatus(in: unrelatedAbort)).pendingInputAtMs != nil, "unrelated turn interruption preserves question")
+    func start(_ second: Int, _ turn: String, _ trigger: String) -> String {
+        event(second, ["type": "task_started", "turn_id": turn,
+                       "turn_attribution": ["turn_id": turn, "turn_trigger": trigger]])
+    }
+    let nextStart = start(6, "turn-b", "composer")
+    let nextTurn = codexTranscriptStatus(in: nextStart)
+    let resumed = tagged.merged(with: nextTurn)
+    check(resumed.pendingInputAtMs == nil, "new composer turn supersedes previous question")
+    check(codexTranscriptStatus(in: taggedRequest + "\n" + nextStart).pendingInputAtMs == nil,
+          "full transcript releases previous turn question")
+    check(resumed.merged(with: tagged).pendingInputAtMs == nil, "overlap cannot restore superseded question")
+    check(pending.merged(with: nextTurn).pendingInputAtMs == nil, "new turn releases legacy question without turn ID")
+    check(tagged.merged(with: codexTranscriptStatus(in: start(6, "turn-a", "composer"))).pendingInputAtMs != nil,
+          "same turn start preserves its pending question")
+    check(tagged.merged(with: codexTranscriptStatus(in: start(6, "turn-b", "agent"))).pendingInputAtMs != nil,
+          "automatic continuation preserves pending question")
+    let laterQuestion = taggedRequest.replacingOccurrences(of: "turn-a", with: "turn-b")
+        .replacingOccurrences(of: "06:11:01", with: "06:11:07")
+    check(resumed.merged(with: codexTranscriptStatus(in: laterQuestion)).pendingInputAtMs != nil,
+          "new turn question still requires input")
+    check(reconcileCodexTask(payload: payload, indexTitle: nil, transcriptStatus: resumed).state == .running,
+          "resumed running task no longer displays waiting")
+    check(reconcileCodexTask(payload: waiting, indexTitle: nil, transcriptStatus: resumed).state == .running,
+          "new turn releases stale waiting hook")
+    let completedBeforeRestart = codexTranscriptStatus(in: event(5, ["type": "task_complete"]))
+    check(!completedBeforeRestart.merged(with: nextTurn).isCompletedAfterLatestPrompt,
+          "new turn start invalidates old completion before prompt arrives")
+    let abortedBeforeRestart = codexTranscriptStatus(in: abort).merged(with: nextTurn)
+    check(reconcileCodexTask(payload: waiting, indexTitle: nil, transcriptStatus: abortedBeforeRestart).state == .running,
+          "new turn start invalidates old interruption before prompt arrives")
+    let currentWaiting = try! JSONDecoder().decode(StatePayload.self, from: JSONSerialization.data(withJSONObject:
+        ["state": "waiting", "sessionId": "fixture", "updatedAtMs": (nextTurn.latestComposerStartAtMs ?? 0) + 1]))
+    check(reconcileCodexTask(payload: currentWaiting, indexTitle: nil, transcriptStatus: nextTurn).state == .waiting,
+          "permission requested in current turn remains waiting")
+    let unknownTrigger = codexTranscriptStatus(in: event(6, ["type": "task_started", "turn_id": "turn-b"]))
+    check(tagged.merged(with: unknownTrigger).pendingInputAtMs != nil, "unknown turn trigger does not dismiss question")
+    let resumedRoundtrip = try! JSONDecoder().decode(CodexTranscriptStatus.self, from: JSONEncoder().encode(resumed))
+    check(resumedRoundtrip.pendingInputAtMs == nil, "superseded question remains resolved after restart")
+    let completedResumed = resumed.merged(with: codexTranscriptStatus(in: event(8, ["type": "task_complete"])))
+    check(reconcileCodexTask(payload: waiting, indexTitle: nil, transcriptStatus: completedResumed).state == .waving,
+          "new turn completion replaces stale waiting hook")
     check(pending.merged(with: codexTranscriptStatus(in: abort)).pendingInputAtMs == nil, "legacy request without turn releases on interruption")
     check(reconcileCodexTask(payload: waiting, indexTitle: nil, transcriptStatus: cancelled).state == .idle, "interrupted hook waiting releases")
     let sync = request("sync").replacingOccurrences(of: "request_user_input_async", with: "functions.request_user_input")

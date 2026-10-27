@@ -258,9 +258,18 @@ func reconcileCodexTask(payload: StatePayload, indexTitle: String?, transcriptSt
     if let abortedAt = transcriptStatus.latestAbortAtMs,
        abortedAt >= (payload.updatedAtMs ?? 0),
        abortedAt >= (transcriptStatus.latestPromptAtMs ?? 0),
+       abortedAt >= (transcriptStatus.latestComposerStartAtMs ?? 0),
        abortedAt >= (transcriptStatus.completedAtMs ?? 0) {
         return ReconciledCodexTask(state: .idle, observedAtMs: abortedAt,
                                    needsAttention: false, title: title, source: .rollout)
+    }
+    if payload.petState == .waiting,
+       let startedAt = transcriptStatus.latestComposerStartAtMs,
+       startedAt > (payload.updatedAtMs ?? 0) {
+        return ReconciledCodexTask(state: transcriptStatus.isCompletedAfterLatestPrompt ? .waving : .running,
+                                   observedAtMs: max(startedAt, transcriptStatus.completedAtMs ?? 0),
+                                   needsAttention: transcriptStatus.isCompletedAfterLatestPrompt,
+                                   title: title, source: .rollout)
     }
     // 비동기 질문은 답변 뒤에도 훅의 waiting 값이 남을 수 있다.
     if payload.petState == .waiting,
@@ -349,10 +358,18 @@ struct CodexTranscriptStatus: Codable {
     var toolOutputs: [String: Double]? = nil
     var abortedTurns: [String: Double]? = nil
     var latestAbortAtMs: Double? = nil
+    var composerTurns: [String: Double]? = nil
+
+    var latestComposerStartAtMs: Double? { composerTurns?.values.max() }
 
     var pendingInputAtMs: Double? {
         (inputRequests ?? [:]).filter { id, requestedAt in
             if (inputReplies?[id] ?? 0) >= requestedAt { return false }
+            // 새 사용자 요청은 이전 턴의 질문을 대체한다. 같은 턴의 답변·도구 실행이나
+            // 자동 재개는 질문을 해제하지 않는다.
+            if (composerTurns ?? [:]).contains(where: { turn, startedAt in
+                turn != inputRequestTurns?[id] && startedAt > requestedAt
+            }) { return false }
             let callId = String(id.split(separator: ":").dropLast().joined(separator: ":"))
             if synchronousRequests?[callId] != nil, (toolOutputs?[callId] ?? 0) >= requestedAt { return false }
             if let turn = inputRequestTurns?[id] {
@@ -370,7 +387,7 @@ struct CodexTranscriptStatus: Codable {
 
     var isCompletedAfterLatestPrompt: Bool {
         guard pendingInputAtMs == nil, let completedAtMs else { return false }
-        return completedAtMs > max(latestPromptAtMs ?? 0, latestAbortAtMs ?? 0)
+        return completedAtMs > max(latestPromptAtMs ?? 0, latestAbortAtMs ?? 0, latestComposerStartAtMs ?? 0)
     }
 
     func merged(with newer: CodexTranscriptStatus) -> CodexTranscriptStatus {
@@ -383,7 +400,8 @@ struct CodexTranscriptStatus: Codable {
             synchronousRequests: (synchronousRequests ?? [:]).merging(newer.synchronousRequests ?? [:], uniquingKeysWith: max),
             toolOutputs: (toolOutputs ?? [:]).merging(newer.toolOutputs ?? [:], uniquingKeysWith: max),
             abortedTurns: (abortedTurns ?? [:]).merging(newer.abortedTurns ?? [:], uniquingKeysWith: max),
-            latestAbortAtMs: max(latestAbortAtMs ?? 0, newer.latestAbortAtMs ?? 0)
+            latestAbortAtMs: max(latestAbortAtMs ?? 0, newer.latestAbortAtMs ?? 0),
+            composerTurns: (composerTurns ?? [:]).merging(newer.composerTurns ?? [:], uniquingKeysWith: max)
         )
     }
 }
@@ -403,6 +421,7 @@ func codexTranscriptStatus(in text: String) -> CodexTranscriptStatus {
     var aborted: [String: Double] = [:]
     var latestAbort: Double?
     var activeTurn: String?
+    var composerTurns: [String: Double] = [:]
     for line in text.split(separator: "\n") {
         guard let data = line.data(using: .utf8),
               let record = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
@@ -412,7 +431,11 @@ func codexTranscriptStatus(in text: String) -> CodexTranscriptStatus {
         let timestampMs = date.timeIntervalSince1970 * 1000
         if record["type"] as? String == "event_msg" {
             if payload["type"] as? String == "task_started" {
-                activeTurn = (payload["turn_attribution"] as? [String: Any])?["turn_id"] as? String ?? payload["turn_id"] as? String
+                let attribution = payload["turn_attribution"] as? [String: Any]
+                activeTurn = attribution?["turn_id"] as? String ?? payload["turn_id"] as? String
+                if attribution?["turn_trigger"] as? String == "composer", let turn = activeTurn {
+                    composerTurns[turn] = max(composerTurns[turn] ?? 0, timestampMs)
+                }
             }
             if payload["type"] as? String == "turn_aborted" {
                 latestAbort = max(latestAbort ?? 0, timestampMs)
@@ -468,7 +491,8 @@ func codexTranscriptStatus(in text: String) -> CodexTranscriptStatus {
     return CodexTranscriptStatus(completedAtMs: completion, latestPromptAtMs: latestPrompt,
                                  inputRequests: requests, inputReplies: replies,
                                  inputRequestTurns: requestTurns, synchronousRequests: syncRequests,
-                                 toolOutputs: outputs, abortedTurns: aborted, latestAbortAtMs: latestAbort)
+                                 toolOutputs: outputs, abortedTurns: aborted, latestAbortAtMs: latestAbort,
+                                 composerTurns: composerTurns)
 }
 
 func codexTaskCompletionAtMs(in text: String) -> Double? {
@@ -736,7 +760,7 @@ final class CodexLifecycleIndex {
     private struct Store: Codable { var entries: [String: Entry] }
 
     private let storeURL = FileManager.default.homeDirectoryForCurrentUser
-        .appendingPathComponent(".claude/retto-pet/codex-lifecycle-input-v3.json")
+        .appendingPathComponent(".claude/retto-pet/codex-lifecycle-input-v4.json")
     private let stateQueue = DispatchQueue(label: "retto.codex-lifecycle.state")
     private let scanQueue = DispatchQueue(label: "retto.codex-lifecycle.scan")
     private var entries: [String: Entry]
