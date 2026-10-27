@@ -280,7 +280,10 @@ func reconcileCodexTask(payload: StatePayload, indexTitle: String?, transcriptSt
                                    needsAttention: transcriptStatus.isCompletedAfterLatestPrompt,
                                    title: title, source: .rollout)
     }
-    guard (payload.petState == .running || payload.petState == .review),
+    // 질문 대기는 위에서 유지한다. 권한 훅 이후 턴이 끝났다면 권한 대기도 끝난 상태다.
+    let completedWaiting = payload.petState == .waiting
+        && (transcriptStatus.completedAtMs ?? 0) >= (payload.updatedAtMs ?? 0)
+    guard (payload.petState == .running || payload.petState == .review || completedWaiting),
           transcriptStatus.isCompletedAfterLatestPrompt,
           let completedAtMs = transcriptStatus.completedAtMs else {
         return ReconciledCodexTask(

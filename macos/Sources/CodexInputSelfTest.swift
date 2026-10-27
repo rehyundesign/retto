@@ -100,6 +100,14 @@ func runCodexInputSelfTest() -> Int32 {
     let completedResumed = resumed.merged(with: codexTranscriptStatus(in: event(8, ["type": "task_complete"])))
     check(reconcileCodexTask(payload: waiting, indexTitle: nil, transcriptStatus: completedResumed).state == .waving,
           "new turn completion replaces stale waiting hook")
+    let completedPermission = reconcileCodexTask(payload: waiting, indexTitle: nil, transcriptStatus: completedBeforeRestart)
+    check(completedPermission.state == .waving && completedPermission.needsAttention,
+          "completed turn releases stale permission hook")
+    check(reconcileCodexTask(payload: currentWaiting, indexTitle: nil, transcriptStatus: completedBeforeRestart).state == .waiting,
+          "completion before permission request does not dismiss current permission")
+    check(reconcileCodexTask(payload: waiting, indexTitle: nil,
+          transcriptStatus: tagged.merged(with: completedBeforeRestart)).state == .waiting,
+          "completion still preserves unanswered async question")
     check(pending.merged(with: codexTranscriptStatus(in: abort)).pendingInputAtMs == nil, "legacy request without turn releases on interruption")
     check(reconcileCodexTask(payload: waiting, indexTitle: nil, transcriptStatus: cancelled).state == .idle, "interrupted hook waiting releases")
     let sync = request("sync").replacingOccurrences(of: "request_user_input_async", with: "functions.request_user_input")
