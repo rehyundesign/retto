@@ -42,6 +42,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     private let codexTranscriptStatusReader = CodexTranscriptStatusReader()
     private let codexThreadTitleReader = CodexThreadTitleReader()
     private let codexRolloutDiscovery = CodexRolloutDiscovery()
+    private let codexLiveStatusReader = CodexLiveStatusReader()
+    private var hookSessions: [StatePayload] = []
     private var clearAttentionItem: NSMenuItem!
     private var typefaceItems: [NSMenuItem] = []
     private var skinItems: [NSMenuItem] = []
@@ -61,8 +63,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         let fixture = "{\"state\":\"idle\",\"sessionId\":\"placeholder\"}".data(using: .utf8)!
         return try? JSONDecoder().decode(StatePayload.self, from: fixture)
     }()
-    private var lookingApp: String?
-    private var lookingSince: Date?
+    private var readDwell = SessionReadDwell()
     /// 세션마다 마지막으로 다녀온 시각. 다음 실행에도 유지한다.
     private var seenSessions: [String: Double] {
         get { UserDefaults.standard.dictionary(forKey: seenSessionsDefaultsKey) as? [String: Double] ?? [:] }
@@ -101,13 +102,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             recordSeenFromAccess(payload)
             return false
         }
-        // 레토를 누르지 않고 직접 세션에 들어가 읽은 경우. 트랜스크립트 접근 시각으로 알아낸다.
-        if let accessed = transcriptAccessedAtMs(path: payload.transcriptPath),
-           wasViewedElsewhere(accessedAtMs: accessed, updatedAtMs: payload.updatedAtMs) {
-            // 한 번 판정하면 붙잡아 둔다. 나중에 atime 이 다시 밀려도 흔들리지 않는다.
-            recordSeenFromAccess(payload)
-            return false
-        }
+        // 파일 접근은 인덱싱이나 훅에서도 발생한다. 읽음은 해당 창 확인 또는 직접 클릭으로 정한다.
         return true
     }
 
@@ -484,12 +479,17 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     }
 
     private func startStateMonitor() {
+        codexLiveStatusReader.onChange = { [weak self] in
+            guard let self else { return }
+            self.applySessions(self.hookSessions)
+        }
         let petDirectory = FileManager.default.homeDirectoryForCurrentUser
             .appendingPathComponent(".claude/retto-pet")
         stateMonitor = StateMonitor(
             registryURL: petDirectory.appendingPathComponent("sessions.json"),
             fallbackStateURL: petDirectory.appendingPathComponent("state.json")
         ) { [weak self] sessions in
+            self?.hookSessions = sessions
             self?.applySessions(sessions)
         }
         stateMonitor.start()
@@ -516,6 +516,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             !$0.isClosed && ($0.petState == .waiting || ($0.updatedAtMs ?? 0) >= monitoringSince)
         }
         codexTranscriptStatusReader.retainTrackedPaths(Set(monitored.compactMap(\.transcriptPath)))
+        codexLiveStatusReader.track(Set(monitored.filter { $0.source == "codex" || $0.client == "codex" }.map(\.navigationSessionId)))
         sessions = merged.values.map(reconciledCodexPayload).sorted {
             let leftPriority = statePriority($0)
             let rightPriority = statePriority($1)
@@ -609,11 +610,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     private func reconciledCodexPayload(_ payload: StatePayload) -> StatePayload {
         guard !payload.isClosed, payload.source == "codex" || payload.client == "codex" else { return payload }
         var refreshed = payload
-        let task = reconcileCodexTask(
+        let transcriptStatus = codexTranscriptStatusReader.status(at: payload.transcriptPath)
+        let task = applyCodexLiveStatus(codexLiveStatusReader.statuses[payload.navigationSessionId], to: reconcileCodexTask(
             payload: payload,
             indexTitle: codexThreadTitleReader.title(for: payload.navigationSessionId),
-            transcriptStatus: codexTranscriptStatusReader.status(at: payload.transcriptPath)
-        )
+            transcriptStatus: transcriptStatus
+        ), transcriptStatus: transcriptStatus)
         refreshed.state = task.state.rawValue
         refreshed.updatedAtMs = task.observedAtMs
         refreshed.attention = task.needsAttention
@@ -1380,30 +1382,27 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     /// "봤다" 는 기록이 없어서, 최상단 앱과 그 앱의 맨 앞 창 제목으로 알아낸다.
     /// 창 제목을 읽지 못하는 환경에서는 아무 일도 하지 않고 수동 지우기만 남는다.
     private func markSeenByLooking() {
-        // 지울 것이 없으면 창 목록을 뒤질 이유가 없다. 0.25초마다 도는 자리다.
-        let waiting = badgeSessions().filter { $0.petState != .waiting }
-        guard !waiting.isEmpty else {
-            lookingSince = nil
-            lookingApp = nil
+        let now = Date().timeIntervalSince1970 * 1000
+        guard sessions.contains(where: { $0.petState != .waiting && needsAttention($0) }),
+              let front = NSWorkspace.shared.frontmostApplication,
+              let bundleId = front.bundleIdentifier,
+              let title = frontWindowTitle(pid: front.processIdentifier), !title.isEmpty else {
+            _ = readDwell.observe(key: nil, nowMs: now)
             return
         }
-        guard let front = NSWorkspace.shared.frontmostApplication,
-              let bundleId = front.bundleIdentifier else {
-            lookingSince = nil
-            lookingApp = nil
-            return
-        }
-        if bundleId != lookingApp {
-            lookingApp = bundleId
-            lookingSince = Date()
-            return
-        }
-        guard let since = lookingSince, Date().timeIntervalSince(since) >= lookingDwell else { return }
-        guard let title = frontWindowTitle(pid: front.processIdentifier), !title.isEmpty else { return }
-
-        for payload in waiting where payload.source != "slack" && resolveOpenApp(for: payload).bundleIdentifier == bundleId {
+        let matches = sessions.filter { payload in
+            guard !payload.isClosed, payload.source != "slack",
+                  resolveOpenApp(for: payload).bundleIdentifier == bundleId else { return false }
             let folder = payload.cwd.map { ($0 as NSString).lastPathComponent }
-            guard windowShowsSession(windowTitle: title, sessionTitle: payload.title, folderName: folder) else { continue }
+            return windowShowsSession(windowTitle: title, sessionTitle: payload.title, folderName: folder)
+        }
+        guard matches.count == 1, let payload = matches.first,
+              payload.petState != .waiting, needsAttention(payload) else {
+            _ = readDwell.observe(key: nil, nowMs: now)
+            return
+        }
+        let key = "\(front.processIdentifier):\(payload.id):\(payload.updatedAtMs ?? 0):\(title)"
+        if readDwell.observe(key: key, nowMs: now) {
             recordSeenFromAccess(payload)
         }
     }
@@ -1596,6 +1595,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     }
 
     func applicationWillTerminate(_ notification: Notification) {
+        codexLiveStatusReader.stop()
         clearDefaultsIfUninstalling()
     }
 

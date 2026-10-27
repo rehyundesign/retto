@@ -470,9 +470,10 @@ func runSelfTest() -> Int32 {
         && petClickTarget(layout: baseline, badgeFrame: .zero, point: NSPoint(x: baseline.ribbonRect.midX, y: baseline.ribbonRect.midY), attentionCount: 2) == .ribbon
         && petClickTarget(layout: baseline, badgeFrame: badge, point: NSPoint(x: baseline.petRect.midX, y: baseline.petRect.midY), attentionCount: 2) == .body
         && petClickTarget(layout: baseline, badgeFrame: badge, point: NSPoint(x: 2, y: baseline.windowSize.height - 2), attentionCount: 2) == nil
-    // 내 답 대기 → 답변 완료 → 실패 순서를 지키면서, 셋 다 작업 중보다 위에 있어야 한다.
+    // 내 답 대기 → 실패 → 답변 완료 순서이며, 셋 다 작업 중보다 먼저 표시한다.
     let priorityOK = selectionPriority(state: .waiting, isClosed: false) > selectionPriority(state: .waving, isClosed: false)
-        && selectionPriority(state: .waving, isClosed: false) > selectionPriority(state: .failed, isClosed: false)
+        && selectionPriority(state: .waiting, isClosed: false) > selectionPriority(state: .failed, isClosed: false)
+        && selectionPriority(state: .failed, isClosed: false) > selectionPriority(state: .waving, isClosed: false)
         && needsInputStates.allSatisfy {
             selectionPriority(state: $0, isClosed: false) > selectionPriority(state: .running, isClosed: false)
                 && selectionPriority(state: $0, isClosed: false) > selectionPriority(state: .review, isClosed: false)
@@ -600,11 +601,12 @@ func runSelfTest() -> Int32 {
         && titleOf("{\"state\":\"running\",\"displayTitle\":\"아주 긴 프롬프트입니다\",\"projectName\":\"planning\"}") == "아주 긴 프롬프트입니다"
         && titleOf("{\"state\":\"running\",\"displayTitle\":\"B\",\"projectName\":\"planning\"}") == "No name"
         && titleOf("{\"state\":\"running\",\"displayTitle\":\"재진행\",\"projectName\":\"planning\"}") == "No name"
-    // 레토를 누르지 않고 직접 세션에 들어가 읽은 경우를 접근 시각으로 잡아내는지.
-    let viewedOK = wasViewedElsewhere(accessedAtMs: 10_000, updatedAtMs: 5_000)
-        && !wasViewedElsewhere(accessedAtMs: 6_000, updatedAtMs: 5_000)   // 2초 여유 안쪽은 훅이 읽은 것
-        && !wasViewedElsewhere(accessedAtMs: 4_000, updatedAtMs: 5_000)   // 완료보다 앞이면 안 본 것
-        && !wasViewedElsewhere(accessedAtMs: 10_000, updatedAtMs: nil)
+    // 같은 대화를 3초 확인해야 읽음으로 처리한다.
+    var readDwell = SessionReadDwell()
+    let viewedOK = !readDwell.observe(key: "session-a", nowMs: 0)
+        && !readDwell.observe(key: "session-b", nowMs: 3000)
+        && readDwell.observe(key: "session-b", nowMs: 6000)
+        && !readDwell.observe(key: nil, nowMs: 7000)
 
     // 전부 조용한 채로 10분이 지나면 자는지. 하나라도 일하고 있으면 안 잔다.
     let nowFixed: Double = 100_000_000
@@ -645,7 +647,7 @@ func runSelfTest() -> Int32 {
 
     // 창 제목으로 "그 세션을 보고 있다" 를 알아내는지. 짧은 폴더 이름에 낚이지 않아야 한다.
     let lookingOK = windowShowsSession(windowTitle: "백오피스 기획 — planning", sessionTitle: "백오피스 기획", folderName: "planning")
-        && windowShowsSession(windowTitle: "hook.cjs — git-rehyundesign", sessionTitle: "레토 공식", folderName: "git-rehyundesign")
+        && !windowShowsSession(windowTitle: "hook.cjs — git-rehyundesign", sessionTitle: "레토 공식", folderName: "git-rehyundesign")
         && !windowShowsSession(windowTitle: "hook.cjs — other-repo", sessionTitle: "레토 공식", folderName: "git-rehyundesign")
         && !windowShowsSession(windowTitle: "", sessionTitle: "레토 공식", folderName: "git-rehyundesign")
         && !windowShowsSession(windowTitle: "a — b", sessionTitle: nil, folderName: "ui")   // 두 글자 폴더는 안 믿는다

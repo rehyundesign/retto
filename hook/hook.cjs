@@ -12,6 +12,8 @@ const legacyStatePath = path.join(petDir, 'state.json');
 const lockPath = path.join(petDir, '.sessions.lock');
 const sleepArray = new Int32Array(new SharedArrayBuffer(4));
 const eventSource = process.argv[3] === 'codex' ? 'codex' : 'claude';
+// 잠금을 기다린 뒤의 시각으로 이전 이벤트를 새 이벤트처럼 기록하지 않는다.
+const receivedAtMs = Date.now();
 
 function text(value, limit = 180) {
   if (!value) return '';
@@ -309,6 +311,33 @@ function attentionFor(state, event) {
   return state === 'waiting' || state === 'failed' || state === 'waving';
 }
 
+/// 훅 실행 순서와 무관하게 이미 끝난 도구·턴을 확인한다. 내용은 저장하지 않는다.
+function codexLifecycleEvidence(transcriptPath) {
+  const result = { turnId: '', startedTurns: new Set(), terminalTurns: new Set(), completedTools: new Set() };
+  if (!transcriptPath) return result;
+  let fd;
+  try {
+    fd = fs.openSync(transcriptPath, 'r');
+    const size = fs.fstatSync(fd).size;
+    const span = Math.min(size, 1048576);
+    const buffer = Buffer.alloc(span);
+    fs.readSync(fd, buffer, 0, span, size - span);
+    for (const line of buffer.toString('utf8').split('\n')) {
+      let record;
+      try { record = JSON.parse(line); } catch { continue; }
+      const p = record.payload || {};
+      if (record.type === 'event_msg') {
+        if (p.type === 'task_started' && p.turn_id) { result.turnId = p.turn_id; result.startedTurns.add(p.turn_id); }
+        if (['task_complete', 'turn_aborted'].includes(p.type) && p.turn_id) result.terminalTurns.add(p.turn_id);
+      }
+      if (record.type === 'response_item' && ['function_call_output', 'custom_tool_call_output'].includes(p.type) && p.call_id) {
+        result.completedTools.add(p.call_id);
+      }
+    }
+  } catch {} finally { if (fd !== undefined) fs.closeSync(fd); }
+  return result;
+}
+
 function updateRegistry(input, fallbackState) {
   const now = new Date();
   const nowMs = now.getTime();
@@ -321,13 +350,44 @@ function updateRegistry(input, fallbackState) {
   registry.version = 1;
   registry.sessions = registry.sessions && typeof registry.sessions === 'object' ? registry.sessions : {};
   const previous = registry.sessions[sessionId] || {};
+  const turnId = text(input.turn_id, 200);
+  const toolUseId = text(input.tool_use_id, 200);
+  const transcriptPath = input.transcript_path || input.transcriptPath || previous.transcriptPath;
+  const evidence = eventSource === 'codex' ? codexLifecycleEvidence(transcriptPath) : null;
+  const toolEvent = ['PreToolUse', 'PermissionRequest', 'PostToolUse', 'PostToolUseFailure', 'PermissionDenied'].includes(event);
+  const sameTurn = !turnId || !previous.turnId || turnId === previous.turnId;
+  const retiredTurnIds = previous.retiredTurnIds || [];
+  if (turnId && retiredTurnIds.includes(turnId)) return;
+  if (evidence && turnId && evidence.turnId && turnId !== evidence.turnId
+      && !retiredTurnIds.includes(evidence.turnId)
+      && (event !== 'UserPromptSubmit' || evidence.startedTurns.has(turnId) || evidence.terminalTurns.has(turnId))) return;
+  if (eventSource === 'codex' && turnId && !sameTurn && event !== 'UserPromptSubmit'
+      && evidence?.turnId !== turnId) return;
+  if (toolEvent && turnId && (previous.terminalTurnId === turnId || evidence?.terminalTurns.has(turnId))) return;
+  const completedToolUseIds = sameTurn ? (previous.completedToolUseIds || []) : [];
+  if (['PreToolUse', 'PermissionRequest'].includes(event) && toolUseId
+      && (completedToolUseIds.includes(toolUseId) || evidence?.completedTools.has(toolUseId))) return;
+  // 도구 ID가 없는 이전 클라이언트에서도 잠금 대기 때문에 순서가 바뀌는 것은 막는다.
+  if (!toolUseId && receivedAtMs < (previous.receivedAtMs || 0)) return;
+  if (event === 'UserPromptSubmit' && turnId && turnId === previous.turnId
+      && ['PreToolUse', 'PermissionRequest', 'PostToolUse', 'Stop', 'Interrupt'].includes(previous.event)) return;
+  if (turnId && !sameTurn && previous.turnId) retiredTurnIds.push(previous.turnId);
+  if (event === 'UserPromptSubmit' && turnId && evidence?.turnId && turnId !== evidence.turnId) retiredTurnIds.push(evidence.turnId);
+  let pendingApprovals = sameTurn ? { ...previous.pendingApprovals } : {};
+  if (event === 'UserPromptSubmit' || event === 'Stop' || event === 'Interrupt') pendingApprovals = {};
+  if (event === 'PermissionRequest' && toolUseId) pendingApprovals[toolUseId] = receivedAtMs;
+  if (['PostToolUse', 'PostToolUseFailure', 'PermissionDenied'].includes(event) && toolUseId) {
+    delete pendingApprovals[toolUseId];
+    if (!completedToolUseIds.includes(toolUseId)) completedToolUseIds.push(toolUseId);
+  }
   const liveRestart = isLiveRestart(event, previous, nowMs);
   // 사용자 확인이 필요한 상태 뒤의 SessionEnd 는 새 상태가 아니라 프로세스가 내려갔다는 뜻이다.
   // 완료·실패·입력 대기를 닫아 버리면 화면에서 함께 빠진다. 이미 확인한 시각도 유지해야
   // 다음 폴링에서 안 읽음 알림으로 되살아나지 않는다.
   const preserveAttention = event === 'SessionEnd' && previous.attention === true;
   const preservePrevious = liveRestart || preserveAttention;
-  const state = preservePrevious ? previous.state : eventState(input, fallbackState);
+  const state = preservePrevious ? previous.state
+    : Object.keys(pendingApprovals).length > 0 ? 'waiting' : eventState(input, fallbackState);
   const cwd = text(input.cwd, 500) || previous.cwd || '';
   const prompt = text(input.prompt, 80);
   // 이름표에 쓸 프롬프트인가. 기준은 길이가 아니라 **세션의 첫 요청인가** 다.
@@ -343,7 +403,6 @@ function updateRegistry(input, fallbackState) {
   const backgroundTaskCount = Array.isArray(input.background_tasks) ? input.background_tasks.length : 0;
   const isClosed = event === 'SessionEnd' && !preserveAttention;
 
-  const transcriptPath = input.transcript_path || input.transcriptPath;
   const sessionTitle = eventSource === 'codex'
     ? codexThreadNameFrom(rawSessionId)
     : sessionTitleFrom(transcriptPath);
@@ -355,6 +414,13 @@ function updateRegistry(input, fallbackState) {
     rawSessionId,
     source: eventSource,
     state,
+    receivedAtMs,
+    turnId: turnId || previous.turnId || '',
+    retiredTurnIds: [...new Set(retiredTurnIds)].slice(-64),
+    toolUseId,
+    terminalTurnId: ['Stop', 'Interrupt'].includes(event) ? turnId : (sameTurn ? previous.terminalTurnId || '' : ''),
+    completedToolUseIds: completedToolUseIds.slice(-256),
+    pendingApprovals,
     // 살아 있는 세션에 프로세스가 다시 붙은 것뿐이면 시각도 그대로 둔다.
     // 시각을 밀면 이미 읽은 완료 알림이 안 읽음으로 되살아난다(읽음 판정이 이 시각을 본다).
     event: preservePrevious ? (previous.event || event) : event,

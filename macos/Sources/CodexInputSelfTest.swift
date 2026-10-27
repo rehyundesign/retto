@@ -103,6 +103,24 @@ func runCodexInputSelfTest() -> Int32 {
     let completedPermission = reconcileCodexTask(payload: waiting, indexTitle: nil, transcriptStatus: completedBeforeRestart)
     check(completedPermission.state == .waving && completedPermission.needsAttention,
           "completed turn releases stale permission hook")
+    var failed = waiting
+    failed.state = "failed"
+    check(reconcileCodexTask(payload: failed, indexTitle: nil, transcriptStatus: completedBeforeRestart).state == .waving,
+          "successful completion clears an earlier tool failure")
+    failed.updatedAtMs = (completedBeforeRestart.completedAtMs ?? 0) + 1
+    check(reconcileCodexTask(payload: failed, indexTitle: nil, transcriptStatus: completedBeforeRestart).state == .failed,
+          "earlier completion cannot clear a later failure")
+    failed.attention = true
+    check(attentionBadgeSessions([failed], needsAttention: { $0.needsAttention }).count == 1,
+          "unread failure appears in badge")
+    check(selectionPriority(state: .failed, isClosed: false) > selectionPriority(state: .waving, isClosed: false),
+          "failure precedes completion")
+    check(notificationTone(source: "codex", state: .failed, fallback: toneDone).key == toneFailed.key,
+          "failure badge uses failure color instead of completion color")
+    check(!windowShowsSession(windowTitle: "다른 대화 — same-project", sessionTitle: "확인할 대화", folderName: "same-project"),
+          "shared folder never marks another conversation as read")
+    check(!windowShowsSession(windowTitle: "same-project", sessionTitle: nil, folderName: "same-project"),
+          "folder without conversation identity is insufficient")
     check(reconcileCodexTask(payload: currentWaiting, indexTitle: nil, transcriptStatus: completedBeforeRestart).state == .waiting,
           "completion before permission request does not dismiss current permission")
     check(reconcileCodexTask(payload: waiting, indexTitle: nil,
@@ -152,8 +170,35 @@ func runCodexInputSelfTest() -> Int32 {
     let claudeWork = healthFixture("claude", "running", "/fixture/current.jsonl")
     check(taskConnectionNotice(for: claudeWork, unreadablePaths: ["/fixture/current.jsonl"], slackNotice: "Slack 재연결 중") == nil,
           "Codex and Slack diagnostics do not appear on Claude tasks")
+    checkCodexLiveStatus(check)
     print("Codex input self-test: \(checks) checks, \(failures.count) failures")
     for failure in failures { print("FAIL: \(failure)") }
+    if let flag = CommandLine.arguments.firstIndex(of: "--live-codex-thread"), CommandLine.arguments.count > flag + 1 {
+        let id = CommandLine.arguments[flag + 1]
+        let reader = CodexLiveStatusReader()
+        var expected: [String]?
+        if let index = CommandLine.arguments.firstIndex(of: "--live-codex-expect"), CommandLine.arguments.count > index + 1 {
+            expected = CommandLine.arguments[index + 1].components(separatedBy: ",")
+        }
+        var observed: [String] = []
+        reader.onChange = {
+            let state = reader.statuses[id]?.state.rawValue ?? "unavailable"
+            if observed.last != state { observed.append(state) }
+        }
+        reader.track([id])
+        let deadline = Date().addingTimeInterval(30)
+        while (expected.map { observed != $0 } ?? (reader.statuses[id] == nil)) && Date() < deadline {
+            RunLoop.main.run(until: Date().addingTimeInterval(0.05))
+        }
+        print("Live Codex status: \(reader.statuses[id]?.state.rawValue ?? "unavailable")")
+        if let expected {
+            print("Live Codex transitions: \(observed.joined(separator: ","))")
+            reader.stop()
+            return observed == expected && failures.isEmpty ? 0 : 1
+        }
+        reader.stop()
+        if reader.statuses[id] == nil { return 1 }
+    }
     if let flag = CommandLine.arguments.firstIndex(of: "--input-transcript"), CommandLine.arguments.count > flag + 1 {
         let path = CommandLine.arguments[flag + 1]
         let text = (try? String(contentsOfFile: path, encoding: .utf8)) ?? ""

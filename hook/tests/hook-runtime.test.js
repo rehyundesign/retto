@@ -566,3 +566,97 @@ test('names a session by its first request, not by the replies that follow', asy
   assert.equal(registry.sessions.first.displayTitle, '세션명 오류를 고쳐줘');
   assert.equal(registry.sessions.joined.displayTitle, '');
 });
+
+test('late approval and progress hooks cannot reopen a completed tool or turn', async () => {
+  const directory = freshHook('retto-hook-order-');
+  const hook = path.join(directory, 'hook.cjs');
+  const base = { session_id: 'ordered', turn_id: 'turn-a', tool_use_id: 'tool-a' };
+  await invoke(hook, { ...base, hook_event_name: 'UserPromptSubmit' }, 'running', {}, 'codex');
+  await invoke(hook, { ...base, hook_event_name: 'PostToolUse' }, 'running', {}, 'codex');
+  await invoke(hook, { ...base, hook_event_name: 'PermissionRequest' }, 'waiting', {}, 'codex');
+  assert.equal(registry(directory)['codex:ordered'].state, 'running');
+  await invoke(hook, { ...base, hook_event_name: 'Stop' }, 'waving', {}, 'codex');
+  await invoke(hook, { ...base, tool_use_id: 'other', hook_event_name: 'PreToolUse' }, 'running', {}, 'codex');
+  assert.equal(registry(directory)['codex:ordered'].state, 'waving');
+  await invoke(hook, { ...base, turn_id: 'turn-b', hook_event_name: 'UserPromptSubmit' }, 'running', {}, 'codex');
+  await invoke(hook, { ...base, hook_event_name: 'PermissionRequest' }, 'waiting', {}, 'codex');
+  assert.equal(registry(directory)['codex:ordered'].state, 'running');
+});
+
+test('parallel tool progress preserves pending approvals until their own result arrives', async () => {
+  const directory = freshHook('retto-hook-parallel-approval-');
+  const hook = path.join(directory, 'hook.cjs');
+  const base = { session_id: 'parallel', turn_id: 'turn-a' };
+  for (const id of ['a', 'b']) {
+    await invoke(hook, { ...base, tool_use_id: id, hook_event_name: 'PermissionRequest' }, 'waiting', {}, 'codex');
+  }
+  await invoke(hook, { ...base, tool_use_id: 'other', hook_event_name: 'PostToolUse' }, 'running', {}, 'codex');
+  assert.equal(registry(directory)['codex:parallel'].state, 'waiting');
+  await invoke(hook, { ...base, tool_use_id: 'a', hook_event_name: 'PostToolUse' }, 'running', {}, 'codex');
+  assert.equal(registry(directory)['codex:parallel'].state, 'waiting');
+  await invoke(hook, { ...base, tool_use_id: 'b', hook_event_name: 'PostToolUse' }, 'running', {}, 'codex');
+  assert.equal(registry(directory)['codex:parallel'].state, 'running');
+});
+
+test('rollout evidence rejects a late permission even after registry restart', async () => {
+  const directory = freshHook('retto-hook-rollout-order-');
+  const hook = path.join(directory, 'hook.cjs');
+  const transcript = path.join(directory, 'rollout.jsonl');
+  fs.writeFileSync(transcript, [
+    { type: 'event_msg', payload: { type: 'task_started', turn_id: 'new-turn' } },
+    { type: 'response_item', payload: { type: 'custom_tool_call_output', call_id: 'finished-tool', output: 'done' } }
+  ].map(JSON.stringify).join('\n'));
+  const base = { session_id: 'rollout-order', transcript_path: transcript, hook_event_name: 'PermissionRequest' };
+  await invoke(hook, { ...base, turn_id: 'old-turn', tool_use_id: 'old-tool' }, 'waiting', {}, 'codex');
+  assert.equal(fs.existsSync(path.join(directory, 'sessions.json')), false);
+  await invoke(hook, { ...base, turn_id: 'new-turn', tool_use_id: 'finished-tool' }, 'waiting', {}, 'codex');
+  assert.equal(fs.existsSync(path.join(directory, 'sessions.json')), false);
+});
+
+test('denied or failed approval is removed and cannot be reopened by a delayed hook', async () => {
+  for (const event of ['PermissionDenied', 'PostToolUseFailure']) {
+    const directory = freshHook('retto-hook-denied-');
+    const hook = path.join(directory, 'hook.cjs');
+    const base = { session_id: 'denied', turn_id: 'turn-a', tool_use_id: 'tool-a' };
+    await invoke(hook, { ...base, hook_event_name: 'PermissionRequest' }, 'waiting', {}, 'codex');
+    await invoke(hook, { ...base, hook_event_name: event }, 'failed', {}, 'codex');
+    assert.equal(registry(directory)['codex:denied'].state, 'failed');
+    await invoke(hook, { ...base, hook_event_name: 'PermissionRequest' }, 'waiting', {}, 'codex');
+    assert.equal(registry(directory)['codex:denied'].state, 'failed');
+  }
+});
+
+test('a late UserPromptSubmit cannot clear approval already requested in the same turn', async () => {
+  const directory = freshHook('retto-hook-late-prompt-');
+  const hook = path.join(directory, 'hook.cjs');
+  const base = { session_id: 'prompt', turn_id: 'turn-a' };
+  await invoke(hook, { ...base, tool_use_id: 'tool-a', hook_event_name: 'PermissionRequest' }, 'waiting', {}, 'codex');
+  await invoke(hook, { ...base, hook_event_name: 'UserPromptSubmit' }, 'running', {}, 'codex');
+  assert.equal(registry(directory)['codex:prompt'].state, 'waiting');
+});
+
+test('new prompt may arrive before task_started is flushed, without accepting an old prompt later', async () => {
+  const directory = freshHook('retto-hook-prompt-flush-');
+  const hook = path.join(directory, 'hook.cjs');
+  const transcript = path.join(directory, 'rollout.jsonl');
+  fs.writeFileSync(transcript, JSON.stringify({ type: 'event_msg', payload: { type: 'task_started', turn_id: 'old-turn' } }));
+  const base = { session_id: 'flush', transcript_path: transcript, hook_event_name: 'UserPromptSubmit' };
+  await invoke(hook, { ...base, turn_id: 'new-turn' }, 'running', {}, 'codex');
+  assert.equal(registry(directory)['codex:flush'].turnId, 'new-turn');
+  await invoke(hook, { ...base, turn_id: 'new-turn', tool_use_id: 'new-tool', hook_event_name: 'PermissionRequest' }, 'waiting', {}, 'codex');
+  assert.equal(registry(directory)['codex:flush'].state, 'waiting');
+  await invoke(hook, { ...base, turn_id: 'old-turn' }, 'running', {}, 'codex');
+  assert.equal(registry(directory)['codex:flush'].turnId, 'new-turn');
+  assert.equal(registry(directory)['codex:flush'].state, 'waiting');
+});
+
+test('legacy prompt without turn ID does not retire the current active turn', async () => {
+  const directory = freshHook('retto-hook-legacy-turn-');
+  const hook = path.join(directory, 'hook.cjs');
+  const transcript = path.join(directory, 'rollout.jsonl');
+  fs.writeFileSync(transcript, JSON.stringify({ type: 'event_msg', payload: { type: 'task_started', turn_id: 'current-turn' } }));
+  const base = { session_id: 'legacy-turn', transcript_path: transcript };
+  await invoke(hook, { ...base, hook_event_name: 'UserPromptSubmit' }, 'running', {}, 'codex');
+  await invoke(hook, { ...base, turn_id: 'current-turn', tool_use_id: 'tool-a', hook_event_name: 'PermissionRequest' }, 'waiting', {}, 'codex');
+  assert.equal(registry(directory)['codex:legacy-turn'].state, 'waiting');
+});
