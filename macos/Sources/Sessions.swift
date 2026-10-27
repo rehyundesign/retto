@@ -95,10 +95,10 @@ func selectionPriority(state: PetState, isClosed: Bool, source: String? = nil) -
     if source == "slack", state == .waving { return 70 }
     switch state {
     // 1순위는 내 답을 기다리는 세션이다. 다른 무엇보다 먼저 보여준다.
-    // 2순위는 답변이 끝난 세션. 내가 찾아 나서기 전에 레토가 먼저 알려줘야 하는 것이다.
+    // 실패를 완료보다 먼저 보여준다.
     case .waiting: return 80
     case .waving: return 55
-    case .failed: return 50
+    case .failed: return 75
     case .running: return 40
     case .review: return 35
     case .jumping: return 20
@@ -237,6 +237,7 @@ func sessionMenuLabel(for payload: StatePayload) -> String {
 enum TaskStateSource: String {
     case hook
     case rollout
+    case live
 }
 
 /// Retto가 화면에 쓰는 Codex task 상태. 훅은 즉시성, 롤아웃은 완료 사실, 인덱스는 제목을 맡는다.
@@ -258,9 +259,18 @@ func reconcileCodexTask(payload: StatePayload, indexTitle: String?, transcriptSt
     if let abortedAt = transcriptStatus.latestAbortAtMs,
        abortedAt >= (payload.updatedAtMs ?? 0),
        abortedAt >= (transcriptStatus.latestPromptAtMs ?? 0),
+       abortedAt >= (transcriptStatus.latestComposerStartAtMs ?? 0),
        abortedAt >= (transcriptStatus.completedAtMs ?? 0) {
         return ReconciledCodexTask(state: .idle, observedAtMs: abortedAt,
                                    needsAttention: false, title: title, source: .rollout)
+    }
+    if payload.petState == .waiting,
+       let startedAt = transcriptStatus.latestComposerStartAtMs,
+       startedAt > (payload.updatedAtMs ?? 0) {
+        return ReconciledCodexTask(state: transcriptStatus.isCompletedAfterLatestPrompt ? .waving : .running,
+                                   observedAtMs: max(startedAt, transcriptStatus.completedAtMs ?? 0),
+                                   needsAttention: transcriptStatus.isCompletedAfterLatestPrompt,
+                                   title: title, source: .rollout)
     }
     // 비동기 질문은 답변 뒤에도 훅의 waiting 값이 남을 수 있다.
     if payload.petState == .waiting,
@@ -271,7 +281,10 @@ func reconcileCodexTask(payload: StatePayload, indexTitle: String?, transcriptSt
                                    needsAttention: transcriptStatus.isCompletedAfterLatestPrompt,
                                    title: title, source: .rollout)
     }
-    guard (payload.petState == .running || payload.petState == .review),
+    // 질문 대기는 위에서 유지한다. 권한 훅 이후 턴이 끝났다면 권한 대기도 끝난 상태다.
+    let completedAttention = (payload.petState == .waiting || payload.petState == .failed)
+        && (transcriptStatus.completedAtMs ?? 0) >= (payload.updatedAtMs ?? 0)
+    guard (payload.petState == .running || payload.petState == .review || completedAttention),
           transcriptStatus.isCompletedAfterLatestPrompt,
           let completedAtMs = transcriptStatus.completedAtMs else {
         return ReconciledCodexTask(
@@ -349,10 +362,18 @@ struct CodexTranscriptStatus: Codable {
     var toolOutputs: [String: Double]? = nil
     var abortedTurns: [String: Double]? = nil
     var latestAbortAtMs: Double? = nil
+    var composerTurns: [String: Double]? = nil
+
+    var latestComposerStartAtMs: Double? { composerTurns?.values.max() }
 
     var pendingInputAtMs: Double? {
         (inputRequests ?? [:]).filter { id, requestedAt in
             if (inputReplies?[id] ?? 0) >= requestedAt { return false }
+            // 새 사용자 요청은 이전 턴의 질문을 대체한다. 같은 턴의 답변·도구 실행이나
+            // 자동 재개는 질문을 해제하지 않는다.
+            if (composerTurns ?? [:]).contains(where: { turn, startedAt in
+                turn != inputRequestTurns?[id] && startedAt > requestedAt
+            }) { return false }
             let callId = String(id.split(separator: ":").dropLast().joined(separator: ":"))
             if synchronousRequests?[callId] != nil, (toolOutputs?[callId] ?? 0) >= requestedAt { return false }
             if let turn = inputRequestTurns?[id] {
@@ -370,7 +391,7 @@ struct CodexTranscriptStatus: Codable {
 
     var isCompletedAfterLatestPrompt: Bool {
         guard pendingInputAtMs == nil, let completedAtMs else { return false }
-        return completedAtMs > max(latestPromptAtMs ?? 0, latestAbortAtMs ?? 0)
+        return completedAtMs > max(latestPromptAtMs ?? 0, latestAbortAtMs ?? 0, latestComposerStartAtMs ?? 0)
     }
 
     func merged(with newer: CodexTranscriptStatus) -> CodexTranscriptStatus {
@@ -383,7 +404,8 @@ struct CodexTranscriptStatus: Codable {
             synchronousRequests: (synchronousRequests ?? [:]).merging(newer.synchronousRequests ?? [:], uniquingKeysWith: max),
             toolOutputs: (toolOutputs ?? [:]).merging(newer.toolOutputs ?? [:], uniquingKeysWith: max),
             abortedTurns: (abortedTurns ?? [:]).merging(newer.abortedTurns ?? [:], uniquingKeysWith: max),
-            latestAbortAtMs: max(latestAbortAtMs ?? 0, newer.latestAbortAtMs ?? 0)
+            latestAbortAtMs: max(latestAbortAtMs ?? 0, newer.latestAbortAtMs ?? 0),
+            composerTurns: (composerTurns ?? [:]).merging(newer.composerTurns ?? [:], uniquingKeysWith: max)
         )
     }
 }
@@ -403,6 +425,7 @@ func codexTranscriptStatus(in text: String) -> CodexTranscriptStatus {
     var aborted: [String: Double] = [:]
     var latestAbort: Double?
     var activeTurn: String?
+    var composerTurns: [String: Double] = [:]
     for line in text.split(separator: "\n") {
         guard let data = line.data(using: .utf8),
               let record = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
@@ -412,7 +435,11 @@ func codexTranscriptStatus(in text: String) -> CodexTranscriptStatus {
         let timestampMs = date.timeIntervalSince1970 * 1000
         if record["type"] as? String == "event_msg" {
             if payload["type"] as? String == "task_started" {
-                activeTurn = (payload["turn_attribution"] as? [String: Any])?["turn_id"] as? String ?? payload["turn_id"] as? String
+                let attribution = payload["turn_attribution"] as? [String: Any]
+                activeTurn = attribution?["turn_id"] as? String ?? payload["turn_id"] as? String
+                if attribution?["turn_trigger"] as? String == "composer", let turn = activeTurn {
+                    composerTurns[turn] = max(composerTurns[turn] ?? 0, timestampMs)
+                }
             }
             if payload["type"] as? String == "turn_aborted" {
                 latestAbort = max(latestAbort ?? 0, timestampMs)
@@ -420,7 +447,7 @@ func codexTranscriptStatus(in text: String) -> CodexTranscriptStatus {
             }
         }
         if record["type"] as? String == "response_item",
-           payload["type"] as? String == "function_call_output",
+           ["function_call_output", "custom_tool_call_output"].contains(payload["type"] as? String ?? ""),
            let callId = payload["call_id"] as? String { outputs[callId] = timestampMs }
         if record["type"] as? String == "event_msg", payload["type"] as? String == "task_complete" {
             completion = max(completion ?? 0, timestampMs)
@@ -468,7 +495,8 @@ func codexTranscriptStatus(in text: String) -> CodexTranscriptStatus {
     return CodexTranscriptStatus(completedAtMs: completion, latestPromptAtMs: latestPrompt,
                                  inputRequests: requests, inputReplies: replies,
                                  inputRequestTurns: requestTurns, synchronousRequests: syncRequests,
-                                 toolOutputs: outputs, abortedTurns: aborted, latestAbortAtMs: latestAbort)
+                                 toolOutputs: outputs, abortedTurns: aborted, latestAbortAtMs: latestAbort,
+                                 composerTurns: composerTurns)
 }
 
 func codexTaskCompletionAtMs(in text: String) -> Double? {
@@ -489,15 +517,28 @@ struct SessionRegistry: Decodable {
 /// 제목을 읽을 수 없는 환경(화면 기록 권한이 없을 때)에서는 빈 문자열이 오므로 아무 일도 하지 않는다.
 func windowShowsSession(windowTitle: String, sessionTitle: String?, folderName: String?) -> Bool {
     let title = windowTitle.trimmingCharacters(in: .whitespacesAndNewlines)
-    guard !title.isEmpty else { return false }
-    if let sessionTitle, sessionTitle.count >= 2, title.contains(sessionTitle) { return true }
-    // 폴더 이름은 짧으면 우연히 겹친다. 세 글자 이상만 믿는다.
-    if let folderName, folderName.count >= 3, title.contains(folderName) { return true }
-    return false
+    guard !title.isEmpty, let sessionTitle, sessionTitle.count >= 2,
+          sessionTitle != "No name", sessionTitle != folderName else { return false }
+    if title == sessionTitle { return true }
+    return [" — ", " - ", " | "].contains { separator in
+        title.hasPrefix(sessionTitle + separator) || title.hasSuffix(separator + sessionTitle)
+    }
 }
 
 /// 그 창을 이만큼 보고 있어야 "읽었다" 로 센다. 스쳐 지나간 것과 구분한다.
 let lookingDwell: TimeInterval = 3
+
+/// 앱 안에서 다른 대화로 이동하거나 새 알림이 오면 확인 시간을 다시 센다.
+struct SessionReadDwell {
+    private var key: String?
+    private var sinceMs: Double?
+
+    mutating func observe(key nextKey: String?, nowMs: Double) -> Bool {
+        guard let nextKey else { key = nil; sinceMs = nil; return false }
+        if key != nextKey { key = nextKey; sinceMs = nowMs; return false }
+        return sinceMs.map { nowMs - $0 >= lookingDwell * 1000 } ?? false
+    }
+}
 
 /// 앱이 지켜보기 시작하기 한참 전에 끝난 일인지.
 ///
@@ -514,25 +555,6 @@ func isAncientNews(updatedAtMs: Double?, trackingStartedAtMs: Double) -> Bool {
 
 /// 완료된 세션을 사용자가 레토 밖에서 열어 읽었는지.
 ///
-/// Claude Code 는 "사용자가 봤다" 를 어디에도 적지 않는다. 남는 흔적은 접근 시각(atime) 하나뿐이다.
-///
-/// 다만 재보니 Claude 앱과 VS Code 는 세션을 열 때 이 파일을 다시 읽지 않는다 — 자체 캐시에서
-/// 불러온다. 그래서 이 규칙이 잡아내는 건 CLI 로 `claude --resume` 한 경우 정도다.
-/// GUI 에서 읽은 것은 이걸로 알 수 없다. 2초 여유는 완료를 적을 때 훅이 같은 파일을 읽어
-/// 생기는 오차를 덮는다.
-func wasViewedElsewhere(accessedAtMs: Double, updatedAtMs: Double?) -> Bool {
-    guard let updatedAtMs, updatedAtMs > 0 else { return false }
-    return accessedAtMs > updatedAtMs + 2000
-}
-
-/// 트랜스크립트의 접근 시각. 파일을 열지 않으므로 흔적을 남기지 않는다.
-func transcriptAccessedAtMs(path: String?) -> Double? {
-    guard let path, !path.isEmpty else { return nil }
-    var info = stat()
-    guard stat(path, &info) == 0 else { return nil }
-    return TimeInterval(info.st_atimespec.tv_sec) * 1000 + TimeInterval(info.st_atimespec.tv_nsec) / 1_000_000
-}
-
 /// 두 클라이언트는 같은 말을 다른 모양으로 적는다. 훅의 `assistantTextIn` 과 같은 규칙이다.
 ///   Claude : {"type":"assistant","message":{"content":[{"type":"text","text":…}]}}
 ///   Codex  : {"type":"response_item","payload":{"type":"message","role":"assistant",
@@ -736,7 +758,7 @@ final class CodexLifecycleIndex {
     private struct Store: Codable { var entries: [String: Entry] }
 
     private let storeURL = FileManager.default.homeDirectoryForCurrentUser
-        .appendingPathComponent(".claude/retto-pet/codex-lifecycle-input-v3.json")
+        .appendingPathComponent(".claude/retto-pet/codex-lifecycle-input-v4.json")
     private let stateQueue = DispatchQueue(label: "retto.codex-lifecycle.state")
     private let scanQueue = DispatchQueue(label: "retto.codex-lifecycle.scan")
     private var entries: [String: Entry]
@@ -917,7 +939,7 @@ func codexRolloutReport() -> String {
 func attentionBadgeSessions(_ sessions: [StatePayload], needsAttention: (StatePayload) -> Bool) -> [StatePayload] {
     let unread = sessions.filter { !$0.isClosed && needsAttention($0) }
     let input = unread.filter { $0.petState == .waiting }
-    return input.isEmpty ? unread.filter { $0.petState == .waving } : input
+    return input.isEmpty ? unread.filter { $0.petState == .waving || $0.petState == .failed } : input
 }
 
 func attentionSummary(_ sessions: [StatePayload]) -> String {

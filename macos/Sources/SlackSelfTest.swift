@@ -111,6 +111,24 @@ func runSlackSelfTest() -> Int32 {
     check(updated.userToken == "xoxp-new" && updated.appToken == "xapp-existing", "refresh user auth preserves socket auth")
     let integration = SlackIntegration()
     check(!integration.hasCredentials && integration.payloads.isEmpty, "disconnected state")
+    var loadCount = 0
+    let delayed = SlackIntegration(loadCredentials: {
+        loadCount += 1
+        Thread.sleep(forTimeInterval: 0.25)
+        return nil
+    })
+    var callbacksOnMain = true
+    delayed.onChange = { callbacksOnMain = callbacksOnMain && Thread.isMainThread }
+    let restoreStarted = Date()
+    delayed.restore()
+    check(Date().timeIntervalSince(restoreStarted) < 0.15, "keychain wait does not block app startup")
+    delayed.restore()
+    let restoreDeadline = Date().addingTimeInterval(2)
+    while delayed.connectionState == .connecting && Date() < restoreDeadline {
+        RunLoop.main.run(until: Date().addingTimeInterval(0.01))
+    }
+    check(loadCount == 1, "reconnect while keychain is pending does not duplicate requests")
+    check(callbacksOnMain && delayed.connectionState == .disabled, "credential result returns to main queue")
     let window = SlackSettingsWindow(integration: integration)
     if let index = CommandLine.arguments.firstIndex(of: "--slack-settings-preview"), index + 1 < CommandLine.arguments.count {
         check(window.renderPreview(to: CommandLine.arguments[index + 1]), "settings rendering")

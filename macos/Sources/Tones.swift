@@ -77,7 +77,9 @@ let toneQuiet = StatusTone(key: "quiet", background: hexColor(0x757575), text: h
 let toneSlack = StatusTone(key: "slack", background: hexColor(0x7C3AED), text: hexColor(0xFFFFFF))
 
 func notificationTone(source: String?, state: PetState, fallback: StatusTone) -> StatusTone {
-    source == "slack" && state == .waving ? toneSlack : fallback
+    if source == "slack" && state == .waving { return toneSlack }
+    if state == .failed { return toneFailed }
+    return fallback
 }
 
 struct Animation {
