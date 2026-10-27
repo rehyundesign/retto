@@ -113,3 +113,56 @@ with tempfile.TemporaryDirectory(prefix='retto-codex-stream-') as directory:
             process.terminate()
             process.wait(timeout=5)
         server.close()
+
+# A resolved approval may not deliver its resolution patch. The running app must
+# recheck cached waiting even when the hook has no tool ID or is already running.
+with tempfile.TemporaryDirectory(prefix='retto-codex-pending-') as directory:
+    ipc = Path(directory) / 'ipc'
+    ipc.mkdir(mode=0o700)
+    address = str(ipc / 'ipc.sock')
+    server = socket.socket(socket.AF_UNIX)
+    server.bind(address)
+    os.chmod(address, 0o600)
+    server.listen(1)
+    server.settimeout(10)
+    process = subprocess.Popen([str(Path(sys.argv[1]).resolve()), '--self-test-codex-input',
+                                '--live-codex-thread', 'fixture', '--live-codex-expect', 'waiting,running',
+                                '--live-codex-recheck-pending'], env={**os.environ, 'CODEX_HOME': directory},
+                               stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    try:
+        peer, _ = server.accept()
+        peer.settimeout(6)
+        initialize = receive(peer)
+        send(peer, {'type': 'response', 'method': 'initialize', 'requestId': initialize['requestId'],
+                    'resultType': 'success', 'result': {'clientId': 'fixture-reader'}})
+        follow = receive(peer)
+        assert follow['method'] == 'thread-stream-following-changed' and follow['params']['following']
+        send(peer, snapshot(1, pending=True))
+        # Still genuinely waiting at the first refresh: blue must remain.
+        refresh = receive(peer)
+        assert refresh['method'] == 'thread-stream-following-changed' and refresh['params']['following']
+        send(peer, snapshot(2, pending=True))
+        peer.settimeout(0.2)
+        try:
+            receive(peer)
+        except socket.timeout:
+            pass
+        else:
+            raise AssertionError('fresh waiting snapshot caused an immediate refresh loop')
+        finally:
+            peer.settimeout(6)
+        # The approval resolves without a patch. A later refresh must recover it.
+        refresh = receive(peer)
+        assert refresh['method'] == 'thread-stream-following-changed' and refresh['params']['following']
+        send(peer, snapshot(3))
+        out, err = process.communicate(timeout=10)
+        print(out.strip())
+        if process.returncode:
+            print(err, file=sys.stderr)
+            raise SystemExit(process.returncode)
+        print('Pending recheck: genuine waiting preserved; missing resolution patch recovered; no refresh loop')
+    finally:
+        if process.poll() is None:
+            process.terminate()
+            process.wait(timeout=5)
+        server.close()

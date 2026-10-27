@@ -175,7 +175,8 @@ func runCodexInputSelfTest() -> Int32 {
     for failure in failures { print("FAIL: \(failure)") }
     if let flag = CommandLine.arguments.firstIndex(of: "--live-codex-thread"), CommandLine.arguments.count > flag + 1 {
         let id = CommandLine.arguments[flag + 1]
-        let reader = CodexLiveStatusReader()
+        let checksPendingRecheck = CommandLine.arguments.contains("--live-codex-recheck-pending")
+        let reader = CodexLiveStatusReader(pendingConfirmationInterval: checksPendingRecheck ? 0.4 : 5)
         var expected: [String]?
         if let index = CommandLine.arguments.firstIndex(of: "--live-codex-expect"), CommandLine.arguments.count > index + 1 {
             expected = CommandLine.arguments[index + 1].components(separatedBy: ",")
@@ -192,6 +193,9 @@ func runCodexInputSelfTest() -> Int32 {
         let deadline = Date().addingTimeInterval(30)
         while ((expected.map { observed != $0 } ?? (reader.statuses[id] == nil)) || !hookConfirmed) && Date() < deadline {
             RunLoop.main.run(until: Date().addingTimeInterval(0.05))
+            if checksPendingRecheck, reader.statuses[id]?.state == .waiting {
+                reader.track([id], refreshAfter: [id: 1])
+            }
             if checksHookConfirmation, let status = reader.statuses[id] {
                 if let since = confirmationRequestedAt {
                     hookConfirmed = status.lastConfirmedAtMs >= since
