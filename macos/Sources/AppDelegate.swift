@@ -517,7 +517,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         }
         codexTranscriptStatusReader.retainTrackedPaths(Set(monitored.compactMap(\.transcriptPath)))
         let codexTasks = monitored.filter { $0.source == "codex" || $0.client == "codex" }
-        let waitingHooks = Dictionary(codexTasks.filter { $0.petState == .waiting }.map {
+        let waitingHooks = Dictionary(codexTasks.filter {
+            $0.petState == .waiting || codexLiveStatusReader.statuses[$0.navigationSessionId]?.state == .waiting
+        }.map {
             ($0.navigationSessionId, $0.updatedAtMs ?? 0)
         }, uniquingKeysWith: max)
         codexLiveStatusReader.track(Set(codexTasks.map(\.navigationSessionId)), refreshAfter: waitingHooks)

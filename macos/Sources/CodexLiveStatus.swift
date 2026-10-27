@@ -178,6 +178,11 @@ final class CodexLiveStatusReader {
     private var running = false
     private var lastResync: [String: Date] = [:]
     private var requestedHookConfirmation: [String: Double] = [:]
+    private let pendingConfirmationIntervalMs: Double
+
+    init(pendingConfirmationInterval: TimeInterval = 5) {
+        pendingConfirmationIntervalMs = max(0.1, pendingConfirmationInterval) * 1000
+    }
     private var scheduledResync: [String: DispatchWorkItem] = [:]
     private var retry: DispatchWorkItem?
     private var initializationTimeout: DispatchWorkItem?
@@ -192,12 +197,18 @@ final class CodexLiveStatusReader {
             guard self.clientID != nil else { return }
             for id in removed { self.follow(id, following: false) }
             for id in added { self.follow(id, following: true) }
-            // 자동 승인된 권한 요청은 runtime 상태가 바뀌지 않을 수 있다.
-            // 새 훅 뒤의 snapshot을 한 번 확인해 PostToolUse까지 하늘색이 남지 않게 한다.
+            // 새 권한 훅 뒤에 실제 승인 여부를 확인한다. 첫 snapshot도 waiting이면
+            // 해제 patch가 누락되더라도 하늘색이 고정되지 않도록 현재 상태를 다시 읽는다.
+            // 경과 시간만으로 대기를 해제하지는 않는다.
+            let nowMs = Date().timeIntervalSince1970 * 1000
             for (id, since) in refreshAfter where ids.contains(id) {
-                guard let status = self.store.statuses[id], status.lastConfirmedAtMs < since,
-                      (self.requestedHookConfirmation[id] ?? 0) < since else { continue }
-                self.requestedHookConfirmation[id] = since
+                guard let status = self.store.statuses[id] else { continue }
+                let newHook = status.lastConfirmedAtMs < since
+                    && (self.requestedHookConfirmation[id] ?? 0) < since
+                let staleWaiting = status.state == .waiting
+                    && nowMs - status.lastConfirmedAtMs >= self.pendingConfirmationIntervalMs
+                guard newHook || staleWaiting else { continue }
+                if newHook { self.requestedHookConfirmation[id] = since }
                 self.resync(id)
             }
         }
