@@ -59,7 +59,7 @@ with tempfile.TemporaryDirectory(prefix='retto-codex-stream-') as directory:
     server.settimeout(10)
     expected = 'running,waiting,running,unavailable,waiting,unavailable,waiting,unavailable'
     process = subprocess.Popen([str(Path(sys.argv[1]).resolve()), '--self-test-codex-input',
-                                '--live-codex-thread', 'fixture', '--live-codex-expect', expected],
+                                '--live-codex-thread', 'fixture', '--live-codex-expect', expected, '--live-codex-confirm-hook'],
                                env={**os.environ, 'CODEX_HOME': directory}, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
     try:
         peer, _ = server.accept()
@@ -71,7 +71,20 @@ with tempfile.TemporaryDirectory(prefix='retto-codex-stream-') as directory:
         follow = receive(peer)
         assert follow['method'] == 'thread-stream-following-changed' and follow['params']['following']
         send(peer, snapshot(1), split=True)
-        time.sleep(0.2)
+        # A newly auto-approved hook must request exactly one fresh snapshot,
+        # even though the active runtime and requests have not changed.
+        confirmation = receive(peer)
+        assert confirmation['method'] == 'thread-stream-following-changed' and confirmation['params']['following']
+        send(peer, snapshot(1))
+        peer.settimeout(0.3)
+        try:
+            receive(peer)
+        except socket.timeout:
+            pass
+        else:
+            raise AssertionError('same hook requested more than one confirmation snapshot')
+        finally:
+            peer.settimeout(6)
         send(peer, snapshot(2, pending=True))
         time.sleep(0.2)
         send(peer, event({'type': 'patches', 'baseRevision': 2, 'revision': 3,
@@ -94,7 +107,7 @@ with tempfile.TemporaryDirectory(prefix='retto-codex-stream-') as directory:
         if process.returncode:
             print(err, file=sys.stderr)
             raise SystemExit(process.returncode)
-        print('IPC transport: fragmented frames, duplicate patches, repeated resync, owner disconnect passed')
+        print('IPC transport: fragmented frames, duplicate patches, repeated resync, owner disconnect, fresh hook confirmation passed')
     finally:
         if process.poll() is None:
             process.terminate()
