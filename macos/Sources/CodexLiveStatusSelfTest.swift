@@ -84,6 +84,42 @@ func checkCodexLiveStatus(_ check: (Bool, String) -> Void) {
     _ = store.consume(snapshot(requests: [["id": "first", "method": "mcpServer/elicitation/request"]]), nowMs: 1800)
     _ = store.consume(snapshot(requests: [["id": "second", "method": "mcpServer/elicitation/request"]], revision: 2), nowMs: 1900)
     check(store.statuses["fixture"]?.observedAtMs == 1900, "a different request refreshes waiting observation even with the same method")
+    store.reset()
+    _ = store.consume(snapshot(), nowMs: 100)
+    let autoApprovedHook = ReconciledCodexTask(state: .waiting, observedAtMs: 150, needsAttention: true, title: nil, source: .hook)
+    _ = store.consume(snapshot(revision: 2), nowMs: 200)
+    check(applyCodexLiveStatus(store.statuses["fixture"], to: autoApprovedHook, transcriptStatus: empty).state == .running,
+          "fresh unchanged active snapshot releases auto-approved permission hook")
+    check(store.statuses["fixture"]?.observedAtMs == 100,
+          "fresh confirmation keeps original state transition timestamp")
+    _ = store.consume(snapshot("idle", revision: 3), nowMs: 250)
+    check(applyCodexLiveStatus(store.statuses["fixture"], to: autoApprovedHook, transcriptStatus: empty).state == .idle,
+          "fresh idle confirmation clears stale waiting without creating completion")
+    let freshIdle = CodexLiveStatus(state: .idle, observedAtMs: 20, confirmedAtMs: 40)
+    let confirmedCompletion = applyCodexLiveStatus(freshIdle, to: waiting,
+        transcriptStatus: CodexTranscriptStatus(completedAtMs: 15, latestPromptAtMs: 1))
+    check(confirmedCompletion.state == .waving && confirmedCompletion.observedAtMs == 15,
+          "confirmation does not refresh already completed notification timestamp")
+    let sameApproval = CodexLiveStatus(state: .waiting, observedAtMs: 20, confirmedAtMs: 40)
+    check(applyCodexLiveStatus(sameApproval, to: done, transcriptStatus: newerCompletion).state == .waving,
+          "fresh snapshot cannot resurrect an approval predating completion")
+    let attentionFixture: (String, String, Double, String) -> StatePayload = { id, state, time, source in
+        try! JSONDecoder().decode(StatePayload.self, from: JSONSerialization.data(withJSONObject:
+            ["sessionId": id, "state": state, "updatedAtMs": time, "source": source, "attention": true]))
+    }
+    let olderInput = attentionFixture("input", "waiting", 1, "codex")
+    let newerDone = attentionFixture("done", "waving", 100, "codex")
+    let newerSlack = attentionFixture("slack", "waving", 200, "slack")
+    let mixed = [newerDone, newerSlack, olderInput].sorted {
+        selectionPriority(state: $0.petState, isClosed: $0.isClosed, source: $0.source)
+            > selectionPriority(state: $1.petState, isClosed: $1.isClosed, source: $1.source)
+    }
+    let priority: (StatePayload) -> Int = { selectionPriority(state: $0.petState, isClosed: $0.isClosed, source: $0.source) }
+    check(mixed.first?.id == olderInput.id, "older input precedes newer orange completion and Slack in task list")
+    check(preferredPinnedSession(newerDone, attention: mixed, priority: priority, needsAttention: { $0.needsAttention }).id == olderInput.id,
+          "input preempts pinned orange completion")
+    check(attentionBadgeSessions(mixed, needsAttention: { $0.needsAttention }).map(\.id) == [olderInput.id],
+          "input badge uses the same first-priority task as selection and list")
     let question = CodexTranscriptStatus(completedAtMs: nil, latestPromptAtMs: nil, inputRequests: ["question:0": 2])
     check(applyCodexLiveStatus(liveRunning, to: waiting, transcriptStatus: question).state == .waiting,
           "active stream does not dismiss unanswered asynchronous question")

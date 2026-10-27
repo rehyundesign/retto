@@ -12,6 +12,10 @@ private let codexWaitingMethods: Set<String> = [
 struct CodexLiveStatus: Equatable {
     let state: PetState
     let observedAtMs: Double
+    // 같은 상태의 새 snapshot은 이전 훅보다 나중에 확인한 근거가 된다.
+    // 상태 전환 시각과 분리해, 완료 알림 시각까지 계속 새로 만들지 않는다.
+    var confirmedAtMs: Double? = nil
+    var lastConfirmedAtMs: Double { confirmedAtMs ?? observedAtMs }
 }
 
 /// 대화 본문·명령·도구 인수는 보관하지 않는다. 상태와 요청 종류만 남긴다.
@@ -127,7 +131,11 @@ struct CodexLiveStatusStore {
         }
         let oldStatus = entries[id]?.status
         let unchanged = entries[id].map { NSDictionary(dictionary: $0.fields).isEqual(to: fields) } ?? false
-        let status = state.map { CodexLiveStatus(state: $0, observedAtMs: unchanged ? (oldStatus?.observedAtMs ?? nowMs) : nowMs) }
+        let confirmedAt = change["type"] as? String == "snapshot" || !unchanged
+            ? nowMs : (oldStatus?.lastConfirmedAtMs ?? nowMs)
+        let status = state.map { CodexLiveStatus(state: $0,
+            observedAtMs: unchanged ? (oldStatus?.observedAtMs ?? nowMs) : nowMs,
+            confirmedAtMs: confirmedAt) }
         entries[id] = Entry(fields: fields, owner: owner, revision: revision, status: status)
         return nil
     }
@@ -146,9 +154,10 @@ func applyCodexLiveStatus(_ live: CodexLiveStatus?, to task: ReconciledCodexTask
     }
     // 비동기 질문은 도구가 반환돼도 사용자 답변까지 유지한다.
     guard transcriptStatus.pendingInputAtMs == nil else { return task }
-    if task.state == .waiting, live.observedAtMs >= (task.observedAtMs ?? 0) {
+    if task.state == .waiting, live.lastConfirmedAtMs >= (task.observedAtMs ?? 0) {
         let state: PetState = transcriptStatus.isCompletedAfterLatestPrompt && live.state == .idle ? .waving : live.state
-        return ReconciledCodexTask(state: state, observedAtMs: live.observedAtMs,
+        return ReconciledCodexTask(state: state,
+                                   observedAtMs: state == .waving ? transcriptStatus.completedAtMs : max(live.observedAtMs, task.observedAtMs ?? 0),
                                    needsAttention: needsInputStates.contains(state), title: task.title, source: .live)
     }
     return task
@@ -168,19 +177,29 @@ final class CodexLiveStatusReader {
     private var store = CodexLiveStatusStore()
     private var running = false
     private var lastResync: [String: Date] = [:]
+    private var requestedHookConfirmation: [String: Double] = [:]
     private var scheduledResync: [String: DispatchWorkItem] = [:]
     private var retry: DispatchWorkItem?
     private var initializationTimeout: DispatchWorkItem?
 
-    func track(_ ids: Set<String>) {
+    func track(_ ids: Set<String>, refreshAfter: [String: Double] = [:]) {
         queue.async { [weak self] in
             guard let self else { return }
             let removed = self.tracked.subtracting(ids), added = ids.subtracting(self.tracked)
             self.tracked = ids; self.store.retain(ids); self.publish()
+            self.requestedHookConfirmation = self.requestedHookConfirmation.filter { ids.contains($0.key) }
             if !self.running { self.running = true; self.connect() }
             guard self.clientID != nil else { return }
             for id in removed { self.follow(id, following: false) }
             for id in added { self.follow(id, following: true) }
+            // 자동 승인된 권한 요청은 runtime 상태가 바뀌지 않을 수 있다.
+            // 새 훅 뒤의 snapshot을 한 번 확인해 PostToolUse까지 하늘색이 남지 않게 한다.
+            for (id, since) in refreshAfter where ids.contains(id) {
+                guard let status = self.store.statuses[id], status.lastConfirmedAtMs < since,
+                      (self.requestedHookConfirmation[id] ?? 0) < since else { continue }
+                self.requestedHookConfirmation[id] = since
+                self.resync(id)
+            }
         }
     }
     func stop() {
@@ -189,7 +208,7 @@ final class CodexLiveStatusReader {
             self.running = false; self.retry?.cancel(); self.initializationTimeout?.cancel()
             self.scheduledResync.values.forEach { $0.cancel() }; self.scheduledResync.removeAll()
             self.generation += 1; self.connection?.cancel(); self.connection = nil
-            self.store.reset(); self.publish()
+            self.store.reset(); self.requestedHookConfirmation.removeAll(); self.publish()
         }
     }
     private func connect() {
@@ -229,7 +248,7 @@ final class CodexLiveStatusReader {
         guard current == generation else { return }
         generation += 1; initializationTimeout?.cancel()
         connection?.cancel(); connection = nil; clientID = nil; buffer.removeAll()
-        store.reset(); lastResync.removeAll(); publish(); scheduleRetry()
+        store.reset(); lastResync.removeAll(); requestedHookConfirmation.removeAll(); publish(); scheduleRetry()
         scheduledResync.values.forEach { $0.cancel() }; scheduledResync.removeAll()
     }
     private func send(_ message: [String: Any]) {
