@@ -175,26 +175,44 @@ func runCodexInputSelfTest() -> Int32 {
     for failure in failures { print("FAIL: \(failure)") }
     if let flag = CommandLine.arguments.firstIndex(of: "--live-codex-thread"), CommandLine.arguments.count > flag + 1 {
         let id = CommandLine.arguments[flag + 1]
-        let reader = CodexLiveStatusReader()
+        let checksPendingRecheck = CommandLine.arguments.contains("--live-codex-recheck-pending")
+        let reader = CodexLiveStatusReader(pendingConfirmationInterval: checksPendingRecheck ? 0.4 : 5)
         var expected: [String]?
         if let index = CommandLine.arguments.firstIndex(of: "--live-codex-expect"), CommandLine.arguments.count > index + 1 {
             expected = CommandLine.arguments[index + 1].components(separatedBy: ",")
         }
         var observed: [String] = []
+        let checksHookConfirmation = CommandLine.arguments.contains("--live-codex-confirm-hook")
+        var confirmationRequestedAt: Double?
+        var hookConfirmed = !checksHookConfirmation
         reader.onChange = {
             let state = reader.statuses[id]?.state.rawValue ?? "unavailable"
             if observed.last != state { observed.append(state) }
         }
         reader.track([id])
         let deadline = Date().addingTimeInterval(30)
-        while (expected.map { observed != $0 } ?? (reader.statuses[id] == nil)) && Date() < deadline {
+        while ((expected.map { observed != $0 } ?? (reader.statuses[id] == nil)) || !hookConfirmed) && Date() < deadline {
             RunLoop.main.run(until: Date().addingTimeInterval(0.05))
+            if checksPendingRecheck, reader.statuses[id]?.state == .waiting {
+                reader.track([id], refreshAfter: [id: 1])
+            }
+            if checksHookConfirmation, let status = reader.statuses[id] {
+                if let since = confirmationRequestedAt {
+                    hookConfirmed = status.lastConfirmedAtMs >= since
+                } else {
+                    let since = Date().timeIntervalSince1970 * 1000
+                    confirmationRequestedAt = since
+                    // Repeated polls for the same waiting hook must only request one snapshot.
+                    for _ in 0..<5 { reader.track([id], refreshAfter: [id: since]) }
+                }
+            }
         }
+        if checksHookConfirmation { print("Fresh hook confirmation: \(hookConfirmed ? "PASS" : "FAIL")") }
         print("Live Codex status: \(reader.statuses[id]?.state.rawValue ?? "unavailable")")
         if let expected {
             print("Live Codex transitions: \(observed.joined(separator: ","))")
             reader.stop()
-            return observed == expected && failures.isEmpty ? 0 : 1
+            return observed == expected && failures.isEmpty && hookConfirmed ? 0 : 1
         }
         reader.stop()
         if reader.statuses[id] == nil { return 1 }

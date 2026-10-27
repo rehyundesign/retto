@@ -77,7 +77,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         // 닫힌 세션 기록은 버린다
         let live = Set(sessions.map(\.id))
         seenSessions = seen.filter { live.contains($0.key) || $0.key == payload.id }
-        applySessions(sessions)
+        applySessions(hookSessions)
     }
 
     /// 읽고 넘어간 세션, 그리고 소식이 끊긴 "작업 중" 은 조용한 상태로 본다.
@@ -168,7 +168,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         slack.onChange = { [weak self] in
             guard let self else { return }
             self.slackSettings?.refresh()
-            self.applySessions(self.sessions)
+            self.applySessions(self.hookSessions)
         }
         slack.restore()
         // 상태 파일을 한 번 읽고 나서 정한다. 곧바로 보면 소식이 있는 사람에게도 창이 뜬다.
@@ -516,7 +516,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             !$0.isClosed && ($0.petState == .waiting || ($0.updatedAtMs ?? 0) >= monitoringSince)
         }
         codexTranscriptStatusReader.retainTrackedPaths(Set(monitored.compactMap(\.transcriptPath)))
-        codexLiveStatusReader.track(Set(monitored.filter { $0.source == "codex" || $0.client == "codex" }.map(\.navigationSessionId)))
+        let codexTasks = monitored.filter { $0.source == "codex" || $0.client == "codex" }
+        let waitingHooks = Dictionary(codexTasks.filter {
+            $0.petState == .waiting || codexLiveStatusReader.statuses[$0.navigationSessionId]?.state == .waiting
+        }.map {
+            ($0.navigationSessionId, $0.updatedAtMs ?? 0)
+        }, uniquingKeysWith: max)
+        codexLiveStatusReader.track(Set(codexTasks.map(\.navigationSessionId)), refreshAfter: waitingHooks)
         sessions = merged.values.map(reconciledCodexPayload).sorted {
             let leftPriority = statePriority($0)
             let rightPriority = statePriority($1)
@@ -997,13 +1003,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
 
     @objc private func selectAutomaticSession() {
         pinnedSessionId = nil
-        applySessions(sessions)
+        applySessions(hookSessions)
     }
 
     @objc private func selectSession(_ sender: NSMenuItem) {
         guard let sessionId = sender.representedObject as? String else { return }
         pinnedSessionId = sessionId
-        applySessions(sessions)
+        applySessions(hookSessions)
         panel.orderFrontRegardless()
     }
 
@@ -1011,7 +1017,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         guard let choice = sender.representedObject as? TaskOpenChoice,
               let payload = sessions.first(where: { $0.id == choice.sessionID }) else { return }
         pinnedSessionId = payload.id
-        applySessions(sessions)
+        applySessions(hookSessions)
         revealAgentSession(payload, windowOnly: false, preferredApp: choice.app)
     }
 
@@ -1451,7 +1457,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         }
         let live = Set(sessions.map(\.id))
         seenSessions = seen.filter { live.contains($0.key) }
-        applySessions(sessions)
+        applySessions(hookSessions)
     }
 
     /// 레토가 누구이고 누가 만들었는지. 메일 주소는 눌러서 복사할 수 있게 둔다.
