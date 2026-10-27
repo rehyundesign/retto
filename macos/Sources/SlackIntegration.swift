@@ -199,22 +199,43 @@ final class SlackIntegration {
     private var heartbeat: Task<Void, Never>?
     private var generation = UUID()
     private let session: URLSession
+    private let loadCredentials: () throws -> SlackCredentials?
+    private var restoringCredentials = false
     var preferences = SlackPreferences.load() {
         didSet { preferences.save(); inbox.filter(preferences: preferences); onChange?() }
     }
     var payloads: [StatePayload] { notices.compactMap { $0.payload(preferences: preferences, channels: channels, userNames: userNames) } }
     var hasCredentials: Bool { credentials != nil }
-    init(session: URLSession = .shared) { self.session = session }
+    init(session: URLSession = .shared, loadCredentials: @escaping () throws -> SlackCredentials? = SlackKeychain.read) {
+        self.session = session
+        self.loadCredentials = loadCredentials
+    }
 
     func restore() {
-        do {
-            guard let saved = try SlackKeychain.read() else { return }
-            credentials = saved
-            start()
-        } catch {
-            status = error.localizedDescription
-            connectionState = .failed
-            onChange?()
+        guard !restoringCredentials else { return }
+        restoringCredentials = true
+        let current = generation
+        let load = loadCredentials
+        connectionState = .connecting
+        status = "Slack 키체인 확인 중…"
+        onChange?()
+        // 앱 업데이트 후 키체인 승인을 기다려도 Codex 상태 감시와 화면은 계속 동작한다.
+        DispatchQueue.global(qos: .utility).async { [weak self] in
+            let result = Result { try load() }
+            DispatchQueue.main.async { [weak self] in
+                guard let self, self.generation == current else { return }
+                self.restoringCredentials = false
+                switch result {
+                case .success(let saved):
+                    self.credentials = saved
+                    if saved != nil { self.start() }
+                    else { self.connectionState = .disabled; self.status = "연결되지 않음"; self.onChange?() }
+                case .failure(let error):
+                    self.status = error.localizedDescription
+                    self.connectionState = .failed
+                    self.onChange?()
+                }
+            }
         }
     }
     func reconnect() {
@@ -241,6 +262,7 @@ final class SlackIntegration {
     }
     private func stop() {
         generation = UUID()
+        restoringCredentials = false
         metadataPending = []; metadataRetryAt = [:]
         worker?.cancel(); heartbeat?.cancel()
         socket?.cancel(with: .goingAway, reason: nil)
