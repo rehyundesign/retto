@@ -103,9 +103,12 @@ final class RettoView: NSView {
     private var isRibbonHovering = false
     private var sessionCount = 0
     private var attentionCount = 0
+    private var inputCount = 0
+    private var connectionStatus: String?
     private var isPinned = false
     /// 배지가 대표하는 상태. 다른 세션에 고정해 둔 동안에도 배지 색은 기다리는 쪽을 따른다.
     private var attentionState: PetState?
+    private var attentionSource: String?
 
     /// 클릭 한 번에 한 바퀴만 돌고 원래 상태로 돌아가는 반응 동작. 코덱스의 transientState 와 같은 자리.
     private var transientState: PetState?
@@ -209,7 +212,7 @@ final class RettoView: NSView {
         trackingAreaRef = area
     }
 
-    func apply(_ newPayload: StatePayload, state incoming: PetState? = nil, liveMessage: String? = nil, liveTitle: String? = nil, sleepPose: Bool = false, sessionCount: Int, attentionCount: Int, attentionState: PetState? = nil, isPinned: Bool) {
+    func apply(_ newPayload: StatePayload, state incoming: PetState? = nil, liveMessage: String? = nil, liveTitle: String? = nil, sleepPose: Bool = false, sessionCount: Int, attentionCount: Int, attentionState: PetState? = nil, attentionSource: String? = nil, inputCount: Int = 0, connectionStatus: String? = nil, isPinned: Bool) {
         self.liveMessage = liveMessage
         self.liveTitle = liveTitle
         self.sleepPose = sleepPose
@@ -218,6 +221,9 @@ final class RettoView: NSView {
         let hadBadge = self.attentionCount > 0
         self.attentionCount = attentionCount
         self.attentionState = attentionState
+        self.attentionSource = attentionSource
+        self.inputCount = inputCount
+        self.connectionStatus = connectionStatus
         if !hadBadge && attentionCount > 0 {
             badgeAppearProgress = 0
             startBadgeAnimator()
@@ -317,12 +323,13 @@ final class RettoView: NSView {
     private func updateAccessibility() {
         let animation = animationCatalog[state] ?? animationCatalog[.idle]!
         let selection = isPinned ? "고정한 세션" : "자동 선택 세션"
-        let attention = attentionCount > 0 ? " 손이 필요한 세션 \(attentionCount)개." : ""
+        let attention = inputCount > 0 ? " 입력 필요 \(inputCount)개." : (attentionCount > 0 ? " 새 알림 \(attentionCount)개." : "")
+        let connection = connectionStatus.map { " 연결 상태: \($0)." } ?? ""
         // 말풍선 내용도 읽어 준다. 소리로만 듣는 경우 이게 유일한 통로다.
         let spoken = bodyText()
         let message = spoken.isEmpty ? "" : " \(String(spoken.prefix(160)))."
         let source = payload?.sourceLabel ?? "AI"
-        setAccessibilityLabel("\(source), \(payload?.project ?? "AI 작업"), \(animation.title).\(message) \(selection), 총 \(sessionCount)개 세션.\(attention)")
+        setAccessibilityLabel("\(source), \(payload?.project ?? "AI 작업"), \(animation.title).\(message) \(selection), 총 \(sessionCount)개 세션.\(attention)\(connection)")
     }
 
     /// 지금 그려야 하는 동작. 끄는 중이면 달리기가 상태를 이긴다.
@@ -998,12 +1005,16 @@ final class RettoView: NSView {
         let alpha = badgeAppearProgress
 
         var rect = attentionBadgeRect(ribbon: ribbon, scale: scale)
+        if inputCount > 0 {
+            let width = 65 * scale
+            rect.origin.x -= width - rect.width
+            rect.size.width = width
+        }
         badgeFrame = rect.insetBy(dx: -2, dy: -2)
-        let inset = rect.width * (1 - visualScale) / 2
-        rect = rect.insetBy(dx: inset, dy: inset)
+        rect = rect.insetBy(dx: rect.width * (1 - visualScale) / 2, dy: rect.height * (1 - visualScale) / 2)
 
         let ringWidth = chromeStrokeWidth(scale)
-        let ring = NSBezierPath(ovalIn: rect.insetBy(dx: -ringWidth, dy: -ringWidth))
+        let ring = NSBezierPath(roundedRect: rect.insetBy(dx: -ringWidth, dy: -ringWidth), xRadius: rect.height / 2, yRadius: rect.height / 2)
         NSGraphicsContext.saveGraphicsState()
         let shadow = NSShadow()
         shadow.shadowColor = NSColor.black.withAlphaComponent(0.18 * alpha)
@@ -1014,9 +1025,10 @@ final class RettoView: NSView {
         ring.fill()
         NSGraphicsContext.restoreGraphicsState()
 
-        let circle = NSBezierPath(ovalIn: rect)
-        // 완료된 세션만 세므로 색도 완료 하나다.
-        toneDone.background.withAlphaComponent(0.97 * alpha).setFill()
+        let circle = NSBezierPath(roundedRect: rect, xRadius: rect.height / 2, yRadius: rect.height / 2)
+        let badgeTone = notificationTone(source: attentionSource, state: attentionState ?? .waving,
+                                         fallback: attentionState == .waiting ? toneNeedsYou : toneDone)
+        badgeTone.background.withAlphaComponent(0.97 * alpha).setFill()
         circle.fill()
         if isBadgePressed {
             NSColor.black.withAlphaComponent(0.12 * alpha).setFill()
@@ -1025,14 +1037,17 @@ final class RettoView: NSView {
 
         let attributes: [NSAttributedString.Key: Any] = [
             .font: NSFont(name: "AvenirNext-DemiBold", size: 12 * scale * visualScale) ?? NSFont.boldSystemFont(ofSize: 12 * scale * visualScale),
-            .foregroundColor: toneDone.text.withAlphaComponent(alpha)
+            .foregroundColor: badgeTone.text.withAlphaComponent(alpha)
         ]
-        let label = attentionCount > 9 ? "9+" : "\(attentionCount)"
+        let count = inputCount > 0 ? inputCount : attentionCount
+        let number = count > 99 ? "99+" : "\(count)"
+        let label = inputCount > 0 ? "입력 \(number)" : (count > 9 ? "9+" : number)
         let size = label.size(withAttributes: attributes)
         label.draw(at: NSPoint(x: rect.midX - size.width / 2, y: rect.midY - size.height / 2), withAttributes: attributes)
     }
 
     private func drawStatusRibbon(_ animation: Animation, layout: PetLayout) {
+        let tone = notificationTone(source: payload?.source, state: state, fallback: animation.tone)
         let scale = layout.chromeScale
         let textDelta = layout.textDelta
         let ribbonRect = layout.ribbonRect
@@ -1060,7 +1075,7 @@ final class RettoView: NSView {
         let nameAttributes: [NSAttributedString.Key: Any] = [
             // 이름표는 본문과 같은 글꼴, 크기만 1.5pt 작게.
             .font: petFont(typeface, size: 16.5 * scale + textDelta, bold: true),
-            .foregroundColor: animation.tone.text,
+            .foregroundColor: tone.text,
             .paragraphStyle: nameStyle
         ]
         let namePadding = 12 * scale
@@ -1068,7 +1083,7 @@ final class RettoView: NSView {
         // 한글 12자 폭이 상한이다. 영문처럼 좁은 글자는 12자를 넘어도 이 폭까지는 다 보인다.
         let labelBudget = (sectionLabelWidthSample as NSString).size(withAttributes: nameAttributes).width
         // 오른쪽 배지와 부딧치지 않는 선까지만 허용한다.
-        let badgeGuard = ribbonRect.width - 14 * scale - (attentionBadgeSide + 14) * scale - 10 * scale
+        let badgeGuard = ribbonRect.width - 14 * scale - ((inputCount > 0 ? 65 : attentionBadgeSide) + 14) * scale - 10 * scale
         let nameTextBudget = min(labelBudget, max(40 * scale, badgeGuard - namePadding * 2))
         let name = fittedSingleLine(sectionLabel(), maxWidth: nameTextBudget, attributes: nameAttributes)
         let nameWidth = name.size(withAttributes: nameAttributes).width + namePadding * 2
@@ -1087,7 +1102,7 @@ final class RettoView: NSView {
         nameShadow.shadowOffset = NSSize(width: 0, height: -1 * scale)
         nameShadow.set()
         let namePill = NSBezierPath(roundedRect: nameRect, xRadius: nameHeight / 2, yRadius: nameHeight / 2)
-        animation.tone.background.withAlphaComponent(0.97).setFill()
+        tone.background.withAlphaComponent(0.97).setFill()
         namePill.fill()
         NSGraphicsContext.restoreGraphicsState()
         NSColor.white.withAlphaComponent(0.85).setStroke()
@@ -1115,7 +1130,20 @@ final class RettoView: NSView {
         )
         // 나머지 공간은 전부 멘트에 준다. 펼치면 아래로 더 자라고 그만큼 더 읽힌다.
         let messageAttributes = messageAttributes(scale: scale, textDelta: textDelta)
-        let messageRect = messageRect(in: ribbonRect, scale: scale)
+        var messageRect = messageRect(in: ribbonRect, scale: scale)
+        if let connectionStatus {
+            let lineHeight = 16 * scale
+            messageRect.origin.y += lineHeight
+            messageRect.size.height = max(0, messageRect.height - lineHeight)
+            let style = NSMutableParagraphStyle()
+            style.lineBreakMode = .byTruncatingTail
+            let attributes: [NSAttributedString.Key: Any] = [
+                .font: NSFont.systemFont(ofSize: 10.5 * scale, weight: .medium),
+                .foregroundColor: hexColor(0x925400), .paragraphStyle: style
+            ]
+            (connectionStatus as NSString).draw(in: NSRect(x: messageRect.minX, y: ribbonRect.minY + 9 * scale,
+                width: messageRect.width, height: lineHeight), withAttributes: attributes)
+        }
         let fullMessage = fullMessageText(for: animation)
         let bodyBox = bodyLineBox(in: messageRect, attributes: messageAttributes, scale: scale, textDelta: textDelta)
         let fittedFull = fittedBody(fullMessage, in: messageRect, attributes: messageAttributes, maxHeight: bodyBox.fit) as String
@@ -1408,6 +1436,7 @@ final class RettoView: NSView {
     }
 
     private func detailText(for animation: Animation) -> String {
+        if payload?.source == "slack" { return state == .idle ? "Slack" : "Slack · 새 메시지" }
         if (state == .review || state == .running), let tool = payload?.toolName, !tool.isEmpty { return "\(animation.kicker) · \(tool.uppercased())" }
         if state == .failed, let error = payload?.error, !error.isEmpty { return "\(animation.kicker) · \(String(error.prefix(24)).uppercased())" }
         return animation.kicker

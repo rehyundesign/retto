@@ -84,18 +84,19 @@ func transcriptModifiedAtMs(path: String?) -> Double? {
 ///    트랜스크립트가 자란 시각까지 본다 — 훅은 도구를 부를 때만 돌기 때문에, 도구 없이
 ///    오래 생각하는 동안 살아 있는 세션이 유령으로 몰렸다.
 func displayState(state: PetState, updatedAtMs: Double?, seenAtMs: Double?, transcriptModifiedAtMs: Double?, nowMs: Double) -> PetState {
-    if needsInputStates.contains(state), isSeen(updatedAtMs: updatedAtMs, seenAtMs: seenAtMs) { return .idle }
+    if state != .waiting, needsInputStates.contains(state), isSeen(updatedAtMs: updatedAtMs, seenAtMs: seenAtMs) { return .idle }
     let lastActivity = max(updatedAtMs ?? 0, transcriptModifiedAtMs ?? 0)
     if isStaleWorking(state: state, updatedAtMs: lastActivity, nowMs: nowMs) { return .idle }
     return state
 }
 
-func selectionPriority(state: PetState, isClosed: Bool) -> Int {
+func selectionPriority(state: PetState, isClosed: Bool, source: String? = nil) -> Int {
     if isClosed { return -100 }
+    if source == "slack", state == .waving { return 70 }
     switch state {
     // 1순위는 내 답을 기다리는 세션이다. 다른 무엇보다 먼저 보여준다.
     // 2순위는 답변이 끝난 세션. 내가 찾아 나서기 전에 레토가 먼저 알려줘야 하는 것이다.
-    case .waiting: return 60
+    case .waiting: return 80
     case .waving: return 55
     case .failed: return 50
     case .running: return 40
@@ -105,6 +106,13 @@ func selectionPriority(state: PetState, isClosed: Bool) -> Int {
     // 자는 상태는 세션이 아니라 레토 자신의 모습이다. 고를 대상이 될 일이 없다.
     case .sleeping: return 0
     }
+}
+
+/// 고정된 완료 알림보다 우선하는 새 알림은 먼저 표시한다.
+func preferredPinnedSession(_ pinned: StatePayload, attention: [StatePayload],
+                            priority: (StatePayload) -> Int, needsAttention: (StatePayload) -> Bool) -> StatePayload {
+    guard let first = attention.first else { return pinned }
+    return !needsAttention(pinned) || priority(first) > priority(pinned) ? first : pinned
 }
 
 struct StatePayload: Decodable {
@@ -137,7 +145,10 @@ struct StatePayload: Decodable {
     var id: String { sessionId ?? "" }
     /// 레지스트리에서는 제품별 접두어를 붙이지만 딥링크에는 원래 세션 id가 들어간다.
     var navigationSessionId: String { rawSessionId ?? sessionId ?? "" }
-    var sourceLabel: String { source == "codex" || client == "codex" ? "Codex" : "Claude" }
+    var sourceLabel: String {
+        if source == "slack" { return "Slack" }
+        return source == "codex" || client == "codex" ? "Codex" : "Claude"
+    }
     var project: String {
         if let projectName, !projectName.isEmpty { return projectName }
         if let cwd, !cwd.isEmpty { return URL(fileURLWithPath: cwd).lastPathComponent }
@@ -203,6 +214,7 @@ func isCodexSubagentTranscript(path: String) -> Bool {
 /// 메뉴 막대의 AI 세션 목록과 자동 검사가 같은 문자열을 쓴다. 훅 없이 찾은 Codex task도
 /// 일반 세션과 똑같이 한 행으로 보여야 한다.
 func sessionMenuLabel(for payload: StatePayload) -> String {
+    if payload.source == "slack" { return "● 새 메시지  \(payload.title) · Slack" }
     let stateMark: String
     switch payload.petState {
     case .waiting: stateMark = "● 기다림"
@@ -239,6 +251,26 @@ struct ReconciledCodexTask {
 
 func reconcileCodexTask(payload: StatePayload, indexTitle: String?, transcriptStatus: CodexTranscriptStatus) -> ReconciledCodexTask {
     let title = indexTitle?.isEmpty == false ? indexTitle : payload.sessionTitle
+    if let requestedAt = transcriptStatus.pendingInputAtMs {
+        return ReconciledCodexTask(state: .waiting, observedAtMs: requestedAt,
+                                   needsAttention: true, title: title, source: .rollout)
+    }
+    if let abortedAt = transcriptStatus.latestAbortAtMs,
+       abortedAt >= (payload.updatedAtMs ?? 0),
+       abortedAt >= (transcriptStatus.latestPromptAtMs ?? 0),
+       abortedAt >= (transcriptStatus.completedAtMs ?? 0) {
+        return ReconciledCodexTask(state: .idle, observedAtMs: abortedAt,
+                                   needsAttention: false, title: title, source: .rollout)
+    }
+    // 비동기 질문은 답변 뒤에도 훅의 waiting 값이 남을 수 있다.
+    if payload.petState == .waiting,
+       let answeredAt = transcriptStatus.latestInputReplyAtMs,
+       answeredAt >= (payload.updatedAtMs ?? 0) {
+        return ReconciledCodexTask(state: transcriptStatus.isCompletedAfterLatestPrompt ? .waving : .running,
+                                   observedAtMs: max(answeredAt, transcriptStatus.completedAtMs ?? 0),
+                                   needsAttention: transcriptStatus.isCompletedAfterLatestPrompt,
+                                   title: title, source: .rollout)
+    }
     guard (payload.petState == .running || payload.petState == .review),
           transcriptStatus.isCompletedAfterLatestPrompt,
           let completedAtMs = transcriptStatus.completedAtMs else {
@@ -309,16 +341,49 @@ final class CodexThreadTitleReader {
 struct CodexTranscriptStatus: Codable {
     let completedAtMs: Double?
     let latestPromptAtMs: Double?
+    // 질문 본문은 저장하지 않고 질문 ID와 시각만 기록한다.
+    var inputRequests: [String: Double]? = nil
+    var inputReplies: [String: Double]? = nil
+    var inputRequestTurns: [String: String]? = nil
+    var synchronousRequests: [String: Double]? = nil
+    var toolOutputs: [String: Double]? = nil
+    var abortedTurns: [String: Double]? = nil
+    var latestAbortAtMs: Double? = nil
+
+    var pendingInputAtMs: Double? {
+        (inputRequests ?? [:]).filter { id, requestedAt in
+            if (inputReplies?[id] ?? 0) >= requestedAt { return false }
+            let callId = String(id.split(separator: ":").dropLast().joined(separator: ":"))
+            if synchronousRequests?[callId] != nil, (toolOutputs?[callId] ?? 0) >= requestedAt { return false }
+            if let turn = inputRequestTurns?[id] {
+                return (abortedTurns?[turn] ?? 0) < requestedAt
+            }
+            // 과거 기록에 턴 ID가 없으면 이후 중단 시각으로 해제한다.
+            return (latestAbortAtMs ?? 0) < requestedAt
+        }.values.max()
+    }
+
+    var latestInputReplyAtMs: Double? {
+        let latest = max(inputReplies?.values.max() ?? 0, toolOutputs?.filter { synchronousRequests?[$0.key] != nil }.values.max() ?? 0)
+        return latest > 0 ? latest : nil
+    }
 
     var isCompletedAfterLatestPrompt: Bool {
-        guard let completedAtMs else { return false }
-        return completedAtMs > (latestPromptAtMs ?? 0)
+        guard pendingInputAtMs == nil, let completedAtMs else { return false }
+        return completedAtMs > max(latestPromptAtMs ?? 0, latestAbortAtMs ?? 0)
     }
 
     func merged(with newer: CodexTranscriptStatus) -> CodexTranscriptStatus {
         CodexTranscriptStatus(
             completedAtMs: max(completedAtMs ?? 0, newer.completedAtMs ?? 0),
-            latestPromptAtMs: max(latestPromptAtMs ?? 0, newer.latestPromptAtMs ?? 0)
+            latestPromptAtMs: max(latestPromptAtMs ?? 0, newer.latestPromptAtMs ?? 0),
+            inputRequests: (inputRequests ?? [:]).merging(newer.inputRequests ?? [:], uniquingKeysWith: max),
+            inputReplies: (inputReplies ?? [:]).merging(newer.inputReplies ?? [:], uniquingKeysWith: max),
+            inputRequestTurns: (inputRequestTurns ?? [:]).merging(newer.inputRequestTurns ?? [:], uniquingKeysWith: { _, new in new }),
+            synchronousRequests: (synchronousRequests ?? [:]).merging(newer.synchronousRequests ?? [:], uniquingKeysWith: max),
+            toolOutputs: (toolOutputs ?? [:]).merging(newer.toolOutputs ?? [:], uniquingKeysWith: max),
+            abortedTurns: (abortedTurns ?? [:]).merging(newer.abortedTurns ?? [:], uniquingKeysWith: max),
+            latestAbortAtMs: max(latestAbortAtMs ?? 0, newer.latestAbortAtMs ?? 0)
         )
     }
 }
@@ -330,6 +395,14 @@ func codexTranscriptStatus(in text: String) -> CodexTranscriptStatus {
     plainFormatter.formatOptions = [.withInternetDateTime]
     var completion: Double?
     var latestPrompt: Double?
+    var requests: [String: Double] = [:]
+    var replies: [String: Double] = [:]
+    var requestTurns: [String: String] = [:]
+    var syncRequests: [String: Double] = [:]
+    var outputs: [String: Double] = [:]
+    var aborted: [String: Double] = [:]
+    var latestAbort: Double?
+    var activeTurn: String?
     for line in text.split(separator: "\n") {
         guard let data = line.data(using: .utf8),
               let record = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
@@ -337,16 +410,65 @@ func codexTranscriptStatus(in text: String) -> CodexTranscriptStatus {
               let timestamp = record["timestamp"] as? String,
               let date = fractionalFormatter.date(from: timestamp) ?? plainFormatter.date(from: timestamp) else { continue }
         let timestampMs = date.timeIntervalSince1970 * 1000
+        if record["type"] as? String == "event_msg" {
+            if payload["type"] as? String == "task_started" {
+                activeTurn = (payload["turn_attribution"] as? [String: Any])?["turn_id"] as? String ?? payload["turn_id"] as? String
+            }
+            if payload["type"] as? String == "turn_aborted" {
+                latestAbort = max(latestAbort ?? 0, timestampMs)
+                if let turn = payload["turn_id"] as? String ?? activeTurn { aborted[turn] = timestampMs }
+            }
+        }
+        if record["type"] as? String == "response_item",
+           payload["type"] as? String == "function_call_output",
+           let callId = payload["call_id"] as? String { outputs[callId] = timestampMs }
         if record["type"] as? String == "event_msg", payload["type"] as? String == "task_complete" {
             completion = max(completion ?? 0, timestampMs)
+        }
+        if record["type"] as? String == "response_item",
+           payload["type"] as? String == "function_call",
+           let name = (payload["name"] as? String)?.split(separator: ".").last,
+           ["request_user_input_async", "request_user_input"].contains(String(name)),
+           let callId = payload["call_id"] as? String,
+           let arguments = payload["arguments"] as? String,
+           let argumentData = arguments.data(using: .utf8),
+           let object = try? JSONSerialization.jsonObject(with: argumentData) as? [String: Any],
+           let questions = object["questions"] as? [Any] {
+            let turn = (payload["internal_chat_message_metadata_passthrough"] as? [String: Any])?["turn_id"] as? String
+                ?? (record["metadata"] as? [String: Any])?["turn_id"] as? String ?? activeTurn
+            for index in questions.indices {
+                let id = "\(callId):\(index)"
+                requests[id] = timestampMs
+                requestTurns[id] = turn
+            }
+            if name == "request_user_input" { syncRequests[callId] = timestampMs }
         }
         if record["type"] as? String == "response_item",
            payload["type"] as? String == "message",
            payload["role"] as? String == "user" {
             latestPrompt = max(latestPrompt ?? 0, timestampMs)
+            for part in payload["content"] as? [[String: Any]] ?? [] {
+                guard let body = part["text"] as? String,
+                      let start = body.range(of: "<send_user_message_question_reply>"),
+                      let end = body.range(of: "</send_user_message_question_reply>", range: start.upperBound..<body.endIndex),
+                      let data = String(body[start.upperBound..<end.lowerBound]).data(using: .utf8),
+                      let answers = try? JSONSerialization.jsonObject(with: data) as? [[String: Any]] else { continue }
+                for answer in answers {
+                    guard let encoded = answer["questionItemId"] as? String,
+                          let idData = encoded.data(using: .utf8),
+                          let id = try? JSONSerialization.jsonObject(with: idData) as? [Any],
+                          id.count == 3, let name = id[0] as? String,
+                          ["request_user_input_async", "request_user_input"].contains(String(name.split(separator: ".").last ?? "")),
+                          let callId = id[1] as? String, let index = id[2] as? Int else { continue }
+                    replies["\(callId):\(index)"] = timestampMs
+                }
+            }
         }
     }
-    return CodexTranscriptStatus(completedAtMs: completion, latestPromptAtMs: latestPrompt)
+    return CodexTranscriptStatus(completedAtMs: completion, latestPromptAtMs: latestPrompt,
+                                 inputRequests: requests, inputReplies: replies,
+                                 inputRequestTurns: requestTurns, synchronousRequests: syncRequests,
+                                 toolOutputs: outputs, abortedTurns: aborted, latestAbortAtMs: latestAbort)
 }
 
 func codexTaskCompletionAtMs(in text: String) -> Double? {
@@ -542,6 +664,16 @@ final class CodexTranscriptStatusReader {
 
     private var cache: [String: CachedStatus] = [:]
     private let lifecycleIndex = CodexLifecycleIndex()
+    private(set) var unreadablePaths: Set<String> = []
+    private var trackedPaths: Set<String> = []
+    var connectionIssue: String? {
+        let count = unreadablePaths.intersection(trackedPaths).count
+        return count == 0 ? nil : "Codex 기록 읽기 실패 \(count)개"
+    }
+    func retainTrackedPaths(_ paths: Set<String>) {
+        trackedPaths = paths
+        unreadablePaths.formIntersection(paths)
+    }
 
     func status(at path: String?) -> CodexTranscriptStatus {
         guard let path, !path.isEmpty else {
@@ -549,23 +681,31 @@ final class CodexTranscriptStatusReader {
         }
         var info = stat()
         guard stat(path, &info) == 0 else {
-            cache.removeValue(forKey: path)
-            return CodexTranscriptStatus(completedAtMs: nil, latestPromptAtMs: nil)
+            unreadablePaths.insert(path)
+            return cache[path]?.status ?? CodexTranscriptStatus(completedAtMs: nil, latestPromptAtMs: nil)
         }
+        guard FileManager.default.isReadableFile(atPath: path) else {
+            unreadablePaths.insert(path)
+            return cache[path]?.status ?? CodexTranscriptStatus(completedAtMs: nil, latestPromptAtMs: nil)
+        }
+        unreadablePaths.remove(path)
         let size = UInt64(info.st_size)
         let modifiedAtMs = TimeInterval(info.st_mtimespec.tv_sec) * 1000
             + TimeInterval(info.st_mtimespec.tv_nsec) / 1_000_000
-        if let cached = cache[path], cached.size == size, cached.modifiedAtMs == modifiedAtMs {
-            return cached.status
-        }
-
         if let indexed = lifecycleIndex.status(path: path, size: size, modifiedAtMs: modifiedAtMs) {
             cache[path] = CachedStatus(size: size, modifiedAtMs: modifiedAtMs, status: indexed)
             return indexed
         }
+        if let cached = cache[path], cached.size == size, cached.modifiedAtMs == modifiedAtMs {
+            return cached.status
+        }
 
         let before = info.st_atimespec
-        let status = Self.readStatusTail(path: path, size: size)
+        guard let tailStatus = Self.readStatusTail(path: path, size: size) else {
+            unreadablePaths.insert(path)
+            return cache[path]?.status ?? CodexTranscriptStatus(completedAtMs: nil, latestPromptAtMs: nil)
+        }
+        let status = cache[path]?.status.merged(with: tailStatus) ?? tailStatus
         var times = [before, info.st_mtimespec]
         _ = utimensat(AT_FDCWD, path, &times, 0)
         cache[path] = CachedStatus(size: size, modifiedAtMs: modifiedAtMs, status: status)
@@ -573,17 +713,15 @@ final class CodexTranscriptStatusReader {
         return status
     }
 
-    private static func readStatusTail(path: String, size: UInt64) -> CodexTranscriptStatus {
+    private static func readStatusTail(path: String, size: UInt64) -> CodexTranscriptStatus? {
         guard let handle = FileHandle(forReadingAtPath: path) else {
-            return CodexTranscriptStatus(completedAtMs: nil, latestPromptAtMs: nil)
+            return nil
         }
         defer { try? handle.close() }
         let span: UInt64 = 512 * 1024
         if size > span { try? handle.seek(toOffset: size - span) }
-        guard let data = try? handle.readToEnd(), let text = String(data: data, encoding: .utf8) else {
-            return CodexTranscriptStatus(completedAtMs: nil, latestPromptAtMs: nil)
-        }
-        return codexTranscriptStatus(in: text)
+        guard let data = try? handle.readToEnd() else { return nil }
+        return codexTranscriptStatus(in: codexTranscriptText(data, skipPartialFirstLine: size > span))
     }
 }
 
@@ -598,7 +736,7 @@ final class CodexLifecycleIndex {
     private struct Store: Codable { var entries: [String: Entry] }
 
     private let storeURL = FileManager.default.homeDirectoryForCurrentUser
-        .appendingPathComponent(".claude/retto-pet/codex-lifecycle.json")
+        .appendingPathComponent(".claude/retto-pet/codex-lifecycle-input-v3.json")
     private let stateQueue = DispatchQueue(label: "retto.codex-lifecycle.state")
     private let scanQueue = DispatchQueue(label: "retto.codex-lifecycle.scan")
     private var entries: [String: Entry]
@@ -636,14 +774,24 @@ final class CodexLifecycleIndex {
     }
 
     private static func scan(path: String, from previousSize: UInt64?, previous: CodexTranscriptStatus) -> CodexTranscriptStatus {
+        var before = stat()
+        let hadStat = stat(path, &before) == 0
         guard let handle = FileHandle(forReadingAtPath: path) else { return previous }
-        defer { try? handle.close() }
-        if let previousSize, previousSize > 0 {
-            let overlap: UInt64 = 64 * 1024
-            try? handle.seek(toOffset: previousSize > overlap ? previousSize - overlap : 0)
+        defer {
+            if hadStat {
+                var after = stat()
+                if fstat(handle.fileDescriptor, &after) == 0 {
+                    var times = [before.st_atimespec, after.st_mtimespec]
+                    _ = futimens(handle.fileDescriptor, &times)
+                }
+            }
+            try? handle.close()
         }
-        guard let data = try? handle.readToEnd(), let text = String(data: data, encoding: .utf8) else { return previous }
-        return previous.merged(with: codexTranscriptStatus(in: text))
+        let overlap: UInt64 = 64 * 1024
+        let offset = (previousSize ?? 0) > overlap ? (previousSize ?? 0) - overlap : 0
+        if offset > 0 { try? handle.seek(toOffset: offset) }
+        guard let data = try? handle.readToEnd() else { return previous }
+        return previous.merged(with: codexTranscriptStatus(in: codexTranscriptText(data, skipPartialFirstLine: offset > 0)))
     }
 
     private func save() {
@@ -662,13 +810,19 @@ final class CodexRolloutDiscovery {
     private let titles = CodexThreadTitleReader()
     private let recentWindow: TimeInterval = 24 * 60 * 60
     private(set) var diagnostic = ""
+    private(set) var connectionIssue: String?
 
     func recentTasks(now: Date = Date()) -> [StatePayload] {
         let knownTitles = titles.allTitles()
         var tasks: [String: StatePayload] = [:]
         let paths: [String]
         do { paths = try FileManager.default.subpathsOfDirectory(atPath: sessionsURL.path) }
-        catch { diagnostic = "\(sessionsURL.path): \(error.localizedDescription)"; return [] }
+        catch {
+            diagnostic = "\(sessionsURL.path): \(error.localizedDescription)"
+            connectionIssue = "Codex 작업 목록 읽기 실패"
+            return []
+        }
+        connectionIssue = nil
         diagnostic = "\(sessionsURL.path): \(paths.count) entries"
         for relative in paths where relative.hasSuffix(".jsonl") {
             let url = sessionsURL.appendingPathComponent(relative)
@@ -757,4 +911,25 @@ func codexRolloutReport() -> String {
           let data = try? JSONSerialization.data(withJSONObject: report, options: [.sortedKeys]),
           let text = String(data: data, encoding: .utf8) else { return "[]" }
     return text
+}
+
+/// 입력 대기는 읽음 처리 대상에서 제외하고 별도 배지로 먼저 표시한다.
+func attentionBadgeSessions(_ sessions: [StatePayload], needsAttention: (StatePayload) -> Bool) -> [StatePayload] {
+    let unread = sessions.filter { !$0.isClosed && needsAttention($0) }
+    let input = unread.filter { $0.petState == .waiting }
+    return input.isEmpty ? unread.filter { $0.petState == .waving } : input
+}
+
+func attentionSummary(_ sessions: [StatePayload]) -> String {
+    let input = sessions.filter { $0.petState == .waiting }.count
+    return input > 0 ? "입력 필요 \(input)개" : "새 알림 \(sessions.count)개"
+}
+
+/// 바이트 단위로 읽은 범위가 한글 문자 중간에서 시작해도 이후 JSONL 기록은 파싱한다.
+func codexTranscriptText(_ data: Data, skipPartialFirstLine: Bool) -> String {
+    if skipPartialFirstLine {
+        guard let newline = data.firstIndex(of: 10) else { return "" }
+        return String(decoding: data[data.index(after: newline)...], as: UTF8.self)
+    }
+    return String(decoding: data, as: UTF8.self)
 }

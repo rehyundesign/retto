@@ -11,6 +11,26 @@ if CommandLine.arguments.contains("--ax-check") {
     exit(ClaudeAppNavigator.isPermitted ? 0 : 1)
 }
 
+if let index = CommandLine.arguments.firstIndex(of: "--attention-preview"), index + 1 < CommandLine.arguments.count {
+    let app = NSApplication.shared
+    app.setActivationPolicy(.accessory)
+    app.appearance = NSAppearance(named: .aqua)
+    app.finishLaunching()
+    exit(renderAttentionPreview(to: CommandLine.arguments[index + 1]))
+}
+
+if CommandLine.arguments.contains("--self-test-codex-input") {
+    exit(runCodexInputSelfTest())
+}
+
+if CommandLine.arguments.contains("--self-test-slack") {
+    let app = NSApplication.shared
+    app.setActivationPolicy(.accessory)
+    app.appearance = NSAppearance(named: .aqua)
+    app.finishLaunching()
+    exit(runSlackSelfTest())
+}
+
 if CommandLine.arguments.contains("--self-test") {
     exit(runSelfTest())
 }
