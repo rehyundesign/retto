@@ -63,17 +63,6 @@ func drawChristmasEffects(state: PetState, drag: DragRun?, gaze: Bool, in rect: 
         glow(207,536,18,0.4+0.4*pow(sin(phase),2))
     }
     if id == "review" {
-        if !front {
-            let sway: CGFloat = 6*sin(phase)
-            let garland=NSBezierPath();garland.move(to:NSPoint(x:36,y:155+sway));garland.curve(to:NSPoint(x:412,y:155+sway),controlPoint1:NSPoint(x:161.333333,y:88.333333+sway),controlPoint2:NSPoint(x:286.666667,y:88.333333+sway));garland.lineWidth=3;hexColor(0x367e59).withAlphaComponent(0.55).setStroke();garland.stroke()
-            for i in 0..<6 {
-                let x: CGFloat=50+CGFloat(i)*70,y=113+CGFloat(50.0/(188.0*188.0))*pow(x-224,2)+sway,a=0.35+0.55*(0.5+0.5*sin(phase-CGFloat(i)*0.8))
-                let wire=NSBezierPath();wire.move(to:NSPoint(x:x,y:y-8));wire.line(to:NSPoint(x:x,y:y));wire.lineWidth=1.5;hexColor(0xb4914d).withAlphaComponent(0.65).setStroke();wire.stroke()
-                glow(x,y,13,a,colors[i%3]);colors[i%3].withAlphaComponent(a).setFill();NSBezierPath(ovalIn:NSRect(x:x-5,y:y-5,width:10,height:10)).fill()
-            }
-            for i in 0..<8 {let q=unit(p+CGFloat(i)/8);snow((i%2 == 1 ? 412:36)+8*sin(phase+CGFloat(i)),180+q*410,5+2*CGFloat(i%3),sin(q * .pi)*0.65,phase*18+CGFloat(i*25))}
-            for i in 0..<4 {let q=unit(p+CGFloat(i)/4);glint(i%2 == 1 ? 405:42,230+q*285,6,sin(q * .pi)*0.7,phase*20)}
-        }
         let anchor = Christmas16Attachments.points(id, frame: frame)?.first ?? [77, 494]
         let cx = anchor[0], cy = anchor[1]
         if !front { glow(cx,cy,46,0.45+0.45*pow(sin(phase),2));for i in 0..<5 {let a=phase+CGFloat(i) * .pi*2/5;glint(cx+37*cos(a),cy+37*sin(a),7,0.65,a*25)} }

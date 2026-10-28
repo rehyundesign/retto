@@ -7,11 +7,11 @@ import Foundation
 final class RettoView: NSView {
     /// 지금 그리는 아틀라스. 스킨을 고르면 앱이 갈아 끼운다.
     var spriteSheet: NSImage {
-        didSet { christmasSheetImage = nil; christmasCellImages.removeAll(); magicalHeartSheetImage = nil; magicalHeartCellImages.removeAll(); frameIndex = 0; completedCycles = 0; restartAnimation(); needsDisplay = true }
+        didSet { frameIndex = 0; completedCycles = 0; restartAnimation(); needsDisplay = true }
     }
     /// 아틀라스만으로는 표현하기 어려운 스킨 전용 효과를 고른다.
     var skin: PetSkin {
-        didSet { clearGaze(); frameIndex = 0; completedCycles = 0; restartAnimation(); restartChristmasEffects(); needsDisplay = true }
+        didSet { if skin == .chocolatHeart { chocolatEpoch = ProcessInfo.processInfo.systemUptime }; clearGaze(); frameIndex = 0; completedCycles = 0; restartAnimation(); restartChristmasEffects(); needsDisplay = true }
     }
     private var spriteLayout: SpriteSheetLayout {
         SpriteSheetLayout.forImage(size: spriteSheet.size) ?? .retto
@@ -24,64 +24,28 @@ final class RettoView: NSView {
     private let onOpenAttention: (NSPoint) -> Void
     private var payload: StatePayload?
     private var state: PetState = .idle
+    private var chocolatPreviewTime: TimeInterval?
+    func setChocolatTimeForPreview(_ time: TimeInterval, drag: DragRun? = nil) { chocolatPreviewTime = time; dragRun = drag; needsDisplay = true }
+    private var chocolatEpoch = ProcessInfo.processInfo.systemUptime
     private var frameIndex = 0
     private var completedCycles = 0
     private var animationTimer: Timer?
-    private var jeannePoseEpoch = ProcessInfo.processInfo.systemUptime
-    private let jeanneEffectEpoch = ProcessInfo.processInfo.systemUptime
-    private var jeannePreviewTime: TimeInterval?
-    private var christmasAnimationStart = ProcessInfo.processInfo.systemUptime
-    private var magicalHeartPoseEpoch = ProcessInfo.processInfo.systemUptime
-    private let magicalHeartEffectEpoch = ProcessInfo.processInfo.systemUptime
-    private var magicalHeartPreviewTime: TimeInterval?
-    private var magicalHeartSpriteOnlyPreview = false
-    private var magicalHeartSheetImage: CGImage?
-    private var magicalHeartCellImages: [Int: NSImage] = [:]
-    private var christmasSheetImage: CGImage?
-    private var christmasCellImages: [Int: NSImage] = [:]
-
-    private func drawCachedMagicalHeartCell(row: Int, frame: Int, in rect: NSRect) -> Bool {
-        guard skin == .magicalHeart else { return false }
-        if spriteLayout.columns == 16, MagicalHeartFrames.draw(row: row, frame: frame, in: rect) { return true }
-        let key = row * spriteLayout.columns + frame
-        if magicalHeartCellImages[key] == nil {
-            if magicalHeartSheetImage == nil {
-                magicalHeartSheetImage = spriteSheet.cgImage(forProposedRect: nil, context: nil, hints: nil)
-            }
-            guard let sheet = magicalHeartSheetImage else { return false }
-            let width = sheet.width / spriteLayout.columns
-            let height = sheet.height / spriteLayout.rows
-            guard let cell = sheet.cropping(to: CGRect(x: frame * width, y: row * height, width: width, height: height)) else { return false }
-            if magicalHeartCellImages.count >= 48, let oldest = magicalHeartCellImages.keys.min() {
-                magicalHeartCellImages.removeValue(forKey: oldest)
-            }
-            magicalHeartCellImages[key] = NSImage(cgImage: cell, size: NSSize(width: spriteLayout.cellWidth, height: spriteLayout.cellHeight))
-        }
-        guard let image = magicalHeartCellImages[key] else { return false }
-        image.draw(in: rect, from: NSRect(origin: .zero, size: image.size), operation: .sourceOver, fraction: 1,
-                   respectFlipped: false, hints: [.interpolation: NSImageInterpolation.high])
-        return true
+    private var jeanneEpoch = ProcessInfo.processInfo.systemUptime
+    private var jeannePreviewTime: Double?
+    func setJeanneTimeForPreview(_ time: Double) {
+        jeannePreviewTime = time
+        if let a = currentAnimation { frameIndex = JeanneSkin.position(row: a.row, time: time).frame }
+        needsDisplay = true
     }
-
-    private func drawCachedChristmasCell(row: Int, frame: Int, in rect: NSRect) -> Bool {
-        guard skin == .christmas, spriteLayout.columns == 16 else { return false }
-        let key = row * spriteLayout.columns + frame
-        if christmasCellImages[key] == nil {
-            if christmasSheetImage == nil {
-                christmasSheetImage = spriteSheet.cgImage(forProposedRect: nil, context: nil, hints: nil)
-            }
-            guard let sheet = christmasSheetImage else { return false }
-            let width = sheet.width / spriteLayout.columns
-            let height = sheet.height / spriteLayout.rows
-            guard let cell = sheet.cropping(to: CGRect(x: frame * width, y: row * height, width: width, height: height)) else { return false }
-            christmasCellImages[key] = NSImage(cgImage: cell, size: NSSize(width: spriteLayout.cellWidth, height: spriteLayout.cellHeight))
-        }
-        guard let image = christmasCellImages[key] else { return false }
-        image.draw(in: rect, from: NSRect(origin: .zero, size: image.size), operation: .sourceOver, fraction: 1, respectFlipped: false, hints: [.interpolation: NSImageInterpolation.high])
-        return true
+    private var pichiEpoch = ProcessInfo.processInfo.systemUptime
+    private var pichiPreviewTime: Double?
+    func setPichiTimeForPreview(_ time: Double) {
+        pichiPreviewTime = time
+        if let a = currentAnimation { frameIndex = PichiSkin.position(row: a.row, time: time).frame }
+        needsDisplay = true
     }
-
-
+    private var hanaAnimationStart = ProcessInfo.processInfo.systemUptime
+    private let hanaEffects = HanaEffectLayers()
     private var christmasEffectsTimer: Timer?
     private var christmasEffectsStart = ProcessInfo.processInfo.systemUptime
     private var christmasPreviewTime: TimeInterval?
@@ -299,27 +263,6 @@ final class RettoView: NSView {
         needsDisplay = true
     }
 
-    func setJeanneTimeForPreview(_ time: TimeInterval) {
-        jeannePreviewTime = time
-        needsDisplay = true
-    }
-
-    func setMagicalHeartTimeForPreview(_ time: TimeInterval) {
-        magicalHeartPreviewTime = time
-        needsDisplay = true
-    }
-
-    func setMagicalHeartSpriteOnlyForPreview() {
-        magicalHeartSpriteOnlyPreview = true
-    }
-
-    func setDragRunForPreview(_ direction: DragRun?) {
-        dragRun = direction
-        frameIndex = 0
-        completedCycles = 0
-        restartAnimation()
-    }
-
     private func updateAccessibility() {
         let animation = animationCatalog[state] ?? animationCatalog[.idle]!
         let selection = isPinned ? "고정한 세션" : "자동 선택 세션"
@@ -333,9 +276,17 @@ final class RettoView: NSView {
     }
 
     /// 지금 그려야 하는 동작. 끄는 중이면 달리기가 상태를 이긴다.
+    private var allowsGaze: Bool {
+        guard skin != .hana, skin != .chocolatHeart, skin != .pichiPitch,
+              gazeStates.contains(state), transientState == nil else { return false }
+        return skin != .jeanne || (visibleState == .idle && dragRun == nil)
+    }
+    private var hasActiveGaze: Bool { lookDirection != nil && (skin != .jeanne || allowsGaze) }
+
     private var currentAnimation: Animation? {
-        guard let animation = dragRun.flatMap({ dragRunAnimations[$0] }) ?? animationCatalog[visibleState] else { return nil }
-        return skin == .jeanne ? JeanneMotion.animation(animation) : skinAnimation(animation, skin: skin, columns: spriteLayout.columns)
+        if let dragRun, let animation = dragRunAnimations[dragRun] { return skin == .chocolatHeart ? ChocolatHeart.animation(animation) : skinAnimation(animation, skin: skin, columns: spriteLayout.columns) }
+        guard let animation = animationCatalog[visibleState] else { return nil }
+        return skin == .chocolatHeart ? ChocolatHeart.animation(animation) : skinAnimation(animation, skin: skin, columns: spriteLayout.columns)
     }
 
     private func restartAnimation() {
@@ -343,22 +294,24 @@ final class RettoView: NSView {
         if effectState != christmasEffectState {
             christmasEffectState = effectState
             christmasEffectsStart = ProcessInfo.processInfo.systemUptime
+            chocolatEpoch = ProcessInfo.processInfo.systemUptime
         }
         animationTimer?.invalidate()
-        jeannePoseEpoch = ProcessInfo.processInfo.systemUptime
-        magicalHeartPoseEpoch = ProcessInfo.processInfo.systemUptime
         guard let animation = currentAnimation else { return }
-        let timedChristmas = skin == .christmas && spriteLayout.columns == 16
-        let durations = timedChristmas ? Christmas16Timing.frameDurations(row: animation.row) : nil
-        let poseTiming = timedChristmas ? Christmas16Timing.frameDuration(row: animation.row, frame: frameIndex) : nil
-        if let durations {
-            christmasAnimationStart = ProcessInfo.processInfo.systemUptime
-                - Double(completedCycles) * durations.reduce(0, +)
-                - durations.prefix(frameIndex).reduce(0, +)
+        let poseTiming = skin == .christmas && spriteLayout.columns == 16
+            ? Christmas16Timing.frameDuration(row: animation.row, frame: frameIndex) : nil
+        if skin == .jeanne {
+            jeanneEpoch = ProcessInfo.processInfo.systemUptime - JeanneSkin.elapsed(row: animation.row, frame: frameIndex, cycles: completedCycles)
         }
-        let timer = Timer(timeInterval: skin == .jeanne || skin == .magicalHeart || durations != nil ? 1.0 / 60 : (poseTiming ?? animation.interval), repeats: durations != nil || poseTiming == nil) { [weak self] _ in
+        if skin == .pichiPitch {
+            pichiEpoch = ProcessInfo.processInfo.systemUptime - PichiSkin.elapsed(row: animation.row, frame: frameIndex, cycles: completedCycles)
+        }
+        if skin == .hana {
+            hanaAnimationStart = ProcessInfo.processInfo.systemUptime - Double(completedCycles * animation.frames + frameIndex) * animation.interval
+        }
+        let timer = Timer(timeInterval: skin == .jeanne ? 0.05 : (skin == .hana || skin == .chocolatHeart || skin == .pichiPitch) ? 1.0 / 60 : (poseTiming ?? animation.interval), repeats: poseTiming == nil) { [weak self] _ in
             self?.advanceFrame()
-            if poseTiming != nil && durations == nil { self?.restartAnimation() }
+            if poseTiming != nil { self?.restartAnimation() }
         }
         animationTimer = timer
         RunLoop.main.add(timer, forMode: .common)
@@ -375,29 +328,73 @@ final class RettoView: NSView {
         RunLoop.main.add(timer, forMode: .common)
     }
 
+    func setDragRunForPreview(_ direction: DragRun) {
+        dragRun = direction
+        restartAnimation()
+    }
+
     func setChristmasTimeForPreview(_ time: TimeInterval) {
         christmasPreviewTime = time
         needsDisplay = true
     }
 
+    func validateJeanneStateTransitions() -> Bool {
+        for state in PetState.allCases {
+            guard let data = "{\"state\":\"\(state.rawValue)\",\"sessionId\":\"jeanne-state-fixture\"}".data(using:.utf8),
+                  let payload = try? JSONDecoder().decode(StatePayload.self,from:data) else { return false }
+            apply(payload,state:state,sessionCount:1,attentionCount:0,isPinned:false)
+            guard currentAnimation?.row == animationCatalog[state]?.row else { return false }
+            guard allowsGaze == (state == .idle) else { print("Unexpected gaze policy: \(state)"); return false }
+            if state != .idle {
+                lookDirection = 8
+                guard !hasActiveGaze else { return false }
+            }
+            let duration = JeanneSkin.state(row: animationCatalog[state]!.row)!.cycle
+            jeanneEpoch = ProcessInfo.processInfo.systemUptime - duration * 3 - 0.01
+            advanceFrame()
+            guard visibleState == state, currentAnimation?.row == animationCatalog[state]?.row else { print("State changed unexpectedly: \(state)"); return false }
+        }
+        clearGaze()
+        guard let payload = try? JSONDecoder().decode(StatePayload.self,from:Data("{\"state\":\"waving\",\"sessionId\":\"fixture\"}".utf8)) else { return false }
+        apply(payload,state:.waving,sessionCount:1,attentionCount:0,isPinned:false)
+        playReaction()
+        guard transientState == .jumping, !allowsGaze, currentAnimation?.row == animationCatalog[.jumping]?.row else { return false }
+        jeanneEpoch = ProcessInfo.processInfo.systemUptime - JeanneSkin.state(row:4)!.cycle - 0.01
+        advanceFrame()
+        guard transientState == nil, visibleState == .waving, currentAnimation?.row == 3 else { return false }
+        for direction in [DragRun.right,.left] {
+            dragRun = direction; restartAnimation()
+            guard let a = currentAnimation, a.row == dragRunAnimations[direction]?.row, a.frames == 8 else { return false }
+            jeanneEpoch = ProcessInfo.processInfo.systemUptime - 2.1
+            advanceFrame()
+            guard frameIndex < 8 else { return false }
+        }
+        dragRun = nil
+        apply(payload,state:.idle,sessionCount:1,attentionCount:0,isPinned:false)
+        for direction in 0..<16 { setGazeDirectionForPreview(direction); guard lookDirection == direction, hasActiveGaze else { return false } }
+        clearGaze()
+        apply(payload,state:.idle,sleepPose:true,sessionCount:1,attentionCount:0,isPinned:false)
+        guard visibleState == .sleeping, !allowsGaze, currentAnimation?.row == 11 else { return false }
+        apply(payload,state:.idle,sleepPose:false,sessionCount:1,attentionCount:0,isPinned:false)
+        return lookDirection == nil && allowsGaze && currentAnimation?.row == 0
+    }
+
     private func advanceFrame() {
-        guard let animation = currentAnimation else { return }
-        if skin == .jeanne || skin == .magicalHeart { needsDisplay = true }
-        guard dragRun != nil || lookDirection == nil else { return }
-        let previousFrame = frameIndex
+        guard dragRun != nil || !hasActiveGaze, let animation = currentAnimation else { return }
         if skin == .jeanne {
-            let position = JeanneMotion.position(elapsed: ProcessInfo.processInfo.systemUptime - jeannePoseEpoch,
-                                                 interval: animation.interval)
-            frameIndex = position.frame
-            completedCycles = position.cycles
-        } else if skin == .magicalHeart {
-            let position = MagicalHeartMotion.position(elapsed: ProcessInfo.processInfo.systemUptime - magicalHeartPoseEpoch,
-                                                       frames: animation.frames, interval: animation.interval)
-            frameIndex = position.frame
-            completedCycles = position.cycles
-        } else if skin == .christmas, spriteLayout.columns == 16,
-           let durations = Christmas16Timing.frameDurations(row: animation.row) {
-            let position = ChristmasMotion.position(elapsed: ProcessInfo.processInfo.systemUptime - christmasAnimationStart, durations: durations)
+            if dragRun == nil && hasActiveGaze { return }
+            let p = JeanneSkin.position(row: animation.row, time: ProcessInfo.processInfo.systemUptime - jeanneEpoch)
+            frameIndex = p.frame; completedCycles = p.cycles
+        } else if skin == .pichiPitch {
+            let p = PichiSkin.position(row: animation.row, time: ProcessInfo.processInfo.systemUptime - pichiEpoch)
+            frameIndex = p.frame; completedCycles = p.cycles
+        } else if skin == .chocolatHeart {
+            let tick = Int(max(0, ProcessInfo.processInfo.systemUptime - chocolatEpoch) / animation.interval)
+            frameIndex = tick % animation.frames; completedCycles = tick / animation.frames
+        } else if skin == .hana {
+            // 타이머 호출이 늦어져도 실제 경과 시간의 프레임으로 진행한다.
+            let elapsed = max(0, ProcessInfo.processInfo.systemUptime - hanaAnimationStart)
+            let position = HanaMotion.position(elapsed: elapsed, interval: animation.interval, frames: animation.frames)
             frameIndex = position.frame
             completedCycles = position.cycles
         } else {
@@ -420,7 +417,7 @@ final class RettoView: NSView {
             restartAnimation()
             return
         }
-        if skin != .christmas || frameIndex != previousFrame { needsDisplay = true }
+        needsDisplay = true
     }
 
     /// 몸통을 눌렀을 때의 반응. 코덱스 펫이 마우스를 올릴 때 쓰는 jumping 을 클릭 반응으로 쓴다.
@@ -470,7 +467,7 @@ final class RettoView: NSView {
         case nil: NSCursor.arrow.set()
         }
 
-        guard gazeStates.contains(state), transientState == nil else { return }
+        guard allowsGaze else { return }
         let petRect = layout.petRect
         let dx = point.x - petRect.midX
         let dy = point.y - petRect.midY
@@ -520,7 +517,7 @@ final class RettoView: NSView {
         guard lookDirection != nil else { return }
         lookDirection = nil
         frameIndex = 0
-        if skin == .christmas || skin == .magicalHeart { restartAnimation() }
+        if skin == .christmas { restartAnimation() }
         needsDisplay = true
     }
 
@@ -658,7 +655,7 @@ final class RettoView: NSView {
         if let dragRun, let run = dragRunAnimations[dragRun] {
             row = run.row
             column = frameIndex
-        } else if let direction = lookDirection {
+        } else if let direction = lookDirection, hasActiveGaze {
             row = direction < 8 ? 9 : 10
             column = direction < 8 ? direction : direction - 8
         } else {
@@ -674,27 +671,30 @@ final class RettoView: NSView {
             height: spriteLayout.cellHeight
         )
 
-        let magicalHeartTime = magicalHeartPreviewTime ?? (ProcessInfo.processInfo.systemUptime - magicalHeartEffectEpoch)
+        let hasBakedTransformation = skin == .magicalHeart && visibleState == .running
 
         // 발밑 바닥 그림자. 예전에는 실루엣 드롭 섀도(blur 16)를 썼는데, 흐림이 사방으로
         // 퍼져 머리 위에도 회색 안개가 생겼다. 흰 배경에서는 그게 투명한 사각형처럼 보였다.
         // 동물의 숲처럼 발밑에만 타원을 깔고, 몸에는 아주 얕은 그림자만 남긴다.
         drawGroundShadow(petRect: petRect, scale: uiScale)
-        if skin == .magicalHeart {
-            MagicalHeartEffects.draw(state: visibleState, drag: dragRun, in: petRect, time: magicalHeartTime, front: false)
-        }
 
-        let jeanneTime = jeannePreviewTime ?? (ProcessInfo.processInfo.systemUptime - jeanneEffectEpoch)
-        if skin == .jeanne {
-            JeanneEffects.draw(state: visibleState, drag: dragRun, in: petRect,
-                               time: jeanneTime, frame: frameIndex, front: false)
-        }
+        let jeanneTime = jeannePreviewTime ?? (ProcessInfo.processInfo.systemUptime - jeanneEpoch)
+        if skin == .jeanne { JeanneSkin.drawEffects(row: row, frame: column, time: jeanneTime, front: false, in: petRect) }
+        let pichiTime = pichiPreviewTime ?? (ProcessInfo.processInfo.systemUptime - pichiEpoch)
+        if skin == .pichiPitch { PichiSkin.drawEffects(row: row, time: pichiTime, front: false, in: petRect) }
         let christmasTime = christmasPreviewTime ?? (ProcessInfo.processInfo.systemUptime - christmasEffectsStart)
         if skin == .christmas {
             drawChristmasEffects(state: visibleState, drag: dragRun, gaze: lookDirection != nil,
                                  in: petRect, time: christmasTime, frame: frameIndex, front: false)
         }
 
+        if skin == .hana {
+            hanaEffects.draw(state: visibleState, drag: dragRun, in: petRect, time: christmasTime, front: false)
+        }
+
+        if skin == .chocolatHeart {
+            ChocolatHeart.drawEffects(row: row, time: chocolatPreviewTime ?? (ProcessInfo.processInfo.systemUptime - chocolatEpoch), front: false, in: petRect)
+        }
         NSGraphicsContext.saveGraphicsState()
         let shadow = NSShadow()
         shadow.shadowColor = NSColor.black.withAlphaComponent(0.16)
@@ -702,33 +702,41 @@ final class RettoView: NSView {
         shadow.shadowOffset = NSSize(width: 0, height: -2 * uiScale)
         shadow.set()
         if skin == .jeanne {
-            _ = JeanneFrames.draw(row: row, frame: column, in: petRect)
-        } else if !drawCachedMagicalHeartCell(row: row, frame: column, in: petRect),
-                  !drawCachedChristmasCell(row: row, frame: column, in: petRect) {
+            JeanneSkin.drawCharacter(row: row, frame: column, in: petRect)
+        } else if skin == .pichiPitch {
+            PichiSkin.drawCharacter(row: row, frame: column, in: petRect)
+        } else if skin == .chocolatHeart {
+            ChocolatHeart.drawCharacter(row: row, frame: column, in: petRect)
+        } else if skin != .hana || !HanaFrameCache.drawCharacter(row: row, frame: column, in: petRect) {
             spriteSheet.draw(in: petRect, from: sourceRect, operation: .sourceOver, fraction: 1, respectFlipped: false, hints: [.interpolation: NSImageInterpolation.high])
         }
         NSGraphicsContext.restoreGraphicsState()
 
-        if skin == .jeanne {
-            JeanneEffects.draw(state: visibleState, drag: dragRun, in: petRect,
-                               time: jeanneTime, frame: frameIndex, front: true)
-        }
         if skin == .christmas {
             drawChristmasEffects(state: visibleState, drag: dragRun, gaze: lookDirection != nil,
                                  in: petRect, time: christmasTime, frame: frameIndex, front: true)
         }
 
-        if skin == .magicalHeart {
-            MagicalHeartEffects.draw(state: visibleState, drag: dragRun, in: petRect, time: magicalHeartTime, front: true)
+        if skin == .hana {
+            hanaEffects.draw(state: visibleState, drag: dragRun, in: petRect, time: christmasTime, front: true)
         }
 
-        if visibleState == .sleeping, skin != .jeanne {
+        if skin == .magicalHeart {
+            if !hasBakedTransformation {
+                drawMagicalHeartAmbientEffects(petRect: petRect, scale: uiScale, frame: frameIndex)
+            }
+        }
+
+        if skin == .chocolatHeart {
+            ChocolatHeart.drawEffects(row: row, time: chocolatPreviewTime ?? (ProcessInfo.processInfo.systemUptime - chocolatEpoch), front: true, in: petRect)
+        }
+        if skin == .jeanne { JeanneSkin.drawEffects(row: row, frame: column, time: jeanneTime, front: true, in: petRect) }
+        if skin == .pichiPitch { PichiSkin.drawEffects(row: row, time: pichiTime, front: true, in: petRect) }
+        if visibleState == .sleeping && skin != .jeanne && skin != .hana && skin != .chocolatHeart && skin != .pichiPitch {
             drawSleepBreath(petRect: petRect, scale: uiScale)
         }
 
-        if skin != .magicalHeart || !magicalHeartSpriteOnlyPreview {
-            drawStatusRibbon(statusAnimation, layout: layout)
-        }
+        drawStatusRibbon(statusAnimation, layout: layout)
     }
 
     private static func loadEffectSheet(_ resource: String) -> NSImage? {
@@ -1349,7 +1357,47 @@ final class RettoView: NSView {
         ).height
     }
 
+    private struct JeanneBodyFit {
+        let input: NSAttributedString
+        let width: CGFloat
+        let maxHeight: CGFloat
+        let result: NSString
+    }
+    private var jeanneBodyFits: [JeanneBodyFit] = []
+
     private func fittedBody(_ text: String, in rect: NSRect, attributes: [NSAttributedString.Key: Any], maxHeight: CGFloat) -> NSString {
+        let input = NSAttributedString(string: text, attributes: attributes)
+        if skin == .jeanne, let cached = jeanneBodyFits.first(where: {
+            $0.width == rect.width && $0.maxHeight == maxHeight && $0.input.isEqual(to: input)
+        }) { return cached.result }
+        let result = uncachedFittedBody(text, in: rect, attributes: attributes, maxHeight: maxHeight)
+        if skin == .jeanne {
+            if jeanneBodyFits.count >= 8 { jeanneBodyFits.removeFirst() }
+            jeanneBodyFits.append(JeanneBodyFit(input: input, width: rect.width, maxHeight: maxHeight, result: result))
+        }
+        return result
+    }
+    func validateJeanneBodyFitCache() -> Bool {
+        let originalSkin = skin
+        skin = .jeanne
+        defer { skin = originalSkin }
+        let long = String(repeating: "레토의 작업 결과와 다음 동작을 확인합니다. ", count: 30)
+        let inputs: [(String, CGFloat, CGFloat, CGFloat)] = [
+            (long, 150, 40, 12), (long, 150, 40, 12),
+            ("새 메시지", 150, 40, 12), (long, 220, 40, 12),
+            (long, 150, 80, 12), (long, 150, 40, 18)
+        ]
+        for (text, width, height, size) in inputs {
+            let rect = NSRect(x:0,y:0,width:width,height:height)
+            let attrs: [NSAttributedString.Key: Any] = [.font:NSFont.systemFont(ofSize:size)]
+            let actual = fittedBody(text,in:rect,attributes:attrs,maxHeight:height)
+            let expected = uncachedFittedBody(text,in:rect,attributes:attrs,maxHeight:height)
+            if actual != expected { return false }
+        }
+        return true
+    }
+
+    private func uncachedFittedBody(_ text: String, in rect: NSRect, attributes: [NSAttributedString.Key: Any], maxHeight: CGFloat) -> NSString {
         let box = NSSize(width: rect.width, height: .greatestFiniteMagnitude)
         func height(_ candidate: String) -> CGFloat {
             (candidate as NSString).boundingRect(

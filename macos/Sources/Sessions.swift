@@ -169,7 +169,7 @@ struct StatePayload: Decodable {
     }
     var needsAttention: Bool { attention == true && closed != true }
     var isClosed: Bool { closed == true }
-    /// 내부 Codex 세션은 기존 훅 레지스트리에 남아 있어도 표시 대상에서 뺀다.
+    /// 내부 Codex 세션과 제목 없는 task는 레토의 표시 대상에서 뺀다.
     var isRettoVisibleTask: Bool {
         guard source == "codex" || client == "codex" else { return true }
         guard sessionTitle?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false else { return false }
@@ -833,6 +833,12 @@ final class CodexRolloutDiscovery {
     private let recentWindow: TimeInterval = 24 * 60 * 60
     private(set) var diagnostic = ""
     private(set) var connectionIssue: String?
+    private struct CachedTask {
+        let size: UInt64
+        let modified: Date
+        let payload: StatePayload
+    }
+    private var taskCache: [String: CachedTask] = [:]
 
     func recentTasks(now: Date = Date()) -> [StatePayload] {
         let knownTitles = titles.allTitles()
@@ -848,6 +854,8 @@ final class CodexRolloutDiscovery {
         diagnostic = "\(sessionsURL.path): \(paths.count) entries"
         for relative in paths where relative.hasSuffix(".jsonl") {
             let url = sessionsURL.appendingPathComponent(relative)
+            // 하위 에이전트는 상위 작업과 동일한 ID를 기록한다. 이 파일을 읽으면 최신
+            // 수정 시각 때문에 상위 대화가 worker 실행 내역으로 바뀐다.
             guard let attributes = try? FileManager.default.attributesOfItem(atPath: url.path),
                   let modified = attributes[.modificationDate] as? Date,
                   now.timeIntervalSince(modified) <= recentWindow,
@@ -859,7 +867,36 @@ final class CodexRolloutDiscovery {
         return tasks.values.sorted { ($0.updatedAtMs ?? 0) > ($1.updatedAtMs ?? 0) }
     }
 
+    static func validateTaskCache() -> Bool {
+        let folder = FileManager.default.temporaryDirectory.appendingPathComponent("retto-cache-test-" + UUID().uuidString)
+        do {
+            try FileManager.default.createDirectory(at:folder,withIntermediateDirectories:true)
+            defer { try? FileManager.default.removeItem(at:folder) }
+            let url = folder.appendingPathComponent("fixture.jsonl")
+            func write(_ cwd: String) throws {
+                let data = try JSONSerialization.data(withJSONObject:["type":"session_meta","payload":["id":"cache-test","cwd":cwd]])
+                try data.write(to:url)
+            }
+            try write("/tmp/a")
+            let reader = CodexRolloutDiscovery(), first = Date(timeIntervalSince1970:100)
+            guard let a = reader.task(at:url,modifiedAt:first,titles:["cache-test":"first"]), a.cwd == "/tmp/a" else { return false }
+            guard reader.task(at:url,modifiedAt:first,titles:["cache-test":"first"])?.sessionTitle == "first" else { return false }
+            guard reader.task(at:url,modifiedAt:first,titles:["cache-test":"renamed"])?.sessionTitle == "renamed" else { return false }
+            try write("/tmp/b")
+            guard reader.task(at:url,modifiedAt:first.addingTimeInterval(1),titles:["cache-test":"renamed"])?.cwd == "/tmp/b" else { return false }
+            try write("/tmp/a-longer-path")
+            guard reader.task(at:url,modifiedAt:first.addingTimeInterval(1),titles:["cache-test":"renamed"])?.cwd == "/tmp/a-longer-path" else { return false }
+            try FileManager.default.removeItem(at:url)
+            return reader.task(at:url,modifiedAt:first,titles:["cache-test":"first"]) == nil
+        } catch { return false }
+    }
+
     private func task(at url: URL, modifiedAt: Date, titles: [String: String]) -> StatePayload? {
+        let fileSize = (try? FileManager.default.attributesOfItem(atPath: url.path)[.size] as? NSNumber)?.uint64Value ?? 0
+        if let cached = taskCache[url.path], cached.size == fileSize, cached.modified == modifiedAt,
+           let id = cached.payload.rawSessionId, cached.payload.sessionTitle == titles[id] {
+            return cached.payload
+        }
         guard let handle = FileHandle(forReadingAtPath: url.path) else { return nil }
         defer { try? handle.close() }
         // session_meta 첫 줄에는 기본 지시문이 함께 들어가 16KB를 넘는다. 중간에서 끊어 JSON
@@ -875,7 +912,6 @@ final class CodexRolloutDiscovery {
               !threadId.isEmpty,
               let title = titles[threadId], !title.isEmpty else { return nil }
 
-        let fileSize = (try? FileManager.default.attributesOfItem(atPath: url.path)[.size] as? NSNumber)?.uint64Value ?? 0
         // 앞에서 session_meta를 읽었으므로 작은 파일도 반드시 처음으로 되돌린다. 안 그러면
         // 첫 16KB 안의 마지막 사용자 요청을 놓쳐, 오래된 완료를 새 요청의 완료로 오해한다.
         try? handle.seek(toOffset: fileSize > 512 * 1024 ? fileSize - 512 * 1024 : 0)
@@ -888,7 +924,7 @@ final class CodexRolloutDiscovery {
         )
         let completed = transcript.isCompletedAfterLatestPrompt
         let cwd = payload["cwd"] as? String
-        return StatePayload(
+        let result = StatePayload(
             state: completed ? PetState.waving.rawValue : PetState.running.rawValue,
             updatedAt: nil,
             event: completed ? "task_complete" : "rollout",
@@ -912,6 +948,9 @@ final class CodexRolloutDiscovery {
             stateSource: TaskStateSource.rollout.rawValue,
             client: "codex"
         )
+        if taskCache.count >= 512 { taskCache.removeAll(keepingCapacity: true) }
+        taskCache[url.path] = CachedTask(size: fileSize, modified: modifiedAt, payload: result)
+        return result
     }
 }
 

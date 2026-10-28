@@ -198,12 +198,19 @@ echo "share: $DMG_PATH"
 fi
 
 if (( INSTALL )); then
-  # 이 체크아웃에 없는 개인 스킨도 기존 로컬 설치본에서 보존한다.
-  for skin in spritesheet-rilakkuma spritesheet-rilakkuma-cape; do
-    if [[ ! -f "$RESOURCES_DIR/$skin.webp" && -f "$HOME/Applications/$APP_NAME/Contents/Resources/$skin.webp" ]]; then
-      cp "$HOME/Applications/$APP_NAME/Contents/Resources/$skin.webp" "$RESOURCES_DIR/$skin.webp"
-    fi
-  done
+  # 이 체크아웃에 없는 개인 스킨 그림(리락쿠마·피치핏치·쇼콜라 하트·하나·잔느 프레임 등)은
+  # 레포에 없고 설치본에만 있다. 새 빌드에 없는 항목은 기존 설치본에서 그대로 가져온다.
+  # 2026-10-28 에 앱을 통째로 바꿨다가 리소스 11,178개 중 피치·쇼콜라·잔느 그림을 잃었다.
+  INSTALLED_RESOURCES="$HOME/Applications/$APP_NAME/Contents/Resources"
+  if [[ -d "$INSTALLED_RESOURCES" ]]; then
+    for item in "$INSTALLED_RESOURCES"/*(N); do
+      name="${item:t}"
+      if [[ ! -e "$RESOURCES_DIR/$name" ]]; then
+        cp -R "$item" "$RESOURCES_DIR/$name"
+        echo "install: 설치본에서 보존 $name"
+      fi
+    done
+  fi
   codesign --force --deep --sign - "$APP_DIR"
   # 앱 이름과 실행파일 이름이 차례로 바뀌었다. 옛 조합으로 돌고 있는 것까지 내려야
   # 새 것을 덮어쓸 수 있다.
