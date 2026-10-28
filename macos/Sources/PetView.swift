@@ -212,7 +212,31 @@ final class RettoView: NSView {
         trackingAreaRef = area
     }
 
+    private struct ApplyInputs: Equatable {
+        let payload: StatePayload
+        let state: PetState?
+        let liveMessage: String?
+        let liveTitle: String?
+        let sleepPose: Bool
+        let sessionCount: Int
+        let attentionCount: Int
+        let attentionState: PetState?
+        let attentionSource: String?
+        let inputCount: Int
+        let connectionStatus: String?
+        let isPinned: Bool
+    }
+    /// 폴링은 0.25초마다 같은 값을 다시 넘긴다. 표시 상태는 여기서만 바뀌므로, 같은 값이면 다시 그리지 않는다.
+    private var lastApplyInputs: ApplyInputs?
+
     func apply(_ newPayload: StatePayload, state incoming: PetState? = nil, liveMessage: String? = nil, liveTitle: String? = nil, sleepPose: Bool = false, sessionCount: Int, attentionCount: Int, attentionState: PetState? = nil, attentionSource: String? = nil, inputCount: Int = 0, connectionStatus: String? = nil, isPinned: Bool) {
+        let inputs = ApplyInputs(
+            payload: newPayload, state: incoming, liveMessage: liveMessage, liveTitle: liveTitle, sleepPose: sleepPose,
+            sessionCount: sessionCount, attentionCount: attentionCount, attentionState: attentionState,
+            attentionSource: attentionSource, inputCount: inputCount, connectionStatus: connectionStatus, isPinned: isPinned
+        )
+        guard inputs != lastApplyInputs else { return }
+        lastApplyInputs = inputs
         self.liveMessage = liveMessage
         self.liveTitle = liveTitle
         self.sleepPose = sleepPose
@@ -1349,7 +1373,30 @@ final class RettoView: NSView {
         ).height
     }
 
+    private struct FittedBodyKey: Hashable {
+        let text: String
+        let width: CGFloat
+        let maxHeight: CGFloat
+        let font: NSFont?
+        let lineSpacing: CGFloat?
+    }
+    /// 일부 스킨은 60fps 로 다시 그린다. 그때마다 글자 높이를 최대 30번 측정하면 CPU 를 크게 쓴다.
+    private var fittedBodyCache: [FittedBodyKey: NSString] = [:]
+
     private func fittedBody(_ text: String, in rect: NSRect, attributes: [NSAttributedString.Key: Any], maxHeight: CGFloat) -> NSString {
+        let key = FittedBodyKey(
+            text: text, width: rect.width, maxHeight: maxHeight,
+            font: attributes[.font] as? NSFont,
+            lineSpacing: (attributes[.paragraphStyle] as? NSParagraphStyle)?.lineSpacing
+        )
+        if let cached = fittedBodyCache[key] { return cached }
+        let fitted = measureFittedBody(text, in: rect, attributes: attributes, maxHeight: maxHeight)
+        if fittedBodyCache.count >= 16 { fittedBodyCache.removeAll() }
+        fittedBodyCache[key] = fitted
+        return fitted
+    }
+
+    private func measureFittedBody(_ text: String, in rect: NSRect, attributes: [NSAttributedString.Key: Any], maxHeight: CGFloat) -> NSString {
         let box = NSSize(width: rect.width, height: .greatestFiniteMagnitude)
         func height(_ candidate: String) -> CGFloat {
             (candidate as NSString).boundingRect(

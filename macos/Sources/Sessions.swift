@@ -115,7 +115,7 @@ func preferredPinnedSession(_ pinned: StatePayload, attention: [StatePayload],
     return !needsAttention(pinned) || priority(first) > priority(pinned) ? first : pinned
 }
 
-struct StatePayload: Decodable {
+struct StatePayload: Decodable, Equatable {
     var state: String
     let updatedAt: String?
     let event: String?
@@ -834,6 +834,17 @@ final class CodexRolloutDiscovery {
     private(set) var diagnostic = ""
     private(set) var connectionIssue: String?
 
+    /// 롤아웃 하나를 읽은 결과. 최근 하루치 파일이 수십 개이고 각각 앞뒤 512KB 를 읽어서,
+    /// 폴링마다 다시 읽으면 한 번에 수십 MB 를 파싱한다. 수정 시각과 크기가 같으면 재사용한다.
+    private struct ParsedRollout {
+        let modified: Date
+        let size: UInt64
+        let threadId: String?
+        let cwd: String?
+        let transcript: CodexTranscriptStatus?
+    }
+    private var parsed: [String: ParsedRollout] = [:]
+
     func recentTasks(now: Date = Date()) -> [StatePayload] {
         let knownTitles = titles.allTitles()
         var tasks: [String: StatePayload] = [:]
@@ -846,48 +857,75 @@ final class CodexRolloutDiscovery {
         }
         connectionIssue = nil
         diagnostic = "\(sessionsURL.path): \(paths.count) entries"
+        var visited: Set<String> = []
         for relative in paths where relative.hasSuffix(".jsonl") {
             let url = sessionsURL.appendingPathComponent(relative)
-            guard let attributes = try? FileManager.default.attributesOfItem(atPath: url.path),
-                  let modified = attributes[.modificationDate] as? Date,
-                  now.timeIntervalSince(modified) <= recentWindow,
-                  !isCodexSubagentTranscript(path: url.path),
-                  let task = task(at: url, modifiedAt: modified, titles: knownTitles) else { continue }
+            // attributesOfItem 은 확장 속성까지 읽어 폴링마다 수백 개 파일에 쓰기엔 무겁다. 같은 값을 lstat 으로 읽는다.
+            var info = stat()
+            guard lstat(url.path, &info) == 0 else { continue }
+            let modified = Date(timeIntervalSince1970: TimeInterval(info.st_mtimespec.tv_sec)
+                + TimeInterval(info.st_mtimespec.tv_nsec) / 1_000_000_000)
+            guard now.timeIntervalSince(modified) <= recentWindow,
+                  !isCodexSubagentTranscript(path: url.path) else { continue }
+            visited.insert(url.path)
+            let size = UInt64(info.st_size)
+            guard let task = task(at: url, modifiedAt: modified, size: size, titles: knownTitles) else { continue }
             if let old = tasks[task.id], (old.updatedAtMs ?? 0) >= (task.updatedAtMs ?? 0) { continue }
             tasks[task.id] = task
         }
+        parsed = parsed.filter { visited.contains($0.key) }
         return tasks.values.sorted { ($0.updatedAtMs ?? 0) > ($1.updatedAtMs ?? 0) }
     }
 
-    private func task(at url: URL, modifiedAt: Date, titles: [String: String]) -> StatePayload? {
+    private func rollout(at url: URL, modifiedAt: Date, size: UInt64, titles: [String: String]) -> ParsedRollout? {
+        if let cached = parsed[url.path], cached.modified == modifiedAt, cached.size == size {
+            let hasTitle = cached.threadId.flatMap { titles[$0] }.map { !$0.isEmpty } ?? false
+            if cached.transcript != nil || !hasTitle { return cached }
+        }
         guard let handle = FileHandle(forReadingAtPath: url.path) else { return nil }
         defer { try? handle.close() }
         // session_meta 첫 줄에는 기본 지시문이 함께 들어가 16KB를 넘는다. 중간에서 끊어 JSON
         // 파싱이 실패하면 task ID를 하나도 찾지 못하므로, 첫 줄 전체가 들어올 범위를 읽는다.
         let metadataData = try? handle.read(upToCount: 512 * 1024)
-        guard let metadataData,
-              let metadata = String(data: metadataData, encoding: .utf8),
-              let firstLine = metadata.split(separator: "\n").first,
-              let data = firstLine.data(using: .utf8),
-              let record = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
-              let payload = record["payload"] as? [String: Any],
-              let threadId = (payload["id"] as? String) ?? (payload["session_id"] as? String),
-              !threadId.isEmpty,
-              let title = titles[threadId], !title.isEmpty else { return nil }
+        var threadId: String?
+        var cwd: String?
+        if let metadataData,
+           let metadata = String(data: metadataData, encoding: .utf8),
+           let firstLine = metadata.split(separator: "\n").first,
+           let data = firstLine.data(using: .utf8),
+           let record = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+           let payload = record["payload"] as? [String: Any],
+           let id = (payload["id"] as? String) ?? (payload["session_id"] as? String),
+           !id.isEmpty {
+            threadId = id
+            cwd = payload["cwd"] as? String
+        }
+        // 제목이 없는 task 는 표시하지 않으므로 뒷부분을 읽지 않는다. 제목이 생기면 위 조건에서 다시 읽는다.
+        var transcript: CodexTranscriptStatus?
+        if let threadId, let title = titles[threadId], !title.isEmpty {
+            // 앞에서 session_meta를 읽었으므로 작은 파일도 반드시 처음으로 되돌린다. 안 그러면
+            // 첫 16KB 안의 마지막 사용자 요청을 놓쳐, 오래된 완료를 새 요청의 완료로 오해한다.
+            try? handle.seek(toOffset: size > 512 * 1024 ? size - 512 * 1024 : 0)
+            let tail = (try? handle.readToEnd()).flatMap { String(data: $0, encoding: .utf8) } ?? ""
+            transcript = codexTranscriptStatus(in: tail)
+        }
+        let result = ParsedRollout(modified: modifiedAt, size: size, threadId: threadId, cwd: cwd, transcript: transcript)
+        parsed[url.path] = result
+        return result
+    }
 
-        let fileSize = (try? FileManager.default.attributesOfItem(atPath: url.path)[.size] as? NSNumber)?.uint64Value ?? 0
-        // 앞에서 session_meta를 읽었으므로 작은 파일도 반드시 처음으로 되돌린다. 안 그러면
-        // 첫 16KB 안의 마지막 사용자 요청을 놓쳐, 오래된 완료를 새 요청의 완료로 오해한다.
-        try? handle.seek(toOffset: fileSize > 512 * 1024 ? fileSize - 512 * 1024 : 0)
-        let tail = (try? handle.readToEnd()).flatMap { String(data: $0, encoding: .utf8) } ?? ""
-        let transcript = codexTranscriptStatus(in: tail)
+    private func task(at url: URL, modifiedAt: Date, size: UInt64, titles: [String: String]) -> StatePayload? {
+        guard let rollout = rollout(at: url, modifiedAt: modifiedAt, size: size, titles: titles),
+              let threadId = rollout.threadId,
+              let title = titles[threadId], !title.isEmpty,
+              let transcript = rollout.transcript else { return nil }
         let updatedAtMs = max(
             transcript.completedAtMs ?? 0,
             transcript.latestPromptAtMs ?? 0,
             modifiedAt.timeIntervalSince1970 * 1000
         )
         let completed = transcript.isCompletedAfterLatestPrompt
-        let cwd = payload["cwd"] as? String
+        let cwd = rollout.cwd
         return StatePayload(
             state: completed ? PetState.waving.rawValue : PetState.running.rawValue,
             updatedAt: nil,
