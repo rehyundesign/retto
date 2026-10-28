@@ -1349,7 +1349,30 @@ final class RettoView: NSView {
         ).height
     }
 
+    private struct FittedBodyKey: Hashable {
+        let text: String
+        let width: CGFloat
+        let maxHeight: CGFloat
+        let font: NSFont?
+        let lineSpacing: CGFloat?
+    }
+    /// 일부 스킨은 60fps 로 다시 그린다. 그때마다 글자 높이를 최대 30번 측정하면 CPU 를 크게 쓴다.
+    private var fittedBodyCache: [FittedBodyKey: NSString] = [:]
+
     private func fittedBody(_ text: String, in rect: NSRect, attributes: [NSAttributedString.Key: Any], maxHeight: CGFloat) -> NSString {
+        let key = FittedBodyKey(
+            text: text, width: rect.width, maxHeight: maxHeight,
+            font: attributes[.font] as? NSFont,
+            lineSpacing: (attributes[.paragraphStyle] as? NSParagraphStyle)?.lineSpacing
+        )
+        if let cached = fittedBodyCache[key] { return cached }
+        let fitted = measureFittedBody(text, in: rect, attributes: attributes, maxHeight: maxHeight)
+        if fittedBodyCache.count >= 16 { fittedBodyCache.removeAll() }
+        fittedBodyCache[key] = fitted
+        return fitted
+    }
+
+    private func measureFittedBody(_ text: String, in rect: NSRect, attributes: [NSAttributedString.Key: Any], maxHeight: CGFloat) -> NSString {
         let box = NSSize(width: rect.width, height: .greatestFiniteMagnitude)
         func height(_ candidate: String) -> CGFloat {
             (candidate as NSString).boundingRect(
