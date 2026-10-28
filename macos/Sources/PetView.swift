@@ -1367,14 +1367,13 @@ final class RettoView: NSView {
 
     private func fittedBody(_ text: String, in rect: NSRect, attributes: [NSAttributedString.Key: Any], maxHeight: CGFloat) -> NSString {
         let input = NSAttributedString(string: text, attributes: attributes)
-        if skin == .jeanne, let cached = jeanneBodyFits.first(where: {
+        // 일부 스킨은 60fps 로 다시 그린다. 그때마다 글자 높이를 다시 측정하지 않게 모든 스킨에 캐시를 쓴다.
+        if let cached = jeanneBodyFits.first(where: {
             $0.width == rect.width && $0.maxHeight == maxHeight && $0.input.isEqual(to: input)
         }) { return cached.result }
         let result = uncachedFittedBody(text, in: rect, attributes: attributes, maxHeight: maxHeight)
-        if skin == .jeanne {
-            if jeanneBodyFits.count >= 8 { jeanneBodyFits.removeFirst() }
-            jeanneBodyFits.append(JeanneBodyFit(input: input, width: rect.width, maxHeight: maxHeight, result: result))
-        }
+        if jeanneBodyFits.count >= 16 { jeanneBodyFits.removeFirst() }
+        jeanneBodyFits.append(JeanneBodyFit(input: input, width: rect.width, maxHeight: maxHeight, result: result))
         return result
     }
     func validateJeanneBodyFitCache() -> Bool {
