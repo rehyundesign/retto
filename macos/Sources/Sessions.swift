@@ -169,7 +169,7 @@ struct StatePayload: Decodable, Equatable {
     }
     var needsAttention: Bool { attention == true && closed != true }
     var isClosed: Bool { closed == true }
-    /// 내부 Codex 세션은 기존 훅 레지스트리에 남아 있어도 표시 대상에서 뺀다.
+    /// 내부 Codex 세션과 제목 없는 task는 레토의 표시 대상에서 뺀다.
     var isRettoVisibleTask: Bool {
         guard source == "codex" || client == "codex" else { return true }
         guard sessionTitle?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false else { return false }
@@ -833,17 +833,12 @@ final class CodexRolloutDiscovery {
     private let recentWindow: TimeInterval = 24 * 60 * 60
     private(set) var diagnostic = ""
     private(set) var connectionIssue: String?
-
-    /// 롤아웃 하나를 읽은 결과. 최근 하루치 파일이 수십 개이고 각각 앞뒤 512KB 를 읽어서,
-    /// 폴링마다 다시 읽으면 한 번에 수십 MB 를 파싱한다. 수정 시각과 크기가 같으면 재사용한다.
-    private struct ParsedRollout {
-        let modified: Date
+    private struct CachedTask {
         let size: UInt64
-        let threadId: String?
-        let cwd: String?
-        let transcript: CodexTranscriptStatus?
+        let modified: Date
+        let payload: StatePayload
     }
-    private var parsed: [String: ParsedRollout] = [:]
+    private var taskCache: [String: CachedTask] = [:]
 
     func recentTasks(now: Date = Date()) -> [StatePayload] {
         let knownTitles = titles.allTitles()
@@ -857,76 +852,79 @@ final class CodexRolloutDiscovery {
         }
         connectionIssue = nil
         diagnostic = "\(sessionsURL.path): \(paths.count) entries"
-        var visited: Set<String> = []
         for relative in paths where relative.hasSuffix(".jsonl") {
             let url = sessionsURL.appendingPathComponent(relative)
-            // attributesOfItem 은 확장 속성까지 읽어 폴링마다 수백 개 파일에 쓰기엔 무겁다. 같은 값을 lstat 으로 읽는다.
-            var info = stat()
-            guard lstat(url.path, &info) == 0 else { continue }
-            let modified = Date(timeIntervalSince1970: TimeInterval(info.st_mtimespec.tv_sec)
-                + TimeInterval(info.st_mtimespec.tv_nsec) / 1_000_000_000)
-            guard now.timeIntervalSince(modified) <= recentWindow,
-                  !isCodexSubagentTranscript(path: url.path) else { continue }
-            visited.insert(url.path)
-            let size = UInt64(info.st_size)
-            guard let task = task(at: url, modifiedAt: modified, size: size, titles: knownTitles) else { continue }
+            // 하위 에이전트는 상위 작업과 동일한 ID를 기록한다. 이 파일을 읽으면 최신
+            // 수정 시각 때문에 상위 대화가 worker 실행 내역으로 바뀐다.
+            guard let attributes = try? FileManager.default.attributesOfItem(atPath: url.path),
+                  let modified = attributes[.modificationDate] as? Date,
+                  now.timeIntervalSince(modified) <= recentWindow,
+                  !isCodexSubagentTranscript(path: url.path),
+                  let task = task(at: url, modifiedAt: modified, titles: knownTitles) else { continue }
             if let old = tasks[task.id], (old.updatedAtMs ?? 0) >= (task.updatedAtMs ?? 0) { continue }
             tasks[task.id] = task
         }
-        parsed = parsed.filter { visited.contains($0.key) }
         return tasks.values.sorted { ($0.updatedAtMs ?? 0) > ($1.updatedAtMs ?? 0) }
     }
 
-    private func rollout(at url: URL, modifiedAt: Date, size: UInt64, titles: [String: String]) -> ParsedRollout? {
-        if let cached = parsed[url.path], cached.modified == modifiedAt, cached.size == size {
-            let hasTitle = cached.threadId.flatMap { titles[$0] }.map { !$0.isEmpty } ?? false
-            if cached.transcript != nil || !hasTitle { return cached }
+    static func validateTaskCache() -> Bool {
+        let folder = FileManager.default.temporaryDirectory.appendingPathComponent("retto-cache-test-" + UUID().uuidString)
+        do {
+            try FileManager.default.createDirectory(at:folder,withIntermediateDirectories:true)
+            defer { try? FileManager.default.removeItem(at:folder) }
+            let url = folder.appendingPathComponent("fixture.jsonl")
+            func write(_ cwd: String) throws {
+                let data = try JSONSerialization.data(withJSONObject:["type":"session_meta","payload":["id":"cache-test","cwd":cwd]])
+                try data.write(to:url)
+            }
+            try write("/tmp/a")
+            let reader = CodexRolloutDiscovery(), first = Date(timeIntervalSince1970:100)
+            guard let a = reader.task(at:url,modifiedAt:first,titles:["cache-test":"first"]), a.cwd == "/tmp/a" else { return false }
+            guard reader.task(at:url,modifiedAt:first,titles:["cache-test":"first"])?.sessionTitle == "first" else { return false }
+            guard reader.task(at:url,modifiedAt:first,titles:["cache-test":"renamed"])?.sessionTitle == "renamed" else { return false }
+            try write("/tmp/b")
+            guard reader.task(at:url,modifiedAt:first.addingTimeInterval(1),titles:["cache-test":"renamed"])?.cwd == "/tmp/b" else { return false }
+            try write("/tmp/a-longer-path")
+            guard reader.task(at:url,modifiedAt:first.addingTimeInterval(1),titles:["cache-test":"renamed"])?.cwd == "/tmp/a-longer-path" else { return false }
+            try FileManager.default.removeItem(at:url)
+            return reader.task(at:url,modifiedAt:first,titles:["cache-test":"first"]) == nil
+        } catch { return false }
+    }
+
+    private func task(at url: URL, modifiedAt: Date, titles: [String: String]) -> StatePayload? {
+        let fileSize = (try? FileManager.default.attributesOfItem(atPath: url.path)[.size] as? NSNumber)?.uint64Value ?? 0
+        if let cached = taskCache[url.path], cached.size == fileSize, cached.modified == modifiedAt,
+           let id = cached.payload.rawSessionId, cached.payload.sessionTitle == titles[id] {
+            return cached.payload
         }
         guard let handle = FileHandle(forReadingAtPath: url.path) else { return nil }
         defer { try? handle.close() }
         // session_meta 첫 줄에는 기본 지시문이 함께 들어가 16KB를 넘는다. 중간에서 끊어 JSON
         // 파싱이 실패하면 task ID를 하나도 찾지 못하므로, 첫 줄 전체가 들어올 범위를 읽는다.
         let metadataData = try? handle.read(upToCount: 512 * 1024)
-        var threadId: String?
-        var cwd: String?
-        if let metadataData,
-           let metadata = String(data: metadataData, encoding: .utf8),
-           let firstLine = metadata.split(separator: "\n").first,
-           let data = firstLine.data(using: .utf8),
-           let record = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
-           let payload = record["payload"] as? [String: Any],
-           let id = (payload["id"] as? String) ?? (payload["session_id"] as? String),
-           !id.isEmpty {
-            threadId = id
-            cwd = payload["cwd"] as? String
-        }
-        // 제목이 없는 task 는 표시하지 않으므로 뒷부분을 읽지 않는다. 제목이 생기면 위 조건에서 다시 읽는다.
-        var transcript: CodexTranscriptStatus?
-        if let threadId, let title = titles[threadId], !title.isEmpty {
-            // 앞에서 session_meta를 읽었으므로 작은 파일도 반드시 처음으로 되돌린다. 안 그러면
-            // 첫 16KB 안의 마지막 사용자 요청을 놓쳐, 오래된 완료를 새 요청의 완료로 오해한다.
-            try? handle.seek(toOffset: size > 512 * 1024 ? size - 512 * 1024 : 0)
-            let tail = (try? handle.readToEnd()).flatMap { String(data: $0, encoding: .utf8) } ?? ""
-            transcript = codexTranscriptStatus(in: tail)
-        }
-        let result = ParsedRollout(modified: modifiedAt, size: size, threadId: threadId, cwd: cwd, transcript: transcript)
-        parsed[url.path] = result
-        return result
-    }
+        guard let metadataData,
+              let metadata = String(data: metadataData, encoding: .utf8),
+              let firstLine = metadata.split(separator: "\n").first,
+              let data = firstLine.data(using: .utf8),
+              let record = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+              let payload = record["payload"] as? [String: Any],
+              let threadId = (payload["id"] as? String) ?? (payload["session_id"] as? String),
+              !threadId.isEmpty,
+              let title = titles[threadId], !title.isEmpty else { return nil }
 
-    private func task(at url: URL, modifiedAt: Date, size: UInt64, titles: [String: String]) -> StatePayload? {
-        guard let rollout = rollout(at: url, modifiedAt: modifiedAt, size: size, titles: titles),
-              let threadId = rollout.threadId,
-              let title = titles[threadId], !title.isEmpty,
-              let transcript = rollout.transcript else { return nil }
+        // 앞에서 session_meta를 읽었으므로 작은 파일도 반드시 처음으로 되돌린다. 안 그러면
+        // 첫 16KB 안의 마지막 사용자 요청을 놓쳐, 오래된 완료를 새 요청의 완료로 오해한다.
+        try? handle.seek(toOffset: fileSize > 512 * 1024 ? fileSize - 512 * 1024 : 0)
+        let tail = (try? handle.readToEnd()).flatMap { String(data: $0, encoding: .utf8) } ?? ""
+        let transcript = codexTranscriptStatus(in: tail)
         let updatedAtMs = max(
             transcript.completedAtMs ?? 0,
             transcript.latestPromptAtMs ?? 0,
             modifiedAt.timeIntervalSince1970 * 1000
         )
         let completed = transcript.isCompletedAfterLatestPrompt
-        let cwd = rollout.cwd
-        return StatePayload(
+        let cwd = payload["cwd"] as? String
+        let result = StatePayload(
             state: completed ? PetState.waving.rawValue : PetState.running.rawValue,
             updatedAt: nil,
             event: completed ? "task_complete" : "rollout",
@@ -950,6 +948,9 @@ final class CodexRolloutDiscovery {
             stateSource: TaskStateSource.rollout.rawValue,
             client: "codex"
         )
+        if taskCache.count >= 512 { taskCache.removeAll(keepingCapacity: true) }
+        taskCache[url.path] = CachedTask(size: fileSize, modified: modifiedAt, payload: result)
+        return result
     }
 }
 

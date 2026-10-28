@@ -125,4 +125,3 @@ func bubblePath(in rect: NSRect) -> NSBezierPath {
     path.transform(using: transform)
     return path
 }
-

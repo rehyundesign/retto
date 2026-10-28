@@ -1,3 +1,4 @@
+// Local performance validation uses generated temporary fixtures only.
 // 실행 진입점. 진단 플래그를 먼저 처리한다.
 
 import AppKit
@@ -11,6 +12,44 @@ if CommandLine.arguments.contains("--ax-check") {
     exit(ClaudeAppNavigator.isPermitted ? 0 : 1)
 }
 
+if CommandLine.arguments.contains("--jeanne-state-self-test") {
+    let v = RettoView(frame:NSRect(x:0,y:0,width:224,height:320),spriteSheet:JeanneSkin.placeholder,skin:.jeanne,onOpenClaude:{ _,_ in },onOpenAttention:{ _ in })
+    let ok = v.validateJeanneStateTransitions()
+    print("Jeanne state/loop/drag/gaze transitions: \(ok)")
+    exit(ok ? 0 : 1)
+}
+
+if CommandLine.arguments.contains("--discovery-cache-self-test") {
+    let ok = CodexRolloutDiscovery.validateTaskCache()
+    print("Task cache invalidation: \(ok)")
+    exit(ok ? 0 : 1)
+}
+
+if CommandLine.arguments.contains("--jeanne-fit-self-test") {
+    let v = RettoView(frame:NSRect(x:0,y:0,width:224,height:320),spriteSheet:JeanneSkin.placeholder,skin:.jeanne,onOpenClaude:{ _,_ in },onOpenAttention:{ _ in })
+    let ok = v.validateJeanneBodyFitCache()
+    print("Jeanne text cache invalidation: \(ok)")
+    exit(ok ? 0 : 1)
+}
+
+if CommandLine.arguments.contains("--jeanne-effects-self-test") { exit(JeanneSkin.validateEffects() ? 0 : 1) }
+if CommandLine.arguments.contains("--jeanne-self-test") { exit(JeanneSkin.validate() ? 0 : 1) }
+if let i = CommandLine.arguments.firstIndex(of: "--render-jeanne-preview"), i + 1 < CommandLine.arguments.count { exit(renderJeannePreview(to: CommandLine.arguments[i + 1])) }
+
+if CommandLine.arguments.contains("--pichi-self-test") { let ok = PichiSkin.validate(); print("{\"pichiOK\":\(ok)}"); exit(ok ? 0 : 1) }
+if let i = CommandLine.arguments.firstIndex(of: "--render-pichi-preview"), i + 1 < CommandLine.arguments.count { exit(renderPichiPreview(to: CommandLine.arguments[i + 1])) }
+
+if CommandLine.arguments.contains("--hana-self-test") {
+    let ok = hanaSkinSelfTest(); print("{\"hanaOK\":\(ok)}"); exit(ok ? 0 : 1)
+}
+if let index = CommandLine.arguments.firstIndex(of: "--render-hana-motion-preview"), index + 1 < CommandLine.arguments.count {
+    exit(renderHanaMotionPreview(to: CommandLine.arguments[index + 1]))
+}
+
+if let index=CommandLine.arguments.firstIndex(of:"--render-chocolat-preview"),index+1<CommandLine.arguments.count { exit(renderChocolatHeartPreview(to:CommandLine.arguments[index+1])) }
+if CommandLine.arguments.contains("--chocolat-self-test") {
+    let ok=ChocolatHeart.validate();print("chocolatOK: \(ok)");exit(ok ? 0:1)
+}
 if let index = CommandLine.arguments.firstIndex(of: "--attention-preview"), index + 1 < CommandLine.arguments.count {
     let app = NSApplication.shared
     app.setActivationPolicy(.accessory)
@@ -33,30 +72,6 @@ if CommandLine.arguments.contains("--self-test-slack") {
 
 if CommandLine.arguments.contains("--self-test") {
     exit(runSelfTest())
-}
-
-if CommandLine.arguments.contains("--self-test-magical-heart-clock") {
-    exit(runMagicalHeartClockSelfTest())
-}
-
-if let index = CommandLine.arguments.firstIndex(of: "--render-magical-heart-motion-preview"), index + 1 < CommandLine.arguments.count {
-    exit(renderMagicalHeartMotionPreview(to: CommandLine.arguments[index + 1]))
-}
-
-if CommandLine.arguments.contains("--self-test-jeanne-clock") {
-    exit(runJeanneClockSelfTest())
-}
-
-if CommandLine.arguments.contains("--self-test-jeanne-resources") {
-    exit(runJeanneResourceSelfTest())
-}
-
-if let index = CommandLine.arguments.firstIndex(of: "--render-jeanne-motion-preview"), index + 1 < CommandLine.arguments.count {
-    exit(renderJeanneMotionPreview(to: CommandLine.arguments[index + 1]))
-}
-
-if let index = CommandLine.arguments.firstIndex(of: "--render-jeanne-gaze-preview"), index + 1 < CommandLine.arguments.count {
-    exit(renderJeanneMotionPreview(to: CommandLine.arguments[index + 1], gaze: true))
 }
 
 if CommandLine.arguments.contains("--codex-rollouts-json") {

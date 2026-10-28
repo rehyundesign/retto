@@ -56,44 +56,50 @@ enum DragRun {
 /// 스킨마다 칸 규격(224x320, 8x12)은 같아야 한다 — 그리는 자리 계산이 공용이다.
 enum PetSkin: String, CaseIterable {
     case classic
+    case chocolatHeart
     case angelWings
     case bee
-    case luna
     case bunny
     case rilakkuma
     case rilakkumaCape
     case magicalHeart
-    case jeanne
     case christmas
+    case hana
+    case pichiPitch
+    case jeanne
 
     var label: String {
         switch self {
+        case .chocolatHeart: return "쇼콜라 하트"
         case .classic: return "기본"
         case .angelWings: return "천사 날개"
         case .bee: return "꿀벌"
-        case .luna: return "달 고양이"
         case .bunny: return "딸기 토끼"
         case .rilakkuma: return "리락쿠마"
         case .rilakkumaCape: return "리락쿠마 망토"
         case .magicalHeart: return "매지컬 하트"
-        case .jeanne: return "잔느 · 핀"
         case .christmas: return "크리스마스"
+        case .hana: return "하나 · 토토"
+        case .pichiPitch: return "피치핏치"
+        case .jeanne: return "잔느 · 핀"
         }
     }
 
     /// 번들 안 리소스 이름. 확장자는 webp 로 고정이다.
     var resourceName: String {
         switch self {
+        case .chocolatHeart: return "spritesheet-chocolat-heart"
         case .classic: return "spritesheet"
         case .angelWings: return "spritesheet-angel"
         case .bee: return "spritesheet-bee"
-        case .luna: return "spritesheet-luna"
         case .bunny: return "spritesheet-bunny"
         case .rilakkuma: return "spritesheet-rilakkuma"
         case .rilakkumaCape: return "spritesheet-rilakkuma-cape"
         case .magicalHeart: return "spritesheet-magical-heart"
-        case .jeanne: return "spritesheet-jeanne"
         case .christmas: return "spritesheet-christmas-16-character"
+        case .hana: return "spritesheet-hana-16-character"
+        case .pichiPitch: return "pichi-character"
+        case .jeanne: return "jeanne-character"
         }
     }
 
@@ -101,16 +107,16 @@ enum PetSkin: String, CaseIterable {
     /// 받아 간 쪽에서는 파일이 없으므로 메뉴에 자물쇠로 뜨고 고를 수 없다.
     var isPersonal: Bool {
         switch self {
-        case .rilakkuma, .rilakkumaCape: return true
+        case .rilakkuma, .rilakkumaCape, .pichiPitch: return true
         default: return false
         }
     }
 
     /// 이 기기의 앱 번들에 아틀라스가 실제로 들어 있는지.
     var isAvailable: Bool {
-        if self == .jeanne {
-            return Bundle.main.url(forResource: resourceName, withExtension: "webp") != nil && JeanneFrames.hasAllFrames
-        }
+        if self == .jeanne { return JeanneSkin.available }
+        if self == .pichiPitch { return PichiSkin.available }
+        if self == .chocolatHeart { return ChocolatHeart.available }
         return Bundle.main.url(forResource: resourceName, withExtension: "webp") != nil
     }
 }
