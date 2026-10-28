@@ -115,7 +115,7 @@ func preferredPinnedSession(_ pinned: StatePayload, attention: [StatePayload],
     return !needsAttention(pinned) || priority(first) > priority(pinned) ? first : pinned
 }
 
-struct StatePayload: Decodable {
+struct StatePayload: Decodable, Equatable {
     var state: String
     let updatedAt: String?
     let event: String?
@@ -860,12 +860,15 @@ final class CodexRolloutDiscovery {
         var visited: Set<String> = []
         for relative in paths where relative.hasSuffix(".jsonl") {
             let url = sessionsURL.appendingPathComponent(relative)
-            guard let attributes = try? FileManager.default.attributesOfItem(atPath: url.path),
-                  let modified = attributes[.modificationDate] as? Date,
-                  now.timeIntervalSince(modified) <= recentWindow,
+            // attributesOfItem 은 확장 속성까지 읽어 폴링마다 수백 개 파일에 쓰기엔 무겁다. 같은 값을 lstat 으로 읽는다.
+            var info = stat()
+            guard lstat(url.path, &info) == 0 else { continue }
+            let modified = Date(timeIntervalSince1970: TimeInterval(info.st_mtimespec.tv_sec)
+                + TimeInterval(info.st_mtimespec.tv_nsec) / 1_000_000_000)
+            guard now.timeIntervalSince(modified) <= recentWindow,
                   !isCodexSubagentTranscript(path: url.path) else { continue }
             visited.insert(url.path)
-            let size = (attributes[.size] as? NSNumber)?.uint64Value ?? 0
+            let size = UInt64(info.st_size)
             guard let task = task(at: url, modifiedAt: modified, size: size, titles: knownTitles) else { continue }
             if let old = tasks[task.id], (old.updatedAtMs ?? 0) >= (task.updatedAtMs ?? 0) { continue }
             tasks[task.id] = task

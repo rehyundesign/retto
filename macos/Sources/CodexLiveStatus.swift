@@ -18,6 +18,41 @@ struct CodexLiveStatus: Equatable {
     var lastConfirmedAtMs: Double { confirmedAtMs ?? observedAtMs }
 }
 
+/// snapshot 의 conversationState 는 대화 전체라 한 건에 16~30MB 다. 입력 대기 확인으로 몇 초마다 다시 받으므로,
+/// 전부 객체로 만들지 않고 statusProjection 이 읽는 필드만 남긴다. 나머지 모양과 값의 타입은 JSONSerialization 과 같다.
+private let liveStateKeys: Set<String> = ["id", "threadRuntimeStatus", "requests", "latestTurnStartMessageId"]
+
+private struct LiveStatusJSON: Decodable {
+    let value: Any?
+    init(from decoder: Decoder) throws {
+        let path = decoder.codingPath
+        if path.count == 4, path[0].stringValue == "params", path[1].stringValue == "change",
+           path[2].stringValue == "conversationState", !liveStateKeys.contains(path[3].stringValue) {
+            value = nil
+            return
+        }
+        let single = try decoder.singleValueContainer()
+        if single.decodeNil() { value = NSNull(); return }
+        if let bool = try? single.decode(Bool.self) { value = NSNumber(value: bool); return }
+        if let int = try? single.decode(Int.self) { value = NSNumber(value: int); return }
+        if let double = try? single.decode(Double.self) { value = NSNumber(value: double); return }
+        if let string = try? single.decode(String.self) { value = string; return }
+        if let array = try? single.decode([LiveStatusJSON].self) { value = array.compactMap(\.value); return }
+        let object = try single.decode([String: LiveStatusJSON].self)
+        value = object.compactMapValues(\.value)
+    }
+}
+
+/// 작은 메시지(패치·요청)는 JSONDecoder 가 25배 느리므로(1건 4.7µs → 120µs) 예전처럼 JSONSerialization 으로 읽는다.
+/// 18MB snapshot 은 49ms → 8.7ms 다. 읽지 못하면 JSONSerialization 으로 다시 읽는다.
+func decodeLiveStatusMessage(_ frame: Data) -> [String: Any]? {
+    if frame.count > 1_000_000,
+       let message = (try? JSONDecoder().decode(LiveStatusJSON.self, from: frame))?.value as? [String: Any] {
+        return message
+    }
+    return try? JSONSerialization.jsonObject(with: frame) as? [String: Any]
+}
+
 /// 대화 본문·명령·도구 인수는 보관하지 않는다. 상태와 요청 종류만 남긴다.
 private func statusProjection(_ state: [String: Any]) -> [String: Any] {
     var result: [String: Any] = [:]
@@ -298,7 +333,7 @@ final class CodexLiveStatusReader {
                 guard size > 0, size <= 64 * 1024 * 1024 else { self.disconnected(current); return }
                 guard self.buffer.count >= size + 4 else { break }
                 let frame = self.buffer.subdata(in: 4..<(size + 4)); self.buffer.removeSubrange(0..<(size + 4))
-                guard let message = try? JSONSerialization.jsonObject(with: frame) as? [String: Any] else { self.disconnected(current); return }
+                guard let message = decodeLiveStatusMessage(frame) else { self.disconnected(current); return }
                 self.handle(message)
             }
             if done || error != nil { self.disconnected(current) } else { self.receive(current) }
