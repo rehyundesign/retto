@@ -58,6 +58,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     private var isRepositioning = false
     /// 제거를 시작하면 켠다. 종료 직전에 설정을 한 번 더 지우는 근거다.
     private var isUninstalling = false
+    private var liveStatusApplyScheduled = false
     /// 세션이 없을 때 쓰는 빈 껍데기. 상태·이름·멘트는 넘겨 주는 값으로 덮는다.
     private static let placeholderPayload: StatePayload? = {
         let fixture = "{\"state\":\"idle\",\"sessionId\":\"placeholder\"}".data(using: .utf8)!
@@ -65,9 +66,15 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     }()
     private var readDwell = SessionReadDwell()
     /// 세션마다 마지막으로 다녀온 시각. 다음 실행에도 유지한다.
+    /// 정렬 비교마다 불려서, 매번 설정에서 꺼내 변환하면 CPU 를 한 코어 가까이 쓴다. 메모리에 두고 쓸 때만 저장한다.
+    private lazy var seenSessionsCache: [String: Double] =
+        UserDefaults.standard.dictionary(forKey: seenSessionsDefaultsKey) as? [String: Double] ?? [:]
     private var seenSessions: [String: Double] {
-        get { UserDefaults.standard.dictionary(forKey: seenSessionsDefaultsKey) as? [String: Double] ?? [:] }
-        set { UserDefaults.standard.set(newValue, forKey: seenSessionsDefaultsKey) }
+        get { seenSessionsCache }
+        set {
+            seenSessionsCache = newValue
+            UserDefaults.standard.set(newValue, forKey: seenSessionsDefaultsKey)
+        }
     }
 
     private func markSeen(_ payload: StatePayload?) {
@@ -483,9 +490,16 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     }
 
     private func startStateMonitor() {
+        // Codex 스트림은 답변이 흐르는 동안 초당 여러 번 바뀐다. 0.2초 안의 변경은 한 번에 반영한다.
         codexLiveStatusReader.onChange = { [weak self] in
-            guard let self else { return }
-            self.applySessions(self.hookSessions)
+            guard let self, !self.liveStatusApplyScheduled else { return }
+            self.liveStatusApplyScheduled = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [weak self] in
+                guard let self else { return }
+                self.liveStatusApplyScheduled = false
+                guard !self.isUninstalling else { return }
+                self.applySessions(self.hookSessions)
+            }
         }
         let petDirectory = FileManager.default.homeDirectoryForCurrentUser
             .appendingPathComponent(".claude/retto-pet")
@@ -527,12 +541,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             ($0.navigationSessionId, $0.updatedAtMs ?? 0)
         }, uniquingKeysWith: max)
         codexLiveStatusReader.track(Set(codexTasks.map(\.navigationSessionId)), refreshAfter: waitingHooks)
-        sessions = merged.values.map(reconciledCodexPayload).sorted {
-            let leftPriority = statePriority($0)
-            let rightPriority = statePriority($1)
-            if leftPriority != rightPriority { return leftPriority > rightPriority }
-            return ($0.updatedAtMs ?? 0) > ($1.updatedAtMs ?? 0)
-        }
+        // 우선순위는 파일 시각까지 읽으므로 비교마다 다시 구하지 않고 세션마다 한 번만 구한다.
+        sessions = merged.values.map(reconciledCodexPayload)
+            .map { (payload: $0, priority: statePriority($0)) }
+            .sorted {
+                if $0.priority != $1.priority { return $0.priority > $1.priority }
+                return ($0.payload.updatedAtMs ?? 0) > ($1.payload.updatedAtMs ?? 0)
+            }
+            .map(\.payload)
         let openSessions = sessions.filter { !$0.isClosed }
         let attentionSessions = openSessions.filter { self.needsAttention($0) }
         if let pinnedSessionId,
