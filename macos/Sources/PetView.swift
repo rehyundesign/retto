@@ -176,7 +176,31 @@ final class RettoView: NSView {
         trackingAreaRef = area
     }
 
+    private struct ApplyInputs: Equatable {
+        let payload: StatePayload
+        let state: PetState?
+        let liveMessage: String?
+        let liveTitle: String?
+        let sleepPose: Bool
+        let sessionCount: Int
+        let attentionCount: Int
+        let attentionState: PetState?
+        let attentionSource: String?
+        let inputCount: Int
+        let connectionStatus: String?
+        let isPinned: Bool
+    }
+    /// 폴링은 0.25초마다 같은 값을 다시 넘긴다. 표시 상태는 여기서만 바뀌므로, 같은 값이면 다시 그리지 않는다.
+    private var lastApplyInputs: ApplyInputs?
+
     func apply(_ newPayload: StatePayload, state incoming: PetState? = nil, liveMessage: String? = nil, liveTitle: String? = nil, sleepPose: Bool = false, sessionCount: Int, attentionCount: Int, attentionState: PetState? = nil, attentionSource: String? = nil, inputCount: Int = 0, connectionStatus: String? = nil, isPinned: Bool) {
+        let inputs = ApplyInputs(
+            payload: newPayload, state: incoming, liveMessage: liveMessage, liveTitle: liveTitle, sleepPose: sleepPose,
+            sessionCount: sessionCount, attentionCount: attentionCount, attentionState: attentionState,
+            attentionSource: attentionSource, inputCount: inputCount, connectionStatus: connectionStatus, isPinned: isPinned
+        )
+        guard inputs != lastApplyInputs else { return }
+        lastApplyInputs = inputs
         self.liveMessage = liveMessage
         self.liveTitle = liveTitle
         self.sleepPose = sleepPose

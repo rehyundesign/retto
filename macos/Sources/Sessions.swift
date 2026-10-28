@@ -115,7 +115,7 @@ func preferredPinnedSession(_ pinned: StatePayload, attention: [StatePayload],
     return !needsAttention(pinned) || priority(first) > priority(pinned) ? first : pinned
 }
 
-struct StatePayload: Decodable {
+struct StatePayload: Decodable, Equatable {
     var state: String
     let updatedAt: String?
     let event: String?
