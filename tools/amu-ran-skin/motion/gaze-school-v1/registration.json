@@ -1,0 +1,434 @@
+[
+  {
+    "id": "G00",
+    "full_pose_source": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-school-v1/raw/G00.png",
+    "head_cutout_source": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-school-head-v1/raw/G00.png",
+    "head_source_sha256": "c50e64c65b547c231aba8e423557d21039c60a2bcaa63abe0492e2b6dda6d777",
+    "body_master": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/idle-v2/reference/costume-master.png",
+    "head_fur_source_box": [
+      11,
+      121,
+      433,
+      541
+    ],
+    "original_direction_fur_width": 192,
+    "canonical_compact_stance_fur_width": 228.0,
+    "uniform_head_scale": 0.5402843601895735,
+    "translation": [
+      77.82701421800947,
+      161.62559241706157
+    ],
+    "fixed_body_from_y": 469,
+    "target_neck_y": 443,
+    "natural_outline_preserved": true,
+    "regional_face_trims": false,
+    "gaze_head_neck_only_exception": true,
+    "animated_frame": false,
+    "visual_review": "pending"
+  },
+  {
+    "id": "G01",
+    "full_pose_source": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-school-v1/raw/G01.png",
+    "head_cutout_source": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-school-head-v1/raw/G01.png",
+    "head_source_sha256": "c87bf3b819738cc90949241ff2275eb34db25fa7f6f4a806640546704888e5c4",
+    "body_master": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/idle-v2/reference/costume-master.png",
+    "head_fur_source_box": [
+      20,
+      111,
+      446,
+      559
+    ],
+    "original_direction_fur_width": 191,
+    "canonical_compact_stance_fur_width": 219.19828105560293,
+    "uniform_head_scale": 0.5145499555295844,
+    "translation": [
+      92.36713533937163,
+      166.85202490343272
+    ],
+    "fixed_body_from_y": 469,
+    "target_neck_y": 443,
+    "natural_outline_preserved": true,
+    "regional_face_trims": false,
+    "gaze_head_neck_only_exception": true,
+    "animated_frame": false,
+    "visual_review": "pending"
+  },
+  {
+    "id": "G02",
+    "full_pose_source": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-school-v1/raw/G02.png",
+    "head_cutout_source": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-school-head-v1/raw/G02.png",
+    "head_source_sha256": "623e0c7d2eb166854c8c75f8d493bb8d017464c17069f50f5bb4eb6ba8170f5d",
+    "body_master": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/idle-v2/reference/costume-master.png",
+    "head_fur_source_box": [
+      38,
+      92,
+      444,
+      550
+    ],
+    "original_direction_fur_width": 189,
+    "canonical_compact_stance_fur_width": 211.73654403270942,
+    "uniform_head_scale": 0.5215185813613532,
+    "translation": [
+      84.57478118259455,
+      165.55718734444895
+    ],
+    "fixed_body_from_y": 469,
+    "target_neck_y": 443,
+    "natural_outline_preserved": true,
+    "regional_face_trims": false,
+    "gaze_head_neck_only_exception": true,
+    "animated_frame": false,
+    "visual_review": "pending"
+  },
+  {
+    "id": "G03",
+    "full_pose_source": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-school-v1/raw/G03.png",
+    "head_cutout_source": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-school-head-v1/raw/G03.png",
+    "head_source_sha256": "8f2b76c2595792258f5f6e6775757ca388460ab60e112b3a854e42a7a124165a",
+    "body_master": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/idle-v2/reference/costume-master.png",
+    "head_fur_source_box": [
+      12,
+      108,
+      446,
+      573
+    ],
+    "original_direction_fur_width": 193,
+    "canonical_compact_stance_fur_width": 206.7507707522404,
+    "uniform_head_scale": 0.4763842644060839,
+    "translation": [
+      100.14619558320983,
+      181.07904796650178
+    ],
+    "fixed_body_from_y": 469,
+    "target_neck_y": 443,
+    "natural_outline_preserved": true,
+    "regional_face_trims": false,
+    "gaze_head_neck_only_exception": true,
+    "animated_frame": false,
+    "visual_review": "pending"
+  },
+  {
+    "id": "G04",
+    "full_pose_source": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-school-v1/raw/G04.png",
+    "head_cutout_source": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-school-head-v1/raw/G04.png",
+    "head_source_sha256": "3b0e0eee205742e89ede147f3c9c2f193b4bbee1637cc7a2f65f01dd114e4739",
+    "body_master": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/idle-v2/reference/costume-master.png",
+    "head_fur_source_box": [
+      37,
+      144,
+      409,
+      506
+    ],
+    "original_direction_fur_width": 206,
+    "canonical_compact_stance_fur_width": 205.0,
+    "uniform_head_scale": 0.5510752688172043,
+    "translation": [
+      86.88575268817205,
+      176.15591397849465
+    ],
+    "fixed_body_from_y": 469,
+    "target_neck_y": 443,
+    "natural_outline_preserved": true,
+    "regional_face_trims": false,
+    "gaze_head_neck_only_exception": true,
+    "animated_frame": false,
+    "visual_review": "pending"
+  },
+  {
+    "id": "G05",
+    "full_pose_source": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-school-v1/raw/G05.png",
+    "head_cutout_source": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-school-head-v1/raw/G05.png",
+    "head_source_sha256": "0c93f8fe65454865abaac5b3f9cb789c7d24831f3ed0b0e5e5d2f4b7d624fc74",
+    "body_master": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/idle-v2/reference/costume-master.png",
+    "head_fur_source_box": [
+      23,
+      128,
+      417,
+      534
+    ],
+    "original_direction_fur_width": 215,
+    "canonical_compact_stance_fur_width": 206.7507707522404,
+    "uniform_head_scale": 0.5247481491173615,
+    "translation": [
+      98.81778126873917,
+      173.21024392397692
+    ],
+    "fixed_body_from_y": 469,
+    "target_neck_y": 443,
+    "natural_outline_preserved": true,
+    "regional_face_trims": false,
+    "gaze_head_neck_only_exception": true,
+    "animated_frame": false,
+    "visual_review": "pending"
+  },
+  {
+    "id": "G06",
+    "full_pose_source": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-school-v1/raw/G06.png",
+    "head_cutout_source": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-school-head-v1/raw/G06.png",
+    "head_source_sha256": "0e844a283fb548cb54d9d66cfdec8f8d4209e97317cd69daa1dee0f6fead41c5",
+    "body_master": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/idle-v2/reference/costume-master.png",
+    "head_fur_source_box": [
+      16,
+      165,
+      438,
+      532
+    ],
+    "original_direction_fur_width": 241,
+    "canonical_compact_stance_fur_width": 211.73654403270942,
+    "uniform_head_scale": 0.5017453650064204,
+    "translation": [
+      110.35467482604578,
+      187.5697204515779
+    ],
+    "fixed_body_from_y": 469,
+    "target_neck_y": 443,
+    "natural_outline_preserved": true,
+    "regional_face_trims": false,
+    "gaze_head_neck_only_exception": true,
+    "animated_frame": false,
+    "visual_review": "pending"
+  },
+  {
+    "id": "G07",
+    "full_pose_source": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-school-v1/raw/G07.png",
+    "head_cutout_source": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-school-head-v1/raw/G07.png",
+    "head_source_sha256": "0caf3720c3fd77ba08afe7310722ceb840f0bda0e64bf518b758cf6a8fd8e41b",
+    "body_master": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/idle-v2/reference/costume-master.png",
+    "head_fur_source_box": [
+      16,
+      126,
+      443,
+      523
+    ],
+    "original_direction_fur_width": 249,
+    "canonical_compact_stance_fur_width": 219.19828105560293,
+    "uniform_head_scale": 0.5133449205049249,
+    "translation": [
+      110.44401320437221,
+      186.00726165541937
+    ],
+    "fixed_body_from_y": 469,
+    "target_neck_y": 443,
+    "natural_outline_preserved": true,
+    "regional_face_trims": false,
+    "gaze_head_neck_only_exception": true,
+    "animated_frame": false,
+    "visual_review": "pending"
+  },
+  {
+    "id": "G08",
+    "full_pose_source": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-school-v1/raw/G08.png",
+    "head_cutout_source": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-school-head-v1/raw/G08.png",
+    "head_source_sha256": "268aae028eb18dd378dc962575bcebf0720f1d6a3d549c62d528238c31b50049",
+    "body_master": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/idle-v2/reference/costume-master.png",
+    "head_fur_source_box": [
+      12,
+      127,
+      432,
+      532
+    ],
+    "original_direction_fur_width": 205,
+    "canonical_compact_stance_fur_width": 228.0,
+    "uniform_head_scale": 0.5428571428571428,
+    "translation": [
+      65.75714285714287,
+      164.5714285714286
+    ],
+    "fixed_body_from_y": 469,
+    "target_neck_y": 443,
+    "natural_outline_preserved": true,
+    "regional_face_trims": false,
+    "gaze_head_neck_only_exception": true,
+    "animated_frame": false,
+    "visual_review": "pending"
+  },
+  {
+    "id": "G09",
+    "full_pose_source": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-school-v1/raw/G09.png",
+    "head_cutout_source": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-school-head-v1/raw/G09.png",
+    "head_source_sha256": "9a78d94fea086813ce7b151a369226a8bb0362ed3bd621647971a6c91a6a9d52",
+    "body_master": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/idle-v2/reference/costume-master.png",
+    "head_fur_source_box": [
+      37,
+      119,
+      432,
+      533
+    ],
+    "original_direction_fur_width": 199,
+    "canonical_compact_stance_fur_width": 219.19828105560293,
+    "uniform_head_scale": 0.5549323571027922,
+    "translation": [
+      55.14582843794662,
+      158.11118895000618
+    ],
+    "fixed_body_from_y": 469,
+    "target_neck_y": 443,
+    "natural_outline_preserved": true,
+    "regional_face_trims": false,
+    "gaze_head_neck_only_exception": true,
+    "animated_frame": false,
+    "visual_review": "pending"
+  },
+  {
+    "id": "G10",
+    "full_pose_source": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-school-v1/raw/G10.png",
+    "head_cutout_source": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-school-head-v1/raw/G10.png",
+    "head_source_sha256": "037523a74c374f89f533badb8b8491372ac8fca02b26e78eb9f917c912c8f117",
+    "body_master": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/idle-v2/reference/costume-master.png",
+    "head_fur_source_box": [
+      25,
+      120,
+      441,
+      546
+    ],
+    "original_direction_fur_width": 215,
+    "canonical_compact_stance_fur_width": 211.73654403270942,
+    "uniform_head_scale": 0.5089820770017053,
+    "translation": [
+      58.66166709710352,
+      176.58680388006724
+    ],
+    "fixed_body_from_y": 469,
+    "target_neck_y": 443,
+    "natural_outline_preserved": true,
+    "regional_face_trims": false,
+    "gaze_head_neck_only_exception": true,
+    "animated_frame": false,
+    "visual_review": "pending"
+  },
+  {
+    "id": "G11",
+    "full_pose_source": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-school-v1/raw/G11.png",
+    "head_cutout_source": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-school-head-v1/raw/G11.png",
+    "head_source_sha256": "962261c099386a8343e061193e82eae01c2c1375f19a26c6b074f349a2601697",
+    "body_master": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/idle-v2/reference/costume-master.png",
+    "head_fur_source_box": [
+      36,
+      102,
+      434,
+      549
+    ],
+    "original_direction_fur_width": 194,
+    "canonical_compact_stance_fur_width": 206.7507707522404,
+    "uniform_head_scale": 0.5194742983724634,
+    "translation": [
+      62.68327703165734,
+      168.2501872984002
+    ],
+    "fixed_body_from_y": 469,
+    "target_neck_y": 443,
+    "natural_outline_preserved": true,
+    "regional_face_trims": false,
+    "gaze_head_neck_only_exception": true,
+    "animated_frame": false,
+    "visual_review": "pending"
+  },
+  {
+    "id": "G12",
+    "full_pose_source": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-school-v1/raw/G12.png",
+    "head_cutout_source": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-school-head-v1/raw/G12.png",
+    "head_source_sha256": "669accfa5a309e0fe512088841a302dadc424db4df0cdc95107657d22ec5ae8a",
+    "body_master": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/idle-v2/reference/costume-master.png",
+    "head_fur_source_box": [
+      24,
+      106,
+      437,
+      552
+    ],
+    "original_direction_fur_width": 192,
+    "canonical_compact_stance_fur_width": 205.0,
+    "uniform_head_scale": 0.4963680387409201,
+    "translation": [
+      72.33535108958837,
+      180.01210653753026
+    ],
+    "fixed_body_from_y": 469,
+    "target_neck_y": 443,
+    "natural_outline_preserved": true,
+    "regional_face_trims": false,
+    "gaze_head_neck_only_exception": true,
+    "animated_frame": false,
+    "visual_review": "pending"
+  },
+  {
+    "id": "G13",
+    "full_pose_source": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-school-v1/raw/G13.png",
+    "head_cutout_source": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-school-head-v1/raw/G13.png",
+    "head_source_sha256": "4b64d9d626b6f5b31608a2e45325ab8c3098f8916a5c4e032c9747b062a0f2db",
+    "body_master": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/idle-v2/reference/costume-master.png",
+    "head_fur_source_box": [
+      39,
+      117,
+      412,
+      532
+    ],
+    "original_direction_fur_width": 188,
+    "canonical_compact_stance_fur_width": 206.7507707522404,
+    "uniform_head_scale": 0.5542916105958188,
+    "translation": [
+      69.78438761594077,
+      159.00827994183277
+    ],
+    "fixed_body_from_y": 469,
+    "target_neck_y": 443,
+    "natural_outline_preserved": true,
+    "regional_face_trims": false,
+    "gaze_head_neck_only_exception": true,
+    "animated_frame": false,
+    "visual_review": "pending"
+  },
+  {
+    "id": "G14",
+    "full_pose_source": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-school-v1/raw/G14.png",
+    "head_cutout_source": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-school-head-v1/raw/G14.png",
+    "head_source_sha256": "d33f2a97cc8dca9865ca39f1c26e3ea08c13aa8fa183f8918a06850dff3aef3e",
+    "body_master": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/idle-v2/reference/costume-master.png",
+    "head_fur_source_box": [
+      40,
+      86,
+      437,
+      563
+    ],
+    "original_direction_fur_width": 187,
+    "canonical_compact_stance_fur_width": 211.7365440327094,
+    "uniform_head_scale": 0.5333414207373033,
+    "translation": [
+      60.06474186452182,
+      153.66209728342363
+    ],
+    "fixed_body_from_y": 469,
+    "target_neck_y": 443,
+    "natural_outline_preserved": true,
+    "regional_face_trims": false,
+    "gaze_head_neck_only_exception": true,
+    "animated_frame": false,
+    "visual_review": "pending"
+  },
+  {
+    "id": "G15",
+    "full_pose_source": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-school-v1/raw/G15.png",
+    "head_cutout_source": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-school-head-v1/raw/G15.png",
+    "head_source_sha256": "0306a1585bdc0eb938a9e185c7fc3d1eb10200c2f1714f52fac03f6d0421f14e",
+    "body_master": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/idle-v2/reference/costume-master.png",
+    "head_fur_source_box": [
+      37,
+      107,
+      425,
+      538
+    ],
+    "original_direction_fur_width": 187,
+    "canonical_compact_stance_fur_width": 219.19828105560293,
+    "uniform_head_scale": 0.5649440233391828,
+    "translation": [
+      59.78040262031837,
+      150.49517142018044
+    ],
+    "fixed_body_from_y": 469,
+    "target_neck_y": 443,
+    "natural_outline_preserved": true,
+    "regional_face_trims": false,
+    "gaze_head_neck_only_exception": true,
+    "animated_frame": false,
+    "visual_review": "pending"
+  }
+]

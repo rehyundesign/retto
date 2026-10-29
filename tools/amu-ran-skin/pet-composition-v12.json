@@ -1,0 +1,53 @@
+{
+  "kind": "static-pet-composition",
+  "source_cell": [
+    448,
+    640
+  ],
+  "runtime_display": [
+    224,
+    320
+  ],
+  "character": {
+    "path": "anchors/idle-heart-scarf-v12-character.png",
+    "sha256": "859ee4d84e946703ea2afeba161d81cb40e385dc9bc2cbef00cc2ca0c9bf1382",
+    "redrawn": false
+  },
+  "companion": {
+    "path": "reference/ran-sculpted-v10-source.png",
+    "sha256": "1c7a4862a350dd012e1cb9d8ed546163a0801e6bb8ee16077b28689825ab5181",
+    "redrawn": false,
+    "position_2x": [
+      360,
+      282
+    ],
+    "size_2x": [
+      76,
+      90
+    ]
+  },
+  "layers": [
+    "character",
+    "ran"
+  ],
+  "source_hash_preservation": true,
+  "candidate": "amu-ran-pet-v12.png",
+  "runtime_review": "pet-review-v12-1x.png",
+  "animated": false,
+  "production_ready": false,
+  "installed": false,
+  "visual_review": {
+    "pose": "two central forelegs and two smaller outer rear paws visible; four limbs total",
+    "cape": "one broad shoulder/upper-chest mantle with pink lining and red edge",
+    "pendant": "single visibly suspended Guardian Egg",
+    "floor_pompons": "removed, including wrist loops",
+    "companion": "Ran floats beside shoulder, separate from visor/face/cape"
+  },
+  "remaining": [
+    "all static anchors",
+    "independent motion",
+    "gaze",
+    "effects",
+    "strict cell registration and native review"
+  ]
+}

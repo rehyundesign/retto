@@ -27,6 +27,12 @@ final class RettoView: NSView {
     private var chocolatPreviewTime: TimeInterval?
     func setChocolatTimeForPreview(_ time: TimeInterval, drag: DragRun? = nil) { chocolatPreviewTime = time; dragRun = drag; needsDisplay = true }
     private var chocolatEpoch = ProcessInfo.processInfo.systemUptime
+    private var amuRanPoseEpoch = ProcessInfo.processInfo.systemUptime
+    private let amuRanEffectEpoch = ProcessInfo.processInfo.systemUptime
+    private var amuRanPreviewTime: TimeInterval?
+    private var amuRanSpriteOnlyPreview = false
+    func setAmuRanTimeForPreview(_ time: TimeInterval) { amuRanPreviewTime = time; needsDisplay = true }
+    func setAmuRanSpriteOnlyForPreview() { amuRanSpriteOnlyPreview = true }
     private var frameIndex = 0
     private var completedCycles = 0
     private var animationTimer: Timer?
@@ -321,6 +327,7 @@ final class RettoView: NSView {
             chocolatEpoch = ProcessInfo.processInfo.systemUptime
         }
         animationTimer?.invalidate()
+        if skin == .amuRan { amuRanPoseEpoch = ProcessInfo.processInfo.systemUptime }
         guard let animation = currentAnimation else { return }
         let poseTiming = skin == .christmas && spriteLayout.columns == 16
             ? Christmas16Timing.frameDuration(row: animation.row, frame: frameIndex) : nil
@@ -333,7 +340,7 @@ final class RettoView: NSView {
         if skin == .hana {
             hanaAnimationStart = ProcessInfo.processInfo.systemUptime - Double(completedCycles * animation.frames + frameIndex) * animation.interval
         }
-        let timer = Timer(timeInterval: skin == .jeanne ? 0.05 : (skin == .hana || skin == .chocolatHeart || skin == .pichiPitch) ? 1.0 / 60 : (poseTiming ?? animation.interval), repeats: poseTiming == nil) { [weak self] _ in
+        let timer = Timer(timeInterval: skin == .jeanne ? 0.05 : (skin == .amuRan || skin == .hana || skin == .chocolatHeart || skin == .pichiPitch) ? 1.0 / 60 : (poseTiming ?? animation.interval), repeats: poseTiming == nil) { [weak self] _ in
             self?.advanceFrame()
             if poseTiming != nil { self?.restartAnimation() }
         }
@@ -352,7 +359,7 @@ final class RettoView: NSView {
         RunLoop.main.add(timer, forMode: .common)
     }
 
-    func setDragRunForPreview(_ direction: DragRun) {
+    func setDragRunForPreview(_ direction: DragRun?) {
         dragRun = direction
         restartAnimation()
     }
@@ -404,6 +411,7 @@ final class RettoView: NSView {
     }
 
     private func advanceFrame() {
+        if skin == .amuRan { needsDisplay = true }
         guard dragRun != nil || !hasActiveGaze, let animation = currentAnimation else { return }
         if skin == .jeanne {
             if dragRun == nil && hasActiveGaze { return }
@@ -415,6 +423,9 @@ final class RettoView: NSView {
         } else if skin == .chocolatHeart {
             let tick = Int(max(0, ProcessInfo.processInfo.systemUptime - chocolatEpoch) / animation.interval)
             frameIndex = tick % animation.frames; completedCycles = tick / animation.frames
+        } else if skin == .amuRan {
+            let p = AmuRanMotion.position(elapsed: ProcessInfo.processInfo.systemUptime - amuRanPoseEpoch, interval: animation.interval)
+            frameIndex = p.frame; completedCycles = p.cycles
         } else if skin == .hana {
             // 타이머 호출이 늦어져도 실제 경과 시간의 프레임으로 진행한다.
             let elapsed = max(0, ProcessInfo.processInfo.systemUptime - hanaAnimationStart)
@@ -514,7 +525,7 @@ final class RettoView: NSView {
 
     private func updateGaze(toward direction: Int) {
         gazeTargetDirection = direction
-        guard skin == .christmas, spriteLayout.columns == 16, lookDirection != nil else {
+        guard skin == .christmas || skin == .amuRan, spriteLayout.columns == 16, lookDirection != nil else {
             lookDirection = direction
             return
         }
@@ -541,6 +552,7 @@ final class RettoView: NSView {
         guard lookDirection != nil else { return }
         lookDirection = nil
         frameIndex = 0
+        if skin == .amuRan { restartAnimation() }
         if skin == .christmas { restartAnimation() }
         needsDisplay = true
     }
@@ -680,8 +692,12 @@ final class RettoView: NSView {
             row = run.row
             column = frameIndex
         } else if let direction = lookDirection, hasActiveGaze {
-            row = direction < 8 ? 9 : 10
-            column = direction < 8 ? direction : direction - 8
+            if skin == .amuRan {
+                row = AmuRanMotion.gazeRow(state: visibleState); column = direction
+            } else {
+                row = direction < 8 ? 9 : 10
+                column = direction < 8 ? direction : direction - 8
+            }
         } else {
             // v2 개인 스킨은 11행이라 레토 전용 잠자기 행이 없다. idle 자세에 호흡 효과를
             // 더해 잠든 모습을 유지한다. 나머지 상태와 시선 행은 같은 순서다.
@@ -702,6 +718,9 @@ final class RettoView: NSView {
         // 동물의 숲처럼 발밑에만 타원을 깔고, 몸에는 아주 얕은 그림자만 남긴다.
         drawGroundShadow(petRect: petRect, scale: uiScale)
 
+        let amuRanTime = amuRanPreviewTime ?? (ProcessInfo.processInfo.systemUptime - amuRanEffectEpoch)
+        let amuRanPoseTime = amuRanPreviewTime ?? (ProcessInfo.processInfo.systemUptime - amuRanPoseEpoch)
+        if skin == .amuRan { AmuRanFrames.drawEffects(state: visibleState, drag: dragRun, time: amuRanTime, poseTime: amuRanPoseTime, gazeDirection: dragRun == nil ? lookDirection : nil, in: petRect, front: false) }
         let jeanneTime = jeannePreviewTime ?? (ProcessInfo.processInfo.systemUptime - jeanneEpoch)
         if skin == .jeanne { JeanneSkin.drawEffects(row: row, frame: column, time: jeanneTime, front: false, in: petRect) }
         let pichiTime = pichiPreviewTime ?? (ProcessInfo.processInfo.systemUptime - pichiEpoch)
@@ -725,7 +744,9 @@ final class RettoView: NSView {
         shadow.shadowBlurRadius = 5 * uiScale
         shadow.shadowOffset = NSSize(width: 0, height: -2 * uiScale)
         shadow.set()
-        if skin == .jeanne {
+        if skin == .amuRan {
+            _ = AmuRanFrames.drawCharacter(row: row, frame: column, in: petRect)
+        } else if skin == .jeanne {
             JeanneSkin.drawCharacter(row: row, frame: column, in: petRect)
         } else if skin == .pichiPitch {
             PichiSkin.drawCharacter(row: row, frame: column, in: petRect)
@@ -756,11 +777,12 @@ final class RettoView: NSView {
         }
         if skin == .jeanne { JeanneSkin.drawEffects(row: row, frame: column, time: jeanneTime, front: true, in: petRect) }
         if skin == .pichiPitch { PichiSkin.drawEffects(row: row, time: pichiTime, front: true, in: petRect) }
-        if visibleState == .sleeping && skin != .jeanne && skin != .hana && skin != .chocolatHeart && skin != .pichiPitch {
+        if skin == .amuRan { AmuRanFrames.drawEffects(state: visibleState, drag: dragRun, time: amuRanTime, poseTime: amuRanPoseTime, gazeDirection: dragRun == nil ? lookDirection : nil, in: petRect, front: true) }
+        if visibleState == .sleeping && skin != .amuRan && skin != .jeanne && skin != .hana && skin != .chocolatHeart && skin != .pichiPitch {
             drawSleepBreath(petRect: petRect, scale: uiScale)
         }
 
-        drawStatusRibbon(statusAnimation, layout: layout)
+        if skin != .amuRan || !amuRanSpriteOnlyPreview { drawStatusRibbon(statusAnimation, layout: layout) }
     }
 
     private static func loadEffectSheet(_ resource: String) -> NSImage? {

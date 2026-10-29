@@ -166,6 +166,7 @@ func skinAnimation(_ animation: Animation, skin: PetSkin, columns: Int) -> Anima
     }
     if skin == .jeanne { return JeanneSkin.animation(animation) }
     if skin == .pichiPitch { return PichiSkin.animation(animation) }
+    if skin == .amuRan, columns == 16 { return AmuRanMotion.animation(animation) }
     if skin == .hana, columns == 16 { return HanaMotion.animation(animation) }
     guard skin == .christmas, columns == 16 else { return animation }
     return Animation(row: animation.row, frames: 16,

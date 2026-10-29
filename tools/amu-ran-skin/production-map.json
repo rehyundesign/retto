@@ -1,0 +1,855 @@
+{
+  "skin_id": "amuRan",
+  "label": "아무 · 란",
+  "status": "autonomous full production authorized; finish left then remaining states and gaze; no intermediate approval requests",
+  "production_ready": false,
+  "installed": false,
+  "mode": "registered-character",
+  "character_identity": "Original Retto identity: blue eyes, brown-white ragdoll fur, four limbs; original proportions preferred, Hana-level costume/motion proportion adaptation explicitly allowed",
+  "companion": "Ran, small pink-haired cheer guardian, separately layered",
+  "proposed_layout": {
+    "cell_width": 448,
+    "cell_height": 640,
+    "columns": 16,
+    "rows": 12
+  },
+  "sequences": [
+    {
+      "id": "idle",
+      "row": 0,
+      "outfit": "school",
+      "drawings_required": 16,
+      "cycle_seconds": 3.2,
+      "action": "Cool casual tie adjustment; glance at Ran; blink and settle",
+      "motion_review": "motion/idle-v2/idle-light.gif",
+      "character_drawings": 16,
+      "companion_drawings": 8,
+      "status": "user accepted to proceed",
+      "delivery": "motion/idle-v2/delivery.json",
+      "rejected_motion_review": "motion/idle-v1/idle-light.gif"
+    },
+    {
+      "id": "drag-right",
+      "row": 1,
+      "outfit": "school",
+      "drawings_required": 16,
+      "cycle_seconds": 1.6,
+      "action": "Rightward gait; Ran follows behind",
+      "motion_review": "motion/drag-right-v1/drag-right-light.gif",
+      "delivery": "motion/drag-right-v1/delivery.json",
+      "status": "user accepted",
+      "character_drawings": 16,
+      "companion_drawings": 8
+    },
+    {
+      "id": "drag-left",
+      "row": 2,
+      "outfit": "school",
+      "drawings_required": 16,
+      "cycle_seconds": 1.6,
+      "action": "Leftward gait; preserve clip and armband sides",
+      "motion_review": "motion/drag-left-v1/drag-left-light.gif",
+      "delivery": "motion/drag-left-v1/delivery.json",
+      "status": "internally reviewed; continuing full production without intermediate user approval",
+      "character_drawings": 16,
+      "companion_drawings": 8
+    },
+    {
+      "id": "waving",
+      "row": 3,
+      "outfit": "heart",
+      "drawings_required": 16,
+      "cycle_seconds": 2.4,
+      "action": "Completion: raise an actual forepaw, cheer with Ran, lower and recover"
+    },
+    {
+      "id": "jumping",
+      "row": 4,
+      "outfit": "heart",
+      "drawings_required": 16,
+      "cycle_seconds": 2.4,
+      "action": "Crouch, push off, jump, land and recover"
+    },
+    {
+      "id": "failed",
+      "row": 5,
+      "outfit": "school",
+      "drawings_required": 16,
+      "cycle_seconds": 3.2,
+      "action": "Brief surprise, comfort Ran, recover"
+    },
+    {
+      "id": "waiting",
+      "row": 6,
+      "outfit": "school",
+      "drawings_required": 16,
+      "cycle_seconds": 3.2,
+      "action": "Tap the worn armband, look toward Ran, settle"
+    },
+    {
+      "id": "running",
+      "row": 7,
+      "outfit": "school",
+      "drawings_required": 16,
+      "cycle_seconds": 2.4,
+      "action": "Concentrate with Ran; build a small heart charm between forepaws"
+    },
+    {
+      "id": "review",
+      "row": 8,
+      "outfit": "school",
+      "drawings_required": 16,
+      "cycle_seconds": 3.2,
+      "action": "Inspect the charm with Ran, touch, look up"
+    },
+    {
+      "id": "sleeping",
+      "row": 11,
+      "outfit": "school",
+      "drawings_required": 16,
+      "cycle_seconds": 6.4,
+      "action": "Curled sleep with pose-aware jacket; Ran rests nearby"
+    }
+  ],
+  "static_anchors": [
+    {
+      "id": "A01",
+      "sequence": "idle",
+      "base_cell": [
+        0,
+        0
+      ],
+      "view": "front-seated",
+      "pose": "neutral",
+      "status": "display size and ground contact normalized; final motion/anatomical registration pending",
+      "source": "anchors/idle-school-source.png",
+      "production_ready": false,
+      "registered_source": "registered-static-v2/A01.png"
+    },
+    {
+      "id": "A02",
+      "sequence": "running",
+      "base_cell": [
+        7,
+        0
+      ],
+      "view": "front-seated",
+      "pose": "anticipation",
+      "status": "raised-side shoulder, armpit, side and hem redrawn; downward empty-sleeve silhouette removed; static review passed",
+      "source": "anchors/A02-school-tailoring-locked-v4.png",
+      "production_ready": false,
+      "registered_source": "registered-static-v2/A02.png",
+      "pre_sleeve_repair_source": "anchors/A02-character-source.png",
+      "clothing_repair": "sleeve-repair-verification-v4.json",
+      "pre_tailoring_v4_source": "anchors/A02-school-sleeve-locked-v3.png"
+    },
+    {
+      "id": "A03",
+      "sequence": "review",
+      "base_cell": [
+        8,
+        0
+      ],
+      "view": "front-low",
+      "pose": "inspect",
+      "status": "display size and ground contact normalized; final motion/anatomical registration pending",
+      "source": "anchors/A03-character-source.png",
+      "production_ready": false,
+      "registered_source": "registered-static-v2/A03.png"
+    },
+    {
+      "id": "A04",
+      "sequence": "waiting",
+      "base_cell": [
+        6,
+        0
+      ],
+      "view": "front-seated",
+      "pose": "armband tap",
+      "status": "display size and ground contact normalized; final motion/anatomical registration pending",
+      "source": "anchors/A04-compact-body-locked-v1.png",
+      "production_ready": false,
+      "pre_size_repair_source": "anchors/A04-character-source.png",
+      "registered_source": "registered-static-v2/A04.png"
+    },
+    {
+      "id": "A05",
+      "sequence": "failed",
+      "base_cell": [
+        5,
+        0
+      ],
+      "view": "front-seated",
+      "pose": "surprise",
+      "status": "display size and ground contact normalized; final motion/anatomical registration pending",
+      "source": "anchors/A05-character-source.png",
+      "production_ready": false,
+      "registered_source": "registered-static-v2/A05.png"
+    },
+    {
+      "id": "A06",
+      "sequence": "waving",
+      "base_cell": [
+        3,
+        0
+      ],
+      "view": "front-seated",
+      "pose": "transformed neutral",
+      "status": "compact school-size body and protected head/cape/scarf/egg visually verified at1x; independent motion pending",
+      "source": "anchors/A06-heart-compact-locked-v2.png",
+      "production_ready": false,
+      "registered_source": "registered-static-v2/A06.png",
+      "pre_heart_size_repair_source": "anchors/idle-heart-scarf-v12-character.png"
+    },
+    {
+      "id": "A07",
+      "sequence": "jumping",
+      "base_cell": [
+        4,
+        0
+      ],
+      "view": "front-crouch",
+      "pose": "prepare",
+      "status": "compact school-size body and protected head/cape/scarf/egg visually verified at1x; independent motion pending",
+      "source": "anchors/A07-heart-compact-locked-v2.png",
+      "rejected_source": "anchors/A07-character-source.png",
+      "production_ready": false,
+      "registered_source": "registered-static-v2/A07.png",
+      "pre_heart_size_repair_source": "anchors/A07-face-repair-v3.png"
+    },
+    {
+      "id": "A08",
+      "sequence": "sleeping",
+      "base_cell": [
+        11,
+        0
+      ],
+      "view": "curled-side",
+      "pose": "rest",
+      "status": "display size and ground contact normalized; final motion/anatomical registration pending",
+      "source": "anchors/A08-character-source.png",
+      "production_ready": false,
+      "registered_source": "registered-static-v2/A08.png"
+    },
+    {
+      "id": "A09",
+      "sequence": "drag-right",
+      "base_cell": [
+        1,
+        0
+      ],
+      "view": "right-profile",
+      "pose": "contact",
+      "status": "display size and ground contact normalized; final motion/anatomical registration pending",
+      "source": "anchors/A09-profile-repair-v2.png",
+      "production_ready": false,
+      "registered_source": "registered-static-v2/A09.png"
+    },
+    {
+      "id": "A10",
+      "sequence": "drag-left",
+      "base_cell": [
+        2,
+        0
+      ],
+      "view": "left-profile",
+      "pose": "contact",
+      "status": "display size and ground contact normalized; final motion/anatomical registration pending",
+      "source": "anchors/A10-character-source.png",
+      "production_ready": false,
+      "registered_source": "registered-static-v2/A10.png"
+    },
+    {
+      "id": "A11",
+      "sequence": "idle",
+      "base_cell": [
+        0,
+        2
+      ],
+      "view": "front-seated",
+      "pose": "look toward Ran",
+      "status": "display size and ground contact normalized; final motion/anatomical registration pending",
+      "source": "anchors/A11-compact-body-locked-v1.png",
+      "production_ready": false,
+      "pre_size_repair_source": "anchors/A11-character-source.png",
+      "registered_source": "registered-static-v2/A11.png"
+    },
+    {
+      "id": "A12",
+      "sequence": "running",
+      "base_cell": [
+        7,
+        3
+      ],
+      "view": "front-seated",
+      "pose": "present charm",
+      "status": "display size and ground contact normalized; final motion/anatomical registration pending",
+      "source": "anchors/A12-compact-body-locked-v1.png",
+      "production_ready": false,
+      "pre_size_repair_source": "anchors/A12-character-source.png",
+      "registered_source": "registered-static-v2/A12.png"
+    },
+    {
+      "id": "A13",
+      "sequence": "review",
+      "base_cell": [
+        8,
+        2
+      ],
+      "view": "front-low",
+      "pose": "touch charm",
+      "status": "display size and ground contact normalized; final motion/anatomical registration pending",
+      "source": "anchors/A13-character-source.png",
+      "production_ready": false,
+      "registered_source": "registered-static-v2/A13.png"
+    },
+    {
+      "id": "A14",
+      "sequence": "waving",
+      "base_cell": [
+        3,
+        2
+      ],
+      "view": "front-seated",
+      "pose": "one forepaw raised; remove its grounded counterpart",
+      "status": "compact school-size body and protected head/cape/scarf/egg visually verified at1x; independent motion pending",
+      "source": "anchors/A14-heart-compact-locked-v2.png",
+      "production_ready": false,
+      "registered_source": "registered-static-v2/A14.png",
+      "pre_heart_size_repair_source": "anchors/A14-character-source.png"
+    },
+    {
+      "id": "A15",
+      "sequence": "jumping",
+      "base_cell": [
+        4,
+        2
+      ],
+      "view": "front-airborne",
+      "pose": "apex",
+      "status": "compact school-size body and protected head/cape/scarf/egg visually verified at1x; independent motion pending",
+      "source": "anchors/A15-heart-compact-locked-v2.png",
+      "production_ready": false,
+      "registered_source": "registered-static-v2/A15.png",
+      "pre_heart_size_repair_source": "anchors/A15-costume-repair-v2.png"
+    },
+    {
+      "id": "A16",
+      "sequence": "failed",
+      "base_cell": [
+        5,
+        5
+      ],
+      "view": "front-seated",
+      "pose": "recover",
+      "status": "display size and ground contact normalized; final motion/anatomical registration pending",
+      "source": "anchors/A16-character-source.png",
+      "production_ready": false,
+      "registered_source": "registered-static-v2/A16.png"
+    }
+  ],
+  "gaze": {
+    "directions_per_outfit": 16,
+    "school": {
+      "row": 9,
+      "columns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "path": "motion/gaze-school-v2"
+    },
+    "heart": {
+      "row": 10,
+      "columns": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "path": "motion/gaze-heart-v2"
+    },
+    "runtime_mapping": "row9 school, row10 transformed waving; direction maps directly to column0..15",
+    "status": "complete-source v2 repair",
+    "construction": "one complete source per direction; no isolated head/body composition"
+  },
+  "effects": {
+    "layers": [
+      "effect_back",
+      "character",
+      "ran",
+      "effect_front"
+    ],
+    "clock": "elapsed time independent of character frame and gaze hold",
+    "status": "pending"
+  },
+  "runtime_evidence": [
+    "macos/Sources/Geometry.swift: SpriteSheetLayout.retto16 and gazeStates",
+    "macos/Sources/Tones.swift: animationCatalog",
+    "macos/Sources/PetView.swift: draw gaze row/column selection",
+    "hook/hook.cjs: Stop maps to waving",
+    "macos/Sources/Sessions.swift: completed Codex turn maps to waving"
+  ],
+  "remaining_gates": [
+    "Finalize costume construction and keep visor-heart side consistent with supplied reference (viewer-right)",
+    "Review proportion adaptation against original Retto and Hana; establish shared same-stance profiles and fixed runtime center/baseline",
+    "Complete 16 passing static anchors before motion generation",
+    "Generate 160 distinct independent character drawings and 32 gaze stills",
+    "Layer and animate Ran and state effects",
+    "Inspect all final cells and motion at runtime scale",
+    "Register runtime resources and skin-specific gaze mapping; validate native preview"
+  ],
+  "exceptions_accepted": [
+    {
+      "type": "proportion-adaptation",
+      "reference": "Hana skin",
+      "scope": "Amu and Ran skin only, garment and motion needs",
+      "date": "2026-10-28"
+    }
+  ],
+  "costume_anchors": {
+    "school": {
+      "head": "pink X clip at viewer-right ear root",
+      "neck": "white collar and red tie",
+      "shoulders_chest": "black fitted blazer; no humanoid arms",
+      "front_legs": "actual forelegs in blazer sleeves; red armband on anatomical left foreleg",
+      "back_hips": "red tartan short pleats",
+      "tail": "original brown fluffy tail, no decoration"
+    },
+    "heart": {
+      "head": "clean white sport visor with red edge, red heart at viewer-right and compact high pink side-ponytail-shaped accessory",
+      "neck": "soft matte red scarf wraps from back to front-center knot; one Guardian Egg hangs directly beneath knot via small connector loop; no separate necklace cord",
+      "shoulders_chest": "one broad white-pink cape draped over both shoulders and upper chest down to upper forelegs, pink lining and clean red edge; no separate pointed collar pieces or fitted bodice",
+      "front_legs": "two naturally aligned short seated forelegs under cape, paired white-pink lower-leg warmers at same height, grounded visible forepaws; no pompons or wrist loops",
+      "back_hips": "white box-pleated cheer skirt with red hem and pink underskirt; simple red hip bow with two long narrow red tails",
+      "tail": "original brown fluffy tail, no decoration"
+    }
+  },
+  "proportion_policy": {
+    "preferred": "Original Retto proportions",
+    "allowed_upper_reference": "User explicitly allows Hana-skin level of proportion adaptation for clothing and motion",
+    "authorization": "2026-10-28: 비율은 기본 레토가 베스트이나, 동작이나 옷을위해서 하나스킨정도까지의 비율은 괜찮아.",
+    "applies_to": "Head-to-torso and limb proportions needed by costume or actual pose; preserve cat identity, four limbs, consistent same-stance profile, runtime body center and ground baseline",
+    "not_waived": [
+      "same-pose consistency",
+      "face markings and blue eyes",
+      "four limbs",
+      "16 independent drawings per newly authored sequence",
+      "gaze coverage",
+      "visual review",
+      "installation authorization"
+    ]
+  },
+  "selected_preview": "amu-ran-pet-v12.png",
+  "costume_revision": {
+    "heart_source": "anchors/idle-heart-scarf-v12-character.png",
+    "status": "local neck revision candidate; v9 approved base preserved outside region",
+    "user_request": "Red scarf like Ran, wrapped from back and tied at front center, Guardian Egg hanging from the knot",
+    "base": "anchors/idle-heart-cape-pose-v9-source.png",
+    "changed": [
+      "soft red neckerchief wrapping neck from behind to exact front-center knot",
+      "two short tapered scarf tails",
+      "same single Guardian Egg connected directly below knot with small loop",
+      "former separate pink necklace cord removed"
+    ],
+    "scope_audit": "scarf-v12-scope-audit.json",
+    "changed_outside_requested_zone": 0,
+    "protected_face_changed": false,
+    "retained": [
+      "approved v9 face, proportions, limbs and clothes outside neck/cape attachment zone",
+      "broad cape coverage",
+      "Ran v10 source and composition position"
+    ],
+    "pending": [
+      "user review of local scarf revision",
+      "full anchors and motion",
+      "strict runtime registration and native review"
+    ]
+  },
+  "costume_revision_history": [
+    {
+      "heart_source": "anchors/idle-heart-ornate-v3-source.png",
+      "status": "design-candidate-not-production-registered",
+      "user_request": "Keep approved school outfit; make transformed outfit richer like Hana",
+      "school_source_preserved": true,
+      "ran_source_preserved": true,
+      "added": [
+        "ruffled visor band",
+        "layered shoulder ruffles",
+        "heart jewel and chest bow",
+        "two-tier pleated skirt",
+        "hip bow and two narrow ribbon tails",
+        "ruffled heart wrist cuffs"
+      ],
+      "unverified": [
+        "original-to-Hana proportion bounds",
+        "all-pose anatomy",
+        "production alpha edge and cell margins",
+        "motion transitions"
+      ]
+    },
+    {
+      "heart_source": "anchors/idle-heart-cape-egg-v5-source.png",
+      "status": "design-candidate-not-production-registered",
+      "user_request": "Use a Hana-like short cape instead of the upper bodice; replace neck heart ribbon with the supplied Guardian Egg",
+      "school_source_preserved": true,
+      "ran_source_preserved": true,
+      "changed": [
+        "single draped white-pink scalloped shoulder cape",
+        "remove fitted upper bodice and peplum; expose natural white chest fur",
+        "replace neck bow and heart jewel with suspended Guardian Egg pendant"
+      ],
+      "pendant": {
+        "reference": "reference/guardian-egg-user-reference.jpg",
+        "shape": "single upright closed egg",
+        "pattern": "pink tartan top/bottom; wide black center band with prominent pink heart and small black heart edge rows",
+        "attachment": "pink cord at neck with small connecting loop",
+        "scope": "transformed outfit only"
+      },
+      "retained_design": [
+        "heart visor",
+        "two-tier pleated skirt and hip bow",
+        "wrist and ankle cuffs",
+        "Retto face/eyes/fur/tail and four-limb anatomy"
+      ],
+      "unverified": [
+        "strict outside-target pixel equality for AI edited character",
+        "all-pose registration and anatomy",
+        "production alpha edges and margins",
+        "motion transitions"
+      ]
+    },
+    {
+      "heart_source": "anchors/idle-heart-sporty-v7-source.png",
+      "status": "design-candidate-not-production-registered",
+      "user_request": "Prior design does not evoke the supplied Amulet Heart reference",
+      "outfit_reference": "reference/amu-heart-outfit-user-reference.jpg",
+      "design_priority": "Amulet Heart sporty cheer silhouette and white/pink/red color blocking; Hana is proportion/material/richness reference only, not lace/pearl princess styling",
+      "changed": [
+        "clean white/red sport visor without lace or pearls",
+        "compact high pink side-ponytail-shaped costume accessory behind visor",
+        "simple pointed white/pink cape with red border",
+        "clean white box-pleated skirt, red hem, pink underskirt",
+        "two long narrow red hip ribbon tails",
+        "pink heart pompons with visible wrist loops",
+        "white-pink flared legwarmers with red edge"
+      ],
+      "preserved_decisions": [
+        "approved school outfit and Ran sources unchanged",
+        "short cape instead of fitted bodice",
+        "pink plaid Guardian Egg necklace with black band and pink heart",
+        "Retto blue eyes, brown-white fur, four legs and one tail remain identity requirements"
+      ],
+      "removed": [
+        "pearl trim",
+        "gem settings",
+        "round scalloped lace cape",
+        "jeweled wrist bows",
+        "ornate layered princess skirt"
+      ],
+      "unverified": [
+        "strict AI edited outside-target pixel equality",
+        "original-to-Hana registration and scale",
+        "all-pose anatomy and final runtime margin",
+        "motion and native rendering"
+      ]
+    },
+    {
+      "heart_source": "anchors/idle-heart-hana-material-v8-source.png",
+      "status": "design-and-material-candidate-not-production-registered",
+      "user_request": "Verify and follow Hana production material and texture approach",
+      "primary_material_reference": "reference/hana-material-reference.png",
+      "outfit_geometry_reference": "anchors/idle-heart-sporty-v7-source.png",
+      "method_correction": "Actual Hana independent sprite used as primary cat/material edit reference; previous Amu sprite supplies garment geometry only",
+      "materials": {
+        "fur": "short soft flocked fur; avoid long photographic fibers",
+        "cloth": "matte soft felt on visor/cape/skirt/ribbons/legwarmers/pompons",
+        "eyes": "natural blue eyes and restrained highlights; avoid green-grey glass-marble look",
+        "details": "simple readable texture and broad folds at 224x320"
+      },
+      "preserved_decisions": [
+        "school and Ran source hashes unchanged",
+        "sport visor and high pink side accessory",
+        "pointed cape and Guardian Egg necklace",
+        "white pleated cheer skirt with red hem",
+        "pink heart pompons and legwarmers"
+      ],
+      "actual_completed_stage": "single costume/material candidate plus same-size light/dark comparison",
+      "remaining_stages": [
+        "complete 16 passing static anchors",
+        "independent character motion",
+        "separate continuously moving effects",
+        "gaze cuts and resource assembly",
+        "native rendering and final registration"
+      ]
+    },
+    {
+      "heart_source": "anchors/idle-heart-cape-pose-v9-source.png",
+      "status": "user-approved-neutral-costume; full production pending",
+      "user_request": "Remove both floor pompons; repair foreleg position; broaden cape to Hana-like upper-body coverage; show Ran with the pet",
+      "approved_character_source_locked": true,
+      "source_sha256": "0ed91b021ad472f22b6767a255d617f5c197f96c3686c6b934f6ef0b5be000ca",
+      "changed": [
+        "both floor pompons and wrist-loop straps removed",
+        "two central forelegs aligned under shoulders with level lower-leg cuffs and side-by-side paws",
+        "two smaller outer seated rear paws visible, four attached limbs total",
+        "single broad cape wrapping shoulders and covering upper chest/upper forelegs",
+        "existing Ran composited beside shoulder using independent layer"
+      ],
+      "retained": [
+        "Hana short-soft-fur and matte felt material",
+        "Guardian Egg necklace",
+        "visor and high pink accessory",
+        "white/red cheer skirt, hip bow and narrow tails",
+        "approved school and Ran original source files"
+      ],
+      "pending": [
+        "all static anchors",
+        "pose-specific independent motion",
+        "strict registration and alpha margins",
+        "gaze and effects",
+        "native app review"
+      ]
+    }
+  ],
+  "material_review": "material-review-v9-1x.png",
+  "material_contract": {
+    "reference": "reference/hana-material-reference.png",
+    "source_document": "/Users/luxia/.codex/worktrees/7bab/retto/tools/hana-skin/costume-master.md",
+    "comparison": "material-review-v8-1x.png",
+    "same_workflow_fully_completed": false,
+    "no_approval_inferred_from_comparison": true,
+    "requirements": [
+      "soft short fur",
+      "matte soft felt fabric",
+      "simple readable texture",
+      "material master before motion",
+      "16 distinct independent static anchors before motion expansion",
+      "character/effect layers separate",
+      "light/dark 224x320 comparison and native review"
+    ]
+  },
+  "costume_comparison": "costume-preview-v9.png",
+  "pet_review": "pet-review-size-v2-1x.png",
+  "neutral_design_approval": {
+    "date": "2026-10-28",
+    "user_message": "응 마음에들어.",
+    "scope": "current master art approved; continue static anchors and motion",
+    "approved_sources": {
+      "school": "anchors/idle-school-source.png",
+      "heart": "anchors/idle-heart-scarf-v12-character.png",
+      "ran": "reference/ran-sculpted-v10-source.png"
+    },
+    "installed": false
+  },
+  "companion_composition": {
+    "source": "reference/ran-sculpted-v10-source.png",
+    "layer": "ran",
+    "position_2x": [
+      360,
+      330
+    ],
+    "max_size_2x": [
+      90,
+      90
+    ],
+    "source_unchanged": "selected new Ran input preserved by composition; previous Ran source also retained",
+    "preview": "amu-ran-pet-size-v2.png",
+    "character_source": "registered-static-v2/A06.png"
+  },
+  "companion_review": "ran-review-v10.png",
+  "companion_revision": {
+    "version": 10,
+    "status": "new-companion-design-candidate",
+    "user_request": "Improve Ran like Hana and Finn",
+    "previous_source": "reference/ran-neutral-source.png",
+    "current_source": "reference/ran-sculpted-v10-source.png",
+    "references": [
+      "reference/fin-material-reference.png",
+      "reference/hana-material-reference.png"
+    ],
+    "changes": [
+      "rounded dimensional face with gentle cheek/nose shading",
+      "pink irises with depth and restrained highlights",
+      "rounded short soft flocked pink hair and ponytail clumps",
+      "matte felt dress/visor/pompons and readable silhouette",
+      "large head and small compact guardian body"
+    ],
+    "preserved_design": [
+      "pink bob and high side ponytail",
+      "white red-edged visor with red heart",
+      "pink eyes and smile",
+      "white-pink cheer dress and red neck scarf",
+      "two hand-held pink heart pompons",
+      "two tiny red-white shoes",
+      "no wings or new accessories"
+    ],
+    "approved_retto_source_unchanged": true,
+    "changed_pixels_outside_companion_region": 0,
+    "old_ran_source_preserved": true,
+    "candidate_sha256": "1c7a4862a350dd012e1cb9d8ed546163a0801e6bb8ee16077b28689825ab5181",
+    "pending": [
+      "user review of new Ran",
+      "companion pose/animation coverage",
+      "native rendering"
+    ]
+  },
+  "master_approval": "approved-master-v12-lock.json",
+  "face_contract": {
+    "master": "anchors/idle-heart-scarf-v12-character.png",
+    "preserve": [
+      "upright round skull",
+      "forehead height",
+      "blue eyes and eye spacing",
+      "muzzle depth",
+      "rounded chin"
+    ],
+    "crouch": "bend body and limbs, retain upright head and face height",
+    "rejected": "A07-character-source.png: widened flattened face",
+    "current_repair": "anchors/A07-face-repair-v3.png"
+  },
+  "size_registration": {
+    "version": "v2",
+    "landmarks": "static-size-landmarks-v2.json",
+    "report": "static-size-registration-v2.json",
+    "light_review": "static-size-review-v2-light.png",
+    "dark_review": "static-size-review-v2-dark.png",
+    "full_pet_light_review": "static-size-pet-review-v2-light.png",
+    "full_pet_dark_review": "static-size-pet-review-v2-dark.png",
+    "head_lock_audit": "heart-body-lock-audit-v2.json",
+    "cell": [
+      448,
+      640
+    ],
+    "display": [
+      224,
+      320
+    ],
+    "body_repairs": [
+      "A04",
+      "A06",
+      "A07",
+      "A11",
+      "A12",
+      "A14",
+      "A15"
+    ],
+    "ran_positions_2x": {
+      "A06": [
+        360,
+        330
+      ],
+      "A07": [
+        360,
+        344
+      ],
+      "A14": [
+        360,
+        330
+      ],
+      "A15": [
+        360,
+        290
+      ]
+    },
+    "installed": false,
+    "focus_review": "heart-school-size-comparison-v2-light.png",
+    "verification": "heart-size-verification-v2.json",
+    "body_gate": {
+      "reference_id": "A01",
+      "max_eye_error_2x": 1,
+      "max_paw_error_2x": 0,
+      "anchors": {
+        "A06": {
+          "eye_offset_2x": 0,
+          "paw_offset_2x": 0
+        },
+        "A07": {
+          "eye_offset_2x": 10,
+          "paw_offset_2x": 0
+        },
+        "A14": {
+          "eye_offset_2x": 0,
+          "paw_offset_2x": 0
+        },
+        "A15": {
+          "eye_offset_2x": -40,
+          "paw_offset_2x": -32
+        }
+      }
+    },
+    "scoped_clothing_repairs": {
+      "A02": "sleeve-repair-verification-v4.json"
+    },
+    "school_tailoring_version": "v4"
+  },
+  "quality_workflow_reference": {
+    "skill": "/Users/luxia/.codex/skills/retto-skin/SKILL.md",
+    "hana_costume_master": "/Users/luxia/.codex/worktrees/7bab/retto/tools/hana-skin/costume-master.md",
+    "hana_registration": "/Users/luxia/.codex/worktrees/7bab/retto/tools/hana-skin/register-drag-gait.py",
+    "actual_hana_material_reference": "reference/hana-material-reference.png",
+    "current_stage": "autonomous full motion production after approved idle/right gait; left gait internally reviewed",
+    "size_authority": "compact approved school A01 body; Hana is material/workflow reference only",
+    "required_body_checks": [
+      "ground contact",
+      "hip/body center",
+      "torso/leg proportions",
+      "head/eyes/muzzle/chin",
+      "tail attachment",
+      "four named limbs"
+    ],
+    "reject_face_only_size_pass": true,
+    "preserve_approved_design_during_geometry_repairs": true,
+    "minimum_motion_drawings_per_state": 16,
+    "motion_and_native_checks_not_claimed": true
+  },
+  "authorization": "user: 나 집에 돌려놓고 갈거라서. 이제 나한테 묻지말고 일단 쭉 만들어. 포즈는 캐릭캐릭체인지랑 꼭 어울리게!",
+  "delivery_status": "complete artwork/native preparation; unified review ready; not installed",
+  "full_motion_plan": "full-motion-plan.json",
+  "unified_preview": "preview-full.html",
+  "native_validation": "native/verification.json",
+  "validation": "validation-all.json",
+  "user_review": "initial idle/right accepted; remaining states internally reviewed under autonomous authorization",
+  "partner_interaction": {
+    "status": "complete; native and browser review",
+    "source_queue": "motion/queue-ran-interactions-v1.json",
+    "contract": "interaction/plan.json",
+    "new_drawings": 16,
+    "shared_existing_sleep_drawings": 8,
+    "preserved": "character/gaze/partner sources and character atlas remain unchanged; ambient effects replaced in effects-v2"
+  },
+  "effects_v2": {
+    "status": "native/browser ready",
+    "ambient_samples": 1600,
+    "pose_accents": true,
+    "states_labelled": 10,
+    "protected_character_gaze_partner_images": 224,
+    "installed": false,
+    "visibility_revision": "v3"
+  }
+}

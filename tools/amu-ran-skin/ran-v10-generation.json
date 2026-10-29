@@ -1,0 +1,18 @@
+{
+  "tool": "built-in image_gen.imagegen",
+  "stage": "companion-only-material-and-volume-revision",
+  "user_request": "란도 하나, 핀처럼 개선해줘",
+  "edit_target": "reference/ran-neutral-source.png",
+  "references": [
+    "reference/fin-material-reference.png",
+    "reference/hana-material-reference.png"
+  ],
+  "fin_reference_original": "tools/jeanne-skin/master-v47/neutral-master.png",
+  "output": "reference/ran-sculpted-v10-source.png",
+  "prompt": "Create ONE independent updated RAN companion sprite by editing image1. Keep Ran's recognizable identity and costume from image1, but translate the flat applique/printed illustration into a soft volumetric 3D pet companion with the same refined tactile quality as the tiny fairies in image2 Finn and image3 Toto. Image1 is RAN IDENTITY/DESIGN; image2 ONLY Finn's small sculpted fairy materials/volume; image3 ONLY Toto's big-head tiny-body companion proportions and short soft fur/felt. Output RAN ONLY, NO CAT, no other fairy. Preserve pink bob haircut and high viewer-right side ponytail, white sport visor with red edge and a single red heart on viewer-right, pink eyes, small warm smile, white/pink cheer dress with red trim and red neck scarf, small pink heart pompons in BOTH actual hands, tiny red/white shoes. Redesign materials/volume: rounded soft peach face with gentle 3D cheeks and tiny button nose, clear pink irises and small natural highlights like Finn, thin subtle eyelid/lash definition rather than thick printed black anime lines; short soft flocked pink hair forming rounded dimensional clumps/bangs and a softly curved pink ponytail, not flat sharp felt slabs or shiny human wig strands. Head large and round, body VERY SMALL and compact, exactly two tiny attached arms holding pompons and two tiny attached legs; all limbs anatomically accounted for. Match tiny fairy feel of Finn/Toto; friendly guardian pet, not a realistic human child or doll with long adult body. White costume is soft matte felt with simple rounded pleats and red edges, no fine stitching or noisy embroidery. Pompoms are rounded clusters of soft pink strips with a few clear red hearts, not giant balls that hide the hands/body. Keep both eyes open, gently cheerful floating pose, full body visible. NO extra wings (Ran does not have Finn wings), no green/gold hair, no halo, no cat ears/tail, no pearls/jewels except original visor heart, no egg, no new accessory. Single companion on genuine transparent background with generous margin all sides, no text, no floor/particles/effects. Must remain legible as a 40-45px tall companion and harmonize with short-fur matte-felt Retto. Same design vocabulary as Ran, sculpted dimensional material quality of Finn/Toto.",
+  "approved_retto_redrawn": false,
+  "scope_audit": "ran-v10-scope-audit.json",
+  "composition": "pet-composition-v10.json",
+  "production_ready": false,
+  "installed": false
+}

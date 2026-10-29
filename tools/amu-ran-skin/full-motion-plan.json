@@ -1,0 +1,142 @@
+{
+  "authorization": "autonomous complete remaining production; no intermediate user approval questions",
+  "native_installation_authorized": false,
+  "finished_art": [
+    "idle-v2",
+    "drag-right-v1",
+    "drag-left-v1",
+    "waving-v1",
+    "jumping-v1",
+    "failed-v1",
+    "waiting-v1",
+    "running-v1",
+    "review-v1",
+    "sleeping-v1"
+  ],
+  "active": [],
+  "remaining_states": [
+    {
+      "id": "waving",
+      "row": 3,
+      "costume": "heart",
+      "seconds": 2.4,
+      "theme": "Amulet Heart confident actual-paw cheer with Ran; cape/egg/plume follow through; no generic human wave",
+      "retained_keys": {
+        "F00": "registered-static-v2/A06.png",
+        "F08": "registered-static-v2/A14.png"
+      }
+    },
+    {
+      "id": "jumping",
+      "row": 4,
+      "costume": "heart",
+      "seconds": 2.4,
+      "theme": "Amulet Heart short athletic cheer hop, actual hindleg push-off, compact airborne four-limb cat, soft landing",
+      "retained_keys": {
+        "F00": "registered-static-v2/A07.png",
+        "F08": "registered-static-v2/A15.png"
+      },
+      "lowest_paw_targets_2x": [
+        629,
+        629,
+        629,
+        625,
+        600,
+        575,
+        550,
+        540,
+        540,
+        550,
+        570,
+        600,
+        629,
+        629,
+        629,
+        629
+      ]
+    },
+    {
+      "id": "failed",
+      "row": 5,
+      "costume": "school",
+      "seconds": 3.2,
+      "theme": "Amu brief startled pout/ears, glance toward Ran, reassuring small fist-up then recover confidently"
+    },
+    {
+      "id": "waiting",
+      "row": 6,
+      "costume": "school",
+      "seconds": 3.2,
+      "theme": "Amu cool stance; right paw crosses to tap actual left red armband, glance to Ran then settle"
+    },
+    {
+      "id": "running",
+      "row": 7,
+      "costume": "school",
+      "seconds": 2.4,
+      "theme": "Amu heart-unlock preparation: actual right forepaw on center heart/tie, other foreleg planted, short compact body; focused then outward release toward Ran"
+    },
+    {
+      "id": "review",
+      "row": 8,
+      "costume": "school",
+      "seconds": 3.2,
+      "theme": "Lean slightly to inspect Ran heart charm, gently tap with an actual paw, look back up; original head volume preserved"
+    },
+    {
+      "id": "sleeping",
+      "row": 11,
+      "costume": "school",
+      "seconds": 6.4,
+      "theme": "Amu curled beside resting Ran, tiny paw tuck and ear/eyelid/tail settling, genuine independent sleep drawings"
+    }
+  ],
+  "gaze": {
+    "school": {
+      "row": 9,
+      "directions": 16,
+      "path": "motion/gaze-school-v2"
+    },
+    "heart": {
+      "row": 10,
+      "directions": 16,
+      "path": "motion/gaze-heart-v2"
+    },
+    "finished": 32,
+    "construction": "independent complete-body drawings from original Retto seated gaze cells; no head/body grafting",
+    "pose_group": {
+      "profile": "original seated gaze, each original direction retains its head pitch/yaw and natural neck/chest connection",
+      "registration": "uniform whole-source scale from fur ear-top to grounded toes; translate by forepaw center and baseline; headgear excluded",
+      "body_pixel_lock": false,
+      "reason": "user rejected isolated-head compositing; rebuild the entire character from original poses"
+    },
+    "source_queue": "motion/queue-gaze-full-body-v2.json",
+    "supersedes": "v1 isolated-head/body composite"
+  },
+  "delivery": "all independent states+32 gaze, per-state GIFs, unified interactive motion board, atlas/native cells and isolated native verification; no install/push/PR without request",
+  "quality": "16 distinct whole-character drawings per state, anatomy/inbetween/seam checks, separate elapsed-time effects, original identity/proportion diagnostics retained honestly",
+  "native_validation": "native/verification.json",
+  "delivery_status": "all artwork, layers, GIF exports, unified preview, atlas and isolated native validation ready; not installed",
+  "partner_interaction": {
+    "contract": "interaction/plan.json",
+    "states": 10,
+    "new_independent_ran_poses": 16,
+    "active_ran_poses": 24,
+    "cat_and_gaze_cells": "unchanged",
+    "clock": "state-relative character epoch plus independent breathing",
+    "export": "interaction/export.py",
+    "validation": "interaction/validation.json"
+  },
+  "effects": {
+    "status": "completed-v2",
+    "ambient_layers": "1600 independent back/front PNG samples",
+    "clock": "8s loop,10Hz; continues during gaze/holds",
+    "gesture_accents": "pose-relative hand/cuff hearts,armband signal,charm glints and jump landing ring",
+    "source": "effects/build.py",
+    "accent_contract": "interaction/plan.json effects",
+    "state_labels": "review-config.json stateTitle/stateNote from animationCatalog",
+    "validation": "effects/validation.json",
+    "visibility": "v3: larger hearts/sparkles, more saturated pink, stronger glow; pose/partner timing unchanged",
+    "visibility_validation": "effects/visibility-v3.json"
+  }
+}

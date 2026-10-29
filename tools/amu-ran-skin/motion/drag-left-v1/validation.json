@@ -1,0 +1,278 @@
+{
+  "scope": "one leftward movement review GIF",
+  "source_count": 16,
+  "reused_or_reversed_filler": 0,
+  "motion_regional_grafts": 0,
+  "original_pose_authority": "actual assets/spritesheet.webp row2 eight original poses; independent half-step drawings",
+  "strict_original_landmark_certification": false,
+  "checks": [
+    {
+      "id": "F00",
+      "original_profile": [
+        0
+      ],
+      "face_span_error_2x": 0.5,
+      "eye_y_residual_2x": -2.258,
+      "lowest_paw_residual_2x": -1,
+      "visible_bounds": [
+        41,
+        273,
+        413,
+        590
+      ],
+      "max_edge_alpha": 0
+    },
+    {
+      "id": "F01",
+      "original_profile": [
+        0,
+        1
+      ],
+      "face_span_error_2x": 0.5,
+      "eye_y_residual_2x": 1.967,
+      "lowest_paw_residual_2x": 0.0,
+      "visible_bounds": [
+        37,
+        297,
+        417,
+        597
+      ],
+      "max_edge_alpha": 0
+    },
+    {
+      "id": "F02",
+      "original_profile": [
+        1
+      ],
+      "face_span_error_2x": 0.0,
+      "eye_y_residual_2x": 2.642,
+      "lowest_paw_residual_2x": 0,
+      "visible_bounds": [
+        41,
+        272,
+        416,
+        604
+      ],
+      "max_edge_alpha": 0
+    },
+    {
+      "id": "F03",
+      "original_profile": [
+        1,
+        2
+      ],
+      "face_span_error_2x": 0.5,
+      "eye_y_residual_2x": 6.004,
+      "lowest_paw_residual_2x": 0.0,
+      "visible_bounds": [
+        36,
+        294,
+        419,
+        592
+      ],
+      "max_edge_alpha": 0
+    },
+    {
+      "id": "F04",
+      "original_profile": [
+        2
+      ],
+      "face_span_error_2x": 0.0,
+      "eye_y_residual_2x": 0.556,
+      "lowest_paw_residual_2x": 0,
+      "visible_bounds": [
+        39,
+        281,
+        412,
+        580
+      ],
+      "max_edge_alpha": 1
+    },
+    {
+      "id": "F05",
+      "original_profile": [
+        2,
+        3
+      ],
+      "face_span_error_2x": 1.0,
+      "eye_y_residual_2x": -0.303,
+      "lowest_paw_residual_2x": -0.647013995850898,
+      "visible_bounds": [
+        49,
+        261,
+        376,
+        570
+      ],
+      "max_edge_alpha": 0
+    },
+    {
+      "id": "F06",
+      "original_profile": [
+        3
+      ],
+      "face_span_error_2x": -1.0,
+      "eye_y_residual_2x": 0.242,
+      "lowest_paw_residual_2x": 0,
+      "visible_bounds": [
+        40,
+        239,
+        413,
+        622
+      ],
+      "max_edge_alpha": 0
+    },
+    {
+      "id": "F07",
+      "original_profile": [
+        3,
+        4
+      ],
+      "face_span_error_2x": 0.25,
+      "eye_y_residual_2x": -2.447,
+      "lowest_paw_residual_2x": -1.0,
+      "visible_bounds": [
+        38,
+        255,
+        416,
+        617
+      ],
+      "max_edge_alpha": 0
+    },
+    {
+      "id": "F08",
+      "original_profile": [
+        4
+      ],
+      "face_span_error_2x": 0.0,
+      "eye_y_residual_2x": 2.998,
+      "lowest_paw_residual_2x": 0,
+      "visible_bounds": [
+        41,
+        254,
+        409,
+        614
+      ],
+      "max_edge_alpha": 0
+    },
+    {
+      "id": "F09",
+      "original_profile": [
+        4,
+        5
+      ],
+      "face_span_error_2x": -0.75,
+      "eye_y_residual_2x": -3.934,
+      "lowest_paw_residual_2x": 0.0,
+      "visible_bounds": [
+        32,
+        260,
+        436,
+        614
+      ],
+      "max_edge_alpha": 0
+    },
+    {
+      "id": "F10",
+      "original_profile": [
+        5
+      ],
+      "face_span_error_2x": 0.0,
+      "eye_y_residual_2x": 3.738,
+      "lowest_paw_residual_2x": -1,
+      "visible_bounds": [
+        41,
+        258,
+        409,
+        614
+      ],
+      "max_edge_alpha": 0
+    },
+    {
+      "id": "F11",
+      "original_profile": [
+        5,
+        6
+      ],
+      "face_span_error_2x": -1.0,
+      "eye_y_residual_2x": -7.697,
+      "lowest_paw_residual_2x": -1.0,
+      "visible_bounds": [
+        43,
+        252,
+        440,
+        610
+      ],
+      "max_edge_alpha": 0
+    },
+    {
+      "id": "F12",
+      "original_profile": [
+        6
+      ],
+      "face_span_error_2x": 0.5,
+      "eye_y_residual_2x": 12.569,
+      "lowest_paw_residual_2x": 0,
+      "visible_bounds": [
+        43,
+        277,
+        395,
+        608
+      ],
+      "max_edge_alpha": 1
+    },
+    {
+      "id": "F13",
+      "original_profile": [
+        6,
+        7
+      ],
+      "face_span_error_2x": -0.5,
+      "eye_y_residual_2x": -5.189,
+      "lowest_paw_residual_2x": -1.0,
+      "visible_bounds": [
+        41,
+        259,
+        437,
+        602
+      ],
+      "max_edge_alpha": 0
+    },
+    {
+      "id": "F14",
+      "original_profile": [
+        7
+      ],
+      "face_span_error_2x": -1.0,
+      "eye_y_residual_2x": -0.729,
+      "lowest_paw_residual_2x": 0,
+      "visible_bounds": [
+        39,
+        265,
+        409,
+        598
+      ],
+      "max_edge_alpha": 0
+    },
+    {
+      "id": "F15",
+      "original_profile": [
+        7,
+        0
+      ],
+      "face_span_error_2x": -0.5,
+      "eye_y_residual_2x": -2.522,
+      "lowest_paw_residual_2x": -1.0,
+      "visible_bounds": [
+        49,
+        274,
+        444,
+        593
+      ],
+      "max_edge_alpha": 0
+    }
+  ],
+  "decoded_character_count": 16,
+  "passed": "source locks, unique decoded drawings, whole-cell integrity, visible bounds, ground/air lowest-paw levels, both GIF durations",
+  "visual_review": "all16 final cells light/dark1x and browser render reviewed; keep original face/eye diagnostics separate from structural checks",
+  "installed": false
+}

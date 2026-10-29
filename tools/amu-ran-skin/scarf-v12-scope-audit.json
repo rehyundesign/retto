@@ -1,0 +1,58 @@
+{
+  "base": "anchors/idle-heart-cape-pose-v9-source.png",
+  "edit": "anchors/idle-heart-scarf-v12-edit-source.png",
+  "output": "anchors/idle-heart-scarf-v12-character.png",
+  "allowed_polygon": [
+    [
+      330,
+      750
+    ],
+    [
+      700,
+      750
+    ],
+    [
+      700,
+      915
+    ],
+    [
+      590,
+      930
+    ],
+    [
+      575,
+      985
+    ],
+    [
+      405,
+      985
+    ],
+    [
+      395,
+      925
+    ],
+    [
+      330,
+      910
+    ]
+  ],
+  "mask": "scarf-v12-edit-mask.png",
+  "canvas": [
+    1049,
+    1500
+  ],
+  "changed_outside_requested_zone": 0,
+  "changed_inside_requested_zone": 75097,
+  "protected_face_region": [
+    0,
+    0,
+    1049,
+    748
+  ],
+  "protected_face_changed": false,
+  "base_sha256": "0ed91b021ad472f22b6767a255d617f5c197f96c3686c6b934f6ef0b5be000ca",
+  "output_sha256": "859ee4d84e946703ea2afeba161d81cb40e385dc9bc2cbef00cc2ca0c9bf1382",
+  "review": "center red scarf knot, egg connected to knot, no separate pink necklace cord; approved art restored outside local zone",
+  "production_ready": false,
+  "installed": false
+}

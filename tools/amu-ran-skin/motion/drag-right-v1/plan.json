@@ -1,0 +1,124 @@
+{
+  "state": "drag-right",
+  "row": 1,
+  "version": "v1",
+  "scope": "one GIF, then user review; no left direction or installation",
+  "cat_cycle_seconds": 1.6,
+  "distinct_drawings": 16,
+  "hold_ms": 100,
+  "reference": "8 actual original atlas row1 poses plus 8 independently drawn anatomical inbetweens; no repeated/reversed filler",
+  "costume_master": "../idle-v2/reference/costume-master.png",
+  "clothing": "approved short school blazer, red tie, hip plaid skirt, far-side left-foreleg red shield armband, pink left-ear X clip",
+  "pose_groups": "each original row1 pose is its own gait profile; odd cells interpolate actual adjacent gait poses",
+  "layer_order": [
+    "effect_back",
+    "complete_character",
+    "Ran",
+    "effect_front"
+  ],
+  "limbs": {
+    "front_right": "near side; original supported/lifted pose",
+    "front_left": "far side, partly occluded by near foreleg/chest; red armband",
+    "rear_right": "near rear leg, original hip and foot pose",
+    "rear_left": "far rear leg, original pelvis/near hindleg occluder"
+  },
+  "registration": "uniform whole-character scaling and translation only; original pose head geometry, body pitch, ground/air phase, tail attachment checked; no head or torso motion grafts",
+  "sources": [
+    {
+      "id": "F00",
+      "original_pose": 0,
+      "next_original_pose": 0,
+      "phase": "actual original key pose"
+    },
+    {
+      "id": "F01",
+      "original_pose": 0,
+      "next_original_pose": 1,
+      "phase": "independent anatomical midpoint"
+    },
+    {
+      "id": "F02",
+      "original_pose": 1,
+      "next_original_pose": 1,
+      "phase": "actual original key pose"
+    },
+    {
+      "id": "F03",
+      "original_pose": 1,
+      "next_original_pose": 2,
+      "phase": "independent anatomical midpoint"
+    },
+    {
+      "id": "F04",
+      "original_pose": 2,
+      "next_original_pose": 2,
+      "phase": "actual original key pose"
+    },
+    {
+      "id": "F05",
+      "original_pose": 2,
+      "next_original_pose": 3,
+      "phase": "independent anatomical midpoint"
+    },
+    {
+      "id": "F06",
+      "original_pose": 3,
+      "next_original_pose": 3,
+      "phase": "actual original key pose"
+    },
+    {
+      "id": "F07",
+      "original_pose": 3,
+      "next_original_pose": 4,
+      "phase": "independent anatomical midpoint"
+    },
+    {
+      "id": "F08",
+      "original_pose": 4,
+      "next_original_pose": 4,
+      "phase": "actual original key pose"
+    },
+    {
+      "id": "F09",
+      "original_pose": 4,
+      "next_original_pose": 5,
+      "phase": "independent anatomical midpoint"
+    },
+    {
+      "id": "F10",
+      "original_pose": 5,
+      "next_original_pose": 5,
+      "phase": "actual original key pose"
+    },
+    {
+      "id": "F11",
+      "original_pose": 5,
+      "next_original_pose": 6,
+      "phase": "independent anatomical midpoint"
+    },
+    {
+      "id": "F12",
+      "original_pose": 6,
+      "next_original_pose": 6,
+      "phase": "actual original key pose"
+    },
+    {
+      "id": "F13",
+      "original_pose": 6,
+      "next_original_pose": 7,
+      "phase": "independent anatomical midpoint"
+    },
+    {
+      "id": "F14",
+      "original_pose": 7,
+      "next_original_pose": 7,
+      "phase": "actual original key pose"
+    },
+    {
+      "id": "F15",
+      "original_pose": 7,
+      "next_original_pose": 0,
+      "phase": "independent anatomical midpoint"
+    }
+  ]
+}

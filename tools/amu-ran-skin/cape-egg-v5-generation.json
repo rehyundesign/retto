@@ -1,0 +1,24 @@
+{
+  "tool": "built-in image_gen.imagegen",
+  "kind": "scoped-upper-costume-revision",
+  "status": "design-candidate",
+  "production_ready": false,
+  "stages": [
+    {
+      "input": "anchors/idle-heart-ornate-v3-source.png",
+      "output": "anchors/idle-heart-cape-v4-source.png",
+      "prompt": "Make a precise local clothing edit to IMAGE1. Change ONLY its UPPER TORSO GARMENT into a short draped magical CAPELET like Hana's cape in image2. REMOVE the fitted pink corset/bodice and its lower peplum panel entirely; expose natural white chest fur below the cape, as in Hana. The new cape should be ONE coherent wearable white-and-blush-pink shoulder mantle: rounded petal/scalloped panels gently drape from the neck over shoulders and upper back, layered soft pink lining and thin cherry-red edging. It closes at upper center chest with the existing red ribbon and red heart jewel; two short elegant cape front tips hang below the jewel. Do not make a human blouse, corset, vest or bust-shaped bodice. Keep the same overall ornate magical cheerleader design, soft cloth/felt volume and trim richness. IMAGE2 supplies ONLY the cape construction, not color/identity/hat/wings. KEEP IMAGE1 face, blue eyes, fur markings, head size, body size, original transparent canvas framing and character position EXACTLY unchanged. KEEP visor and all its ruffles/heart/ribbon EXACTLY unchanged. KEEP hip skirt, two tiers, side hip bow, tails, wrist cuffs, all existing paws and single brown tail unchanged. No extra limbs: exactly four cat legs, with far rear leg occluded by torso. No new companion, no effects, no text. This is an UPPER CLOTHING ONLY revision; preserve all other art and composition. Transparent background, same portrait canvas and same cat size. A capelet on a cat with white chest fur below it, like Hana."
+    },
+    {
+      "input": "anchors/idle-heart-cape-v4-source.png",
+      "reference": "reference/guardian-egg-user-reference.jpg",
+      "output": "anchors/idle-heart-cape-egg-v5-source.png",
+      "prompt": "Precise LOCAL EDIT to image1: replace ONLY the red neck bow and heart-shaped jewel clasp at center chest with a hanging Guardian Egg pendant based faithfully on image2. REMOVE the entire neck bow, both ribbon loops and ribbon tails, heart gem and pearl heart frame. In their place hang ONE small but clearly readable egg-shaped pendant from a thin pink/ivory cord or short necklace coming naturally from both sides of neck above cape. Egg design EXACTLY image2: upright egg silhouette, pink tartan/plaid top and bottom, wide BLACK horizontal center band with one prominent PINK HEART facing forward, rows of tiny black hearts along plaid edges. Keep egg identity and strong pink/black contrast. It is an actual small 3D egg, not a heart gem, oval jewel, flat badge or open/cracked egg. Pendant size roughly 40% of the cat face width, hanging just below cape neckline centered on white chest fur, weight supported by visible small loop/cord. Soft tactile smooth painted pendant, matching cloth/fur render. Preserve image1 short scalloped white/pink shoulder CAPELET exactly, exposed white chest fur below, no fitted bodice. KEEP EXACTLY image1 face, eyes, fur, ears, head/body size, pose, canvas framing and transparent background, visor, skirt and hip bow, wrist/ankle cuffs, paws and tail. Do not change heart shapes on visor, hip bow or cuffs: only NECK bow/jewel is replaced. Exactly FOUR cat limbs, no extra paws, no floating/detached parts. No companion, no particles, no background, no text. Image2 is design reference for the small necklace egg ONLY; do not copy photo background."
+    }
+  ],
+  "preserved_sources": [
+    "anchors/idle-school-source.png",
+    "reference/ran-neutral-source.png"
+  ],
+  "strict_ai_edited_outside_scope_pixel_equality": "not certified"
+}

@@ -1,0 +1,132 @@
+{
+  "state": "drag-left",
+  "row": 2,
+  "scope": "one review GIF only; user approved rightward movement",
+  "distinct_drawings": 16,
+  "character_cycle_seconds": 1.6,
+  "drawing_hold_ms": 100,
+  "pose_authority": "eight actual original row2 cells plus eight independent anatomical inbetweens",
+  "art_direction": "approved school uniform from idle/right movement; no flipped rightward artwork",
+  "asymmetry": {
+    "anatomical_left_foreleg": "NEAR foreleg in left-facing view; red shield armband around actual upper sleeve",
+    "anatomical_right_foreleg": "far sleeve plain black",
+    "pink_X": "anatomical left ear, NEAR ear in left-facing view"
+  },
+  "limbs": [
+    "front_left near",
+    "front_right far, chest/near foreleg occluder",
+    "rear_left near",
+    "rear_right far, pelvis/near hindleg occluder"
+  ],
+  "layer_order": [
+    "effect_back",
+    "whole_character",
+    "Ran",
+    "effect_front"
+  ],
+  "sources": [
+    {
+      "id": "F00",
+      "original_pose": 0,
+      "next_original": 0,
+      "type": "independent costume try-on of actual original gait"
+    },
+    {
+      "id": "F01",
+      "original_pose": 0,
+      "next_original": 1,
+      "type": "independent midpoint"
+    },
+    {
+      "id": "F02",
+      "original_pose": 1,
+      "next_original": 1,
+      "type": "independent costume try-on of actual original gait"
+    },
+    {
+      "id": "F03",
+      "original_pose": 1,
+      "next_original": 2,
+      "type": "independent midpoint"
+    },
+    {
+      "id": "F04",
+      "original_pose": 2,
+      "next_original": 2,
+      "type": "independent costume try-on of actual original gait"
+    },
+    {
+      "id": "F05",
+      "original_pose": 2,
+      "next_original": 3,
+      "type": "independent midpoint"
+    },
+    {
+      "id": "F06",
+      "original_pose": 3,
+      "next_original": 3,
+      "type": "independent costume try-on of actual original gait"
+    },
+    {
+      "id": "F07",
+      "original_pose": 3,
+      "next_original": 4,
+      "type": "independent midpoint"
+    },
+    {
+      "id": "F08",
+      "original_pose": 4,
+      "next_original": 4,
+      "type": "independent costume try-on of actual original gait"
+    },
+    {
+      "id": "F09",
+      "original_pose": 4,
+      "next_original": 5,
+      "type": "independent midpoint"
+    },
+    {
+      "id": "F10",
+      "original_pose": 5,
+      "next_original": 5,
+      "type": "independent costume try-on of actual original gait"
+    },
+    {
+      "id": "F11",
+      "original_pose": 5,
+      "next_original": 6,
+      "type": "independent midpoint"
+    },
+    {
+      "id": "F12",
+      "original_pose": 6,
+      "next_original": 6,
+      "type": "independent costume try-on of actual original gait"
+    },
+    {
+      "id": "F13",
+      "original_pose": 6,
+      "next_original": 7,
+      "type": "independent midpoint"
+    },
+    {
+      "id": "F14",
+      "original_pose": 7,
+      "next_original": 7,
+      "type": "independent costume try-on of actual original gait"
+    },
+    {
+      "id": "F15",
+      "original_pose": 7,
+      "next_original": 0,
+      "type": "independent midpoint"
+    }
+  ],
+  "native_changed": false,
+  "installed": false,
+  "midpoint_foot_targets_2x": {},
+  "midpoint_foot_profile_reason": "F05 is airborne: the lowest limb switches from rear toe in key2 to forepaw in key3. Interpolate each limb trajectory first (front about576, rear about560); the max of endpoint silhouettes (601) is not the physical midpoint sole position.",
+  "registration_anchor_overrides": {
+    "F05": "original midpoint eye; airborne paw height derived from independently generated anatomical pose"
+  }
+}

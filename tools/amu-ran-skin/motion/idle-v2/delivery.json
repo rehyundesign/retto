@@ -1,0 +1,41 @@
+{
+  "state": "idle",
+  "version": "v2",
+  "review_status": "accepted to proceed by user: \uc624 \ub0ab\ubc30\ub4dc \uc77c\ub2e8 \ub2e4\uc74c",
+  "action": "cool casual tie adjustment; actual foreleg/shoulder/sleeve movement; glance at Ran; lower and settle",
+  "character_drawings": 16,
+  "unique_source_sha256": 16,
+  "unique_decoded_characters": 16,
+  "repeated_or_reversed_filler": 0,
+  "complete_generated_motion_cells_without_regional_patches": 15,
+  "static_master_original_proportion_fix": "master-registration.json",
+  "cat_cycle_seconds": 3.2,
+  "cat_interval_seconds": 0.2,
+  "pet_independent_drawings": 8,
+  "effects_period_seconds": 8,
+  "effects_samples_per_layer": 80,
+  "effects_hz": 10,
+  "gif_period_seconds": 16,
+  "display": [
+    224,
+    320
+  ],
+  "character_sources_locked": true,
+  "frozen_character_effect_clock_verified": true,
+  "native_changed": true,
+  "installed": false,
+  "next_state_started": false,
+  "visual_review": {
+    "reviewed": "16-cell runtime-scale light/dark boards; browser at 224x320 with effects visible and hidden",
+    "reference": "actual original Retto idle proportions and Hana idle cadence/material",
+    "costume": "short blazer, attached bent sleeve/cuff, hip skirt, red upper-foreleg armband; no hanging empty raised-side sleeve",
+    "motion": "tie-adjustment candidate with small glance and blink; user naturalness judgment pending",
+    "original_size": "228px cheek target at 2x; eye-to-floor stature within 6px at 2x; planted forepaw within 1.5px at 2x",
+    "limit": "whole independent drawings retain small fur/fabric variation; this is a review GIF, not production atlas certification"
+  },
+  "partner_interaction": "../../interaction/plan.json",
+  "partner_source_drawings": 8,
+  "partner_poses": "right8 independent interaction poses",
+  "partner_clock": "character pose epoch; independent breathing during holds",
+  "gif_sampling_hz": 20
+}

@@ -1,0 +1,44 @@
+[
+  {
+    "id": "A04",
+    "frozen_input": "size-repair-input-v1/A04.png",
+    "frozen_input_sha256": "3a3d9a5507dad5925652ea25380f7e2122e08b51acec3a50fe7d2cf48b9facae",
+    "independent_body_edit": "anchors/A04-compact-body-edit-v1.png",
+    "head_translation_2x": [
+      0,
+      44
+    ],
+    "changed_protected_head_pixels": 0,
+    "blend": "2px feather following the head/neck contour; jacket, raised paw and tail excluded",
+    "output": "anchors/A04-compact-body-locked-v1.png",
+    "body_scale": 0.9764453961456103
+  },
+  {
+    "id": "A11",
+    "frozen_input": "size-repair-input-v1/A11.png",
+    "frozen_input_sha256": "e7af1b8d20b04a1a41ab1c7988885c776882138b0b990a31f056af6c4f7d6444",
+    "independent_body_edit": "anchors/A11-compact-body-edit-v1.png",
+    "head_translation_2x": [
+      0,
+      40
+    ],
+    "changed_protected_head_pixels": 0,
+    "blend": "2px feather following the head/neck contour; jacket, raised paw and tail excluded",
+    "output": "anchors/A11-compact-body-locked-v1.png",
+    "body_scale": 0.9743589743589743
+  },
+  {
+    "id": "A12",
+    "frozen_input": "size-repair-input-v1/A12.png",
+    "frozen_input_sha256": "3f071cee72228ece8b9326868a04cac83c66596f46f0ea14bea4af868393f636",
+    "independent_body_edit": "anchors/A12-compact-body-edit-v1.png",
+    "head_translation_2x": [
+      0,
+      31
+    ],
+    "changed_protected_head_pixels": 0,
+    "blend": "2px feather following the head/neck contour; jacket, raised paw and tail excluded",
+    "output": "anchors/A12-compact-body-locked-v1.png",
+    "body_scale": 0.9743589743589743
+  }
+]

@@ -1,0 +1,44 @@
+{
+  "baseline": "baseline-v2",
+  "samples": [
+    {
+      "state": "idle-v2",
+      "layer": "back",
+      "white_background_contrast_energy_ratio": 5.303,
+      "dark_background_light_energy_ratio": 5.888
+    },
+    {
+      "state": "idle-v2",
+      "layer": "front",
+      "white_background_contrast_energy_ratio": 5.326,
+      "dark_background_light_energy_ratio": 5.097
+    },
+    {
+      "state": "waving-v1",
+      "layer": "back",
+      "white_background_contrast_energy_ratio": 1.301,
+      "dark_background_light_energy_ratio": 1.317
+    },
+    {
+      "state": "waving-v1",
+      "layer": "front",
+      "white_background_contrast_energy_ratio": 3.141,
+      "dark_background_light_energy_ratio": 3.103
+    },
+    {
+      "state": "waiting-v1",
+      "layer": "back",
+      "white_background_contrast_energy_ratio": 5.303,
+      "dark_background_light_energy_ratio": 5.888
+    },
+    {
+      "state": "waiting-v1",
+      "layer": "front",
+      "white_background_contrast_energy_ratio": 5.326,
+      "dark_background_light_energy_ratio": 5.097
+    }
+  ],
+  "character_pose_timing_unchanged": true,
+  "ambient_period_seconds": 8,
+  "installed": false
+}

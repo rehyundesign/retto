@@ -1,0 +1,25 @@
+{
+  "scope": "gaze only",
+  "changed_runtime_cells": 32,
+  "unchanged_runtime_resources": 1776,
+  "complete_source_integrity": "verified by validate-all.py",
+  "registration": "original pose-specific seated stature and foot anchors",
+  "generator": "built-in image_gen",
+  "prompt_set": "motion/queue-gaze-full-body-v2.json",
+  "visual_review": "all32 native cells inspected at1x,light and dark",
+  "installed": false,
+  "browser_review": {
+    "url": "http://127.0.0.1:8773/preview-full.html",
+    "directions_exercised": [
+      4,
+      8,
+      12
+    ],
+    "backgrounds": [
+      "light",
+      "dark"
+    ],
+    "companion_and_effects_continue": true
+  },
+  "native_validation": "native/verification.json"
+}

@@ -1,0 +1,11 @@
+{
+  "id": "R00",
+  "side": "right",
+  "pose": 0,
+  "action": "attentive listening hover, small smile, both pompoms low, eyes gently looking toward the cat beside her",
+  "prompt": "Use case: identity-preserve. ONE independent full-body transparent game sprite of the EXACT small Ran fairy from reference, no cat, no sheet. Preserve her sculpted felt3D identity/material, pink eyes, pink bob and single side ponytail, white/red visor with ONE heart, red neck scarf, white/red cheer dress and sneakers, TWO pink heart-pattern pompoms. The fairy is positioned on the RIGHT side of a cat (cat outside output). Her entire head/eyes/body face screen LEFT in a readable three-quarter view toward that cat; no front-facing camera gaze. Action phase 0/8: attentive listening hover, small smile, both pompoms low, eyes gently looking toward the cat beside her. Clear anatomically drawn shoulders/elbows/hands, two arms each holding one pompom, two legs. Pompom arm nearest cat extends toward screen LEFT. Maintain head/body volume and consistent small fairy proportions, all hair/visor/shoes/pompoms inside generous transparent margin. Hair ornament stays on her anatomical LEFT side with natural occlusion when turned; never mirror the entire outfit. Fine matte felt fibres and soft studio lighting; no sparkles, letters, external prop or second character. Draw actual new gesture, not translation of a static fairy.",
+  "refs": [
+    "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/reference/ran-sculpted-v10-source.png"
+  ],
+  "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/ran-interaction-right-v1/requests/R00.json"
+}

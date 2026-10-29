@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="ko"><meta charset="utf-8"><title>아무 · 란 — 교복 기본 대기</title>
+<style>
+body{background:#fffdfa;color:#51444d;font:15px system-ui;margin:32px}h1{font-size:20px;font-weight:600}main{display:flex;gap:40px;align-items:flex-start}figure{margin:0}img{display:block;width:224px;height:320px}figcaption{margin:12px 0}button{font:inherit;padding:8px 14px;margin:8px 8px 16px 0;border:1px solid #d9cbd4;border-radius:8px;background:transparent;color:inherit}body.dark{background:#23232d;color:#f0e7ee}small{display:block;max-width:510px;line-height:1.7;margin-top:20px}
+</style>
+<h1>아무 · 란 — 교복 기본 대기</h1>
+<button id="theme">밝은 / 어두운 배경</button><button id="layers">캐릭터만 보기</button><button id="restart">처음부터</button>
+<main><figure><img id="current" src="idle-light.gif"><figcaption>현재 검토할 GIF · 실제 크기</figcaption></figure>
+<figure><img src="reference/hana-idle-3.2s.gif"><figcaption>하나 · 토토 참고 · 같은 3.2초 동작 주기</figcaption></figure></main>
+<small>고양이 16개 독립 동작 컷 · 한 바퀴 3.2초<br>란 8개 독립 자세 · 이펙트 8초 · 전체 GIF 반복 16초<br>정지 자세를 늘이거나 찌그러뜨린 동작 없음 · 앱 적용 전 검토본</small>
+<script>
+let dark=false,bare=false;const current=document.querySelector('#current');
+function update(){document.body.classList.toggle('dark',dark);current.src=(bare?'character-only-':'idle-')+(dark?'dark':'light')+'.gif?'+Date.now()}
+document.querySelector('#theme').onclick=()=>{dark=!dark;update()};
+document.querySelector('#layers').onclick=()=>{bare=!bare;update()};
+document.querySelector('#restart').onclick=update;
+</script></html>

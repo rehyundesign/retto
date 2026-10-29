@@ -1,0 +1,15 @@
+{
+  "scope": "Ran partner response only",
+  "existing_character_gaze_partner_hashes_preserved": 208,
+  "new_independent_partner_sources": 16,
+  "active_partner_sources": 24,
+  "retained_legacy_partner_sources": 8,
+  "new_data_contracts": 1,
+  "states": 10,
+  "bounded_samples_per_state": 1024,
+  "composite_loops": "pass",
+  "character_epoch_not_effect_epoch": "pass",
+  "held_gaze_partner_progression": "pass",
+  "visual_review": "16 poses, all10 composited states reviewed; native/browser review recorded separately",
+  "installed": false
+}

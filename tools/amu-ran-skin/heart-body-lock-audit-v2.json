@@ -1,0 +1,66 @@
+[
+  {
+    "id": "A06",
+    "independent_body_source": "anchors/A06-heart-compact-edit-v2.png",
+    "frozen_source": "heart-size-input-v2/A06.png",
+    "head_and_costume_translation_2x": [
+      0,
+      80
+    ],
+    "changed_protected_head_cape_scarf_egg_pixels": 0,
+    "body_uniform_scale": 0.987012987012987,
+    "body_translation_2x": [
+      -7.610389610389603,
+      20.98701298701303
+    ],
+    "output": "anchors/A06-heart-compact-locked-v2.png"
+  },
+  {
+    "id": "A07",
+    "independent_body_source": "anchors/A07-heart-compact-edit-v2.png",
+    "frozen_source": "heart-size-input-v2/A07.png",
+    "head_and_costume_translation_2x": [
+      0,
+      55
+    ],
+    "changed_protected_head_cape_scarf_egg_pixels": 0,
+    "body_uniform_scale": 0.9806451612903225,
+    "body_translation_2x": [
+      -10.36129032258063,
+      22.94193548387102
+    ],
+    "output": "anchors/A07-heart-compact-locked-v2.png"
+  },
+  {
+    "id": "A14",
+    "independent_body_source": "anchors/A14-heart-compact-edit-v2.png",
+    "frozen_source": "heart-size-input-v2/A14.png",
+    "head_and_costume_translation_2x": [
+      0,
+      70
+    ],
+    "changed_protected_head_cape_scarf_egg_pixels": 0,
+    "body_uniform_scale": 0.9785407725321889,
+    "body_translation_2x": [
+      -13.879828326180245,
+      34.025751072961384
+    ],
+    "output": "anchors/A14-heart-compact-locked-v2.png"
+  },
+  {
+    "id": "A15",
+    "independent_body_source": "anchors/A15-heart-compact-edit-v3.png",
+    "frozen_source": "heart-size-input-v2/A15.png",
+    "head_and_costume_translation_2x": [
+      0,
+      131
+    ],
+    "changed_protected_head_cape_scarf_egg_pixels": 0,
+    "body_uniform_scale": 0.9640591966173362,
+    "body_translation_2x": [
+      -24.59619450317126,
+      46.486257928118334
+    ],
+    "output": "anchors/A15-heart-compact-locked-v2.png"
+  }
+]

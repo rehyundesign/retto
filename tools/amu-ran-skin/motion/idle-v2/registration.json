@@ -1,0 +1,528 @@
+[
+  {
+    "id": "F00",
+    "source": "reference/costume-master.png",
+    "source_sha256": "c6549b03ed2e7478f38e83410ce55c80eec56932b862017577d40a56d736f114",
+    "after": {
+      "cheek_width": 228,
+      "head_center_x": 171.5,
+      "eye_line": 350.82269976574696,
+      "foot_baseline": 629,
+      "support_toe_x": 218.88550983899822
+    },
+    "static_master_proportion_fix": "master-registration.json",
+    "regional_grafts": "static <=3% body correction with face restored, not an animated cell patch",
+    "full_generated_body_preserved": true,
+    "head_or_body_warp": false
+  },
+  {
+    "id": "F01",
+    "source": "raw/F01.png",
+    "source_sha256": "1ba29d70224c0771b0068754bf481dfd3ffba2a0926945bb235feb8a29b07a1e",
+    "whole_source_uniform_scale": 0.41085542590290935,
+    "whole_source_translation": [
+      5.239483243010454,
+      43.12658227848101
+    ],
+    "contained_registration_scale": 0.9620253164556962,
+    "before": {
+      "cheek_width": 237,
+      "head_center_x": 175.5,
+      "eye_line": 326.1236487027546,
+      "foot_baseline": 609,
+      "support_toe_x": 222.07942238267148
+    },
+    "after": {
+      "cheek_width": 228,
+      "head_center_x": 174.5,
+      "eye_line": 357.1347811671087,
+      "foot_baseline": 630,
+      "support_toe_x": 218.74650698602795
+    },
+    "opaque_bounds": [
+      59,
+      241,
+      413,
+      631
+    ],
+    "regional_grafts": false,
+    "head_or_body_warp": false,
+    "full_generated_body_preserved": true
+  },
+  {
+    "id": "F02",
+    "source": "raw/F02.png",
+    "source_sha256": "76bc299c1a652fc22622a7835c5e57ce0d2d75e48f2cf90a457de6c71c5ef298",
+    "whole_source_uniform_scale": 0.41259633872453183,
+    "whole_source_translation": [
+      5.760657491664205,
+      40.644067796610216
+    ],
+    "contained_registration_scale": 0.9661016949152542,
+    "before": {
+      "cheek_width": 236,
+      "head_center_x": 171.5,
+      "eye_line": 327.0855828953655,
+      "foot_baseline": 609,
+      "support_toe_x": 220.6029173419773
+    },
+    "after": {
+      "cheek_width": 228,
+      "head_center_x": 171.5,
+      "eye_line": 355.9268481286731,
+      "foot_baseline": 630,
+      "support_toe_x": 218.99823633156967
+    },
+    "opaque_bounds": [
+      56,
+      244,
+      419,
+      631
+    ],
+    "regional_grafts": false,
+    "head_or_body_warp": false,
+    "full_generated_body_preserved": true
+  },
+  {
+    "id": "F03",
+    "source": "raw/F03.png",
+    "source_sha256": "701a6d8bce883f35471902e24fd844c782f62a000b5738495682b908c9baf28f",
+    "whole_source_uniform_scale": 0.42152699540688104,
+    "whole_source_translation": [
+      4.120610354920672,
+      9.155844155844193
+    ],
+    "contained_registration_scale": 0.987012987012987,
+    "before": {
+      "cheek_width": 231,
+      "head_center_x": 170.0,
+      "eye_line": 347.14365478849294,
+      "foot_baseline": 628,
+      "support_toe_x": 217.59075342465752
+    },
+    "after": {
+      "cheek_width": 227,
+      "head_center_x": 172.0,
+      "eye_line": 352.0213924138409,
+      "foot_baseline": 629,
+      "support_toe_x": 218.71125611745515
+    },
+    "opaque_bounds": [
+      57,
+      239,
+      420,
+      631
+    ],
+    "regional_grafts": false,
+    "head_or_body_warp": false,
+    "full_generated_body_preserved": true
+  },
+  {
+    "id": "F04",
+    "source": "raw/F04.png",
+    "source_sha256": "df73e015c722322f3dac826c025f951d2248a7d97e1d77901ca7b7a9ba11c913",
+    "whole_source_uniform_scale": 0.42335972147386747,
+    "whole_source_translation": [
+      -0.46992494361049353,
+      6.460869565217308
+    ],
+    "contained_registration_scale": 0.991304347826087,
+    "before": {
+      "cheek_width": 230,
+      "head_center_x": 173.5,
+      "eye_line": 351.42266579406635,
+      "foot_baseline": 628,
+      "support_toe_x": 221.2796052631579
+    },
+    "after": {
+      "cheek_width": 228,
+      "head_center_x": 171.5,
+      "eye_line": 355.3318407319116,
+      "foot_baseline": 630,
+      "support_toe_x": 218.82444061962133
+    },
+    "opaque_bounds": [
+      56,
+      242,
+      415,
+      631
+    ],
+    "regional_grafts": false,
+    "head_or_body_warp": false,
+    "full_generated_body_preserved": true
+  },
+  {
+    "id": "F05",
+    "source": "raw/F05.png",
+    "source_sha256": "0b335c210157567e725380c66d51909cdd3abeec1b0add461c5951d11808bcc1",
+    "whole_source_uniform_scale": 0.4161228031580748,
+    "whole_source_translation": [
+      1.9778505101170083,
+      18.076923076923094
+    ],
+    "contained_registration_scale": 0.9743589743589743,
+    "before": {
+      "cheek_width": 234,
+      "head_center_x": 172.5,
+      "eye_line": 347.72717331875344,
+      "foot_baseline": 627,
+      "support_toe_x": 222.61575562700966
+    },
+    "after": {
+      "cheek_width": 229,
+      "head_center_x": 170.0,
+      "eye_line": 357.22243849268136,
+      "foot_baseline": 630,
+      "support_toe_x": 218.86449399656948
+    },
+    "opaque_bounds": [
+      56,
+      246,
+      416,
+      631
+    ],
+    "regional_grafts": false,
+    "head_or_body_warp": false,
+    "full_generated_body_preserved": true
+  },
+  {
+    "id": "F06",
+    "source": "raw/F06.png",
+    "source_sha256": "e04ebef600a8dc14fc7ca01b5a3c517fd010ab7cfa1a9a44def07acd2df6f2d3",
+    "whole_source_uniform_scale": 0.4179087379355773,
+    "whole_source_translation": [
+      3.415086252508189,
+      11.54077253218884
+    ],
+    "contained_registration_scale": 0.9785407725321889,
+    "before": {
+      "cheek_width": 233,
+      "head_center_x": 172.5,
+      "eye_line": 352.0647275405007,
+      "foot_baseline": 631,
+      "support_toe_x": 220.19565217391306
+    },
+    "after": {
+      "cheek_width": 227,
+      "head_center_x": 172.0,
+      "eye_line": 356.4937362451329,
+      "foot_baseline": 629,
+      "support_toe_x": 218.9334470989761
+    },
+    "opaque_bounds": [
+      58,
+      245,
+      416,
+      630
+    ],
+    "regional_grafts": false,
+    "head_or_body_warp": false,
+    "full_generated_body_preserved": true
+  },
+  {
+    "id": "F07",
+    "source": "raw/F07.png",
+    "source_sha256": "e937ccea53690a017bfcc72c82029000eb0e23946b36c0a184ae75bde6cab15f",
+    "whole_source_uniform_scale": 0.4270734032411821,
+    "whole_source_translation": [
+      0.8610798715714907,
+      0.0
+    ],
+    "contained_registration_scale": 1.0,
+    "before": {
+      "cheek_width": 228,
+      "head_center_x": 171.0,
+      "eye_line": 353.39346012679346,
+      "foot_baseline": 629,
+      "support_toe_x": 218.02442996742673
+    },
+    "after": {
+      "cheek_width": 228,
+      "head_center_x": 172.0,
+      "eye_line": 353.65767497348884,
+      "foot_baseline": 630,
+      "support_toe_x": 219.1120543293718
+    },
+    "opaque_bounds": [
+      57,
+      242,
+      418,
+      631
+    ],
+    "regional_grafts": false,
+    "head_or_body_warp": false,
+    "full_generated_body_preserved": true
+  },
+  {
+    "id": "F08",
+    "source": "raw/F08.png",
+    "source_sha256": "74e48c04d079e67b38b711092c841070d5e2e5229ead2ea319d318c5f88ebeda",
+    "whole_source_uniform_scale": 0.43276771528439784,
+    "whole_source_translation": [
+      -6.356263333137662,
+      -8.38666666666677
+    ],
+    "contained_registration_scale": 1.0133333333333334,
+    "before": {
+      "cheek_width": 225,
+      "head_center_x": 177.5,
+      "eye_line": 356.43113871635614,
+      "foot_baseline": 629,
+      "support_toe_x": 222.27806563039724
+    },
+    "after": {
+      "cheek_width": 228,
+      "head_center_x": 173.5,
+      "eye_line": 353.15225563909775,
+      "foot_baseline": 629,
+      "support_toe_x": 218.94838709677418
+    },
+    "opaque_bounds": [
+      58,
+      239,
+      416,
+      630
+    ],
+    "regional_grafts": false,
+    "head_or_body_warp": false,
+    "full_generated_body_preserved": true
+  },
+  {
+    "id": "F09",
+    "source": "raw/F09.png",
+    "source_sha256": "18a4b754266dcd2e3d6cdb2e28695d6f408e966accdb7699ad0a0dd6b8e0805e",
+    "whole_source_uniform_scale": 0.42335972147386747,
+    "whole_source_translation": [
+      -6.421563033016497,
+      14.391304347826008
+    ],
+    "contained_registration_scale": 0.991304347826087,
+    "before": {
+      "cheek_width": 230,
+      "head_center_x": 182.0,
+      "eye_line": 338.45455980800807,
+      "foot_baseline": 620,
+      "support_toe_x": 227.28345070422534
+    },
+    "after": {
+      "cheek_width": 228,
+      "head_center_x": 174.0,
+      "eye_line": 350.2398561890087,
+      "foot_baseline": 629,
+      "support_toe_x": 218.7956810631229
+    },
+    "opaque_bounds": [
+      59,
+      241,
+      417,
+      630
+    ],
+    "regional_grafts": false,
+    "head_or_body_warp": false,
+    "full_generated_body_preserved": true
+  },
+  {
+    "id": "F10",
+    "source": "raw/F10.png",
+    "source_sha256": "a4eb7edd59278c843f38fab997b7de7c321a4d267fb7cd405e2668b166deb3b9",
+    "whole_source_uniform_scale": 0.43276771528439784,
+    "whole_source_translation": [
+      -10.825979009705833,
+      -8.38666666666677
+    ],
+    "contained_registration_scale": 1.0133333333333334,
+    "before": {
+      "cheek_width": 225,
+      "head_center_x": 181.0,
+      "eye_line": 350.0055330921473,
+      "foot_baseline": 629,
+      "support_toe_x": 226.6889692585895
+    },
+    "after": {
+      "cheek_width": 228,
+      "head_center_x": 172.5,
+      "eye_line": 346.7119952198377,
+      "foot_baseline": 629,
+      "support_toe_x": 219.0436974789916
+    },
+    "opaque_bounds": [
+      57,
+      238,
+      420,
+      631
+    ],
+    "regional_grafts": false,
+    "head_or_body_warp": false,
+    "full_generated_body_preserved": true
+  },
+  {
+    "id": "F11",
+    "source": "raw/F11.png",
+    "source_sha256": "54c5099c3abfa158686e82b3d09af6dbe33bffdb7154eb591eb25cba2dc929c2",
+    "whole_source_uniform_scale": 0.42520845388205025,
+    "whole_source_translation": [
+      1.475426472582967,
+      3.7423580786025923
+    ],
+    "contained_registration_scale": 0.9956331877729258,
+    "before": {
+      "cheek_width": 229,
+      "head_center_x": 170.5,
+      "eye_line": 350.3157328805886,
+      "foot_baseline": 628,
+      "support_toe_x": 218.36363636363637
+    },
+    "after": {
+      "cheek_width": 228,
+      "head_center_x": 171.0,
+      "eye_line": 352.5937428506063,
+      "foot_baseline": 630,
+      "support_toe_x": 218.79633027522937
+    },
+    "opaque_bounds": [
+      57,
+      244,
+      418,
+      631
+    ],
+    "regional_grafts": false,
+    "head_or_body_warp": false,
+    "full_generated_body_preserved": true
+  },
+  {
+    "id": "F12",
+    "source": "raw/F12.png",
+    "source_sha256": "fecbabdd9274a6bddd588156a4739b5abefb9852c5d9c64100dc012ae4a6bb00",
+    "whole_source_uniform_scale": 0.44666392632563995,
+    "whole_source_translation": [
+      -19.42081329455118,
+      -15.256880733944968
+    ],
+    "contained_registration_scale": 1.0458715596330275,
+    "before": {
+      "cheek_width": 218,
+      "head_center_x": 182.0,
+      "eye_line": 349.5654761904762,
+      "foot_baseline": 616,
+      "support_toe_x": 227.85429141716565
+    },
+    "after": {
+      "cheek_width": 227,
+      "head_center_x": 171.0,
+      "eye_line": 351.1639771119969,
+      "foot_baseline": 629,
+      "support_toe_x": 218.78392857142856
+    },
+    "opaque_bounds": [
+      56,
+      238,
+      420,
+      630
+    ],
+    "regional_grafts": false,
+    "head_or_body_warp": false,
+    "full_generated_body_preserved": true
+  },
+  {
+    "id": "F13",
+    "source": "raw/F13.png",
+    "source_sha256": "cf701648b4a3de03251ef6363ff32e5613ec3d55fc49cbfd899b407d1049545b",
+    "whole_source_uniform_scale": 0.42335972147386747,
+    "whole_source_translation": [
+      2.9383805655714923,
+      16.373913043478183
+    ],
+    "contained_registration_scale": 0.991304347826087,
+    "before": {
+      "cheek_width": 230,
+      "head_center_x": 169.0,
+      "eye_line": 337.23674911660777,
+      "foot_baseline": 618,
+      "support_toe_x": 217.84140233722871
+    },
+    "after": {
+      "cheek_width": 228,
+      "head_center_x": 170.5,
+      "eye_line": 350.5527272727273,
+      "foot_baseline": 629,
+      "support_toe_x": 218.7888
+    },
+    "opaque_bounds": [
+      53,
+      242,
+      423,
+      631
+    ],
+    "regional_grafts": false,
+    "head_or_body_warp": false,
+    "full_generated_body_preserved": true
+  },
+  {
+    "id": "F14",
+    "source": "raw/F14.png",
+    "source_sha256": "904dce84e4ea155ae5a6d6662528cfe58e9abc19a4d72688dc1828cb7e9b4797",
+    "whole_source_uniform_scale": 0.4179087379355773,
+    "whole_source_translation": [
+      5.3625969219277465,
+      14.476394849785379
+    ],
+    "contained_registration_scale": 0.9785407725321889,
+    "before": {
+      "cheek_width": 233,
+      "head_center_x": 172.0,
+      "eye_line": 350.27619139494504,
+      "foot_baseline": 628,
+      "support_toe_x": 218.20543293718166
+    },
+    "after": {
+      "cheek_width": 228,
+      "head_center_x": 173.5,
+      "eye_line": 357.5646139804574,
+      "foot_baseline": 629,
+      "support_toe_x": 218.79173553719008
+    },
+    "opaque_bounds": [
+      59,
+      246,
+      420,
+      631
+    ],
+    "regional_grafts": false,
+    "head_or_body_warp": false,
+    "full_generated_body_preserved": true
+  },
+  {
+    "id": "F15",
+    "source": "raw/F15.png",
+    "source_sha256": "2c0002126ec3d40967ec77a732fc27ea7af99e4f822cd8122f67c4727e815d42",
+    "whole_source_uniform_scale": 0.4270734032411821,
+    "whole_source_translation": [
+      0.9946647685756886,
+      7.0
+    ],
+    "contained_registration_scale": 1.0,
+    "before": {
+      "cheek_width": 228,
+      "head_center_x": 169.5,
+      "eye_line": 346.13568001199576,
+      "foot_baseline": 622,
+      "support_toe_x": 217.89084507042253
+    },
+    "after": {
+      "cheek_width": 229,
+      "head_center_x": 170.5,
+      "eye_line": 353.72231995349694,
+      "foot_baseline": 629,
+      "support_toe_x": 218.775
+    },
+    "opaque_bounds": [
+      55,
+      239,
+      421,
+      631
+    ],
+    "regional_grafts": false,
+    "head_or_body_warp": false,
+    "full_generated_body_preserved": true
+  }
+]

@@ -65,6 +65,7 @@ enum PetSkin: String, CaseIterable {
     case magicalHeart
     case christmas
     case hana
+    case amuRan
     case pichiPitch
     case jeanne
 
@@ -79,6 +80,7 @@ enum PetSkin: String, CaseIterable {
         case .rilakkumaCape: return "리락쿠마 망토"
         case .magicalHeart: return "매지컬 하트"
         case .christmas: return "크리스마스"
+        case .amuRan: return "아무 · 란"
         case .hana: return "하나 · 토토"
         case .pichiPitch: return "피치핏치"
         case .jeanne: return "잔느 · 핀"
@@ -97,6 +99,7 @@ enum PetSkin: String, CaseIterable {
         case .rilakkumaCape: return "spritesheet-rilakkuma-cape"
         case .magicalHeart: return "spritesheet-magical-heart"
         case .christmas: return "spritesheet-christmas-16-character"
+        case .amuRan: return "spritesheet-amu-ran"
         case .hana: return "spritesheet-hana-16-character"
         case .pichiPitch: return "pichi-character"
         case .jeanne: return "jeanne-character"
@@ -114,6 +117,7 @@ enum PetSkin: String, CaseIterable {
 
     /// 이 기기의 앱 번들에 아틀라스가 실제로 들어 있는지.
     var isAvailable: Bool {
+        if self == .amuRan { return Bundle.main.url(forResource: resourceName, withExtension: "webp") != nil && AmuRanFrames.hasAllFrames }
         if self == .jeanne { return JeanneSkin.available }
         if self == .pichiPitch { return PichiSkin.available }
         if self == .chocolatHeart { return ChocolatHeart.available }

@@ -1,0 +1,14 @@
+{
+  "tool": "built-in image_gen.imagegen plus scoped independent-layer composition",
+  "stage": "neck-only requested revision",
+  "edit_target": "anchors/idle-heart-cape-pose-v9-source.png",
+  "scarf_reference": "reference/ran-sculpted-v10-source.png",
+  "raw_generated_edit": "anchors/idle-heart-scarf-v12-edit-source.png",
+  "final_character": "anchors/idle-heart-scarf-v12-character.png",
+  "prompt": "Precise LOCAL NECK CLOTHING edit to image1, the approved Retto Amu skin. Add a RED cheerleader NECKERCHIEF tied like Ran in image2. The scarf wraps from BEHIND THE NECK around both sides and is TIED AT THE EXACT FRONT CENTER below chin, not off to one side. Small soft ordinary center knot, NO stiff big bow loops. Two SHORT TAPERED RED SCARF TAILS spread diagonally toward the upper chest left/right, leaving center below knot clear. Most important: ATTACH THE EXISTING GUARDIAN EGG DIRECTLY TO THE CENTER KNOT by one tiny visible connecting loop. The egg hangs straight from the knot at center chest as an integrated scarf pendant. It is the SAME ONE closed pink-plaid egg with wide BLACK middle band, large PINK heart, tiny black heart rows; no extra egg/heart-gem. REMOVE the former separate pink necklace cord completely, do not show a second cord or disconnected necklace. Keep egg approximately same size as image1, with its loop attached to bottom of center scarf knot and egg fully visible below; scarf tails do NOT cover egg. Match Ran's soft matte red felt scarf shape/material. New scarf/egg are confined to neck/front cape region aboutx330..700,y750..1005 on original1049x1500 canvas; scarf tails end ABOVEy925 so they do not overlap the hip bow. Keep the broad white/pink cape same shape/coverage and red hem, clean its old necklace location seamlessly. Everything else remains EXACTLY image1: approved face/head shape, blue eyes, muzzle, fur markings, ears, visor, pink side accessory, body proportions and pose, four paws/forelegs, legwarmers, skirt, hip bow/streamers and brown tail. NO pompons on cat, no new body parts, NO companion or effects/text. Same1049x1500canvas and cat pixel position/size, real transparent background. No recoloring or restyling outside local neck/cape attachment zone. Image2 is SCARF CONSTRUCTION ONLY; do not copy Ran human anatomy or add Ran to output.",
+  "assembly": "assemble-scarf-v12.py",
+  "scope_audit": "scarf-v12-scope-audit.json",
+  "pet_preview": "amu-ran-pet-v12.png",
+  "production_ready": false,
+  "installed": false
+}

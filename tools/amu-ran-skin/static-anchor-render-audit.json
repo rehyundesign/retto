@@ -1,0 +1,282 @@
+{
+  "sources": [
+    {
+      "id": "A01",
+      "source": "registered-static-v2/A01.png",
+      "sha256": "b1946dddfdf1bc2bbe93dd6ae7b0bef18d0d30b98c295cc44f7b68d63e9f2a10",
+      "size": [
+        448,
+        640
+      ],
+      "alpha_bounds": [
+        2,
+        40,
+        421,
+        638
+      ],
+      "rgba": true,
+      "registration": "not certified by this rendering check"
+    },
+    {
+      "id": "A02",
+      "source": "registered-static-v2/A02.png",
+      "sha256": "0ddf40d3226ee5e552f1f7b14a517ee262b2242a955de39d19e77f9dd98cc0cc",
+      "size": [
+        448,
+        640
+      ],
+      "alpha_bounds": [
+        4,
+        25,
+        380,
+        632
+      ],
+      "rgba": true,
+      "registration": "not certified by this rendering check"
+    },
+    {
+      "id": "A03",
+      "source": "registered-static-v2/A03.png",
+      "sha256": "b729ff6b12a99ca9d05c965ab76709d25f737b334220710569823eec92ce00d8",
+      "size": [
+        448,
+        640
+      ],
+      "alpha_bounds": [
+        30,
+        19,
+        385,
+        633
+      ],
+      "rgba": true,
+      "registration": "not certified by this rendering check"
+    },
+    {
+      "id": "A04",
+      "source": "registered-static-v2/A04.png",
+      "sha256": "944aee3be511095df2a6acf5b3bfb24d5f45c5636d1ab683c1d6bbe84f3df1c6",
+      "size": [
+        448,
+        640
+      ],
+      "alpha_bounds": [
+        54,
+        201,
+        407,
+        632
+      ],
+      "rgba": true,
+      "registration": "not certified by this rendering check"
+    },
+    {
+      "id": "A05",
+      "source": "registered-static-v2/A05.png",
+      "sha256": "e759ec4fa6f6e560e136d4918251959e341011e9a726430aa6c35c507537d31b",
+      "size": [
+        448,
+        640
+      ],
+      "alpha_bounds": [
+        29,
+        68,
+        408,
+        631
+      ],
+      "rgba": true,
+      "registration": "not certified by this rendering check"
+    },
+    {
+      "id": "A06",
+      "source": "registered-static-v2/A06.png",
+      "sha256": "8538455554683ed99b26d60a5d22d21790966ca5d9972d9baac34a1591c1b351",
+      "size": [
+        448,
+        640
+      ],
+      "alpha_bounds": [
+        14,
+        112,
+        407,
+        633
+      ],
+      "rgba": true,
+      "registration": "not certified by this rendering check"
+    },
+    {
+      "id": "A07",
+      "source": "registered-static-v2/A07.png",
+      "sha256": "aa2d2f8545c848ea79fc5f1e614c91d1431bc85167d05bdfa581feb5f9d1db5d",
+      "size": [
+        448,
+        640
+      ],
+      "alpha_bounds": [
+        35,
+        120,
+        406,
+        637
+      ],
+      "rgba": true,
+      "registration": "not certified by this rendering check"
+    },
+    {
+      "id": "A08",
+      "source": "registered-static-v2/A08.png",
+      "sha256": "13dc74d3af3a1eed6e07ca6acf9a2e8cf658739feb5883e35b099682e8e4fd99",
+      "size": [
+        448,
+        640
+      ],
+      "alpha_bounds": [
+        44,
+        166,
+        393,
+        639
+      ],
+      "rgba": true,
+      "registration": "not certified by this rendering check"
+    },
+    {
+      "id": "A09",
+      "source": "registered-static-v2/A09.png",
+      "sha256": "fbda6f6b00b1559cf0d8f0932ba9f230891b988c310b0955196da6acb11c91bc",
+      "size": [
+        448,
+        640
+      ],
+      "alpha_bounds": [
+        12,
+        157,
+        413,
+        631
+      ],
+      "rgba": true,
+      "registration": "not certified by this rendering check"
+    },
+    {
+      "id": "A10",
+      "source": "registered-static-v2/A10.png",
+      "sha256": "88b8fc9ce8a8fd895d7dd88aff2058644da1d85bf449ae8fdf69b3f5de1e28e3",
+      "size": [
+        448,
+        640
+      ],
+      "alpha_bounds": [
+        0,
+        34,
+        433,
+        633
+      ],
+      "rgba": true,
+      "registration": "not certified by this rendering check"
+    },
+    {
+      "id": "A11",
+      "source": "registered-static-v2/A11.png",
+      "sha256": "78e5ec6c862a10cdb2368d7439fb326dc3ddcd26612eae7a55f7a5b1be43d18e",
+      "size": [
+        448,
+        640
+      ],
+      "alpha_bounds": [
+        24,
+        31,
+        394,
+        631
+      ],
+      "rgba": true,
+      "registration": "not certified by this rendering check"
+    },
+    {
+      "id": "A12",
+      "source": "registered-static-v2/A12.png",
+      "sha256": "b343c3c5b6d3e5ff8486bd8414e7ebf409411916a6a164066b3e459e7b458a93",
+      "size": [
+        448,
+        640
+      ],
+      "alpha_bounds": [
+        26,
+        119,
+        386,
+        632
+      ],
+      "rgba": true,
+      "registration": "not certified by this rendering check"
+    },
+    {
+      "id": "A13",
+      "source": "registered-static-v2/A13.png",
+      "sha256": "875f6805d18223a037eadcdcbd79e026287527e8294620db4d5847b76397b31f",
+      "size": [
+        448,
+        640
+      ],
+      "alpha_bounds": [
+        6,
+        77,
+        399,
+        634
+      ],
+      "rgba": true,
+      "registration": "not certified by this rendering check"
+    },
+    {
+      "id": "A14",
+      "source": "registered-static-v2/A14.png",
+      "sha256": "49a59aa46b13d4444defcbf7382052b4c179c6391e36247fa3f4c3db839e64b7",
+      "size": [
+        448,
+        640
+      ],
+      "alpha_bounds": [
+        34,
+        195,
+        386,
+        632
+      ],
+      "rgba": true,
+      "registration": "not certified by this rendering check"
+    },
+    {
+      "id": "A15",
+      "source": "registered-static-v2/A15.png",
+      "sha256": "d0c9c0e5eee85cc3cd3eeb436dbc1592447c93218a5e424e1219cbd23e5986e0",
+      "size": [
+        448,
+        640
+      ],
+      "alpha_bounds": [
+        24,
+        157,
+        392,
+        627
+      ],
+      "rgba": true,
+      "registration": "not certified by this rendering check"
+    },
+    {
+      "id": "A16",
+      "source": "registered-static-v2/A16.png",
+      "sha256": "df53a22815552e5a962ad5e93e055914b5c8b145f6f4121b763ab1e16ad0f280",
+      "size": [
+        448,
+        640
+      ],
+      "alpha_bounds": [
+        22,
+        137,
+        382,
+        634
+      ],
+      "rgba": true,
+      "registration": "not certified by this rendering check"
+    }
+  ],
+  "display": [
+    224,
+    320
+  ],
+  "source_hashes_preserved": true,
+  "production_ready": false
+}
