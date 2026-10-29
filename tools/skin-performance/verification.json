@@ -1,0 +1,98 @@
+{
+  "candidate": "/private/tmp/retto-skin-cache-20261029/Retto.app",
+  "sources": "/private/tmp/retto-skin-cache-20261029/Sources",
+  "installedApp": "/Users/luxia/Applications/Retto.app",
+  "installedBinaryBefore": "c86fd3ed7f33c58fb3371df0c414d3277ba245b60da817ac048df49aff4e8603",
+  "candidateBinary": "4574c118eb8e12660bbfd7aa4d4e2178334bb738776abca20037cb0c5dd37a77",
+  "resourcesPreserved": 15886,
+  "cacheProbes": {
+    "before": {
+      "ok": true,
+      "optimized": false,
+      "retainedDecodedBytes": 11182080,
+      "skins": [
+        {
+          "reloadedPixelsIdentical": true,
+          "retainedDecodedBytes": 3440640,
+          "retainedFrames": 3,
+          "sameSkinCachePreserved": true,
+          "skin": "jeanne"
+        },
+        {
+          "reloadedPixelsIdentical": true,
+          "retainedDecodedBytes": 1720320,
+          "retainedFrames": 3,
+          "sameSkinCachePreserved": true,
+          "skin": "hana"
+        },
+        {
+          "reloadedPixelsIdentical": true,
+          "retainedDecodedBytes": 860160,
+          "retainedFrames": 3,
+          "sameSkinCachePreserved": true,
+          "skin": "pichiPitch"
+        },
+        {
+          "reloadedPixelsIdentical": true,
+          "retainedDecodedBytes": 1720320,
+          "retainedFrames": 3,
+          "sameSkinCachePreserved": true,
+          "skin": "chocolatHeart"
+        },
+        {
+          "reloadedPixelsIdentical": true,
+          "retainedDecodedBytes": 3440640,
+          "retainedFrames": 3,
+          "sameSkinCachePreserved": true,
+          "skin": "amuRan"
+        }
+      ]
+    },
+    "after": {
+      "ok": true,
+      "optimized": true,
+      "retainedDecodedBytes": 0,
+      "skins": [
+        {
+          "reloadedPixelsIdentical": true,
+          "retainedDecodedBytes": 0,
+          "retainedFrames": 0,
+          "sameSkinCachePreserved": true,
+          "skin": "jeanne"
+        },
+        {
+          "reloadedPixelsIdentical": true,
+          "retainedDecodedBytes": 0,
+          "retainedFrames": 0,
+          "sameSkinCachePreserved": true,
+          "skin": "hana"
+        },
+        {
+          "reloadedPixelsIdentical": true,
+          "retainedDecodedBytes": 0,
+          "retainedFrames": 0,
+          "sameSkinCachePreserved": true,
+          "skin": "pichiPitch"
+        },
+        {
+          "reloadedPixelsIdentical": true,
+          "retainedDecodedBytes": 0,
+          "retainedFrames": 0,
+          "sameSkinCachePreserved": true,
+          "skin": "chocolatHeart"
+        },
+        {
+          "reloadedPixelsIdentical": true,
+          "retainedDecodedBytes": 0,
+          "retainedFrames": 0,
+          "sameSkinCachePreserved": true,
+          "skin": "amuRan"
+        }
+      ]
+    }
+  },
+  "installed": false,
+  "installationReceipt": "installation.json",
+  "locallyPreservedBaselineSources": "/Users/luxia/Documents/ChatGPT/retto/tools/skin-performance/local/baseline-Sources",
+  "locallyPreservedOptimizedSources": "/Users/luxia/Documents/ChatGPT/retto/tools/skin-performance/local/optimized-Sources"
+}
