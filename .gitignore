@@ -10,10 +10,7 @@ hook/sessions.json
 hook/state.json
 hook/.sessions.lock/
 
-# 개인 스킨. 만든 사람 기기에서만 쓰고 레포·배포 묶음에 넣지 않는다.
-# 남의 캐릭터로 만든 것이라 공개 대상이 아니다.
-assets/spritesheet-rilakkuma.webp
-assets/spritesheet-rilakkuma-cape.webp
+# 스킨 원본 제작 도구의 중간 파일은 제외한다. 실행에 쓰는 assets/는 포함한다.
 tools/rilakkuma-skin/
 tools/strawberry-bunny-skin/
 
