@@ -132,8 +132,10 @@ func runSelfTest() -> Int32 {
         }
     }
     let skinsOK = PetSkin.allCases.allSatisfy { skin in
+        guard skin.isAvailable else { return false }
+        if skin == .jeanne || skin == .pichiPitch || skin == .chocolatHeart { return true }
         guard let url = Bundle.main.url(forResource: skin.resourceName, withExtension: "webp"),
-              let sheet = NSImage(contentsOf: url) else { return skin != .classic }
+              let sheet = NSImage(contentsOf: url) else { return false }
         return SpriteSheetLayout.forImage(size: sheet.size) != nil
     }
     let christmasTimingOK = (Array(animationCatalog.values) + Array(dragRunAnimations.values)).allSatisfy { original in

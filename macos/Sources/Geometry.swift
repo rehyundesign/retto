@@ -106,15 +106,6 @@ enum PetSkin: String, CaseIterable {
         }
     }
 
-    /// 만든 사람만 쓰는 스킨. 아틀라스를 레포에도 배포 묶음에도 넣지 않는다.
-    /// 받아 간 쪽에서는 파일이 없으므로 메뉴에 자물쇠로 뜨고 고를 수 없다.
-    var isPersonal: Bool {
-        switch self {
-        case .rilakkuma, .rilakkumaCape, .pichiPitch: return true
-        default: return false
-        }
-    }
-
     /// 이 기기의 앱 번들에 아틀라스가 실제로 들어 있는지.
     var isAvailable: Bool {
         if self == .amuRan { return Bundle.main.url(forResource: resourceName, withExtension: "webp") != nil && AmuRanFrames.hasAllFrames }

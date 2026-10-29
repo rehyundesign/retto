@@ -48,6 +48,7 @@ touch "$DIST_DIR/.metadata_never_index"
 
 swiftc \
   -O \
+  -module-cache-path "$BUILD_DIR/module-cache" \
   -target arm64-apple-macos13.0 \
   -framework AppKit \
   -framework ServiceManagement \
@@ -75,20 +76,26 @@ BUILD_STAMP="$(date '+%Y-%m-%d %H:%M') · $GIT_SHA"
 /usr/libexec/PlistBuddy -c "Add :RettoBuildStamp string $BUILD_STAMP" "$CONTENTS_DIR/Info.plist"
 echo "stamp: $VERSION ($BUILD_NUMBER) · $BUILD_STAMP"
 cp "$ASSETS_DIR/spritesheet.webp" "$RESOURCES_DIR/spritesheet.webp"
-# 스킨 아틀라스. 발바닥 메뉴 "스킨" 이 이걸 갈아 끼운다. 없으면 기본 스킨만 뜬다.
-for skin in spritesheet-angel spritesheet-bee spritesheet-bunny spritesheet-luna spritesheet-rilakkuma spritesheet-rilakkuma-cape spritesheet-magical-heart spritesheet-jeanne spritesheet-christmas-character spritesheet-christmas-16-character; do
-  [ -f "$ASSETS_DIR/$skin.webp" ] && cp "$ASSETS_DIR/$skin.webp" "$RESOURCES_DIR/$skin.webp"
+# 모든 스킨의 실행 리소스를 포함한다. 누락된 빌드는 자체 검사에서 실패한다.
+for skin in spritesheet-angel spritesheet-bee spritesheet-bunny spritesheet-rilakkuma spritesheet-rilakkuma-cape spritesheet-magical-heart spritesheet-christmas-16-character spritesheet-hana-16-character spritesheet-amu-ran; do
+  if [[ ! -f "$ASSETS_DIR/$skin.webp" ]]; then
+    print -u2 -- "스킨 아틀라스 누락: $skin.webp"
+    exit 1
+  fi
+  cp "$ASSETS_DIR/$skin.webp" "$RESOURCES_DIR/$skin.webp"
 done
-if [[ -d "$ASSETS_DIR/jeanne-frames" ]]; then
-  cp -R "$ASSETS_DIR/jeanne-frames" "$RESOURCES_DIR/JeanneFrames"
-fi
-if [[ -d "$ASSETS_DIR/magical-heart-frames" ]]; then
-  cp -R "$ASSETS_DIR/magical-heart-frames" "$RESOURCES_DIR/MagicalHeartFrames"
-fi
-if [[ -f "$ASSETS_DIR/spritesheet-amu-ran.webp" && -d "$ASSETS_DIR/amu-ran-frames" ]]; then
-  cp "$ASSETS_DIR/spritesheet-amu-ran.webp" "$RESOURCES_DIR/"
-  cp -R "$ASSETS_DIR/amu-ran-frames" "$RESOURCES_DIR/AmuRanFrames"
-fi
+for mapping in jeanne-frames:JeanneFrames pichi-frames:PichiFrames chocolat-heart-frames:ChocolatHeartFrames hana-frames:HanaFrames amu-ran-frames:AmuRanFrames; do
+  source_name="${mapping%%:*}"
+  bundle_name="${mapping#*:}"
+  if [[ ! -d "$ASSETS_DIR/$source_name" ]]; then
+    print -u2 -- "스킨 프레임 누락: $source_name"
+    exit 1
+  fi
+  cp -R "$ASSETS_DIR/$source_name" "$RESOURCES_DIR/$bundle_name"
+done
+for effect in "$ASSETS_DIR"/hana-*-effects-*.webp(N); do
+  cp "$effect" "$RESOURCES_DIR/"
+done
 # 매지컬 하트의 진행 중 변신 이펙트는 캐릭터와 분리한 앞·뒤 투명 아틀라스다.
 for effect in spritesheet-magical-heart-effects-back spritesheet-magical-heart-effects-front; do
   [ -f "$ASSETS_DIR/$effect.webp" ] && cp "$ASSETS_DIR/$effect.webp" "$RESOURCES_DIR/$effect.webp"
@@ -114,6 +121,7 @@ codesign --force --deep --sign - "$APP_DIR"
 
 "$MACOS_DIR/Retto" --self-test
 "$MACOS_DIR/Retto" --self-test-slack
+"$MACOS_DIR/Retto" --self-test-all-skins
 
 if (( ! APP_ONLY )); then
 # dist 에는 dmg 만 둔다. 예전에는 앱을 한 벌 더 풀어 뒀는데 쓰는 데가 없었고,
@@ -133,19 +141,7 @@ STAGE_DIR="$DIST_DIR/dmg/레토 $VERSION"
 rm -rf "$DIST_DIR/dmg"
 mkdir -p "$STAGE_DIR"
 cp -R "$APP_DIR" "$STAGE_DIR/$APP_NAME"
-# 개인 스킨은 남에게 보내는 묶음에서 뺀다. 내 기기에서는 그대로 쓴다.
-# 무엇이 개인 것인지는 git 이 안다 — .gitignore 에 올려 둔 에셋이 그것이다.
-# (리락쿠마처럼 남의 캐릭터로 만든 스킨이 여기 해당한다.)
-for skin in "$ASSETS_DIR"/spritesheet-*.webp; do
-  [ -f "$skin" ] || continue
-  if git -C "$APP_ROOT" check-ignore -q "$skin" 2>/dev/null; then
-    rm -f "$STAGE_DIR/$APP_NAME/Contents/Resources/$(basename "$skin")"
-    echo "share: 개인 스킨 제외 $(basename "$skin")"
-  fi
-done
-
-# 서명은 번들 안의 파일 목록까지 봉인한다. 위에서 스킨을 하나 뺐으므로 다시 서명해야
-# 한다. 이걸 빠뜨리면 받는 쪽에서 "손상되었습니다" 가 뜬다 — 격리 딱지를 떼도 마찬가지다.
+# DMG에도 같은 전체 스킨 구성을 넣고 서명을 확인한다.
 codesign --force --deep --sign - "$STAGE_DIR/$APP_NAME"
 codesign --verify --deep --strict "$STAGE_DIR/$APP_NAME" || {
   echo "보낼 앱의 서명이 깨졌습니다" >&2
@@ -202,8 +198,8 @@ echo "share: $DMG_PATH"
 fi
 
 if (( INSTALL )); then
-  # 이 체크아웃에 없는 개인 스킨 그림(리락쿠마·피치핏치·쇼콜라 하트·하나·잔느 프레임 등)은
-  # 레포에 없고 설치본에만 있다. 새 빌드에 없는 항목은 기존 설치본에서 그대로 가져온다.
+  # 현재 13개 스킨은 assets/에서 모두 복사한다.
+  # 기존 설치본에만 있는 추가 리소스도 새 빌드에 없으면 보존한다.
   # 2026-10-28 에 앱을 통째로 바꿨다가 리소스 11,178개 중 피치·쇼콜라·잔느 그림을 잃었다.
   INSTALLED_RESOURCES="$HOME/Applications/$APP_NAME/Contents/Resources"
   if [[ -d "$INSTALLED_RESOURCES" ]]; then

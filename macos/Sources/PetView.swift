@@ -11,7 +11,18 @@ final class RettoView: NSView {
     }
     /// 아틀라스만으로는 표현하기 어려운 스킨 전용 효과를 고른다.
     var skin: PetSkin {
-        didSet { if skin == .chocolatHeart { chocolatEpoch = ProcessInfo.processInfo.systemUptime }; clearGaze(); frameIndex = 0; completedCycles = 0; restartAnimation(); restartChristmasEffects(); needsDisplay = true }
+        didSet {
+            if oldValue != skin {
+                switch oldValue {
+                case .jeanne: JeanneSkin.removeCachedImages()
+                case .hana: HanaFrameCache.removeCachedImages()
+                case .pichiPitch: PichiSkin.removeCachedImages()
+                case .chocolatHeart: ChocolatHeart.removeCachedImages()
+                case .amuRan: AmuRanFrames.removeCachedImages()
+                default: break
+                }
+            }
+            if skin == .chocolatHeart { chocolatEpoch = ProcessInfo.processInfo.systemUptime }; clearGaze(); frameIndex = 0; completedCycles = 0; restartAnimation(); restartChristmasEffects(); needsDisplay = true }
     }
     private var spriteLayout: SpriteSheetLayout {
         SpriteSheetLayout.forImage(size: spriteSheet.size) ?? .retto
@@ -62,6 +73,7 @@ final class RettoView: NSView {
     private var gazeResetTimer: Timer?
     private var gazeTransitionTimer: Timer?
     private var gazeTargetDirection: Int?
+    private var hanaLastMouseLocation: NSPoint?
     private var dragStartMouseLocation: NSPoint?
     private var dragStartWindowOrigin: NSPoint?
     private var pressedTarget: PetClickTarget?
@@ -131,6 +143,7 @@ final class RettoView: NSView {
     private var sleepPose = false {
         didSet {
             guard sleepPose != oldValue else { return }
+            if skin == .hana { clearGaze() }
             frameIndex = 0
             restartAnimation()
             needsDisplay = true
@@ -307,11 +320,12 @@ final class RettoView: NSView {
 
     /// 지금 그려야 하는 동작. 끄는 중이면 달리기가 상태를 이긴다.
     private var allowsGaze: Bool {
+        if skin == .hana { return HanaGaze.allows(state: visibleState, dragging: dragRun != nil) && transientState == nil }
         guard skin != .hana, skin != .chocolatHeart, skin != .pichiPitch,
               gazeStates.contains(state), transientState == nil else { return false }
         return skin != .jeanne || (visibleState == .idle && dragRun == nil)
     }
-    private var hasActiveGaze: Bool { lookDirection != nil && (skin != .jeanne || allowsGaze) }
+    private var hasActiveGaze: Bool { lookDirection != nil && ((skin != .jeanne && skin != .hana) || allowsGaze) }
 
     private var currentAnimation: Animation? {
         if let dragRun, let animation = dragRunAnimations[dragRun] { return skin == .chocolatHeart ? ChocolatHeart.animation(animation) : skinAnimation(animation, skin: skin, columns: spriteLayout.columns) }
@@ -395,10 +409,10 @@ final class RettoView: NSView {
         guard transientState == nil, visibleState == .waving, currentAnimation?.row == 3 else { return false }
         for direction in [DragRun.right,.left] {
             dragRun = direction; restartAnimation()
-            guard let a = currentAnimation, a.row == dragRunAnimations[direction]?.row, a.frames == 8 else { return false }
+            guard let a = currentAnimation, a.row == dragRunAnimations[direction]?.row, a.frames == 16 else { return false }
             jeanneEpoch = ProcessInfo.processInfo.systemUptime - 2.1
             advanceFrame()
-            guard frameIndex < 8 else { return false }
+            guard frameIndex < 16 else { return false }
         }
         dragRun = nil
         apply(payload,state:.idle,sessionCount:1,attentionCount:0,isPinned:false)
@@ -411,7 +425,17 @@ final class RettoView: NSView {
     }
 
     private func advanceFrame() {
-        if skin == .amuRan { needsDisplay = true }
+        if skin == .hana {
+            needsDisplay = true
+            if let window, window.isVisible {
+                let cursor = NSEvent.mouseLocation
+                if let previous = hanaLastMouseLocation, hypot(cursor.x - previous.x, cursor.y - previous.y) > 0.5 {
+                    updateHanaGaze(at: convert(window.convertPoint(fromScreen: cursor), from: nil))
+                }
+                hanaLastMouseLocation = cursor
+            }
+        }
+        if skin == .amuRan || skin == .jeanne { needsDisplay = true }
         guard dragRun != nil || !hasActiveGaze, let animation = currentAnimation else { return }
         if skin == .jeanne {
             if dragRun == nil && hasActiveGaze { return }
@@ -502,6 +526,7 @@ final class RettoView: NSView {
         case nil: NSCursor.arrow.set()
         }
 
+        if skin == .hana { updateHanaGaze(at: point); return }
         guard allowsGaze else { return }
         let petRect = layout.petRect
         let dx = point.x - petRect.midX
@@ -509,6 +534,52 @@ final class RettoView: NSView {
         guard hypot(dx, dy) > 22 * petScale else { return }
         let direction = gazeDirection(dx: dx, dy: dy, previous: gazeTargetDirection ?? lookDirection)
         updateGaze(toward: direction)
+        scheduleGazeReset()
+        needsDisplay = true
+    }
+
+    func verifyHanaGazeBehaviorForTesting() -> Bool {
+        guard skin == .hana else { return false }
+        let point = NSPoint(x: layout.petRect.maxX + 100, y: layout.petRect.minY + layout.petRect.height * (1 - 260.0 / 640))
+        updateHanaGaze(at: point)
+        guard lookDirection == 4 else { return false }
+        let before = HanaMotion.effectFrame(time: 0.1)
+        guard before != HanaMotion.effectFrame(time: 0.8) else { return false }
+        RunLoop.main.run(until: Date(timeIntervalSinceNow: gazeHoldDuration + 0.12))
+        guard lookDirection == nil, frameIndex < 2 else { return false }
+        dragRun = .right
+        updateHanaGaze(at: point)
+        guard lookDirection == nil else { return false }
+        dragRun = nil
+        sleepPose = true
+        updateHanaGaze(at: point)
+        guard lookDirection == nil else { return false }
+        sleepPose = false
+        for testState in PetState.allCases where !gazeStates.contains(testState) {
+            state = testState
+            updateHanaGaze(at: point)
+            guard lookDirection == nil else { return false }
+        }
+        for testState in gazeStates {
+            state = testState
+            updateHanaGaze(at: point)
+            guard lookDirection == 4 else { return false }
+            clearGaze()
+        }
+        state = .idle
+        updateHanaGaze(at: point)
+        guard lookDirection == 4 else { return false }
+        playReaction()
+        guard lookDirection == nil else { return false }
+        return true
+    }
+
+    private func updateHanaGaze(at point: NSPoint) {
+        guard HanaGaze.allows(state: visibleState, dragging: dragRun != nil) else { return }
+        let dx = point.x - layout.petRect.midX
+        let dy = point.y - (layout.petRect.minY + layout.petRect.height * (1 - 260.0 / 640))
+        guard hypot(dx, dy) > 22 * petScale else { return }
+        updateGaze(toward: gazeDirection(dx: dx, dy: dy, previous: gazeTargetDirection ?? lookDirection))
         scheduleGazeReset()
         needsDisplay = true
     }
@@ -525,7 +596,7 @@ final class RettoView: NSView {
 
     private func updateGaze(toward direction: Int) {
         gazeTargetDirection = direction
-        guard skin == .christmas || skin == .amuRan, spriteLayout.columns == 16, lookDirection != nil else {
+        guard skin == .christmas || skin == .amuRan || skin == .hana, spriteLayout.columns == 16, lookDirection != nil else {
             lookDirection = direction
             return
         }
@@ -553,7 +624,7 @@ final class RettoView: NSView {
         lookDirection = nil
         frameIndex = 0
         if skin == .amuRan { restartAnimation() }
-        if skin == .christmas { restartAnimation() }
+        if skin == .christmas || skin == .hana { restartAnimation() }
         needsDisplay = true
     }
 
@@ -732,7 +803,7 @@ final class RettoView: NSView {
         }
 
         if skin == .hana {
-            hanaEffects.draw(state: visibleState, drag: dragRun, in: petRect, time: christmasTime, front: false)
+            hanaEffects.draw(state: hasActiveGaze && dragRun == nil ? .idle : visibleState, drag: dragRun, in: petRect, time: christmasTime, front: false)
         }
 
         if skin == .chocolatHeart {
@@ -763,7 +834,7 @@ final class RettoView: NSView {
         }
 
         if skin == .hana {
-            hanaEffects.draw(state: visibleState, drag: dragRun, in: petRect, time: christmasTime, front: true)
+            hanaEffects.draw(state: hasActiveGaze && dragRun == nil ? .idle : visibleState, drag: dragRun, in: petRect, time: christmasTime, front: true)
         }
 
         if skin == .magicalHeart {

@@ -4,6 +4,7 @@
 import AppKit
 import CoreText
 import Foundation
+if CommandLine.arguments.contains("--self-test-all-skins") { exit(runAllSkinsSelfTest()) }
 if CommandLine.arguments.contains("--self-test-amu-ran-clock") { exit(runAmuRanClockSelfTest()) }
 if let i = CommandLine.arguments.firstIndex(of: "--render-amu-ran-motion-preview"), i + 1 < CommandLine.arguments.count { exit(renderAmuRanMotionPreview(to: CommandLine.arguments[i+1])) }
 if let i = CommandLine.arguments.firstIndex(of: "--render-amu-ran-gaze-preview"), i + 1 < CommandLine.arguments.count { exit(renderAmuRanGazePreview(to: CommandLine.arguments[i+1])) }
@@ -42,6 +43,8 @@ if let i = CommandLine.arguments.firstIndex(of: "--render-jeanne-preview"), i + 
 if CommandLine.arguments.contains("--pichi-self-test") { let ok = PichiSkin.validate(); print("{\"pichiOK\":\(ok)}"); exit(ok ? 0 : 1) }
 if let i = CommandLine.arguments.firstIndex(of: "--render-pichi-preview"), i + 1 < CommandLine.arguments.count { exit(renderPichiPreview(to: CommandLine.arguments[i + 1])) }
 
+if CommandLine.arguments.contains("--hana-gaze-self-test") { exit(HanaGaze.selfTest() ? 0 : 1) }
+if let i = CommandLine.arguments.firstIndex(of: "--render-hana-gaze-preview"), i + 1 < CommandLine.arguments.count { exit(HanaGaze.renderPreview(to: CommandLine.arguments[i+1])) }
 if CommandLine.arguments.contains("--hana-self-test") {
     let ok = hanaSkinSelfTest(); print("{\"hanaOK\":\(ok)}"); exit(ok ? 0 : 1)
 }

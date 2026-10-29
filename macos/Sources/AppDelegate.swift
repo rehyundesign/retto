@@ -144,6 +144,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     /// 스킨의 아틀라스를 읽는다. 파일이 없으면 기본 스킨으로 물러난다 —
     /// 옛 앱에 새 스킨 설정만 남아 있는 경우에도 레토가 사라지지 않게.
     private func loadSpriteSheet(_ skin: PetSkin) -> NSImage? {
+        if skin == .amuRan, AmuRanFrames.hasAllFrames { return NSImage(size: NSSize(width: 7168, height: 7680)) }
         if skin == .jeanne { return JeanneSkin.placeholder }
         if skin == .pichiPitch { return PichiSkin.placeholder }
         if skin == .chocolatHeart { return ChocolatHeart.placeholder }
@@ -394,8 +395,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         let skinMenu = NSMenu(title: "스킨")
         skinMenu.autoenablesItems = false
         skinItems = PetSkin.allCases.map { value in
-            // 개인 스킨은 받아 간 쪽 번들에 파일이 없다. 지우지 않고 자물쇠로 남겨 둔다 —
-            // 항목이 통째로 사라지면 고장인지 원래 없는 건지 알 수 없다.
+            // 리소스가 누락되면 선택을 막고, 빌드 자체 검사에서 원인을 보고한다.
             let available = value.isAvailable
             let title = available ? value.label : "\(value.label) 🔒"
             let item = NSMenuItem(title: title, action: available ? #selector(changeSkin(_:)) : nil, keyEquivalent: "")
@@ -403,7 +403,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             item.isEnabled = available
             item.representedObject = value.rawValue
             item.state = value == skin ? .on : .off
-            if !available { item.toolTip = "만든 사람만 쓰는 스킨이라 이 앱에는 그림이 들어 있지 않습니다." }
+            if !available { item.toolTip = "스킨 리소스가 누락되었습니다. 앱을 다시 빌드해 주세요." }
             skinMenu.addItem(item)
             return item
         }

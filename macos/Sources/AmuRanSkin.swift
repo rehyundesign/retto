@@ -24,6 +24,12 @@ enum AmuRanMotion {
 }
 
 enum AmuRanFrames {
+    /// Release decoded frames when the single overlay switches away from this skin.
+    static func removeCachedImages() {
+        characters.removeAllObjects()
+        effects.removeAllObjects()
+    }
+
     private static func resource(_ key: String) -> URL? {
         Bundle.main.url(forResource: key, withExtension: "png", subdirectory: "AmuRanFrames")
     }

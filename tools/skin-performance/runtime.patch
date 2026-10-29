@@ -1,0 +1,60 @@
+--- a/AmuRanSkin.swift
++++ b/AmuRanSkin.swift
+@@ -26,0 +27,6 @@
++    /// Release decoded frames when the single overlay switches away from this skin.
++    static func removeCachedImages() {
++        characters.removeAllObjects()
++        effects.removeAllObjects()
++    }
++
+--- a/ChocolatHeart.swift
++++ b/ChocolatHeart.swift
+@@ -5,0 +6,5 @@
++    /// Release decoded frames when the single overlay switches away from this skin.
++    static func removeCachedImages() {
++        cache.removeAllObjects()
++    }
++
+--- a/HanaSkin.swift
++++ b/HanaSkin.swift
+@@ -30,0 +31,6 @@
++    /// Release decoded frames when the single overlay switches away from this skin.
++    static func removeCachedImages() {
++        characters.removeAllObjects()
++        effects.removeAllObjects()
++    }
++
+--- a/JeanneSkin.swift
++++ b/JeanneSkin.swift
+@@ -4,0 +5,7 @@
++    /// Release decoded frames when the single overlay switches away from this skin.
++    static func removeCachedImages() {
++        cache.removeAllObjects()
++        effectCache.removeAllObjects()
++        glowCache.removeAllObjects()
++    }
++
+--- a/PetView.swift
++++ b/PetView.swift
+@@ -14 +14,12 @@
+-        didSet { if skin == .chocolatHeart { chocolatEpoch = ProcessInfo.processInfo.systemUptime }; clearGaze(); frameIndex = 0; completedCycles = 0; restartAnimation(); restartChristmasEffects(); needsDisplay = true }
++        didSet {
++            if oldValue != skin {
++                switch oldValue {
++                case .jeanne: JeanneSkin.removeCachedImages()
++                case .hana: HanaFrameCache.removeCachedImages()
++                case .pichiPitch: PichiSkin.removeCachedImages()
++                case .chocolatHeart: ChocolatHeart.removeCachedImages()
++                case .amuRan: AmuRanFrames.removeCachedImages()
++                default: break
++                }
++            }
++            if skin == .chocolatHeart { chocolatEpoch = ProcessInfo.processInfo.systemUptime }; clearGaze(); frameIndex = 0; completedCycles = 0; restartAnimation(); restartChristmasEffects(); needsDisplay = true }
+--- a/PichiSkin.swift
++++ b/PichiSkin.swift
+@@ -4,0 +5,5 @@
++    /// Release decoded frames when the single overlay switches away from this skin.
++    static func removeCachedImages() {
++        cache.removeAllObjects()
++    }
++
