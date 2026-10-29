@@ -8,6 +8,10 @@ coming from VS Code, the Claude desktop app, the terminal, and Codex at once.
 
 Requires an Apple Silicon Mac (macOS 13 or later) and Node.js.
 
+Source builds include all 13 skins and their animation resources. Run
+`macos/scripts/build.sh --app-only` to build and verify every skin from this checkout.
+Existing Homebrew packages and release downloads retain their published versions.
+
 ```sh
 brew tap rehyundesign/retto
 brew install --cask retto

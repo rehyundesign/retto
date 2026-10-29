@@ -1,6 +1,6 @@
 # Installed all-skins cache optimization — 2026-10-29
 
-The installed personal app has more skins and newer Jeanne resources than `macos/Sources`. This change uses its verified v56 all-skins source baseline and preserves the v58 art revision and every other installed resource. Do not replace the personal installation with a public-checkout build.
+The initial optimization used the verified installed v56 all-skins source baseline and v58 art revision. That runtime is now integrated into `macos/Sources`, and all thirteen skins are packaged from tracked `assets/` resources. Use `macos/scripts/build.sh --app-only` for current builds; the patch workflow below records the original scoped installation.
 
 `runtime.patch` changes six Swift files. Leaving Jeanne, Hana, Pichi, Chocolat Heart, or Amu & Ran releases that skin's character/effect caches. Selecting the current skin preserves its cache. Frame timing, image decoding, drawing, and resource contents are unchanged. Returning to a previous skin loads its frames again; this trades retained memory for a cold load on that switch.
 
@@ -28,6 +28,6 @@ python3 tools/skin-performance/build.py \
   --output /private/tmp/retto-skin-cache-20261029
 ```
 
-After this installation, the original baseline no longer matches the installed executable. Rebase the patch against any later source/app change; do not bypass that check. The original source snapshots are local inputs, not a replacement for the public app source tree.
+After this installation, the original baseline no longer matches the installed executable. Rebase the patch against any later source/app change; do not bypass that check. The original source snapshots are local historical inputs. Current source builds use the tracked `macos/Sources` and `assets` trees directly.
 
 `install.py --workspace <verified-workspace>` checks the tested candidate hash, the entire unchanged baseline bundle, the cache probe, and at least ten passing native checks. It backs up the executable/signature, stops only processes running that exact app executable, replaces only the executable, signs and verifies the bundle, runs every recorded check, and restarts if the app was running. A failure restores the executable and re-signs it. The persistent backup is `local/installed-backup/Retto`; preserve current resources when recovering it.
