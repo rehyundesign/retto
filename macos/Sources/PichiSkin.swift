@@ -2,6 +2,11 @@ import AppKit
 import Foundation
 
 enum PichiSkin {
+    /// Release decoded frames when the single overlay switches away from this skin.
+    static func removeCachedImages() {
+        cache.removeAllObjects()
+    }
+
     struct Cell: Decodable { let file: String; let duration_ms: Double }
     struct Resource: Decodable { let file: String }
     struct Effect: Decodable { let back: Resource; let front: Resource }

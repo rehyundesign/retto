@@ -28,6 +28,12 @@ enum HanaMotion {
 
 /// 작은 프레임만 읽고, 캐릭터와 효과 캐시의 메모리 사용량을 제한한다.
 enum HanaFrameCache {
+    /// Release decoded frames when the single overlay switches away from this skin.
+    static func removeCachedImages() {
+        characters.removeAllObjects()
+        effects.removeAllObjects()
+    }
+
     private static let characters: NSCache<NSString, NSImage> = {
         let cache = NSCache<NSString, NSImage>()
         cache.countLimit = 48; cache.totalCostLimit = 56 * 1024 * 1024

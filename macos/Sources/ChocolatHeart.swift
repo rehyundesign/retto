@@ -3,6 +3,11 @@ import Foundation
 
 /// 승인된 motion-v27 원본 캐릭터와 별도로 진행하는 앞·뒤 마법 효과.
 enum ChocolatHeart {
+    /// Release decoded frames when the single overlay switches away from this skin.
+    static func removeCachedImages() {
+        cache.removeAllObjects()
+    }
+
     static let speed = 0.75
     static let rows = [0,7,8,6,5,3,4,11,1,2]
     static let names = ["idle","running","review","waiting","failed","waving","jumping","sleeping","drag-right","drag-left"]
