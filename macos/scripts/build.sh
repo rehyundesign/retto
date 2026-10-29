@@ -85,6 +85,10 @@ fi
 if [[ -d "$ASSETS_DIR/magical-heart-frames" ]]; then
   cp -R "$ASSETS_DIR/magical-heart-frames" "$RESOURCES_DIR/MagicalHeartFrames"
 fi
+if [[ -f "$ASSETS_DIR/spritesheet-amu-ran.webp" && -d "$ASSETS_DIR/amu-ran-frames" ]]; then
+  cp "$ASSETS_DIR/spritesheet-amu-ran.webp" "$RESOURCES_DIR/"
+  cp -R "$ASSETS_DIR/amu-ran-frames" "$RESOURCES_DIR/AmuRanFrames"
+fi
 # 매지컬 하트의 진행 중 변신 이펙트는 캐릭터와 분리한 앞·뒤 투명 아틀라스다.
 for effect in spritesheet-magical-heart-effects-back spritesheet-magical-heart-effects-front; do
   [ -f "$ASSETS_DIR/$effect.webp" ] && cp "$ASSETS_DIR/$effect.webp" "$RESOURCES_DIR/$effect.webp"

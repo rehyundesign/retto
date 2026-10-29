@@ -4,6 +4,9 @@
 import AppKit
 import CoreText
 import Foundation
+if CommandLine.arguments.contains("--self-test-amu-ran-clock") { exit(runAmuRanClockSelfTest()) }
+if let i = CommandLine.arguments.firstIndex(of: "--render-amu-ran-motion-preview"), i + 1 < CommandLine.arguments.count { exit(renderAmuRanMotionPreview(to: CommandLine.arguments[i+1])) }
+if let i = CommandLine.arguments.firstIndex(of: "--render-amu-ran-gaze-preview"), i + 1 < CommandLine.arguments.count { exit(renderAmuRanGazePreview(to: CommandLine.arguments[i+1])) }
 
 // 접근성 권한이 이 앱에 실제로 붙어 있는지. 애드혹 서명이라 다시 빌드할 때마다 풀리고,
 // 손쉬운 사용 목록에는 켜져 보이는데 실제로는 없는 상태가 된다. 그때 이걸로 확인한다.
