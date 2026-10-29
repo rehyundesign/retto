@@ -37,8 +37,8 @@
     }
   ],
   "signature_verified": true,
-  "executable_sha256": "6f7754228aa607890cfc2d206a341e168af824763ebfadc6a19b20a867fcc33e",
-  "isolated_app": "/private/tmp/retto-amu-review.Sw8XkX/AmuReview.app",
+  "executable_sha256": "514bcf6e8d48fccf866a046dbe21f2dc051f081a2678d9993cf6f13bb5dc174a",
+  "isolated_app": "/private/tmp/retto-amu-review.q1yNj5/AmuReview.app",
   "installed": false,
   "tests": {
     "self_test": true,
