@@ -82,5 +82,70 @@
   "selfTestFlagReporting": {
     "reported": 52,
     "missing": 0
+  },
+  "trackedOnlyArchiveBuild": {
+    "sourceCommit": "ba9137adf0c60c26ef8d5335bcbb70411518c266",
+    "command": "macos/scripts/build.sh --app-only",
+    "exit": 0,
+    "usesInstalledResources": false,
+    "allSkinsReport": {
+      "completeFrameResources": true,
+      "ok": true,
+      "skinCount": 13,
+      "skins": [
+        {
+          "available": true,
+          "skin": "classic"
+        },
+        {
+          "available": true,
+          "skin": "chocolatHeart"
+        },
+        {
+          "available": true,
+          "skin": "angelWings"
+        },
+        {
+          "available": true,
+          "skin": "bee"
+        },
+        {
+          "available": true,
+          "skin": "bunny"
+        },
+        {
+          "available": true,
+          "skin": "rilakkuma"
+        },
+        {
+          "available": true,
+          "skin": "rilakkumaCape"
+        },
+        {
+          "available": true,
+          "skin": "magicalHeart"
+        },
+        {
+          "available": true,
+          "skin": "christmas"
+        },
+        {
+          "available": true,
+          "skin": "hana"
+        },
+        {
+          "available": true,
+          "skin": "amuRan"
+        },
+        {
+          "available": true,
+          "skin": "pichiPitch"
+        },
+        {
+          "available": true,
+          "skin": "jeanne"
+        }
+      ]
+    }
   }
 }
