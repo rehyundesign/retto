@@ -1,0 +1,49 @@
+{
+  "compiled_sources_match_current": true,
+  "resource_hash_matches": 1825,
+  "native_motion_boards": 160,
+  "native_gaze_boards": 4,
+  "rendered_seconds_per_background": 8,
+  "display": [
+    224,
+    320
+  ],
+  "pose_frames_covered_per_state": 16,
+  "all32_gaze_complete_sources_match_native": true,
+  "frozen_gaze_effect_checks": [
+    {
+      "background": "white",
+      "held_gaze": "school",
+      "protected_head_pixels": 5856,
+      "changing_effect_background_pixels": 1911
+    },
+    {
+      "background": "white",
+      "held_gaze": "heart",
+      "protected_head_pixels": 5238,
+      "changing_effect_background_pixels": 3369
+    },
+    {
+      "background": "dark",
+      "held_gaze": "school",
+      "protected_head_pixels": 5856,
+      "changing_effect_background_pixels": 1372
+    },
+    {
+      "background": "dark",
+      "held_gaze": "heart",
+      "protected_head_pixels": 5238,
+      "changing_effect_background_pixels": 2655
+    }
+  ],
+  "signature_verified": true,
+  "executable_sha256": "6f7754228aa607890cfc2d206a341e168af824763ebfadc6a19b20a867fcc33e",
+  "isolated_app": "/private/tmp/retto-amu-review.Sw8XkX/AmuReview.app",
+  "installed": false,
+  "tests": {
+    "self_test": true,
+    "amu_ran_clock": true,
+    "all16_boundaries_all10_rows": true
+  },
+  "limits": "offscreen RettoView and elapsed-time checks; no installed-app or desktop FPS claim"
+}
