@@ -2,6 +2,13 @@ import AppKit
 import Foundation
 
 enum JeanneSkin {
+    /// Release decoded frames when the single overlay switches away from this skin.
+    static func removeCachedImages() {
+        cache.removeAllObjects()
+        effectCache.removeAllObjects()
+        glowCache.removeAllObjects()
+    }
+
     struct Effect: Decodable { let back: String; let front: String }
     struct State: Decodable { let effects: [Effect]; let effectCycle: Double; let effectInterval: Double; let anchors: [[Double]]; let id: String; let row: Int; let cycle: Double; let times: [Double]; let files: [String] }
     struct Manifest: Decodable { let version: Int; let glowFiles: [String]; let states: [State] }
@@ -44,19 +51,13 @@ enum JeanneSkin {
         Int(max(0, time).truncatingRemainder(dividingBy: s.effectCycle) / s.effectInterval) % s.effects.count
     }
     static func drawEffects(row: Int, frame: Int, time: Double, front: Bool, in rect: NSRect) {
-        guard let s = state(row: row) else { return }
+        guard let s = state(row: row == 9 || row == 10 ? 0 : row) else { return }
         let e = s.effects[effectIndex(s, time: time)]
         image(front ? e.front : e.back)?.draw(in: rect, from: .zero, operation: .sourceOver, fraction: 1, respectFlipped: false, hints: [.interpolation: NSImageInterpolation.high])
-        guard front, let m = manifest else { return }
-        let phase = (time / s.cycle + 0.25 - (["running", "waving"].contains(s.id) ? 0.4 : 0.25)).truncatingRemainder(dividingBy: 1)
-        let gi = Int(((phase + 1).truncatingRemainder(dividingBy: 1)) * 40) % 40
-        let a = s.anchors[frame % s.anchors.count]
-        let r = NSRect(x: rect.minX + (a[0]-80)/448*rect.width, y: rect.maxY-(a[1]+80)/640*rect.height, width: 160/448*rect.width, height: 160/640*rect.height)
-        let strength = s.id == "sleeping" ? 0.22 : s.id == "running" ? 1.0 : s.id == "waving" ? 0.85 : 0.45
-        image(m.glowFiles[gi])?.draw(in: r, from: .zero, operation: .sourceOver, fraction: strength, respectFlipped: false, hints: [.interpolation: NSImageInterpolation.high])
+
     }
     static func validateEffects() -> Bool {
-        guard let m = manifest, m.version == 40, m.glowFiles.count == 40 else { return false }
+        guard let m = manifest, m.version == 56, m.glowFiles.isEmpty else { return false }
         for s in m.states {
             guard s.anchors.count == s.files.count, s.effectInterval == 0.05,
                 abs(Double(s.effects.count)*s.effectInterval-s.effectCycle)<0.00001,
@@ -64,7 +65,7 @@ enum JeanneSkin {
             for e in s.effects { for f in [e.back,e.front] { guard image(f)?.size == NSSize(width:448,height:640) else { print("Missing effect: \(f)"); return false } } }
         }
         for f in m.glowFiles { guard image(f)?.size == NSSize(width:160,height:160) else { return false } }
-        print("Jeanne v40 independent back/front effects, anchors, glow and timing: true")
+        print("Jeanne v56 independent back/front effects and pose-attached light: true")
         return true
     }
     static func drawCharacter(row: Int, frame: Int, in rect: NSRect) {
@@ -80,7 +81,7 @@ enum JeanneSkin {
         for state in m.states { guard expectedRows[state.id] == state.row else { print("State row mismatch: \(state.id)"); return false } }
         guard animation(animationCatalog[.waving]!).cycleLimit == nil else { return false }
         for s in m.states {
-            let expected = (s.row == 1 || s.row == 2) ? 8 : 16
+            let expected = 16
             guard s.files.count == expected, s.times.count == expected, abs(s.times.reduce(0,+)-s.cycle)<0.000001 else { print("Jeanne validation failure at line \(#line)"); return false }
             var elapsed = 0.0
             for (i,f) in s.files.enumerated() {
@@ -90,7 +91,7 @@ enum JeanneSkin {
             guard position(row:s.row,time:s.cycle+0.00001).cycles == 1 else { print("Jeanne validation failure at line \(#line)"); return false }
         }
         for i in 0..<16 { guard image("gaze-\(i).png")?.size == NSSize(width:448,height:640) else { print("Jeanne validation failure at line \(#line)"); return false } }
-        print("{\"jeanneOK\":true,\"cells\":144,\"gaze\":16,\"timing\":\"v31\"}")
+        print("{\"jeanneOK\":true,\"cells\":160,\"gaze\":16,\"timing\":\"v56\"}")
         return true
     }
 
