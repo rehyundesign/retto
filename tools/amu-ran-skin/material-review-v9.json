@@ -1,0 +1,32 @@
+{
+  "kind": "material-comparison-only",
+  "display_cell": [
+    224,
+    320
+  ],
+  "production_ready": false,
+  "registration_certified": false,
+  "reference_and_candidate": [
+    {
+      "path": "reference/hana-material-reference.png",
+      "sha256": "8ef187550a5ca43890fda32948edcd6c9597af4e7414c0cdfab00a21a988d6c7"
+    },
+    {
+      "path": "anchors/idle-heart-cape-pose-v9-source.png",
+      "sha256": "0ed91b021ad472f22b6767a255d617f5c197f96c3686c6b934f6ef0b5be000ca"
+    }
+  ],
+  "ran_source_preserved": true,
+  "visual_review": {
+    "fur": "candidate follows Hana short soft flocked-fur material reference",
+    "fabric": "matte felt reference applies to all current outfit pieces",
+    "shine": "satin/plastic ribbon highlights removed; natural eye highlights retained",
+    "anatomy": "Four visible attached limbs: two central forelegs emerge below the cape and end in paired grounded paws; two smaller rear paws visible outside forelegs; one right-side tail. No pompons or wrist-loop straps.",
+    "pending": [
+      "original and Hana profile measurements",
+      "source alpha-edge fragments and cell margin",
+      "all-pose four-limb review",
+      "actual motion and native rendering"
+    ]
+  }
+}

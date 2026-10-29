@@ -1,0 +1,891 @@
+{
+  "scope": "user-requested uniform cross-anchor size and placement repair",
+  "cell": [
+    448,
+    640
+  ],
+  "display": [
+    224,
+    320
+  ],
+  "separate_companion": true,
+  "approved_source_hashes_unchanged": true,
+  "anisotropic_transforms": false,
+  "original_reference": {
+    "front": {
+      "source": "base/idle.png",
+      "face_box": [
+        28,
+        117,
+        148,
+        221
+      ],
+      "eye_line": 174,
+      "head_x": [
+        20,
+        155
+      ],
+      "hip_x": 87,
+      "foot_x": [
+        42,
+        137
+      ],
+      "torso_box": [
+        44,
+        220,
+        145,
+        286
+      ],
+      "tail_anchor": [
+        145,
+        250
+      ]
+    },
+    "profile-right": {
+      "source": "base/drag-right.png",
+      "face_box": [
+        128,
+        167,
+        201,
+        252
+      ],
+      "hip_x": 70,
+      "foot_x": [
+        40,
+        202
+      ],
+      "torso_box": [
+        67,
+        207,
+        158,
+        271
+      ],
+      "tail_anchor": [
+        74,
+        206
+      ]
+    },
+    "profile-left": {
+      "source": "base/drag-left.png",
+      "face_box": [
+        23,
+        166,
+        96,
+        248
+      ],
+      "hip_x": 160,
+      "foot_x": [
+        21,
+        180
+      ],
+      "torso_box": [
+        66,
+        207,
+        160,
+        271
+      ],
+      "tail_anchor": [
+        155,
+        206
+      ]
+    },
+    "sleep": {
+      "source": "base/sleeping.png",
+      "face_box": [
+        111,
+        216,
+        194,
+        301
+      ],
+      "hip_x": 80,
+      "foot_x": [
+        130,
+        191
+      ],
+      "torso_box": [
+        28,
+        214,
+        132,
+        296
+      ],
+      "tail_anchor": [
+        53,
+        284
+      ]
+    }
+  },
+  "artwork_redrawn": true,
+  "redrawn_body_only": [
+    "A04",
+    "A06",
+    "A07",
+    "A11",
+    "A12",
+    "A14",
+    "A15"
+  ],
+  "head_restoration_audit": "compact-body-head-lock-audit-v1.json",
+  "heart_head_and_costume_restoration_audit": "heart-body-lock-audit-v2.json",
+  "cross_costume_body_gate": [
+    {
+      "id": "A06",
+      "eye_error_2x": 0.379594,
+      "paw_error_2x": 0
+    },
+    {
+      "id": "A07",
+      "eye_error_2x": -0.610346,
+      "paw_error_2x": 0
+    },
+    {
+      "id": "A14",
+      "eye_error_2x": -0.503636,
+      "paw_error_2x": 0
+    },
+    {
+      "id": "A15",
+      "eye_error_2x": -0.514651,
+      "paw_error_2x": 0
+    }
+  ],
+  "animated": false,
+  "installed": false,
+  "records": [
+    {
+      "id": "A01",
+      "group": "front",
+      "source": "anchors/idle-school-source.png",
+      "source_sha256": "5225312d506f69d10df69e5806e59ea03c5ac21f55adda9a4c36355e8d5c44cf",
+      "output": "registered-static-v2/A01.png",
+      "output_sha256": "b1946dddfdf1bc2bbe93dd6ae7b0bef18d0d30b98c295cc44f7b68d63e9f2a10",
+      "uniform_scale_from_previous_display": 0.987013,
+      "translation_2x": [
+        2.26,
+        16.052
+      ],
+      "source_to_cell_affine": {
+        "uniform_scale": 0.4214064787780598,
+        "translate_x": 2.259740259740255,
+        "translate_y": 16.051948051948102
+      },
+      "measurement": "warm-fur cheek span excluding costume/raised paw/tail",
+      "before_2x": 231.0,
+      "target_2x": 228,
+      "after_2x": 228.0,
+      "measurement_error_2x": 0.0,
+      "foot_baseline_2x": 628,
+      "body_center_x_2x": 174,
+      "eye_line_2x": 355.584416,
+      "face_box_2x": [
+        55.558,
+        243.065,
+        294.416,
+        452.312
+      ],
+      "torso_box_2x": [
+        93.065,
+        448.364,
+        264.805,
+        572.727
+      ],
+      "tail_anchor_2x": [
+        276.649,
+        507.584
+      ],
+      "clipped_opaque_pixels": 0,
+      "four_limb_review": "source anatomy unchanged under a single uniform transform; see static-review-notes.md",
+      "face_shape_deformed": false,
+      "strict_anatomical_registration": "not certified by a display-size normalization"
+    },
+    {
+      "id": "A02",
+      "group": "front",
+      "source": "anchors/A02-school-sleeve-locked-v3.png",
+      "source_sha256": "a8a257a08873ed2e9a2af04c27bb154f2ab301dadb0e0a12cf14535f073b1af6",
+      "output": "registered-static-v2/A02.png",
+      "output_sha256": "a8a257a08873ed2e9a2af04c27bb154f2ab301dadb0e0a12cf14535f073b1af6",
+      "uniform_scale_from_previous_display": 1.0,
+      "translation_2x": [
+        0.0,
+        0.0
+      ],
+      "source_to_cell_affine": {
+        "uniform_scale": 1.0,
+        "translate_x": 0.0,
+        "translate_y": 0.0
+      },
+      "measurement": "warm-fur cheek span excluding costume/raised paw/tail",
+      "before_2x": 228.0,
+      "target_2x": 228,
+      "after_2x": 228.0,
+      "measurement_error_2x": 0.0,
+      "foot_baseline_2x": 628,
+      "body_center_x_2x": 174,
+      "eye_line_2x": 343.0,
+      "face_box_2x": [
+        49.821,
+        224.929,
+        296.143,
+        434.607
+      ],
+      "torso_box_2x": [
+        90.536,
+        432.571,
+        257.464,
+        577.107
+      ],
+      "tail_anchor_2x": [
+        269.679,
+        509.929
+      ],
+      "clipped_opaque_pixels": 0,
+      "four_limb_review": "source anatomy unchanged under a single uniform transform; see static-review-notes.md",
+      "face_shape_deformed": false,
+      "strict_anatomical_registration": "not certified by a display-size normalization"
+    },
+    {
+      "id": "A03",
+      "group": "bow",
+      "source": "anchors/A03-character-source.png",
+      "source_sha256": "0d1b532e35747324821735c1dfbcbd6c793caa880883c70f97661579338eec73",
+      "output": "registered-static-v2/A03.png",
+      "output_sha256": "b729ff6b12a99ca9d05c965ab76709d25f737b334220710569823eec92ce00d8",
+      "uniform_scale_from_previous_display": 1.017857,
+      "translation_2x": [
+        -49.929,
+        8.125
+      ],
+      "source_to_cell_affine": {
+        "uniform_scale": 0.43457543123987413,
+        "translate_x": -49.928571428571416,
+        "translate_y": 8.125
+      },
+      "measurement": "warm-fur cheek span excluding costume/raised paw/tail",
+      "before_2x": 224.0,
+      "target_2x": 228,
+      "after_2x": 228,
+      "measurement_error_2x": 0,
+      "foot_baseline_2x": 628,
+      "body_center_x_2x": 174,
+      "eye_line_2x": 431.553571,
+      "face_box_2x": [
+        35.571,
+        295.161,
+        273.75,
+        490.589
+      ],
+      "torso_box_2x": [
+        66.107,
+        480.411,
+        267.643,
+        588.304
+      ],
+      "tail_anchor_2x": [
+        275.786,
+        535.375
+      ],
+      "clipped_opaque_pixels": 0,
+      "four_limb_review": "source anatomy unchanged under a single uniform transform; see static-review-notes.md",
+      "face_shape_deformed": false,
+      "strict_anatomical_registration": "not certified by a display-size normalization"
+    },
+    {
+      "id": "A04",
+      "group": "front",
+      "source": "anchors/A04-compact-body-locked-v1.png",
+      "source_sha256": "ae8ed7c5be579fbec9e2c461053e29a9dcd06b8329999cc519c6f43d3548d558",
+      "output": "registered-static-v2/A04.png",
+      "output_sha256": "944aee3be511095df2a6acf5b3bfb24d5f45c5636d1ab683c1d6bbe84f3df1c6",
+      "uniform_scale_from_previous_display": 1.0,
+      "translation_2x": [
+        0.0,
+        0.0
+      ],
+      "source_to_cell_affine": {
+        "uniform_scale": 1.0,
+        "translate_x": 0.0,
+        "translate_y": 0.0
+      },
+      "measurement": "warm-fur cheek span excluding costume/raised paw/tail",
+      "before_2x": 228.0,
+      "target_2x": 228,
+      "after_2x": 228.0,
+      "measurement_error_2x": 0.0,
+      "foot_baseline_2x": 628,
+      "body_center_x_2x": 174,
+      "eye_line_2x": 363.163752,
+      "face_box_2x": [
+        51.709,
+        238.8,
+        288.0,
+        452.291
+      ],
+      "torso_box_2x": [
+        86.0,
+        450.0,
+        264.0,
+        574.0
+      ],
+      "tail_anchor_2x": [
+        270.0,
+        496.0
+      ],
+      "clipped_opaque_pixels": 0,
+      "four_limb_review": "source anatomy unchanged under a single uniform transform; see static-review-notes.md",
+      "face_shape_deformed": false,
+      "strict_anatomical_registration": "not certified by a display-size normalization"
+    },
+    {
+      "id": "A05",
+      "group": "front",
+      "source": "anchors/A05-character-source.png",
+      "source_sha256": "8a5a5769f98699cdb81aa3821482c1e0925eca3422e8ca8dc8389a73b3d2b352",
+      "output": "registered-static-v2/A05.png",
+      "output_sha256": "e759ec4fa6f6e560e136d4918251959e341011e9a726430aa6c35c507537d31b",
+      "uniform_scale_from_previous_display": 0.942149,
+      "translation_2x": [
+        -1.24,
+        53.347
+      ],
+      "source_to_cell_affine": {
+        "uniform_scale": 0.4019834710743802,
+        "translate_x": -1.239669421487605,
+        "translate_y": 53.347107438016565
+      },
+      "measurement": "warm-fur cheek span excluding costume/raised paw/tail",
+      "before_2x": 242.0,
+      "target_2x": 228,
+      "after_2x": 228,
+      "measurement_error_2x": 0,
+      "foot_baseline_2x": 628,
+      "body_center_x_2x": 174,
+      "eye_line_2x": 347.297521,
+      "face_box_2x": [
+        55.289,
+        266.273,
+        290.826,
+        435.86
+      ],
+      "torso_box_2x": [
+        87.322,
+        433.975,
+        268.215,
+        577.182
+      ],
+      "tail_anchor_2x": [
+        277.636,
+        520.653
+      ],
+      "clipped_opaque_pixels": 0,
+      "four_limb_review": "source anatomy unchanged under a single uniform transform; see static-review-notes.md",
+      "face_shape_deformed": false,
+      "strict_anatomical_registration": "not certified by a display-size normalization"
+    },
+    {
+      "id": "A06",
+      "group": "front",
+      "source": "anchors/A06-heart-compact-locked-v2.png",
+      "source_sha256": "3530e4ac89edbae7c74c1bb78f3c015687f890412471d876651b0904312f937d",
+      "output": "registered-static-v2/A06.png",
+      "output_sha256": "8538455554683ed99b26d60a5d22d21790966ca5d9972d9baac34a1591c1b351",
+      "uniform_scale_from_previous_display": 1.0,
+      "translation_2x": [
+        0.0,
+        0.0
+      ],
+      "source_to_cell_affine": {
+        "uniform_scale": 1.0,
+        "translate_x": 0.0,
+        "translate_y": 0.0
+      },
+      "measurement": "warm-fur cheek span excluding costume/raised paw/tail",
+      "before_2x": 228.0,
+      "target_2x": 228,
+      "after_2x": 228.0,
+      "measurement_error_2x": 0.0,
+      "foot_baseline_2x": 628,
+      "body_center_x_2x": 174,
+      "eye_line_2x": 355.96401,
+      "face_box_2x": [
+        54.596,
+        236.56,
+        291.345,
+        428.018
+      ],
+      "torso_box_2x": [
+        92.0,
+        448.0,
+        266.0,
+        574.0
+      ],
+      "tail_anchor_2x": [
+        278.0,
+        498.0
+      ],
+      "clipped_opaque_pixels": 0,
+      "four_limb_review": "source anatomy unchanged under a single uniform transform; see static-review-notes.md",
+      "face_shape_deformed": false,
+      "strict_anatomical_registration": "not certified by a display-size normalization"
+    },
+    {
+      "id": "A07",
+      "group": "crouch",
+      "source": "anchors/A07-heart-compact-locked-v2.png",
+      "source_sha256": "c11b64a42d62077ffb92aa9b0a671d11d6df54e75b93837288c6e933278536e8",
+      "output": "registered-static-v2/A07.png",
+      "output_sha256": "aa2d2f8545c848ea79fc5f1e614c91d1431bc85167d05bdfa581feb5f9d1db5d",
+      "uniform_scale_from_previous_display": 1.0,
+      "translation_2x": [
+        0.0,
+        0.0
+      ],
+      "source_to_cell_affine": {
+        "uniform_scale": 1.0,
+        "translate_x": 0.0,
+        "translate_y": 0.0
+      },
+      "measurement": "warm-fur cheek span excluding costume/raised paw/tail",
+      "before_2x": 228.0,
+      "target_2x": 228,
+      "after_2x": 228.0,
+      "measurement_error_2x": 0.0,
+      "foot_baseline_2x": 628,
+      "body_center_x_2x": 174,
+      "eye_line_2x": 364.97407,
+      "face_box_2x": [
+        54.618,
+        247.549,
+        289.468,
+        441.3
+      ],
+      "torso_box_2x": [
+        92.0,
+        448.0,
+        266.0,
+        574.0
+      ],
+      "tail_anchor_2x": [
+        278.0,
+        498.0
+      ],
+      "clipped_opaque_pixels": 0,
+      "four_limb_review": "source anatomy unchanged under a single uniform transform; see static-review-notes.md",
+      "face_shape_deformed": false,
+      "strict_anatomical_registration": "not certified by a display-size normalization"
+    },
+    {
+      "id": "A08",
+      "group": "sleep",
+      "source": "anchors/A08-character-source.png",
+      "source_sha256": "c88858ef11bb1a5e6aa2840dee2a699532a89db57144ad9d9a4ceb826e5152d0",
+      "output": "registered-static-v2/A08.png",
+      "output_sha256": "13dc74d3af3a1eed6e07ca6acf9a2e8cf658739feb5883e35b099682e8e4fd99",
+      "uniform_scale_from_previous_display": 0.831683,
+      "translation_2x": [
+        26.931,
+        157.267
+      ],
+      "source_to_cell_affine": {
+        "uniform_scale": 0.35485148514851483,
+        "translate_x": 26.930693069306926,
+        "translate_y": 157.26732673267327
+      },
+      "measurement": "view-specific anatomical head height",
+      "before_2x": 202,
+      "target_2x": 168,
+      "after_2x": 168.0,
+      "measurement_error_2x": 0.0,
+      "foot_baseline_2x": 628,
+      "body_center_x_2x": 160,
+      "eye_line_2x": null,
+      "face_box_2x": [
+        228.198,
+        463.327,
+        391.208,
+        631.327
+      ],
+      "torso_box_2x": [
+        76.832,
+        478.297,
+        254.812,
+        606.376
+      ],
+      "tail_anchor_2x": [
+        118.416,
+        581.426
+      ],
+      "clipped_opaque_pixels": 0,
+      "four_limb_review": "source anatomy unchanged under a single uniform transform; see static-review-notes.md",
+      "face_shape_deformed": false,
+      "strict_anatomical_registration": "not certified by a display-size normalization"
+    },
+    {
+      "id": "A09",
+      "group": "profile-right",
+      "source": "anchors/A09-profile-repair-v2.png",
+      "source_sha256": "37245b81372abc325b7a8bb7524b2ed2f1217e2f19ba2b4d52e5729f6ecd39ec",
+      "output": "registered-static-v2/A09.png",
+      "output_sha256": "fbda6f6b00b1559cf0d8f0932ba9f230891b988c310b0955196da6acb11c91bc",
+      "uniform_scale_from_previous_display": 0.911111,
+      "translation_2x": [
+        12.444,
+        121.422
+      ],
+      "source_to_cell_affine": {
+        "uniform_scale": 0.3890000741234897,
+        "translate_x": 12.444444444444443,
+        "translate_y": 121.42222222222222
+      },
+      "measurement": "view-specific anatomical head height",
+      "before_2x": 180,
+      "target_2x": 164,
+      "after_2x": 164.0,
+      "measurement_error_2x": 0.0,
+      "foot_baseline_2x": 628,
+      "body_center_x_2x": 140,
+      "eye_line_2x": null,
+      "face_box_2x": [
+        243.867,
+        365.6,
+        404.222,
+        529.6
+      ],
+      "torso_box_2x": [
+        140.0,
+        473.111,
+        307.644,
+        591.556
+      ],
+      "tail_anchor_2x": [
+        143.644,
+        493.156
+      ],
+      "clipped_opaque_pixels": 0,
+      "four_limb_review": "source anatomy unchanged under a single uniform transform; see static-review-notes.md",
+      "face_shape_deformed": false,
+      "strict_anatomical_registration": "not certified by a display-size normalization"
+    },
+    {
+      "id": "A10",
+      "group": "profile-left",
+      "source": "anchors/A10-character-source.png",
+      "source_sha256": "c45ee764bec2cee84aef0a0b7b2c07c6e62b06f9bbffa13b42f6d332a69b8f62",
+      "output": "registered-static-v2/A10.png",
+      "output_sha256": "88b8fc9ce8a8fd895d7dd88aff2058644da1d85bf449ae8fdf69b3f5de1e28e3",
+      "uniform_scale_from_previous_display": 1.037975,
+      "translation_2x": [
+        -24.608,
+        12.481
+      ],
+      "source_to_cell_affine": {
+        "uniform_scale": 0.4386911870074039,
+        "translate_x": -24.607594936708836,
+        "translate_y": 18.708860759493703
+      },
+      "measurement": "view-specific anatomical head height",
+      "before_2x": 158,
+      "target_2x": 164,
+      "after_2x": 164.0,
+      "measurement_error_2x": 0.0,
+      "foot_baseline_2x": 628,
+      "body_center_x_2x": 320,
+      "eye_line_2x": null,
+      "face_box_2x": [
+        4.456,
+        350.861,
+        158.076,
+        514.861
+      ],
+      "torso_box_2x": [
+        120.709,
+        438.051,
+        326.228,
+        577.139
+      ],
+      "tail_anchor_2x": [
+        315.848,
+        462.962
+      ],
+      "clipped_opaque_pixels": 0,
+      "four_limb_review": "source anatomy unchanged under a single uniform transform; see static-review-notes.md",
+      "face_shape_deformed": false,
+      "strict_anatomical_registration": "not certified by a display-size normalization"
+    },
+    {
+      "id": "A11",
+      "group": "slight-turn",
+      "source": "anchors/A11-compact-body-locked-v1.png",
+      "source_sha256": "768add064b633d88c76e815319fbf0a3b474a0e91735d31f51ca1211dd5b8aeb",
+      "output": "registered-static-v2/A11.png",
+      "output_sha256": "78e5ec6c862a10cdb2368d7439fb326dc3ddcd26612eae7a55f7a5b1be43d18e",
+      "uniform_scale_from_previous_display": 1.0,
+      "translation_2x": [
+        0.0,
+        0.0
+      ],
+      "source_to_cell_affine": {
+        "uniform_scale": 1.0,
+        "translate_x": 0.0,
+        "translate_y": 0.0
+      },
+      "measurement": "warm-fur cheek span excluding costume/raised paw/tail",
+      "before_2x": 228.0,
+      "target_2x": 228,
+      "after_2x": 228.0,
+      "measurement_error_2x": 0.0,
+      "foot_baseline_2x": 628,
+      "body_center_x_2x": 174,
+      "eye_line_2x": 360.43996,
+      "face_box_2x": [
+        26.628,
+        236.562,
+        274.384,
+        452.281
+      ],
+      "torso_box_2x": [
+        86.0,
+        450.0,
+        264.0,
+        574.0
+      ],
+      "tail_anchor_2x": [
+        270.0,
+        496.0
+      ],
+      "clipped_opaque_pixels": 0,
+      "four_limb_review": "source anatomy unchanged under a single uniform transform; see static-review-notes.md",
+      "face_shape_deformed": false,
+      "strict_anatomical_registration": "not certified by a display-size normalization"
+    },
+    {
+      "id": "A12",
+      "group": "front",
+      "source": "anchors/A12-compact-body-locked-v1.png",
+      "source_sha256": "35f6c1a65f2c973eca57e2c458001c0028fcde0dd63c39da3aa732011105a1e1",
+      "output": "registered-static-v2/A12.png",
+      "output_sha256": "b343c3c5b6d3e5ff8486bd8414e7ebf409411916a6a164066b3e459e7b458a93",
+      "uniform_scale_from_previous_display": 0.991304,
+      "translation_2x": [
+        1.513,
+        5.461
+      ],
+      "source_to_cell_affine": {
+        "uniform_scale": 0.991304347826087,
+        "translate_x": 1.5130434782608688,
+        "translate_y": 5.460869565217308
+      },
+      "measurement": "warm-fur cheek span excluding costume/raised paw/tail",
+      "before_2x": 230.0,
+      "target_2x": 228,
+      "after_2x": 228.0,
+      "measurement_error_2x": 0.0,
+      "foot_baseline_2x": 628,
+      "body_center_x_2x": 174,
+      "eye_line_2x": 359.022674,
+      "face_box_2x": [
+        41.456,
+        230.434,
+        284.783,
+        453.979
+      ],
+      "torso_box_2x": [
+        86.765,
+        451.548,
+        263.217,
+        574.47
+      ],
+      "tail_anchor_2x": [
+        269.165,
+        497.148
+      ],
+      "clipped_opaque_pixels": 0,
+      "four_limb_review": "source anatomy unchanged under a single uniform transform; see static-review-notes.md",
+      "face_shape_deformed": false,
+      "strict_anatomical_registration": "not certified by a display-size normalization"
+    },
+    {
+      "id": "A13",
+      "group": "bow",
+      "source": "anchors/A13-character-source.png",
+      "source_sha256": "4510c09552ccecc75613d11fc28d7252785119d64d56c7460273208a42e185d7",
+      "output": "registered-static-v2/A13.png",
+      "output_sha256": "875f6805d18223a037eadcdcbd79e026287527e8294620db4d5847b76397b31f",
+      "uniform_scale_from_previous_display": 0.951983,
+      "translation_2x": [
+        -27.82,
+        56.81
+      ],
+      "source_to_cell_affine": {
+        "uniform_scale": 0.4023476582502856,
+        "translate_x": -27.820459290187898,
+        "translate_y": 62.521920668058414
+      },
+      "measurement": "warm-fur cheek span excluding costume/raised paw/tail",
+      "before_2x": 239.5,
+      "target_2x": 228,
+      "after_2x": 227.5,
+      "measurement_error_2x": -0.5,
+      "foot_baseline_2x": 628,
+      "body_center_x_2x": 174,
+      "eye_line_2x": 382.388309,
+      "face_box_2x": [
+        29.299,
+        231.975,
+        286.334,
+        452.835
+      ],
+      "torso_box_2x": [
+        63.57,
+        443.315,
+        261.582,
+        568.977
+      ],
+      "tail_anchor_2x": [
+        297.758,
+        527.09
+      ],
+      "clipped_opaque_pixels": 0,
+      "four_limb_review": "source anatomy unchanged under a single uniform transform; see static-review-notes.md",
+      "face_shape_deformed": false,
+      "strict_anatomical_registration": "not certified by a display-size normalization"
+    },
+    {
+      "id": "A14",
+      "group": "front",
+      "source": "anchors/A14-heart-compact-locked-v2.png",
+      "source_sha256": "5aca2aa3a457e9b6287e6876d16948b78cb84c91b4e57014d2d03fc1c4cd8bd5",
+      "output": "registered-static-v2/A14.png",
+      "output_sha256": "49a59aa46b13d4444defcbf7382052b4c179c6391e36247fa3f4c3db839e64b7",
+      "uniform_scale_from_previous_display": 1.0,
+      "translation_2x": [
+        0.0,
+        0.0
+      ],
+      "source_to_cell_affine": {
+        "uniform_scale": 1.0,
+        "translate_x": 0.0,
+        "translate_y": 0.0
+      },
+      "measurement": "warm-fur cheek span excluding costume/raised paw/tail",
+      "before_2x": 228.0,
+      "target_2x": 228,
+      "after_2x": 228.0,
+      "measurement_error_2x": 0.0,
+      "foot_baseline_2x": 628,
+      "body_center_x_2x": 174,
+      "eye_line_2x": 355.08078,
+      "face_box_2x": [
+        47.129,
+        235.565,
+        293.516,
+        434.145
+      ],
+      "torso_box_2x": [
+        92.0,
+        448.0,
+        266.0,
+        574.0
+      ],
+      "tail_anchor_2x": [
+        278.0,
+        498.0
+      ],
+      "clipped_opaque_pixels": 0,
+      "four_limb_review": "source anatomy unchanged under a single uniform transform; see static-review-notes.md",
+      "face_shape_deformed": false,
+      "strict_anatomical_registration": "not certified by a display-size normalization"
+    },
+    {
+      "id": "A15",
+      "group": "airborne",
+      "source": "anchors/A15-heart-compact-locked-v2.png",
+      "source_sha256": "ae8cd6b3420ca3e4f001beda5d2ac72aea19389dcb800ccb756c0aeb740272d6",
+      "output": "registered-static-v2/A15.png",
+      "output_sha256": "d0c9c0e5eee85cc3cd3eeb436dbc1592447c93218a5e424e1219cbd23e5986e0",
+      "uniform_scale_from_previous_display": 1.002198,
+      "translation_2x": [
+        -0.382,
+        -1.31
+      ],
+      "source_to_cell_affine": {
+        "uniform_scale": 1.0021978021978022,
+        "translate_x": -0.38241758241758816,
+        "translate_y": -1.3098901098901479
+      },
+      "measurement": "warm-fur cheek span excluding costume/raised paw/tail",
+      "before_2x": 227.5,
+      "target_2x": 228,
+      "after_2x": 228.5,
+      "measurement_error_2x": 0.5,
+      "foot_baseline_2x": 596,
+      "body_center_x_2x": 174,
+      "eye_line_2x": 315.069765,
+      "face_box_2x": [
+        53.897,
+        197.003,
+        292.067,
+        386.317
+      ],
+      "torso_box_2x": [
+        91.82,
+        407.587,
+        266.202,
+        533.864
+      ],
+      "tail_anchor_2x": [
+        278.229,
+        457.697
+      ],
+      "clipped_opaque_pixels": 0,
+      "four_limb_review": "source anatomy unchanged under a single uniform transform; see static-review-notes.md",
+      "face_shape_deformed": false,
+      "strict_anatomical_registration": "not certified by a display-size normalization"
+    },
+    {
+      "id": "A16",
+      "group": "bow",
+      "source": "anchors/A16-character-source.png",
+      "source_sha256": "5851e525ab3746c633a6681bd8a8938fe0bd03cf45c58a788a12734948add462",
+      "output": "registered-static-v2/A16.png",
+      "output_sha256": "df53a22815552e5a962ad5e93e055914b5c8b145f6f4121b763ab1e16ad0f280",
+      "uniform_scale_from_previous_display": 0.86692,
+      "translation_2x": [
+        4.084,
+        102.646
+      ],
+      "source_to_cell_affine": {
+        "uniform_scale": 0.3698859315589354,
+        "translate_x": 4.083650190114071,
+        "translate_y": 102.64638783269959
+      },
+      "measurement": "warm-fur cheek span excluding costume/raised paw/tail",
+      "before_2x": 263.0,
+      "target_2x": 228,
+      "after_2x": 227.5,
+      "measurement_error_2x": -0.5,
+      "foot_baseline_2x": 628,
+      "body_center_x_2x": 174,
+      "eye_line_2x": 355.787072,
+      "face_box_2x": [
+        50.897,
+        229.217,
+        288.433,
+        451.148
+      ],
+      "torso_box_2x": [
+        83.84,
+        442.479,
+        257.224,
+        584.654
+      ],
+      "tail_anchor_2x": [
+        288.433,
+        530.905
+      ],
+      "clipped_opaque_pixels": 0,
+      "four_limb_review": "source anatomy unchanged under a single uniform transform; see static-review-notes.md",
+      "face_shape_deformed": false,
+      "strict_anatomical_registration": "not certified by a display-size normalization"
+    }
+  ]
+}

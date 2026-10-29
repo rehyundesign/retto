@@ -1,0 +1,14 @@
+{
+  "rejected_version": "../idle-v1",
+  "user_feedback": [
+    "clothing does not fit body",
+    "pose lacks Amu attitude",
+    "motion is very awkward"
+  ],
+  "root_causes": [
+    "Restored static head/body left isolated eye/tail/cloth animation instead of connected action",
+    "Breast patch substituted for iconic sleeve armband and boxy blazer did not follow cat shoulders",
+    "Source-count/hash checks were reported as visual naturalness despite visible pose construction issues"
+  ],
+  "correction": "new fitted anchor from actual Amu reference then 16 fully integrated anatomical drawings; uniform whole-cell registration only, no regional grafts"
+}

@@ -1,0 +1,17 @@
+{
+  "state": "gaze-heart-v2",
+  "costume": "heart",
+  "id": "G04",
+  "direction": 4,
+  "prompt": "Precise accessory placement edit of this complete image. Keep the entire cat, exact face, gaze direction, neck, shoulders, all four legs, clothing, paws, tail, lighting, scale, and framing unchanged. Move ONLY the entire ONE red heart and pink plume ornament to the OPPOSITE ear/temple: the far small ear on the image's upper RIGHT, behind the forehead. This right-looking cat's visible big ear on image LEFT is its RIGHT ear and must have NO ornament. The correct LEFT ear is the far ear at image RIGHT and the ornament should be mostly occluded there, a subtle far-side glimpse. Leave the white/red visor in place around the forehead. The plume must be behind the far ear, never a new large plume behind the near ear. No duplicate ornament. Output ONE complete cat with original continuous neck/body, transparent background. Do not isolate or replace the head, do not change the pose.",
+  "refs": [
+    "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-heart-v2/rejected/G04-56f932fb11.png"
+  ],
+  "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-heart-v2/requests/G04.json",
+  "construction": "one complete source; no body/head compositing",
+  "profile": "original-seated-gaze-4",
+  "generated_path": "/Users/luxia/.codex/generated_images/01a18151-f01e-7831-98b4-dca0f52b644c/exec-aec29ae0-c650-44fd-8e75-1a15f3b34838.png",
+  "source_sha256": "f03ae1a31daf1c19866cd8f7fd80ed768a2ef544b722139554904317e726fe0e",
+  "generator": "built-in image_gen",
+  "repair": "far-side accessory only"
+}

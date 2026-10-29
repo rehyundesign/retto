@@ -1,0 +1,14 @@
+{
+  "allowed_companion_region_2x": [
+    360,
+    282,
+    448,
+    372
+  ],
+  "changed_pixels_outside_companion": 0,
+  "changed_pixels_inside_companion": 5185,
+  "approved_retto_hash_unchanged": true,
+  "old_ran_source_preserved": true,
+  "new_ran_source": "reference/ran-sculpted-v10-source.png",
+  "new_ran_sha256": "1c7a4862a350dd012e1cb9d8ed546163a0801e6bb8ee16077b28689825ab5181"
+}

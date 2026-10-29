@@ -1,0 +1,67 @@
+{
+  "state": "idle",
+  "review_status": "rejected by user: outfit fit, Amu attitude and unnatural motion",
+  "independent_character_drawings": 16,
+  "unique_character_pixels": 16,
+  "independent_companion_drawings": 8,
+  "character_interval_seconds": 0.2,
+  "character_cycle_seconds": 3.2,
+  "companion_cycle_seconds": 3.2,
+  "companion_delay_seconds": 0.2,
+  "effect_cycle_seconds": 8,
+  "effect_samples_per_layer": 80,
+  "effect_sample_hz": 10,
+  "gif_cycle_seconds": 16,
+  "gif_tick_ms": 100,
+  "rendered_display": [
+    224,
+    320
+  ],
+  "drawing_ids": [
+    "F00",
+    "F02",
+    "F01",
+    "F03",
+    "F04",
+    "F06",
+    "F05",
+    "F07",
+    "F08",
+    "F09",
+    "F10",
+    "F11",
+    "F12",
+    "F13",
+    "F14",
+    "F15"
+  ],
+  "intentional_character_holds": 0,
+  "frozen_character_effect_progression_check": true,
+  "source_hashes_unchanged": true,
+  "four_limb_contract": {
+    "front_left": "grounded unchanged",
+    "front_right": "grounded unchanged",
+    "rear_left": "grounded behind front_left",
+    "rear_right": "grounded behind front_right"
+  },
+  "native_changed": false,
+  "installed": false,
+  "reference": "reference/hana-idle-3.2s.gif",
+  "registration": "registration.json",
+  "visual_review": {
+    "character_action": "superseded: user rejected outfit fit, character gesture and motion naturalness",
+    "secondary_motion": "superseded: user rejected outfit fit, character gesture and motion naturalness",
+    "loop_seam": "superseded: user rejected outfit fit, character gesture and motion naturalness",
+    "light_dark_1x": "superseded: user rejected outfit fit, character gesture and motion naturalness",
+    "same_scale_hana_comparison": "superseded: user rejected outfit fit, character gesture and motion naturalness"
+  },
+  "browser_review": {
+    "url": "http://127.0.0.1:8767/preview.html",
+    "character_only_checked": true,
+    "composite_checked": true,
+    "light_checked": true,
+    "dark_checked": true,
+    "native_app_checked": false
+  },
+  "visual_review_superseded_by_user_feedback": true
+}

@@ -1,0 +1,10 @@
+{
+  "id": "A12",
+  "stage": "independent-static-anchor",
+  "source": "anchors/A12-character-source.png",
+  "master": "anchors/idle-school-source.png",
+  "pose_reference": "base/running.png",
+  "generated_file": "/Users/luxia/.codex/generated_images/01a18151-f01e-7831-98b4-dca0f52b644c/exec-8dfce3f2-97ff-40ec-ab0d-605e181580ec.png",
+  "prompt": "One independent static Retto costume anchor A12. Image1 is the approved identity and costume master. Image2 is only original Retto pose/direction reference. Pose: School outfit, front seated, anatomical RIGHT forepaw (viewer-left) cupped forward at chest level to present a future tiny heart charm (DO NOT DRAW CHARM); other forepaw remains grounded, both rear feet support seated hips. Small happy focused expression. No extra paw or effects. Preserve the master cat's head as a round full-volume skull with normal forehead height, blue eyes, correct eye spacing, distinct muzzle and rounded chin. Do NOT flatten, widen or compress the face to make a low pose; lower torso and bend legs instead. For side profile keep realistic feline muzzle depth and round cranium, no brachycephalic face. Same brown-white markings, pink nose, brown tail, short soft fur, matte felt clothing, exact school uniform black blazer/white collar/red tie/red plaid skirt/pink X hairclip and red armband. Four anatomically attached feline limbs exactly once; any occluded limb must lie behind torso plausibly. Same portrait 7:10 full-body framing, same head/body scale as master, no zoom to fill canvas; ground contact near 97% height except airborne poses. No text, no props, no companion/effects, real transparent background; ignore stale RGB rays in original reference. One image not a sheet.",
+  "review": "pending-registration-and-anatomy"
+}

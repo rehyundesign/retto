@@ -1,0 +1,32 @@
+{
+  "scope": "shorten only three overlong school torsos, restore frozen face pixels, then uniformly register all 16 independent cells",
+  "entries": [
+    {
+      "id": "A04",
+      "prompt": "Precise proportion repair of image1, a single transparent school-uniform Retto cat. Image2 is the approved neutral reference for BODY LENGTH, not a replacement pose. Image1's torso/straight foreleg section is too long: SHORTEN body/leg stance so its total seated height from skull top to foot matches image2. Keep the exact head SIZE, round head shape, blue eyes, muzzle/chin/ear proportions and brown-white fur markings of image1; move that intact head assembly DOWN by about 40 pixels on the 448x640 reference canvas (about20px at runtime), instead of shrinking or flattening the head. Maintain paws' lowest contact at y628/640 and anatomical hip center around x174/448; do not zoom whole character. Shorter feline torso and softly bent supporting foreleg bring shoulders down; jacket/tie/skirt follow this compact body. Preserve image1 action: anatomical right forepaw crosses chest to the red breast badge; left forepaw grounded; both rear haunches supporting. Four actual attached feline limbs exactly once, one fluffy brown tail, black blazer/white collar/red tie/red plaid hip skirt/red breast patch and pink X clip on anatomical left ear. Matte soft fabric, same fur material. No new accessory, no effects/companion/text. True transparent background. Same portrait7:10 canvas with complete ears/tail/paws and headroom. One independent cell only. Do not stretch skull or redraw face into a different cat. Crucial change is shorter torso by ~40/640 of canvas, not a differently sized head.",
+      "tool": "built-in image_gen.imagegen",
+      "edit_source": "size-repair-input-v1/A04.png",
+      "body_length_reference": "size-repair-input-v1/A01.png",
+      "generated_source": "anchors/A04-compact-body-edit-v1.png",
+      "selected_head_restored_source": "anchors/A04-compact-body-locked-v1.png"
+    },
+    {
+      "id": "A11",
+      "prompt": "Precise proportion repair of image1, a single transparent school-uniform Retto cat. Image2 is the approved neutral reference for BODY LENGTH, not a replacement pose. Image1's torso/straight foreleg section is too long: SHORTEN body/leg stance so its total seated height from skull top to foot matches image2. Keep the exact head SIZE, round head shape, blue eyes, muzzle/chin/ear proportions and brown-white fur markings of image1; move that intact head assembly DOWN by about 40 pixels on the 448x640 reference canvas (about20px at runtime), instead of shrinking or flattening the head. Maintain paws' lowest contact at y628/640 and anatomical hip center around x174/448; do not zoom whole character. Shorter feline torso and softly bent supporting foreleg bring shoulders down; jacket/tie/skirt follow this compact body. Preserve image1 action: both forepaws grounded, slight head turn toward viewer right. Four actual attached feline limbs exactly once, one fluffy brown tail, black blazer/white collar/red tie/red plaid hip skirt/red breast patch and pink X clip on anatomical left ear. Matte soft fabric, same fur material. No new accessory, no effects/companion/text. True transparent background. Same portrait7:10 canvas with complete ears/tail/paws and headroom. One independent cell only. Do not stretch skull or redraw face into a different cat. Crucial change is shorter torso by ~40/640 of canvas, not a differently sized head.",
+      "tool": "built-in image_gen.imagegen",
+      "edit_source": "size-repair-input-v1/A11.png",
+      "body_length_reference": "size-repair-input-v1/A01.png",
+      "generated_source": "anchors/A11-compact-body-edit-v1.png",
+      "selected_head_restored_source": "anchors/A11-compact-body-locked-v1.png"
+    },
+    {
+      "id": "A12",
+      "prompt": "Precise proportion repair of image1, a single transparent school-uniform Retto cat. Image2 is the approved neutral reference for BODY LENGTH, not a replacement pose. Image1's torso/straight foreleg section is too long: SHORTEN body/leg stance so its total seated height from skull top to foot matches image2. Keep the exact head SIZE, round head shape, blue eyes, muzzle/chin/ear proportions and brown-white fur markings of image1; move that intact head assembly DOWN by about 40 pixels on the 448x640 reference canvas (about20px at runtime), instead of shrinking or flattening the head. Maintain paws' lowest contact at y628/640 and anatomical hip center around x174/448; do not zoom whole character. Shorter feline torso and softly bent supporting foreleg bring shoulders down; jacket/tie/skirt follow this compact body. Preserve image1 action: anatomical right forepaw raised cupped forward at chest level, left forepaw grounded, rear feet support hips. Four actual attached feline limbs exactly once, one fluffy brown tail, black blazer/white collar/red tie/red plaid hip skirt/red breast patch and pink X clip on anatomical left ear. Matte soft fabric, same fur material. No new accessory, no effects/companion/text. True transparent background. Same portrait7:10 canvas with complete ears/tail/paws and headroom. One independent cell only. Do not stretch skull or redraw face into a different cat. Crucial change is shorter torso by ~40/640 of canvas, not a differently sized head.",
+      "tool": "built-in image_gen.imagegen",
+      "edit_source": "size-repair-input-v1/A12.png",
+      "body_length_reference": "size-repair-input-v1/A01.png",
+      "generated_source": "anchors/A12-compact-body-edit-v1.png",
+      "selected_head_restored_source": "anchors/A12-compact-body-locked-v1.png"
+    }
+  ]
+}

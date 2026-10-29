@@ -1,0 +1,597 @@
+{
+  "coordinate_space": "224x320 preview of isolated source, uniformly contained and centered",
+  "method": "Observed head/eye/hip/foot regions on each independent source. Warm-fur cheek width is measured from pixels inside the declared region; hats, raised paws, cape, skirt and tail are excluded.",
+  "targets": {
+    "front_cheek_width": 114,
+    "profile_head_height": 82,
+    "sleep_head_height": 84,
+    "ground_baseline": 314,
+    "jump_baseline": 298,
+    "front_hip_center_x": 87
+  },
+  "anchors": {
+    "A01": {
+      "group": "front",
+      "eye_line": 172,
+      "head_x": [
+        22,
+        154
+      ],
+      "hip_x": 87,
+      "foot_x": [
+        42,
+        138
+      ],
+      "face_box": [
+        27,
+        115,
+        148,
+        221
+      ],
+      "torso_box": [
+        46,
+        219,
+        133,
+        282
+      ],
+      "tail_anchor": [
+        139,
+        249
+      ]
+    },
+    "A02": {
+      "group": "front",
+      "eye_line": 168,
+      "head_x": [
+        43,
+        165
+      ],
+      "hip_x": 106,
+      "foot_x": [
+        60,
+        150
+      ],
+      "face_box": [
+        45,
+        110,
+        166,
+        213
+      ],
+      "torso_box": [
+        65,
+        212,
+        147,
+        283
+      ],
+      "tail_anchor": [
+        153,
+        250
+      ]
+    },
+    "A03": {
+      "group": "bow",
+      "eye_line": 208,
+      "head_x": [
+        36,
+        166
+      ],
+      "cheek_y": [
+        188,
+        208
+      ],
+      "hip_x": 110,
+      "foot_x": [
+        55,
+        158
+      ],
+      "face_box": [
+        42,
+        141,
+        159,
+        237
+      ],
+      "torso_box": [
+        57,
+        232,
+        156,
+        285
+      ],
+      "tail_anchor": [
+        160,
+        259
+      ]
+    },
+    "A04": {
+      "group": "front",
+      "eye_line": 181.58187600000002,
+      "head_x": [
+        21.70906,
+        145.03637600000002
+      ],
+      "hip_x": 87,
+      "foot_x": [
+        40,
+        145
+      ],
+      "face_box": [
+        25.8545,
+        119.4,
+        144.0,
+        226.1455
+      ],
+      "torso_box": [
+        43,
+        225,
+        132,
+        287
+      ],
+      "tail_anchor": [
+        135,
+        248
+      ]
+    },
+    "A05": {
+      "group": "front",
+      "eye_line": 156,
+      "head_x": [
+        26,
+        160
+      ],
+      "hip_x": 93,
+      "foot_x": [
+        40,
+        143
+      ],
+      "face_box": [
+        30,
+        113,
+        155,
+        203
+      ],
+      "torso_box": [
+        47,
+        202,
+        143,
+        278
+      ],
+      "tail_anchor": [
+        148,
+        248
+      ]
+    },
+    "A06": {
+      "group": "front",
+      "eye_line": 177.98200500000002,
+      "head_x": [
+        24.20968,
+        149.78976999999998
+      ],
+      "hip_x": 87,
+      "foot_x": [
+        40,
+        145
+      ],
+      "face_box": [
+        27.298,
+        118.28,
+        145.6725,
+        214.009
+      ],
+      "torso_box": [
+        46,
+        224,
+        133,
+        287
+      ],
+      "tail_anchor": [
+        139,
+        249
+      ],
+      "torso_visibility": "partly occluded by approved cape/skirt; canonical compact A01 body profile, not an independent pixelwise torso segmentation"
+    },
+    "A07": {
+      "group": "crouch",
+      "eye_line": 182.487035,
+      "head_x": [
+        25.351722000000002,
+        147.66934700000002
+      ],
+      "hip_x": 87,
+      "foot_x": [
+        40,
+        145
+      ],
+      "face_box": [
+        27.309,
+        123.7745,
+        144.734,
+        220.65
+      ],
+      "torso_box": [
+        46,
+        224,
+        133,
+        287
+      ],
+      "tail_anchor": [
+        139,
+        249
+      ],
+      "torso_visibility": "partly occluded by approved cape/skirt; canonical compact A01 body profile, not an independent pixelwise torso segmentation"
+    },
+    "A08": {
+      "group": "sleep",
+      "head_box": [
+        121,
+        184,
+        219,
+        285
+      ],
+      "hip_x": 80,
+      "target_hip_x": 80,
+      "foot_x": [
+        133,
+        213
+      ],
+      "face_box": [
+        121,
+        184,
+        219,
+        285
+      ],
+      "torso_box": [
+        30,
+        193,
+        137,
+        270
+      ],
+      "tail_anchor": [
+        55,
+        255
+      ]
+    },
+    "A09": {
+      "group": "profile-right",
+      "head_box": [
+        127,
+        134,
+        215,
+        224
+      ],
+      "hip_x": 70,
+      "target_hip_x": 70,
+      "foot_x": [
+        45,
+        213
+      ],
+      "face_box": [
+        127,
+        134,
+        215,
+        224
+      ],
+      "torso_box": [
+        70,
+        193,
+        162,
+        258
+      ],
+      "tail_anchor": [
+        72,
+        204
+      ]
+    },
+    "A10": {
+      "group": "profile-left",
+      "head_box": [
+        14,
+        163,
+        88,
+        242
+      ],
+      "hip_x": 166,
+      "target_hip_x": 160,
+      "foot_x": [
+        40,
+        175
+      ],
+      "face_box": [
+        14,
+        163,
+        88,
+        242
+      ],
+      "torso_box": [
+        70,
+        205,
+        169,
+        272
+      ],
+      "tail_anchor": [
+        164,
+        217
+      ]
+    },
+    "A11": {
+      "group": "slight-turn",
+      "eye_line": 180.21998000000002,
+      "head_x": [
+        11.178224,
+        141.463976
+      ],
+      "hip_x": 87,
+      "foot_x": [
+        40,
+        145
+      ],
+      "face_box": [
+        13.314,
+        118.281,
+        137.192,
+        226.1405
+      ],
+      "torso_box": [
+        43,
+        225,
+        132,
+        287
+      ],
+      "tail_anchor": [
+        135,
+        248
+      ]
+    },
+    "A12": {
+      "group": "front",
+      "eye_line": 178.331612,
+      "head_x": [
+        18.15098,
+        147.86654
+      ],
+      "hip_x": 87,
+      "foot_x": [
+        40,
+        145
+      ],
+      "face_box": [
+        20.1465,
+        113.4735,
+        142.8775,
+        226.2265
+      ],
+      "torso_box": [
+        43,
+        225,
+        132,
+        287
+      ],
+      "tail_anchor": [
+        135,
+        248
+      ]
+    },
+    "A13": {
+      "group": "bow",
+      "eye_line": 171,
+      "head_x": [
+        28,
+        166
+      ],
+      "hip_x": 106,
+      "foot_x": [
+        74,
+        154
+      ],
+      "face_box": [
+        30,
+        92,
+        165,
+        208
+      ],
+      "torso_box": [
+        48,
+        203,
+        152,
+        269
+      ],
+      "tail_anchor": [
+        171,
+        247
+      ]
+    },
+    "A14": {
+      "group": "front",
+      "eye_line": 177.54039,
+      "head_x": [
+        29.080765000000003,
+        147.67756
+      ],
+      "hip_x": 87,
+      "foot_x": [
+        40,
+        145
+      ],
+      "face_box": [
+        23.5645,
+        117.7825,
+        146.758,
+        217.0725
+      ],
+      "torso_box": [
+        46,
+        224,
+        133,
+        287
+      ],
+      "tail_anchor": [
+        139,
+        249
+      ],
+      "torso_visibility": "partly occluded by approved cape/skirt; canonical compact A01 body profile, not an independent pixelwise torso segmentation"
+    },
+    "A15": {
+      "group": "airborne",
+      "eye_line": 157.84292,
+      "head_x": [
+        24.033369999999998,
+        149.96653
+      ],
+      "hip_x": 87,
+      "foot_x": [
+        60,
+        120
+      ],
+      "face_box": [
+        27.08,
+        98.939,
+        145.904,
+        193.3885
+      ],
+      "torso_box": [
+        46,
+        204,
+        133,
+        267
+      ],
+      "tail_anchor": [
+        139,
+        229
+      ],
+      "torso_visibility": "partly occluded by approved cape/skirt; canonical compact A01 body profile, not an independent pixelwise torso segmentation",
+      "foot_region_note": "Only actual tucked rear paws; tail on viewer-right excluded."
+    },
+    "A16": {
+      "group": "bow",
+      "eye_line": 146,
+      "head_x": [
+        24,
+        168
+      ],
+      "hip_x": 98,
+      "foot_x": [
+        43,
+        145
+      ],
+      "face_box": [
+        27,
+        73,
+        164,
+        201
+      ],
+      "torso_box": [
+        46,
+        196,
+        146,
+        278
+      ],
+      "tail_anchor": [
+        164,
+        247
+      ]
+    }
+  },
+  "canonical_original_profiles": {
+    "front": {
+      "source": "base/idle.png",
+      "face_box": [
+        28,
+        117,
+        148,
+        221
+      ],
+      "eye_line": 174,
+      "head_x": [
+        20,
+        155
+      ],
+      "hip_x": 87,
+      "foot_x": [
+        42,
+        137
+      ],
+      "torso_box": [
+        44,
+        220,
+        145,
+        286
+      ],
+      "tail_anchor": [
+        145,
+        250
+      ]
+    },
+    "profile-right": {
+      "source": "base/drag-right.png",
+      "face_box": [
+        128,
+        167,
+        201,
+        252
+      ],
+      "hip_x": 70,
+      "foot_x": [
+        40,
+        202
+      ],
+      "torso_box": [
+        67,
+        207,
+        158,
+        271
+      ],
+      "tail_anchor": [
+        74,
+        206
+      ]
+    },
+    "profile-left": {
+      "source": "base/drag-left.png",
+      "face_box": [
+        23,
+        166,
+        96,
+        248
+      ],
+      "hip_x": 160,
+      "foot_x": [
+        21,
+        180
+      ],
+      "torso_box": [
+        66,
+        207,
+        160,
+        271
+      ],
+      "tail_anchor": [
+        155,
+        206
+      ]
+    },
+    "sleep": {
+      "source": "base/sleeping.png",
+      "face_box": [
+        111,
+        216,
+        194,
+        301
+      ],
+      "hip_x": 80,
+      "foot_x": [
+        130,
+        191
+      ],
+      "torso_box": [
+        28,
+        214,
+        132,
+        296
+      ],
+      "tail_anchor": [
+        53,
+        284
+      ]
+    }
+  },
+  "revision": "v2: school and transformed states share one compact body; cheek width alone is insufficient"
+}

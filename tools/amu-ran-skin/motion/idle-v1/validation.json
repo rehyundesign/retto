@@ -1,0 +1,221 @@
+{
+  "counts": "16 independent drawing sources, 16 distinct decoded character cells; visual continuity reviewed separately",
+  "rows": [
+    {
+      "id": "F00",
+      "playback_slot": 0,
+      "blue_iris_pixels": 645,
+      "tail_center_2x": [
+        330.43,
+        525.64
+      ],
+      "support_region_changed_pixels": 0,
+      "protected_identity_region_changed_pixels": 0,
+      "anatomy": "four limbs: two unchanged front support paws, rear pair behind; no lifted or duplicate paw"
+    },
+    {
+      "id": "F02",
+      "playback_slot": 1,
+      "blue_iris_pixels": 467,
+      "tail_center_2x": [
+        331.37,
+        530.39
+      ],
+      "support_region_changed_pixels": 0,
+      "protected_identity_region_changed_pixels": 0,
+      "anatomy": "four limbs: two unchanged front support paws, rear pair behind; no lifted or duplicate paw"
+    },
+    {
+      "id": "F01",
+      "playback_slot": 2,
+      "blue_iris_pixels": 443,
+      "tail_center_2x": [
+        337.11,
+        538.28
+      ],
+      "support_region_changed_pixels": 0,
+      "protected_identity_region_changed_pixels": 0,
+      "anatomy": "four limbs: two unchanged front support paws, rear pair behind; no lifted or duplicate paw"
+    },
+    {
+      "id": "F03",
+      "playback_slot": 3,
+      "blue_iris_pixels": 368,
+      "tail_center_2x": [
+        341.01,
+        530.14
+      ],
+      "support_region_changed_pixels": 0,
+      "protected_identity_region_changed_pixels": 0,
+      "anatomy": "four limbs: two unchanged front support paws, rear pair behind; no lifted or duplicate paw"
+    },
+    {
+      "id": "F04",
+      "playback_slot": 4,
+      "blue_iris_pixels": 538,
+      "tail_center_2x": [
+        336.91,
+        531.46
+      ],
+      "support_region_changed_pixels": 0,
+      "protected_identity_region_changed_pixels": 0,
+      "anatomy": "four limbs: two unchanged front support paws, rear pair behind; no lifted or duplicate paw"
+    },
+    {
+      "id": "F06",
+      "playback_slot": 5,
+      "blue_iris_pixels": 218,
+      "tail_center_2x": [
+        331.25,
+        529.71
+      ],
+      "support_region_changed_pixels": 0,
+      "protected_identity_region_changed_pixels": 0,
+      "anatomy": "four limbs: two unchanged front support paws, rear pair behind; no lifted or duplicate paw"
+    },
+    {
+      "id": "F05",
+      "playback_slot": 6,
+      "blue_iris_pixels": 178,
+      "tail_center_2x": [
+        334.88,
+        527.07
+      ],
+      "support_region_changed_pixels": 0,
+      "protected_identity_region_changed_pixels": 0,
+      "anatomy": "four limbs: two unchanged front support paws, rear pair behind; no lifted or duplicate paw"
+    },
+    {
+      "id": "F07",
+      "playback_slot": 7,
+      "blue_iris_pixels": 110,
+      "tail_center_2x": [
+        337.24,
+        533.02
+      ],
+      "support_region_changed_pixels": 0,
+      "protected_identity_region_changed_pixels": 0,
+      "anatomy": "four limbs: two unchanged front support paws, rear pair behind; no lifted or duplicate paw"
+    },
+    {
+      "id": "F08",
+      "playback_slot": 8,
+      "blue_iris_pixels": 0,
+      "tail_center_2x": [
+        333.59,
+        528.17
+      ],
+      "support_region_changed_pixels": 0,
+      "protected_identity_region_changed_pixels": 0,
+      "anatomy": "four limbs: two unchanged front support paws, rear pair behind; no lifted or duplicate paw"
+    },
+    {
+      "id": "F09",
+      "playback_slot": 9,
+      "blue_iris_pixels": 96,
+      "tail_center_2x": [
+        339.8,
+        528.75
+      ],
+      "support_region_changed_pixels": 0,
+      "protected_identity_region_changed_pixels": 0,
+      "anatomy": "four limbs: two unchanged front support paws, rear pair behind; no lifted or duplicate paw"
+    },
+    {
+      "id": "F10",
+      "playback_slot": 10,
+      "blue_iris_pixels": 154,
+      "tail_center_2x": [
+        333.22,
+        530.54
+      ],
+      "support_region_changed_pixels": 0,
+      "protected_identity_region_changed_pixels": 0,
+      "anatomy": "four limbs: two unchanged front support paws, rear pair behind; no lifted or duplicate paw"
+    },
+    {
+      "id": "F11",
+      "playback_slot": 11,
+      "blue_iris_pixels": 363,
+      "tail_center_2x": [
+        331.41,
+        526.59
+      ],
+      "support_region_changed_pixels": 0,
+      "protected_identity_region_changed_pixels": 0,
+      "anatomy": "four limbs: two unchanged front support paws, rear pair behind; no lifted or duplicate paw"
+    },
+    {
+      "id": "F12",
+      "playback_slot": 12,
+      "blue_iris_pixels": 640,
+      "tail_center_2x": [
+        333.2,
+        524.93
+      ],
+      "support_region_changed_pixels": 0,
+      "protected_identity_region_changed_pixels": 0,
+      "anatomy": "four limbs: two unchanged front support paws, rear pair behind; no lifted or duplicate paw"
+    },
+    {
+      "id": "F13",
+      "playback_slot": 13,
+      "blue_iris_pixels": 619,
+      "tail_center_2x": [
+        334.41,
+        523.87
+      ],
+      "support_region_changed_pixels": 0,
+      "protected_identity_region_changed_pixels": 0,
+      "anatomy": "four limbs: two unchanged front support paws, rear pair behind; no lifted or duplicate paw"
+    },
+    {
+      "id": "F14",
+      "playback_slot": 14,
+      "blue_iris_pixels": 590,
+      "tail_center_2x": [
+        335.83,
+        518.84
+      ],
+      "support_region_changed_pixels": 0,
+      "protected_identity_region_changed_pixels": 0,
+      "anatomy": "four limbs: two unchanged front support paws, rear pair behind; no lifted or duplicate paw"
+    },
+    {
+      "id": "F15",
+      "playback_slot": 15,
+      "blue_iris_pixels": 612,
+      "tail_center_2x": [
+        330.65,
+        522.69
+      ],
+      "support_region_changed_pixels": 0,
+      "protected_identity_region_changed_pixels": 0,
+      "anatomy": "four limbs: two unchanged front support paws, rear pair behind; no lifted or duplicate paw"
+    }
+  ],
+  "tail_center_step_2x": [
+    4.842,
+    9.757,
+    9.026,
+    4.307,
+    5.924,
+    4.488,
+    6.401,
+    6.07,
+    6.237,
+    6.819,
+    4.345,
+    2.441,
+    1.609,
+    5.227,
+    6.454,
+    2.958
+  ],
+  "loop_seam_tail_step_2x": 2.958,
+  "baseline": "approved A01 unchanged support-foot pixels; same 628px 2x contact baseline",
+  "size": "approved school anchor preserved; no whole-character animation scaling",
+  "original_atlas_final_registration": "not certified by the idle preview; preserve static registration report boundaries",
+  "native_build_test": "not applicable to this GIF-only change",
+  "installed": false
+}

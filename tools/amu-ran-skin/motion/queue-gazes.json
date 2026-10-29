@@ -1,0 +1,386 @@
+[
+  {
+    "state": "gaze-school",
+    "id": "G00",
+    "direction": 0,
+    "variant": "independent-head-direction",
+    "prompt": "ONE independent full-body transparent Retto GAZE STILL, not an animation sheet. IMAGE1 actual original Retto direction reference: head looks straight UP, chin lifted (direction0/16). IMAGE2 costume/identity BODY LOCK reference. ONLY head/neck and worn headgear rotate to the EXACT direction in IMAGE1; torso, shoulders, tail, hips and all four paws remain FRONTAL in exactly IMAGE2 posture/positions. Do NOT turn entire body sideways, do not raise any paw. Keep original compact Retto torso/short legs and original round3D muzzle volume, cream/brown short fur, original blue eyes/highlights. Genuine3D profile/up/down foreshortening like IMAGE1, not flattened/painted face. Short black fitted blazer, white shirt collar/cuffs, loose red tie, red-black plaid skirt at REAR HIPS, ONE red shield armband on anatomical LEFT foreleg at VIEWER-RIGHT because body stays frontal. Pink X clip mounted on anatomical LEFT ear: move naturally with that ear, partly occluded in RIGHT profile, prominent in LEFT profile; never switch ear. Soft tactile3D fur and matte fabric like IMAGE2. Full ears/headgear/tail/paws comfortably inside margins. No pet/effects/text/new accessory or fifth limb.",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/gaze/reference/base-00.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/idle-v2/reference/costume-master.png"
+    ],
+    "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-school-v1/requests/G00.json"
+  },
+  {
+    "state": "gaze-school",
+    "id": "G01",
+    "direction": 1,
+    "variant": "independent-head-direction",
+    "prompt": "ONE independent full-body transparent Retto GAZE STILL, not an animation sheet. IMAGE1 actual original Retto direction reference: head looks UP and slightly RIGHT (direction1/16). IMAGE2 costume/identity BODY LOCK reference. ONLY head/neck and worn headgear rotate to the EXACT direction in IMAGE1; torso, shoulders, tail, hips and all four paws remain FRONTAL in exactly IMAGE2 posture/positions. Do NOT turn entire body sideways, do not raise any paw. Keep original compact Retto torso/short legs and original round3D muzzle volume, cream/brown short fur, original blue eyes/highlights. Genuine3D profile/up/down foreshortening like IMAGE1, not flattened/painted face. Short black fitted blazer, white shirt collar/cuffs, loose red tie, red-black plaid skirt at REAR HIPS, ONE red shield armband on anatomical LEFT foreleg at VIEWER-RIGHT because body stays frontal. Pink X clip mounted on anatomical LEFT ear: move naturally with that ear, partly occluded in RIGHT profile, prominent in LEFT profile; never switch ear. Soft tactile3D fur and matte fabric like IMAGE2. Full ears/headgear/tail/paws comfortably inside margins. No pet/effects/text/new accessory or fifth limb.",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/gaze/reference/base-01.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/idle-v2/reference/costume-master.png"
+    ],
+    "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-school-v1/requests/G01.json"
+  },
+  {
+    "state": "gaze-school",
+    "id": "G02",
+    "direction": 2,
+    "variant": "independent-head-direction",
+    "prompt": "ONE independent full-body transparent Retto GAZE STILL, not an animation sheet. IMAGE1 actual original Retto direction reference: head looks UP-RIGHT diagonal (direction2/16). IMAGE2 costume/identity BODY LOCK reference. ONLY head/neck and worn headgear rotate to the EXACT direction in IMAGE1; torso, shoulders, tail, hips and all four paws remain FRONTAL in exactly IMAGE2 posture/positions. Do NOT turn entire body sideways, do not raise any paw. Keep original compact Retto torso/short legs and original round3D muzzle volume, cream/brown short fur, original blue eyes/highlights. Genuine3D profile/up/down foreshortening like IMAGE1, not flattened/painted face. Short black fitted blazer, white shirt collar/cuffs, loose red tie, red-black plaid skirt at REAR HIPS, ONE red shield armband on anatomical LEFT foreleg at VIEWER-RIGHT because body stays frontal. Pink X clip mounted on anatomical LEFT ear: move naturally with that ear, partly occluded in RIGHT profile, prominent in LEFT profile; never switch ear. Soft tactile3D fur and matte fabric like IMAGE2. Full ears/headgear/tail/paws comfortably inside margins. No pet/effects/text/new accessory or fifth limb.",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/gaze/reference/base-02.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/idle-v2/reference/costume-master.png"
+    ],
+    "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-school-v1/requests/G02.json"
+  },
+  {
+    "state": "gaze-school",
+    "id": "G03",
+    "direction": 3,
+    "variant": "independent-head-direction",
+    "prompt": "ONE independent full-body transparent Retto GAZE STILL, not an animation sheet. IMAGE1 actual original Retto direction reference: head looks RIGHT and slightly UP (direction3/16). IMAGE2 costume/identity BODY LOCK reference. ONLY head/neck and worn headgear rotate to the EXACT direction in IMAGE1; torso, shoulders, tail, hips and all four paws remain FRONTAL in exactly IMAGE2 posture/positions. Do NOT turn entire body sideways, do not raise any paw. Keep original compact Retto torso/short legs and original round3D muzzle volume, cream/brown short fur, original blue eyes/highlights. Genuine3D profile/up/down foreshortening like IMAGE1, not flattened/painted face. Short black fitted blazer, white shirt collar/cuffs, loose red tie, red-black plaid skirt at REAR HIPS, ONE red shield armband on anatomical LEFT foreleg at VIEWER-RIGHT because body stays frontal. Pink X clip mounted on anatomical LEFT ear: move naturally with that ear, partly occluded in RIGHT profile, prominent in LEFT profile; never switch ear. Soft tactile3D fur and matte fabric like IMAGE2. Full ears/headgear/tail/paws comfortably inside margins. No pet/effects/text/new accessory or fifth limb.",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/gaze/reference/base-03.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/idle-v2/reference/costume-master.png"
+    ],
+    "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-school-v1/requests/G03.json"
+  },
+  {
+    "state": "gaze-school",
+    "id": "G04",
+    "direction": 4,
+    "variant": "independent-head-direction",
+    "prompt": "ONE independent full-body transparent Retto GAZE STILL, not an animation sheet. IMAGE1 actual original Retto direction reference: head looks RIGHT profile (direction4/16). IMAGE2 costume/identity BODY LOCK reference. ONLY head/neck and worn headgear rotate to the EXACT direction in IMAGE1; torso, shoulders, tail, hips and all four paws remain FRONTAL in exactly IMAGE2 posture/positions. Do NOT turn entire body sideways, do not raise any paw. Keep original compact Retto torso/short legs and original round3D muzzle volume, cream/brown short fur, original blue eyes/highlights. Genuine3D profile/up/down foreshortening like IMAGE1, not flattened/painted face. Short black fitted blazer, white shirt collar/cuffs, loose red tie, red-black plaid skirt at REAR HIPS, ONE red shield armband on anatomical LEFT foreleg at VIEWER-RIGHT because body stays frontal. Pink X clip mounted on anatomical LEFT ear: move naturally with that ear, partly occluded in RIGHT profile, prominent in LEFT profile; never switch ear. Soft tactile3D fur and matte fabric like IMAGE2. Full ears/headgear/tail/paws comfortably inside margins. No pet/effects/text/new accessory or fifth limb.",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/gaze/reference/base-04.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/idle-v2/reference/costume-master.png"
+    ],
+    "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-school-v1/requests/G04.json"
+  },
+  {
+    "state": "gaze-school",
+    "id": "G05",
+    "direction": 5,
+    "variant": "independent-head-direction",
+    "prompt": "ONE independent full-body transparent Retto GAZE STILL, not an animation sheet. IMAGE1 actual original Retto direction reference: head looks RIGHT and slightly DOWN (direction5/16). IMAGE2 costume/identity BODY LOCK reference. ONLY head/neck and worn headgear rotate to the EXACT direction in IMAGE1; torso, shoulders, tail, hips and all four paws remain FRONTAL in exactly IMAGE2 posture/positions. Do NOT turn entire body sideways, do not raise any paw. Keep original compact Retto torso/short legs and original round3D muzzle volume, cream/brown short fur, original blue eyes/highlights. Genuine3D profile/up/down foreshortening like IMAGE1, not flattened/painted face. Short black fitted blazer, white shirt collar/cuffs, loose red tie, red-black plaid skirt at REAR HIPS, ONE red shield armband on anatomical LEFT foreleg at VIEWER-RIGHT because body stays frontal. Pink X clip mounted on anatomical LEFT ear: move naturally with that ear, partly occluded in RIGHT profile, prominent in LEFT profile; never switch ear. Soft tactile3D fur and matte fabric like IMAGE2. Full ears/headgear/tail/paws comfortably inside margins. No pet/effects/text/new accessory or fifth limb.",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/gaze/reference/base-05.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/idle-v2/reference/costume-master.png"
+    ],
+    "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-school-v1/requests/G05.json"
+  },
+  {
+    "state": "gaze-school",
+    "id": "G06",
+    "direction": 6,
+    "variant": "independent-head-direction",
+    "prompt": "ONE independent full-body transparent Retto GAZE STILL, not an animation sheet. IMAGE1 actual original Retto direction reference: head looks DOWN-RIGHT diagonal (direction6/16). IMAGE2 costume/identity BODY LOCK reference. ONLY head/neck and worn headgear rotate to the EXACT direction in IMAGE1; torso, shoulders, tail, hips and all four paws remain FRONTAL in exactly IMAGE2 posture/positions. Do NOT turn entire body sideways, do not raise any paw. Keep original compact Retto torso/short legs and original round3D muzzle volume, cream/brown short fur, original blue eyes/highlights. Genuine3D profile/up/down foreshortening like IMAGE1, not flattened/painted face. Short black fitted blazer, white shirt collar/cuffs, loose red tie, red-black plaid skirt at REAR HIPS, ONE red shield armband on anatomical LEFT foreleg at VIEWER-RIGHT because body stays frontal. Pink X clip mounted on anatomical LEFT ear: move naturally with that ear, partly occluded in RIGHT profile, prominent in LEFT profile; never switch ear. Soft tactile3D fur and matte fabric like IMAGE2. Full ears/headgear/tail/paws comfortably inside margins. No pet/effects/text/new accessory or fifth limb.",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/gaze/reference/base-06.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/idle-v2/reference/costume-master.png"
+    ],
+    "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-school-v1/requests/G06.json"
+  },
+  {
+    "state": "gaze-school",
+    "id": "G07",
+    "direction": 7,
+    "variant": "independent-head-direction",
+    "prompt": "ONE independent full-body transparent Retto GAZE STILL, not an animation sheet. IMAGE1 actual original Retto direction reference: head looks DOWN and slightly RIGHT (direction7/16). IMAGE2 costume/identity BODY LOCK reference. ONLY head/neck and worn headgear rotate to the EXACT direction in IMAGE1; torso, shoulders, tail, hips and all four paws remain FRONTAL in exactly IMAGE2 posture/positions. Do NOT turn entire body sideways, do not raise any paw. Keep original compact Retto torso/short legs and original round3D muzzle volume, cream/brown short fur, original blue eyes/highlights. Genuine3D profile/up/down foreshortening like IMAGE1, not flattened/painted face. Short black fitted blazer, white shirt collar/cuffs, loose red tie, red-black plaid skirt at REAR HIPS, ONE red shield armband on anatomical LEFT foreleg at VIEWER-RIGHT because body stays frontal. Pink X clip mounted on anatomical LEFT ear: move naturally with that ear, partly occluded in RIGHT profile, prominent in LEFT profile; never switch ear. Soft tactile3D fur and matte fabric like IMAGE2. Full ears/headgear/tail/paws comfortably inside margins. No pet/effects/text/new accessory or fifth limb.",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/gaze/reference/base-07.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/idle-v2/reference/costume-master.png"
+    ],
+    "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-school-v1/requests/G07.json"
+  },
+  {
+    "state": "gaze-school",
+    "id": "G08",
+    "direction": 8,
+    "variant": "independent-head-direction",
+    "prompt": "ONE independent full-body transparent Retto GAZE STILL, not an animation sheet. IMAGE1 actual original Retto direction reference: head looks straight DOWN, chin gently bowed (direction8/16). IMAGE2 costume/identity BODY LOCK reference. ONLY head/neck and worn headgear rotate to the EXACT direction in IMAGE1; torso, shoulders, tail, hips and all four paws remain FRONTAL in exactly IMAGE2 posture/positions. Do NOT turn entire body sideways, do not raise any paw. Keep original compact Retto torso/short legs and original round3D muzzle volume, cream/brown short fur, original blue eyes/highlights. Genuine3D profile/up/down foreshortening like IMAGE1, not flattened/painted face. Short black fitted blazer, white shirt collar/cuffs, loose red tie, red-black plaid skirt at REAR HIPS, ONE red shield armband on anatomical LEFT foreleg at VIEWER-RIGHT because body stays frontal. Pink X clip mounted on anatomical LEFT ear: move naturally with that ear, partly occluded in RIGHT profile, prominent in LEFT profile; never switch ear. Soft tactile3D fur and matte fabric like IMAGE2. Full ears/headgear/tail/paws comfortably inside margins. No pet/effects/text/new accessory or fifth limb.",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/gaze/reference/base-08.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/idle-v2/reference/costume-master.png"
+    ],
+    "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-school-v1/requests/G08.json"
+  },
+  {
+    "state": "gaze-school",
+    "id": "G09",
+    "direction": 9,
+    "variant": "independent-head-direction",
+    "prompt": "ONE independent full-body transparent Retto GAZE STILL, not an animation sheet. IMAGE1 actual original Retto direction reference: head looks DOWN and slightly LEFT (direction9/16). IMAGE2 costume/identity BODY LOCK reference. ONLY head/neck and worn headgear rotate to the EXACT direction in IMAGE1; torso, shoulders, tail, hips and all four paws remain FRONTAL in exactly IMAGE2 posture/positions. Do NOT turn entire body sideways, do not raise any paw. Keep original compact Retto torso/short legs and original round3D muzzle volume, cream/brown short fur, original blue eyes/highlights. Genuine3D profile/up/down foreshortening like IMAGE1, not flattened/painted face. Short black fitted blazer, white shirt collar/cuffs, loose red tie, red-black plaid skirt at REAR HIPS, ONE red shield armband on anatomical LEFT foreleg at VIEWER-RIGHT because body stays frontal. Pink X clip mounted on anatomical LEFT ear: move naturally with that ear, partly occluded in RIGHT profile, prominent in LEFT profile; never switch ear. Soft tactile3D fur and matte fabric like IMAGE2. Full ears/headgear/tail/paws comfortably inside margins. No pet/effects/text/new accessory or fifth limb.",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/gaze/reference/base-09.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/idle-v2/reference/costume-master.png"
+    ],
+    "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-school-v1/requests/G09.json"
+  },
+  {
+    "state": "gaze-school",
+    "id": "G10",
+    "direction": 10,
+    "variant": "independent-head-direction",
+    "prompt": "ONE independent full-body transparent Retto GAZE STILL, not an animation sheet. IMAGE1 actual original Retto direction reference: head looks DOWN-LEFT diagonal (direction10/16). IMAGE2 costume/identity BODY LOCK reference. ONLY head/neck and worn headgear rotate to the EXACT direction in IMAGE1; torso, shoulders, tail, hips and all four paws remain FRONTAL in exactly IMAGE2 posture/positions. Do NOT turn entire body sideways, do not raise any paw. Keep original compact Retto torso/short legs and original round3D muzzle volume, cream/brown short fur, original blue eyes/highlights. Genuine3D profile/up/down foreshortening like IMAGE1, not flattened/painted face. Short black fitted blazer, white shirt collar/cuffs, loose red tie, red-black plaid skirt at REAR HIPS, ONE red shield armband on anatomical LEFT foreleg at VIEWER-RIGHT because body stays frontal. Pink X clip mounted on anatomical LEFT ear: move naturally with that ear, partly occluded in RIGHT profile, prominent in LEFT profile; never switch ear. Soft tactile3D fur and matte fabric like IMAGE2. Full ears/headgear/tail/paws comfortably inside margins. No pet/effects/text/new accessory or fifth limb.",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/gaze/reference/base-10.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/idle-v2/reference/costume-master.png"
+    ],
+    "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-school-v1/requests/G10.json"
+  },
+  {
+    "state": "gaze-school",
+    "id": "G11",
+    "direction": 11,
+    "variant": "independent-head-direction",
+    "prompt": "ONE independent full-body transparent Retto GAZE STILL, not an animation sheet. IMAGE1 actual original Retto direction reference: head looks LEFT and slightly DOWN (direction11/16). IMAGE2 costume/identity BODY LOCK reference. ONLY head/neck and worn headgear rotate to the EXACT direction in IMAGE1; torso, shoulders, tail, hips and all four paws remain FRONTAL in exactly IMAGE2 posture/positions. Do NOT turn entire body sideways, do not raise any paw. Keep original compact Retto torso/short legs and original round3D muzzle volume, cream/brown short fur, original blue eyes/highlights. Genuine3D profile/up/down foreshortening like IMAGE1, not flattened/painted face. Short black fitted blazer, white shirt collar/cuffs, loose red tie, red-black plaid skirt at REAR HIPS, ONE red shield armband on anatomical LEFT foreleg at VIEWER-RIGHT because body stays frontal. Pink X clip mounted on anatomical LEFT ear: move naturally with that ear, partly occluded in RIGHT profile, prominent in LEFT profile; never switch ear. Soft tactile3D fur and matte fabric like IMAGE2. Full ears/headgear/tail/paws comfortably inside margins. No pet/effects/text/new accessory or fifth limb.",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/gaze/reference/base-11.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/idle-v2/reference/costume-master.png"
+    ],
+    "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-school-v1/requests/G11.json"
+  },
+  {
+    "state": "gaze-school",
+    "id": "G12",
+    "direction": 12,
+    "variant": "independent-head-direction",
+    "prompt": "ONE independent full-body transparent Retto GAZE STILL, not an animation sheet. IMAGE1 actual original Retto direction reference: head looks LEFT profile (direction12/16). IMAGE2 costume/identity BODY LOCK reference. ONLY head/neck and worn headgear rotate to the EXACT direction in IMAGE1; torso, shoulders, tail, hips and all four paws remain FRONTAL in exactly IMAGE2 posture/positions. Do NOT turn entire body sideways, do not raise any paw. Keep original compact Retto torso/short legs and original round3D muzzle volume, cream/brown short fur, original blue eyes/highlights. Genuine3D profile/up/down foreshortening like IMAGE1, not flattened/painted face. Short black fitted blazer, white shirt collar/cuffs, loose red tie, red-black plaid skirt at REAR HIPS, ONE red shield armband on anatomical LEFT foreleg at VIEWER-RIGHT because body stays frontal. Pink X clip mounted on anatomical LEFT ear: move naturally with that ear, partly occluded in RIGHT profile, prominent in LEFT profile; never switch ear. Soft tactile3D fur and matte fabric like IMAGE2. Full ears/headgear/tail/paws comfortably inside margins. No pet/effects/text/new accessory or fifth limb.",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/gaze/reference/base-12.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/idle-v2/reference/costume-master.png"
+    ],
+    "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-school-v1/requests/G12.json"
+  },
+  {
+    "state": "gaze-school",
+    "id": "G13",
+    "direction": 13,
+    "variant": "independent-head-direction",
+    "prompt": "ONE independent full-body transparent Retto GAZE STILL, not an animation sheet. IMAGE1 actual original Retto direction reference: head looks LEFT and slightly UP (direction13/16). IMAGE2 costume/identity BODY LOCK reference. ONLY head/neck and worn headgear rotate to the EXACT direction in IMAGE1; torso, shoulders, tail, hips and all four paws remain FRONTAL in exactly IMAGE2 posture/positions. Do NOT turn entire body sideways, do not raise any paw. Keep original compact Retto torso/short legs and original round3D muzzle volume, cream/brown short fur, original blue eyes/highlights. Genuine3D profile/up/down foreshortening like IMAGE1, not flattened/painted face. Short black fitted blazer, white shirt collar/cuffs, loose red tie, red-black plaid skirt at REAR HIPS, ONE red shield armband on anatomical LEFT foreleg at VIEWER-RIGHT because body stays frontal. Pink X clip mounted on anatomical LEFT ear: move naturally with that ear, partly occluded in RIGHT profile, prominent in LEFT profile; never switch ear. Soft tactile3D fur and matte fabric like IMAGE2. Full ears/headgear/tail/paws comfortably inside margins. No pet/effects/text/new accessory or fifth limb.",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/gaze/reference/base-13.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/idle-v2/reference/costume-master.png"
+    ],
+    "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-school-v1/requests/G13.json"
+  },
+  {
+    "state": "gaze-school",
+    "id": "G14",
+    "direction": 14,
+    "variant": "independent-head-direction",
+    "prompt": "ONE independent full-body transparent Retto GAZE STILL, not an animation sheet. IMAGE1 actual original Retto direction reference: head looks UP-LEFT diagonal (direction14/16). IMAGE2 costume/identity BODY LOCK reference. ONLY head/neck and worn headgear rotate to the EXACT direction in IMAGE1; torso, shoulders, tail, hips and all four paws remain FRONTAL in exactly IMAGE2 posture/positions. Do NOT turn entire body sideways, do not raise any paw. Keep original compact Retto torso/short legs and original round3D muzzle volume, cream/brown short fur, original blue eyes/highlights. Genuine3D profile/up/down foreshortening like IMAGE1, not flattened/painted face. Short black fitted blazer, white shirt collar/cuffs, loose red tie, red-black plaid skirt at REAR HIPS, ONE red shield armband on anatomical LEFT foreleg at VIEWER-RIGHT because body stays frontal. Pink X clip mounted on anatomical LEFT ear: move naturally with that ear, partly occluded in RIGHT profile, prominent in LEFT profile; never switch ear. Soft tactile3D fur and matte fabric like IMAGE2. Full ears/headgear/tail/paws comfortably inside margins. No pet/effects/text/new accessory or fifth limb.",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/gaze/reference/base-14.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/idle-v2/reference/costume-master.png"
+    ],
+    "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-school-v1/requests/G14.json"
+  },
+  {
+    "state": "gaze-school",
+    "id": "G15",
+    "direction": 15,
+    "variant": "independent-head-direction",
+    "prompt": "ONE independent full-body transparent Retto GAZE STILL, not an animation sheet. IMAGE1 actual original Retto direction reference: head looks UP and slightly LEFT (direction15/16). IMAGE2 costume/identity BODY LOCK reference. ONLY head/neck and worn headgear rotate to the EXACT direction in IMAGE1; torso, shoulders, tail, hips and all four paws remain FRONTAL in exactly IMAGE2 posture/positions. Do NOT turn entire body sideways, do not raise any paw. Keep original compact Retto torso/short legs and original round3D muzzle volume, cream/brown short fur, original blue eyes/highlights. Genuine3D profile/up/down foreshortening like IMAGE1, not flattened/painted face. Short black fitted blazer, white shirt collar/cuffs, loose red tie, red-black plaid skirt at REAR HIPS, ONE red shield armband on anatomical LEFT foreleg at VIEWER-RIGHT because body stays frontal. Pink X clip mounted on anatomical LEFT ear: move naturally with that ear, partly occluded in RIGHT profile, prominent in LEFT profile; never switch ear. Soft tactile3D fur and matte fabric like IMAGE2. Full ears/headgear/tail/paws comfortably inside margins. No pet/effects/text/new accessory or fifth limb.",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/gaze/reference/base-15.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/idle-v2/reference/costume-master.png"
+    ],
+    "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-school-v1/requests/G15.json"
+  },
+  {
+    "state": "gaze-heart",
+    "id": "G00",
+    "direction": 0,
+    "variant": "independent-head-direction",
+    "prompt": "ONE independent full-body transparent Retto GAZE STILL, not an animation sheet. IMAGE1 actual original Retto direction reference: head looks straight UP, chin lifted (direction0/16). IMAGE2 costume/identity BODY LOCK reference. ONLY head/neck and worn headgear rotate to the EXACT direction in IMAGE1; torso, shoulders, tail, hips and all four paws remain FRONTAL in exactly IMAGE2 posture/positions. Do NOT turn entire body sideways, do not raise any paw. Keep original compact Retto torso/short legs and original round3D muzzle volume, cream/brown short fur, original blue eyes/highlights. Genuine3D profile/up/down foreshortening like IMAGE1, not flattened/painted face. Broad one-piece white/pale-pink scalloped cape covering shoulders/torso, red trim, layered hip cheer skirt, white/pink cuffs only FRONT forelegs, bare hindlegs, centered Ran-style red scarf with ONE attached pink-black plaid heart Guardian Egg. White visor/red stripe, ONE red heart and pink plume mounted at anatomical LEFT temple: follows head turn, partly occluded in RIGHT profile, prominent in LEFT profile. Do not switch sides or duplicate decoration. Soft tactile3D fur and matte fabric like IMAGE2. Full ears/headgear/tail/paws comfortably inside margins. No pet/effects/text/new accessory or fifth limb.",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/gaze/reference/base-00.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/registered-static-v2/A06.png"
+    ],
+    "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-heart-v1/requests/G00.json"
+  },
+  {
+    "state": "gaze-heart",
+    "id": "G01",
+    "direction": 1,
+    "variant": "independent-head-direction",
+    "prompt": "ONE independent full-body transparent Retto GAZE STILL, not an animation sheet. IMAGE1 actual original Retto direction reference: head looks UP and slightly RIGHT (direction1/16). IMAGE2 costume/identity BODY LOCK reference. ONLY head/neck and worn headgear rotate to the EXACT direction in IMAGE1; torso, shoulders, tail, hips and all four paws remain FRONTAL in exactly IMAGE2 posture/positions. Do NOT turn entire body sideways, do not raise any paw. Keep original compact Retto torso/short legs and original round3D muzzle volume, cream/brown short fur, original blue eyes/highlights. Genuine3D profile/up/down foreshortening like IMAGE1, not flattened/painted face. Broad one-piece white/pale-pink scalloped cape covering shoulders/torso, red trim, layered hip cheer skirt, white/pink cuffs only FRONT forelegs, bare hindlegs, centered Ran-style red scarf with ONE attached pink-black plaid heart Guardian Egg. White visor/red stripe, ONE red heart and pink plume mounted at anatomical LEFT temple: follows head turn, partly occluded in RIGHT profile, prominent in LEFT profile. Do not switch sides or duplicate decoration. Soft tactile3D fur and matte fabric like IMAGE2. Full ears/headgear/tail/paws comfortably inside margins. No pet/effects/text/new accessory or fifth limb.",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/gaze/reference/base-01.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/registered-static-v2/A06.png"
+    ],
+    "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-heart-v1/requests/G01.json"
+  },
+  {
+    "state": "gaze-heart",
+    "id": "G02",
+    "direction": 2,
+    "variant": "independent-head-direction",
+    "prompt": "ONE independent full-body transparent Retto GAZE STILL, not an animation sheet. IMAGE1 actual original Retto direction reference: head looks UP-RIGHT diagonal (direction2/16). IMAGE2 costume/identity BODY LOCK reference. ONLY head/neck and worn headgear rotate to the EXACT direction in IMAGE1; torso, shoulders, tail, hips and all four paws remain FRONTAL in exactly IMAGE2 posture/positions. Do NOT turn entire body sideways, do not raise any paw. Keep original compact Retto torso/short legs and original round3D muzzle volume, cream/brown short fur, original blue eyes/highlights. Genuine3D profile/up/down foreshortening like IMAGE1, not flattened/painted face. Broad one-piece white/pale-pink scalloped cape covering shoulders/torso, red trim, layered hip cheer skirt, white/pink cuffs only FRONT forelegs, bare hindlegs, centered Ran-style red scarf with ONE attached pink-black plaid heart Guardian Egg. White visor/red stripe, ONE red heart and pink plume mounted at anatomical LEFT temple: follows head turn, partly occluded in RIGHT profile, prominent in LEFT profile. Do not switch sides or duplicate decoration. Soft tactile3D fur and matte fabric like IMAGE2. Full ears/headgear/tail/paws comfortably inside margins. No pet/effects/text/new accessory or fifth limb.",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/gaze/reference/base-02.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/registered-static-v2/A06.png"
+    ],
+    "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-heart-v1/requests/G02.json"
+  },
+  {
+    "state": "gaze-heart",
+    "id": "G03",
+    "direction": 3,
+    "variant": "independent-head-direction",
+    "prompt": "ONE independent full-body transparent Retto GAZE STILL, not an animation sheet. IMAGE1 actual original Retto direction reference: head looks RIGHT and slightly UP (direction3/16). IMAGE2 costume/identity BODY LOCK reference. ONLY head/neck and worn headgear rotate to the EXACT direction in IMAGE1; torso, shoulders, tail, hips and all four paws remain FRONTAL in exactly IMAGE2 posture/positions. Do NOT turn entire body sideways, do not raise any paw. Keep original compact Retto torso/short legs and original round3D muzzle volume, cream/brown short fur, original blue eyes/highlights. Genuine3D profile/up/down foreshortening like IMAGE1, not flattened/painted face. Broad one-piece white/pale-pink scalloped cape covering shoulders/torso, red trim, layered hip cheer skirt, white/pink cuffs only FRONT forelegs, bare hindlegs, centered Ran-style red scarf with ONE attached pink-black plaid heart Guardian Egg. White visor/red stripe, ONE red heart and pink plume mounted at anatomical LEFT temple: follows head turn, partly occluded in RIGHT profile, prominent in LEFT profile. Do not switch sides or duplicate decoration. Soft tactile3D fur and matte fabric like IMAGE2. Full ears/headgear/tail/paws comfortably inside margins. No pet/effects/text/new accessory or fifth limb.",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/gaze/reference/base-03.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/registered-static-v2/A06.png"
+    ],
+    "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-heart-v1/requests/G03.json"
+  },
+  {
+    "state": "gaze-heart",
+    "id": "G04",
+    "direction": 4,
+    "variant": "independent-head-direction",
+    "prompt": "ONE independent full-body transparent Retto GAZE STILL, not an animation sheet. IMAGE1 actual original Retto direction reference: head looks RIGHT profile (direction4/16). IMAGE2 costume/identity BODY LOCK reference. ONLY head/neck and worn headgear rotate to the EXACT direction in IMAGE1; torso, shoulders, tail, hips and all four paws remain FRONTAL in exactly IMAGE2 posture/positions. Do NOT turn entire body sideways, do not raise any paw. Keep original compact Retto torso/short legs and original round3D muzzle volume, cream/brown short fur, original blue eyes/highlights. Genuine3D profile/up/down foreshortening like IMAGE1, not flattened/painted face. Broad one-piece white/pale-pink scalloped cape covering shoulders/torso, red trim, layered hip cheer skirt, white/pink cuffs only FRONT forelegs, bare hindlegs, centered Ran-style red scarf with ONE attached pink-black plaid heart Guardian Egg. White visor/red stripe, ONE red heart and pink plume mounted at anatomical LEFT temple: follows head turn, partly occluded in RIGHT profile, prominent in LEFT profile. Do not switch sides or duplicate decoration. Soft tactile3D fur and matte fabric like IMAGE2. Full ears/headgear/tail/paws comfortably inside margins. No pet/effects/text/new accessory or fifth limb.",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/gaze/reference/base-04.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/registered-static-v2/A06.png"
+    ],
+    "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-heart-v1/requests/G04.json"
+  },
+  {
+    "state": "gaze-heart",
+    "id": "G05",
+    "direction": 5,
+    "variant": "independent-head-direction",
+    "prompt": "ONE independent full-body transparent Retto GAZE STILL, not an animation sheet. IMAGE1 actual original Retto direction reference: head looks RIGHT and slightly DOWN (direction5/16). IMAGE2 costume/identity BODY LOCK reference. ONLY head/neck and worn headgear rotate to the EXACT direction in IMAGE1; torso, shoulders, tail, hips and all four paws remain FRONTAL in exactly IMAGE2 posture/positions. Do NOT turn entire body sideways, do not raise any paw. Keep original compact Retto torso/short legs and original round3D muzzle volume, cream/brown short fur, original blue eyes/highlights. Genuine3D profile/up/down foreshortening like IMAGE1, not flattened/painted face. Broad one-piece white/pale-pink scalloped cape covering shoulders/torso, red trim, layered hip cheer skirt, white/pink cuffs only FRONT forelegs, bare hindlegs, centered Ran-style red scarf with ONE attached pink-black plaid heart Guardian Egg. White visor/red stripe, ONE red heart and pink plume mounted at anatomical LEFT temple: follows head turn, partly occluded in RIGHT profile, prominent in LEFT profile. Do not switch sides or duplicate decoration. Soft tactile3D fur and matte fabric like IMAGE2. Full ears/headgear/tail/paws comfortably inside margins. No pet/effects/text/new accessory or fifth limb.",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/gaze/reference/base-05.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/registered-static-v2/A06.png"
+    ],
+    "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-heart-v1/requests/G05.json"
+  },
+  {
+    "state": "gaze-heart",
+    "id": "G06",
+    "direction": 6,
+    "variant": "independent-head-direction",
+    "prompt": "ONE independent full-body transparent Retto GAZE STILL, not an animation sheet. IMAGE1 actual original Retto direction reference: head looks DOWN-RIGHT diagonal (direction6/16). IMAGE2 costume/identity BODY LOCK reference. ONLY head/neck and worn headgear rotate to the EXACT direction in IMAGE1; torso, shoulders, tail, hips and all four paws remain FRONTAL in exactly IMAGE2 posture/positions. Do NOT turn entire body sideways, do not raise any paw. Keep original compact Retto torso/short legs and original round3D muzzle volume, cream/brown short fur, original blue eyes/highlights. Genuine3D profile/up/down foreshortening like IMAGE1, not flattened/painted face. Broad one-piece white/pale-pink scalloped cape covering shoulders/torso, red trim, layered hip cheer skirt, white/pink cuffs only FRONT forelegs, bare hindlegs, centered Ran-style red scarf with ONE attached pink-black plaid heart Guardian Egg. White visor/red stripe, ONE red heart and pink plume mounted at anatomical LEFT temple: follows head turn, partly occluded in RIGHT profile, prominent in LEFT profile. Do not switch sides or duplicate decoration. Soft tactile3D fur and matte fabric like IMAGE2. Full ears/headgear/tail/paws comfortably inside margins. No pet/effects/text/new accessory or fifth limb.",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/gaze/reference/base-06.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/registered-static-v2/A06.png"
+    ],
+    "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-heart-v1/requests/G06.json"
+  },
+  {
+    "state": "gaze-heart",
+    "id": "G07",
+    "direction": 7,
+    "variant": "independent-head-direction",
+    "prompt": "ONE independent full-body transparent Retto GAZE STILL, not an animation sheet. IMAGE1 actual original Retto direction reference: head looks DOWN and slightly RIGHT (direction7/16). IMAGE2 costume/identity BODY LOCK reference. ONLY head/neck and worn headgear rotate to the EXACT direction in IMAGE1; torso, shoulders, tail, hips and all four paws remain FRONTAL in exactly IMAGE2 posture/positions. Do NOT turn entire body sideways, do not raise any paw. Keep original compact Retto torso/short legs and original round3D muzzle volume, cream/brown short fur, original blue eyes/highlights. Genuine3D profile/up/down foreshortening like IMAGE1, not flattened/painted face. Broad one-piece white/pale-pink scalloped cape covering shoulders/torso, red trim, layered hip cheer skirt, white/pink cuffs only FRONT forelegs, bare hindlegs, centered Ran-style red scarf with ONE attached pink-black plaid heart Guardian Egg. White visor/red stripe, ONE red heart and pink plume mounted at anatomical LEFT temple: follows head turn, partly occluded in RIGHT profile, prominent in LEFT profile. Do not switch sides or duplicate decoration. Soft tactile3D fur and matte fabric like IMAGE2. Full ears/headgear/tail/paws comfortably inside margins. No pet/effects/text/new accessory or fifth limb.",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/gaze/reference/base-07.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/registered-static-v2/A06.png"
+    ],
+    "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-heart-v1/requests/G07.json"
+  },
+  {
+    "state": "gaze-heart",
+    "id": "G08",
+    "direction": 8,
+    "variant": "independent-head-direction",
+    "prompt": "ONE independent full-body transparent Retto GAZE STILL, not an animation sheet. IMAGE1 actual original Retto direction reference: head looks straight DOWN, chin gently bowed (direction8/16). IMAGE2 costume/identity BODY LOCK reference. ONLY head/neck and worn headgear rotate to the EXACT direction in IMAGE1; torso, shoulders, tail, hips and all four paws remain FRONTAL in exactly IMAGE2 posture/positions. Do NOT turn entire body sideways, do not raise any paw. Keep original compact Retto torso/short legs and original round3D muzzle volume, cream/brown short fur, original blue eyes/highlights. Genuine3D profile/up/down foreshortening like IMAGE1, not flattened/painted face. Broad one-piece white/pale-pink scalloped cape covering shoulders/torso, red trim, layered hip cheer skirt, white/pink cuffs only FRONT forelegs, bare hindlegs, centered Ran-style red scarf with ONE attached pink-black plaid heart Guardian Egg. White visor/red stripe, ONE red heart and pink plume mounted at anatomical LEFT temple: follows head turn, partly occluded in RIGHT profile, prominent in LEFT profile. Do not switch sides or duplicate decoration. Soft tactile3D fur and matte fabric like IMAGE2. Full ears/headgear/tail/paws comfortably inside margins. No pet/effects/text/new accessory or fifth limb.",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/gaze/reference/base-08.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/registered-static-v2/A06.png"
+    ],
+    "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-heart-v1/requests/G08.json"
+  },
+  {
+    "state": "gaze-heart",
+    "id": "G09",
+    "direction": 9,
+    "variant": "independent-head-direction",
+    "prompt": "ONE independent full-body transparent Retto GAZE STILL, not an animation sheet. IMAGE1 actual original Retto direction reference: head looks DOWN and slightly LEFT (direction9/16). IMAGE2 costume/identity BODY LOCK reference. ONLY head/neck and worn headgear rotate to the EXACT direction in IMAGE1; torso, shoulders, tail, hips and all four paws remain FRONTAL in exactly IMAGE2 posture/positions. Do NOT turn entire body sideways, do not raise any paw. Keep original compact Retto torso/short legs and original round3D muzzle volume, cream/brown short fur, original blue eyes/highlights. Genuine3D profile/up/down foreshortening like IMAGE1, not flattened/painted face. Broad one-piece white/pale-pink scalloped cape covering shoulders/torso, red trim, layered hip cheer skirt, white/pink cuffs only FRONT forelegs, bare hindlegs, centered Ran-style red scarf with ONE attached pink-black plaid heart Guardian Egg. White visor/red stripe, ONE red heart and pink plume mounted at anatomical LEFT temple: follows head turn, partly occluded in RIGHT profile, prominent in LEFT profile. Do not switch sides or duplicate decoration. Soft tactile3D fur and matte fabric like IMAGE2. Full ears/headgear/tail/paws comfortably inside margins. No pet/effects/text/new accessory or fifth limb.",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/gaze/reference/base-09.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/registered-static-v2/A06.png"
+    ],
+    "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-heart-v1/requests/G09.json"
+  },
+  {
+    "state": "gaze-heart",
+    "id": "G10",
+    "direction": 10,
+    "variant": "independent-head-direction",
+    "prompt": "ONE independent full-body transparent Retto GAZE STILL, not an animation sheet. IMAGE1 actual original Retto direction reference: head looks DOWN-LEFT diagonal (direction10/16). IMAGE2 costume/identity BODY LOCK reference. ONLY head/neck and worn headgear rotate to the EXACT direction in IMAGE1; torso, shoulders, tail, hips and all four paws remain FRONTAL in exactly IMAGE2 posture/positions. Do NOT turn entire body sideways, do not raise any paw. Keep original compact Retto torso/short legs and original round3D muzzle volume, cream/brown short fur, original blue eyes/highlights. Genuine3D profile/up/down foreshortening like IMAGE1, not flattened/painted face. Broad one-piece white/pale-pink scalloped cape covering shoulders/torso, red trim, layered hip cheer skirt, white/pink cuffs only FRONT forelegs, bare hindlegs, centered Ran-style red scarf with ONE attached pink-black plaid heart Guardian Egg. White visor/red stripe, ONE red heart and pink plume mounted at anatomical LEFT temple: follows head turn, partly occluded in RIGHT profile, prominent in LEFT profile. Do not switch sides or duplicate decoration. Soft tactile3D fur and matte fabric like IMAGE2. Full ears/headgear/tail/paws comfortably inside margins. No pet/effects/text/new accessory or fifth limb.",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/gaze/reference/base-10.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/registered-static-v2/A06.png"
+    ],
+    "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-heart-v1/requests/G10.json"
+  },
+  {
+    "state": "gaze-heart",
+    "id": "G11",
+    "direction": 11,
+    "variant": "independent-head-direction",
+    "prompt": "ONE independent full-body transparent Retto GAZE STILL, not an animation sheet. IMAGE1 actual original Retto direction reference: head looks LEFT and slightly DOWN (direction11/16). IMAGE2 costume/identity BODY LOCK reference. ONLY head/neck and worn headgear rotate to the EXACT direction in IMAGE1; torso, shoulders, tail, hips and all four paws remain FRONTAL in exactly IMAGE2 posture/positions. Do NOT turn entire body sideways, do not raise any paw. Keep original compact Retto torso/short legs and original round3D muzzle volume, cream/brown short fur, original blue eyes/highlights. Genuine3D profile/up/down foreshortening like IMAGE1, not flattened/painted face. Broad one-piece white/pale-pink scalloped cape covering shoulders/torso, red trim, layered hip cheer skirt, white/pink cuffs only FRONT forelegs, bare hindlegs, centered Ran-style red scarf with ONE attached pink-black plaid heart Guardian Egg. White visor/red stripe, ONE red heart and pink plume mounted at anatomical LEFT temple: follows head turn, partly occluded in RIGHT profile, prominent in LEFT profile. Do not switch sides or duplicate decoration. Soft tactile3D fur and matte fabric like IMAGE2. Full ears/headgear/tail/paws comfortably inside margins. No pet/effects/text/new accessory or fifth limb.",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/gaze/reference/base-11.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/registered-static-v2/A06.png"
+    ],
+    "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-heart-v1/requests/G11.json"
+  },
+  {
+    "state": "gaze-heart",
+    "id": "G12",
+    "direction": 12,
+    "variant": "independent-head-direction",
+    "prompt": "ONE independent full-body transparent Retto GAZE STILL, not an animation sheet. IMAGE1 actual original Retto direction reference: head looks LEFT profile (direction12/16). IMAGE2 costume/identity BODY LOCK reference. ONLY head/neck and worn headgear rotate to the EXACT direction in IMAGE1; torso, shoulders, tail, hips and all four paws remain FRONTAL in exactly IMAGE2 posture/positions. Do NOT turn entire body sideways, do not raise any paw. Keep original compact Retto torso/short legs and original round3D muzzle volume, cream/brown short fur, original blue eyes/highlights. Genuine3D profile/up/down foreshortening like IMAGE1, not flattened/painted face. Broad one-piece white/pale-pink scalloped cape covering shoulders/torso, red trim, layered hip cheer skirt, white/pink cuffs only FRONT forelegs, bare hindlegs, centered Ran-style red scarf with ONE attached pink-black plaid heart Guardian Egg. White visor/red stripe, ONE red heart and pink plume mounted at anatomical LEFT temple: follows head turn, partly occluded in RIGHT profile, prominent in LEFT profile. Do not switch sides or duplicate decoration. Soft tactile3D fur and matte fabric like IMAGE2. Full ears/headgear/tail/paws comfortably inside margins. No pet/effects/text/new accessory or fifth limb.",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/gaze/reference/base-12.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/registered-static-v2/A06.png"
+    ],
+    "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-heart-v1/requests/G12.json"
+  },
+  {
+    "state": "gaze-heart",
+    "id": "G13",
+    "direction": 13,
+    "variant": "independent-head-direction",
+    "prompt": "ONE independent full-body transparent Retto GAZE STILL, not an animation sheet. IMAGE1 actual original Retto direction reference: head looks LEFT and slightly UP (direction13/16). IMAGE2 costume/identity BODY LOCK reference. ONLY head/neck and worn headgear rotate to the EXACT direction in IMAGE1; torso, shoulders, tail, hips and all four paws remain FRONTAL in exactly IMAGE2 posture/positions. Do NOT turn entire body sideways, do not raise any paw. Keep original compact Retto torso/short legs and original round3D muzzle volume, cream/brown short fur, original blue eyes/highlights. Genuine3D profile/up/down foreshortening like IMAGE1, not flattened/painted face. Broad one-piece white/pale-pink scalloped cape covering shoulders/torso, red trim, layered hip cheer skirt, white/pink cuffs only FRONT forelegs, bare hindlegs, centered Ran-style red scarf with ONE attached pink-black plaid heart Guardian Egg. White visor/red stripe, ONE red heart and pink plume mounted at anatomical LEFT temple: follows head turn, partly occluded in RIGHT profile, prominent in LEFT profile. Do not switch sides or duplicate decoration. Soft tactile3D fur and matte fabric like IMAGE2. Full ears/headgear/tail/paws comfortably inside margins. No pet/effects/text/new accessory or fifth limb.",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/gaze/reference/base-13.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/registered-static-v2/A06.png"
+    ],
+    "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-heart-v1/requests/G13.json"
+  },
+  {
+    "state": "gaze-heart",
+    "id": "G14",
+    "direction": 14,
+    "variant": "independent-head-direction",
+    "prompt": "ONE independent full-body transparent Retto GAZE STILL, not an animation sheet. IMAGE1 actual original Retto direction reference: head looks UP-LEFT diagonal (direction14/16). IMAGE2 costume/identity BODY LOCK reference. ONLY head/neck and worn headgear rotate to the EXACT direction in IMAGE1; torso, shoulders, tail, hips and all four paws remain FRONTAL in exactly IMAGE2 posture/positions. Do NOT turn entire body sideways, do not raise any paw. Keep original compact Retto torso/short legs and original round3D muzzle volume, cream/brown short fur, original blue eyes/highlights. Genuine3D profile/up/down foreshortening like IMAGE1, not flattened/painted face. Broad one-piece white/pale-pink scalloped cape covering shoulders/torso, red trim, layered hip cheer skirt, white/pink cuffs only FRONT forelegs, bare hindlegs, centered Ran-style red scarf with ONE attached pink-black plaid heart Guardian Egg. White visor/red stripe, ONE red heart and pink plume mounted at anatomical LEFT temple: follows head turn, partly occluded in RIGHT profile, prominent in LEFT profile. Do not switch sides or duplicate decoration. Soft tactile3D fur and matte fabric like IMAGE2. Full ears/headgear/tail/paws comfortably inside margins. No pet/effects/text/new accessory or fifth limb.",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/gaze/reference/base-14.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/registered-static-v2/A06.png"
+    ],
+    "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-heart-v1/requests/G14.json"
+  },
+  {
+    "state": "gaze-heart",
+    "id": "G15",
+    "direction": 15,
+    "variant": "independent-head-direction",
+    "prompt": "ONE independent full-body transparent Retto GAZE STILL, not an animation sheet. IMAGE1 actual original Retto direction reference: head looks UP and slightly LEFT (direction15/16). IMAGE2 costume/identity BODY LOCK reference. ONLY head/neck and worn headgear rotate to the EXACT direction in IMAGE1; torso, shoulders, tail, hips and all four paws remain FRONTAL in exactly IMAGE2 posture/positions. Do NOT turn entire body sideways, do not raise any paw. Keep original compact Retto torso/short legs and original round3D muzzle volume, cream/brown short fur, original blue eyes/highlights. Genuine3D profile/up/down foreshortening like IMAGE1, not flattened/painted face. Broad one-piece white/pale-pink scalloped cape covering shoulders/torso, red trim, layered hip cheer skirt, white/pink cuffs only FRONT forelegs, bare hindlegs, centered Ran-style red scarf with ONE attached pink-black plaid heart Guardian Egg. White visor/red stripe, ONE red heart and pink plume mounted at anatomical LEFT temple: follows head turn, partly occluded in RIGHT profile, prominent in LEFT profile. Do not switch sides or duplicate decoration. Soft tactile3D fur and matte fabric like IMAGE2. Full ears/headgear/tail/paws comfortably inside margins. No pet/effects/text/new accessory or fifth limb.",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/gaze/reference/base-15.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/registered-static-v2/A06.png"
+    ],
+    "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-heart-v1/requests/G15.json"
+  }
+]

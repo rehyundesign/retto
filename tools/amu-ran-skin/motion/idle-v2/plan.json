@@ -1,0 +1,165 @@
+{
+  "version": "idle-v2",
+  "state": "idle",
+  "row": 0,
+  "outfit": "fitted Amu school uniform",
+  "scope": "one replacement idle GIF for user review; no next state",
+  "mode": "registered-character, whole independent drawings",
+  "prohibited_methods": [
+    "regional eye/tail/cloth grafting",
+    "frozen head/body restoration",
+    "mesh or limb warping",
+    "temporal crossfade",
+    "whole-image motion as pose replacement",
+    "repeated or reversed filler cells"
+  ],
+  "drawings_required": 16,
+  "interval_seconds": 0.2,
+  "cycle_seconds": 3.2,
+  "cell": [
+    448,
+    640
+  ],
+  "display": [
+    224,
+    320
+  ],
+  "body_profile": "original current atlas seated Retto: cheek width228, head center171.5, supporting sole629, eye-to-sole277.279 at 2x; no body enlargement for costume",
+  "head_profiles": {
+    "front": {
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        14,
+        15
+      ],
+      "scale": "original Retto face, no flattening"
+    },
+    "glance-return": {
+      "frames": [
+        9,
+        12,
+        13
+      ],
+      "yaw_degrees": 3,
+      "scale_change_permitted": false,
+      "observed_view": "near front with slight turn; no scale enlargement"
+    },
+    "glance-ran": {
+      "frames": [
+        10,
+        11
+      ],
+      "yaw_degrees": 6,
+      "scale_change_permitted": false,
+      "observed_view": "small complete head turn, not just pupils"
+    }
+  },
+  "limbs": {
+    "front_right": "viewer-left tie-adjusting limb; the old grounded duplicate MUST disappear while raised",
+    "front_left": "viewer-right planted supporting foreleg with red armband",
+    "rear_right": "viewer-left rear support, unchanged ground contact",
+    "rear_left": "viewer-right rear support behind front_left"
+  },
+  "costume_depth": [
+    "rear hip skirt",
+    "white shirt and torso blazer",
+    "bent foreground sleeve and paw",
+    "necktie contact area"
+  ],
+  "costume_lock": {
+    "pink_clip": "viewer-right ear",
+    "red_armband": "wraps viewer-right upper sleeve, not breast pocket",
+    "blazer": "short fitted torso and attached slim sleeves",
+    "shirt": "small collar, narrow visible untucked hem",
+    "tie": "deep red slightly loose necktie",
+    "skirt": "red-black plaid at rear hip waist, behind forelegs"
+  },
+  "frames": [
+    {
+      "id": "F00",
+      "phase": "cool relaxed neutral, both forepaws grounded"
+    },
+    {
+      "id": "F01",
+      "phase": "prepare to adjust tie: settle weight on viewer-right foreleg and rear support pair"
+    },
+    {
+      "id": "F02",
+      "phase": "viewer-left forepaw lifts just clear of floor; elbow begins flexing"
+    },
+    {
+      "id": "F03",
+      "phase": "viewer-left forepaw rises halfway toward lower chest, shoulder/sleeve follow"
+    },
+    {
+      "id": "F04",
+      "phase": "paw at lower necktie, elbow bent and sleeve folded; composed front gaze"
+    },
+    {
+      "id": "F05",
+      "phase": "paw travels toward tie knot, wrist rotates inward rather than waving"
+    },
+    {
+      "id": "F06",
+      "phase": "paw gently touches tie knot, sleeve follows bent elbow, chin inclines slightly"
+    },
+    {
+      "id": "F07",
+      "phase": "small casual tug on tie knot, no forceful pull or new prop"
+    },
+    {
+      "id": "F08",
+      "phase": "peak: cool nonchalant tie adjustment, paw naturally touching knot, confident alert eyes"
+    },
+    {
+      "id": "F09",
+      "phase": "release knot; paw begins descending, head starts glancing toward Ran on right"
+    },
+    {
+      "id": "F10",
+      "phase": "paw halfway down chest, complete head turns subtly 6 degrees toward Ran, attentive glance"
+    },
+    {
+      "id": "F11",
+      "phase": "paw lower near ankle, head still toward Ran; sleeve lengthens naturally as elbow unfolds"
+    },
+    {
+      "id": "F12",
+      "phase": "paw just above floor, head starts returning, eyelids half closing in soft blink"
+    },
+    {
+      "id": "F13",
+      "phase": "paw lands at original footprint, brief full blink, shoulder settles"
+    },
+    {
+      "id": "F14",
+      "phase": "eyes halfway reopen, head nearly front, tie/skirt/tail settle"
+    },
+    {
+      "id": "F15",
+      "phase": "open-eyed neutral loop bridge; forepaw fully weighted at original footprint"
+    }
+  ],
+  "references_sha256": {
+    "original-retto.png": "deabd52d55da035357e8fad8ced4f6b99efd0b562f306ca4a96e985995c61de9",
+    "amu-school-uniform.webp": "104a872784127af269c3a562ad07b5966b3e9c7ad41f8dbff442a480757d6abd",
+    "hana-idle-3.2s.gif": "938e5690d91b46ee45deca2edcb22fe4b37297f38a911fceb94b133173e07d41",
+    "ran-master.png": "1c7a4862a350dd012e1cb9d8ed546163a0801e6bb8ee16077b28689825ab5181",
+    "old-school-identity-only.png": "b1946dddfdf1bc2bbe93dd6ae7b0bef18d0d30b98c295cc44f7b68d63e9f2a10",
+    "hana-material.png": "8ef187550a5ca43890fda32948edcd6c9597af4e7414c0cdfab00a21a988d6c7"
+  },
+  "installed": false,
+  "production_ready": false,
+  "original_body_authority": "reference/original-body-landmarks.json",
+  "master_sha256": "c6549b03ed2e7478f38e83410ce55c80eec56932b862017577d40a56d736f114",
+  "master_registration": "master-registration.json",
+  "original_raised_pose_reference": "reference/original-raised-paw.png"
+}

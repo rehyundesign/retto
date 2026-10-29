@@ -1,0 +1,70 @@
+{
+  "baseline": "4d5c8d43c",
+  "samples": [
+    {
+      "state": "idle-v2",
+      "layer": "back",
+      "white_background_contrast_energy_ratio": 5.303,
+      "dark_background_light_energy_ratio": 5.888
+    },
+    {
+      "state": "idle-v2",
+      "layer": "front",
+      "white_background_contrast_energy_ratio": 5.326,
+      "dark_background_light_energy_ratio": 5.097
+    },
+    {
+      "state": "waving-v1",
+      "layer": "back",
+      "white_background_contrast_energy_ratio": 1.301,
+      "dark_background_light_energy_ratio": 1.317
+    },
+    {
+      "state": "waving-v1",
+      "layer": "front",
+      "white_background_contrast_energy_ratio": 3.141,
+      "dark_background_light_energy_ratio": 3.103
+    },
+    {
+      "state": "waiting-v1",
+      "layer": "back",
+      "white_background_contrast_energy_ratio": 5.303,
+      "dark_background_light_energy_ratio": 5.888
+    },
+    {
+      "state": "waiting-v1",
+      "layer": "front",
+      "white_background_contrast_energy_ratio": 5.326,
+      "dark_background_light_energy_ratio": 5.097
+    }
+  ],
+  "character_pose_timing_unchanged": true,
+  "ambient_period_seconds": 8,
+  "installed": false,
+  "style": {
+    "ambient_heart_radius_2x": {
+      "school": 7,
+      "transformed": 11,
+      "sleep": 5
+    },
+    "spark_radius_2x": {
+      "school": 5,
+      "transformed": 7,
+      "sleep": 4
+    },
+    "color": "higher-contrast rose pink with white sparkle core"
+  },
+  "preview_loader": {
+    "lookahead_seconds": 0.6,
+    "bounded_image_cache": 200,
+    "only_visible_canvases_render": true,
+    "versioned_png_http_cache": "public,max-age=86400 verified on ?fx=3 URL"
+  },
+  "browser_verification": {
+    "url": "http://127.0.0.1:8773/preview-full.html?effects=heart3",
+    "light_playback": "passed",
+    "dark_playback": "passed",
+    "newly_visible_states": "passed",
+    "restored": "light, playing, effects on"
+  }
+}

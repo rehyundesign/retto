@@ -1,0 +1,243 @@
+{
+  "scope": "idle v2 original Retto size and whole-character integrity",
+  "original_measurement": {
+    "cheek_width": 228,
+    "head_center_x": 171.5,
+    "eye_line": 351.72089947089944,
+    "foot_baseline": 629
+  },
+  "checks": [
+    {
+      "id": "F00",
+      "original_cheek_width_error_2x": 0,
+      "original_eye_height_error_2x": -0.898,
+      "foot_baseline_error_2x": 0,
+      "support_toe_slide_2x": 0.0,
+      "full_motion_cell_without_grafts": false,
+      "opaque_bounds": [
+        55,
+        235,
+        420,
+        630
+      ]
+    },
+    {
+      "id": "F01",
+      "original_cheek_width_error_2x": 0,
+      "original_eye_height_error_2x": 5.414,
+      "foot_baseline_error_2x": 1,
+      "support_toe_slide_2x": -0.139,
+      "full_motion_cell_without_grafts": true,
+      "opaque_bounds": [
+        59,
+        241,
+        413,
+        631
+      ]
+    },
+    {
+      "id": "F02",
+      "original_cheek_width_error_2x": 0,
+      "original_eye_height_error_2x": 4.206,
+      "foot_baseline_error_2x": 1,
+      "support_toe_slide_2x": 0.113,
+      "full_motion_cell_without_grafts": true,
+      "opaque_bounds": [
+        56,
+        244,
+        419,
+        631
+      ]
+    },
+    {
+      "id": "F03",
+      "original_cheek_width_error_2x": -1,
+      "original_eye_height_error_2x": 0.3,
+      "foot_baseline_error_2x": 0,
+      "support_toe_slide_2x": -0.174,
+      "full_motion_cell_without_grafts": true,
+      "opaque_bounds": [
+        57,
+        239,
+        420,
+        631
+      ]
+    },
+    {
+      "id": "F04",
+      "original_cheek_width_error_2x": 0,
+      "original_eye_height_error_2x": 3.611,
+      "foot_baseline_error_2x": 1,
+      "support_toe_slide_2x": -0.061,
+      "full_motion_cell_without_grafts": true,
+      "opaque_bounds": [
+        56,
+        242,
+        415,
+        631
+      ]
+    },
+    {
+      "id": "F05",
+      "original_cheek_width_error_2x": 1,
+      "original_eye_height_error_2x": 5.502,
+      "foot_baseline_error_2x": 1,
+      "support_toe_slide_2x": -0.021,
+      "full_motion_cell_without_grafts": true,
+      "opaque_bounds": [
+        56,
+        246,
+        416,
+        631
+      ]
+    },
+    {
+      "id": "F06",
+      "original_cheek_width_error_2x": -1,
+      "original_eye_height_error_2x": 4.773,
+      "foot_baseline_error_2x": 0,
+      "support_toe_slide_2x": 0.048,
+      "full_motion_cell_without_grafts": true,
+      "opaque_bounds": [
+        58,
+        245,
+        416,
+        630
+      ]
+    },
+    {
+      "id": "F07",
+      "original_cheek_width_error_2x": 0,
+      "original_eye_height_error_2x": 1.937,
+      "foot_baseline_error_2x": 1,
+      "support_toe_slide_2x": 0.227,
+      "full_motion_cell_without_grafts": true,
+      "opaque_bounds": [
+        57,
+        242,
+        418,
+        631
+      ]
+    },
+    {
+      "id": "F08",
+      "original_cheek_width_error_2x": 0,
+      "original_eye_height_error_2x": 1.431,
+      "foot_baseline_error_2x": 0,
+      "support_toe_slide_2x": 0.063,
+      "full_motion_cell_without_grafts": true,
+      "opaque_bounds": [
+        58,
+        239,
+        416,
+        630
+      ]
+    },
+    {
+      "id": "F09",
+      "original_cheek_width_error_2x": 0,
+      "original_eye_height_error_2x": -1.481,
+      "foot_baseline_error_2x": 0,
+      "support_toe_slide_2x": -0.09,
+      "full_motion_cell_without_grafts": true,
+      "opaque_bounds": [
+        59,
+        241,
+        417,
+        630
+      ]
+    },
+    {
+      "id": "F10",
+      "original_cheek_width_error_2x": 0,
+      "original_eye_height_error_2x": -5.009,
+      "foot_baseline_error_2x": 0,
+      "support_toe_slide_2x": 0.158,
+      "full_motion_cell_without_grafts": true,
+      "opaque_bounds": [
+        57,
+        238,
+        420,
+        631
+      ]
+    },
+    {
+      "id": "F11",
+      "original_cheek_width_error_2x": 0,
+      "original_eye_height_error_2x": 0.873,
+      "foot_baseline_error_2x": 1,
+      "support_toe_slide_2x": -0.089,
+      "full_motion_cell_without_grafts": true,
+      "opaque_bounds": [
+        57,
+        244,
+        418,
+        631
+      ]
+    },
+    {
+      "id": "F12",
+      "original_cheek_width_error_2x": -1,
+      "original_eye_height_error_2x": -0.557,
+      "foot_baseline_error_2x": 0,
+      "support_toe_slide_2x": -0.102,
+      "full_motion_cell_without_grafts": true,
+      "opaque_bounds": [
+        56,
+        238,
+        420,
+        630
+      ]
+    },
+    {
+      "id": "F13",
+      "original_cheek_width_error_2x": 0,
+      "original_eye_height_error_2x": -1.168,
+      "foot_baseline_error_2x": 0,
+      "support_toe_slide_2x": -0.097,
+      "full_motion_cell_without_grafts": true,
+      "opaque_bounds": [
+        53,
+        242,
+        423,
+        631
+      ]
+    },
+    {
+      "id": "F14",
+      "original_cheek_width_error_2x": 0,
+      "original_eye_height_error_2x": 5.844,
+      "foot_baseline_error_2x": 0,
+      "support_toe_slide_2x": -0.094,
+      "full_motion_cell_without_grafts": true,
+      "opaque_bounds": [
+        59,
+        246,
+        420,
+        631
+      ]
+    },
+    {
+      "id": "F15",
+      "original_cheek_width_error_2x": 1,
+      "original_eye_height_error_2x": 2.001,
+      "foot_baseline_error_2x": 0,
+      "support_toe_slide_2x": -0.111,
+      "full_motion_cell_without_grafts": true,
+      "opaque_bounds": [
+        55,
+        239,
+        421,
+        631
+      ]
+    }
+  ],
+  "distinct_source_drawings": 16,
+  "distinct_decoded_characters": 16,
+  "static_master_uniform_correction": 0.9779846401436327,
+  "motion_grafts_or_face_body_warps": 0,
+  "loop_visual_continuity": "16-cell board including F15/F00/F01 inspected; browser rendering checked; user review pending",
+  "four_limbs_and_costume_fit": "each-cell light/dark runtime-scale board inspected: lifted foreleg connects through bent sleeve, support foreleg planted, rear paws occlude behind; user review pending",
+  "native_test": "not applicable to GIF-only art",
+  "installed": false
+}

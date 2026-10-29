@@ -1,0 +1,182 @@
+{
+  "review_scope": "candidate visual inspection; user approval pending",
+  "limb_naming": "near=anatomical right; far=anatomical left in right-facing view",
+  "frames": [
+    {
+      "id": "F00",
+      "front_right": "near actual foreleg inside fitted plain black sleeve and white cuff; articulated with shoulder/elbow",
+      "front_left": "far foreleg at right side, red shield armband, partly occluded by chest/near foreleg",
+      "rear_right": "near hindleg under rear hip, plain fur below hip skirt",
+      "rear_left": "far hindleg partly occluded by pelvis, near hindleg and hip skirt; visible toe where pose permits",
+      "tail": "single raised brown tail attached behind skirt at rear hip",
+      "extra_or_detached_limb_seen": false,
+      "costume_depth": "far paws -> rear hips/skirt -> torso blazer -> near foreleg/cuff -> paws; collar/tie on chest",
+      "review_status": "final 1x light/dark board inspected; user review pending"
+    },
+    {
+      "id": "F01",
+      "front_right": "near actual foreleg inside fitted plain black sleeve and white cuff; articulated with shoulder/elbow",
+      "front_left": "far foreleg at right side, red shield armband, partly occluded by chest/near foreleg",
+      "rear_right": "near hindleg under rear hip, plain fur below hip skirt",
+      "rear_left": "far hindleg partly occluded by pelvis, near hindleg and hip skirt; visible toe where pose permits",
+      "tail": "single raised brown tail attached behind skirt at rear hip",
+      "extra_or_detached_limb_seen": false,
+      "costume_depth": "far paws -> rear hips/skirt -> torso blazer -> near foreleg/cuff -> paws; collar/tie on chest",
+      "review_status": "final 1x light/dark board inspected; user review pending"
+    },
+    {
+      "id": "F02",
+      "front_right": "near actual foreleg inside fitted plain black sleeve and white cuff; articulated with shoulder/elbow",
+      "front_left": "far foreleg at right side, red shield armband, partly occluded by chest/near foreleg",
+      "rear_right": "near hindleg under rear hip, plain fur below hip skirt",
+      "rear_left": "far hindleg partly occluded by pelvis, near hindleg and hip skirt; visible toe where pose permits",
+      "tail": "single raised brown tail attached behind skirt at rear hip",
+      "extra_or_detached_limb_seen": false,
+      "costume_depth": "far paws -> rear hips/skirt -> torso blazer -> near foreleg/cuff -> paws; collar/tie on chest",
+      "review_status": "final 1x light/dark board inspected; user review pending"
+    },
+    {
+      "id": "F03",
+      "front_right": "near actual foreleg inside fitted plain black sleeve and white cuff; articulated with shoulder/elbow",
+      "front_left": "far foreleg at right side, red shield armband, partly occluded by chest/near foreleg",
+      "rear_right": "near hindleg under rear hip, plain fur below hip skirt",
+      "rear_left": "far hindleg partly occluded by pelvis, near hindleg and hip skirt; visible toe where pose permits",
+      "tail": "single raised brown tail attached behind skirt at rear hip",
+      "extra_or_detached_limb_seen": false,
+      "costume_depth": "far paws -> rear hips/skirt -> torso blazer -> near foreleg/cuff -> paws; collar/tie on chest",
+      "review_status": "final 1x light/dark board inspected; user review pending"
+    },
+    {
+      "id": "F04",
+      "front_right": "near actual foreleg inside fitted plain black sleeve and white cuff; articulated with shoulder/elbow",
+      "front_left": "far foreleg at right side, red shield armband, partly occluded by chest/near foreleg",
+      "rear_right": "near hindleg under rear hip, plain fur below hip skirt",
+      "rear_left": "far hindleg partly occluded by pelvis, near hindleg and hip skirt; visible toe where pose permits",
+      "tail": "single raised brown tail attached behind skirt at rear hip",
+      "extra_or_detached_limb_seen": false,
+      "costume_depth": "far paws -> rear hips/skirt -> torso blazer -> near foreleg/cuff -> paws; collar/tie on chest",
+      "review_status": "final 1x light/dark board inspected; user review pending"
+    },
+    {
+      "id": "F05",
+      "front_right": "near actual foreleg inside fitted plain black sleeve and white cuff; articulated with shoulder/elbow",
+      "front_left": "far foreleg at right side, red shield armband, partly occluded by chest/near foreleg",
+      "rear_right": "near hindleg under rear hip, plain fur below hip skirt",
+      "rear_left": "far hindleg partly occluded by pelvis, near hindleg and hip skirt; visible toe where pose permits",
+      "tail": "single raised brown tail attached behind skirt at rear hip",
+      "extra_or_detached_limb_seen": false,
+      "costume_depth": "far paws -> rear hips/skirt -> torso blazer -> near foreleg/cuff -> paws; collar/tie on chest",
+      "review_status": "final 1x light/dark board inspected; user review pending"
+    },
+    {
+      "id": "F06",
+      "front_right": "near actual foreleg inside fitted plain black sleeve and white cuff; articulated with shoulder/elbow",
+      "front_left": "far foreleg at right side, red shield armband, partly occluded by chest/near foreleg",
+      "rear_right": "near hindleg under rear hip, plain fur below hip skirt",
+      "rear_left": "far hindleg partly occluded by pelvis, near hindleg and hip skirt; visible toe where pose permits",
+      "tail": "single raised brown tail attached behind skirt at rear hip",
+      "extra_or_detached_limb_seen": false,
+      "costume_depth": "far paws -> rear hips/skirt -> torso blazer -> near foreleg/cuff -> paws; collar/tie on chest",
+      "review_status": "final 1x light/dark board inspected; user review pending"
+    },
+    {
+      "id": "F07",
+      "front_right": "near actual foreleg inside fitted plain black sleeve and white cuff; articulated with shoulder/elbow",
+      "front_left": "far foreleg at right side, red shield armband, partly occluded by chest/near foreleg",
+      "rear_right": "near hindleg under rear hip, plain fur below hip skirt",
+      "rear_left": "far hindleg partly occluded by pelvis, near hindleg and hip skirt; visible toe where pose permits",
+      "tail": "single raised brown tail attached behind skirt at rear hip",
+      "extra_or_detached_limb_seen": false,
+      "costume_depth": "far paws -> rear hips/skirt -> torso blazer -> near foreleg/cuff -> paws; collar/tie on chest",
+      "review_status": "final 1x light/dark board inspected; user review pending"
+    },
+    {
+      "id": "F08",
+      "front_right": "near actual foreleg inside fitted plain black sleeve and white cuff; articulated with shoulder/elbow",
+      "front_left": "far foreleg at right side, red shield armband, partly occluded by chest/near foreleg",
+      "rear_right": "near hindleg under rear hip, plain fur below hip skirt",
+      "rear_left": "far hindleg partly occluded by pelvis, near hindleg and hip skirt; visible toe where pose permits",
+      "tail": "single raised brown tail attached behind skirt at rear hip",
+      "extra_or_detached_limb_seen": false,
+      "costume_depth": "far paws -> rear hips/skirt -> torso blazer -> near foreleg/cuff -> paws; collar/tie on chest",
+      "review_status": "final 1x light/dark board inspected; user review pending"
+    },
+    {
+      "id": "F09",
+      "front_right": "near actual foreleg inside fitted plain black sleeve and white cuff; articulated with shoulder/elbow",
+      "front_left": "far foreleg at right side, red shield armband, partly occluded by chest/near foreleg",
+      "rear_right": "near hindleg under rear hip, plain fur below hip skirt",
+      "rear_left": "far hindleg partly occluded by pelvis, near hindleg and hip skirt; visible toe where pose permits",
+      "tail": "single raised brown tail attached behind skirt at rear hip",
+      "extra_or_detached_limb_seen": false,
+      "costume_depth": "far paws -> rear hips/skirt -> torso blazer -> near foreleg/cuff -> paws; collar/tie on chest",
+      "review_status": "final 1x light/dark board inspected; user review pending"
+    },
+    {
+      "id": "F10",
+      "front_right": "near actual foreleg inside fitted plain black sleeve and white cuff; articulated with shoulder/elbow",
+      "front_left": "far foreleg at right side, red shield armband, partly occluded by chest/near foreleg",
+      "rear_right": "near hindleg under rear hip, plain fur below hip skirt",
+      "rear_left": "far hindleg partly occluded by pelvis, near hindleg and hip skirt; visible toe where pose permits",
+      "tail": "single raised brown tail attached behind skirt at rear hip",
+      "extra_or_detached_limb_seen": false,
+      "costume_depth": "far paws -> rear hips/skirt -> torso blazer -> near foreleg/cuff -> paws; collar/tie on chest",
+      "review_status": "final 1x light/dark board inspected; user review pending"
+    },
+    {
+      "id": "F11",
+      "front_right": "near actual foreleg inside fitted plain black sleeve and white cuff; articulated with shoulder/elbow",
+      "front_left": "far foreleg at right side, red shield armband, partly occluded by chest/near foreleg",
+      "rear_right": "near hindleg under rear hip, plain fur below hip skirt",
+      "rear_left": "far hindleg partly occluded by pelvis, near hindleg and hip skirt; visible toe where pose permits",
+      "tail": "single raised brown tail attached behind skirt at rear hip",
+      "extra_or_detached_limb_seen": false,
+      "costume_depth": "far paws -> rear hips/skirt -> torso blazer -> near foreleg/cuff -> paws; collar/tie on chest",
+      "review_status": "final 1x light/dark board inspected; user review pending"
+    },
+    {
+      "id": "F12",
+      "front_right": "near actual foreleg inside fitted plain black sleeve and white cuff; articulated with shoulder/elbow",
+      "front_left": "far foreleg at right side, red shield armband, partly occluded by chest/near foreleg",
+      "rear_right": "near hindleg under rear hip, plain fur below hip skirt",
+      "rear_left": "far hindleg partly occluded by pelvis, near hindleg and hip skirt; visible toe where pose permits",
+      "tail": "single raised brown tail attached behind skirt at rear hip",
+      "extra_or_detached_limb_seen": false,
+      "costume_depth": "far paws -> rear hips/skirt -> torso blazer -> near foreleg/cuff -> paws; collar/tie on chest",
+      "review_status": "final 1x light/dark board inspected; user review pending"
+    },
+    {
+      "id": "F13",
+      "front_right": "near actual foreleg inside fitted plain black sleeve and white cuff; articulated with shoulder/elbow",
+      "front_left": "far foreleg at right side, red shield armband, partly occluded by chest/near foreleg",
+      "rear_right": "near hindleg under rear hip, plain fur below hip skirt",
+      "rear_left": "far hindleg partly occluded by pelvis, near hindleg and hip skirt; visible toe where pose permits",
+      "tail": "single raised brown tail attached behind skirt at rear hip",
+      "extra_or_detached_limb_seen": false,
+      "costume_depth": "far paws -> rear hips/skirt -> torso blazer -> near foreleg/cuff -> paws; collar/tie on chest",
+      "review_status": "final 1x light/dark board inspected; user review pending"
+    },
+    {
+      "id": "F14",
+      "front_right": "near actual foreleg inside fitted plain black sleeve and white cuff; articulated with shoulder/elbow",
+      "front_left": "far foreleg at right side, red shield armband, partly occluded by chest/near foreleg",
+      "rear_right": "near hindleg under rear hip, plain fur below hip skirt",
+      "rear_left": "far hindleg partly occluded by pelvis, near hindleg and hip skirt; visible toe where pose permits",
+      "tail": "single raised brown tail attached behind skirt at rear hip",
+      "extra_or_detached_limb_seen": false,
+      "costume_depth": "far paws -> rear hips/skirt -> torso blazer -> near foreleg/cuff -> paws; collar/tie on chest",
+      "review_status": "final 1x light/dark board inspected; user review pending"
+    },
+    {
+      "id": "F15",
+      "front_right": "near actual foreleg inside fitted plain black sleeve and white cuff; articulated with shoulder/elbow",
+      "front_left": "far foreleg at right side, red shield armband, partly occluded by chest/near foreleg",
+      "rear_right": "near hindleg under rear hip, plain fur below hip skirt",
+      "rear_left": "far hindleg partly occluded by pelvis, near hindleg and hip skirt; visible toe where pose permits",
+      "tail": "single raised brown tail attached behind skirt at rear hip",
+      "extra_or_detached_limb_seen": false,
+      "costume_depth": "far paws -> rear hips/skirt -> torso blazer -> near foreleg/cuff -> paws; collar/tie on chest",
+      "review_status": "final 1x light/dark board inspected; user review pending"
+    }
+  ]
+}
