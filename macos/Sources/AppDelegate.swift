@@ -560,6 +560,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         let monitored = merged.values.filter {
             !$0.isClosed && ($0.petState == .waiting || ($0.updatedAtMs ?? 0) >= monitoringSince)
         }
+        taskStatusDiagnostics.retain(Set(monitored.filter { $0.source != "slack" }
+            .sorted { ($0.updatedAtMs ?? 0) > ($1.updatedAtMs ?? 0) }.prefix(1024).map(\.id)))
         codexTranscriptStatusReader.retainTrackedPaths(Set(monitored.compactMap(\.transcriptPath)))
         let codexTasks = monitored.filter { $0.source == "codex" || $0.client == "codex" }
         let waitingHooks = Dictionary(codexTasks.compactMap { payload -> (String, Double)? in
@@ -568,16 +570,20 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
                 || codexLiveStatusReader.statuses[payload.navigationSessionId]?.state == .waiting else { return nil }
             return (payload.navigationSessionId, max(payload.updatedAtMs ?? 0, questionAt ?? 0))
         }, uniquingKeysWith: max)
-        codexLiveStatusReader.track(Set(codexTasks.map(\.navigationSessionId)), refreshAfter: waitingHooks)
+        let activityHints = Dictionary(codexTasks.map {
+            ($0.navigationSessionId, $0.updatedAtMs ?? 0)
+        }, uniquingKeysWith: max)
+        codexLiveStatusReader.track(Set(codexTasks.map(\.navigationSessionId)),
+            refreshAfter: waitingHooks, activityAfter: activityHints)
         // 우선순위는 파일 시각까지 읽으므로 비교마다 다시 구하지 않고 세션마다 한 번만 구한다.
         claudeNativeStatusReader.refresh()
         sessions = merged.values.map { payload in
             let output = reconciledCodexPayload(applyClaudeNativeStatus(
-                claudeNativeStatusReader.statuses[payload.navigationSessionId], to: payload))
+                claudeNativeStatusReader.status(for: payload), to: payload))
             if payload.source != "slack" {
                 taskStatusDiagnostics.record(input: payload, output: output,
                     live: codexLiveStatusReader.statuses[payload.navigationSessionId],
-                    nativeState: claudeNativeStatusReader.statuses[payload.navigationSessionId]?.state)
+                    nativeState: claudeNativeStatusReader.status(for: payload)?.state)
             }
             return output
         }
@@ -674,18 +680,17 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     private func reconciledCodexPayload(_ payload: StatePayload) -> StatePayload {
         guard !payload.isClosed, payload.source == "codex" || payload.client == "codex" else { return payload }
         var refreshed = payload
-        if codexLiveStatusReader.oversizedThreadIDs.contains(payload.navigationSessionId) {
-            refreshed.state = PetState.idle.rawValue
-            refreshed.attention = false
-            refreshed.stateSource = TaskStateSource.unavailable.rawValue
-            return refreshed
-        }
         let transcriptStatus = codexTranscriptStatusReader.status(at: payload.transcriptPath)
-        let task = applyCodexLiveStatus(codexLiveStatusReader.statuses[payload.navigationSessionId], to: reconcileCodexTask(
+        let reconciled = reconcileCodexTask(
             payload: payload,
             indexTitle: codexThreadTitleReader.title(for: payload.navigationSessionId),
             transcriptStatus: transcriptStatus
-        ), transcriptStatus: transcriptStatus)
+        )
+        let unavailable = codexLiveStatusReader.oversizedThreadIDs.contains(payload.navigationSessionId)
+            || codexLiveStatusReader.unavailableThreadIDs.contains(payload.navigationSessionId)
+        let task = unavailable ? unavailableCodexTask(reconciled)
+            : applyCodexLiveStatus(codexLiveStatusReader.statuses[payload.navigationSessionId],
+                to: reconciled, transcriptStatus: transcriptStatus)
         refreshed.state = task.state.rawValue
         refreshed.updatedAtMs = task.observedAtMs
         refreshed.attention = task.needsAttention
