@@ -171,8 +171,15 @@ func runCodexInputSelfTest() -> Int32 {
     check(taskConnectionNotice(for: claudeWork, unreadablePaths: ["/fixture/current.jsonl"], slackNotice: "Slack 재연결 중") == nil,
           "Codex and Slack diagnostics do not appear on Claude tasks")
     checkCodexLiveStatus(check)
+    checkNativeTaskStatus(check)
     print("Codex input self-test: \(checks) checks, \(failures.count) failures")
     for failure in failures { print("FAIL: \(failure)") }
+    if CommandLine.arguments.contains("--native-claude-status") {
+        let reader = ClaudeNativeStatusReader()
+        reader.refresh()
+        let counts = Dictionary(grouping: reader.statuses.values, by: { $0.state.rawValue }).mapValues(\.count)
+        print("Native Claude status counts: \(counts)")
+    }
     if let flag = CommandLine.arguments.firstIndex(of: "--live-codex-thread"), CommandLine.arguments.count > flag + 1 {
         let id = CommandLine.arguments[flag + 1]
         let checksPendingRecheck = CommandLine.arguments.contains("--live-codex-recheck-pending")
