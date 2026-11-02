@@ -220,10 +220,11 @@ final class CodexLiveStatusReader {
     private var requestedHookConfirmation: [String: Double] = [:]
     private let pendingConfirmationIntervalMs: Double
 
-    init(pendingConfirmationInterval: TimeInterval = 5) {
+    init(pendingConfirmationInterval: TimeInterval = 1) {
         pendingConfirmationIntervalMs = max(0.1, pendingConfirmationInterval) * 1000
     }
     private var scheduledResync: [String: DispatchWorkItem] = [:]
+    private var pendingRecheck: DispatchWorkItem?
     private var retry: DispatchWorkItem?
     private var initializationTimeout: DispatchWorkItem?
 
@@ -258,6 +259,7 @@ final class CodexLiveStatusReader {
             guard let self else { return }
             self.running = false; self.retry?.cancel(); self.initializationTimeout?.cancel()
             self.scheduledResync.values.forEach { $0.cancel() }; self.scheduledResync.removeAll()
+            self.pendingRecheck?.cancel(); self.pendingRecheck = nil
             self.generation += 1; self.connection?.cancel(); self.connection = nil
             self.store.reset(); self.requestedHookConfirmation.removeAll(); self.publish()
         }
@@ -300,6 +302,7 @@ final class CodexLiveStatusReader {
         generation += 1; initializationTimeout?.cancel()
         connection?.cancel(); connection = nil; clientID = nil; buffer.removeAll()
         store.reset(); lastResync.removeAll(); requestedHookConfirmation.removeAll(); publish(); scheduleRetry()
+        pendingRecheck?.cancel(); pendingRecheck = nil
         scheduledResync.values.forEach { $0.cancel() }; scheduledResync.removeAll()
     }
     private func send(_ message: [String: Any]) {
@@ -328,6 +331,30 @@ final class CodexLiveStatusReader {
         }
         scheduledResync[id] = work
         queue.asyncAfter(deadline: .now() + delay, execute: work)
+    }
+    // 화면 갱신이나 다른 도구의 patch를 기다리지 않고 미해결 입력을 재확인한다.
+    // 경과 시간으로 상태를 바꾸지 않고 최신 snapshot의 확인 결과를 사용한다.
+    private func schedulePendingRecheck() {
+        let waiting = store.statuses.filter { tracked.contains($0.key) && $0.value.state == .waiting }
+        guard running, clientID != nil, !waiting.isEmpty else {
+            pendingRecheck?.cancel(); pendingRecheck = nil
+            return
+        }
+        guard pendingRecheck == nil else { return }
+        let current = generation
+        let work = DispatchWorkItem { [weak self] in
+            guard let self, current == self.generation else { return }
+            self.pendingRecheck = nil
+            let nowMs = Date().timeIntervalSince1970 * 1000
+            for (id, status) in self.store.statuses where self.tracked.contains(id) && status.state == .waiting {
+                if nowMs - (status.snapshotConfirmedAtMs ?? status.observedAtMs) >= self.pendingConfirmationIntervalMs {
+                    self.resync(id)
+                }
+            }
+            self.schedulePendingRecheck()
+        }
+        pendingRecheck = work
+        queue.asyncAfter(deadline: .now() + pendingConfirmationIntervalMs / 1000, execute: work)
     }
     private func receive(_ current: Int) {
         connection?.receive(minimumIncompleteLength: 1, maximumLength: 262144) { [weak self] data, _, done, error in
@@ -373,6 +400,7 @@ final class CodexLiveStatusReader {
         publish()
     }
     private func publish() {
+        schedulePendingRecheck()
         let next = store.statuses
         DispatchQueue.main.async { [weak self] in
             guard let self, next != self.statuses else { return }
