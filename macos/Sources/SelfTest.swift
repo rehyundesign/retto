@@ -536,6 +536,26 @@ func runSelfTest() -> Int32 {
         && abs(half.windowSize.width - max(basePetWidth * 0.5 + 2 * petSideMargin * 0.5, (baseRibbonWidth + 2 * ribbonSideInset) * chromeScale(for: 0.5))) < 0.01
         // 글자가 작아졌다고 두 줄이 세 줄로 늘면 말풍선이 달라 보인다.
         && bodyLines(at: 0.5) == 2
+    // 레토 크기와 글자 크기를 서로 바꿔도 상대 설정과 말풍선 치수는 유지한다.
+    let chatReference: CGFloat = 0.5
+    let chatBaseline = petLayout(scale: chatReference)
+    let independentChatOK = supportedScales.allSatisfy { scale in
+        ChatFontSize.allCases.allSatisfy { size in
+            let layout = petLayout(scale: scale, chatScale: chatReference, fontSize: size)
+            let bodySize = 18 * layout.chromeScale + layout.textDelta
+            let expected = (18 * chatBaseline.chromeScale + chatBaseline.textDelta) * size.factor
+            return abs(bodySize - expected) < 0.0001
+                && layout.petRect.width == basePetWidth * scale
+                && layout.ribbonRect.height == chatBaseline.ribbonRect.height
+                && layout.ribbonRect.width == chatBaseline.ribbonRect.width
+                && PetTypeface.allCases.allSatisfy { face in
+                    let font = petFont(face, size: bodySize)
+                    return font.pointSize > 0 && font.ascender - font.descender + font.leading
+                        < layout.ribbonRect.height - 30 * layout.chromeScale
+                }
+        }
+    } && petLayout(scale: chatReference, chatScale: chatReference).textDelta == chatBaseline.textDelta
+        && zip(ChatFontSize.allCases, ChatFontSize.allCases.dropFirst()).allSatisfy { $0.factor < $1.factor }
     // 색은 뜻 단위 넷(+조용함)으로만 쓰고, 뜻이 섞이지 않아야 한다.
     let tonesOK = animationCatalog[.running]?.tone.key == toneWorking.key
         && animationCatalog[.review]?.tone.key == toneWorking.key
@@ -688,24 +708,26 @@ func runSelfTest() -> Int32 {
     // ⚠️ ok 에 넣은 항목은 아래 print 에도 반드시 넣는다. 안 그러면 그 항목이 실패해도
     // ok:false 만 뜨고 무엇이 깨졌는지 알 수 없다 — 실제로 두 번 헤맸다.
     // scripts/check.sh 가 두 줄을 대조해서 빠진 게 있으면 막는다.
-    let ok = rilakkumaTimingOK && christmasOK && claudeRowOK && fallbackOK && cornerOK && lookingOK && sleepRowOK && displayOK && dozeOK && sleepOK && ancientOK && viewedOK && haloOK && assetOK && skinsOK && dragRunOK && behaviorsOK && statesOK && deepLinkOK && clientRoutingOK && codexMenuOK && integrationOK && setupOK && legacyOK && transcriptShapesOK && scalesOK && baselineOK && decoupledOK && fontOK && priorityOK && registryOK && titleOK && badgeLayoutOK && clickRoutingOK && gazeStatesOK && expandOK && lineBudgetOK && typefaceOK && textDeltaOK && tonesOK && folderFoldOK && labelOK && doneStaysOK && bubbleShapeOK && seenOK && staleOK && personalV2LayoutOK && codexTitleRefreshOK && codexCompletionRefreshOK && codexStateReconciliationOK && rolloutDiscoveryPayloadOK && unnamedTitleOK
-    print("{\"ok\":\(ok),\"asset\":\"\(Int(image.size.width))x\(Int(image.size.height))\",\"skins\":\(PetSkin.allCases.count),\"skinsOK\":\(skinsOK),\"christmasEffects\":\(christmasOK),\"dragRun\":\(dragRunOK),\"canJoinAllSpaces\":\(behaviorsOK),\"states\":\(animationCatalog.count),\"deepLink\":\(deepLinkOK),\"clientRouting\":\(clientRoutingOK),\"codexMenu\":\(codexMenuOK),\"integration\":\(integrationOK),\"setup\":\(setupOK),\"legacy\":\(legacyOK),\"transcriptShapes\":\(transcriptShapesOK),\"sizePresets\":\(supportedScales.count),\"baselineLayout\":\(baselineOK),\"scaleDecoupled\":\(decoupledOK),\"badgePlacement\":\(badgeLayoutOK),\"ribbonExpand\":\(expandOK),\"lineBudget\":\(lineBudgetOK),\"typefaces\":\(PetTypeface.allCases.count),\"typefaceOK\":\(typefaceOK),\"textDelta\":\(textDeltaOK),\"tones\":\(tonesOK),\"folderFold\":\(folderFoldOK),\"doneStays\":\(doneStaysOK),\"bubbleShape\":\(bubbleShapeOK),\"seenRule\":\(seenOK),\"staleWorking\":\(staleOK),\"headroomClean\":\(haloOK),\"viewedElsewhere\":\(viewedOK),\"ancientNews\":\(ancientOK),\"sleeps\":\(sleepOK),\"sleepRow\":\(sleepRow),\"dozes\":\(dozeOK),\"displayState\":\(displayOK),\"seenByLooking\":\(lookingOK),\"corners\":\(cornerOK),\"appFallback\":\(fallbackOK),\"haloRows\":\(halo.rows),\"haloDeepest\":\(halo.deepest),\"haloFaint\":\(haloFaintPixels),\"claudeRow\":\(claudeRowOK),\"font\":\"\(rettoHandwritingFontName)\",\"fontLoaded\":\(fontOK),\"multiSession\":\(registryOK),\"sessionTitleFallback\":\(titleOK),\"prioritySelection\":\(priorityOK),\"badgeLayout\":\(badgeLayoutOK),\"clickRouting\":\(clickRoutingOK),\"sleepRowOK\":\(sleepRowOK),\"assetOK\":\(assetOK),\"statesOK\":\(statesOK),\"scales\":\(scalesOK),\"gazeStates\":\(gazeStatesOK),\"label\":\(labelOK),\"personalV2Layout\":\(personalV2LayoutOK),\"codexTitleRefresh\":\(codexTitleRefreshOK),\"codexCompletionRefresh\":\(codexCompletionRefreshOK),\"codexStateReconciliation\":\(codexStateReconciliationOK),\"rolloutDiscoveryPayload\":\(rolloutDiscoveryPayloadOK),\"rilakkumaTiming\":\(rilakkumaTimingOK),\"unnamedTitle\":\(unnamedTitleOK)}")
+    let ok = rilakkumaTimingOK && christmasOK && claudeRowOK && fallbackOK && cornerOK && lookingOK && sleepRowOK && displayOK && dozeOK && sleepOK && ancientOK && viewedOK && haloOK && assetOK && skinsOK && dragRunOK && behaviorsOK && statesOK && deepLinkOK && clientRoutingOK && codexMenuOK && integrationOK && setupOK && legacyOK && transcriptShapesOK && scalesOK && baselineOK && decoupledOK && fontOK && priorityOK && registryOK && titleOK && badgeLayoutOK && clickRoutingOK && gazeStatesOK && expandOK && lineBudgetOK && typefaceOK && textDeltaOK && independentChatOK && tonesOK && folderFoldOK && labelOK && doneStaysOK && bubbleShapeOK && seenOK && staleOK && personalV2LayoutOK && codexTitleRefreshOK && codexCompletionRefreshOK && codexStateReconciliationOK && rolloutDiscoveryPayloadOK && unnamedTitleOK
+    print("{\"ok\":\(ok),\"asset\":\"\(Int(image.size.width))x\(Int(image.size.height))\",\"skins\":\(PetSkin.allCases.count),\"skinsOK\":\(skinsOK),\"christmasEffects\":\(christmasOK),\"dragRun\":\(dragRunOK),\"canJoinAllSpaces\":\(behaviorsOK),\"states\":\(animationCatalog.count),\"deepLink\":\(deepLinkOK),\"clientRouting\":\(clientRoutingOK),\"codexMenu\":\(codexMenuOK),\"integration\":\(integrationOK),\"setup\":\(setupOK),\"legacy\":\(legacyOK),\"transcriptShapes\":\(transcriptShapesOK),\"sizePresets\":\(supportedScales.count),\"baselineLayout\":\(baselineOK),\"scaleDecoupled\":\(decoupledOK),\"badgePlacement\":\(badgeLayoutOK),\"ribbonExpand\":\(expandOK),\"lineBudget\":\(lineBudgetOK),\"typefaces\":\(PetTypeface.allCases.count),\"typefaceOK\":\(typefaceOK),\"textDelta\":\(textDeltaOK),\"independentChat\":\(independentChatOK),\"tones\":\(tonesOK),\"folderFold\":\(folderFoldOK),\"doneStays\":\(doneStaysOK),\"bubbleShape\":\(bubbleShapeOK),\"seenRule\":\(seenOK),\"staleWorking\":\(staleOK),\"headroomClean\":\(haloOK),\"viewedElsewhere\":\(viewedOK),\"ancientNews\":\(ancientOK),\"sleeps\":\(sleepOK),\"sleepRow\":\(sleepRow),\"dozes\":\(dozeOK),\"displayState\":\(displayOK),\"seenByLooking\":\(lookingOK),\"corners\":\(cornerOK),\"appFallback\":\(fallbackOK),\"haloRows\":\(halo.rows),\"haloDeepest\":\(halo.deepest),\"haloFaint\":\(haloFaintPixels),\"claudeRow\":\(claudeRowOK),\"font\":\"\(rettoHandwritingFontName)\",\"fontLoaded\":\(fontOK),\"multiSession\":\(registryOK),\"sessionTitleFallback\":\(titleOK),\"prioritySelection\":\(priorityOK),\"badgeLayout\":\(badgeLayoutOK),\"clickRouting\":\(clickRoutingOK),\"sleepRowOK\":\(sleepRowOK),\"assetOK\":\(assetOK),\"statesOK\":\(statesOK),\"scales\":\(scalesOK),\"gazeStates\":\(gazeStatesOK),\"label\":\(labelOK),\"personalV2Layout\":\(personalV2LayoutOK),\"codexTitleRefresh\":\(codexTitleRefreshOK),\"codexCompletionRefresh\":\(codexCompletionRefreshOK),\"codexStateReconciliation\":\(codexStateReconciliationOK),\"rolloutDiscoveryPayload\":\(rolloutDiscoveryPayloadOK),\"rilakkumaTiming\":\(rilakkumaTimingOK),\"unnamedTitle\":\(unnamedTitleOK)}")
     return ok ? 0 : 1
 }
 
 /// 배율별 레이아웃을 화면 없이 PNG 한 장으로 뽑는다. 몸과 리본이 따로 자라는지 눈으로 확인하는 용도.
-func renderPreview(to path: String, skin: PetSkin = .classic) -> Int32 {
+func renderPreview(to path: String, skin: PetSkin = .classic, chatFonts: Bool = false) -> Int32 {
     registerRettoFont()
     guard let imageURL = Bundle.main.url(forResource: skin.resourceName, withExtension: "webp"),
           let spriteSheet = NSImage(contentsOf: imageURL) else { return 1 }
-    let scales: [CGFloat] = [0.39, 0.5, 0.65, 1.0, 1.4]
+    let scales: [CGFloat] = chatFonts ? [0.5, 0.5, 0.5, 0.5] : [0.39, 0.5, 0.65, 1.0, 1.4]
     // 칸마다 다른 상태로 그려 색 넷이 한 장에서 비교되게 한다.
     let previewStates = ["idle", "running", "waiting", "sleeping", "failed"]
     // 배지 모서리 네 곳을 한 장에서 다 보이게 돌려 쓴다.
     let gap: CGFloat = 24
     // 마지막 칸은 말풍선을 펼친 모습으로 그린다.
     let expandedFlags = scales.indices.map { $0 == scales.count - 1 }
-    let layouts = zip(scales, expandedFlags).map { petLayout(scale: $0, expanded: $1) }
+    let layouts = zip(scales, expandedFlags).enumerated().map { index, pair in
+        petLayout(scale: pair.0, expanded: pair.1, chatScale: chatFonts ? 0.5 : nil, fontSize: chatFonts ? ChatFontSize.allCases[index] : .medium)
+    }
     let totalWidth = layouts.reduce(0) { $0 + $1.windowSize.width } + gap * CGFloat(layouts.count + 1)
     let bandHeight = (layouts.map(\.windowSize.height).max() ?? 0) + gap * 2 + 22
     // 어두운 배경만 보다가 흰 배경에서 머리 위 그림자를 놓친 적이 있다. 두 줄로 같이 본다.
@@ -727,7 +749,12 @@ func renderPreview(to path: String, skin: PetSkin = .classic) -> Int32 {
         // 서체를 바꿔 놓고 미리보기를 뽑아 눈으로 비교할 수 있어야 한다.
         view.typeface = PetTypeface(rawValue: UserDefaults.standard.string(forKey: typefaceDefaultsKey) ?? "") ?? .handwriting
         view.petScale = scale
-        let petState = previewStates[min(index, previewStates.count - 1)]
+        if chatFonts {
+            view.chatScale = 0.5
+            view.chatFontSize = ChatFontSize.allCases[index]
+            view.typeface = bandIndex == 0 ? .handwriting : .system
+        }
+        let petState = chatFonts ? "waiting" : previewStates[min(index, previewStates.count - 1)]
         let body = "그 파란 숫자의 정체를 코드에서 확인하고 맞췄어. Claude Code 확장이 세션 목록 뷰에 붙이는 배지고, 기준 상태는 waiting_input 이야. 권한 요청만이 아니라 턴이 끝나 답을 기다리는 상태까지 포함해."
         let fixture = "{\"state\":\"\(petState)\",\"sessionId\":\"preview\",\"projectName\":\"platform-web-next\",\"displayTitle\":\"백오피스 조직별 화면 목업 다시 봐줘\",\"lastAssistantMessage\":\"\(body)\"}".data(using: .utf8)!
         guard let payload = try? JSONDecoder().decode(StatePayload.self, from: fixture) else { continue }
@@ -745,7 +772,7 @@ func renderPreview(to path: String, skin: PetSkin = .classic) -> Int32 {
         transform.concat()
         view.draw(view.bounds)
         NSGraphicsContext.restoreGraphicsState()
-        let label = String(format: "%.0f%%  %@  %@", scale * 100, petState, expandedFlags[index] ? "말풍선 펼침" : "접힘")
+        let label = chatFonts ? ChatFontSize.allCases[index].label : String(format: "%.0f%%  %@  %@", scale * 100, petState, expandedFlags[index] ? "말풍선 펼침" : "접힘")
         (label as NSString).draw(at: NSPoint(x: x, y: bandOrigin + 6), withAttributes: [
             .foregroundColor: band.ink,
             .font: NSFont.boldSystemFont(ofSize: 12)

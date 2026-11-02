@@ -154,6 +154,9 @@ if let index = CommandLine.arguments.firstIndex(of: "--render-christmas16-previe
     exit(renderChristmas16Preview(to: CommandLine.arguments[index + 1]))
 }
 
+if let index = CommandLine.arguments.firstIndex(of: "--render-chat-font-preview"), index + 1 < CommandLine.arguments.count {
+    exit(renderPreview(to: CommandLine.arguments[index + 1], chatFonts: true))
+}
 if let index = CommandLine.arguments.firstIndex(of: "--render-preview"), index + 1 < CommandLine.arguments.count {
     exit(renderPreview(to: CommandLine.arguments[index + 1]))
 }
