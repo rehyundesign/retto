@@ -68,6 +68,18 @@ if CommandLine.arguments.contains("--self-test-codex-input") {
     exit(runCodexInputSelfTest())
 }
 
+if CommandLine.arguments.contains("--self-test-status-rendering") {
+    let app = NSApplication.shared
+    app.setActivationPolicy(.prohibited)
+    app.appearance = NSAppearance(named: .aqua)
+    app.finishLaunching()
+    var output: URL?
+    if let flag = CommandLine.arguments.firstIndex(of: "--status-render-output"), flag + 1 < CommandLine.arguments.count {
+        output = URL(fileURLWithPath: CommandLine.arguments[flag + 1])
+    }
+    exit(runStatusRenderingSelfTest(outputDirectory: output))
+}
+
 if CommandLine.arguments.contains("--self-test-slack") {
     let app = NSApplication.shared
     app.setActivationPolicy(.accessory)

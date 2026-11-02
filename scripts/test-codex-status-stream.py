@@ -45,6 +45,7 @@ def snapshot(revision, pending=False):
 
 def event(change):
     return {'type': 'broadcast', 'method': 'thread-stream-state-changed', 'version': 11,
+            'targetClientIds': ['fixture-reader'],
             'sourceClientId': 'fixture-owner', 'params': {'hostId': 'local', 'conversationId': 'fixture', 'change': change}}
 
 
@@ -57,7 +58,7 @@ with tempfile.TemporaryDirectory(prefix='retto-codex-stream-') as directory:
     os.chmod(address, 0o600)
     server.listen(1)
     server.settimeout(10)
-    expected = 'running,waiting,running,unavailable,waiting,unavailable,waiting,unavailable'
+    expected = 'running,waiting,running,waiting,running,unavailable,waiting,unavailable,waiting,unavailable'
     process = subprocess.Popen([str(Path(sys.argv[1]).resolve()), '--self-test-codex-input',
                                 '--live-codex-thread', 'fixture', '--live-codex-expect', expected, '--live-codex-confirm-hook'],
                                env={**os.environ, 'CODEX_HOME': directory}, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
@@ -90,6 +91,21 @@ with tempfile.TemporaryDirectory(prefix='retto-codex-stream-') as directory:
         send(peer, event({'type': 'patches', 'baseRevision': 2, 'revision': 3,
                          'patches': [{'op': 'add', 'path': ['requests', 0, 'completed'], 'value': True}]}))
         time.sleep(0.2)
+        # Restored request history is not a current approval dialog. Match the
+        # app's needs_resume handling and release waiting before tool completion.
+        auto = snapshot(4)
+        auto['params']['change']['conversationState']['resumeState'] = 'needs_resume'
+        auto['params']['change']['conversationState']['requests'] = [
+            {'id': 'auto-review', 'method': 'item/commandExecution/requestApproval'}]
+        send(peer, auto)
+        time.sleep(0.2)
+        send(peer, event({'type': 'patches', 'baseRevision': 4, 'revision': 5,
+                         'patches': [{'op': 'replace', 'path': ['threadRuntimeStatus', 'activeFlags'],
+                                      'value': ['waitingOnApproval']}]}))
+        time.sleep(0.2)
+        send(peer, event({'type': 'patches', 'baseRevision': 5, 'revision': 6,
+                         'patches': [{'op': 'replace', 'path': ['threadRuntimeStatus', 'activeFlags'], 'value': []}]}))
+        time.sleep(0.2)
         # Duplicate old patch must not clear state or force a resubscription.
         send(peer, event({'type': 'patches', 'baseRevision': 1, 'revision': 2, 'patches': []}))
         time.sleep(0.1)
@@ -107,15 +123,73 @@ with tempfile.TemporaryDirectory(prefix='retto-codex-stream-') as directory:
         if process.returncode:
             print(err, file=sys.stderr)
             raise SystemExit(process.returncode)
-        print('IPC transport: fragmented frames, duplicate patches, repeated resync, owner disconnect, fresh hook confirmation passed')
+        print('IPC transport: fragmented frames, app-confirmed approval before tool completion, duplicate patches, repeated resync, owner disconnect, fresh hook confirmation passed')
     finally:
         if process.poll() is None:
             process.terminate()
             process.wait(timeout=5)
         server.close()
 
+# One large conversation must neither disconnect healthy conversations nor leave
+# them on hook fallback. Test both the old 64 MiB boundary and bounded discard.
+for isolate in [False, True]:
+    with tempfile.TemporaryDirectory(prefix='retto-codex-frame-') as directory:
+        ipc = Path(directory) / 'ipc'
+        ipc.mkdir(mode=0o700)
+        address = str(ipc / 'ipc.sock')
+        server = socket.socket(socket.AF_UNIX)
+        server.bind(address)
+        os.chmod(address, 0o600)
+        server.listen(1)
+        server.settimeout(10)
+        args = [str(Path(sys.argv[1]).resolve()), '--self-test-codex-input',
+                '--live-codex-thread', 'fixture', '--live-codex-expect', 'running,waiting,running']
+        if isolate:
+            args += ['--live-codex-small-frames', '--live-codex-extra-thread', 'oversized']
+        process = subprocess.Popen(args, env={**os.environ, 'CODEX_HOME': directory},
+                                   stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        try:
+            peer, _ = server.accept()
+            peer.settimeout(15)
+            initialize = receive(peer)
+            send(peer, {'type': 'response', 'method': 'initialize', 'requestId': initialize['requestId'],
+                        'resultType': 'success', 'result': {'clientId': 'fixture-reader'}})
+            for _ in range(2 if isolate else 1):
+                assert receive(peer)['method'] == 'thread-stream-following-changed'
+            send(peer, snapshot(1))
+            time.sleep(0.2)
+            if isolate:
+                oversized = snapshot(1)
+                oversized['params']['conversationId'] = 'oversized'
+                oversized['params']['change']['conversationState']['id'] = 'oversized'
+                oversized['params']['change']['conversationState']['historyPadding'] = 'x' * 6000
+                send(peer, oversized, split=True)
+                removed = receive(peer)
+                assert removed['params']['conversationId'] == 'oversized'
+                assert removed['params']['following'] is False
+                send(peer, snapshot(2, pending=True))
+            else:
+                large = snapshot(2, pending=True)
+                large['params']['change']['conversationState']['historyPadding'] = 'x' * (65 * 1024 * 1024)
+                send(peer, large)
+                del large
+            time.sleep(0.3)
+            send(peer, snapshot(3))
+            out, err = process.communicate(timeout=20)
+            print(out.strip())
+            if process.returncode:
+                print(err, file=sys.stderr)
+                raise SystemExit(process.returncode)
+            print('Oversized isolation: healthy thread stayed connected' if isolate else 'Large snapshot: 65 MiB accepted without disconnect')
+        finally:
+            if process.poll() is None:
+                process.terminate()
+                process.wait(timeout=5)
+            server.close()
+
 # A resolved approval may not deliver its resolution patch. The running app must
 # recheck cached waiting even when the hook has no tool ID or is already running.
+# The reader gets no further track() calls, matching a UI that has stopped polling.
 with tempfile.TemporaryDirectory(prefix='retto-codex-pending-') as directory:
     ipc = Path(directory) / 'ipc'
     ipc.mkdir(mode=0o700)
@@ -151,16 +225,32 @@ with tempfile.TemporaryDirectory(prefix='retto-codex-pending-') as directory:
             raise AssertionError('fresh waiting snapshot caused an immediate refresh loop')
         finally:
             peer.settimeout(6)
-        # The approval resolves without a patch. A later refresh must recover it.
-        refresh = receive(peer)
+        # The approval resolves without a patch while other tools keep updating.
+        # These updates must not postpone a full confirmation of pending input.
+        revision = 2
+        peer.settimeout(0.1)
+        deadline = time.monotonic() + 4
+        while True:
+            revision += 1
+            send(peer, event({'type': 'patches', 'baseRevision': revision - 1, 'revision': revision,
+                             'patches': [{'op': 'add' if revision == 3 else 'replace',
+                                          'path': ['requests', 1],
+                                          'value': {'id': 'ordinary-tool', 'method': 'item/tool/call',
+                                                    'completed': revision % 2 == 0}}]}))
+            try:
+                refresh = receive(peer)
+                break
+            except socket.timeout:
+                if time.monotonic() >= deadline:
+                    raise AssertionError('tool activity postponed pending input confirmation')
         assert refresh['method'] == 'thread-stream-following-changed' and refresh['params']['following']
-        send(peer, snapshot(3))
+        send(peer, snapshot(revision + 1))
         out, err = process.communicate(timeout=10)
         print(out.strip())
         if process.returncode:
             print(err, file=sys.stderr)
             raise SystemExit(process.returncode)
-        print('Pending recheck: genuine waiting preserved; missing resolution patch recovered; no refresh loop')
+        print('Autonomous pending recheck: genuine waiting preserved; missing resolution recovered during tool activity without UI polling; no refresh loop')
     finally:
         if process.poll() is None:
             process.terminate()
