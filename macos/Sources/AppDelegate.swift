@@ -34,6 +34,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     private var sizeItems: [NSMenuItem] = []
     private var openTargetItems: [NSMenuItem] = []
     private var currentScale: CGFloat = 1.0
+    private var chatScale: CGFloat = 1.0
+    private var chatFontSizeItems: [NSMenuItem] = []
+    private var chatFontSize: ChatFontSize {
+        get { ChatFontSize(rawValue: UserDefaults.standard.string(forKey: chatFontSizeDefaultsKey) ?? "") ?? .medium }
+        set { UserDefaults.standard.set(newValue.rawValue, forKey: chatFontSizeDefaultsKey) }
+    }
     private var sessionsMenu = NSMenu(title: "작업·알림")
     private var autoSelectionItem: NSMenuItem!
     private var sessions: [StatePayload] = []
@@ -218,6 +224,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     private func createPanel(spriteSheet: NSImage) {
         let savedScale = UserDefaults.standard.double(forKey: "RettoClaudePetScale")
         currentScale = supportedScales.min(by: { abs($0 - CGFloat(savedScale == 0 ? 1 : savedScale)) < abs($1 - CGFloat(savedScale == 0 ? 1 : savedScale)) }) ?? 1
+        // 처음 분리할 때만 현재 말풍선 크기를 저장한다. 이후 레토 배율과 독립이다.
+        let savedChatScale = UserDefaults.standard.double(forKey: chatScaleDefaultsKey)
+        chatScale = supportedScales.contains(CGFloat(savedChatScale)) ? CGFloat(savedChatScale) : currentScale
+        UserDefaults.standard.set(Double(chatScale), forKey: chatScaleDefaultsKey)
         let size = scaledWindowSize(currentScale)
         // 화면이 여럿이면 마지막에 있던 화면에 붙인다. main 화면은 키보드 초점을 따라 바뀌어서,
         // 그것만 보면 재시작할 때마다 레토가 다른 모니터로 건너간다.
@@ -249,6 +259,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             onOpenAttention: { [weak self] point in self?.showAttentionMenu(at: point) }
         )
         petView.petScale = currentScale
+        petView.chatScale = chatScale
+        petView.chatFontSize = chatFontSize
         petView.typeface = typeface
         petView.onExpansionChanged = { [weak self] expanded in
             self?.applyRibbonExpansion(expanded)
@@ -367,8 +379,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         // 여기부터 모양 묶음. 레토가 어떻게 보일지 정하는 항목들이다.
         menu.addItem(.separator())
 
-        let sizeItem = NSMenuItem(title: "크기", action: nil, keyEquivalent: "")
-        let sizeMenu = NSMenu(title: "크기")
+        let sizeItem = NSMenuItem(title: "레토 크기", action: nil, keyEquivalent: "")
+        let sizeMenu = NSMenu(title: "레토 크기")
         sizeItems = supportedScales.map { scale in
             let percent = Int((scale * 100).rounded())
             let label: String
@@ -419,6 +431,15 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             item.target = self
             item.representedObject = face.rawValue
             item.state = face == typeface ? .on : .off
+            typefaceMenu.addItem(item)
+            return item
+        }
+        typefaceMenu.addItem(.separator())
+        chatFontSizeItems = ChatFontSize.allCases.map { value in
+            let item = NSMenuItem(title: value.label, action: #selector(changeChatFontSize(_:)), keyEquivalent: "")
+            item.target = self
+            item.representedObject = value.rawValue
+            item.state = value == chatFontSize ? .on : .off
             typefaceMenu.addItem(item)
             return item
         }
@@ -781,12 +802,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     }
 
     private func scaledWindowSize(_ scale: CGFloat) -> NSSize {
-        petLayout(scale: scale).windowSize
+        petLayout(scale: scale, chatScale: chatScale).windowSize
     }
 
     /// 말풍선이 펼쳐지면 창을 아래로 늘린다. 위 변을 고정해야 레토가 화면에서 제자리에 있는다.
     private func applyRibbonExpansion(_ expanded: Bool) {
-        let target = petLayout(scale: currentScale, expanded: expanded).windowSize
+        let target = petLayout(scale: currentScale, expanded: expanded, chatScale: chatScale).windowSize
         let current = panel.frame
         guard abs(target.height - current.height) > 0.5 else { return }
         // 위 변을 고정하면 레토가 제자리에 있는다. 아래 모서리에 고정한 경우에는 반대로
@@ -1310,10 +1331,20 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         }
     }
 
+    @objc private func changeChatFontSize(_ sender: NSMenuItem) {
+        guard let raw = sender.representedObject as? String,
+              let next = ChatFontSize(rawValue: raw) else { return }
+        chatFontSize = next
+        petView.chatFontSize = next
+        for item in chatFontSizeItems {
+            item.state = (item.representedObject as? String) == raw ? .on : .off
+        }
+    }
+
     @objc private func changeScale(_ sender: NSMenuItem) {
         guard let number = sender.representedObject as? NSNumber else { return }
         let nextScale = CGFloat(number.doubleValue)
-        let nextSize = petLayout(scale: nextScale).windowSize
+        let nextSize = petLayout(scale: nextScale, expanded: petView.isRibbonExpanded, chatScale: chatScale).windowSize
         let oldCenter = NSPoint(x: panel.frame.midX, y: panel.frame.midY)
         var nextFrame = NSRect(
             x: oldCenter.x - nextSize.width / 2,
