@@ -87,6 +87,11 @@ struct CodexFrameMetadata {
         case .key:
             guard !keyTooLong else { return }
             if bytes.count >= 128 { keyTooLong = true; bytes.removeAll(keepingCapacity: true); return }
+        case .field(.revision), .field(.type):
+            // 버전별 본문 필드가 길거나 다른 형식이어도 안정적인 라우팅 정보는 남긴다.
+            if bytes.count >= 4096 {
+                destination = .ignored; bytes.removeAll(keepingCapacity: true); return
+            }
         default:
             guard bytes.count < 4096 else { invalid = true; return }
         }
@@ -153,7 +158,16 @@ struct CodexFrameMetadata {
     }
 
     private mutating func startValue(_ byte: UInt8) {
-        let dest = valueDestination()
+        var dest = valueDestination()
+        switch dest {
+        case .field(.revision):
+            if byte != 0x2D && !(0x30...0x39).contains(byte) { dest = .ignored }
+        case .field(.type):
+            if byte != 0x22 { dest = .ignored }
+        case .field(.change):
+            if byte != 0x7B { dest = .ignored }
+        default: break
+        }
         if byte == 0x7B || byte == 0x5B {
             let role: Role
             switch dest {
@@ -350,9 +364,9 @@ struct CodexFrameMetadata {
         guard [.zero, .integer, .fraction, .exponentDigits].contains(numberState) else { invalid = true; return }
         token = .none
         if case .field(let field) = destination {
-            guard numberIsInteger, let value = Int(String(decoding: bytes, as: UTF8.self)) else { invalid = true; return }
-            if field == .version { version = value }
-            else if field == .revision { revision = value }
+            let value = numberIsInteger ? Int(String(decoding: bytes, as: UTF8.self)) : nil
+            if field == .revision { revision = value }
+            else if field == .version, let value { version = value }
             else { invalid = true; return }
         }
         bytes.removeAll(keepingCapacity: true)

@@ -49,7 +49,6 @@ func checkCodexFrameMetadata(_ check: (Bool, String) -> Void) {
         #"{"method":"one","params":{"hostId":"local","conversationId":"thread"},"targetClientIds":null}"#,
         #"{"method":"one","params":{"hostId":"local","conversationId":"thread"},"targetClientIds":["reader",false]}"#,
         #"{"method":"one","params":{"hostId":"local","conversationId":"thread"},"version":11.0}"#,
-        #"{"method":"one","params":{"hostId":"local","conversationId":"thread","change":{"revision":1e2}}}"#,
         #"{"method":"one","params":{"hostId":"local","conversationId":"thread"},"padding":[1,]}"#,
         #"{"method":"one","params":{"hostId":"local","conversationId":"thread"},"padding":01}"#,
         #"{"method":"one","params":{"hostId":"local","conversationId":"thread"},"padding":truefalse}"#,
@@ -63,6 +62,30 @@ func checkCodexFrameMetadata(_ check: (Bool, String) -> Void) {
         var invalid = CodexFrameMetadata()
         invalid.consume(Data(value.utf8))
         check(invalid.route == nil, "malformed or ambiguous frame metadata \(index) is rejected")
+    }
+
+    let future = standard.replacingOccurrences(of: "\"version\":11", with: "\"version\":12")
+    for value in ["\"11\"", "null", "true", "1.5", "1e2", "[11]", "{\"value\":11}",
+                  "\"" + String(repeating: "x", count: 5000) + "\""] {
+        var metadata = CodexFrameMetadata()
+        metadata.consume(Data(future.replacingOccurrences(of: "\"revision\":7", with: "\"revision\":" + value).utf8))
+        check(metadata.route?.version == 12 && metadata.route?.conversationID == "thread" && metadata.route?.revision == nil,
+              "future revision values preserve stable routing without assuming supported numeric semantics")
+    }
+    for value in ["null", "false", "{\"futureKind\":true}", "\"" + String(repeating: "x", count: 5000) + "\""] {
+        var metadata = CodexFrameMetadata()
+        metadata.consume(Data(future.replacingOccurrences(of: "\"type\":\"snapshot\"", with: "\"type\":" + value).utf8))
+        check(metadata.route?.version == 12 && metadata.route?.conversationID == "thread" && metadata.route?.changeType == nil,
+              "future change kinds do not erase stable protocol routing")
+    }
+    for value in ["null", "false", "\"future-change\"", "[1,2,3]"] {
+        var object = try! JSONSerialization.jsonObject(with: Data(future.utf8)) as! [String: Any]
+        var params = object["params"] as! [String: Any]
+        params["change"] = try! JSONSerialization.jsonObject(with: Data(value.utf8), options: [.fragmentsAllowed])
+        object["params"] = params
+        var metadata = CodexFrameMetadata(); metadata.consume(try! JSONSerialization.data(withJSONObject: object))
+        check(metadata.route?.version == 12 && metadata.route?.conversationID == "thread",
+              "future change container shapes retain routing while JSON grammar remains validated")
     }
 
     var large = CodexFrameMetadata()

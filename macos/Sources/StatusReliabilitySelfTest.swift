@@ -60,6 +60,44 @@ func checkStatusReliability(_ check: (Bool, String) -> Void) {
     check(store.statuses["fixture"]?.state == .running, "untracked task metadata is removed before a later new subscription")
 
     store.reset()
+    _ = store.consume(snapshot("owner", 10, flags: ["waitingOnApproval"]), nowMs: 100)
+    var unsupported = snapshot("owner", 11)
+    unsupported["version"] = 12
+    _ = store.consume(unsupported, nowMs: 200)
+    check(store.takeProtocolValidationRequests() == ["fixture"] && store.takeOwnerValidationRequests().isEmpty,
+          "protocol incompatibility requests failure-counted recovery rather than an ownership retry")
+    _ = store.consume(snapshot("owner", 10, flags: ["waitingOnApproval"]), nowMs: 300)
+    check(store.statuses["fixture"] == nil,
+          "unsupported newer protocol state cannot restore waiting from a delayed supported snapshot")
+    _ = store.consume(snapshot("owner", 1000, flags: ["waitingOnApproval"]), nowMs: 400)
+    check(store.statuses["fixture"] == nil && store.takeProtocolValidationRequests().isEmpty,
+          "a higher revision on the incompatible observer does not bypass its quarantine or create retry floods")
+    _ = store.consume(snapshot("healthy", 1, flags: ["waitingOnApproval"], id: "other"), nowMs: 500)
+    check(store.statuses["other"]?.state == .waiting, "protocol quarantine remains scoped to the affected conversation")
+    store.reset()
+    _ = store.consume(snapshot("owner", 10), nowMs: 100)
+    unsupported = snapshot("new-owner", 1)
+    unsupported["version"] = 12
+    _ = store.consume(unsupported, nowMs: 200)
+    check(store.takeProtocolValidationRequests() == ["fixture"] && store.takeOwnerValidationRequests().isEmpty,
+          "unsupported owner changes count as protocol failures before ownership handling")
+    store.reset()
+    _ = store.consume(snapshot("owner", 12), nowMs: 600)
+    check(store.statuses["fixture"]?.state == .running, "a fresh observer epoch can confirm supported protocol state again")
+    for futureChange in [[String: Any](), ["revision": "11"], ["revision": -1], ["futureState": "running"]] {
+        store.reset()
+        _ = store.consume(snapshot("owner", 10, flags: ["waitingOnApproval"]), nowMs: 100)
+        var future = snapshot("owner", 11)
+        future["version"] = 12
+        var envelope = future["params"] as! [String: Any]
+        envelope["change"] = futureChange; future["params"] = envelope
+        _ = store.consume(future, nowMs: 200)
+        _ = store.consume(snapshot("owner", 10, flags: ["waitingOnApproval"]), nowMs: 300)
+        check(store.statuses["fixture"] == nil && store.takeProtocolValidationRequests() == ["fixture"],
+              "unknown protocol does not require its revision or change schema to match the supported version")
+    }
+
+    store.reset()
     _ = store.consume(snapshot("owner", 1, "idle", flags: ["waitingOnApproval"]), nowMs: 100)
     check(store.statuses["fixture"]?.state == .idle, "idle runtime does not use active-only waiting flags")
     _ = store.consume(snapshot("owner", 2, "systemError", flags: ["waitingOnUserInput"]), nowMs: 200)

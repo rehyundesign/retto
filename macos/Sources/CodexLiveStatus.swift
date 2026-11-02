@@ -174,16 +174,19 @@ struct CodexLiveStatusStore {
     private var disconnectedOwners: Set<String> = []
     private var validateNewOwners = false
     private(set) var ownerValidationRequests: Set<String> = []
+    private var protocolValidationRequests: Set<String> = []
     private(set) var acceptedSnapshotID: String?
     var statuses: [String: CodexLiveStatus] { entries.compactMapValues(\.status) }
     mutating func reset() {
         entries.removeAll(); fences.removeAll(); disconnectedOwners.removeAll()
-        ownerValidationRequests.removeAll(); acceptedSnapshotID = nil; validateNewOwners = false
+        ownerValidationRequests.removeAll(); protocolValidationRequests.removeAll()
+        acceptedSnapshotID = nil; validateNewOwners = false
     }
     mutating func retain(_ ids: Set<String>) {
         entries = entries.filter { ids.contains($0.key) }
         fences = fences.filter { ids.contains($0.key) }
         ownerValidationRequests.formIntersection(ids)
+        protocolValidationRequests.formIntersection(ids)
     }
     @discardableResult mutating func disconnect(owner: String) -> Set<String> {
         let affected = Set(fences.keys.filter { fences[$0]?.owner == owner })
@@ -199,6 +202,16 @@ struct CodexLiveStatusStore {
     }
     mutating func takeOwnerValidationRequests() -> Set<String> {
         let ids = ownerValidationRequests; ownerValidationRequests.removeAll(); return ids
+    }
+    mutating func requireProtocolValidation(_ id: String) {
+        var fence = fences[id] ?? Fence()
+        fence.validationPending = true
+        fences[id] = fence
+        entries.removeValue(forKey: id)
+        protocolValidationRequests.insert(id)
+    }
+    mutating func takeProtocolValidationRequests() -> Set<String> {
+        let ids = protocolValidationRequests; protocolValidationRequests.removeAll(); return ids
     }
     func metadataRequiresOwnerValidation(owner: String, threadID: String) -> Bool {
         if disconnectedOwners.contains(owner) { return true }
@@ -241,11 +254,17 @@ struct CodexLiveStatusStore {
               let params = message["params"] as? [String: Any], params["hostId"] as? String == "local",
               let id = params["conversationId"] as? String else { return nil }
         guard let owner = message["sourceClientId"] as? String, !owner.isEmpty, owner.utf8.count <= 256,
-              !id.isEmpty, id.utf8.count <= 256,
-              let change = params["change"] as? [String: Any],
-              let revision = change["revision"] as? Int, revision >= 0 else { return nil }
+              !id.isEmpty, id.utf8.count <= 256 else { return nil }
         let fence = fences[id]
         if fence?.validationPending == true { return nil }
+        // 지원하지 않는 버전의 revision 의미는 신뢰할 수 없다. 현재 관찰자 세대를
+        // 격리하고, 새 관찰자가 지원 버전으로 확인할 때까지 같은 채널을 재사용하지 않는다.
+        guard message["version"] as? Int == 11 else {
+            requireProtocolValidation(id)
+            return nil
+        }
+        guard let change = params["change"] as? [String: Any],
+              let revision = change["revision"] as? Int, revision >= 0 else { return nil }
         let snapshot = change["type"] as? String == "snapshot"
         // 같은 관찰자 ID에 도착한 다른 소유자의 snapshot만으로 새 소유권을 확정하지 않는다.
         if snapshot, let currentOwner = fence?.owner, currentOwner != owner {
@@ -261,10 +280,6 @@ struct CodexLiveStatusStore {
                 var pending = fences[id] ?? Fence(); pending.validationPending = true; fences[id] = pending
                 entries.removeValue(forKey: id); ownerValidationRequests.insert(id)
             }
-            return nil
-        }
-        guard message["version"] as? Int == 11 else {
-            if fence?.owner == owner || fence?.owner == nil { entries.removeValue(forKey: id) }
             return nil
         }
         if let highest = fence?.revisions[owner], revision < highest {
@@ -879,13 +894,19 @@ final class CodexLiveStatusReader {
         guard let route, route.messageType == "broadcast", route.method == "thread-stream-state-changed",
               route.hostID == "local", tracked.contains(route.conversationID),
               let owner = route.sourceClientID, !owner.isEmpty, owner.utf8.count <= 256,
-              route.version == 11, let revision = route.revision, revision >= 0,
-              ["snapshot", "patches"].contains(route.changeType ?? ""),
               route.targetClientIDs.map({ $0.contains(clientID ?? "") }) ?? true,
               !validationThreads.contains(route.conversationID) else { return }
         let id = route.conversationID
+        guard initialValidatedSnapshots.contains(id) || route.targetClientIDs?.contains(clientID ?? "") == true else { return }
+        guard route.version == 11 else {
+            store.requireProtocolValidation(id)
+            for requested in store.takeProtocolValidationRequests() { validateOwner(requested, failure: true) }
+            return
+        }
+        guard let revision = route.revision, revision >= 0,
+              ["snapshot", "patches"].contains(route.changeType ?? "") else { return }
         if !initialValidatedSnapshots.contains(id) {
-            guard route.changeType == "snapshot", route.targetClientIDs?.contains(clientID ?? "") == true else { return }
+            guard route.changeType == "snapshot" else { return }
         }
         if store.metadataRequiresOwnerValidation(owner: owner, threadID: id) {
             validateOwner(id); return
@@ -976,7 +997,11 @@ final class CodexLiveStatusReader {
         }
         if parkedThreads.contains(id) {
             if (message["targetClientIds"] as? [String])?.contains(clientID ?? "") == true,
-               message["method"] as? String == "thread-stream-state-changed" { validateOwner(id, wake: true) }
+               message["method"] as? String == "thread-stream-state-changed",
+               message["version"] as? Int == 11,
+               (params["change"] as? [String: Any])?["type"] as? String == "snapshot" {
+                validateOwner(id, wake: true)
+            }
             return
         }
         guard !validationThreads.contains(id) else { return }
@@ -989,12 +1014,14 @@ final class CodexLiveStatusReader {
             return
         }
         if !initialValidatedSnapshots.contains(id) {
-            guard change?["type"] as? String == "snapshot",
-                  (message["targetClientIds"] as? [String])?.contains(clientID ?? "") == true else { return }
+            guard (message["targetClientIds"] as? [String])?.contains(clientID ?? "") == true else { return }
+            if message["version"] as? Int == 11, change?["type"] as? String != "snapshot" { return }
         }
         if let repair = store.consume(message, nowMs: Date().timeIntervalSince1970 * 1000) { resync(repair) }
+        let protocolFailures = store.takeProtocolValidationRequests()
         let ambiguities = store.takeOwnerValidationRequests()
-        for requested in ambiguities { validateOwner(requested) }
+        for requested in protocolFailures { validateOwner(requested, failure: true) }
+        for requested in ambiguities.subtracting(protocolFailures) { validateOwner(requested) }
         if store.statuses[id] == nil { unavailableThreads.insert(id) }
         if store.acceptedSnapshotID == id {
             confirmations.removeValue(forKey: id); snapshotConfirmedAt[id] = uptime
