@@ -128,6 +128,7 @@ codesign --force --deep --sign - "$APP_DIR"
 "$MACOS_DIR/Retto" --self-test-slack
 "$MACOS_DIR/Retto" --self-test-all-skins
 "$MACOS_DIR/Retto" --self-test-codex-input
+"$MACOS_DIR/Retto" --self-test-status-rendering
 python3 "$APP_ROOT/scripts/test-codex-status-stream.py" "$MACOS_DIR/Retto"
 python3 "$APP_ROOT/scripts/test-status-reliability.py" "$MACOS_DIR/Retto"
 

@@ -348,6 +348,61 @@ def main():
         send(current, snapshot(1, 'waiting', target='fair-current-reader', owner='owner-b'))
     checks.append('all-active recovery saturation gives a queued task a fresh observer through bounded fair slot rotation')
 
+    for changed_owner, giant, future_schema in [(False, False, False), (True, False, False),
+                                               (False, True, False), (False, False, True), (False, True, True),
+                                               (False, True, 'string-revision'), (False, True, 'future-change')]:
+        flags = ['--live-codex-small-frames'] if giant else []
+        with fixture(args.binary, ['waiting', 'unavailable', 'running'], flags) as (accept, _):
+            primary = accept()
+            send(primary, snapshot(10, 'waiting'))
+            time.sleep(0.1)
+            unsupported = snapshot(11, 'running', owner='new-owner' if changed_owner else 'owner',
+                                   padding=9000 if giant else 0, reordered=giant)
+            unsupported['version'] = 12
+            if future_schema == 'string-revision':
+                unsupported['params']['change']['revision'] = '11'
+            elif future_schema == 'future-change':
+                unsupported['params']['change'] = ['future-shape']
+                unsupported['params']['futurePayload'] = 'x' * 9000
+            elif future_schema:
+                unsupported['params']['change'].pop('revision')
+                unsupported['params']['change']['type'] = 'future-state'
+            send(primary, unsupported)
+            fresh = accept('protocol-reader')
+            send(primary, snapshot(10, 'waiting'))
+            send(primary, snapshot(1000, 'waiting'))
+            send(fresh, snapshot(12, 'waiting', target='reader-1'))
+            time.sleep(0.1)
+            send(fresh, snapshot(12, 'running', target='protocol-reader'))
+        checks.append(f'unsupported protocol quarantines old observer and recovers through a fresh supported snapshot (newOwner={changed_owner}, giant={giant}, futureSchema={future_schema})')
+
+    with fixture(args.binary, ['waiting', 'unavailable', 'running'], ['--live-codex-reliability']) as (accept, _):
+        primary = accept()
+        send(primary, snapshot(10, 'waiting'))
+        time.sleep(0.1)
+        unsupported = snapshot(11, 'running')
+        unsupported['version'] = 12
+        send(primary, unsupported)
+        created = 0
+        end = time.monotonic() + 1.5
+        while time.monotonic() < end:
+            ready, _, _ = select.select([accept.server], [], [], 0.05)
+            if ready:
+                created += 1
+                assert created <= 2, 'unsupported protocol bypassed the bounded recovery failure budget'
+                client = f'incompatible-reader-{created}'
+                child = accept(client)
+                message = snapshot(1, 'waiting', target=client, owner=f'changed-owner-{created}')
+                message['version'] = 12
+                send(child, message)
+            send(primary, unsupported)
+        assert created == 2, 'protocol recovery attempts were not charged consistently'
+        assert not select.select([accept.server], [], [], 0.15)[0], 'unsupported traffic restarted a parked task'
+        send(primary, snapshot(12, 'running'))
+        fresh = accept('supported-again')
+        send(fresh, snapshot(12, 'running', target='supported-again'))
+    checks.append('permanently unsupported protocol parks after bounded failures; unsupported traffic cannot wake it, and supported state recovers freshly')
+
     cycling = ['waiting'] + ['unavailable', 'waiting'] * 7 + ['unavailable', 'running']
     with fixture(args.binary, cycling, ['--live-codex-cycle-observers']) as (accept, _):
         for index in range(9):
