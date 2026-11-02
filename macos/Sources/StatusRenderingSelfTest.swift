@@ -81,7 +81,7 @@ func runStatusRenderingSelfTest(outputDirectory: URL? = nil) -> Int32 {
     var unsupported = snapshot(revision + 1, "active"); unsupported["version"] = 12
     codex(unsupported, "04-protocol-unknown", input: 0, attention: 0, render: true)
     codex(snapshot(revision + 100, "active", flags: ["waitingOnApproval"]), "quarantined-late-waiting", input: 0, attention: 0)
-    
+
     let nativeDirectory = output.appendingPathComponent("native-fixtures")
     try! FileManager.default.createDirectory(at: nativeDirectory, withIntermediateDirectories: true)
     let native = ClaudeNativeStatusReader(directory: nativeDirectory, processMatches: { $0 == 1 && $1 == "fixture" })
