@@ -17,6 +17,9 @@ enum IntegrationConnectionState {
 func taskConnectionNotice(for payload: StatePayload?, unreadablePaths: Set<String>, slackNotice: String?) -> String? {
     guard let payload, !payload.isClosed else { return nil }
     if payload.source == "slack" { return slackNotice }
+    if payload.stateSource == TaskStateSource.unavailable.rawValue {
+        return "앱의 현재 입력 상태를 확인할 수 없어요"
+    }
     guard payload.source == "codex" || payload.client == "codex",
           [.running, .review, .waiting].contains(payload.petState),
           let path = payload.transcriptPath, unreadablePaths.contains(path) else { return nil }

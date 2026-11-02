@@ -8,6 +8,10 @@ private let codexWaitingMethods: Set<String> = [
     "item/fileChange/requestApproval", "item/permissions/requestApproval",
     "item/tool/requestUserInput", "item/tool/requestOptionPicker"
 ]
+// 복원된 권한 요청은 앱의 waitingOnApproval로 확인한다. 현재 대화의 입력 요청은 별도로 유지한다.
+private let codexUserInputMethods: Set<String> = [
+    "mcpServer/elicitation/request", "item/tool/requestUserInput", "item/tool/requestOptionPicker"
+]
 
 struct CodexLiveStatus: Equatable {
     let state: PetState
@@ -19,11 +23,21 @@ struct CodexLiveStatus: Equatable {
     // 다른 도구의 patch는 남아 있는 승인 요청을 다시 확인한 근거가 아니다.
     // 전체 snapshot을 받은 시각으로 입력 대기 재확인 주기를 관리한다.
     var snapshotConfirmedAtMs: Double? = nil
+    var requestIDs: [String] = []
+    var requestMethods: [String] = []
+    var waitingFlags: [String] = []
+    var turnStartMessageID: String? = nil
+    var revision: Int? = nil
+}
+
+func needsCodexHookConfirmation(_ status: CodexLiveStatus, since: Double, requestedAt: Double) -> Bool {
+    // 일반 도구 patch가 새 질문 뒤에 도착해도 전체 상태 재확인을 생략하지 않는다.
+    (status.snapshotConfirmedAtMs ?? status.lastConfirmedAtMs) < since && requestedAt < since
 }
 
 /// snapshot 의 conversationState 는 대화 전체라 한 건에 16~30MB 다. 입력 대기 확인으로 몇 초마다 다시 받으므로,
 /// 전부 객체로 만들지 않고 statusProjection 이 읽는 필드만 남긴다. 나머지 모양과 값의 타입은 JSONSerialization 과 같다.
-private let liveStateKeys: Set<String> = ["id", "threadRuntimeStatus", "requests", "latestTurnStartMessageId"]
+private let liveStateKeys: Set<String> = ["id", "threadRuntimeStatus", "requests", "latestTurnStartMessageId", "resumeState"]
 
 private struct LiveStatusJSON: Decodable {
     let value: Any?
@@ -66,7 +80,18 @@ private func statusProjection(_ state: [String: Any]) -> [String: Any] {
         result["requests"] = requests.map { $0.filter { ["id", "method", "completed"].contains($0.key) } }
     }
     if let turn = state["latestTurnStartMessageId"] { result["latestTurnStartMessageId"] = turn }
+    if let resume = state["resumeState"] { result["resumeState"] = resume }
     return result
+}
+
+private func waitingIdentity(_ fields: [String: Any]) -> NSDictionary {
+    let runtime = fields["threadRuntimeStatus"] as? [String: Any]
+    let requests = (fields["requests"] as? [[String: Any]] ?? []).filter {
+        codexWaitingMethods.contains($0["method"] as? String ?? "") && $0["completed"] as? Bool != true
+    }
+    return NSDictionary(dictionary: ["requests": requests,
+        "flags": (runtime?["activeFlags"] as? [String] ?? []).filter { ["waitingOnApproval", "waitingOnUserInput"].contains($0) },
+        "turn": fields["latestTurnStartMessageId"] ?? ""])
 }
 
 private enum StatusPatchError: Error { case invalid }
@@ -144,7 +169,7 @@ struct CodexLiveStatusStore {
                     guard let path = patch["path"] as? [Any], let op = patch["op"] as? String,
                           ["add", "remove", "replace"].contains(op) else { throw StatusPatchError.invalid }
                     if let root = path.first as? String {
-                        guard ["threadRuntimeStatus", "requests", "latestTurnStartMessageId"].contains(root) else { continue }
+                        guard liveStateKeys.contains(root) else { continue }
                         if root == "requests", path.count > 2,
                            let key = path[2] as? String, !["id", "method", "completed"].contains(key) { continue }
                     }
@@ -154,8 +179,13 @@ struct CodexLiveStatusStore {
         } else { entries.removeValue(forKey: id); return nil }
         let runtime = fields["threadRuntimeStatus"] as? [String: Any]
         let flags = runtime?["activeFlags"] as? [String] ?? []
+        let resume = fields["resumeState"] as? String
+        // Codex UI와 같이, 현재 소유 중인 대화의 요청과 복원된 대화의 과거 요청을 구분한다.
+        // needs_resume의 요청은 앱의 activeFlags가 실제 대기를 확인한 경우에만 사용한다.
         let pending = (fields["requests"] as? [[String: Any]] ?? []).contains {
-            codexWaitingMethods.contains($0["method"] as? String ?? "") && $0["completed"] as? Bool != true
+            let method = $0["method"] as? String ?? ""
+            return $0["completed"] as? Bool != true && resume != "needs_resume"
+                && (codexUserInputMethods.contains(method) || (resume == "resumed" && codexWaitingMethods.contains(method)))
         }
         let state: PetState?
         if pending || flags.contains("waitingOnApproval") || flags.contains("waitingOnUserInput") { state = .waiting }
@@ -169,13 +199,26 @@ struct CodexLiveStatusStore {
         }
         let oldStatus = entries[id]?.status
         let unchanged = entries[id].map { NSDictionary(dictionary: $0.fields).isEqual(to: fields) } ?? false
+        let sameWaiting = state == .waiting && oldStatus?.state == .waiting
+            && entries[id].map { waitingIdentity($0.fields).isEqual(waitingIdentity(fields)) } == true
         let confirmedAt = change["type"] as? String == "snapshot" || !unchanged
             ? nowMs : (oldStatus?.lastConfirmedAtMs ?? nowMs)
         let status = state.map { CodexLiveStatus(state: $0,
-            observedAtMs: unchanged ? (oldStatus?.observedAtMs ?? nowMs) : nowMs,
+            observedAtMs: unchanged || sameWaiting ? (oldStatus?.observedAtMs ?? nowMs) : nowMs,
             confirmedAtMs: confirmedAt,
             snapshotConfirmedAtMs: change["type"] as? String == "snapshot"
-                ? nowMs : oldStatus?.snapshotConfirmedAtMs) }
+                ? nowMs : oldStatus?.snapshotConfirmedAtMs,
+            requestIDs: (fields["requests"] as? [[String: Any]] ?? []).filter {
+                codexWaitingMethods.contains($0["method"] as? String ?? "") && $0["completed"] as? Bool != true
+            }.compactMap { request -> String? in
+                if let id = request["id"] as? String { return String(id.prefix(256)) }
+                return (request["id"] as? Int).map(String.init)
+            }.sorted(),
+            requestMethods: (fields["requests"] as? [[String: Any]] ?? []).filter {
+                codexWaitingMethods.contains($0["method"] as? String ?? "") && $0["completed"] as? Bool != true
+            }.compactMap { $0["method"] as? String }.sorted(),
+            waitingFlags: flags.filter { ["waitingOnApproval", "waitingOnUserInput"].contains($0) },
+            turnStartMessageID: fields["latestTurnStartMessageId"] as? String, revision: revision) }
         entries[id] = Entry(fields: fields, owner: owner, revision: revision, status: status)
         return nil
     }
@@ -183,7 +226,7 @@ struct CodexLiveStatusStore {
 
 func applyCodexLiveStatus(_ live: CodexLiveStatus?, to task: ReconciledCodexTask,
                          transcriptStatus: CodexTranscriptStatus) -> ReconciledCodexTask {
-    guard let live else { return task }
+    guard let live else { return unconfirmedInputTask(task) }
     if live.state == .waiting {
         // 완료·새 사용자 턴은 그보다 먼저 관측한 도구 승인을 종료한다.
         let endedAt = max(transcriptStatus.completedAtMs ?? 0, transcriptStatus.latestAbortAtMs ?? 0,
@@ -192,15 +235,19 @@ func applyCodexLiveStatus(_ live: CodexLiveStatus?, to task: ReconciledCodexTask
         return ReconciledCodexTask(state: .waiting, observedAtMs: live.observedAtMs,
                                    needsAttention: true, title: task.title, source: .live)
     }
-    // 비동기 질문은 도구가 반환돼도 사용자 답변까지 유지한다.
-    guard transcriptStatus.pendingInputAtMs == nil else { return task }
-    if task.state == .waiting, live.lastConfirmedAtMs >= (task.observedAtMs ?? 0) {
-        let state: PetState = transcriptStatus.isCompletedAfterLatestPrompt && live.state == .idle ? .waving : live.state
-        return ReconciledCodexTask(state: state,
-                                   observedAtMs: state == .waving ? transcriptStatus.completedAtMs : max(live.observedAtMs, task.observedAtMs ?? 0),
-                                   needsAttention: needsInputStates.contains(state), title: task.title, source: .live)
+    // 훅 수신 시각은 앱의 상태 버전이 아니다. 실제 입력 여부는 앱 상태를 우선한다.
+    // 새 질문 이후 전체 상태를 아직 받지 않았다면 재확인하는 동안 파란색으로 단정하지 않는다.
+    if let pending = transcriptStatus.pendingInputAtMs,
+       pending > (live.snapshotConfirmedAtMs ?? live.lastConfirmedAtMs) {
+        return unconfirmedInputTask(task)
     }
-    return task
+    let state: PetState
+    if live.state == .idle, transcriptStatus.isCompletedAfterLatestPrompt { state = .waving }
+    else if live.state == .idle, task.state == .waving || task.state == .failed { state = task.state }
+    else { state = live.state }
+    return ReconciledCodexTask(state: state,
+        observedAtMs: state == .waving ? (transcriptStatus.completedAtMs ?? task.observedAtMs) : live.observedAtMs,
+        needsAttention: needsInputStates.contains(state), title: task.title, source: .live)
 }
 
 /// 연결에서 허용하는 발신은 초기화, 상태 구독과 미지원 요청 회신뿐이다.
@@ -244,8 +291,8 @@ final class CodexLiveStatusReader {
             let nowMs = Date().timeIntervalSince1970 * 1000
             for (id, since) in refreshAfter where ids.contains(id) {
                 guard let status = self.store.statuses[id] else { continue }
-                let newHook = status.lastConfirmedAtMs < since
-                    && (self.requestedHookConfirmation[id] ?? 0) < since
+                let newHook = needsCodexHookConfirmation(status, since: since,
+                    requestedAt: self.requestedHookConfirmation[id] ?? 0)
                 let staleWaiting = status.state == .waiting
                     && nowMs - (status.snapshotConfirmedAtMs ?? status.observedAtMs) >= self.pendingConfirmationIntervalMs
                 guard newHook || staleWaiting else { continue }

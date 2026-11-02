@@ -2,10 +2,10 @@ import Foundation
 
 func checkCodexLiveStatus(_ check: (Bool, String) -> Void) {
     var store = CodexLiveStatusStore()
-    func snapshot(_ state: String = "active", flags: [String] = [], requests: [[String: Any]] = [], revision: Int = 1, owner: String = "owner") -> [String: Any] {
+    func snapshot(_ state: String = "active", flags: [String] = [], requests: [[String: Any]] = [], revision: Int = 1, owner: String = "owner", resume: String = "") -> [String: Any] {
         ["type": "broadcast", "method": "thread-stream-state-changed", "version": 11, "sourceClientId": owner,
          "params": ["hostId": "local", "conversationId": "fixture", "change": ["type": "snapshot", "revision": revision,
-         "conversationState": ["id": "fixture", "threadRuntimeStatus": ["type": state, "activeFlags": flags], "requests": requests]]]]
+         "conversationState": ["id": "fixture", "threadRuntimeStatus": ["type": state, "activeFlags": flags], "requests": requests, "resumeState": resume]]]]
     }
     func patch(_ patches: [[String: Any]], base: Int, revision: Int, owner: String = "owner") -> [String: Any] {
         ["type": "broadcast", "method": "thread-stream-state-changed", "version": 11, "sourceClientId": owner,
@@ -20,7 +20,7 @@ func checkCodexLiveStatus(_ check: (Bool, String) -> Void) {
     check(store.statuses["fixture"]?.state == .waiting, "file upload MCP elicitation is waiting even without runtime flag")
     _ = store.consume(patch([["op": "replace", "path": ["requests", 0, "completed"], "value": true]], base: 3, revision: 4), nowMs: 400)
     check(store.statuses["fixture"]?.state == .running, "elicitation response releases blue state")
-    _ = store.consume(patch([["op": "add", "path": ["requests", 1], "value": request("item/commandExecution/requestApproval")]], base: 4, revision: 5), nowMs: 500)
+    _ = store.consume(patch([["op": "add", "path": ["requests", 1], "value": request("item/tool/requestUserInput")]], base: 4, revision: 5), nowMs: 500)
     check(store.statuses["fixture"]?.state == .waiting, "array insertion detects a second approval")
     _ = store.consume(patch([["op": "replace", "path": ["title"], "value": "ignored"],
                              ["op": "add", "path": ["requests", 1, "params", "arbitrary"], "value": "ignored"]], base: 5, revision: 6), nowMs: 600)
@@ -68,11 +68,11 @@ func checkCodexLiveStatus(_ check: (Bool, String) -> Void) {
           "live approval overrides running hook")
     check(applyCodexLiveStatus(liveRunning, to: waiting, transcriptStatus: empty).state == .running,
           "live response releases stale permission hook before turn completion")
-    check(applyCodexLiveStatus(nil, to: waiting, transcriptStatus: empty).state == .waiting,
-          "unavailable live connection preserves hook fallback")
+    check(applyCodexLiveStatus(nil, to: waiting, transcriptStatus: empty).source == .unavailable,
+          "unavailable live connection does not turn an unconfirmed permission hook blue")
     let newerWaiting = ReconciledCodexTask(state: .waiting, observedAtMs: 30, needsAttention: true, title: nil, source: .hook)
-    check(applyCodexLiveStatus(liveRunning, to: newerWaiting, transcriptStatus: empty).state == .waiting,
-          "older live running cannot clear a newer permission hook")
+    check(applyCodexLiveStatus(liveRunning, to: newerWaiting, transcriptStatus: empty).state == .running,
+          "a late permission hook cannot override the app's current running state")
     let newerCompletion = CodexTranscriptStatus(completedAtMs: 30, latestPromptAtMs: 1)
     let done = ReconciledCodexTask(state: .waving, observedAtMs: 30, needsAttention: true, title: nil, source: .rollout)
     check(applyCodexLiveStatus(liveWaiting, to: done, transcriptStatus: newerCompletion).state == .waving,
@@ -121,8 +121,43 @@ func checkCodexLiveStatus(_ check: (Bool, String) -> Void) {
     check(attentionBadgeSessions(mixed, needsAttention: { $0.needsAttention }).map(\.id) == [olderInput.id],
           "input badge uses the same first-priority task as selection and list")
     let question = CodexTranscriptStatus(completedAtMs: nil, latestPromptAtMs: nil, inputRequests: ["question:0": 2])
-    check(applyCodexLiveStatus(liveRunning, to: waiting, transcriptStatus: question).state == .waiting,
-          "active stream does not dismiss unanswered asynchronous question")
+    check(applyCodexLiveStatus(liveRunning, to: waiting, transcriptStatus: question).state == .running,
+          "fresh app state resolves an obsolete transcript question")
+    let unconfirmedQuestion = CodexTranscriptStatus(completedAtMs: nil, latestPromptAtMs: nil, inputRequests: ["new-question:0": 30])
+    check(applyCodexLiveStatus(liveRunning, to: newerWaiting, transcriptStatus: unconfirmedQuestion).source == .unavailable,
+          "a question newer than the app snapshot requests confirmation without guessing input state")
+    check(applyCodexLiveStatus(liveWaiting, to: waiting, transcriptStatus: question).state == .waiting,
+          "app-confirmed pending question remains waiting during other tool activity")
+    check(applyCodexLiveStatus(liveRunning, to: done, transcriptStatus: newerCompletion).state == .running,
+          "app running overrides stale rollout completion")
+    store.reset()
+    let approval = request("item/commandExecution/requestApproval")
+    _ = store.consume(snapshot(requests: [approval]), nowMs: 2000)
+    check(store.statuses["fixture"]?.state == .running,
+          "automatic permission review without the app waiting flag is not user input")
+    _ = store.consume(snapshot(flags: ["waitingOnApproval"], requests: [approval], revision: 2), nowMs: 2100)
+    check(store.statuses["fixture"]?.state == .waiting, "app approval flag confirms a real approval wait")
+    _ = store.consume(snapshot(requests: [approval], revision: 3), nowMs: 2200)
+    check(store.statuses["fixture"]?.state == .running, "cleared app flag releases approval before tool completion")
+    _ = store.consume(snapshot(requests: [request("item/tool/requestUserInput")], revision: 4), nowMs: 2300)
+    check(store.statuses["fixture"]?.state == .waiting, "native pending user-input request is preserved without a blocking runtime flag")
+    _ = store.consume(snapshot(requests: [approval], revision: 5, resume: "resumed"), nowMs: 2400)
+    check(store.statuses["fixture"]?.state == .waiting, "owned conversation preserves an actual approval dialog even without a runtime flag")
+    _ = store.consume(snapshot(requests: [approval], revision: 6, resume: "needs_resume"), nowMs: 2500)
+    check(store.statuses["fixture"]?.state == .running, "restored historical requests do not override the app's running status")
+    store.reset()
+    _ = store.consume(snapshot(flags: ["waitingOnApproval"]), nowMs: 20)
+    _ = store.consume(patch([["op": "add", "path": ["requests", 0], "value": request("item/tool/call")]], base: 1, revision: 2), nowMs: 40)
+    check(store.statuses["fixture"]?.observedAtMs == 20,
+          "ordinary tool patches cannot turn an old wait into a new input event")
+    check(applyCodexLiveStatus(store.statuses["fixture"], to: done, transcriptStatus: newerCompletion).state == .waving,
+          "unrelated activity cannot resurrect a wait from a completed turn")
+    let activeWithToolPatch = CodexLiveStatus(state: .running, observedAtMs: 100,
+        confirmedAtMs: 200, snapshotConfirmedAtMs: 100)
+    check(needsCodexHookConfirmation(activeWithToolPatch, since: 150, requestedAt: 0),
+          "a tool patch after a question does not replace full app confirmation")
+    check(!needsCodexHookConfirmation(activeWithToolPatch, since: 150, requestedAt: 150),
+          "the same hook does not continuously request confirmation")
     let completed = CodexTranscriptStatus(completedAtMs: 10, latestPromptAtMs: 1)
     check(applyCodexLiveStatus(CodexLiveStatus(state: .idle, observedAtMs: 20), to: waiting, transcriptStatus: completed).state == .waving,
           "idle stream preserves confirmed completion")

@@ -121,6 +121,7 @@ struct StatePayload: Decodable, Equatable {
     let event: String?
     let sessionId: String?
     let rawSessionId: String?
+    var turnId: String? = nil
     let source: String?
     let cwd: String?
     let toolName: String?
@@ -238,6 +239,7 @@ enum TaskStateSource: String {
     case hook
     case rollout
     case live
+    case unavailable
 }
 
 /// Retto가 화면에 쓰는 Codex task 상태. 훅은 즉시성, 롤아웃은 완료 사실, 인덱스는 제목을 맡는다.
