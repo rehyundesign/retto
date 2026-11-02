@@ -674,6 +674,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     private func reconciledCodexPayload(_ payload: StatePayload) -> StatePayload {
         guard !payload.isClosed, payload.source == "codex" || payload.client == "codex" else { return payload }
         var refreshed = payload
+        if codexLiveStatusReader.oversizedThreadIDs.contains(payload.navigationSessionId) {
+            refreshed.state = PetState.idle.rawValue
+            refreshed.attention = false
+            refreshed.stateSource = TaskStateSource.unavailable.rawValue
+            return refreshed
+        }
         let transcriptStatus = codexTranscriptStatusReader.status(at: payload.transcriptPath)
         let task = applyCodexLiveStatus(codexLiveStatusReader.statuses[payload.navigationSessionId], to: reconcileCodexTask(
             payload: payload,

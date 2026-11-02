@@ -158,6 +158,12 @@ func checkCodexLiveStatus(_ check: (Bool, String) -> Void) {
           "a tool patch after a question does not replace full app confirmation")
     check(!needsCodexHookConfirmation(activeWithToolPatch, since: 150, requestedAt: 150),
           "the same hook does not continuously request confirmation")
+    let largeHeader = Data(#"{"type":"broadcast","method":"thread-stream-state-changed","params":{"hostId":"local","conversationId":"large","change":{"type":"snapshot","conversationState":{"ignored":""#.utf8)
+    check(oversizedCodexThreadID(in: largeHeader) == "large", "oversized frame header identifies its own thread without parsing the body")
+    check(oversizedCodexThreadID(in: Data(largeHeader.prefix(40))) == nil, "fragmented oversized header waits for complete metadata")
+    check(CodexLiveStatus(state: .running, observedAtMs: 1, revision: 1)
+          == CodexLiveStatus(state: .running, observedAtMs: 1, revision: 2),
+          "diagnostic-only revision changes do not refresh the whole overlay")
     let completed = CodexTranscriptStatus(completedAtMs: 10, latestPromptAtMs: 1)
     check(applyCodexLiveStatus(CodexLiveStatus(state: .idle, observedAtMs: 20), to: waiting, transcriptStatus: completed).state == .waving,
           "idle stream preserves confirmed completion")

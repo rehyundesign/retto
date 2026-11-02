@@ -28,6 +28,14 @@ struct CodexLiveStatus: Equatable {
     var waitingFlags: [String] = []
     var turnStartMessageID: String? = nil
     var revision: Int? = nil
+
+    // revision은 진단용이다. 본문 패치마다 오버레이 전체를 다시 갱신하지 않는다.
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        lhs.state == rhs.state && lhs.observedAtMs == rhs.observedAtMs
+            && lhs.confirmedAtMs == rhs.confirmedAtMs && lhs.snapshotConfirmedAtMs == rhs.snapshotConfirmedAtMs
+            && lhs.requestIDs == rhs.requestIDs && lhs.requestMethods == rhs.requestMethods
+            && lhs.waitingFlags == rhs.waitingFlags && lhs.turnStartMessageID == rhs.turnStartMessageID
+    }
 }
 
 func needsCodexHookConfirmation(_ status: CodexLiveStatus, since: Double, requestedAt: Double) -> Bool {
@@ -140,6 +148,7 @@ struct CodexLiveStatusStore {
     mutating func reset() { entries.removeAll() }
     mutating func retain(_ ids: Set<String>) { entries = entries.filter { ids.contains($0.key) } }
     mutating func disconnect(owner: String) { entries = entries.filter { $0.value.owner != owner } }
+    mutating func invalidate(_ id: String) { entries.removeValue(forKey: id) }
 
     /// 반환한 ID는 누락된 차이를 다시 읽을 대상이다. 알 수 없는 버전은 상태를 추측하지 않는다.
     mutating func consume(_ message: [String: Any], nowMs: Double) -> String? {
@@ -255,11 +264,17 @@ func applyCodexLiveStatus(_ live: CodexLiveStatus?, to task: ReconciledCodexTask
 final class CodexLiveStatusReader {
     var onChange: (() -> Void)?
     private(set) var statuses: [String: CodexLiveStatus] = [:] // main queue
+    private(set) var oversizedThreadIDs: Set<String> = [] // main queue
     private let queue = DispatchQueue(label: "retto.codex-status", qos: .utility)
     private var connection: NWConnection?
     private var generation = 0
     private var clientID: String?
     private var buffer = Data()
+    private let maximumFrameBytes: Int
+    private var discardedBytesRemaining = 0
+    private var discardedHeader = Data()
+    private var discardedThreadIdentified = false
+    private var oversizedThreads: Set<String> = []
     private var tracked: Set<String> = []
     private var store = CodexLiveStatusStore()
     private var running = false
@@ -267,8 +282,9 @@ final class CodexLiveStatusReader {
     private var requestedHookConfirmation: [String: Double] = [:]
     private let pendingConfirmationIntervalMs: Double
 
-    init(pendingConfirmationInterval: TimeInterval = 1) {
+    init(pendingConfirmationInterval: TimeInterval = 1, maximumFrameBytes: Int = 128 * 1024 * 1024) {
         pendingConfirmationIntervalMs = max(0.1, pendingConfirmationInterval) * 1000
+        self.maximumFrameBytes = max(1024, maximumFrameBytes)
     }
     private var scheduledResync: [String: DispatchWorkItem] = [:]
     private var pendingRecheck: DispatchWorkItem?
@@ -280,6 +296,7 @@ final class CodexLiveStatusReader {
             guard let self else { return }
             let removed = self.tracked.subtracting(ids), added = ids.subtracting(self.tracked)
             self.tracked = ids; self.store.retain(ids); self.publish()
+            self.oversizedThreads.formIntersection(ids)
             self.requestedHookConfirmation = self.requestedHookConfirmation.filter { ids.contains($0.key) }
             if !self.running { self.running = true; self.connect() }
             guard self.clientID != nil else { return }
@@ -307,6 +324,8 @@ final class CodexLiveStatusReader {
             self.running = false; self.retry?.cancel(); self.initializationTimeout?.cancel()
             self.scheduledResync.values.forEach { $0.cancel() }; self.scheduledResync.removeAll()
             self.pendingRecheck?.cancel(); self.pendingRecheck = nil
+            self.buffer = Data(); self.discardedBytesRemaining = 0; self.discardedHeader = Data()
+            self.discardedThreadIdentified = false; self.oversizedThreads.removeAll()
             self.generation += 1; self.connection?.cancel(); self.connection = nil
             self.store.reset(); self.requestedHookConfirmation.removeAll(); self.publish()
         }
@@ -348,6 +367,7 @@ final class CodexLiveStatusReader {
         guard current == generation else { return }
         generation += 1; initializationTimeout?.cancel()
         connection?.cancel(); connection = nil; clientID = nil; buffer.removeAll()
+        discardedBytesRemaining = 0; discardedHeader = Data(); discardedThreadIdentified = false
         store.reset(); lastResync.removeAll(); requestedHookConfirmation.removeAll(); publish(); scheduleRetry()
         pendingRecheck?.cancel(); pendingRecheck = nil
         scheduledResync.values.forEach { $0.cancel() }; scheduledResync.removeAll()
@@ -363,6 +383,7 @@ final class CodexLiveStatusReader {
     }
     private func follow(_ id: String, following: Bool) {
         guard let clientID else { return }
+        guard !following || !oversizedThreads.contains(id) else { return }
         send(["type": "broadcast", "method": "thread-stream-following-changed", "version": 1,
               "sourceClientId": clientID, "params": ["conversationId": id, "hostId": "local", "following": following]])
     }
@@ -407,14 +428,41 @@ final class CodexLiveStatusReader {
         connection?.receive(minimumIncompleteLength: 1, maximumLength: 262144) { [weak self] data, _, done, error in
             guard let self, current == self.generation else { return }
             if let data { self.buffer.append(data) }
-            while self.buffer.count >= 4 {
+            while !self.buffer.isEmpty {
+                if self.discardedBytesRemaining > 0 {
+                    let count = min(self.buffer.count, self.discardedBytesRemaining)
+                    if !self.discardedThreadIdentified {
+                        self.discardedHeader.append(self.buffer.prefix(min(count, 8192 - self.discardedHeader.count)))
+                        if let id = oversizedCodexThreadID(in: self.discardedHeader), self.tracked.contains(id) {
+                            self.oversizedThreads.insert(id); self.store.invalidate(id)
+                            self.follow(id, following: false); self.publish()
+                            self.discardedThreadIdentified = true
+                        }
+                    }
+                    self.buffer.removeSubrange(0..<count)
+                    self.discardedBytesRemaining -= count
+                    if self.discardedBytesRemaining == 0 {
+                        // 헤더를 확인할 수 없는 형식에서도 이전 입력 대기를 현재 사실로 남기지 않는다.
+                        if !self.discardedThreadIdentified { self.store.reset(); self.publish() }
+                        self.discardedHeader = Data(); self.discardedThreadIdentified = false
+                    }
+                    continue
+                }
+                guard self.buffer.count >= 4 else { break }
                 let size = self.buffer.prefix(4).enumerated().reduce(0) { $0 | (Int($1.element) << ($1.offset * 8)) }
-                guard size > 0, size <= 64 * 1024 * 1024 else { self.disconnected(current); return }
+                guard size > 0 else { self.disconnected(current); return }
+                if size > self.maximumFrameBytes {
+                    // 큰 한 건이 다른 채팅의 연결까지 끊지 않도록 프레임을 제한된 메모리로 비운다.
+                    self.buffer.removeSubrange(0..<4)
+                    self.discardedBytesRemaining = size
+                    continue
+                }
                 guard self.buffer.count >= size + 4 else { break }
                 let frame = self.buffer.subdata(in: 4..<(size + 4)); self.buffer.removeSubrange(0..<(size + 4))
                 guard let message = decodeLiveStatusMessage(frame) else { self.disconnected(current); return }
                 self.handle(message)
             }
+            if self.buffer.isEmpty { self.buffer = Data() }
             if done || error != nil { self.disconnected(current) } else { self.receive(current) }
         }
     }
@@ -448,10 +496,21 @@ final class CodexLiveStatusReader {
     }
     private func publish() {
         schedulePendingRecheck()
-        let next = store.statuses
+        let next = store.statuses, excluded = oversizedThreads
         DispatchQueue.main.async { [weak self] in
-            guard let self, next != self.statuses else { return }
-            self.statuses = next; self.onChange?()
+            guard let self, next != self.statuses || excluded != self.oversizedThreadIDs else { return }
+            self.statuses = next; self.oversizedThreadIDs = excluded; self.onChange?()
         }
     }
+}
+
+/// 큰 본문을 보관하지 않고 change 앞의 프로토콜 헤더만 읽는다.
+func oversizedCodexThreadID(in prefix: Data) -> String? {
+    let text = String(decoding: prefix, as: UTF8.self)
+    guard let range = text.range(of: #""change"\s*:\s*"#, options: .regularExpression),
+          let data = (String(text[..<range.upperBound]) + "{}}}").data(using: .utf8),
+          let header = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+          header["method"] as? String == "thread-stream-state-changed",
+          let params = header["params"] as? [String: Any], params["hostId"] as? String == "local" else { return nil }
+    return params["conversationId"] as? String
 }
