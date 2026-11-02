@@ -172,6 +172,8 @@ func runCodexInputSelfTest() -> Int32 {
           "Codex and Slack diagnostics do not appear on Claude tasks")
     checkCodexLiveStatus(check)
     checkNativeTaskStatus(check)
+    checkCodexFrameMetadata(check)
+    checkStatusReliability(check)
     print("Codex input self-test: \(checks) checks, \(failures.count) failures")
     for failure in failures { print("FAIL: \(failure)") }
     if CommandLine.arguments.contains("--native-claude-status") {
@@ -184,11 +186,22 @@ func runCodexInputSelfTest() -> Int32 {
         let id = CommandLine.arguments[flag + 1]
         let checksPendingRecheck = CommandLine.arguments.contains("--live-codex-recheck-pending")
         let smallFrames = CommandLine.arguments.contains("--live-codex-small-frames")
-        let reader = CodexLiveStatusReader(pendingConfirmationInterval: checksPendingRecheck ? 0.4 : 5,
-            maximumFrameBytes: smallFrames ? 4096 : 128 * 1024 * 1024)
+        let reliabilityMode = CommandLine.arguments.contains("--live-codex-reliability")
+        let fairRecovery = CommandLine.arguments.contains("--live-codex-fair-recovery")
+        let reader = CodexLiveStatusReader(pendingConfirmationInterval: reliabilityMode ? 0.15 : (checksPendingRecheck ? 0.4 : 5),
+            maximumFrameBytes: smallFrames ? 4096 : 128 * 1024 * 1024,
+            confirmationTimeout: reliabilityMode ? 0.6 : 15,
+            retryInterval: reliabilityMode ? 0.1 : 5,
+            resyncInterval: reliabilityMode ? 0.1 : 2,
+            maximumDedicatedReaders: fairRecovery ? 2 : 16,
+            dedicatedReaderLease: fairRecovery ? 0.25 : 30,
+            maximumObserverHistory: CommandLine.arguments.contains("--live-codex-cycle-observers") ? 4 : 4096)
         var trackedIDs: Set<String> = [id]
         if let index = CommandLine.arguments.firstIndex(of: "--live-codex-extra-thread"), CommandLine.arguments.count > index + 1 {
             trackedIDs.insert(CommandLine.arguments[index + 1])
+        }
+        if let index = CommandLine.arguments.firstIndex(of: "--live-codex-extra-threads"), CommandLine.arguments.count > index + 1 {
+            trackedIDs.formUnion(CommandLine.arguments[index + 1].split(separator: ",").map(String.init))
         }
         var expected: [String]?
         if let index = CommandLine.arguments.firstIndex(of: "--live-codex-expect"), CommandLine.arguments.count > index + 1 {
@@ -198,14 +211,44 @@ func runCodexInputSelfTest() -> Int32 {
         let checksHookConfirmation = CommandLine.arguments.contains("--live-codex-confirm-hook")
         var confirmationRequestedAt: Double?
         var hookConfirmed = !checksHookConfirmation
+        var restarted = false
+        var retracked = false
+        var activityTriggered = false
+        var lastObserverCycleTransition = 0
         reader.onChange = {
-            let state = reader.statuses[id]?.state.rawValue ?? "unavailable"
+            let state = reader.unavailableThreadIDs.contains(id) ? "unavailable" : (reader.statuses[id]?.state.rawValue ?? "unavailable")
+            // 초기 미확인 상태를 기준으로 삼고, 첫 앱 확인 뒤의 상태 전환을 비교한다.
+            if observed.isEmpty && state == "unavailable" { return }
             if observed.last != state { observed.append(state) }
         }
         reader.track(trackedIDs)
         let deadline = Date().addingTimeInterval(30)
         while ((expected.map { observed != $0 } ?? (reader.statuses[id] == nil)) || !hookConfirmed) && Date() < deadline {
             RunLoop.main.run(until: Date().addingTimeInterval(0.05))
+            if CommandLine.arguments.contains("--live-codex-cycle-observers"),
+               reader.statuses[id]?.state == .waiting, observed.count > lastObserverCycleTransition {
+                lastObserverCycleTransition = observed.count
+                reader.track([])
+                reader.track(trackedIDs)
+            }
+            if !activityTriggered, reader.statuses[id]?.state == .waiting,
+               let flag = CommandLine.arguments.firstIndex(of: "--live-codex-activity-thread"),
+               CommandLine.arguments.count > flag + 1 {
+                activityTriggered = true
+                reader.track(trackedIDs, activityAfter: [CommandLine.arguments[flag + 1]: Date().timeIntervalSince1970 * 1000])
+            }
+            if !restarted, CommandLine.arguments.contains("--live-codex-stop-restart"), reader.statuses[id]?.state == .waiting {
+                restarted = true
+                reader.stop()
+                reader.track(trackedIDs)
+            }
+            let retrackState: PetState? = CommandLine.arguments.contains("--live-codex-untrack-on-wait") ? .waiting
+                : (CommandLine.arguments.contains("--live-codex-untrack-retrack") ? .running : nil)
+            if !retracked, let retrackState, reader.statuses[id]?.state == retrackState {
+                retracked = true
+                reader.track([])
+                reader.track(trackedIDs)
+            }
             // Production must recover a missed resolution even without another UI poll.
             if checksHookConfirmation, let status = reader.statuses[id] {
                 if let since = confirmationRequestedAt {
