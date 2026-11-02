@@ -151,16 +151,32 @@ with tempfile.TemporaryDirectory(prefix='retto-codex-pending-') as directory:
             raise AssertionError('fresh waiting snapshot caused an immediate refresh loop')
         finally:
             peer.settimeout(6)
-        # The approval resolves without a patch. A later refresh must recover it.
-        refresh = receive(peer)
+        # The approval resolves without a patch while other tools keep updating.
+        # These updates must not postpone a full confirmation of pending input.
+        revision = 2
+        peer.settimeout(0.1)
+        deadline = time.monotonic() + 4
+        while True:
+            revision += 1
+            send(peer, event({'type': 'patches', 'baseRevision': revision - 1, 'revision': revision,
+                             'patches': [{'op': 'add' if revision == 3 else 'replace',
+                                          'path': ['requests', 1],
+                                          'value': {'id': 'ordinary-tool', 'method': 'item/tool/call',
+                                                    'completed': revision % 2 == 0}}]}))
+            try:
+                refresh = receive(peer)
+                break
+            except socket.timeout:
+                if time.monotonic() >= deadline:
+                    raise AssertionError('tool activity postponed pending input confirmation')
         assert refresh['method'] == 'thread-stream-following-changed' and refresh['params']['following']
-        send(peer, snapshot(3))
+        send(peer, snapshot(revision + 1))
         out, err = process.communicate(timeout=10)
         print(out.strip())
         if process.returncode:
             print(err, file=sys.stderr)
             raise SystemExit(process.returncode)
-        print('Pending recheck: genuine waiting preserved; missing resolution patch recovered; no refresh loop')
+        print('Pending recheck: genuine waiting preserved; missing resolution recovered during tool activity; no refresh loop')
     finally:
         if process.poll() is None:
             process.terminate()

@@ -16,6 +16,9 @@ struct CodexLiveStatus: Equatable {
     // 상태 전환 시각과 분리해, 완료 알림 시각까지 계속 새로 만들지 않는다.
     var confirmedAtMs: Double? = nil
     var lastConfirmedAtMs: Double { confirmedAtMs ?? observedAtMs }
+    // 다른 도구의 patch는 남아 있는 승인 요청을 다시 확인한 근거가 아니다.
+    // 전체 snapshot을 받은 시각으로 입력 대기 재확인 주기를 관리한다.
+    var snapshotConfirmedAtMs: Double? = nil
 }
 
 /// snapshot 의 conversationState 는 대화 전체라 한 건에 16~30MB 다. 입력 대기 확인으로 몇 초마다 다시 받으므로,
@@ -170,7 +173,9 @@ struct CodexLiveStatusStore {
             ? nowMs : (oldStatus?.lastConfirmedAtMs ?? nowMs)
         let status = state.map { CodexLiveStatus(state: $0,
             observedAtMs: unchanged ? (oldStatus?.observedAtMs ?? nowMs) : nowMs,
-            confirmedAtMs: confirmedAt) }
+            confirmedAtMs: confirmedAt,
+            snapshotConfirmedAtMs: change["type"] as? String == "snapshot"
+                ? nowMs : oldStatus?.snapshotConfirmedAtMs) }
         entries[id] = Entry(fields: fields, owner: owner, revision: revision, status: status)
         return nil
     }
@@ -241,7 +246,7 @@ final class CodexLiveStatusReader {
                 let newHook = status.lastConfirmedAtMs < since
                     && (self.requestedHookConfirmation[id] ?? 0) < since
                 let staleWaiting = status.state == .waiting
-                    && nowMs - status.lastConfirmedAtMs >= self.pendingConfirmationIntervalMs
+                    && nowMs - (status.snapshotConfirmedAtMs ?? status.observedAtMs) >= self.pendingConfirmationIntervalMs
                 guard newHook || staleWaiting else { continue }
                 if newHook { self.requestedHookConfirmation[id] = since }
                 self.resync(id)
