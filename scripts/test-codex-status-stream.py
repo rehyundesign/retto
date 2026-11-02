@@ -129,6 +129,63 @@ with tempfile.TemporaryDirectory(prefix='retto-codex-stream-') as directory:
             process.wait(timeout=5)
         server.close()
 
+# One large conversation must neither disconnect healthy conversations nor leave
+# them on hook fallback. Test both the old 64 MiB boundary and bounded discard.
+for isolate in [False, True]:
+    with tempfile.TemporaryDirectory(prefix='retto-codex-frame-') as directory:
+        ipc = Path(directory) / 'ipc'
+        ipc.mkdir(mode=0o700)
+        address = str(ipc / 'ipc.sock')
+        server = socket.socket(socket.AF_UNIX)
+        server.bind(address)
+        os.chmod(address, 0o600)
+        server.listen(1)
+        server.settimeout(10)
+        args = [str(Path(sys.argv[1]).resolve()), '--self-test-codex-input',
+                '--live-codex-thread', 'fixture', '--live-codex-expect', 'running,waiting,running']
+        if isolate:
+            args += ['--live-codex-small-frames', '--live-codex-extra-thread', 'oversized']
+        process = subprocess.Popen(args, env={**os.environ, 'CODEX_HOME': directory},
+                                   stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        try:
+            peer, _ = server.accept()
+            peer.settimeout(15)
+            initialize = receive(peer)
+            send(peer, {'type': 'response', 'method': 'initialize', 'requestId': initialize['requestId'],
+                        'resultType': 'success', 'result': {'clientId': 'fixture-reader'}})
+            for _ in range(2 if isolate else 1):
+                assert receive(peer)['method'] == 'thread-stream-following-changed'
+            send(peer, snapshot(1))
+            time.sleep(0.2)
+            if isolate:
+                oversized = snapshot(1)
+                oversized['params']['conversationId'] = 'oversized'
+                oversized['params']['change']['conversationState']['id'] = 'oversized'
+                oversized['params']['change']['conversationState']['historyPadding'] = 'x' * 6000
+                send(peer, oversized, split=True)
+                removed = receive(peer)
+                assert removed['params']['conversationId'] == 'oversized'
+                assert removed['params']['following'] is False
+                send(peer, snapshot(2, pending=True))
+            else:
+                large = snapshot(2, pending=True)
+                large['params']['change']['conversationState']['historyPadding'] = 'x' * (65 * 1024 * 1024)
+                send(peer, large)
+                del large
+            time.sleep(0.3)
+            send(peer, snapshot(3))
+            out, err = process.communicate(timeout=20)
+            print(out.strip())
+            if process.returncode:
+                print(err, file=sys.stderr)
+                raise SystemExit(process.returncode)
+            print('Oversized isolation: healthy thread stayed connected' if isolate else 'Large snapshot: 65 MiB accepted without disconnect')
+        finally:
+            if process.poll() is None:
+                process.terminate()
+                process.wait(timeout=5)
+            server.close()
+
 # A resolved approval may not deliver its resolution patch. The running app must
 # recheck cached waiting even when the hook has no tool ID or is already running.
 # The reader gets no further track() calls, matching a UI that has stopped polling.
