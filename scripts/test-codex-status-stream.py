@@ -45,6 +45,7 @@ def snapshot(revision, pending=False):
 
 def event(change):
     return {'type': 'broadcast', 'method': 'thread-stream-state-changed', 'version': 11,
+            'targetClientIds': ['fixture-reader'],
             'sourceClientId': 'fixture-owner', 'params': {'hostId': 'local', 'conversationId': 'fixture', 'change': change}}
 
 
