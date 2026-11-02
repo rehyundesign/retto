@@ -57,7 +57,7 @@ with tempfile.TemporaryDirectory(prefix='retto-codex-stream-') as directory:
     os.chmod(address, 0o600)
     server.listen(1)
     server.settimeout(10)
-    expected = 'running,waiting,running,unavailable,waiting,unavailable,waiting,unavailable'
+    expected = 'running,waiting,running,waiting,running,unavailable,waiting,unavailable,waiting,unavailable'
     process = subprocess.Popen([str(Path(sys.argv[1]).resolve()), '--self-test-codex-input',
                                 '--live-codex-thread', 'fixture', '--live-codex-expect', expected, '--live-codex-confirm-hook'],
                                env={**os.environ, 'CODEX_HOME': directory}, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
@@ -90,6 +90,21 @@ with tempfile.TemporaryDirectory(prefix='retto-codex-stream-') as directory:
         send(peer, event({'type': 'patches', 'baseRevision': 2, 'revision': 3,
                          'patches': [{'op': 'add', 'path': ['requests', 0, 'completed'], 'value': True}]}))
         time.sleep(0.2)
+        # Restored request history is not a current approval dialog. Match the
+        # app's needs_resume handling and release waiting before tool completion.
+        auto = snapshot(4)
+        auto['params']['change']['conversationState']['resumeState'] = 'needs_resume'
+        auto['params']['change']['conversationState']['requests'] = [
+            {'id': 'auto-review', 'method': 'item/commandExecution/requestApproval'}]
+        send(peer, auto)
+        time.sleep(0.2)
+        send(peer, event({'type': 'patches', 'baseRevision': 4, 'revision': 5,
+                         'patches': [{'op': 'replace', 'path': ['threadRuntimeStatus', 'activeFlags'],
+                                      'value': ['waitingOnApproval']}]}))
+        time.sleep(0.2)
+        send(peer, event({'type': 'patches', 'baseRevision': 5, 'revision': 6,
+                         'patches': [{'op': 'replace', 'path': ['threadRuntimeStatus', 'activeFlags'], 'value': []}]}))
+        time.sleep(0.2)
         # Duplicate old patch must not clear state or force a resubscription.
         send(peer, event({'type': 'patches', 'baseRevision': 1, 'revision': 2, 'patches': []}))
         time.sleep(0.1)
@@ -107,7 +122,7 @@ with tempfile.TemporaryDirectory(prefix='retto-codex-stream-') as directory:
         if process.returncode:
             print(err, file=sys.stderr)
             raise SystemExit(process.returncode)
-        print('IPC transport: fragmented frames, duplicate patches, repeated resync, owner disconnect, fresh hook confirmation passed')
+        print('IPC transport: fragmented frames, app-confirmed approval before tool completion, duplicate patches, repeated resync, owner disconnect, fresh hook confirmation passed')
     finally:
         if process.poll() is None:
             process.terminate()
