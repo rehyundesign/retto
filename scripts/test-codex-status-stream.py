@@ -116,6 +116,7 @@ with tempfile.TemporaryDirectory(prefix='retto-codex-stream-') as directory:
 
 # A resolved approval may not deliver its resolution patch. The running app must
 # recheck cached waiting even when the hook has no tool ID or is already running.
+# The reader gets no further track() calls, matching a UI that has stopped polling.
 with tempfile.TemporaryDirectory(prefix='retto-codex-pending-') as directory:
     ipc = Path(directory) / 'ipc'
     ipc.mkdir(mode=0o700)
@@ -176,7 +177,7 @@ with tempfile.TemporaryDirectory(prefix='retto-codex-pending-') as directory:
         if process.returncode:
             print(err, file=sys.stderr)
             raise SystemExit(process.returncode)
-        print('Pending recheck: genuine waiting preserved; missing resolution recovered during tool activity; no refresh loop')
+        print('Autonomous pending recheck: genuine waiting preserved; missing resolution recovered during tool activity without UI polling; no refresh loop')
     finally:
         if process.poll() is None:
             process.terminate()

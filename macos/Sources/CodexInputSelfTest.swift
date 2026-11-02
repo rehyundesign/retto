@@ -193,9 +193,7 @@ func runCodexInputSelfTest() -> Int32 {
         let deadline = Date().addingTimeInterval(30)
         while ((expected.map { observed != $0 } ?? (reader.statuses[id] == nil)) || !hookConfirmed) && Date() < deadline {
             RunLoop.main.run(until: Date().addingTimeInterval(0.05))
-            if checksPendingRecheck, reader.statuses[id]?.state == .waiting {
-                reader.track([id], refreshAfter: [id: 1])
-            }
+            // Production must recover a missed resolution even without another UI poll.
             if checksHookConfirmation, let status = reader.statuses[id] {
                 if let since = confirmationRequestedAt {
                     hookConfirmed = status.lastConfirmedAtMs >= since
