@@ -128,6 +128,32 @@ enum PetTypeface: String, CaseIterable {
     }
 }
 
+/// 채팅 글자 크기. 중간은 분리 전 보이던 크기를 유지한다.
+enum ChatFontSize: String, CaseIterable {
+    case extraSmall, small, medium, normal
+
+    var label: String {
+        switch self {
+        case .extraSmall: return "더 작음"
+        case .small: return "작음"
+        case .medium: return "중간"
+        case .normal: return "일반"
+        }
+    }
+
+    var factor: CGFloat {
+        switch self {
+        case .extraSmall: return 0.75
+        case .small: return 0.875
+        case .medium: return 1
+        case .normal: return 1.125
+        }
+    }
+}
+
+let chatScaleDefaultsKey = "RettoChatReferenceScale"
+let chatFontSizeDefaultsKey = "RettoChatFontSize"
+
 /// 기본 서체는 같은 pt 에서 손글씨보다 크게 보인다 — 속공간이 넓어서다. 4.5pt 낮춰 눈에 맞춘다.
 let systemTypefaceDelta: CGFloat = -4.5
 
@@ -217,8 +243,9 @@ struct PetLayout {
     let isExpanded: Bool
 }
 
-func petLayout(scale: CGFloat, width overrideWidth: CGFloat? = nil, expanded: Bool = false) -> PetLayout {
-    let chromeScale = chromeScale(for: scale)
+func petLayout(scale: CGFloat, width overrideWidth: CGFloat? = nil, expanded: Bool = false, chatScale: CGFloat? = nil, fontSize: ChatFontSize = .medium) -> PetLayout {
+    let referenceScale = chatScale ?? scale
+    let chromeScale = chromeScale(for: referenceScale)
     let petWidth = basePetWidth * scale
     let petHeight = petWidth * cellHeight / cellWidth
     // 펼치면 말풍선만 아래로 자란다. 레토와 배지의 자리는 그대로 둔다.
@@ -228,18 +255,19 @@ func petLayout(scale: CGFloat, width overrideWidth: CGFloat? = nil, expanded: Bo
     let petBottom = ribbonBottomInset * chromeScale + ribbonHeight - petRibbonOverlap * scale
     let windowHeight = petBottom + petHeight + petBadgeHeadroom * scale
     let petRect = NSRect(x: (width - petWidth) / 2, y: petBottom, width: petWidth, height: petHeight)
+    let ribbonWidth = chatScale == nil ? width - 2 * ribbonSideInset * chromeScale : baseRibbonWidth * chromeScale
     return PetLayout(
         windowSize: NSSize(width: canonicalWidth, height: windowHeight),
         petRect: petRect,
         ribbonRect: NSRect(
-            x: ribbonSideInset * chromeScale,
+            x: (width - ribbonWidth) / 2,
             y: ribbonBottomInset * chromeScale,
-            width: width - 2 * ribbonSideInset * chromeScale,
+            width: ribbonWidth,
             height: ribbonHeight
         ),
         petScale: scale,
         chromeScale: chromeScale,
-        textDelta: chromeTextDelta(for: scale),
+        textDelta: chromeTextDelta(for: referenceScale) + (18 * chromeScale + chromeTextDelta(for: referenceScale)) * (fontSize.factor - 1),
         isExpanded: expanded
     )
 }

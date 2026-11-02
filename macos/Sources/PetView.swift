@@ -98,7 +98,7 @@ final class RettoView: NSView {
     /// 답변이 끝난 세션은 내가 볼 때까지 "완료"로 남아야 하므로 상태를 쉬는 중으로 바꾸지 않는다.
     private var spriteRestState: PetState?
     /// 말풍선에 마우스를 잠깐 올려두면 마지막 답을 읽을 수 있게 아래로 펼친다.
-    private var isRibbonExpanded = false
+    private(set) var isRibbonExpanded = false
     private var ribbonExpandTimer: Timer?
     var onExpansionChanged: ((Bool) -> Void)?
 
@@ -123,8 +123,15 @@ final class RettoView: NSView {
         didSet { needsDisplay = true }
     }
 
+    var chatScale: CGFloat? {
+        didSet { needsDisplay = true }
+    }
+    var chatFontSize: ChatFontSize = .medium {
+        didSet { needsDisplay = true }
+    }
+
     private var layout: PetLayout {
-        petLayout(scale: petScale, width: bounds.width, expanded: isRibbonExpanded)
+        petLayout(scale: petScale, width: bounds.width, expanded: isRibbonExpanded, chatScale: chatScale, fontSize: chatFontSize)
     }
 
     /// 지금 화면에 그려야 하는 상태. 반응 → 앉은 자리 → 실제 상태 순으로 이긴다.
@@ -1347,7 +1354,7 @@ final class RettoView: NSView {
 
     /// 접힌 상태에서 문장이 이미 다 보이는지. 다 보이면 펼쳐도 새로 읽을 게 없다.
     private func bodyFitsCollapsed() -> Bool {
-        let collapsed = petLayout(scale: petScale, width: bounds.width, expanded: false)
+        let collapsed = petLayout(scale: petScale, width: bounds.width, expanded: false, chatScale: chatScale, fontSize: chatFontSize)
         let full = fullMessageText(for: animationCatalog[state] ?? animationCatalog[.idle]!)
         guard !full.isEmpty else { return true }
         let attributes = messageAttributes(scale: collapsed.chromeScale, textDelta: collapsed.textDelta)
