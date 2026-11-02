@@ -65,6 +65,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     /// 제거를 시작하면 켠다. 종료 직전에 설정을 한 번 더 지우는 근거다.
     private var isUninstalling = false
     private var liveStatusApplyScheduled = false
+    private let claudeNativeStatusReader = ClaudeNativeStatusReader()
+    private let taskStatusDiagnostics = TaskStatusDiagnostics()
     /// 세션이 없을 때 쓰는 빈 껍데기. 상태·이름·멘트는 넘겨 주는 값으로 덮는다.
     private static let placeholderPayload: StatePayload? = {
         let fixture = "{\"state\":\"idle\",\"sessionId\":\"placeholder\"}".data(using: .utf8)!
@@ -511,6 +513,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     }
 
     private func startStateMonitor() {
+        claudeNativeStatusReader.start { [weak self] in
+            guard let self, !self.isUninstalling else { return }
+            self.applySessions(self.hookSessions)
+        }
         // Codex 스트림은 답변이 흐르는 동안 초당 여러 번 바뀐다. 0.2초 안의 변경은 한 번에 반영한다.
         codexLiveStatusReader.onChange = { [weak self] in
             guard let self, !self.liveStatusApplyScheduled else { return }
@@ -556,14 +562,25 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         }
         codexTranscriptStatusReader.retainTrackedPaths(Set(monitored.compactMap(\.transcriptPath)))
         let codexTasks = monitored.filter { $0.source == "codex" || $0.client == "codex" }
-        let waitingHooks = Dictionary(codexTasks.filter {
-            $0.petState == .waiting || codexLiveStatusReader.statuses[$0.navigationSessionId]?.state == .waiting
-        }.map {
-            ($0.navigationSessionId, $0.updatedAtMs ?? 0)
+        let waitingHooks = Dictionary(codexTasks.compactMap { payload -> (String, Double)? in
+            let questionAt = codexTranscriptStatusReader.status(at: payload.transcriptPath).pendingInputAtMs
+            guard payload.petState == .waiting || questionAt != nil
+                || codexLiveStatusReader.statuses[payload.navigationSessionId]?.state == .waiting else { return nil }
+            return (payload.navigationSessionId, max(payload.updatedAtMs ?? 0, questionAt ?? 0))
         }, uniquingKeysWith: max)
         codexLiveStatusReader.track(Set(codexTasks.map(\.navigationSessionId)), refreshAfter: waitingHooks)
         // 우선순위는 파일 시각까지 읽으므로 비교마다 다시 구하지 않고 세션마다 한 번만 구한다.
-        sessions = merged.values.map(reconciledCodexPayload)
+        claudeNativeStatusReader.refresh()
+        sessions = merged.values.map { payload in
+            let output = reconciledCodexPayload(applyClaudeNativeStatus(
+                claudeNativeStatusReader.statuses[payload.navigationSessionId], to: payload))
+            if payload.source != "slack" {
+                taskStatusDiagnostics.record(input: payload, output: output,
+                    live: codexLiveStatusReader.statuses[payload.navigationSessionId],
+                    nativeState: claudeNativeStatusReader.statuses[payload.navigationSessionId]?.state)
+            }
+            return output
+        }
             .map { (payload: $0, priority: statePriority($0)) }
             .sorted {
                 if $0.priority != $1.priority { return $0.priority > $1.priority }
@@ -1604,6 +1621,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         //   창 위치 — AppKit 이 종료할 때 프레임을 설정에 도로 쓴다. 이름을 비우면 쓰지 않는다
         isUninstalling = true
         stateMonitor?.stop()
+        taskStatusDiagnostics.stop()
         panel.setFrameAutosaveName("")
 
         // 훅 등록·상태 파일·자동 실행. 실제 작업은 `--uninstall` 과 같은 코드를 쓴다.
