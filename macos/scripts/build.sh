@@ -40,6 +40,11 @@ if ! command -v swiftc >/dev/null 2>&1; then
   exit 1
 fi
 
+if ! command -v python3 >/dev/null 2>&1; then
+  print -u2 -- "앱 상태 IPC 회귀 검사에 필요한 python3를 찾지 못했습니다."
+  exit 1
+fi
+
 rm -rf "$BUILD_DIR"
 mkdir -p "$MACOS_DIR" "$RESOURCES_DIR" "$ICONSET_DIR" "$DIST_DIR"
 
@@ -122,6 +127,9 @@ codesign --force --deep --sign - "$APP_DIR"
 "$MACOS_DIR/Retto" --self-test
 "$MACOS_DIR/Retto" --self-test-slack
 "$MACOS_DIR/Retto" --self-test-all-skins
+"$MACOS_DIR/Retto" --self-test-codex-input
+python3 "$APP_ROOT/scripts/test-codex-status-stream.py" "$MACOS_DIR/Retto"
+python3 "$APP_ROOT/scripts/test-status-reliability.py" "$MACOS_DIR/Retto"
 
 if (( ! APP_ONLY )); then
 # dist 에는 dmg 만 둔다. 예전에는 앱을 한 벌 더 풀어 뒀는데 쓰는 데가 없었고,
