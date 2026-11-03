@@ -61,6 +61,10 @@ jobs:
           # 가짜 sessions.json 의 입력 대기 세션을 실제로 읽고 골랐는지까지 본다.
           if (-not (Select-String -Path "$out.log" -Pattern 'pose=waiting' -Quiet)) { throw '입력 대기 세션을 고르지 못했다' }
 
+      - name: 처음부터 끝까지 — 훅 설치 → 셸 셋으로 훅 실행 → 화면 → 훅 제거
+        shell: pwsh
+        run: node windows/test-e2e/flow.mjs (Resolve-Path dist\windows\win-unpacked\Retto.exe) (Join-Path $env:RUNNER_TEMP 'e2e')
+
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -68,5 +72,6 @@ jobs:
           path: |
             ${{ runner.temp }}/retto-windows-preview.png
             ${{ runner.temp }}/retto-windows-preview.png.*
+            ${{ runner.temp }}/e2e/
             dist/windows/*.zip
           retention-days: 14

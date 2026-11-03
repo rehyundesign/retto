@@ -21,22 +21,45 @@ function invoke(hookPath, payload, fallbackState = 'idle', env = undefined, sour
   });
 }
 
+// Windows 는 잠금 폴더 「삭제 대기」 때문에 가끔만 놓친다(2026-11-03 CI 에서 한 번 16개 중 15개).
+// 한 번으로는 잘 안 잡혀서 Windows 에서는 다섯 번 돌린다.
 test('keeps concurrent Claude sessions instead of losing the last writer', async () => {
-  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'reto-hook-'));
+  const rounds = process.platform === 'win32' ? 5 : 1;
+  for (let round = 0; round < rounds; round += 1) {
+    const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'reto-hook-'));
+    const hookPath = path.join(directory, 'hook.cjs');
+    fs.copyFileSync(path.join(__dirname, '..', 'hook.cjs'), hookPath);
+    const count = 16;
+    await Promise.all(Array.from({ length: count }, (_, index) => invoke(hookPath, {
+      hook_event_name: index % 3 === 0 ? 'PermissionRequest' : 'UserPromptSubmit',
+      session_id: `session-${index}`,
+      cwd: `/tmp/project-${index}`,
+      prompt: `작업 ${index}`
+    }, 'running')));
+
+    const registry = JSON.parse(fs.readFileSync(path.join(directory, 'sessions.json'), 'utf8'));
+    assert.equal(Object.keys(registry.sessions).length, count, `${round + 1}번째`);
+    assert.equal(registry.sessions['session-0'].state, 'waiting');
+    assert.equal(registry.sessions['session-1'].displayTitle, '작업 1');
+  }
+});
+
+// 잠깐 못 읽은 기록을 「없음」으로 보면 빈 기록으로 덮어써 모든 세션이 사라진다. 권한을 막아 읽기 거절을 만든다.
+// Windows 는 chmod 로 읽기를 막을 수 없어 맥·리눅스에서만 돈다.
+test('a registry that cannot be read is left alone instead of being overwritten as empty', { skip: process.platform === 'win32' && 'chmod 로 읽기를 막을 수 없다' }, async () => {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'retto-hook-locked-'));
   const hookPath = path.join(directory, 'hook.cjs');
   fs.copyFileSync(path.join(__dirname, '..', 'hook.cjs'), hookPath);
-  const count = 16;
-  await Promise.all(Array.from({ length: count }, (_, index) => invoke(hookPath, {
-    hook_event_name: index % 3 === 0 ? 'PermissionRequest' : 'UserPromptSubmit',
-    session_id: `session-${index}`,
-    cwd: `/tmp/project-${index}`,
-    prompt: `작업 ${index}`
-  }, 'running')));
-
-  const registry = JSON.parse(fs.readFileSync(path.join(directory, 'sessions.json'), 'utf8'));
-  assert.equal(Object.keys(registry.sessions).length, count);
-  assert.equal(registry.sessions['session-0'].state, 'waiting');
-  assert.equal(registry.sessions['session-1'].displayTitle, '작업 1');
+  await invoke(hookPath, { hook_event_name: 'UserPromptSubmit', session_id: 'kept', prompt: '지워지면 안 되는 세션' }, 'running');
+  const registryPath = path.join(directory, 'sessions.json');
+  const before = fs.readFileSync(registryPath, 'utf8');
+  fs.chmodSync(registryPath, 0o000);
+  try {
+    await invoke(hookPath, { hook_event_name: 'UserPromptSubmit', session_id: 'newcomer', prompt: '읽기가 막힌 동안 온 요청' }, 'running');
+  } finally {
+    fs.chmodSync(registryPath, 0o644);
+  }
+  assert.equal(fs.readFileSync(registryPath, 'utf8'), before);
 });
 
 test('stores Codex beside Claude and keeps the raw thread id for deep links', async () => {
