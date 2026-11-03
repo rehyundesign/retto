@@ -380,7 +380,27 @@ ipcMain.on('setup:open-url', (_event, url) => {
 
 // ── 시작 ──────────────────────────────────────────────────────────────────
 
-if (!app.requestSingleInstanceLock()) {
+// 미리보기 모드는 무슨 일이 있었는지 파일로 남긴다. Windows 의 GUI 앱은 stdout 이 어디에도 안 남아,
+// CI 에서 앱이 그림 없이 끝났을 때 원인을 알 길이 없었다(2026-11-03 첫 CI).
+const previewOut = process.argv.includes('--render-preview')
+  ? (process.argv[process.argv.indexOf('--render-preview') + 1] || path.join(os.tmpdir(), 'retto-windows-preview.png'))
+  : null;
+function previewLog(message) {
+  if (!previewOut) return;
+  try { fs.appendFileSync(`${previewOut}.log`, `${new Date().toISOString()} ${message}\n`); } catch {}
+}
+if (previewOut) {
+  previewLog(`start argv=${JSON.stringify(process.argv)} home=${os.homedir()}`);
+  process.on('uncaughtException', (error) => { previewLog(`uncaught ${error?.stack || error}`); app.exit(3); });
+  process.on('unhandledRejection', (error) => previewLog(`unhandled ${error?.stack || error}`));
+  app.on('render-process-gone', (_event, _contents, details) => previewLog(`renderer gone ${JSON.stringify(details)}`));
+  app.on('child-process-gone', (_event, details) => previewLog(`child gone ${JSON.stringify(details)}`));
+  app.on('will-quit', () => previewLog('will-quit'));
+}
+
+const gotLock = app.requestSingleInstanceLock();
+previewLog(`single-instance lock=${gotLock}`);
+if (!gotLock) {
   app.quit();
 } else {
   app.on('second-instance', openSetupWindow);
@@ -395,19 +415,20 @@ if (!app.requestSingleInstanceLock()) {
     setInterval(() => { if (readSessions()) rethink(); }, POLL_MS);
     setInterval(rethink, RETHINK_MS);
     // 진단 — 화면을 PNG 로 남기고 끝낸다(맥 앱 --render-preview 와 같은 이름). CI 가 Windows 에서 쓴다.
-    const previewAt = process.argv.indexOf('--render-preview');
-    if (previewAt !== -1) {
-      const out = process.argv[previewAt + 1] || path.join(os.tmpdir(), 'retto-windows-preview.png');
+    if (previewOut) {
+      const out = previewOut;
+      previewLog('ready');
       // 무엇이 실패해도 끝나야 한다. CI 가 끝나지 않는 앱을 기다리며 멈추지 않게.
       setTimeout(() => app.exit(2), 20000);
       setTimeout(async () => {
         try {
           const image = await petWindow.webContents.capturePage();
+          previewLog(`captured empty=${image.isEmpty()} size=${JSON.stringify(image.getSize())}`);
           fs.writeFileSync(out, image.toPNG());
           console.log(JSON.stringify({ ok: true, out, pose: view?.pose, badge: view?.badgeCount, problems: setupProblems() }));
           app.exit(0);
         } catch (error) {
-          console.error(String(error?.stack || error));
+          previewLog(`capture failed ${error?.stack || error}`);
           app.exit(1);
         }
       }, 2500);

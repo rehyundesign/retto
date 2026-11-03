@@ -49,8 +49,13 @@ jobs:
           $env:USERPROFILE = $home2
           $exe = Get-ChildItem dist\windows\win-unpacked\Retto.exe | Select-Object -First 1
           $out = Join-Path $env:RUNNER_TEMP 'retto-windows-preview.png'
-          $p = Start-Process -FilePath $exe.FullName -ArgumentList '--render-preview', $out -PassThru -Wait -RedirectStandardOutput (Join-Path $env:RUNNER_TEMP 'preview.json')
-          Get-Content (Join-Path $env:RUNNER_TEMP 'preview.json')
+          $env:ELECTRON_ENABLE_LOGGING = '1'
+          $p = Start-Process -FilePath $exe.FullName -ArgumentList '--render-preview', "`"$out`"" -PassThru -Wait `
+            -RedirectStandardOutput (Join-Path $env:RUNNER_TEMP 'preview.json') -RedirectStandardError (Join-Path $env:RUNNER_TEMP 'preview.err')
+          "exit code: $($p.ExitCode)"
+          '--- 앱 로그'; if (Test-Path "$out.log") { Get-Content "$out.log" } else { '(없음)' }
+          '--- stdout'; Get-Content (Join-Path $env:RUNNER_TEMP 'preview.json') -ErrorAction SilentlyContinue
+          '--- stderr'; Get-Content (Join-Path $env:RUNNER_TEMP 'preview.err') -ErrorAction SilentlyContinue | Select-Object -Last 40
           if (-not (Test-Path $out)) { throw '화면을 남기지 못했다' }
 
       - uses: actions/upload-artifact@v4
@@ -60,5 +65,7 @@ jobs:
           path: |
             ${{ runner.temp }}/retto-windows-preview.png
             ${{ runner.temp }}/preview.json
+            ${{ runner.temp }}/preview.err
+            ${{ runner.temp }}/retto-windows-preview.png.log
             dist/windows/*.zip
           retention-days: 14
