@@ -400,7 +400,9 @@ if (previewOut) {
 
 const gotLock = app.requestSingleInstanceLock();
 previewLog(`single-instance lock=${gotLock}`);
-if (!gotLock) {
+// GitHub Actions 의 Windows 러너에서는 다른 레토가 없는데도 잠금이 false 로 온다(2026-11-03 CI 로그).
+// 미리보기는 몇 초 뒤 스스로 끝나는 진단이라 잠금 없이 그린다. 실제 PC 에서도 false 가 오는지는 실기로 본다.
+if (!gotLock && !previewOut) {
   app.quit();
 } else {
   app.on('second-instance', openSetupWindow);
