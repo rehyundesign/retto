@@ -13,6 +13,8 @@
 | `settings.json` 에 sh 경로가 적혀 Claude Code 가 훅마다 오류를 띄운다 | Windows 에서는 `hook.sh` 를 깔지도 부르지도 않는다(`hook/lib/hook-settings.js` `hookCommand`) |
 | Claude Code 가 훅을 돌리는 셸이 버전마다 달라 어떤 버전에서만 훅이 안 돈다 | 훅 한 줄을 cmd · PowerShell · bash 셋에서 같은 뜻이 되는 꼴로 적는다 — `node "C:/…/hook.cjs" "running"`. 셋 다 실제로 돌려 보는 테스트가 있다 |
 | 레토가 `sessions.json` 을 읽는 순간 훅의 덮어쓰기가 거절돼(EPERM) 상태가 한 칸 사라진다 | 훅이 10ms 간격으로 40번까지 다시 쓴다(`hook/hook.cjs` `writeJSONAtomic`) |
+| 훅 여러 개가 동시에 돌 때 하나의 상태가 사라진다 | Windows 는 방금 지운 잠금 폴더가 「삭제 대기」로 남아 EPERM 을 낸다. 훅이 이걸 포기 대신 기다림으로 본다. Windows CI 에서 16개 중 15개만 남은 적이 있어 찾았다(2026-11-03) |
+| 백신 검사 등으로 `sessions.json` 을 잠깐 못 읽으면 빈 기록으로 덮어써 모든 세션이 사라진다 | 없는 파일 · 깨진 JSON 만 처음부터 쓰고, 읽기 거절은 기다렸다 다시 읽는다. 끝내 못 읽으면 그 회차만 포기한다. 맥에서도 재현됐다(권한을 막은 시험) |
 | 모니터를 뺀 뒤 레토가 화면 밖에 남아 안 보인다 | 저장한 자리가 지금 화면 밖이면 기본 자리로 띄운다. 트레이에 「레토 위치 처음으로」 |
 | PATH 에 node 가 없어 Claude Code 가 훅마다 오류를 띄운다 | **아직 못 막는다.** 맥은 `hook.sh` 가 node 를 못 찾으면 오류 없이 끝나지만, Windows 한 줄은 맨 앞이 `node` 라 그대로 실패한다. 연동 확인 창의 「node」 줄은 레토 자신의 PATH 로 찾으므로 Claude Code 가 훅을 돌리는 셸(Git Bash 비로그인 셸 등)과 다를 수 있다 |
 | Claude 앱 안의 낮은 claude-code 가 모르는 이벤트 때문에 훅 등록 전체를 버린다 | **아직 못 막는다.** 버전을 `~/Library/Application Support/Claude/claude-code` 에서만 찾아 Windows 에서는 늘 「못 찾음 → 17개 전부 등록」이다. Windows 의 자리는 실기로 확인한 뒤 넣는다 |

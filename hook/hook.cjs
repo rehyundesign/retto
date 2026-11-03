@@ -33,8 +33,24 @@ function basename(cwd) {
   return path.basename(cwd) || cwd;
 }
 
+/// Windows 가 잠깐 거절하는 오류. 백신 검사·삭제 대기 중인 파일·폴더에서 난다. 기다렸다 다시 하면 된다.
+const TRANSIENT_FS_CODES = new Set(['EPERM', 'EBUSY', 'EACCES']);
+
 function readJSON(filePath, fallback) {
-  try { return JSON.parse(fs.readFileSync(filePath, 'utf8')); } catch { return fallback; }
+  // 없는 파일이나 깨진 JSON 은 처음부터 다시 쓴다. 하지만 잠깐 못 읽은 것을 「없음」으로 보면
+  // 빈 기록으로 덮어써 모든 세션이 사라진다. 그때는 기다렸다 다시 읽고, 끝내 못 읽으면 이번 회차를 포기한다.
+  for (let attempt = 0; ; attempt += 1) {
+    let text;
+    try {
+      text = fs.readFileSync(filePath, 'utf8');
+    } catch (error) {
+      if (error.code === 'ENOENT') return fallback;
+      if (!TRANSIENT_FS_CODES.has(error.code) || attempt >= 40) throw error;
+      Atomics.wait(sleepArray, 0, 0, 10);
+      continue;
+    }
+    try { return JSON.parse(text); } catch { return fallback; }
+  }
 }
 
 function writeJSONAtomic(filePath, value) {
@@ -47,7 +63,7 @@ function writeJSONAtomic(filePath, value) {
       fs.renameSync(tempPath, filePath);
       return;
     } catch (error) {
-      if (attempt >= 40 || !['EPERM', 'EBUSY', 'EACCES'].includes(error.code)) {
+      if (attempt >= 40 || !TRANSIENT_FS_CODES.has(error.code)) {
         fs.rmSync(tempPath, { force: true });
         throw error;
       }
@@ -68,7 +84,9 @@ function withRegistryLock(callback) {
       acquired = true;
       break;
     } catch (error) {
-      if (error.code !== 'EEXIST') throw error;
+      // Windows 는 방금 지운 잠금 폴더가 「삭제 대기」로 잠깐 남아 EEXIST 대신 EPERM 을 낸다.
+      // 그걸 실패로 보고 포기하면 동시에 돈 훅 하나의 상태가 사라진다(2026-11-03 Windows CI 16개 중 15개).
+      if (error.code !== 'EEXIST' && !TRANSIENT_FS_CODES.has(error.code)) throw error;
       try {
         if (Date.now() - fs.statSync(lockPath).mtimeMs > 10_000) {
           fs.rmSync(lockPath, { recursive: true, force: true });
