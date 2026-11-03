@@ -46,17 +46,30 @@ jobs:
           $now = (Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ssZ')
           $json = '{"version":1,"sessions":{"s1":{"sessionId":"s1","state":"waiting","updatedAt":"' + $now + '","attention":true,"cwd":"C:\\work\\landing","sessionTitle":"랜딩 히어로 고치기","client":"vscode"}}}'
           [IO.File]::WriteAllText((Join-Path $home2 '.claude\retto-pet\sessions.json'), $json, (New-Object Text.UTF8Encoding $false))
-          $env:USERPROFILE = $home2
-          $exe = Get-ChildItem dist\windows\win-unpacked\Retto.exe | Select-Object -First 1
-          $out = Join-Path $env:RUNNER_TEMP 'retto-windows-preview.png'
-          $env:ELECTRON_ENABLE_LOGGING = '1'
-          $p = Start-Process -FilePath $exe.FullName -ArgumentList '--render-preview', "`"$out`"" -PassThru -Wait `
-            -RedirectStandardOutput (Join-Path $env:RUNNER_TEMP 'preview.json') -RedirectStandardError (Join-Path $env:RUNNER_TEMP 'preview.err')
-          "exit code: $($p.ExitCode)"
-          '--- 앱 로그'; if (Test-Path "$out.log") { Get-Content "$out.log" } else { '(없음)' }
-          '--- stdout'; Get-Content (Join-Path $env:RUNNER_TEMP 'preview.json') -ErrorAction SilentlyContinue
-          '--- stderr'; Get-Content (Join-Path $env:RUNNER_TEMP 'preview.err') -ErrorAction SilentlyContinue | Select-Object -Last 40
-          if (-not (Test-Path $out)) { throw '화면을 남기지 못했다' }
+          $exe = (Get-ChildItem dist\windows\win-unpacked\Retto.exe | Select-Object -First 1).FullName
+          Write-Host "session: $([Diagnostics.Process]::GetCurrentProcess().SessionId) user: $env:USERNAME appdata: $env:APPDATA"
+
+          # 원인을 좁히려고 조건을 바꿔 여러 번 띄운다. 하나라도 그림이 나오면 그 조건이 답이다.
+          function Try-Preview($name, $extraArgs, $fakeHome) {
+            $out = Join-Path $env:RUNNER_TEMP "preview-$name.png"
+            $saved = $env:USERPROFILE
+            if ($fakeHome) { $env:USERPROFILE = $home2 }
+            $env:ELECTRON_ENABLE_LOGGING = '1'
+            $args2 = @('--render-preview', "`"$out`"") + $extraArgs
+            $p = Start-Process -FilePath $exe -ArgumentList $args2 -PassThru -Wait `
+              -RedirectStandardOutput "$out.stdout" -RedirectStandardError "$out.stderr"
+            $env:USERPROFILE = $saved
+            Write-Host "===== $name · exit $('0x{0:X8}' -f $p.ExitCode) · png $(Test-Path $out)"
+            if (Test-Path "$out.log") { Get-Content "$out.log" | Write-Host }
+            Get-Content "$out.stderr" -ErrorAction SilentlyContinue | Select-Object -Last 25 | Write-Host
+            return (Test-Path $out)
+          }
+          $a = Try-Preview 'fakehome' @() $true
+          $b = Try-Preview 'realhome' @() $false
+          $c = Try-Preview 'nosandbox' @('--no-sandbox') $true
+          $d = Try-Preview 'verbose' @('--enable-logging=stderr', '--v=1') $true
+          if ($a) { Copy-Item (Join-Path $env:RUNNER_TEMP 'preview-fakehome.png') (Join-Path $env:RUNNER_TEMP 'retto-windows-preview.png') }
+          if (-not $a) { throw '가짜 홈으로 화면을 남기지 못했다 — 위 조건별 결과를 본다' }
 
       - uses: actions/upload-artifact@v4
         if: always()
@@ -64,8 +77,6 @@ jobs:
           name: retto-windows
           path: |
             ${{ runner.temp }}/retto-windows-preview.png
-            ${{ runner.temp }}/preview.json
-            ${{ runner.temp }}/preview.err
-            ${{ runner.temp }}/retto-windows-preview.png.log
+            ${{ runner.temp }}/preview-*
             dist/windows/*.zip
           retention-days: 14
