@@ -28,7 +28,7 @@
 | 훅 한 줄이 cmd · PowerShell · Git Bash 에서 돈다 | [테스트] Windows | windows-latest 에서 세 셸 모두 sessions.json 에 상태를 적었다(2026-11-03 CI, `hook-runtime.test.js` 28~30번) |
 | 훅 · 앱 테스트, zip 빌드 | [테스트] Windows | 같은 CI 에서 통과 |
 | 상태 판정이 맥 앱과 같다 | [테스트] 맥 | `windows/test/core.test.js` 14건 — 우선순위 · 배지 · 읽음 · 유령 · 고정 · 잠 · VS Code 폴더 링크 |
-| 화면이 그려진다(그림 · 말풍선 · 배지 · 손글씨) | 맥에서 띄움 | `Retto --render-preview` 를 가짜 홈으로 맥에서 실행해 확인. Windows 렌더는 CI 대기 |
+| 화면이 그려진다(그림 · 말풍선 · 배지 · 손글씨) | [테스트] Windows | CI 가 설치본 `Retto.exe --render-preview` 를 `RETTO_HOME` 가짜 홈으로 띄워 PNG 를 남긴다. 시험용 홈은 `USERPROFILE` 이 아니라 `RETTO_HOME` 으로 바꾼다 — `USERPROFILE` 을 바꾸면 Electron 이 시작하자마자 0x80000003 으로 끝난다(2026-11-03, 사용자 PC 와 무관한 시험 조건 문제) |
 | Windows zip 이 만들어진다 | 맥에서 빌드 | x64 · arm64 각 약 159MB(풀면 394MB, `Retto.exe` 246MB) |
 | Claude Code(Windows)가 실제로 이 훅을 부른다 | 미검증 | [실기] 필요 |
 | VS Code 로 세션 열기 | [소스] | 폴더 창 → 1.2초 뒤 세션 딥링크. 맥은 그 창이 앞에 온 것을 확인한 뒤 보내지만 Windows 는 시간만 기다린다. 작업 폴더를 모르면 딥링크를 보내지 않는다. 같은 탭이 살아나는지는 [실기] 필요 |
@@ -59,7 +59,6 @@
 5. Codex 가 있으면 훅 승인 화면 → 허용 → Codex 세션도 보이는가
 6. 한글 사용자 이름(`C:\Users\레토 사용자`)에서 훅 경로. `$`·`%` 가 든 사용자 이름은 PowerShell·bash 가 변수로 펼칠 수 있어 다루지 않았다
 7. Claude 앱(Windows)이 claude-code 를 어디에 내려받는지 — 이벤트 범위 판정에 넣어야 한다
-8. 처음 켤 때 단일 실행 잠금이 false 로 와서 레토가 아무 표시 없이 꺼지지 않는가 — GitHub Actions 러너에서는 다른 레토가 없는데도 false 였다(2026-11-03). 실제 PC 에서도 그러면 「켜도 아무것도 안 뜬다」가 된다
 
 ## 돌리는 법
 

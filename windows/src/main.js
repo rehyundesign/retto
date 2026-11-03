@@ -358,7 +358,7 @@ function rememberPosition() {
 }
 ipcMain.handle('setup:report', () => {
   const report = setupReport();
-  return { ...report, platform: process.platform, version: app.getVersion(), home: os.homedir() };
+  return { ...report, platform: process.platform, version: app.getVersion(), home: setupCheck.rettoHome() };
 });
 ipcMain.handle('setup:install', () => {
   try {
@@ -390,7 +390,7 @@ function previewLog(message) {
   try { fs.appendFileSync(`${previewOut}.log`, `${new Date().toISOString()} ${message}\n`); } catch {}
 }
 if (previewOut) {
-  previewLog(`start argv=${JSON.stringify(process.argv)} home=${os.homedir()}`);
+  previewLog(`start argv=${JSON.stringify(process.argv)} home=${setupCheck.rettoHome()}`);
   process.on('uncaughtException', (error) => { previewLog(`uncaught ${error?.stack || error}`); app.exit(3); });
   process.on('unhandledRejection', (error) => previewLog(`unhandled ${error?.stack || error}`));
   app.on('render-process-gone', (_event, _contents, details) => previewLog(`renderer gone ${JSON.stringify(details)}`));
@@ -400,9 +400,7 @@ if (previewOut) {
 
 const gotLock = app.requestSingleInstanceLock();
 previewLog(`single-instance lock=${gotLock} userData=${app.getPath('userData')} exists=${fs.existsSync(app.getPath('userData'))}`);
-// GitHub Actions 의 Windows 러너에서는 다른 레토가 없는데도 잠금이 false 로 온다(2026-11-03 CI 로그).
-// 미리보기는 몇 초 뒤 스스로 끝나는 진단이라 잠금 없이 그린다. 실제 PC 에서도 false 가 오는지는 실기로 본다.
-if (!gotLock && !previewOut) {
+if (!gotLock) {
   app.quit();
 } else {
   app.on('second-instance', openSetupWindow);
@@ -425,7 +423,7 @@ if (!gotLock && !previewOut) {
       setTimeout(async () => {
         try {
           const image = await petWindow.webContents.capturePage();
-          previewLog(`captured empty=${image.isEmpty()} size=${JSON.stringify(image.getSize())}`);
+          previewLog(`captured empty=${image.isEmpty()} size=${JSON.stringify(image.getSize())} pose=${view?.pose} badge=${view?.badgeCount}`);
           fs.writeFileSync(out, image.toPNG());
           console.log(JSON.stringify({ ok: true, out, pose: view?.pose, badge: view?.badgeCount, problems: setupProblems() }));
           app.exit(0);

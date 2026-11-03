@@ -49,27 +49,17 @@ jobs:
           $exe = (Get-ChildItem dist\windows\win-unpacked\Retto.exe | Select-Object -First 1).FullName
           Write-Host "session: $([Diagnostics.Process]::GetCurrentProcess().SessionId) user: $env:USERNAME appdata: $env:APPDATA"
 
-          # 원인을 좁히려고 조건을 바꿔 여러 번 띄운다. 하나라도 그림이 나오면 그 조건이 답이다.
-          function Try-Preview($name, $extraArgs, $fakeHome) {
-            $out = Join-Path $env:RUNNER_TEMP "preview-$name.png"
-            $saved = $env:USERPROFILE
-            if ($fakeHome) { $env:USERPROFILE = $home2 }
-            $env:ELECTRON_ENABLE_LOGGING = '1'
-            $args2 = @('--render-preview', "`"$out`"") + $extraArgs
-            $p = Start-Process -FilePath $exe -ArgumentList $args2 -PassThru -Wait `
-              -RedirectStandardOutput "$out.stdout" -RedirectStandardError "$out.stderr"
-            $env:USERPROFILE = $saved
-            Write-Host "===== $name · exit $('0x{0:X8}' -f $p.ExitCode) · png $(Test-Path $out)"
-            if (Test-Path "$out.log") { Get-Content "$out.log" | Write-Host }
-            Get-Content "$out.stderr" -ErrorAction SilentlyContinue | Select-Object -Last 25 | Write-Host
-            return (Test-Path $out)
-          }
-          $a = Try-Preview 'fakehome' @() $true
-          $b = Try-Preview 'realhome' @() $false
-          $c = Try-Preview 'nosandbox' @('--no-sandbox') $true
-          $d = Try-Preview 'verbose' @('--enable-logging=stderr', '--v=1') $true
-          if ($a) { Copy-Item (Join-Path $env:RUNNER_TEMP 'preview-fakehome.png') (Join-Path $env:RUNNER_TEMP 'retto-windows-preview.png') }
-          if (-not $a) { throw '가짜 홈으로 화면을 남기지 못했다 — 위 조건별 결과를 본다' }
+          # 레토가 읽는 홈만 RETTO_HOME 으로 바꾼다. USERPROFILE 을 바꾸면 Electron 이 시작하자마자
+          # 0x80000003 으로 끝난다(2026-11-03 조건별 실행: 가짜 USERPROFILE 3번 모두 실패, 진짜 홈 통과).
+          $env:RETTO_HOME = $home2
+          $out = Join-Path $env:RUNNER_TEMP 'retto-windows-preview.png'
+          $p = Start-Process -FilePath $exe -ArgumentList '--render-preview', "`"$out`"" -PassThru -Wait `
+            -RedirectStandardOutput "$out.stdout" -RedirectStandardError "$out.stderr"
+          Write-Host "exit $('0x{0:X8}' -f $p.ExitCode) · png $(Test-Path $out)"
+          if (Test-Path "$out.log") { Get-Content "$out.log" | Write-Host }
+          if (-not (Test-Path $out)) { Get-Content "$out.stderr" -ErrorAction SilentlyContinue | Select-Object -Last 25 | Write-Host; throw '화면을 남기지 못했다' }
+          # 가짜 sessions.json 의 입력 대기 세션을 실제로 읽고 골랐는지까지 본다.
+          if (-not (Select-String -Path "$out.log" -Pattern 'pose=waiting' -Quiet)) { throw '입력 대기 세션을 고르지 못했다' }
 
       - uses: actions/upload-artifact@v4
         if: always()
@@ -77,6 +67,6 @@ jobs:
           name: retto-windows
           path: |
             ${{ runner.temp }}/retto-windows-preview.png
-            ${{ runner.temp }}/preview-*
+            ${{ runner.temp }}/retto-windows-preview.png.*
             dist/windows/*.zip
           retention-days: 14

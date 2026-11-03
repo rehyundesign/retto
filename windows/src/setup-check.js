@@ -14,7 +14,13 @@ const { execFileSync } = require('node:child_process');
 
 const HOOK_MARKERS = ['.claude/retto-pet/hook.', '.claude/reto-pet/hook.'];
 
-function homePaths(home = os.homedir()) {
+/// 레토가 읽는 홈. RETTO_HOME 은 시험용이다 — CI 가 가짜 sessions.json 을 읽히려고 USERPROFILE 을
+/// 바꿨더니 Electron 이 시작하자마자 0x80000003 으로 끝났다(2026-11-03). 홈만 따로 바꾸는 자리를 둔다.
+function rettoHome() {
+  return process.env.RETTO_HOME || os.homedir();
+}
+
+function homePaths(home = rettoHome()) {
   return {
     settingsPath: path.join(home, '.claude', 'settings.json'),
     codexHooksPath: path.join(home, '.codex', 'hooks.json'),
@@ -74,7 +80,7 @@ function lastNewsByChannel(registry) {
   return news;
 }
 
-function inspect({ home = os.homedir(), expectedClaudeHooks, expectedCodexHooks } = {}) {
+function inspect({ home = rettoHome(), expectedClaudeHooks, expectedCodexHooks } = {}) {
   const paths = homePaths(home);
   const claudeHooks = countRettoHooks(readJSON(paths.settingsPath));
   const codexInstalled = fs.existsSync(paths.codexHome);
@@ -101,4 +107,4 @@ function inspect({ home = os.homedir(), expectedClaudeHooks, expectedCodexHooks 
   };
 }
 
-module.exports = { countRettoHooks, findNode, inspect, lastNewsByChannel, homePaths };
+module.exports = { rettoHome, countRettoHooks, findNode, inspect, lastNewsByChannel, homePaths };
