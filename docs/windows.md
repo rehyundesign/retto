@@ -27,6 +27,7 @@
 | 훅 한 줄이 bash 에서 돈다 | [테스트] 맥 | `hook/tests/hook-runtime.test.js` 「the Windows-form hook line …」 sh 1건 |
 | 훅 한 줄이 cmd · PowerShell · Git Bash 에서 돈다 | [테스트] Windows | windows-latest 에서 세 셸 모두 sessions.json 에 상태를 적었다(2026-11-03 CI, `hook-runtime.test.js` 28~30번) |
 | 훅 · 앱 테스트, zip 빌드 | [테스트] Windows | 같은 CI 에서 통과 |
+| 설치 → 훅 실행 → 화면 → 제거 | [테스트] Windows | `windows/test-e2e/flow.mjs` — 설치본의 「훅 설치」로 등록하고, 등록된 명령을 cmd · PowerShell · Git Bash 로 돌려 작업 중 → 기다림 → 완료 · 배지 1 이 그려지는지, 「훅 제거」 뒤 다른 훅이 그대로인지 본다. Claude Code 자체는 띄우지 않는다 |
 | 상태 판정이 맥 앱과 같다 | [테스트] 맥 | `windows/test/core.test.js` 14건 — 우선순위 · 배지 · 읽음 · 유령 · 고정 · 잠 · VS Code 폴더 링크 |
 | 화면이 그려진다(그림 · 말풍선 · 배지 · 손글씨) | [테스트] Windows | CI 가 설치본 `Retto.exe --render-preview` 를 `RETTO_HOME` 가짜 홈으로 띄워 PNG 를 남긴다. 시험용 홈은 `USERPROFILE` 이 아니라 `RETTO_HOME` 으로 바꾼다 — `USERPROFILE` 을 바꾸면 Electron 이 시작하자마자 0x80000003 으로 끝난다(2026-11-03, 사용자 PC 와 무관한 시험 조건 문제) |
 | Windows zip 이 만들어진다 | 맥에서 빌드 | x64 · arm64 각 약 159MB(풀면 394MB, `Retto.exe` 246MB) |

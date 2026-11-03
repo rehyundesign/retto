@@ -398,7 +398,22 @@ if (previewOut) {
   app.on('will-quit', () => previewLog('will-quit'));
 }
 
-const gotLock = app.requestSingleInstanceLock();
+// 진단 — 연동 확인 창의 「훅 설치」·「훅 제거」 단추와 같은 일을 하고 결과를 JSON 파일로 남긴 뒤 끝낸다.
+// CI 가 실제 Windows 에서 설치 → 훅 실행 → 화면 → 제거 흐름을 처음부터 끝까지 보려고 둔다.
+let diagnosticRan = false;
+for (const [flag, action] of [['--install-hooks', installHooks], ['--uninstall-hooks', uninstallHooks]]) {
+  const at = process.argv.indexOf(flag);
+  if (at === -1) continue;
+  diagnosticRan = true;
+  const out = process.argv[at + 1];
+  let result;
+  try { result = { ok: true, ...(action() || {}) }; } catch (error) { result = { ok: false, error: String(error?.stack || error) }; }
+  try { fs.writeFileSync(out, JSON.stringify(result, null, 2)); } catch {}
+  app.exit(result.ok ? 0 : 1);
+}
+
+// app.exit 는 이 아래 코드를 멈추지 않는다. 진단을 돌렸으면 창도 잠금도 만들지 않는다.
+const gotLock = !diagnosticRan && app.requestSingleInstanceLock();
 previewLog(`single-instance lock=${gotLock} userData=${app.getPath('userData')} exists=${fs.existsSync(app.getPath('userData'))}`);
 if (!gotLock) {
   app.quit();
