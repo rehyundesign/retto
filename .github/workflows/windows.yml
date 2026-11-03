@@ -1,0 +1,72 @@
+# Windows 판(베타)을 실제 Windows 에서 돌려 본다. 맥에는 Windows 가 없어서, 여기가 Windows 증거의 유일한 자리다.
+#
+# - 훅 테스트: Windows 용 훅 한 줄을 cmd · PowerShell · Git Bash 셋으로 실제로 돌려 sessions.json 에 적히는지 본다
+# - 앱 테스트: 상태 판정(core.js)과 연동 확인(setup-check.js)
+# - 설치본: zip 을 만들고, 그 안의 Retto.exe 를 가짜 홈으로 띄워 화면을 PNG 로 남긴다
+#
+# 이것은 [테스트] 단계 증거다. 사람이 쓰는 PC 에서 Claude Code 와 함께 확인한 것([실기])과는 다르다.
+name: windows
+
+on:
+  workflow_dispatch:
+  push:
+    paths: ['hook/**', 'windows/**', 'assets/**', '.github/workflows/windows.yml']
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: 훅 테스트 (cmd · PowerShell · Git Bash)
+        working-directory: hook
+        run: npm test
+
+      - name: 앱 의존성
+        working-directory: windows
+        run: npm ci
+
+      - name: 앱 테스트
+        working-directory: windows
+        run: npm test
+
+      - name: 설치본 만들기 (x64 zip)
+        working-directory: windows
+        run: npx electron-builder --win zip --x64 --publish never
+
+      - name: 설치본을 가짜 홈으로 띄워 화면 남기기
+        shell: pwsh
+        run: |
+          $home2 = Join-Path $env:RUNNER_TEMP 'retto-home'
+          New-Item -ItemType Directory -Force -Path (Join-Path $home2 '.claude\retto-pet') | Out-Null
+          $now = (Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ssZ')
+          $json = '{"version":1,"sessions":{"s1":{"sessionId":"s1","state":"waiting","updatedAt":"' + $now + '","attention":true,"cwd":"C:\\work\\landing","sessionTitle":"랜딩 히어로 고치기","client":"vscode"}}}'
+          [IO.File]::WriteAllText((Join-Path $home2 '.claude\retto-pet\sessions.json'), $json, (New-Object Text.UTF8Encoding $false))
+          $exe = (Get-ChildItem dist\windows\win-unpacked\Retto.exe | Select-Object -First 1).FullName
+          Write-Host "session: $([Diagnostics.Process]::GetCurrentProcess().SessionId) user: $env:USERNAME appdata: $env:APPDATA"
+
+          # 레토가 읽는 홈만 RETTO_HOME 으로 바꾼다. USERPROFILE 을 바꾸면 Electron 이 시작하자마자
+          # 0x80000003 으로 끝난다(2026-11-03 조건별 실행: 가짜 USERPROFILE 3번 모두 실패, 진짜 홈 통과).
+          $env:RETTO_HOME = $home2
+          $out = Join-Path $env:RUNNER_TEMP 'retto-windows-preview.png'
+          $p = Start-Process -FilePath $exe -ArgumentList '--render-preview', "`"$out`"" -PassThru -Wait `
+            -RedirectStandardOutput "$out.stdout" -RedirectStandardError "$out.stderr"
+          Write-Host "exit $('0x{0:X8}' -f $p.ExitCode) · png $(Test-Path $out)"
+          if (Test-Path "$out.log") { Get-Content "$out.log" | Write-Host }
+          if (-not (Test-Path $out)) { Get-Content "$out.stderr" -ErrorAction SilentlyContinue | Select-Object -Last 25 | Write-Host; throw '화면을 남기지 못했다' }
+          # 가짜 sessions.json 의 입력 대기 세션을 실제로 읽고 골랐는지까지 본다.
+          if (-not (Select-String -Path "$out.log" -Pattern 'pose=waiting' -Quiet)) { throw '입력 대기 세션을 고르지 못했다' }
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: retto-windows
+          path: |
+            ${{ runner.temp }}/retto-windows-preview.png
+            ${{ runner.temp }}/retto-windows-preview.png.*
+            dist/windows/*.zip
+          retention-days: 14

@@ -31,6 +31,8 @@ const {
 /// 버전을 올리면 사라진다. 버전이 안 든 안정적인 자리를 먼저 쓴다.
 /// 여기서 고른 경로가 나중에 사라져도 hook.sh 가 다른 자리를 찾아본다.
 function stableNodePath() {
+  // Windows 훅은 PATH 의 node 를 부른다(hook-settings 의 hookCommand). 적어 둘 자리가 없다.
+  if (process.platform === 'win32') return 'node (PATH)';
   for (const candidate of ['/opt/homebrew/bin/node', '/usr/local/bin/node', '/usr/bin/node']) {
     try {
       fs.accessSync(candidate, fs.constants.X_OK);
@@ -97,7 +99,7 @@ try {
     if (codex.install) installCodexHooks({ hooksPath: codexHooksPath, installedHookPath });
     const count = eventCountFor(minimal);
     console.log([
-      `레토 훅을 설치했습니다 · ${installedShimPath}`,
+      `레토 훅을 설치했습니다 · ${installedShimPath || installedHookPath}`,
       `  이벤트: ${count}개 — ${reason}`,
       `  node: ${nodeCommand}`,
       `  Claude: ${settingsPath}`,

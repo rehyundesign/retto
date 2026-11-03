@@ -4,15 +4,21 @@ const {
   CODEX_EVENT_STATES,
   EVENT_STATES,
   REQUIRED_EVENT_STATES,
-  mergeRettoCodexHooks,
-  mergeRettoHooks,
+  hookCommand,
+  mergeRettoCodexHooks: mergeRettoCodexHooksOnAnyOS,
+  mergeRettoHooks: mergeRettoHooksOnAnyOS,
   removeRettoCodexHooks,
   removeRettoHooks,
   shimPathFor
 } = require('../lib/hook-settings');
 
+// 아래 맥 기준 기대값은 Windows 에서 돌려도 같아야 한다. 플랫폼을 고정해서 부른다.
+const mergeRettoHooks = (settings, hook, options = {}) => mergeRettoHooksOnAnyOS(settings, hook, { platform: 'darwin', ...options });
+const mergeRettoCodexHooks = (settings, hook, options = {}) => mergeRettoCodexHooksOnAnyOS(settings, hook, { platform: 'darwin', ...options });
+
 const hookPath = '/Users/example/.claude/retto-pet/hook.cjs';
-const shimPath = '/Users/example/.claude/retto-pet/hook.sh';
+// path.join 은 돌리는 OS 의 구분자를 쓴다. Windows CI 에서도 같은 기대값이 되도록 함수로 만든다.
+const shimPath = shimPathFor(hookPath);
 
 function rettoHandlers(settings, event) {
   return (settings.hooks[event] || [])
@@ -171,4 +177,27 @@ test('uninstall does not create the files it was asked to clean', () => {
 
   assert.equal(fs.existsSync(settingsPath), false);
   assert.equal(fs.existsSync(path.dirname(codexPath)), false);
+});
+
+test('Windows registers node with forward-slash paths that bash, PowerShell, and cmd all read', () => {
+  const windowsHook = 'C:\\Users\\레토 사용자\\.claude\\retto-pet\\hook.cjs';
+  const result = mergeRettoHooksOnAnyOS({}, windowsHook, { platform: 'win32' });
+  const command = result.hooks.UserPromptSubmit[0].hooks[0].command;
+  assert.equal(command, 'node "C:/Users/레토 사용자/.claude/retto-pet/hook.cjs" "running"');
+  assert.equal(hookCommand(windowsHook, ['running', 'codex'], 'win32'),
+    'node "C:/Users/레토 사용자/.claude/retto-pet/hook.cjs" "running" "codex"');
+});
+
+test('Windows install is idempotent and removal finds the slash-form entries', () => {
+  const windowsHook = 'C:\\Users\\me\\.claude\\retto-pet\\hook.cjs';
+  const neighbor = { hooks: { Stop: [{ hooks: [{ type: 'command', command: 'echo keep' }] }] } };
+  const once = mergeRettoHooksOnAnyOS(neighbor, windowsHook, { platform: 'win32' });
+  const twice = mergeRettoHooksOnAnyOS(once, windowsHook, { platform: 'win32' });
+  assert.deepEqual(twice, once);
+  const removed = removeRettoHooks(twice, windowsHook);
+  assert.deepEqual(removed, neighbor);
+
+  const codex = mergeRettoCodexHooksOnAnyOS({}, windowsHook, { platform: 'win32' });
+  assert.ok(Object.keys(codex.hooks).length > 0);
+  assert.equal(removeRettoCodexHooks(codex, windowsHook).hooks, undefined);
 });

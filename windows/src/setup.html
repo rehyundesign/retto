@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'self'">
+<title>Retto 연동 확인</title>
+<style>
+  body { margin: 0; padding: 24px; font: 14px/1.5 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif; color: #2B2420; background: #FFFDF6; }
+  h1 { font-size: 18px; margin: 0 0 4px; }
+  .lead { margin: 0 0 18px; color: #6B5E52; }
+  .row { display: grid; grid-template-columns: 20px 1fr; gap: 4px 10px; padding: 12px 0; border-top: 1px solid #EDE4D6; }
+  .mark { font-weight: 700; }
+  .ok { color: #0A5225; } .bad { color: #B00010; } .info { color: #6B5E52; }
+  .name { font-weight: 700; }
+  .detail { grid-column: 2; color: #6B5E52; font-size: 13px; word-break: break-all; }
+  button { font: inherit; padding: 6px 14px; border-radius: 8px; border: 1px solid #C9B9A3; background: #FFF; cursor: pointer; margin-right: 6px; }
+  button.primary { background: #0174E3; border-color: #0174E3; color: #FFF; }
+  .actions { margin-top: 18px; }
+  #result { margin-top: 10px; font-size: 13px; color: #6B5E52; white-space: pre-line; }
+  .note { margin-top: 20px; font-size: 12px; color: #8A7C6E; }
+</style>
+</head>
+<body>
+  <h1>레토가 소식을 받고 있나</h1>
+  <p class="lead">셋 중 하나라도 어긋나면 레토는 아무 일 없는 것처럼 자고만 있다. 어디서 멈췄는지 여기서 본다.</p>
+  <div id="rows"></div>
+  <div class="actions">
+    <button class="primary" id="install">훅 설치 · 다시 설치</button>
+    <button id="refresh">다시 확인</button>
+    <button id="uninstall">훅 제거</button>
+  </div>
+  <div id="result"></div>
+  <p class="note">Windows 판은 베타다. 이상하면 이 창의 내용을 그대로 보내 주면 된다.</p>
+  <script src="setup.js"></script>
+</body>
+</html>

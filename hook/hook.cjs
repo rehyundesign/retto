@@ -40,7 +40,20 @@ function readJSON(filePath, fallback) {
 function writeJSONAtomic(filePath, value) {
   const tempPath = `${filePath}.${process.pid}.${Date.now()}.tmp`;
   fs.writeFileSync(tempPath, `${JSON.stringify(value, null, 2)}\n`, 'utf8');
-  fs.renameSync(tempPath, filePath);
+  // Windows 는 다른 프로세스(레토 앱)가 파일을 읽는 그 순간에 덮어쓰기를 EPERM·EBUSY 로
+  // 거절한다. 레토는 0.25초마다 읽으므로 잠깐 기다렸다 다시 하면 된다. 끝내 못 하면 임시 파일을 지운다.
+  for (let attempt = 0; ; attempt += 1) {
+    try {
+      fs.renameSync(tempPath, filePath);
+      return;
+    } catch (error) {
+      if (attempt >= 40 || !['EPERM', 'EBUSY', 'EACCES'].includes(error.code)) {
+        fs.rmSync(tempPath, { force: true });
+        throw error;
+      }
+      Atomics.wait(sleepArray, 0, 0, 10);
+    }
+  }
 }
 
 function withRegistryLock(callback) {

@@ -75,6 +75,18 @@ Homebrew 6.0 에서 `--no-quarantine` 이 없어졌고, 그 대신 cask 의 `pos
 Codex 는 훅 설정이 바뀌면 시작할 때 승인 화면을 띄우므로, 설치 직후 한 번 다시 켜서
 허용해 준다. 발바닥 메뉴의 **Codex task → Codex 앱**에서 연결을 다시 설치할 수 있다.
 
+### Windows (베타)
+
+Windows 판은 아직 실제 PC 에서 확인하지 않은 베타다. 무엇을 확인했고 무엇이 남았는지는
+[docs/windows.md](docs/windows.md) 에 있다. Node.js 가 PATH 에 있어야 훅이 돈다.
+
+```sh
+cd windows && npm install && npx electron-builder --win zip --x64   # ../dist/windows/ 에 zip
+```
+
+zip 을 풀어 `Retto.exe` 를 실행하면 연동 확인 창이 뜬다. 거기서 「훅 설치」를 누르고 Claude Code 를 다시 켠다.
+서명이 없어 처음 한 번 SmartScreen 의 「추가 정보 → 실행」을 거친다.
+
 ## Slack 알림
 
 발바닥 메뉴 **Slack 설정…**에서 DM·내 멘션·선택 채널 알림과 내용 미리보기를 설정한다.
@@ -85,6 +97,7 @@ Codex 는 훅 설정이 바뀌면 시작할 때 승인 화면을 띄우므로, �
 ```
 assets/   스프라이트 아틀라스·손글씨 폰트·아이콘
 macos/    데스크탑 오버레이 (Swift, 모든 Space·전체화면 위에 상주)
+windows/  Windows 판 오버레이 (Electron, 베타 — docs/windows.md)
 hook/     Claude Code·Codex 훅(hook.sh·hook.cjs)과 설치기
 scripts/  훅 설치 래퍼와 진단기
 tools/    에셋 검사·교정 도구
@@ -109,3 +122,4 @@ scripts/doctor.command            # 어디서 멈췄는지 본다
 | [왜 이 모양인가](docs/왜-이-모양인가.md) | 창이 아니라 인형으로 간 이유, 세션을 하나만 보여주기로 한 이유, 버린 안들 |
 | [스프라이트 아틀라스](docs/에셋.md) | 아틀라스 배율 교정, 자는 행 만들기 |
 | [자는 그림 규격](docs/자는-그림-규격.md) | 행 11 에 넣을 그림을 받을 때의 규격 |
+| [Windows 판 (베타)](docs/windows.md) | 실패로 보는 것, 무엇을 어디까지 확인했나, 1차에서 뺀 것, 실기 시나리오 |
