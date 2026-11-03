@@ -1,0 +1,138 @@
+[
+  {
+    "id": "R00",
+    "source_sha256": "31adfb670c8ecd4a098171c5e980147c3ab5a14f78541330fa3ea3ed14522019",
+    "source": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/ran-interaction-right-v1/raw/R00.png",
+    "source_bounds": [
+      25,
+      60,
+      1213,
+      1242
+    ],
+    "output": [
+      90,
+      90
+    ],
+    "whole_source_only": true,
+    "mirrored": false
+  },
+  {
+    "id": "R01",
+    "source_sha256": "14d8e6b1c2be2ad4c5e87a786048c17c4195551d7032a8fe4237eb31ed4e03ed",
+    "source": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/ran-interaction-right-v1/raw/R01.png",
+    "source_bounds": [
+      37,
+      51,
+      1202,
+      1261
+    ],
+    "output": [
+      90,
+      90
+    ],
+    "whole_source_only": true,
+    "mirrored": false
+  },
+  {
+    "id": "R02",
+    "source_sha256": "563b364abe77acc589812e5aa424c8780e62ea3bf9d1889878ade2afd43d73d1",
+    "source": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/ran-interaction-right-v1/raw/R02.png",
+    "source_bounds": [
+      10,
+      112,
+      1217,
+      1221
+    ],
+    "output": [
+      90,
+      90
+    ],
+    "whole_source_only": true,
+    "mirrored": false
+  },
+  {
+    "id": "R03",
+    "source_sha256": "6379b5e7c78c30d2fc75a742399a598bf7d88664be61722ab74ba0bed969f6e3",
+    "source": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/ran-interaction-right-v1/raw/R03.png",
+    "source_bounds": [
+      13,
+      98,
+      1216,
+      1241
+    ],
+    "output": [
+      90,
+      90
+    ],
+    "whole_source_only": true,
+    "mirrored": false
+  },
+  {
+    "id": "R04",
+    "source_sha256": "b381bbfe64a1c075b358da1750d2d2e097f0883c868310391f3ded496c94d72b",
+    "source": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/ran-interaction-right-v1/raw/R04.png",
+    "source_bounds": [
+      32,
+      83,
+      1202,
+      1236
+    ],
+    "output": [
+      90,
+      90
+    ],
+    "whole_source_only": true,
+    "mirrored": false
+  },
+  {
+    "id": "R05",
+    "source_sha256": "09c7da1ad36a2ebc03491eeef2f489df5939766f613a1c2f5b6a3182de25f069",
+    "source": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/ran-interaction-right-v1/raw/R05.png",
+    "source_bounds": [
+      4,
+      65,
+      1216,
+      1248
+    ],
+    "output": [
+      90,
+      90
+    ],
+    "whole_source_only": true,
+    "mirrored": false
+  },
+  {
+    "id": "R06",
+    "source_sha256": "d52faaffc3c071b0bd9ae29a6e79ead8a565d1d6c8588844bb6ba0560c1ae0d9",
+    "source": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/ran-interaction-right-v1/raw/R06.png",
+    "source_bounds": [
+      53,
+      32,
+      1204,
+      1249
+    ],
+    "output": [
+      90,
+      90
+    ],
+    "whole_source_only": true,
+    "mirrored": false
+  },
+  {
+    "id": "R07",
+    "source_sha256": "58bfa91c51977b7d9ce0b8e5cf64ac5b94df42312745b4b9db43ac2c7c18fef4",
+    "source": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/ran-interaction-right-v1/raw/R07.png",
+    "source_bounds": [
+      207,
+      77,
+      1215,
+      1255
+    ],
+    "output": [
+      90,
+      90
+    ],
+    "whole_source_only": true,
+    "mirrored": false
+  }
+]

@@ -1,0 +1,12 @@
+{
+  "id": "A15",
+  "stage": "independent-static-anchor",
+  "source": "anchors/A15-character-source.png",
+  "master": "anchors/idle-heart-scarf-v12-character.png",
+  "generated_file": "/Users/luxia/.codex/generated_images/01a18151-f01e-7831-98b4-dca0f52b644c/exec-1cb5df2b-91c7-4463-a8f8-5636c065c015.png",
+  "prompt": "One independent full-body static Retto skin anchor A15. Edit this APPROVED identity/costume master into the following anatomical pose: V12 approved center-scarf Amulet Heart outfit. Front-facing airborne jump apex, both actual forepaws flexed near chest, two rear paws tucked below hips, exactly four attached limbs and one original tail, no grounded feet. Same head/body scale; purposeful upward translation only. Broad shoulder cape, Guardian Egg attached directly to the front-center red scarf knot, red hip ribbons and skirt respond to upward momentum. No pompons, wrist loops, props or effects. Preserve the exact master head width-to-height proportions, ROUND upright full-volume skull, forehead height, blue eyes/eye spacing, muzzle depth, rounded chin and brown-white markings; never squash, widen or flatten head to express a crouch/bow/jump. Head movement is gentle, with face height preserved. Same head/body size, portrait7:10 framing with space above for jump; do not enlarge cat to fill canvas. All FOUR anatomical cat limbs exist exactly once; a lifted forepaw REPLACES its previous grounded counterpart. One fluffy brown tail. Exact approved clothing palette/materials/accessory positions from master; no new decoration. Keep broad red-edged white cape over shoulders and upper forelegs, front-center red scarf knot and directly attached single pink-plaid Guardian Egg with black heart band, visor heart, high pink side accessory, cheer skirt/hip bow and lower-legwarmers; NO pompons. Short soft fur and matte felt. No companion, effect, text, object or shadow-floor. True transparent background. Exactly one independent character sprite, not a grid.",
+  "review": "pending-registration-and-anatomy",
+  "selected_replacement": "anchors/A15-costume-repair-v2.png",
+  "repair": "Removed unrequested hind-leg warmers; four actual limbs retained.",
+  "registration": "pending"
+}

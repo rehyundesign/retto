@@ -1,0 +1,181 @@
+{
+  "states": [
+    {
+      "state": "idle",
+      "drawings": 16,
+      "cycleSeconds": 3.2,
+      "clockVisited16": true,
+      "pendantAnchors16": true,
+      "animations": [
+        {
+          "theme": "dark",
+          "file": "latest-idle-dark.webp"
+        },
+        {
+          "theme": "white",
+          "file": "latest-idle-white.webp"
+        }
+      ]
+    },
+    {
+      "state": "running",
+      "drawings": 16,
+      "cycleSeconds": 2.4,
+      "clockVisited16": true,
+      "pendantAnchors16": true,
+      "animations": [
+        {
+          "theme": "dark",
+          "file": "state-direct-v1/running-dark.webp"
+        },
+        {
+          "theme": "white",
+          "file": "state-direct-v1/running-white.webp"
+        }
+      ]
+    },
+    {
+      "state": "review",
+      "drawings": 16,
+      "cycleSeconds": 3.2,
+      "clockVisited16": true,
+      "pendantAnchors16": true,
+      "animations": [
+        {
+          "theme": "dark",
+          "file": "state-direct-v1/review-dark.webp"
+        },
+        {
+          "theme": "white",
+          "file": "state-direct-v1/review-white.webp"
+        }
+      ]
+    },
+    {
+      "state": "waiting",
+      "drawings": 16,
+      "cycleSeconds": 3.2,
+      "clockVisited16": true,
+      "pendantAnchors16": true,
+      "animations": [
+        {
+          "theme": "dark",
+          "file": "state-direct-v1/waiting-dark.webp"
+        },
+        {
+          "theme": "white",
+          "file": "state-direct-v1/waiting-white.webp"
+        }
+      ]
+    },
+    {
+      "state": "failed",
+      "drawings": 16,
+      "cycleSeconds": 3.2,
+      "clockVisited16": true,
+      "pendantAnchors16": true,
+      "animations": [
+        {
+          "theme": "dark",
+          "file": "state-direct-v1/failed-dark.webp"
+        },
+        {
+          "theme": "white",
+          "file": "state-direct-v1/failed-white.webp"
+        }
+      ]
+    },
+    {
+      "state": "waving",
+      "drawings": 16,
+      "cycleSeconds": 2.4,
+      "clockVisited16": true,
+      "pendantAnchors16": true,
+      "animations": [
+        {
+          "theme": "dark",
+          "file": "state-direct-v1/waving-dark.webp"
+        },
+        {
+          "theme": "white",
+          "file": "state-direct-v1/waving-white.webp"
+        }
+      ]
+    },
+    {
+      "state": "jumping",
+      "drawings": 16,
+      "cycleSeconds": 2.4,
+      "clockVisited16": true,
+      "pendantAnchors16": true,
+      "animations": [
+        {
+          "theme": "dark",
+          "file": "state-direct-v1/jumping-dark.webp"
+        },
+        {
+          "theme": "white",
+          "file": "state-direct-v1/jumping-white.webp"
+        }
+      ]
+    },
+    {
+      "state": "sleeping",
+      "drawings": 16,
+      "cycleSeconds": 6.4,
+      "clockVisited16": true,
+      "pendantAnchors16": true,
+      "animations": [
+        {
+          "theme": "dark",
+          "file": "state-direct-v1/sleeping-dark.webp"
+        },
+        {
+          "theme": "white",
+          "file": "state-direct-v1/sleeping-white.webp"
+        }
+      ]
+    },
+    {
+      "state": "drag-right",
+      "drawings": 16,
+      "cycleSeconds": 1.6,
+      "clockVisited16": true,
+      "pendantAnchors16": true,
+      "animations": [
+        {
+          "theme": "dark",
+          "file": "state-direct-v1/drag-right-dark.webp"
+        },
+        {
+          "theme": "white",
+          "file": "state-direct-v1/drag-right-white.webp"
+        }
+      ]
+    },
+    {
+      "state": "drag-left",
+      "drawings": 16,
+      "cycleSeconds": 1.6,
+      "clockVisited16": true,
+      "pendantAnchors16": true,
+      "animations": [
+        {
+          "theme": "dark",
+          "file": "state-direct-v1/drag-left-dark.webp"
+        },
+        {
+          "theme": "white",
+          "file": "state-direct-v1/drag-left-white.webp"
+        }
+      ]
+    }
+  ],
+  "totalCharacterDrawings": 160,
+  "newDrawings": 144,
+  "characterSourcesPreservedDuringExport": true,
+  "browserPlayback": "not verified: local-file tool access blocked",
+  "originalRegistration": "not certified",
+  "naturalTransitions": "residual pose drift remains; review candidate, not finished Hana-floor release",
+  "installation": "not performed"
+}

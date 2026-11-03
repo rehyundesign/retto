@@ -1,0 +1,232 @@
+{
+  "state": "review",
+  "cycle_seconds": 3.2,
+  "independent_drawings": 16,
+  "playback_slots": 16,
+  "original_registration": "not approved; retains current candidate master outside foreleg edit",
+  "character_master_hash": "e5d3ed5640d3a606c139c88271269c27bbaee1a9deb0552016c6d3d7af4f8cc1",
+  "records": [
+    {
+      "frame": 0,
+      "source": "sources/00.png",
+      "source_hash": "9753f78f934f879e2682e8c84e9fe725b295907ff15ebe85752b839dfc7787e6",
+      "cell": "frames/00.png",
+      "cell_hash": "1b2100b6da83749004874bf976e43bb35edd4237187bc0a5e486335f5e38c2d7",
+      "edit_region": [
+        68,
+        385,
+        151,
+        170
+      ]
+    },
+    {
+      "frame": 1,
+      "source": "sources/01.png",
+      "source_hash": "833d79d55cea8ddbe708537fadd73c8ced3d0d7352f6336de9b9c289c6120fa7",
+      "cell": "frames/01.png",
+      "cell_hash": "5ae56f07348c4655747b7381c25239734f4615a45ca40f08fd4f982266a3e5e6",
+      "edit_region": [
+        68,
+        385,
+        151,
+        170
+      ]
+    },
+    {
+      "frame": 2,
+      "source": "sources/02.png",
+      "source_hash": "79b0dbb198f5a74919126a502985224a8764f2cfd2980e757c8117c5d42efe45",
+      "cell": "frames/02.png",
+      "cell_hash": "9afa5b3c7fa627b7d2d26f45aa8175dada6045aa6d6b15cfbeaf619cbadcd9d8",
+      "edit_region": [
+        68,
+        385,
+        151,
+        170
+      ]
+    },
+    {
+      "frame": 3,
+      "source": "sources/03.png",
+      "source_hash": "822ef29fdcbf4d2e8b24392e0b7acb169f39ea7a09c2799946242874d29603cb",
+      "cell": "frames/03.png",
+      "cell_hash": "c0d7c4e085068e75c8aa521c572bf198c11c16c4b55a588b88fd0ccc88dd27cc",
+      "edit_region": [
+        68,
+        385,
+        151,
+        170
+      ]
+    },
+    {
+      "frame": 4,
+      "source": "sources/04.png",
+      "source_hash": "69e9d12d067994e1bbe6820917bc51658dffa6f1f0f15593fab6618f14de0a26",
+      "cell": "frames/04.png",
+      "cell_hash": "ba0be46802240e6b8023a46691b3df2b8790949edee6a617b7907d250a900913",
+      "edit_region": [
+        68,
+        385,
+        151,
+        170
+      ]
+    },
+    {
+      "frame": 5,
+      "source": "sources/05.png",
+      "source_hash": "939a85fe125f2374dc77a54b0d4426356c4252818e0963831cf5621ddb059fa0",
+      "cell": "frames/05.png",
+      "cell_hash": "4b7908aa53b08919b01c1ce7ad0c1b67af5fdb37b661972895be5a4b6db90eae",
+      "edit_region": [
+        68,
+        385,
+        151,
+        170
+      ]
+    },
+    {
+      "frame": 6,
+      "source": "sources/06.png",
+      "source_hash": "f1d5273838fbd83f348c93476265e733f92c182b9acd8193eb9133d7a2e39c55",
+      "cell": "frames/06.png",
+      "cell_hash": "6438b55d5fbbd9008bdc8c85ffa62cc1f2667336982e156651f9f331a64775a6",
+      "edit_region": [
+        68,
+        385,
+        151,
+        170
+      ]
+    },
+    {
+      "frame": 7,
+      "source": "sources/07.png",
+      "source_hash": "e5d3ed5640d3a606c139c88271269c27bbaee1a9deb0552016c6d3d7af4f8cc1",
+      "cell": "frames/07.png",
+      "cell_hash": "46b799a44d0ca41d6b5930b2afd0d6087ca9297539661f7f4e3829cb27d945d0",
+      "edit_region": [
+        68,
+        385,
+        151,
+        170
+      ]
+    },
+    {
+      "frame": 8,
+      "source": "sources/08.png",
+      "source_hash": "030103bafa63f2673aea5110eefefd500f8fd5110df04fecc01fa03c2c93e8e5",
+      "cell": "frames/08.png",
+      "cell_hash": "55e8f5c561224c8d16245133bcca5350527b52f2edd03dd0f413ad0557652fbf",
+      "edit_region": [
+        68,
+        385,
+        151,
+        170
+      ]
+    },
+    {
+      "frame": 9,
+      "source": "sources/09.png",
+      "source_hash": "76aa8c963f8356eb6c9d62aa1df7aa35f180b1bb80d565dfd10150dd84255567",
+      "cell": "frames/09.png",
+      "cell_hash": "4aeb1130c54cfcdf9560e016301da6bdcf7214096d62a2de9c9844d4f886c346",
+      "edit_region": [
+        68,
+        385,
+        151,
+        170
+      ]
+    },
+    {
+      "frame": 10,
+      "source": "sources/10.png",
+      "source_hash": "e6f6e23930b33fd7337c480f31ed89e58987083132c620f82a5db7c901951956",
+      "cell": "frames/10.png",
+      "cell_hash": "d4250e00413345992836e212f541e514fa417c44779166cb23fdbb944d086660",
+      "edit_region": [
+        68,
+        385,
+        151,
+        170
+      ]
+    },
+    {
+      "frame": 11,
+      "source": "sources/11.png",
+      "source_hash": "7be0b5faab5235ba003f4d4cdaf7a583d047ed4ae38ba16ffe33ca3c0cb5bc55",
+      "cell": "frames/11.png",
+      "cell_hash": "63814e65633632fbe15db9b9a115c8cb1f1281010eb82183bff15ae3ff16ae7c",
+      "edit_region": [
+        68,
+        385,
+        151,
+        170
+      ]
+    },
+    {
+      "frame": 12,
+      "source": "sources/12.png",
+      "source_hash": "7a8129bf4de82ca345825f9e0a40787b9ce394ad9ab28bd269507f4b52f1847f",
+      "cell": "frames/12.png",
+      "cell_hash": "fa65f921501f9ba1c4e24c0655ec5f7c4206e62c431b697dfb065258e593d475",
+      "edit_region": [
+        68,
+        385,
+        151,
+        170
+      ]
+    },
+    {
+      "frame": 13,
+      "source": "sources/13.png",
+      "source_hash": "505e54ae1537a913e74570b56f2790a10505e90aa8aee7795bb6c29097b41711",
+      "cell": "frames/13.png",
+      "cell_hash": "e1a33988e9d4f0f8809933eb49475f9ad5c4b7830365ddd4e02f27742a0730db",
+      "edit_region": [
+        68,
+        385,
+        151,
+        170
+      ]
+    },
+    {
+      "frame": 14,
+      "source": "sources/14.png",
+      "source_hash": "471bf878a89f8fa720ac9e0d40e4c107b2e52ace3f928b76540712ae0554f79b",
+      "cell": "frames/14.png",
+      "cell_hash": "07ba0dbdfe8e6d0a71e3028289880b828b25df03409410addf7d154b637864b0",
+      "edit_region": [
+        68,
+        385,
+        151,
+        170
+      ]
+    },
+    {
+      "frame": 15,
+      "source": "sources/15.png",
+      "source_hash": "d6968b0a742a001263816898d71f8e0cf09bde3a6d31b944125ed72857f63dc4",
+      "cell": "frames/15.png",
+      "cell_hash": "de825b81d7cf06d31c9789f11ce77474c479c7c7e4fa39feb7fc2cf0383d9b3f",
+      "edit_region": [
+        68,
+        385,
+        151,
+        170
+      ]
+    }
+  ],
+  "review": {
+    "four_limb_verdict": "four visible limbs per final cell; three grounded master paws unchanged",
+    "identity_and_support": "all pixels outside foreleg/cape-contact region unchanged",
+    "original_retto_registration": "not approved; motion sample based on current candidate",
+    "scope": "review only; native app not applied",
+    "frame_clock_and_controls": "DOM and real Canvas tests passed; no browser UI verification",
+    "exports": {
+      "character_drawings": 16,
+      "effect_sampling_hz": 20,
+      "duration_seconds": 3.2,
+      "character_only_webp_frames": 16,
+      "combined_webp_frames": 64
+    }
+  }
+}

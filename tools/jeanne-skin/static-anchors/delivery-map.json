@@ -1,0 +1,151 @@
+{
+  "stage": "static concept anchors; runtime registration pending",
+  "mode": "registered-character",
+  "master": "../neutral-with-finn-v9.png",
+  "runtime": {
+    "cell": [
+      224,
+      320
+    ],
+    "columns": 8,
+    "rows": 12,
+    "stateCells": 49,
+    "dragCells": 16,
+    "gazeCells": 16,
+    "gazeRows": [
+      9,
+      10
+    ],
+    "gazeDelivery": "separate future scope"
+  },
+  "anchors": [
+    {
+      "id": "01-idle",
+      "label": "기본 대기",
+      "row": 0,
+      "col": 0,
+      "profile": "front",
+      "scene": "Calm front-facing four-paw stance, original face scale. Finn gently hovers beside head. Sparse golden four-point stars and three white feathers; elegant thin ruby ribbon arc behind shoulders."
+    },
+    {
+      "id": "02-running",
+      "label": "작업 · 봉인",
+      "row": 7,
+      "col": 2,
+      "profile": "front-raised",
+      "scene": "Front-facing, ONE anatomical right forepaw raised to touch the large rosario, the other three paws accounted for. Determined calm face. Finn guides a bright golden ornate circular seal behind Retto; crimson ribbon helix circles lower body and small pink gem sparkles."
+    },
+    {
+      "id": "03-review",
+      "label": "검토 · 체크메이트",
+      "row": 8,
+      "col": 2,
+      "profile": "front-raised",
+      "scene": "Front-facing, anatomical left forepaw reaches forward to a floating small white cross-shaped sealing token, other three paws grounded/accounted for. Finn points toward token. Gold intersecting seal lines, crimson swoosh and radiant white feathers."
+    },
+    {
+      "id": "04-waiting",
+      "label": "입력 대기",
+      "row": 6,
+      "col": 0,
+      "profile": "front",
+      "scene": "Front-facing all four paws grounded, slight inquisitive head tilt with same head scale. Finn hovering holding hands patiently. One floating golden ring and gently paused crimson ribbon loop, small pink lights."
+    },
+    {
+      "id": "05-failed",
+      "label": "오류 · 봉인 실패",
+      "row": 5,
+      "col": 0,
+      "profile": "crouch",
+      "scene": "Small startled crouch, ears natural slightly lowered, four limbs accounted for, no extra paws. Finn looks worried. Broken golden seal segments and scattered ruby spark fragments, loose red ribbon, glamorous but no violent imagery."
+    },
+    {
+      "id": "06-waving",
+      "label": "완료 · 승리 인사",
+      "row": 3,
+      "col": 1,
+      "profile": "front-raised",
+      "scene": "Joyful front-facing ONE forepaw raised waving, other three paws accounted for. Finn cheers with arms up. Brilliant golden sealing halo, white feathers burst, red ribbon celebratory loop, pink gem flare."
+    },
+    {
+      "id": "07-jumping",
+      "label": "점프 · 도약",
+      "row": 4,
+      "col": 2,
+      "profile": "airborne",
+      "scene": "Cat mid-leap with exactly four paws clearly visible: front two forward and rear two tucked, same cat head scale. Finn flies upward. Crimson ribbon soaring arc and golden comet streak with white feather trail."
+    },
+    {
+      "id": "08-sleeping",
+      "label": "수면",
+      "row": 11,
+      "col": 0,
+      "profile": "prone",
+      "scene": "Original cat curled prone sleeping on paws, closed eyes, exactly four limbs with hind pair plausibly occluded by curled torso/skirt. Costume wraps torso naturally, pendant nestled at front chest. Finn sleeps nearby wings folded. Thin gold crescent halo, tiny slow-feeling white feathers and subdued rosy sparkles."
+    },
+    {
+      "id": "09-drag-right",
+      "label": "이동 · 오른쪽",
+      "row": 1,
+      "col": 2,
+      "profile": "profile-right",
+      "scene": "Full cat running in profile to image-right, four limbs clear separated stride, feline not biped, costume wraps visible side, pendant at neck front. Finn follows. Crimson ribbon racing trail behind left and gold feather streaks."
+    },
+    {
+      "id": "10-drag-left",
+      "label": "이동 · 왼쪽",
+      "row": 2,
+      "col": 2,
+      "profile": "profile-left",
+      "scene": "Full cat running profile to image-left, four limbs clear separated stride, costume plausible from this side, consistent head bow anatomical attachment. Finn follows. Crimson racing ribbon trail behind right and gold feather streaks."
+    },
+    {
+      "id": "11-running-charge",
+      "label": "작업 · 로사리오 충전",
+      "row": 7,
+      "col": 0,
+      "profile": "front",
+      "scene": "Front-facing all four paws grounded, focused eyes directed down toward rosario without head-scale change. Finn channels tiny gold sparks toward jewel. Pink jewel glow, radiant concentric gold seal rings behind body, first gathering red ribbon coil."
+    },
+    {
+      "id": "12-running-release",
+      "label": "작업 · 봉인 발동",
+      "row": 7,
+      "col": 5,
+      "profile": "front-raised",
+      "scene": "Front-facing one forepaw extended diagonally forward, remaining three paws accounted for. Bright determined expression. Finn flutters excitedly. Gold cross-shaped sealing burst in empty space, broad ruby ribbon sweep and white feathers; do not obscure face."
+    },
+    {
+      "id": "13-review-focus",
+      "label": "검토 · 표적 확인",
+      "row": 8,
+      "col": 0,
+      "profile": "threequarter",
+      "scene": "Small three-quarter head turn, body stays frontal four paws grounded, looks toward Finn who indicates small floating pink sealing gem. Thin gold targeting circles and crimson line sweep behind, sparse feathers."
+    },
+    {
+      "id": "14-waving-bow",
+      "label": "완료 · 감사 인사",
+      "row": 3,
+      "col": 3,
+      "profile": "bow",
+      "scene": "Gentle feline bow: head dipped modestly, all four paws grounded, eyes softly closed, anatomical shoulders bend without human body. Pendant hangs naturally. Finn bows too. Golden completed seal circle, drifting white feathers and red ribbon frame."
+    },
+    {
+      "id": "15-jump-prep",
+      "label": "점프 · 준비",
+      "row": 4,
+      "col": 0,
+      "profile": "crouch",
+      "scene": "Low feline crouch before leap, four paws grounded and accounted for, eyes eager, rear hips lowered with natural costume folds. Finn poised to ascend. Gold charging ring at ground level, red ribbon winds behind and few sparkling feathers."
+    },
+    {
+      "id": "16-sleep-settle",
+      "label": "수면 · 졸음",
+      "row": 11,
+      "col": 1,
+      "profile": "seated",
+      "scene": "Drowsy seated feline, front two paws close together, rear two on either side partly skirt-occluded with plausible attachment, eyelids half closed, same identity. Finn yawns wings folding. Soft golden small halo and two red ribbon curls, pale pink sleep sparkles."
+    }
+  ]
+}

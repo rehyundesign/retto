@@ -1,0 +1,109 @@
+{
+  "anchors": [
+    {
+      "id": "A01",
+      "path": "anchors/idle-school-source.png",
+      "sha256": "5225312d506f69d10df69e5806e59ea03c5ac21f55adda9a4c36355e8d5c44cf",
+      "registered_source": "registered-static-v2/A01.png"
+    },
+    {
+      "id": "A02",
+      "path": "anchors/A02-school-tailoring-locked-v4.png",
+      "sha256": "0ddf40d3226ee5e552f1f7b14a517ee262b2242a955de39d19e77f9dd98cc0cc",
+      "registered_source": "registered-static-v2/A02.png"
+    },
+    {
+      "id": "A03",
+      "path": "anchors/A03-character-source.png",
+      "sha256": "0d1b532e35747324821735c1dfbcbd6c793caa880883c70f97661579338eec73",
+      "registered_source": "registered-static-v2/A03.png"
+    },
+    {
+      "id": "A04",
+      "path": "anchors/A04-compact-body-locked-v1.png",
+      "sha256": "ae8ed7c5be579fbec9e2c461053e29a9dcd06b8329999cc519c6f43d3548d558",
+      "registered_source": "registered-static-v2/A04.png"
+    },
+    {
+      "id": "A05",
+      "path": "anchors/A05-character-source.png",
+      "sha256": "8a5a5769f98699cdb81aa3821482c1e0925eca3422e8ca8dc8389a73b3d2b352",
+      "registered_source": "registered-static-v2/A05.png"
+    },
+    {
+      "id": "A06",
+      "path": "anchors/A06-heart-compact-locked-v2.png",
+      "sha256": "3530e4ac89edbae7c74c1bb78f3c015687f890412471d876651b0904312f937d",
+      "registered_source": "registered-static-v2/A06.png"
+    },
+    {
+      "id": "A07",
+      "path": "anchors/A07-heart-compact-locked-v2.png",
+      "sha256": "c11b64a42d62077ffb92aa9b0a671d11d6df54e75b93837288c6e933278536e8",
+      "registered_source": "registered-static-v2/A07.png"
+    },
+    {
+      "id": "A08",
+      "path": "anchors/A08-character-source.png",
+      "sha256": "c88858ef11bb1a5e6aa2840dee2a699532a89db57144ad9d9a4ceb826e5152d0",
+      "registered_source": "registered-static-v2/A08.png"
+    },
+    {
+      "id": "A09",
+      "path": "anchors/A09-profile-repair-v2.png",
+      "sha256": "37245b81372abc325b7a8bb7524b2ed2f1217e2f19ba2b4d52e5729f6ecd39ec",
+      "registered_source": "registered-static-v2/A09.png"
+    },
+    {
+      "id": "A10",
+      "path": "anchors/A10-character-source.png",
+      "sha256": "c45ee764bec2cee84aef0a0b7b2c07c6e62b06f9bbffa13b42f6d332a69b8f62",
+      "registered_source": "registered-static-v2/A10.png"
+    },
+    {
+      "id": "A11",
+      "path": "anchors/A11-compact-body-locked-v1.png",
+      "sha256": "768add064b633d88c76e815319fbf0a3b474a0e91735d31f51ca1211dd5b8aeb",
+      "registered_source": "registered-static-v2/A11.png"
+    },
+    {
+      "id": "A12",
+      "path": "anchors/A12-compact-body-locked-v1.png",
+      "sha256": "35f6c1a65f2c973eca57e2c458001c0028fcde0dd63c39da3aa732011105a1e1",
+      "registered_source": "registered-static-v2/A12.png"
+    },
+    {
+      "id": "A13",
+      "path": "anchors/A13-character-source.png",
+      "sha256": "4510c09552ccecc75613d11fc28d7252785119d64d56c7460273208a42e185d7",
+      "registered_source": "registered-static-v2/A13.png"
+    },
+    {
+      "id": "A14",
+      "path": "anchors/A14-heart-compact-locked-v2.png",
+      "sha256": "5aca2aa3a457e9b6287e6876d16948b78cb84c91b4e57014d2d03fc1c4cd8bd5",
+      "registered_source": "registered-static-v2/A14.png"
+    },
+    {
+      "id": "A15",
+      "path": "anchors/A15-heart-compact-locked-v2.png",
+      "sha256": "ae8cd6b3420ca3e4f001beda5d2ac72aea19389dcb800ccb756c0aeb740272d6",
+      "registered_source": "registered-static-v2/A15.png"
+    },
+    {
+      "id": "A16",
+      "path": "anchors/A16-character-source.png",
+      "sha256": "5851e525ab3746c633a6681bd8a8938fe0bd03cf45c58a788a12734948add462",
+      "registered_source": "registered-static-v2/A16.png"
+    }
+  ],
+  "distinct_independent_sources": 16,
+  "approved_master_hashes_unchanged": true,
+  "display_and_stature_registration": "static-size-registration-v2.json",
+  "body_repair_verified": "heart-size-verification-v2.json",
+  "registration_passed": false,
+  "registration_note": "static cross-outfit body-size repair passes; not a final motion/native-app certificate",
+  "animated": false,
+  "installed": false,
+  "scoped_clothing_repair": "sleeve-repair-verification-v4.json"
+}

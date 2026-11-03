@@ -66,6 +66,150 @@ test('stores Codex beside Claude and keeps the raw thread id for deep links', as
   assert.equal(sessions['thread-same'].source, 'claude');
 });
 
+test('does not let a Codex worker rollout replace its parent task', async () => {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'retto-hook-codex-worker-'));
+  const hookPath = path.join(directory, 'hook.cjs');
+  fs.copyFileSync(path.join(__dirname, '..', 'hook.cjs'), hookPath);
+  const parentTranscript = path.join(directory, 'rollout-parent.jsonl');
+  const workerTranscript = path.join(directory, 'rollout-parent_12345678-1234-1234-1234-123456789abc.jsonl');
+  fs.writeFileSync(parentTranscript, '');
+  fs.writeFileSync(workerTranscript, '');
+
+  await invoke(hookPath, {
+    hook_event_name: 'UserPromptSubmit', session_id: 'parent', transcript_path: parentTranscript,
+    prompt: '스킨을 추가해줘'
+  }, 'running', {}, 'codex');
+  await invoke(hookPath, {
+    hook_event_name: 'PostToolUse', session_id: 'parent', transcript_path: workerTranscript,
+    tool_name: 'Bash'
+  }, 'running', {}, 'codex');
+
+  const session = registry(directory)['codex:parent'];
+  assert.equal(session.transcriptPath, parentTranscript);
+  assert.equal(session.toolName, '');
+});
+
+test('Codex internal session lifecycle events never create registry or legacy state', async () => {
+  for (const source of [
+    { subagent: { other: 'guardian' } },
+    { subagent: { spawn: { parent_thread_id: 'parent' } } },
+    'subagent'
+  ]) {
+    const directory = freshHook('retto-hook-codex-internal-');
+    const hookPath = path.join(directory, 'hook.cjs');
+    // Guardian sessions use ordinary rollout filenames, so the filename alone cannot identify them.
+    const transcriptPath = path.join(directory, 'rollout-2026-10-16T12-00-00-guardian.jsonl');
+    fs.writeFileSync(transcriptPath, `${JSON.stringify({ type: 'session_meta', payload: { source } })}\n`);
+
+    for (const event of ['SessionStart', 'UserPromptSubmit', 'PostToolUse', 'PermissionRequest', 'Stop', 'SessionEnd']) {
+      await invoke(hookPath, {
+        hook_event_name: event,
+        session_id: 'internal',
+        transcript_path: transcriptPath,
+        prompt: 'Review this tool call',
+        last_assistant_message: 'Guardian review complete'
+      }, 'running', {}, 'codex');
+      assert.equal(fs.existsSync(path.join(directory, 'sessions.json')), false, `${event}: ${JSON.stringify(source)}`);
+      assert.equal(fs.existsSync(path.join(directory, 'state.json')), false, `${event}: ${JSON.stringify(source)}`);
+    }
+  }
+});
+
+test('recognizes Codex internal metadata after more than 64KiB of session instructions', async () => {
+  const directory = freshHook('retto-hook-codex-large-metadata-');
+  const hookPath = path.join(directory, 'hook.cjs');
+  const transcriptPath = path.join(directory, 'rollout-guardian.jsonl');
+  const metadata = JSON.stringify({
+    type: 'session_meta',
+    payload: {
+      base_instructions: { text: '가'.repeat(60000) },
+      source: { subagent: { other: 'guardian' } }
+    }
+  });
+  assert.ok(Buffer.byteLength(metadata.slice(0, metadata.indexOf('"source"'))) > 65536);
+  fs.writeFileSync(transcriptPath, `${metadata}\n`);
+
+  await invoke(hookPath, {
+    hook_event_name: 'Stop', session_id: 'large-internal', transcript_path: transcriptPath
+  }, 'waving', {}, 'codex');
+
+  assert.equal(fs.existsSync(path.join(directory, 'sessions.json')), false);
+  assert.equal(fs.existsSync(path.join(directory, 'state.json')), false);
+});
+
+test('a Guardian rollout cannot update an existing parent record or legacy state', async () => {
+  const directory = freshHook('retto-hook-codex-guardian-parent-');
+  const hookPath = path.join(directory, 'hook.cjs');
+  const parentTranscript = path.join(directory, 'rollout-parent.jsonl');
+  const guardianTranscript = path.join(directory, 'rollout-guardian.jsonl');
+  fs.writeFileSync(parentTranscript, `${JSON.stringify({ type: 'session_meta', payload: { source: 'vscode' } })}\n`);
+  fs.writeFileSync(guardianTranscript, `${JSON.stringify({
+    type: 'session_meta', payload: { source: { subagent: { other: 'guardian' } } }
+  })}\n`);
+  await invoke(hookPath, {
+    hook_event_name: 'UserPromptSubmit', session_id: 'parent', transcript_path: parentTranscript,
+    prompt: '레토 알림 개선해줘'
+  }, 'running', {}, 'codex');
+  const registryBefore = fs.readFileSync(path.join(directory, 'sessions.json'), 'utf8');
+  const stateBefore = fs.readFileSync(path.join(directory, 'state.json'), 'utf8');
+
+  for (const event of ['PostToolUse', 'PermissionRequest', 'Stop', 'SessionEnd']) {
+    await invoke(hookPath, {
+      hook_event_name: event, session_id: 'parent', transcriptPath: guardianTranscript,
+      tool_name: 'Bash', last_assistant_message: 'Guardian review complete'
+    }, 'waving', {}, 'codex');
+    assert.equal(fs.readFileSync(path.join(directory, 'sessions.json'), 'utf8'), registryBefore, event);
+    assert.equal(fs.readFileSync(path.join(directory, 'state.json'), 'utf8'), stateBefore, event);
+  }
+});
+
+test('keeps a user Codex session whose title mentions Guardian review', async () => {
+  const directory = freshHook('retto-hook-codex-guardian-title-');
+  const hookPath = path.join(directory, 'hook.cjs');
+  const transcriptPath = path.join(directory, 'rollout-user.jsonl');
+  fs.writeFileSync(transcriptPath, `${JSON.stringify({ type: 'session_meta', payload: { source: 'cli' } })}\n`);
+  const codexHome = path.join(directory, 'codex-home');
+  fs.mkdirSync(codexHome);
+  fs.writeFileSync(path.join(codexHome, 'session_index.jsonl'), `${JSON.stringify({
+    id: 'guardian-question', thread_name: 'Guardian review 알림을 개선해줘'
+  })}\n`);
+
+  await invoke(hookPath, {
+    hook_event_name: 'UserPromptSubmit', session_id: 'guardian-question', transcript_path: transcriptPath,
+    prompt: 'Guardian review 알림을 개선해줘'
+  }, 'running', { CODEX_HOME: codexHome }, 'codex');
+  await invoke(hookPath, {
+    hook_event_name: 'Stop', session_id: 'guardian-question', transcript_path: transcriptPath
+  }, 'waving', { CODEX_HOME: codexHome }, 'codex');
+
+  const session = registry(directory)['codex:guardian-question'];
+  assert.equal(session.sessionTitle, 'Guardian review 알림을 개선해줘');
+  assert.equal(session.state, 'waving');
+  assert.equal(session.attention, true);
+});
+
+test('keeps Codex hooks compatible when rollout metadata is missing or unreadable', async () => {
+  const directory = freshHook('retto-hook-codex-metadata-compat-');
+  const hookPath = path.join(directory, 'hook.cjs');
+  const noMetadata = path.join(directory, 'rollout-without-metadata.jsonl');
+  const invalidMetadata = path.join(directory, 'rollout-invalid-metadata.jsonl');
+  fs.writeFileSync(noMetadata, `${JSON.stringify({ type: 'event_msg', payload: { type: 'task_started' } })}\n`);
+  fs.writeFileSync(invalidMetadata, '{"type":"session_meta","payload":\n');
+  for (const [sessionId, transcriptPath] of [
+    ['no-path', undefined],
+    ['missing-file', path.join(directory, 'missing.jsonl')],
+    ['no-metadata', noMetadata],
+    ['invalid-metadata', invalidMetadata],
+    ['unreadable-file', directory]
+  ]) {
+    await invoke(hookPath, {
+      hook_event_name: 'UserPromptSubmit', session_id: sessionId, transcript_path: transcriptPath,
+      prompt: '일반 작업을 진행해줘'
+    }, 'running', {}, 'codex');
+    assert.equal(registry(directory)[`codex:${sessionId}`].state, 'running', sessionId);
+  }
+});
+
 test('maps a failed Codex tool result to failed', async () => {
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'retto-hook-codex-failure-'));
   const hookPath = path.join(directory, 'hook.cjs');
@@ -463,3 +607,97 @@ for (const [label, shell, flags] of shellsHere()) {
     assert.equal(record.state, 'running');
   });
 }
+
+test('late approval and progress hooks cannot reopen a completed tool or turn', async () => {
+  const directory = freshHook('retto-hook-order-');
+  const hook = path.join(directory, 'hook.cjs');
+  const base = { session_id: 'ordered', turn_id: 'turn-a', tool_use_id: 'tool-a' };
+  await invoke(hook, { ...base, hook_event_name: 'UserPromptSubmit' }, 'running', {}, 'codex');
+  await invoke(hook, { ...base, hook_event_name: 'PostToolUse' }, 'running', {}, 'codex');
+  await invoke(hook, { ...base, hook_event_name: 'PermissionRequest' }, 'waiting', {}, 'codex');
+  assert.equal(registry(directory)['codex:ordered'].state, 'running');
+  await invoke(hook, { ...base, hook_event_name: 'Stop' }, 'waving', {}, 'codex');
+  await invoke(hook, { ...base, tool_use_id: 'other', hook_event_name: 'PreToolUse' }, 'running', {}, 'codex');
+  assert.equal(registry(directory)['codex:ordered'].state, 'waving');
+  await invoke(hook, { ...base, turn_id: 'turn-b', hook_event_name: 'UserPromptSubmit' }, 'running', {}, 'codex');
+  await invoke(hook, { ...base, hook_event_name: 'PermissionRequest' }, 'waiting', {}, 'codex');
+  assert.equal(registry(directory)['codex:ordered'].state, 'running');
+});
+
+test('parallel tool progress preserves pending approvals until their own result arrives', async () => {
+  const directory = freshHook('retto-hook-parallel-approval-');
+  const hook = path.join(directory, 'hook.cjs');
+  const base = { session_id: 'parallel', turn_id: 'turn-a' };
+  for (const id of ['a', 'b']) {
+    await invoke(hook, { ...base, tool_use_id: id, hook_event_name: 'PermissionRequest' }, 'waiting', {}, 'codex');
+  }
+  await invoke(hook, { ...base, tool_use_id: 'other', hook_event_name: 'PostToolUse' }, 'running', {}, 'codex');
+  assert.equal(registry(directory)['codex:parallel'].state, 'waiting');
+  await invoke(hook, { ...base, tool_use_id: 'a', hook_event_name: 'PostToolUse' }, 'running', {}, 'codex');
+  assert.equal(registry(directory)['codex:parallel'].state, 'waiting');
+  await invoke(hook, { ...base, tool_use_id: 'b', hook_event_name: 'PostToolUse' }, 'running', {}, 'codex');
+  assert.equal(registry(directory)['codex:parallel'].state, 'running');
+});
+
+test('rollout evidence rejects a late permission even after registry restart', async () => {
+  const directory = freshHook('retto-hook-rollout-order-');
+  const hook = path.join(directory, 'hook.cjs');
+  const transcript = path.join(directory, 'rollout.jsonl');
+  fs.writeFileSync(transcript, [
+    { type: 'event_msg', payload: { type: 'task_started', turn_id: 'new-turn' } },
+    { type: 'response_item', payload: { type: 'custom_tool_call_output', call_id: 'finished-tool', output: 'done' } }
+  ].map(JSON.stringify).join('\n'));
+  const base = { session_id: 'rollout-order', transcript_path: transcript, hook_event_name: 'PermissionRequest' };
+  await invoke(hook, { ...base, turn_id: 'old-turn', tool_use_id: 'old-tool' }, 'waiting', {}, 'codex');
+  assert.equal(fs.existsSync(path.join(directory, 'sessions.json')), false);
+  await invoke(hook, { ...base, turn_id: 'new-turn', tool_use_id: 'finished-tool' }, 'waiting', {}, 'codex');
+  assert.equal(fs.existsSync(path.join(directory, 'sessions.json')), false);
+});
+
+test('denied or failed approval is removed and cannot be reopened by a delayed hook', async () => {
+  for (const event of ['PermissionDenied', 'PostToolUseFailure']) {
+    const directory = freshHook('retto-hook-denied-');
+    const hook = path.join(directory, 'hook.cjs');
+    const base = { session_id: 'denied', turn_id: 'turn-a', tool_use_id: 'tool-a' };
+    await invoke(hook, { ...base, hook_event_name: 'PermissionRequest' }, 'waiting', {}, 'codex');
+    await invoke(hook, { ...base, hook_event_name: event }, 'failed', {}, 'codex');
+    assert.equal(registry(directory)['codex:denied'].state, 'failed');
+    await invoke(hook, { ...base, hook_event_name: 'PermissionRequest' }, 'waiting', {}, 'codex');
+    assert.equal(registry(directory)['codex:denied'].state, 'failed');
+  }
+});
+
+test('a late UserPromptSubmit cannot clear approval already requested in the same turn', async () => {
+  const directory = freshHook('retto-hook-late-prompt-');
+  const hook = path.join(directory, 'hook.cjs');
+  const base = { session_id: 'prompt', turn_id: 'turn-a' };
+  await invoke(hook, { ...base, tool_use_id: 'tool-a', hook_event_name: 'PermissionRequest' }, 'waiting', {}, 'codex');
+  await invoke(hook, { ...base, hook_event_name: 'UserPromptSubmit' }, 'running', {}, 'codex');
+  assert.equal(registry(directory)['codex:prompt'].state, 'waiting');
+});
+
+test('new prompt may arrive before task_started is flushed, without accepting an old prompt later', async () => {
+  const directory = freshHook('retto-hook-prompt-flush-');
+  const hook = path.join(directory, 'hook.cjs');
+  const transcript = path.join(directory, 'rollout.jsonl');
+  fs.writeFileSync(transcript, JSON.stringify({ type: 'event_msg', payload: { type: 'task_started', turn_id: 'old-turn' } }));
+  const base = { session_id: 'flush', transcript_path: transcript, hook_event_name: 'UserPromptSubmit' };
+  await invoke(hook, { ...base, turn_id: 'new-turn' }, 'running', {}, 'codex');
+  assert.equal(registry(directory)['codex:flush'].turnId, 'new-turn');
+  await invoke(hook, { ...base, turn_id: 'new-turn', tool_use_id: 'new-tool', hook_event_name: 'PermissionRequest' }, 'waiting', {}, 'codex');
+  assert.equal(registry(directory)['codex:flush'].state, 'waiting');
+  await invoke(hook, { ...base, turn_id: 'old-turn' }, 'running', {}, 'codex');
+  assert.equal(registry(directory)['codex:flush'].turnId, 'new-turn');
+  assert.equal(registry(directory)['codex:flush'].state, 'waiting');
+});
+
+test('legacy prompt without turn ID does not retire the current active turn', async () => {
+  const directory = freshHook('retto-hook-legacy-turn-');
+  const hook = path.join(directory, 'hook.cjs');
+  const transcript = path.join(directory, 'rollout.jsonl');
+  fs.writeFileSync(transcript, JSON.stringify({ type: 'event_msg', payload: { type: 'task_started', turn_id: 'current-turn' } }));
+  const base = { session_id: 'legacy-turn', transcript_path: transcript };
+  await invoke(hook, { ...base, hook_event_name: 'UserPromptSubmit' }, 'running', {}, 'codex');
+  await invoke(hook, { ...base, turn_id: 'current-turn', tool_use_id: 'tool-a', hook_event_name: 'PermissionRequest' }, 'waiting', {}, 'codex');
+  assert.equal(registry(directory)['codex:legacy-turn'].state, 'waiting');
+});

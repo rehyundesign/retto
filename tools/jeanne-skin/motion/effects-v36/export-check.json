@@ -1,0 +1,112 @@
+[
+  {
+    "state": "idle",
+    "characterCount": 16,
+    "characterCycle": 3.2,
+    "effectCycle": 6.4,
+    "effectFps": 20,
+    "exportFrames": 128,
+    "exportDurationMs": 6400,
+    "frozenPoseEffectProgression": true,
+    "nativeInstallation": "not performed"
+  },
+  {
+    "state": "running",
+    "characterCount": 16,
+    "characterCycle": 2.4,
+    "effectCycle": 4.8,
+    "effectFps": 20,
+    "exportFrames": 96,
+    "exportDurationMs": 4800,
+    "frozenPoseEffectProgression": true,
+    "nativeInstallation": "not performed"
+  },
+  {
+    "state": "review",
+    "characterCount": 16,
+    "characterCycle": 3.2,
+    "effectCycle": 6.4,
+    "effectFps": 20,
+    "exportFrames": 128,
+    "exportDurationMs": 6400,
+    "frozenPoseEffectProgression": true,
+    "nativeInstallation": "not performed"
+  },
+  {
+    "state": "waiting",
+    "characterCount": 16,
+    "characterCycle": 3.2,
+    "effectCycle": 6.4,
+    "effectFps": 20,
+    "exportFrames": 128,
+    "exportDurationMs": 6400,
+    "frozenPoseEffectProgression": true,
+    "nativeInstallation": "not performed"
+  },
+  {
+    "state": "failed",
+    "characterCount": 16,
+    "characterCycle": 3.2,
+    "effectCycle": 6.4,
+    "effectFps": 20,
+    "exportFrames": 128,
+    "exportDurationMs": 6400,
+    "frozenPoseEffectProgression": true,
+    "nativeInstallation": "not performed"
+  },
+  {
+    "state": "waving",
+    "characterCount": 16,
+    "characterCycle": 2.4,
+    "effectCycle": 4.8,
+    "effectFps": 20,
+    "exportFrames": 96,
+    "exportDurationMs": 4800,
+    "frozenPoseEffectProgression": true,
+    "nativeInstallation": "not performed"
+  },
+  {
+    "state": "jumping",
+    "characterCount": 16,
+    "characterCycle": 2.4,
+    "effectCycle": 4.8,
+    "effectFps": 20,
+    "exportFrames": 96,
+    "exportDurationMs": 4800,
+    "frozenPoseEffectProgression": true,
+    "nativeInstallation": "not performed"
+  },
+  {
+    "state": "sleeping",
+    "characterCount": 16,
+    "characterCycle": 6.4,
+    "effectCycle": 12.8,
+    "effectFps": 20,
+    "exportFrames": 256,
+    "exportDurationMs": 12800,
+    "frozenPoseEffectProgression": true,
+    "nativeInstallation": "not performed"
+  },
+  {
+    "state": "drag-right",
+    "characterCount": 8,
+    "characterCycle": 1.6,
+    "effectCycle": 3.2,
+    "effectFps": 20,
+    "exportFrames": 64,
+    "exportDurationMs": 3200,
+    "frozenPoseEffectProgression": true,
+    "nativeInstallation": "not performed"
+  },
+  {
+    "state": "drag-left",
+    "characterCount": 8,
+    "characterCycle": 1.6,
+    "effectCycle": 3.2,
+    "effectFps": 20,
+    "exportFrames": 64,
+    "exportDurationMs": 3200,
+    "frozenPoseEffectProgression": true,
+    "nativeInstallation": "not performed"
+  }
+]

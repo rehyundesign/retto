@@ -1,0 +1,12 @@
+const fs=require('fs'),path=require('path'),vm=require('vm');const root=path.dirname(__dirname),ctx={window:{}};
+vm.runInNewContext(fs.readFileSync(root+'/state-integrated-v31-data.js','utf8'),ctx);
+const rows=ctx.window.JeanneIntegrated19,r=rows.find(r=>r.id==='running');
+r.files=Array.from({length:16},(_,i)=>`running-four-limbs-v35/${String(i).padStart(2,'0')}.png`);
+r.animations=['dark','white'].flatMap(theme=>['gif','webp'].map(ext=>({theme,file:`running-four-limbs-v35/animation-${theme}.${ext}`})));
+r.status='작업 중 앞발 동작 수정';r.note='앞발 하나로 마법을 펼치고 팬던트로 돌아오는 동작입니다. 다른 상태는 유지했습니다.';
+for(const r of rows)for(const f of [...r.files,...r.animations.map(a=>a.file)])if(!fs.existsSync(root+'/'+f))throw Error('missing '+f);
+fs.writeFileSync(root+'/state-integrated-v35-data.js','window.JeanneIntegrated19='+JSON.stringify(rows)+';\n');
+let html=fs.readFileSync(root+'/state-integrated-v31.html','utf8').replace(/state-integrated-v31-data\.js\?v=\d+/,'state-integrated-v35-data.js?v='+Date.now()).replace(/<h1>[\s\S]*?<\/h1><p>[\s\S]*?<\/p>/,'<h1>잔느 · 핀 — 작업 중 모션 수정</h1><p>작업 중 모션 16컷만 다시 그렸습니다. 중복 앞다리와 커프스를 제거하고, 작은 뒷발 두 개를 구분되게 다시 그렸습니다. 다른 상태와 재생 시간은 유지했습니다.</p>').replace("rows.findIndex(r=>r.id==='waving')","rows.findIndex(r=>r.id==='running')").replace('중간 자세와 타이밍 보정 · 다른 상태와 시선 유지','작업 중 모션 수정 · 다른 상태와 시선 유지');
+for(const x of html.matchAll(/<script>([\s\S]*?)<\/script>/g))new vm.Script(x[1]);
+fs.writeFileSync(root+'/state-integrated-v35.html',html);
+console.log('v35 preview syntax and files verified');

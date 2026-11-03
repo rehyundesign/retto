@@ -1,0 +1,23 @@
+{
+  "display_information": {
+    "name": "Retto personal notifications",
+    "description": "개인용 레토 데스크톱 알림",
+    "background_color": "#345A89"
+  },
+  "oauth_config": {
+    "scopes": {
+      "user": [
+        "channels:read", "groups:read", "users:read", "channels:history",
+        "groups:history", "im:history", "mpim:history"
+      ]
+    }
+  },
+  "settings": {
+    "event_subscriptions": {
+      "user_events": ["message.channels", "message.groups", "message.im", "message.mpim"]
+    },
+    "socket_mode_enabled": true,
+    "org_deploy_enabled": false,
+    "token_rotation_enabled": false
+  }
+}

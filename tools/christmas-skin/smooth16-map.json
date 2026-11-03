@@ -1,0 +1,1574 @@
+{
+  "version": 16,
+  "groups": [
+    {
+      "id": "idle",
+      "label": "기본",
+      "source": "../../assets/retto-christmas-concept.png",
+      "frames": 16,
+      "interval": 0.15,
+      "face_box": [
+        0.16,
+        0.173,
+        0.71,
+        0.53
+      ],
+      "body_center_x": 0.415,
+      "foot_baseline_y": 0.905,
+      "center": 174,
+      "baseline": 628,
+      "target_face_width": 228,
+      "grounded": true,
+      "limbs": {
+        "front_left": "grounded",
+        "front_right": "grounded",
+        "rear_left": "behind forelegs",
+        "rear_right": "behind forelegs"
+      },
+      "pose_group": "front-seated",
+      "target_eye_gap": 73.73886130941075,
+      "row": 0,
+      "source_directory": "gen-smooth16",
+      "sources": [
+        "idle-0",
+        "idle-0",
+        "idle-0",
+        "idle-0",
+        "idle-0",
+        "idle-new-0",
+        "idle-3",
+        "idle-new-1",
+        "idle-4",
+        "idle-new-1",
+        "idle-3",
+        "idle-new-0",
+        "idle-0",
+        "idle-0",
+        "idle-0",
+        "idle-0"
+      ],
+      "frame_durations": [
+        0.22388888888888886,
+        0.22388888888888886,
+        0.22388888888888886,
+        0.22388888888888886,
+        0.22388888888888886,
+        0.055,
+        0.055,
+        0.055,
+        0.22388888888888886,
+        0.055,
+        0.055,
+        0.055,
+        0.055,
+        0.22388888888888886,
+        0.22388888888888886,
+        0.22388888888888886
+      ],
+      "effect_anchors": [
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        []
+      ],
+      "secondary_motion": {
+        "profile": "idle",
+        "source_directory": "gen-secondary/registered",
+        "pose_phases": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          2,
+          1,
+          0,
+          3,
+          4,
+          3,
+          0,
+          0,
+          0,
+          0
+        ],
+        "mode": "independently drawn coherent ear/cap layer behind original face and foreground paws"
+      }
+    },
+    {
+      "id": "moveRight",
+      "label": "오른쪽 이동",
+      "source": "gen-anchors/moveRight-repair.png",
+      "frames": 16,
+      "interval": 0.07,
+      "face_box": [
+        0.545,
+        0.133,
+        0.916,
+        0.639
+      ],
+      "body_center_x": 0.43,
+      "foot_baseline_y": 0.952,
+      "center": 166,
+      "baseline": 628,
+      "target_face_width": 180,
+      "grounded": false,
+      "limbs": {
+        "front_left": "forward, profile stride",
+        "front_right": "under chest, profile stride",
+        "rear_left": "backward stride",
+        "rear_right": "under hips, profile stride"
+      },
+      "pose_group": "side-running",
+      "row": 1,
+      "source_directory": "gen-smooth16",
+      "sources": [
+        "moveRight-stride-00",
+        "moveRight-stride-01",
+        "moveRight-stride-02",
+        "moveRight-stride-03",
+        "moveRight-stride-04",
+        "moveRight-stride-05",
+        "moveRight-stride-06",
+        "moveRight-stride-07",
+        "moveRight-stride-08",
+        "moveRight-stride-09",
+        "moveRight-stride-10",
+        "moveRight-stride-11",
+        "moveRight-stride-12",
+        "moveRight-stride-13",
+        "moveRight-stride-14",
+        "moveRight-stride-15"
+      ],
+      "frame_durations": [
+        0.07,
+        0.07,
+        0.07,
+        0.07,
+        0.07,
+        0.07,
+        0.07,
+        0.07,
+        0.07,
+        0.07,
+        0.07,
+        0.07,
+        0.07,
+        0.07,
+        0.07,
+        0.07
+      ],
+      "effect_anchors": [
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        []
+      ]
+    },
+    {
+      "id": "moveLeft",
+      "label": "왼쪽 이동",
+      "mirror": "moveRight",
+      "frames": 16,
+      "interval": 0.07,
+      "row": 2,
+      "source_directory": "gen-smooth16",
+      "sources": [
+        "moveRight-stride-00",
+        "moveRight-stride-01",
+        "moveRight-stride-02",
+        "moveRight-stride-03",
+        "moveRight-stride-04",
+        "moveRight-stride-05",
+        "moveRight-stride-06",
+        "moveRight-stride-07",
+        "moveRight-stride-08",
+        "moveRight-stride-09",
+        "moveRight-stride-10",
+        "moveRight-stride-11",
+        "moveRight-stride-12",
+        "moveRight-stride-13",
+        "moveRight-stride-14",
+        "moveRight-stride-15"
+      ],
+      "frame_durations": [
+        0.07,
+        0.07,
+        0.07,
+        0.07,
+        0.07,
+        0.07,
+        0.07,
+        0.07,
+        0.07,
+        0.07,
+        0.07,
+        0.07,
+        0.07,
+        0.07,
+        0.07,
+        0.07
+      ],
+      "effect_anchors": [
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        []
+      ]
+    },
+    {
+      "id": "waving",
+      "label": "완료 인사",
+      "row": 3,
+      "frames": 16,
+      "interval": 0.1,
+      "cycle_limit": 2,
+      "pose_group": "front-seated-wave",
+      "source_dir": "gen-production",
+      "source_directory": "gen-smooth16",
+      "sources": [
+        "waving-3",
+        "waving-new-5",
+        "waving-new-3",
+        "waving-new-4",
+        "waving-0",
+        "waving-new-1",
+        "waving-new-2",
+        "waving-1",
+        "waving-new-2",
+        "waving-new-1",
+        "waving-0",
+        "waving-new-4",
+        "waving-new-3",
+        "waving-new-5",
+        "waving-3",
+        "waving-3"
+      ],
+      "frame_durations": [
+        0.16500000000000004,
+        0.085,
+        0.085,
+        0.085,
+        0.085,
+        0.085,
+        0.085,
+        0.16500000000000004,
+        0.085,
+        0.085,
+        0.085,
+        0.085,
+        0.085,
+        0.085,
+        0.085,
+        0.16500000000000004
+      ],
+      "effect_anchors": [
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        []
+      ],
+      "secondary_motion": {
+        "profile": "idle",
+        "source_directory": "gen-secondary/registered",
+        "pose_phases": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          2,
+          1,
+          0,
+          3,
+          4,
+          3,
+          0,
+          0,
+          0,
+          0
+        ],
+        "mode": "independently drawn coherent ear/cap layer behind original face and foreground paws"
+      }
+    },
+    {
+      "id": "thinking",
+      "label": "생각 중",
+      "source": "gen-anchors/thinking.png",
+      "frames": 16,
+      "interval": 0.2,
+      "face_box": [
+        0.183,
+        0.12,
+        0.719,
+        0.585
+      ],
+      "body_center_x": 0.44,
+      "foot_baseline_y": 0.89,
+      "center": 174,
+      "baseline": 596,
+      "target_face_width": 228,
+      "grounded": true,
+      "limbs": {
+        "front_left": "on gift top",
+        "front_right": "holding ribbon",
+        "rear_left": "grounded behind gift",
+        "rear_right": "grounded behind gift"
+      },
+      "pose_group": "front-leaning",
+      "target_eye_gap": 73.73886130941075,
+      "row": 7,
+      "source_directory": "gen-smooth16",
+      "sources": [
+        "thinking-0",
+        "thinking-new-0",
+        "thinking-new-1",
+        "thinking-1",
+        "thinking-new-1",
+        "thinking-new-0",
+        "thinking-0",
+        "thinking-new-2",
+        "thinking-new-3",
+        "thinking-2",
+        "thinking-2",
+        "thinking-new-3",
+        "thinking-new-2",
+        "thinking-0",
+        "thinking-0",
+        "thinking-0"
+      ],
+      "frame_durations": [
+        0.453,
+        0.085,
+        0.085,
+        0.453,
+        0.085,
+        0.085,
+        0.085,
+        0.085,
+        0.085,
+        0.085,
+        0.453,
+        0.085,
+        0.085,
+        0.085,
+        0.453,
+        0.453
+      ],
+      "effect_anchors": [
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        []
+      ],
+      "secondary_motion": {
+        "profile": "thinking",
+        "source_directory": "gen-secondary/registered",
+        "pose_phases": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          2,
+          1,
+          0,
+          3,
+          4,
+          3,
+          0,
+          0,
+          0,
+          0
+        ],
+        "mode": "independently drawn coherent ear/cap layer behind original face and foreground paws"
+      }
+    },
+    {
+      "id": "review",
+      "label": "도구 사용",
+      "source": "gen-anchors/review-repair.png",
+      "frames": 16,
+      "interval": 0.15,
+      "face_box": [
+        0.22,
+        0.19,
+        0.8,
+        0.55
+      ],
+      "body_center_x": 0.51,
+      "foot_baseline_y": 0.888,
+      "center": 208,
+      "baseline": 628,
+      "target_face_width": 228,
+      "grounded": true,
+      "limbs": {
+        "front_left": "holding hanger",
+        "front_right": "steadying ornament",
+        "rear_left": "grounded under coat",
+        "rear_right": "grounded under coat"
+      },
+      "pose_group": "three-quarter-crouched",
+      "row": 8,
+      "source_directory": "gen-smooth16",
+      "sources": [
+        "review-0",
+        "review-new-0",
+        "review-new-1",
+        "review-1",
+        "review-new-2",
+        "review-new-3",
+        "review-2",
+        "review-2",
+        "review-2",
+        "review-new-3",
+        "review-new-2",
+        "review-1",
+        "review-new-1",
+        "review-new-0",
+        "review-0",
+        "review-0"
+      ],
+      "frame_durations": [
+        0.345,
+        0.085,
+        0.085,
+        0.085,
+        0.085,
+        0.085,
+        0.085,
+        0.345,
+        0.345,
+        0.085,
+        0.085,
+        0.085,
+        0.085,
+        0.085,
+        0.085,
+        0.345
+      ],
+      "effect_anchors": [
+        [
+          [
+            82.7536299765808,
+            493.5962529274005
+          ]
+        ],
+        [
+          [
+            85.44472111553785,
+            491.04631474103587
+          ]
+        ],
+        [
+          [
+            86.50533617929563,
+            499.5160085378869
+          ]
+        ],
+        [
+          [
+            89.02557915057915,
+            496.99758687258685
+          ]
+        ],
+        [
+          [
+            87.44895718990121,
+            465.84138309549945
+          ]
+        ],
+        [
+          [
+            90.29535232383807,
+            440.25737131434283
+          ]
+        ],
+        [
+          [
+            87.97852760736197,
+            455.28783231083844
+          ]
+        ],
+        [
+          [
+            87.97852760736197,
+            455.28783231083844
+          ]
+        ],
+        [
+          [
+            87.97852760736197,
+            455.28783231083844
+          ]
+        ],
+        [
+          [
+            90.29535232383807,
+            440.25737131434283
+          ]
+        ],
+        [
+          [
+            87.44895718990121,
+            465.84138309549945
+          ]
+        ],
+        [
+          [
+            89.02557915057915,
+            496.99758687258685
+          ]
+        ],
+        [
+          [
+            86.50533617929563,
+            499.5160085378869
+          ]
+        ],
+        [
+          [
+            85.44472111553785,
+            491.04631474103587
+          ]
+        ],
+        [
+          [
+            82.7536299765808,
+            493.5962529274005
+          ]
+        ],
+        [
+          [
+            82.7536299765808,
+            493.5962529274005
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "waiting",
+      "label": "입력 대기",
+      "source": "gen-anchors/waiting.png",
+      "frames": 16,
+      "interval": 0.2,
+      "face_box": [
+        0.16,
+        0.17,
+        0.71,
+        0.53
+      ],
+      "body_center_x": 0.415,
+      "foot_baseline_y": 0.917,
+      "center": 174,
+      "baseline": 628,
+      "target_face_width": 228,
+      "grounded": true,
+      "limbs": {
+        "front_left": "grounded",
+        "front_right": "raised holding bell",
+        "rear_left": "grounded behind foreleg",
+        "rear_right": "grounded beneath body"
+      },
+      "pose_group": "front-head-tilt",
+      "target_eye_gap": 73.73886130941075,
+      "row": 6,
+      "effect_period": 3.2,
+      "source_directory": "gen-smooth16",
+      "sources": [
+        "waiting-0",
+        "waiting-new-0",
+        "waiting-new-1",
+        "waiting-1",
+        "waiting-new-1",
+        "waiting-new-0",
+        "waiting-0",
+        "waiting-new-2",
+        "waiting-new-3",
+        "waiting-3",
+        "waiting-new-3",
+        "waiting-new-2",
+        "waiting-0",
+        "waiting-0",
+        "waiting-0",
+        "waiting-0"
+      ],
+      "frame_durations": [
+        0.39166666666666666,
+        0.085,
+        0.085,
+        0.39166666666666666,
+        0.085,
+        0.085,
+        0.085,
+        0.085,
+        0.085,
+        0.39166666666666666,
+        0.085,
+        0.085,
+        0.085,
+        0.39166666666666666,
+        0.39166666666666666,
+        0.39166666666666666
+      ],
+      "effect_anchors": [
+        [
+          [
+            326.04584775086505,
+            427.0596885813149
+          ]
+        ],
+        [
+          [
+            325,
+            438
+          ]
+        ],
+        [
+          [
+            283.68333333333334,
+            437.1166666666667
+          ]
+        ],
+        [
+          [
+            308,
+            454
+          ]
+        ],
+        [
+          [
+            283.68333333333334,
+            437.1166666666667
+          ]
+        ],
+        [
+          [
+            325,
+            438
+          ]
+        ],
+        [
+          [
+            326.04584775086505,
+            427.0596885813149
+          ]
+        ],
+        [
+          [
+            368.078485687904,
+            426.1726685133887
+          ]
+        ],
+        [
+          [
+            381.25706940874034,
+            416.8419023136247
+          ]
+        ],
+        [
+          [
+            364.8109058927001,
+            427.05980650835534
+          ]
+        ],
+        [
+          [
+            381.25706940874034,
+            416.8419023136247
+          ]
+        ],
+        [
+          [
+            368.078485687904,
+            426.1726685133887
+          ]
+        ],
+        [
+          [
+            326.04584775086505,
+            427.0596885813149
+          ]
+        ],
+        [
+          [
+            326.04584775086505,
+            427.0596885813149
+          ]
+        ],
+        [
+          [
+            326.04584775086505,
+            427.0596885813149
+          ]
+        ],
+        [
+          [
+            326.04584775086505,
+            427.0596885813149
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "failed",
+      "label": "실패",
+      "source": "gen-anchors/failed-repair.png",
+      "frames": 16,
+      "interval": 0.2,
+      "face_box": [
+        0.16,
+        0.23,
+        0.75,
+        0.55
+      ],
+      "body_center_x": 0.415,
+      "foot_baseline_y": 0.9075,
+      "center": 174,
+      "baseline": 626,
+      "target_face_width": 228,
+      "grounded": true,
+      "limbs": {
+        "front_left": "grounded cable across wrist",
+        "front_right": "grounded cable across wrist",
+        "rear_left": "behind forelegs and coat",
+        "rear_right": "behind forelegs and coat"
+      },
+      "pose_group": "front-ears-down",
+      "target_eye_gap": 73.73886130941075,
+      "row": 5,
+      "source_directory": "gen-smooth16",
+      "sources": [
+        "failed-0",
+        "failed-new-0",
+        "failed-new-1",
+        "failed-1",
+        "failed-1",
+        "failed-new-1",
+        "failed-new-0",
+        "failed-0",
+        "failed-new-2",
+        "failed-new-3",
+        "failed-4",
+        "failed-4",
+        "failed-new-3",
+        "failed-new-2",
+        "failed-0",
+        "failed-0"
+      ],
+      "frame_durations": [
+        0.545,
+        0.085,
+        0.085,
+        0.085,
+        0.545,
+        0.085,
+        0.085,
+        0.085,
+        0.085,
+        0.085,
+        0.085,
+        0.545,
+        0.085,
+        0.085,
+        0.085,
+        0.545
+      ],
+      "effect_anchors": [
+        [
+          [
+            126,
+            593
+          ],
+          [
+            173,
+            608
+          ],
+          [
+            195,
+            615
+          ],
+          [
+            217,
+            608
+          ],
+          [
+            269,
+            597
+          ]
+        ],
+        [
+          [
+            126,
+            555
+          ],
+          [
+            173,
+            574
+          ],
+          [
+            195,
+            615
+          ],
+          [
+            217,
+            608
+          ],
+          [
+            269,
+            597
+          ]
+        ],
+        [
+          [
+            144,
+            515
+          ],
+          [
+            158,
+            550
+          ],
+          [
+            182,
+            598
+          ],
+          [
+            262,
+            584
+          ],
+          [
+            159,
+            530
+          ]
+        ],
+        [
+          [
+            144,
+            475
+          ],
+          [
+            158,
+            523
+          ],
+          [
+            182,
+            578
+          ],
+          [
+            262,
+            584
+          ],
+          [
+            159,
+            490
+          ]
+        ],
+        [
+          [
+            144,
+            475
+          ],
+          [
+            158,
+            523
+          ],
+          [
+            182,
+            578
+          ],
+          [
+            262,
+            584
+          ],
+          [
+            159,
+            490
+          ]
+        ],
+        [
+          [
+            144,
+            515
+          ],
+          [
+            158,
+            550
+          ],
+          [
+            182,
+            598
+          ],
+          [
+            262,
+            584
+          ],
+          [
+            159,
+            530
+          ]
+        ],
+        [
+          [
+            126,
+            555
+          ],
+          [
+            173,
+            574
+          ],
+          [
+            195,
+            615
+          ],
+          [
+            217,
+            608
+          ],
+          [
+            269,
+            597
+          ]
+        ],
+        [
+          [
+            126,
+            593
+          ],
+          [
+            173,
+            608
+          ],
+          [
+            195,
+            615
+          ],
+          [
+            217,
+            608
+          ],
+          [
+            269,
+            597
+          ]
+        ],
+        [
+          [
+            290,
+            555
+          ],
+          [
+            237,
+            585
+          ],
+          [
+            166,
+            598
+          ],
+          [
+            201,
+            604
+          ],
+          [
+            259,
+            599
+          ]
+        ],
+        [
+          [
+            290,
+            450
+          ],
+          [
+            237,
+            580
+          ],
+          [
+            166,
+            598
+          ],
+          [
+            201,
+            604
+          ],
+          [
+            259,
+            599
+          ]
+        ],
+        [
+          [
+            290,
+            397
+          ],
+          [
+            237,
+            571
+          ],
+          [
+            166,
+            598
+          ],
+          [
+            201,
+            604
+          ],
+          [
+            259,
+            599
+          ]
+        ],
+        [
+          [
+            290,
+            397
+          ],
+          [
+            237,
+            571
+          ],
+          [
+            166,
+            598
+          ],
+          [
+            201,
+            604
+          ],
+          [
+            259,
+            599
+          ]
+        ],
+        [
+          [
+            290,
+            450
+          ],
+          [
+            237,
+            580
+          ],
+          [
+            166,
+            598
+          ],
+          [
+            201,
+            604
+          ],
+          [
+            259,
+            599
+          ]
+        ],
+        [
+          [
+            290,
+            555
+          ],
+          [
+            237,
+            585
+          ],
+          [
+            166,
+            598
+          ],
+          [
+            201,
+            604
+          ],
+          [
+            259,
+            599
+          ]
+        ],
+        [
+          [
+            126,
+            593
+          ],
+          [
+            173,
+            608
+          ],
+          [
+            195,
+            615
+          ],
+          [
+            217,
+            608
+          ],
+          [
+            269,
+            597
+          ]
+        ],
+        [
+          [
+            126,
+            593
+          ],
+          [
+            173,
+            608
+          ],
+          [
+            195,
+            615
+          ],
+          [
+            217,
+            608
+          ],
+          [
+            269,
+            597
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "jumping",
+      "label": "시작",
+      "source": "gen-anchors/jumping.png",
+      "frames": 16,
+      "interval": 0.075,
+      "face_box": [
+        0.17,
+        0.085,
+        0.731,
+        0.475
+      ],
+      "body_center_x": 0.475,
+      "foot_baseline_y": 0.91,
+      "center": 201,
+      "baseline": 628,
+      "target_face_width": 228,
+      "grounded": false,
+      "limbs": {
+        "front_left": "raised, grounded counterpart absent",
+        "front_right": "raised, grounded counterpart absent",
+        "rear_left": "extended under torso",
+        "rear_right": "extended under torso"
+      },
+      "pose_group": "front-standing-airborne",
+      "target_eye_gap": 73.73886130941075,
+      "row": 4,
+      "effect_period": 1.2,
+      "source_directory": "gen-smooth16",
+      "sources": [
+        "jumping-new-0",
+        "jumping-0",
+        "jumping-new-3",
+        "jumping-new-4",
+        "jumping-new-4",
+        "jumping-new-5",
+        "jumping-new-2",
+        "jumping-2",
+        "jumping-new-2",
+        "jumping-2",
+        "jumping-new-2",
+        "jumping-new-5",
+        "jumping-new-4",
+        "jumping-new-4",
+        "jumping-new-3",
+        "jumping-new-0"
+      ],
+      "frame_durations": [
+        0.14499999999999996,
+        0.065,
+        0.065,
+        0.065,
+        0.065,
+        0.065,
+        0.065,
+        0.065,
+        0.14499999999999996,
+        0.065,
+        0.065,
+        0.065,
+        0.065,
+        0.065,
+        0.065,
+        0.065
+      ],
+      "effect_anchors": [
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        []
+      ]
+    },
+    {
+      "id": "sleeping",
+      "label": "잠자기",
+      "source": "gen-anchors/sleeping.png",
+      "frames": 16,
+      "interval": 0.225,
+      "face_box": [
+        0.065,
+        0.209,
+        0.531,
+        0.752
+      ],
+      "body_center_x": 0.7,
+      "foot_baseline_y": 0.85,
+      "center": 306,
+      "baseline": 626,
+      "target_face_width": 216,
+      "grounded": true,
+      "limbs": {
+        "front_left": "folded under muzzle",
+        "front_right": "folded under muzzle",
+        "rear_left": "occluded by reclining torso",
+        "rear_right": "partially visible tucked under coat"
+      },
+      "pose_group": "reclining-head-roll",
+      "row": 11,
+      "source_directory": "gen-smooth16",
+      "sources": [
+        "sleeping-0",
+        "sleeping-new-0",
+        "sleeping-1",
+        "sleeping-new-1",
+        "sleeping-2",
+        "sleeping-2",
+        "sleeping-2",
+        "sleeping-2",
+        "sleeping-2",
+        "sleeping-new-1",
+        "sleeping-1",
+        "sleeping-new-0",
+        "sleeping-0",
+        "sleeping-0",
+        "sleeping-0",
+        "sleeping-0"
+      ],
+      "frame_durations": [
+        0.225,
+        0.225,
+        0.225,
+        0.225,
+        0.225,
+        0.225,
+        0.225,
+        0.225,
+        0.225,
+        0.225,
+        0.225,
+        0.225,
+        0.225,
+        0.225,
+        0.225,
+        0.225
+      ],
+      "effect_anchors": [
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        []
+      ]
+    }
+  ],
+  "gaze": [
+    {
+      "id": "gaze-0",
+      "direction": 0,
+      "degrees_clockwise_from_up": 0,
+      "row": 9,
+      "column": 0,
+      "frames": 1,
+      "interval": 1,
+      "canonical_base_cell": [
+        9,
+        0
+      ]
+    },
+    {
+      "id": "gaze-1",
+      "direction": 1,
+      "degrees_clockwise_from_up": 22.5,
+      "row": 9,
+      "column": 1,
+      "frames": 1,
+      "interval": 1,
+      "canonical_base_cell": [
+        9,
+        1
+      ]
+    },
+    {
+      "id": "gaze-2",
+      "direction": 2,
+      "degrees_clockwise_from_up": 45,
+      "row": 9,
+      "column": 2,
+      "frames": 1,
+      "interval": 1,
+      "canonical_base_cell": [
+        9,
+        2
+      ]
+    },
+    {
+      "id": "gaze-3",
+      "direction": 3,
+      "degrees_clockwise_from_up": 67.5,
+      "row": 9,
+      "column": 3,
+      "frames": 1,
+      "interval": 1,
+      "canonical_base_cell": [
+        9,
+        3
+      ]
+    },
+    {
+      "id": "gaze-4",
+      "direction": 4,
+      "degrees_clockwise_from_up": 90,
+      "row": 9,
+      "column": 4,
+      "frames": 1,
+      "interval": 1,
+      "canonical_base_cell": [
+        9,
+        4
+      ]
+    },
+    {
+      "id": "gaze-5",
+      "direction": 5,
+      "degrees_clockwise_from_up": 112.5,
+      "row": 9,
+      "column": 5,
+      "frames": 1,
+      "interval": 1,
+      "canonical_base_cell": [
+        9,
+        5
+      ]
+    },
+    {
+      "id": "gaze-6",
+      "direction": 6,
+      "degrees_clockwise_from_up": 135,
+      "row": 9,
+      "column": 6,
+      "frames": 1,
+      "interval": 1,
+      "canonical_base_cell": [
+        9,
+        6
+      ]
+    },
+    {
+      "id": "gaze-7",
+      "direction": 7,
+      "degrees_clockwise_from_up": 157.5,
+      "row": 9,
+      "column": 7,
+      "frames": 1,
+      "interval": 1,
+      "canonical_base_cell": [
+        9,
+        7
+      ]
+    },
+    {
+      "id": "gaze-8",
+      "direction": 8,
+      "degrees_clockwise_from_up": 180,
+      "row": 10,
+      "column": 0,
+      "frames": 1,
+      "interval": 1,
+      "canonical_base_cell": [
+        10,
+        0
+      ]
+    },
+    {
+      "id": "gaze-9",
+      "direction": 9,
+      "degrees_clockwise_from_up": 202.5,
+      "row": 10,
+      "column": 1,
+      "frames": 1,
+      "interval": 1,
+      "canonical_base_cell": [
+        10,
+        1
+      ]
+    },
+    {
+      "id": "gaze-10",
+      "direction": 10,
+      "degrees_clockwise_from_up": 225,
+      "row": 10,
+      "column": 2,
+      "frames": 1,
+      "interval": 1,
+      "canonical_base_cell": [
+        10,
+        2
+      ]
+    },
+    {
+      "id": "gaze-11",
+      "direction": 11,
+      "degrees_clockwise_from_up": 247.5,
+      "row": 10,
+      "column": 3,
+      "frames": 1,
+      "interval": 1,
+      "canonical_base_cell": [
+        10,
+        3
+      ]
+    },
+    {
+      "id": "gaze-12",
+      "direction": 12,
+      "degrees_clockwise_from_up": 270,
+      "row": 10,
+      "column": 4,
+      "frames": 1,
+      "interval": 1,
+      "canonical_base_cell": [
+        10,
+        4
+      ]
+    },
+    {
+      "id": "gaze-13",
+      "direction": 13,
+      "degrees_clockwise_from_up": 292.5,
+      "row": 10,
+      "column": 5,
+      "frames": 1,
+      "interval": 1,
+      "canonical_base_cell": [
+        10,
+        5
+      ]
+    },
+    {
+      "id": "gaze-14",
+      "direction": 14,
+      "degrees_clockwise_from_up": 315,
+      "row": 10,
+      "column": 6,
+      "frames": 1,
+      "interval": 1,
+      "canonical_base_cell": [
+        10,
+        6
+      ]
+    },
+    {
+      "id": "gaze-15",
+      "direction": 15,
+      "degrees_clockwise_from_up": 337.5,
+      "row": 10,
+      "column": 7,
+      "frames": 1,
+      "interval": 1,
+      "canonical_base_cell": [
+        10,
+        7
+      ]
+    }
+  ],
+  "columns": 16,
+  "rows": 12,
+  "mapped_cells": 176
+}

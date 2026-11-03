@@ -1,0 +1,738 @@
+[
+  {
+    "id": "G00",
+    "direction": 0,
+    "profile": "original-seated-gaze-0",
+    "original": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/gaze/reference/base-00.png",
+    "source": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-heart-v2/raw/G00.png",
+    "source_sha256": "9d371241c32f94d41889c6749ea3862bc516c7d6ee00a3b85469640e9bf65a12",
+    "base_feet": {
+      "left": 113,
+      "right": 246,
+      "center": 179.5,
+      "baseline": 629
+    },
+    "source_feet": {
+      "left": 122,
+      "right": 253,
+      "center": 187.5,
+      "baseline": 626
+    },
+    "base_fur_top": 249,
+    "source_fur_top": 231,
+    "registration_basis": "whole seated stature and foot center/baseline; headgear excluded",
+    "output_feet": {
+      "left": 115,
+      "right": 243,
+      "center": 179.0,
+      "baseline": 629
+    },
+    "whole_character_scale": 0.9620253164556962,
+    "whole_character_translation": [
+      -0.8797468354430293,
+      26.772151898734137
+    ],
+    "natural_outline_preserved": true,
+    "regional_face_trims": false,
+    "head_body_compositing": false,
+    "entire_cell_one_source": true,
+    "lower_body_pixel_lock": false,
+    "four_limbs": {
+      "front_left": "grounded in sleeve/cuff",
+      "front_right": "grounded in sleeve/cuff",
+      "rear_left": "behind front-left foreleg and rear hip skirt",
+      "rear_right": "grounded beside front-right foreleg; hip partly behind skirt"
+    },
+    "visual_review": "pass: 1x light/dark; connected natural neck/chest, correct gaze, wearable costume and four-limb attachment"
+  },
+  {
+    "id": "G01",
+    "direction": 1,
+    "profile": "original-seated-gaze-1",
+    "original": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/gaze/reference/base-01.png",
+    "source": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-heart-v2/raw/G01.png",
+    "source_sha256": "2e2522cedc5c66bd99e9542d73f15875217f759956262ac7d10879bb9e111cf6",
+    "base_feet": {
+      "left": 112,
+      "right": 251,
+      "center": 181.5,
+      "baseline": 629
+    },
+    "source_feet": {
+      "left": 119,
+      "right": 272,
+      "center": 195.5,
+      "baseline": 616
+    },
+    "base_fur_top": 248,
+    "source_fur_top": 163,
+    "registration_basis": "whole seated stature and foot center/baseline; headgear excluded",
+    "output_feet": {
+      "left": 104,
+      "right": 272,
+      "center": 188.0,
+      "baseline": 629
+    },
+    "whole_character_scale": 0.8410596026490066,
+    "whole_character_translation": [
+      17.072847682119203,
+      110.90728476821198
+    ],
+    "natural_outline_preserved": true,
+    "regional_face_trims": false,
+    "head_body_compositing": false,
+    "entire_cell_one_source": true,
+    "lower_body_pixel_lock": false,
+    "four_limbs": {
+      "front_left": "grounded in sleeve/cuff",
+      "front_right": "grounded in sleeve/cuff",
+      "rear_left": "behind front-left foreleg and rear hip skirt",
+      "rear_right": "grounded beside front-right foreleg; hip partly behind skirt"
+    },
+    "visual_review": "pass: 1x light/dark; connected natural neck/chest, correct gaze, wearable costume and four-limb attachment"
+  },
+  {
+    "id": "G02",
+    "direction": 2,
+    "profile": "original-seated-gaze-2",
+    "original": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/gaze/reference/base-02.png",
+    "source": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-heart-v2/raw/G02.png",
+    "source_sha256": "bcc1f51c479000683ed2e296e338bde2e767a9fcbdc53da8166e54dbbd802ae8",
+    "base_feet": {
+      "left": 114,
+      "right": 251,
+      "center": 182.5,
+      "baseline": 629
+    },
+    "source_feet": {
+      "left": 134,
+      "right": 267,
+      "center": 200.5,
+      "baseline": 622
+    },
+    "base_fur_top": 243,
+    "source_fur_top": 210,
+    "registration_basis": "whole seated stature and foot center/baseline; headgear excluded",
+    "output_feet": {
+      "left": 118,
+      "right": 245,
+      "center": 181.5,
+      "baseline": 629
+    },
+    "whole_character_scale": 0.9368932038834952,
+    "whole_character_translation": [
+      -5.3470873786407935,
+      46.252427184466
+    ],
+    "natural_outline_preserved": true,
+    "regional_face_trims": false,
+    "head_body_compositing": false,
+    "entire_cell_one_source": true,
+    "lower_body_pixel_lock": false,
+    "four_limbs": {
+      "front_left": "grounded in sleeve/cuff",
+      "front_right": "grounded in sleeve/cuff",
+      "rear_left": "behind front-left foreleg and rear hip skirt",
+      "rear_right": "grounded beside front-right foreleg; hip partly behind skirt"
+    },
+    "visual_review": "pass: 1x light/dark; connected natural neck/chest, correct gaze, wearable costume and four-limb attachment"
+  },
+  {
+    "id": "G03",
+    "direction": 3,
+    "profile": "original-seated-gaze-3",
+    "original": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/gaze/reference/base-03.png",
+    "source": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-heart-v2/raw/G03.png",
+    "source_sha256": "c664d984fb37fdbaf9abe5635d3c8e02ac37157c98702d84496531337c8299dc",
+    "base_feet": {
+      "left": 111,
+      "right": 249,
+      "center": 180.0,
+      "baseline": 629
+    },
+    "source_feet": {
+      "left": 144,
+      "right": 279,
+      "center": 211.5,
+      "baseline": 598
+    },
+    "base_fur_top": 256,
+    "source_fur_top": 110,
+    "registration_basis": "whole seated stature and foot center/baseline; headgear excluded",
+    "output_feet": {
+      "left": 128,
+      "right": 240,
+      "center": 184.0,
+      "baseline": 629
+    },
+    "whole_character_scale": 0.764344262295082,
+    "whole_character_translation": [
+      18.341188524590166,
+      171.92213114754094
+    ],
+    "natural_outline_preserved": true,
+    "regional_face_trims": false,
+    "head_body_compositing": false,
+    "entire_cell_one_source": true,
+    "lower_body_pixel_lock": false,
+    "four_limbs": {
+      "front_left": "grounded in sleeve/cuff",
+      "front_right": "grounded in sleeve/cuff",
+      "rear_left": "behind front-left foreleg and rear hip skirt",
+      "rear_right": "grounded beside front-right foreleg; hip partly behind skirt"
+    },
+    "visual_review": "pass: 1x light/dark; connected natural neck/chest, correct gaze, wearable costume and four-limb attachment"
+  },
+  {
+    "id": "G04",
+    "direction": 4,
+    "profile": "original-seated-gaze-4",
+    "original": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/gaze/reference/base-04.png",
+    "source": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-heart-v2/raw/G04.png",
+    "source_sha256": "f03ae1a31daf1c19866cd8f7fd80ed768a2ef544b722139554904317e726fe0e",
+    "base_feet": {
+      "left": 111,
+      "right": 253,
+      "center": 182.0,
+      "baseline": 629
+    },
+    "source_feet": {
+      "left": 124,
+      "right": 266,
+      "center": 195.0,
+      "baseline": 619
+    },
+    "base_fur_top": 252,
+    "source_fur_top": 216,
+    "registration_basis": "whole seated stature and foot center/baseline; headgear excluded",
+    "output_feet": {
+      "left": 113,
+      "right": 249,
+      "center": 181.0,
+      "baseline": 629
+    },
+    "whole_character_scale": 0.9354838709677419,
+    "whole_character_translation": [
+      -0.4193548387096655,
+      49.9354838709678
+    ],
+    "natural_outline_preserved": true,
+    "regional_face_trims": false,
+    "head_body_compositing": false,
+    "entire_cell_one_source": true,
+    "lower_body_pixel_lock": false,
+    "four_limbs": {
+      "front_left": "grounded in sleeve/cuff",
+      "front_right": "grounded in sleeve/cuff",
+      "rear_left": "behind front-left foreleg and rear hip skirt",
+      "rear_right": "grounded beside front-right foreleg; hip partly behind skirt"
+    },
+    "visual_review": "pass: 1x light/dark; connected natural neck/chest, correct gaze, wearable costume and four-limb attachment"
+  },
+  {
+    "id": "G05",
+    "direction": 5,
+    "profile": "original-seated-gaze-5",
+    "original": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/gaze/reference/base-05.png",
+    "source": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-heart-v2/raw/G05.png",
+    "source_sha256": "50bc8d68190c079a40a0bb0dcac8a7f206a3200f0cc69b2f703363067da7b467",
+    "base_feet": {
+      "left": 110,
+      "right": 251,
+      "center": 180.5,
+      "baseline": 629
+    },
+    "source_feet": {
+      "left": 132,
+      "right": 275,
+      "center": 203.5,
+      "baseline": 617
+    },
+    "base_fur_top": 272,
+    "source_fur_top": 236,
+    "registration_basis": "whole seated stature and foot center/baseline; headgear excluded",
+    "output_feet": {
+      "left": 105,
+      "right": 248,
+      "center": 176.5,
+      "baseline": 629
+    },
+    "whole_character_scale": 0.937007874015748,
+    "whole_character_translation": [
+      -10.181102362204712,
+      50.866141732283495
+    ],
+    "natural_outline_preserved": true,
+    "regional_face_trims": false,
+    "head_body_compositing": false,
+    "entire_cell_one_source": true,
+    "lower_body_pixel_lock": false,
+    "four_limbs": {
+      "front_left": "grounded in sleeve/cuff",
+      "front_right": "grounded in sleeve/cuff",
+      "rear_left": "behind front-left foreleg and rear hip skirt",
+      "rear_right": "grounded beside front-right foreleg; hip partly behind skirt"
+    },
+    "visual_review": "pass: 1x light/dark; connected natural neck/chest, correct gaze, wearable costume and four-limb attachment"
+  },
+  {
+    "id": "G06",
+    "direction": 6,
+    "profile": "original-seated-gaze-6",
+    "original": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/gaze/reference/base-06.png",
+    "source": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-heart-v2/raw/G06.png",
+    "source_sha256": "8b702cc3d0d9b02aaffc05bfa51c0999a6a94530ff01323a3e294ddbba2307b6",
+    "base_feet": {
+      "left": 110,
+      "right": 253,
+      "center": 181.5,
+      "baseline": 629
+    },
+    "source_feet": {
+      "left": 120,
+      "right": 262,
+      "center": 191.0,
+      "baseline": 615
+    },
+    "base_fur_top": 286,
+    "source_fur_top": 263,
+    "registration_basis": "whole seated stature and foot center/baseline; headgear excluded",
+    "output_feet": {
+      "left": 112,
+      "right": 251,
+      "center": 181.5,
+      "baseline": 629
+    },
+    "whole_character_scale": 0.9744318181818182,
+    "whole_character_translation": [
+      -4.6164772727272805,
+      29.724431818181756
+    ],
+    "natural_outline_preserved": true,
+    "regional_face_trims": false,
+    "head_body_compositing": false,
+    "entire_cell_one_source": true,
+    "lower_body_pixel_lock": false,
+    "four_limbs": {
+      "front_left": "grounded in sleeve/cuff",
+      "front_right": "grounded in sleeve/cuff",
+      "rear_left": "behind front-left foreleg and rear hip skirt",
+      "rear_right": "grounded beside front-right foreleg; hip partly behind skirt"
+    },
+    "visual_review": "pass: 1x light/dark; connected natural neck/chest, correct gaze, wearable costume and four-limb attachment"
+  },
+  {
+    "id": "G07",
+    "direction": 7,
+    "profile": "original-seated-gaze-7",
+    "original": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/gaze/reference/base-07.png",
+    "source": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-heart-v2/raw/G07.png",
+    "source_sha256": "71ff29215af29888efc075beadc09ec6c4b0ada61de007f81fd788d7e3336200",
+    "base_feet": {
+      "left": 110,
+      "right": 253,
+      "center": 181.5,
+      "baseline": 629
+    },
+    "source_feet": {
+      "left": 138,
+      "right": 265,
+      "center": 201.5,
+      "baseline": 620
+    },
+    "base_fur_top": 288,
+    "source_fur_top": 244,
+    "registration_basis": "whole seated stature and foot center/baseline; headgear excluded",
+    "output_feet": {
+      "left": 124,
+      "right": 239,
+      "center": 181.5,
+      "baseline": 629
+    },
+    "whole_character_scale": 0.9069148936170213,
+    "whole_character_translation": [
+      -1.2433510638297776,
+      66.71276595744678
+    ],
+    "natural_outline_preserved": true,
+    "regional_face_trims": false,
+    "head_body_compositing": false,
+    "entire_cell_one_source": true,
+    "lower_body_pixel_lock": false,
+    "four_limbs": {
+      "front_left": "grounded in sleeve/cuff",
+      "front_right": "grounded in sleeve/cuff",
+      "rear_left": "behind front-left foreleg and rear hip skirt",
+      "rear_right": "grounded beside front-right foreleg; hip partly behind skirt"
+    },
+    "visual_review": "pass: 1x light/dark; connected natural neck/chest, correct gaze, wearable costume and four-limb attachment"
+  },
+  {
+    "id": "G08",
+    "direction": 8,
+    "profile": "original-seated-gaze-8",
+    "original": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/gaze/reference/base-08.png",
+    "source": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-heart-v2/raw/G08.png",
+    "source_sha256": "e7bf478cd4c48de28dcce59dbb6d347dd89975a26a85a56566569fc170b4a48f",
+    "base_feet": {
+      "left": 110,
+      "right": 241,
+      "center": 175.5,
+      "baseline": 629
+    },
+    "source_feet": {
+      "left": 111,
+      "right": 251,
+      "center": 181.0,
+      "baseline": 619
+    },
+    "base_fur_top": 271,
+    "source_fur_top": 245,
+    "registration_basis": "whole seated stature and foot center/baseline; headgear excluded",
+    "output_feet": {
+      "left": 108,
+      "right": 242,
+      "center": 175.0,
+      "baseline": 629
+    },
+    "whole_character_scale": 0.9572192513368984,
+    "whole_character_translation": [
+      2.243315508021368,
+      36.48128342245991
+    ],
+    "natural_outline_preserved": true,
+    "regional_face_trims": false,
+    "head_body_compositing": false,
+    "entire_cell_one_source": true,
+    "lower_body_pixel_lock": false,
+    "four_limbs": {
+      "front_left": "grounded in sleeve/cuff",
+      "front_right": "grounded in sleeve/cuff",
+      "rear_left": "behind front-left foreleg and rear hip skirt",
+      "rear_right": "grounded beside front-right foreleg; hip partly behind skirt"
+    },
+    "visual_review": "pass: 1x light/dark; connected natural neck/chest, correct gaze, wearable costume and four-limb attachment"
+  },
+  {
+    "id": "G09",
+    "direction": 9,
+    "profile": "original-seated-gaze-9",
+    "original": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/gaze/reference/base-09.png",
+    "source": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-heart-v2/raw/G09.png",
+    "source_sha256": "540a5f973c6f51812493907d75006328b025a73404bec05cfa992c02dafaad24",
+    "base_feet": {
+      "left": 110,
+      "right": 241,
+      "center": 175.5,
+      "baseline": 629
+    },
+    "source_feet": {
+      "left": 118,
+      "right": 271,
+      "center": 194.5,
+      "baseline": 626
+    },
+    "base_fur_top": 273,
+    "source_fur_top": 241,
+    "registration_basis": "whole seated stature and foot center/baseline; headgear excluded",
+    "output_feet": {
+      "left": 104,
+      "right": 248,
+      "center": 176.0,
+      "baseline": 629
+    },
+    "whole_character_scale": 0.9246753246753247,
+    "whole_character_translation": [
+      -4.34935064935064,
+      50.153246753246776
+    ],
+    "natural_outline_preserved": true,
+    "regional_face_trims": false,
+    "head_body_compositing": false,
+    "entire_cell_one_source": true,
+    "lower_body_pixel_lock": false,
+    "four_limbs": {
+      "front_left": "grounded in sleeve/cuff",
+      "front_right": "grounded in sleeve/cuff",
+      "rear_left": "behind front-left foreleg and rear hip skirt",
+      "rear_right": "grounded beside front-right foreleg; hip partly behind skirt"
+    },
+    "visual_review": "pass: 1x light/dark; connected natural neck/chest, correct gaze, wearable costume and four-limb attachment"
+  },
+  {
+    "id": "G10",
+    "direction": 10,
+    "profile": "original-seated-gaze-10",
+    "original": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/gaze/reference/base-10.png",
+    "source": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-heart-v2/raw/G10.png",
+    "source_sha256": "508f3c0177bd41a14a598af0a2c4d1c4c41c82a03fad13f5d557fffada3cbdbd",
+    "base_feet": {
+      "left": 109,
+      "right": 241,
+      "center": 175.0,
+      "baseline": 629
+    },
+    "source_feet": {
+      "left": 130,
+      "right": 250,
+      "center": 190.0,
+      "baseline": 626
+    },
+    "base_fur_top": 278,
+    "source_fur_top": 239,
+    "registration_basis": "whole seated stature and foot center/baseline; headgear excluded",
+    "output_feet": {
+      "left": 116,
+      "right": 229,
+      "center": 172.5,
+      "baseline": 629
+    },
+    "whole_character_scale": 0.9069767441860465,
+    "whole_character_translation": [
+      2.67441860465118,
+      61.232558139534945
+    ],
+    "natural_outline_preserved": true,
+    "regional_face_trims": false,
+    "head_body_compositing": false,
+    "entire_cell_one_source": true,
+    "lower_body_pixel_lock": false,
+    "four_limbs": {
+      "front_left": "grounded in sleeve/cuff",
+      "front_right": "grounded in sleeve/cuff",
+      "rear_left": "behind front-left foreleg and rear hip skirt",
+      "rear_right": "grounded beside front-right foreleg; hip partly behind skirt"
+    },
+    "visual_review": "pass: 1x light/dark; connected natural neck/chest, correct gaze, wearable costume and four-limb attachment"
+  },
+  {
+    "id": "G11",
+    "direction": 11,
+    "profile": "original-seated-gaze-11",
+    "original": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/gaze/reference/base-11.png",
+    "source": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-heart-v2/raw/G11.png",
+    "source_sha256": "2a78b61e5915e414252eeaabfe698124e87fb387429403bcc6ed39d31d5361c2",
+    "base_feet": {
+      "left": 109,
+      "right": 240,
+      "center": 174.5,
+      "baseline": 629
+    },
+    "source_feet": {
+      "left": 117,
+      "right": 242,
+      "center": 179.5,
+      "baseline": 616
+    },
+    "base_fur_top": 270,
+    "source_fur_top": 248,
+    "registration_basis": "whole seated stature and foot center/baseline; headgear excluded",
+    "output_feet": {
+      "left": 113,
+      "right": 236,
+      "center": 174.5,
+      "baseline": 629
+    },
+    "whole_character_scale": 0.9755434782608695,
+    "whole_character_translation": [
+      -0.6100543478260647,
+      28.065217391304373
+    ],
+    "natural_outline_preserved": true,
+    "regional_face_trims": false,
+    "head_body_compositing": false,
+    "entire_cell_one_source": true,
+    "lower_body_pixel_lock": false,
+    "four_limbs": {
+      "front_left": "grounded in sleeve/cuff",
+      "front_right": "grounded in sleeve/cuff",
+      "rear_left": "behind front-left foreleg and rear hip skirt",
+      "rear_right": "grounded beside front-right foreleg; hip partly behind skirt"
+    },
+    "visual_review": "pass: 1x light/dark; connected natural neck/chest, correct gaze, wearable costume and four-limb attachment"
+  },
+  {
+    "id": "G12",
+    "direction": 12,
+    "profile": "original-seated-gaze-12",
+    "original": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/gaze/reference/base-12.png",
+    "source": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-heart-v2/raw/G12.png",
+    "source_sha256": "5531e8056b19fbb8a34c0ed9dcef8da84a19aea2f20f0d9b2cc124f9566e4d57",
+    "base_feet": {
+      "left": 112,
+      "right": 240,
+      "center": 176.0,
+      "baseline": 629
+    },
+    "source_feet": {
+      "left": 121,
+      "right": 254,
+      "center": 187.5,
+      "baseline": 616
+    },
+    "base_fur_top": 258,
+    "source_fur_top": 223,
+    "registration_basis": "whole seated stature and foot center/baseline; headgear excluded",
+    "output_feet": {
+      "left": 112,
+      "right": 245,
+      "center": 178.5,
+      "baseline": 629
+    },
+    "whole_character_scale": 0.9440203562340967,
+    "whole_character_translation": [
+      -1.0038167938931508,
+      47.48346055979641
+    ],
+    "natural_outline_preserved": true,
+    "regional_face_trims": false,
+    "head_body_compositing": false,
+    "entire_cell_one_source": true,
+    "lower_body_pixel_lock": false,
+    "four_limbs": {
+      "front_left": "grounded in sleeve/cuff",
+      "front_right": "grounded in sleeve/cuff",
+      "rear_left": "behind front-left foreleg and rear hip skirt",
+      "rear_right": "grounded beside front-right foreleg; hip partly behind skirt"
+    },
+    "visual_review": "pass: 1x light/dark; connected natural neck/chest, correct gaze, wearable costume and four-limb attachment"
+  },
+  {
+    "id": "G13",
+    "direction": 13,
+    "profile": "original-seated-gaze-13",
+    "original": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/gaze/reference/base-13.png",
+    "source": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-heart-v2/raw/G13.png",
+    "source_sha256": "0b2a76bbe0ad652c04f9b33ccb5e04fda8ddc9464ef569a653f0bc7a39b3f24a",
+    "base_feet": {
+      "left": 112,
+      "right": 241,
+      "center": 176.5,
+      "baseline": 629
+    },
+    "source_feet": {
+      "left": 119,
+      "right": 254,
+      "center": 186.5,
+      "baseline": 620
+    },
+    "base_fur_top": 231,
+    "source_fur_top": 224,
+    "registration_basis": "whole seated stature and foot center/baseline; headgear excluded",
+    "output_feet": {
+      "left": 109,
+      "right": 235,
+      "center": 172.0,
+      "baseline": 629
+    },
+    "whole_character_scale": 1.005050505050505,
+    "whole_character_translation": [
+      -10.941919191919169,
+      5.86868686868695
+    ],
+    "natural_outline_preserved": true,
+    "regional_face_trims": false,
+    "head_body_compositing": false,
+    "entire_cell_one_source": true,
+    "lower_body_pixel_lock": false,
+    "four_limbs": {
+      "front_left": "grounded in sleeve/cuff",
+      "front_right": "grounded in sleeve/cuff",
+      "rear_left": "behind front-left foreleg and rear hip skirt",
+      "rear_right": "grounded beside front-right foreleg; hip partly behind skirt"
+    },
+    "visual_review": "pass: 1x light/dark; connected natural neck/chest, correct gaze, wearable costume and four-limb attachment"
+  },
+  {
+    "id": "G14",
+    "direction": 14,
+    "profile": "original-seated-gaze-14",
+    "original": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/gaze/reference/base-14.png",
+    "source": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-heart-v2/raw/G14.png",
+    "source_sha256": "66492730dedae31c81b2c827a53ea01c775bbddb14225b97e1d2054c2922a197",
+    "base_feet": {
+      "left": 112,
+      "right": 239,
+      "center": 175.5,
+      "baseline": 629
+    },
+    "source_feet": {
+      "left": 129,
+      "right": 246,
+      "center": 187.5,
+      "baseline": 626
+    },
+    "base_fur_top": 236,
+    "source_fur_top": 213,
+    "registration_basis": "whole seated stature and foot center/baseline; headgear excluded",
+    "output_feet": {
+      "left": 120,
+      "right": 231,
+      "center": 175.5,
+      "baseline": 629
+    },
+    "whole_character_scale": 0.9515738498789347,
+    "whole_character_translation": [
+      -2.9200968523002473,
+      33.31476997578693
+    ],
+    "natural_outline_preserved": true,
+    "regional_face_trims": false,
+    "head_body_compositing": false,
+    "entire_cell_one_source": true,
+    "lower_body_pixel_lock": false,
+    "four_limbs": {
+      "front_left": "grounded in sleeve/cuff",
+      "front_right": "grounded in sleeve/cuff",
+      "rear_left": "behind front-left foreleg and rear hip skirt",
+      "rear_right": "grounded beside front-right foreleg; hip partly behind skirt"
+    },
+    "visual_review": "pass: 1x light/dark; connected natural neck/chest, correct gaze, wearable costume and four-limb attachment"
+  },
+  {
+    "id": "G15",
+    "direction": 15,
+    "profile": "original-seated-gaze-15",
+    "original": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/gaze/reference/base-15.png",
+    "source": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-heart-v2/raw/G15.png",
+    "source_sha256": "ae0a11d68ff38c41ebdfac4d803a0eaa8cc8c51b338a1b8721cc6e22c626386f",
+    "base_feet": {
+      "left": 111,
+      "right": 240,
+      "center": 175.5,
+      "baseline": 629
+    },
+    "source_feet": {
+      "left": 124,
+      "right": 241,
+      "center": 182.5,
+      "baseline": 624
+    },
+    "base_fur_top": 238,
+    "source_fur_top": 220,
+    "registration_basis": "whole seated stature and foot center/baseline; headgear excluded",
+    "output_feet": {
+      "left": 118,
+      "right": 241,
+      "center": 179.5,
+      "baseline": 629
+    },
+    "whole_character_scale": 0.9678217821782178,
+    "whole_character_translation": [
+      -1.1274752475247567,
+      25.0792079207921
+    ],
+    "natural_outline_preserved": true,
+    "regional_face_trims": false,
+    "head_body_compositing": false,
+    "entire_cell_one_source": true,
+    "lower_body_pixel_lock": false,
+    "four_limbs": {
+      "front_left": "grounded in sleeve/cuff",
+      "front_right": "grounded in sleeve/cuff",
+      "rear_left": "behind front-left foreleg and rear hip skirt",
+      "rear_right": "grounded beside front-right foreleg; hip partly behind skirt"
+    },
+    "visual_review": "pass: 1x light/dark; connected natural neck/chest, correct gaze, wearable costume and four-limb attachment"
+  }
+]

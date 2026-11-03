@@ -1,0 +1,11 @@
+{
+  "characters": 144,
+  "effectPngs": 2368,
+  "states": 10,
+  "sourceTimingPreserved": true,
+  "rowsVerified": true,
+  "previewController": "passed with DOM/image harness",
+  "frozenPoseEffects": "passed",
+  "browserVisualQA": "not performed",
+  "nativeInstalled": false
+}

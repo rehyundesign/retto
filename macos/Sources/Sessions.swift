@@ -84,20 +84,21 @@ func transcriptModifiedAtMs(path: String?) -> Double? {
 ///    트랜스크립트가 자란 시각까지 본다 — 훅은 도구를 부를 때만 돌기 때문에, 도구 없이
 ///    오래 생각하는 동안 살아 있는 세션이 유령으로 몰렸다.
 func displayState(state: PetState, updatedAtMs: Double?, seenAtMs: Double?, transcriptModifiedAtMs: Double?, nowMs: Double) -> PetState {
-    if needsInputStates.contains(state), isSeen(updatedAtMs: updatedAtMs, seenAtMs: seenAtMs) { return .idle }
+    if state != .waiting, needsInputStates.contains(state), isSeen(updatedAtMs: updatedAtMs, seenAtMs: seenAtMs) { return .idle }
     let lastActivity = max(updatedAtMs ?? 0, transcriptModifiedAtMs ?? 0)
     if isStaleWorking(state: state, updatedAtMs: lastActivity, nowMs: nowMs) { return .idle }
     return state
 }
 
-func selectionPriority(state: PetState, isClosed: Bool) -> Int {
+func selectionPriority(state: PetState, isClosed: Bool, source: String? = nil) -> Int {
     if isClosed { return -100 }
+    if source == "slack", state == .waving { return 70 }
     switch state {
     // 1순위는 내 답을 기다리는 세션이다. 다른 무엇보다 먼저 보여준다.
-    // 2순위는 답변이 끝난 세션. 내가 찾아 나서기 전에 레토가 먼저 알려줘야 하는 것이다.
-    case .waiting: return 60
+    // 실패를 완료보다 먼저 보여준다.
+    case .waiting: return 80
     case .waving: return 55
-    case .failed: return 50
+    case .failed: return 75
     case .running: return 40
     case .review: return 35
     case .jumping: return 20
@@ -107,12 +108,20 @@ func selectionPriority(state: PetState, isClosed: Bool) -> Int {
     }
 }
 
-struct StatePayload: Decodable {
+/// 고정된 완료 알림보다 우선하는 새 알림은 먼저 표시한다.
+func preferredPinnedSession(_ pinned: StatePayload, attention: [StatePayload],
+                            priority: (StatePayload) -> Int, needsAttention: (StatePayload) -> Bool) -> StatePayload {
+    guard let first = attention.first else { return pinned }
+    return !needsAttention(pinned) || priority(first) > priority(pinned) ? first : pinned
+}
+
+struct StatePayload: Decodable, Equatable {
     var state: String
     let updatedAt: String?
     let event: String?
     let sessionId: String?
     let rawSessionId: String?
+    var turnId: String? = nil
     let source: String?
     let cwd: String?
     let toolName: String?
@@ -137,7 +146,10 @@ struct StatePayload: Decodable {
     var id: String { sessionId ?? "" }
     /// 레지스트리에서는 제품별 접두어를 붙이지만 딥링크에는 원래 세션 id가 들어간다.
     var navigationSessionId: String { rawSessionId ?? sessionId ?? "" }
-    var sourceLabel: String { source == "codex" || client == "codex" ? "Codex" : "Claude" }
+    var sourceLabel: String {
+        if source == "slack" { return "Slack" }
+        return source == "codex" || client == "codex" ? "Codex" : "Claude"
+    }
     var project: String {
         if let projectName, !projectName.isEmpty { return projectName }
         if let cwd, !cwd.isEmpty { return URL(fileURLWithPath: cwd).lastPathComponent }
@@ -158,14 +170,52 @@ struct StatePayload: Decodable {
     }
     var needsAttention: Bool { attention == true && closed != true }
     var isClosed: Bool { closed == true }
+    /// 내부 Codex 세션과 제목 없는 task는 레토의 표시 대상에서 뺀다.
+    var isRettoVisibleTask: Bool {
+        guard source == "codex" || client == "codex" else { return true }
+        guard sessionTitle?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false else { return false }
+        return !isCodexSubagentTranscript(path: transcriptPath ?? "")
+    }
 }
 
 /// 세션 이름표로 받아들일 최소 길이. hook.cjs 의 NAME_MIN 과 같은 값이어야 한다.
 let sessionNameMinLength = 4
 
+private let codexSubagentCache: NSCache<NSString, NSNumber> = {
+    let cache = NSCache<NSString, NSNumber>()
+    cache.countLimit = 256
+    return cache
+}()
+
+/// 이전 worker 파일명과 session_meta의 source를 함께 확인한다. Guardian 검토는 일반
+/// 파일명으로 저장되므로 제목 대신 출처로 구분해야 같은 제목의 사용자 대화도 유지된다.
+func isCodexSubagentTranscript(path: String) -> Bool {
+    guard !path.isEmpty else { return false }
+    let name = URL(fileURLWithPath: path).deletingPathExtension().lastPathComponent
+    let pattern = "_[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+    if name.range(of: pattern, options: .regularExpression) != nil { return true }
+
+    var info = stat()
+    guard stat(path, &info) == 0 else { return false }
+    let key = "\(path):\(info.st_ino):\(info.st_size):\(info.st_mtimespec.tv_sec):\(info.st_mtimespec.tv_nsec)" as NSString
+    if let cached = codexSubagentCache.object(forKey: key) { return cached.boolValue }
+    guard let handle = FileHandle(forReadingAtPath: path) else { return false }
+    defer { try? handle.close() }
+    // 기본 지시문이 긴 기록도 읽되 첫 줄만 파싱하고, 전체 대화는 읽지 않는다.
+    guard let data = try? handle.read(upToCount: 512 * 1024),
+          let record = try? JSONSerialization.jsonObject(with: Data(data.prefix { $0 != 10 })) as? [String: Any],
+          record["type"] as? String == "session_meta",
+          let metadata = record["payload"] as? [String: Any] else { return false }
+    let source = metadata["source"]
+    let isSubagent = source as? String == "subagent" || (source as? [String: Any])?["subagent"] != nil
+    codexSubagentCache.setObject(NSNumber(value: isSubagent), forKey: key)
+    return isSubagent
+}
+
 /// 메뉴 막대의 AI 세션 목록과 자동 검사가 같은 문자열을 쓴다. 훅 없이 찾은 Codex task도
 /// 일반 세션과 똑같이 한 행으로 보여야 한다.
 func sessionMenuLabel(for payload: StatePayload) -> String {
+    if payload.source == "slack" { return "● 새 메시지  \(payload.title) · Slack" }
     let stateMark: String
     switch payload.petState {
     case .waiting: stateMark = "● 기다림"
@@ -188,6 +238,8 @@ func sessionMenuLabel(for payload: StatePayload) -> String {
 enum TaskStateSource: String {
     case hook
     case rollout
+    case live
+    case unavailable
 }
 
 /// Retto가 화면에 쓰는 Codex task 상태. 훅은 즉시성, 롤아웃은 완료 사실, 인덱스는 제목을 맡는다.
@@ -202,7 +254,39 @@ struct ReconciledCodexTask {
 
 func reconcileCodexTask(payload: StatePayload, indexTitle: String?, transcriptStatus: CodexTranscriptStatus) -> ReconciledCodexTask {
     let title = indexTitle?.isEmpty == false ? indexTitle : payload.sessionTitle
-    guard (payload.petState == .running || payload.petState == .review),
+    if let requestedAt = transcriptStatus.pendingInputAtMs {
+        return ReconciledCodexTask(state: .waiting, observedAtMs: requestedAt,
+                                   needsAttention: true, title: title, source: .rollout)
+    }
+    if let abortedAt = transcriptStatus.latestAbortAtMs,
+       abortedAt >= (payload.updatedAtMs ?? 0),
+       abortedAt >= (transcriptStatus.latestPromptAtMs ?? 0),
+       abortedAt >= (transcriptStatus.latestComposerStartAtMs ?? 0),
+       abortedAt >= (transcriptStatus.completedAtMs ?? 0) {
+        return ReconciledCodexTask(state: .idle, observedAtMs: abortedAt,
+                                   needsAttention: false, title: title, source: .rollout)
+    }
+    if payload.petState == .waiting,
+       let startedAt = transcriptStatus.latestComposerStartAtMs,
+       startedAt > (payload.updatedAtMs ?? 0) {
+        return ReconciledCodexTask(state: transcriptStatus.isCompletedAfterLatestPrompt ? .waving : .running,
+                                   observedAtMs: max(startedAt, transcriptStatus.completedAtMs ?? 0),
+                                   needsAttention: transcriptStatus.isCompletedAfterLatestPrompt,
+                                   title: title, source: .rollout)
+    }
+    // 비동기 질문은 답변 뒤에도 훅의 waiting 값이 남을 수 있다.
+    if payload.petState == .waiting,
+       let answeredAt = transcriptStatus.latestInputReplyAtMs,
+       answeredAt >= (payload.updatedAtMs ?? 0) {
+        return ReconciledCodexTask(state: transcriptStatus.isCompletedAfterLatestPrompt ? .waving : .running,
+                                   observedAtMs: max(answeredAt, transcriptStatus.completedAtMs ?? 0),
+                                   needsAttention: transcriptStatus.isCompletedAfterLatestPrompt,
+                                   title: title, source: .rollout)
+    }
+    // 질문 대기는 위에서 유지한다. 권한 훅 이후 턴이 끝났다면 권한 대기도 끝난 상태다.
+    let completedAttention = (payload.petState == .waiting || payload.petState == .failed)
+        && (transcriptStatus.completedAtMs ?? 0) >= (payload.updatedAtMs ?? 0)
+    guard (payload.petState == .running || payload.petState == .review || completedAttention),
           transcriptStatus.isCompletedAfterLatestPrompt,
           let completedAtMs = transcriptStatus.completedAtMs else {
         return ReconciledCodexTask(
@@ -269,13 +353,62 @@ final class CodexThreadTitleReader {
 
 /// `task_complete`와 사용자 요청의 순서가 훅 콜백의 실행 시각보다 신뢰할 만하다.
 /// 비동기 콜백이 늦게 상태 파일을 덮어써도, 완료 뒤에 새 요청이 있으면 완료로 보지 않는다.
-struct CodexTranscriptStatus {
+struct CodexTranscriptStatus: Codable {
     let completedAtMs: Double?
     let latestPromptAtMs: Double?
+    // 질문 본문은 저장하지 않고 질문 ID와 시각만 기록한다.
+    var inputRequests: [String: Double]? = nil
+    var inputReplies: [String: Double]? = nil
+    var inputRequestTurns: [String: String]? = nil
+    var synchronousRequests: [String: Double]? = nil
+    var toolOutputs: [String: Double]? = nil
+    var abortedTurns: [String: Double]? = nil
+    var latestAbortAtMs: Double? = nil
+    var composerTurns: [String: Double]? = nil
+
+    var latestComposerStartAtMs: Double? { composerTurns?.values.max() }
+
+    var pendingInputAtMs: Double? {
+        (inputRequests ?? [:]).filter { id, requestedAt in
+            if (inputReplies?[id] ?? 0) >= requestedAt { return false }
+            // 새 사용자 요청은 이전 턴의 질문을 대체한다. 같은 턴의 답변·도구 실행이나
+            // 자동 재개는 질문을 해제하지 않는다.
+            if (composerTurns ?? [:]).contains(where: { turn, startedAt in
+                turn != inputRequestTurns?[id] && startedAt > requestedAt
+            }) { return false }
+            let callId = String(id.split(separator: ":").dropLast().joined(separator: ":"))
+            if synchronousRequests?[callId] != nil, (toolOutputs?[callId] ?? 0) >= requestedAt { return false }
+            if let turn = inputRequestTurns?[id] {
+                return (abortedTurns?[turn] ?? 0) < requestedAt
+            }
+            // 과거 기록에 턴 ID가 없으면 이후 중단 시각으로 해제한다.
+            return (latestAbortAtMs ?? 0) < requestedAt
+        }.values.max()
+    }
+
+    var latestInputReplyAtMs: Double? {
+        let latest = max(inputReplies?.values.max() ?? 0, toolOutputs?.filter { synchronousRequests?[$0.key] != nil }.values.max() ?? 0)
+        return latest > 0 ? latest : nil
+    }
 
     var isCompletedAfterLatestPrompt: Bool {
-        guard let completedAtMs else { return false }
-        return completedAtMs > (latestPromptAtMs ?? 0)
+        guard pendingInputAtMs == nil, let completedAtMs else { return false }
+        return completedAtMs > max(latestPromptAtMs ?? 0, latestAbortAtMs ?? 0, latestComposerStartAtMs ?? 0)
+    }
+
+    func merged(with newer: CodexTranscriptStatus) -> CodexTranscriptStatus {
+        CodexTranscriptStatus(
+            completedAtMs: max(completedAtMs ?? 0, newer.completedAtMs ?? 0),
+            latestPromptAtMs: max(latestPromptAtMs ?? 0, newer.latestPromptAtMs ?? 0),
+            inputRequests: (inputRequests ?? [:]).merging(newer.inputRequests ?? [:], uniquingKeysWith: max),
+            inputReplies: (inputReplies ?? [:]).merging(newer.inputReplies ?? [:], uniquingKeysWith: max),
+            inputRequestTurns: (inputRequestTurns ?? [:]).merging(newer.inputRequestTurns ?? [:], uniquingKeysWith: { _, new in new }),
+            synchronousRequests: (synchronousRequests ?? [:]).merging(newer.synchronousRequests ?? [:], uniquingKeysWith: max),
+            toolOutputs: (toolOutputs ?? [:]).merging(newer.toolOutputs ?? [:], uniquingKeysWith: max),
+            abortedTurns: (abortedTurns ?? [:]).merging(newer.abortedTurns ?? [:], uniquingKeysWith: max),
+            latestAbortAtMs: max(latestAbortAtMs ?? 0, newer.latestAbortAtMs ?? 0),
+            composerTurns: (composerTurns ?? [:]).merging(newer.composerTurns ?? [:], uniquingKeysWith: max)
+        )
     }
 }
 
@@ -286,6 +419,15 @@ func codexTranscriptStatus(in text: String) -> CodexTranscriptStatus {
     plainFormatter.formatOptions = [.withInternetDateTime]
     var completion: Double?
     var latestPrompt: Double?
+    var requests: [String: Double] = [:]
+    var replies: [String: Double] = [:]
+    var requestTurns: [String: String] = [:]
+    var syncRequests: [String: Double] = [:]
+    var outputs: [String: Double] = [:]
+    var aborted: [String: Double] = [:]
+    var latestAbort: Double?
+    var activeTurn: String?
+    var composerTurns: [String: Double] = [:]
     for line in text.split(separator: "\n") {
         guard let data = line.data(using: .utf8),
               let record = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
@@ -293,16 +435,70 @@ func codexTranscriptStatus(in text: String) -> CodexTranscriptStatus {
               let timestamp = record["timestamp"] as? String,
               let date = fractionalFormatter.date(from: timestamp) ?? plainFormatter.date(from: timestamp) else { continue }
         let timestampMs = date.timeIntervalSince1970 * 1000
+        if record["type"] as? String == "event_msg" {
+            if payload["type"] as? String == "task_started" {
+                let attribution = payload["turn_attribution"] as? [String: Any]
+                activeTurn = attribution?["turn_id"] as? String ?? payload["turn_id"] as? String
+                if attribution?["turn_trigger"] as? String == "composer", let turn = activeTurn {
+                    composerTurns[turn] = max(composerTurns[turn] ?? 0, timestampMs)
+                }
+            }
+            if payload["type"] as? String == "turn_aborted" {
+                latestAbort = max(latestAbort ?? 0, timestampMs)
+                if let turn = payload["turn_id"] as? String ?? activeTurn { aborted[turn] = timestampMs }
+            }
+        }
+        if record["type"] as? String == "response_item",
+           ["function_call_output", "custom_tool_call_output"].contains(payload["type"] as? String ?? ""),
+           let callId = payload["call_id"] as? String { outputs[callId] = timestampMs }
         if record["type"] as? String == "event_msg", payload["type"] as? String == "task_complete" {
             completion = max(completion ?? 0, timestampMs)
+        }
+        if record["type"] as? String == "response_item",
+           payload["type"] as? String == "function_call",
+           let name = (payload["name"] as? String)?.split(separator: ".").last,
+           ["request_user_input_async", "request_user_input"].contains(String(name)),
+           let callId = payload["call_id"] as? String,
+           let arguments = payload["arguments"] as? String,
+           let argumentData = arguments.data(using: .utf8),
+           let object = try? JSONSerialization.jsonObject(with: argumentData) as? [String: Any],
+           let questions = object["questions"] as? [Any] {
+            let turn = (payload["internal_chat_message_metadata_passthrough"] as? [String: Any])?["turn_id"] as? String
+                ?? (record["metadata"] as? [String: Any])?["turn_id"] as? String ?? activeTurn
+            for index in questions.indices {
+                let id = "\(callId):\(index)"
+                requests[id] = timestampMs
+                requestTurns[id] = turn
+            }
+            if name == "request_user_input" { syncRequests[callId] = timestampMs }
         }
         if record["type"] as? String == "response_item",
            payload["type"] as? String == "message",
            payload["role"] as? String == "user" {
             latestPrompt = max(latestPrompt ?? 0, timestampMs)
+            for part in payload["content"] as? [[String: Any]] ?? [] {
+                guard let body = part["text"] as? String,
+                      let start = body.range(of: "<send_user_message_question_reply>"),
+                      let end = body.range(of: "</send_user_message_question_reply>", range: start.upperBound..<body.endIndex),
+                      let data = String(body[start.upperBound..<end.lowerBound]).data(using: .utf8),
+                      let answers = try? JSONSerialization.jsonObject(with: data) as? [[String: Any]] else { continue }
+                for answer in answers {
+                    guard let encoded = answer["questionItemId"] as? String,
+                          let idData = encoded.data(using: .utf8),
+                          let id = try? JSONSerialization.jsonObject(with: idData) as? [Any],
+                          id.count == 3, let name = id[0] as? String,
+                          ["request_user_input_async", "request_user_input"].contains(String(name.split(separator: ".").last ?? "")),
+                          let callId = id[1] as? String, let index = id[2] as? Int else { continue }
+                    replies["\(callId):\(index)"] = timestampMs
+                }
+            }
         }
     }
-    return CodexTranscriptStatus(completedAtMs: completion, latestPromptAtMs: latestPrompt)
+    return CodexTranscriptStatus(completedAtMs: completion, latestPromptAtMs: latestPrompt,
+                                 inputRequests: requests, inputReplies: replies,
+                                 inputRequestTurns: requestTurns, synchronousRequests: syncRequests,
+                                 toolOutputs: outputs, abortedTurns: aborted, latestAbortAtMs: latestAbort,
+                                 composerTurns: composerTurns)
 }
 
 func codexTaskCompletionAtMs(in text: String) -> Double? {
@@ -323,15 +519,28 @@ struct SessionRegistry: Decodable {
 /// 제목을 읽을 수 없는 환경(화면 기록 권한이 없을 때)에서는 빈 문자열이 오므로 아무 일도 하지 않는다.
 func windowShowsSession(windowTitle: String, sessionTitle: String?, folderName: String?) -> Bool {
     let title = windowTitle.trimmingCharacters(in: .whitespacesAndNewlines)
-    guard !title.isEmpty else { return false }
-    if let sessionTitle, sessionTitle.count >= 2, title.contains(sessionTitle) { return true }
-    // 폴더 이름은 짧으면 우연히 겹친다. 세 글자 이상만 믿는다.
-    if let folderName, folderName.count >= 3, title.contains(folderName) { return true }
-    return false
+    guard !title.isEmpty, let sessionTitle, sessionTitle.count >= 2,
+          sessionTitle != "No name", sessionTitle != folderName else { return false }
+    if title == sessionTitle { return true }
+    return [" — ", " - ", " | "].contains { separator in
+        title.hasPrefix(sessionTitle + separator) || title.hasSuffix(separator + sessionTitle)
+    }
 }
 
 /// 그 창을 이만큼 보고 있어야 "읽었다" 로 센다. 스쳐 지나간 것과 구분한다.
 let lookingDwell: TimeInterval = 3
+
+/// 앱 안에서 다른 대화로 이동하거나 새 알림이 오면 확인 시간을 다시 센다.
+struct SessionReadDwell {
+    private var key: String?
+    private var sinceMs: Double?
+
+    mutating func observe(key nextKey: String?, nowMs: Double) -> Bool {
+        guard let nextKey else { key = nil; sinceMs = nil; return false }
+        if key != nextKey { key = nextKey; sinceMs = nowMs; return false }
+        return sinceMs.map { nowMs - $0 >= lookingDwell * 1000 } ?? false
+    }
+}
 
 /// 앱이 지켜보기 시작하기 한참 전에 끝난 일인지.
 ///
@@ -348,25 +557,6 @@ func isAncientNews(updatedAtMs: Double?, trackingStartedAtMs: Double) -> Bool {
 
 /// 완료된 세션을 사용자가 레토 밖에서 열어 읽었는지.
 ///
-/// Claude Code 는 "사용자가 봤다" 를 어디에도 적지 않는다. 남는 흔적은 접근 시각(atime) 하나뿐이다.
-///
-/// 다만 재보니 Claude 앱과 VS Code 는 세션을 열 때 이 파일을 다시 읽지 않는다 — 자체 캐시에서
-/// 불러온다. 그래서 이 규칙이 잡아내는 건 CLI 로 `claude --resume` 한 경우 정도다.
-/// GUI 에서 읽은 것은 이걸로 알 수 없다. 2초 여유는 완료를 적을 때 훅이 같은 파일을 읽어
-/// 생기는 오차를 덮는다.
-func wasViewedElsewhere(accessedAtMs: Double, updatedAtMs: Double?) -> Bool {
-    guard let updatedAtMs, updatedAtMs > 0 else { return false }
-    return accessedAtMs > updatedAtMs + 2000
-}
-
-/// 트랜스크립트의 접근 시각. 파일을 열지 않으므로 흔적을 남기지 않는다.
-func transcriptAccessedAtMs(path: String?) -> Double? {
-    guard let path, !path.isEmpty else { return nil }
-    var info = stat()
-    guard stat(path, &info) == 0 else { return nil }
-    return TimeInterval(info.st_atimespec.tv_sec) * 1000 + TimeInterval(info.st_atimespec.tv_nsec) / 1_000_000
-}
-
 /// 두 클라이언트는 같은 말을 다른 모양으로 적는다. 훅의 `assistantTextIn` 과 같은 규칙이다.
 ///   Claude : {"type":"assistant","message":{"content":[{"type":"text","text":…}]}}
 ///   Codex  : {"type":"response_item","payload":{"type":"message","role":"assistant",
@@ -497,6 +687,17 @@ final class CodexTranscriptStatusReader {
     }
 
     private var cache: [String: CachedStatus] = [:]
+    private let lifecycleIndex = CodexLifecycleIndex()
+    private(set) var unreadablePaths: Set<String> = []
+    private var trackedPaths: Set<String> = []
+    var connectionIssue: String? {
+        let count = unreadablePaths.intersection(trackedPaths).count
+        return count == 0 ? nil : "Codex 기록 읽기 실패 \(count)개"
+    }
+    func retainTrackedPaths(_ paths: Set<String>) {
+        trackedPaths = paths
+        unreadablePaths.formIntersection(paths)
+    }
 
     func status(at path: String?) -> CodexTranscriptStatus {
         guard let path, !path.isEmpty else {
@@ -504,35 +705,124 @@ final class CodexTranscriptStatusReader {
         }
         var info = stat()
         guard stat(path, &info) == 0 else {
-            cache.removeValue(forKey: path)
-            return CodexTranscriptStatus(completedAtMs: nil, latestPromptAtMs: nil)
+            unreadablePaths.insert(path)
+            return cache[path]?.status ?? CodexTranscriptStatus(completedAtMs: nil, latestPromptAtMs: nil)
         }
+        guard FileManager.default.isReadableFile(atPath: path) else {
+            unreadablePaths.insert(path)
+            return cache[path]?.status ?? CodexTranscriptStatus(completedAtMs: nil, latestPromptAtMs: nil)
+        }
+        unreadablePaths.remove(path)
         let size = UInt64(info.st_size)
         let modifiedAtMs = TimeInterval(info.st_mtimespec.tv_sec) * 1000
             + TimeInterval(info.st_mtimespec.tv_nsec) / 1_000_000
+        if let indexed = lifecycleIndex.status(path: path, size: size, modifiedAtMs: modifiedAtMs) {
+            cache[path] = CachedStatus(size: size, modifiedAtMs: modifiedAtMs, status: indexed)
+            return indexed
+        }
         if let cached = cache[path], cached.size == size, cached.modifiedAtMs == modifiedAtMs {
             return cached.status
         }
 
         let before = info.st_atimespec
-        let status = Self.readStatusTail(path: path, size: size)
+        guard let tailStatus = Self.readStatusTail(path: path, size: size) else {
+            unreadablePaths.insert(path)
+            return cache[path]?.status ?? CodexTranscriptStatus(completedAtMs: nil, latestPromptAtMs: nil)
+        }
+        let status = cache[path]?.status.merged(with: tailStatus) ?? tailStatus
         var times = [before, info.st_mtimespec]
         _ = utimensat(AT_FDCWD, path, &times, 0)
         cache[path] = CachedStatus(size: size, modifiedAtMs: modifiedAtMs, status: status)
+        lifecycleIndex.refresh(path: path, size: size, modifiedAtMs: modifiedAtMs, fallback: status)
         return status
     }
 
-    private static func readStatusTail(path: String, size: UInt64) -> CodexTranscriptStatus {
+    private static func readStatusTail(path: String, size: UInt64) -> CodexTranscriptStatus? {
         guard let handle = FileHandle(forReadingAtPath: path) else {
-            return CodexTranscriptStatus(completedAtMs: nil, latestPromptAtMs: nil)
+            return nil
         }
         defer { try? handle.close() }
         let span: UInt64 = 512 * 1024
         if size > span { try? handle.seek(toOffset: size - span) }
-        guard let data = try? handle.readToEnd(), let text = String(data: data, encoding: .utf8) else {
-            return CodexTranscriptStatus(completedAtMs: nil, latestPromptAtMs: nil)
+        guard let data = try? handle.readToEnd() else { return nil }
+        return codexTranscriptStatus(in: codexTranscriptText(data, skipPartialFirstLine: size > span))
+    }
+}
+
+/// 파일 끝 일부에 없는 종료 이벤트도 잃지 않도록, 작업별 lifecycle을 로컬에 보관한다.
+/// 첫 색인은 백그라운드에서 읽고 이후에는 마지막 64KB를 겹쳐 새로 추가된 JSONL만 반영한다.
+final class CodexLifecycleIndex {
+    private struct Entry: Codable {
+        let size: UInt64
+        let modifiedAtMs: Double
+        let status: CodexTranscriptStatus
+    }
+    private struct Store: Codable { var entries: [String: Entry] }
+
+    private let storeURL = FileManager.default.homeDirectoryForCurrentUser
+        .appendingPathComponent(".claude/retto-pet/codex-lifecycle-input-v4.json")
+    private let stateQueue = DispatchQueue(label: "retto.codex-lifecycle.state")
+    private let scanQueue = DispatchQueue(label: "retto.codex-lifecycle.scan")
+    private var entries: [String: Entry]
+    private var pending: Set<String> = []
+
+    init() {
+        let stored = (try? Data(contentsOf: storeURL))
+            .flatMap { try? JSONDecoder().decode(Store.self, from: $0) }
+        entries = stored?.entries ?? [:]
+    }
+
+    func status(path: String, size: UInt64, modifiedAtMs: Double) -> CodexTranscriptStatus? {
+        stateQueue.sync {
+            guard let entry = entries[path], entry.size == size, entry.modifiedAtMs == modifiedAtMs else { return nil }
+            return entry.status
         }
-        return codexTranscriptStatus(in: text)
+    }
+
+    func refresh(path: String, size: UInt64, modifiedAtMs: Double, fallback: CodexTranscriptStatus) {
+        let request = stateQueue.sync { () -> (accepted: Bool, previous: Entry?) in
+            if pending.contains(path) { return (false, nil) }
+            pending.insert(path)
+            return (true, entries[path])
+        }
+        guard request.accepted else { return }
+        scanQueue.async { [weak self] in
+            guard let self else { return }
+            let scanned = Self.scan(path: path, from: request.previous?.size, previous: request.previous?.status ?? fallback)
+            self.stateQueue.sync {
+                self.entries[path] = Entry(size: size, modifiedAtMs: modifiedAtMs, status: scanned)
+                self.pending.remove(path)
+                self.save()
+            }
+        }
+    }
+
+    private static func scan(path: String, from previousSize: UInt64?, previous: CodexTranscriptStatus) -> CodexTranscriptStatus {
+        var before = stat()
+        let hadStat = stat(path, &before) == 0
+        guard let handle = FileHandle(forReadingAtPath: path) else { return previous }
+        defer {
+            if hadStat {
+                var after = stat()
+                if fstat(handle.fileDescriptor, &after) == 0 {
+                    var times = [before.st_atimespec, after.st_mtimespec]
+                    _ = futimens(handle.fileDescriptor, &times)
+                }
+            }
+            try? handle.close()
+        }
+        let overlap: UInt64 = 64 * 1024
+        let offset = (previousSize ?? 0) > overlap ? (previousSize ?? 0) - overlap : 0
+        if offset > 0 { try? handle.seek(toOffset: offset) }
+        guard let data = try? handle.readToEnd() else { return previous }
+        return previous.merged(with: codexTranscriptStatus(in: codexTranscriptText(data, skipPartialFirstLine: offset > 0)))
+    }
+
+    private func save() {
+        let directory = storeURL.deletingLastPathComponent()
+        try? FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+        guard let data = try? JSONEncoder().encode(Store(entries: entries)) else { return }
+        try? data.write(to: storeURL, options: .atomic)
     }
 }
 
@@ -544,19 +834,34 @@ final class CodexRolloutDiscovery {
     private let titles = CodexThreadTitleReader()
     private let recentWindow: TimeInterval = 24 * 60 * 60
     private(set) var diagnostic = ""
+    private(set) var connectionIssue: String?
+    private struct CachedTask {
+        let size: UInt64
+        let modified: Date
+        let payload: StatePayload
+    }
+    private var taskCache: [String: CachedTask] = [:]
 
     func recentTasks(now: Date = Date()) -> [StatePayload] {
         let knownTitles = titles.allTitles()
         var tasks: [String: StatePayload] = [:]
         let paths: [String]
         do { paths = try FileManager.default.subpathsOfDirectory(atPath: sessionsURL.path) }
-        catch { diagnostic = "\(sessionsURL.path): \(error.localizedDescription)"; return [] }
+        catch {
+            diagnostic = "\(sessionsURL.path): \(error.localizedDescription)"
+            connectionIssue = "Codex 작업 목록 읽기 실패"
+            return []
+        }
+        connectionIssue = nil
         diagnostic = "\(sessionsURL.path): \(paths.count) entries"
         for relative in paths where relative.hasSuffix(".jsonl") {
             let url = sessionsURL.appendingPathComponent(relative)
+            // 하위 에이전트는 상위 작업과 동일한 ID를 기록한다. 이 파일을 읽으면 최신
+            // 수정 시각 때문에 상위 대화가 worker 실행 내역으로 바뀐다.
             guard let attributes = try? FileManager.default.attributesOfItem(atPath: url.path),
                   let modified = attributes[.modificationDate] as? Date,
                   now.timeIntervalSince(modified) <= recentWindow,
+                  !isCodexSubagentTranscript(path: url.path),
                   let task = task(at: url, modifiedAt: modified, titles: knownTitles) else { continue }
             if let old = tasks[task.id], (old.updatedAtMs ?? 0) >= (task.updatedAtMs ?? 0) { continue }
             tasks[task.id] = task
@@ -564,7 +869,36 @@ final class CodexRolloutDiscovery {
         return tasks.values.sorted { ($0.updatedAtMs ?? 0) > ($1.updatedAtMs ?? 0) }
     }
 
+    static func validateTaskCache() -> Bool {
+        let folder = FileManager.default.temporaryDirectory.appendingPathComponent("retto-cache-test-" + UUID().uuidString)
+        do {
+            try FileManager.default.createDirectory(at:folder,withIntermediateDirectories:true)
+            defer { try? FileManager.default.removeItem(at:folder) }
+            let url = folder.appendingPathComponent("fixture.jsonl")
+            func write(_ cwd: String) throws {
+                let data = try JSONSerialization.data(withJSONObject:["type":"session_meta","payload":["id":"cache-test","cwd":cwd]])
+                try data.write(to:url)
+            }
+            try write("/tmp/a")
+            let reader = CodexRolloutDiscovery(), first = Date(timeIntervalSince1970:100)
+            guard let a = reader.task(at:url,modifiedAt:first,titles:["cache-test":"first"]), a.cwd == "/tmp/a" else { return false }
+            guard reader.task(at:url,modifiedAt:first,titles:["cache-test":"first"])?.sessionTitle == "first" else { return false }
+            guard reader.task(at:url,modifiedAt:first,titles:["cache-test":"renamed"])?.sessionTitle == "renamed" else { return false }
+            try write("/tmp/b")
+            guard reader.task(at:url,modifiedAt:first.addingTimeInterval(1),titles:["cache-test":"renamed"])?.cwd == "/tmp/b" else { return false }
+            try write("/tmp/a-longer-path")
+            guard reader.task(at:url,modifiedAt:first.addingTimeInterval(1),titles:["cache-test":"renamed"])?.cwd == "/tmp/a-longer-path" else { return false }
+            try FileManager.default.removeItem(at:url)
+            return reader.task(at:url,modifiedAt:first,titles:["cache-test":"first"]) == nil
+        } catch { return false }
+    }
+
     private func task(at url: URL, modifiedAt: Date, titles: [String: String]) -> StatePayload? {
+        let fileSize = (try? FileManager.default.attributesOfItem(atPath: url.path)[.size] as? NSNumber)?.uint64Value ?? 0
+        if let cached = taskCache[url.path], cached.size == fileSize, cached.modified == modifiedAt,
+           let id = cached.payload.rawSessionId, cached.payload.sessionTitle == titles[id] {
+            return cached.payload
+        }
         guard let handle = FileHandle(forReadingAtPath: url.path) else { return nil }
         defer { try? handle.close() }
         // session_meta 첫 줄에는 기본 지시문이 함께 들어가 16KB를 넘는다. 중간에서 끊어 JSON
@@ -577,9 +911,9 @@ final class CodexRolloutDiscovery {
               let record = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
               let payload = record["payload"] as? [String: Any],
               let threadId = (payload["id"] as? String) ?? (payload["session_id"] as? String),
-              !threadId.isEmpty else { return nil }
+              !threadId.isEmpty,
+              let title = titles[threadId], !title.isEmpty else { return nil }
 
-        let fileSize = (try? FileManager.default.attributesOfItem(atPath: url.path)[.size] as? NSNumber)?.uint64Value ?? 0
         // 앞에서 session_meta를 읽었으므로 작은 파일도 반드시 처음으로 되돌린다. 안 그러면
         // 첫 16KB 안의 마지막 사용자 요청을 놓쳐, 오래된 완료를 새 요청의 완료로 오해한다.
         try? handle.seek(toOffset: fileSize > 512 * 1024 ? fileSize - 512 * 1024 : 0)
@@ -592,7 +926,7 @@ final class CodexRolloutDiscovery {
         )
         let completed = transcript.isCompletedAfterLatestPrompt
         let cwd = payload["cwd"] as? String
-        return StatePayload(
+        let result = StatePayload(
             state: completed ? PetState.waving.rawValue : PetState.running.rawValue,
             updatedAt: nil,
             event: completed ? "task_complete" : "rollout",
@@ -605,7 +939,7 @@ final class CodexRolloutDiscovery {
             error: nil,
             projectName: nil,
             displayTitle: nil,
-            sessionTitle: titles[threadId],
+            sessionTitle: title,
             transcriptPath: url.path,
             lastAssistantMessage: nil,
             activeTaskSubject: nil,
@@ -616,6 +950,9 @@ final class CodexRolloutDiscovery {
             stateSource: TaskStateSource.rollout.rawValue,
             client: "codex"
         )
+        if taskCache.count >= 512 { taskCache.removeAll(keepingCapacity: true) }
+        taskCache[url.path] = CachedTask(size: fileSize, modified: modifiedAt, payload: result)
+        return result
     }
 }
 
@@ -637,4 +974,25 @@ func codexRolloutReport() -> String {
           let data = try? JSONSerialization.data(withJSONObject: report, options: [.sortedKeys]),
           let text = String(data: data, encoding: .utf8) else { return "[]" }
     return text
+}
+
+/// 입력 대기는 읽음 처리 대상에서 제외하고 별도 배지로 먼저 표시한다.
+func attentionBadgeSessions(_ sessions: [StatePayload], needsAttention: (StatePayload) -> Bool) -> [StatePayload] {
+    let unread = sessions.filter { !$0.isClosed && needsAttention($0) }
+    let input = unread.filter { $0.petState == .waiting }
+    return input.isEmpty ? unread.filter { $0.petState == .waving || $0.petState == .failed } : input
+}
+
+func attentionSummary(_ sessions: [StatePayload]) -> String {
+    let input = sessions.filter { $0.petState == .waiting }.count
+    return input > 0 ? "입력 필요 \(input)개" : "새 알림 \(sessions.count)개"
+}
+
+/// 바이트 단위로 읽은 범위가 한글 문자 중간에서 시작해도 이후 JSONL 기록은 파싱한다.
+func codexTranscriptText(_ data: Data, skipPartialFirstLine: Bool) -> String {
+    if skipPartialFirstLine {
+        guard let newline = data.firstIndex(of: 10) else { return "" }
+        return String(decoding: data[data.index(after: newline)...], as: UTF8.self)
+    }
+    return String(decoding: data, as: UTF8.self)
 }

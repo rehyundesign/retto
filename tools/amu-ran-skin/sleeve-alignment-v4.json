@@ -1,0 +1,14 @@
+{
+  "uniform_scale": 0.43300000000000005,
+  "translation_2x": [
+    -1,
+    0
+  ],
+  "matching_region_2x": [
+    90,
+    275,
+    268,
+    389
+  ],
+  "mean_squared_rgb_error": 140.86916264090178
+}

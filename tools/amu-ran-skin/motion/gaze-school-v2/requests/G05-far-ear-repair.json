@@ -1,0 +1,17 @@
+{
+  "state": "gaze-school-v2",
+  "costume": "school",
+  "id": "G05",
+  "direction": 5,
+  "prompt": "Precise accessory placement edit of this complete image. Keep the entire cat, exact face, gaze direction, neck, shoulders, all four legs, clothing, paws, tail, lighting, scale, and framing unchanged. Move ONLY the tiny pink X clip to the OPPOSITE ear/temple: the far small ear on the image's upper RIGHT, behind the forehead. This right-looking cat's visible big ear on image LEFT is its RIGHT ear and must have NO ornament. The correct LEFT ear is the far ear at image RIGHT and the ornament should be mostly occluded there, a subtle far-side glimpse.  No duplicate ornament. Output ONE complete cat with original continuous neck/body, transparent background. Do not isolate or replace the head, do not change the pose.",
+  "refs": [
+    "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-school-v2/rejected/G05-7960664d96.png"
+  ],
+  "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-school-v2/requests/G05.json",
+  "construction": "one complete source; no body/head compositing",
+  "profile": "original-seated-gaze-5",
+  "generated_path": "/Users/luxia/.codex/generated_images/01a18151-f01e-7831-98b4-dca0f52b644c/exec-6e9be286-fb95-4cee-902c-118b2f9cffb8.png",
+  "source_sha256": "c4efa77d2036f58bf1f8fc461493806469813910862f220679b9b28ad085965d",
+  "generator": "built-in image_gen",
+  "repair": "far-side accessory only"
+}

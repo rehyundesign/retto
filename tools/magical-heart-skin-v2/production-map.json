@@ -1,0 +1,352 @@
+{
+  "status": "full remake: new costume master in production",
+  "mode": "registered-character",
+  "runtime_profile": {
+    "cell": [
+      448,
+      640
+    ],
+    "columns": 16,
+    "rows": 12,
+    "scope": "magicalHeart only",
+    "gaze_rows": [
+      9,
+      10
+    ]
+  },
+  "anchors": [
+    {
+      "id": "idle-anchor",
+      "state": "idle",
+      "row": 0,
+      "frame": 0,
+      "canonical_base_cell": [
+        0,
+        0
+      ],
+      "view": "front",
+      "action": "relaxed breathing and gradual blink"
+    },
+    {
+      "id": "drag-right-anchor",
+      "state": "drag-right",
+      "row": 1,
+      "frame": 0,
+      "canonical_base_cell": [
+        1,
+        0
+      ],
+      "view": "profile",
+      "action": "rightward four-leg gait"
+    },
+    {
+      "id": "drag-left-anchor",
+      "state": "drag-left",
+      "row": 2,
+      "frame": 0,
+      "canonical_base_cell": [
+        2,
+        0
+      ],
+      "view": "profile",
+      "action": "leftward four-leg gait"
+    },
+    {
+      "id": "waving-anchor",
+      "state": "waving",
+      "row": 3,
+      "frame": 0,
+      "canonical_base_cell": [
+        3,
+        0
+      ],
+      "view": "front",
+      "action": "raise right forepaw wave bow and recover"
+    },
+    {
+      "id": "jumping-anchor",
+      "state": "jumping",
+      "row": 4,
+      "frame": 0,
+      "canonical_base_cell": [
+        4,
+        0
+      ],
+      "view": "front",
+      "action": "crouch push off land compress and recover"
+    },
+    {
+      "id": "failed-anchor",
+      "state": "failed",
+      "row": 5,
+      "frame": 0,
+      "canonical_base_cell": [
+        5,
+        0
+      ],
+      "view": "front",
+      "action": "small recoil then reassurance"
+    },
+    {
+      "id": "waiting-anchor",
+      "state": "waiting",
+      "row": 6,
+      "frame": 0,
+      "canonical_base_cell": [
+        6,
+        0
+      ],
+      "view": "front",
+      "action": "tap heart brooch and look toward cursor"
+    },
+    {
+      "id": "running-anchor",
+      "state": "running",
+      "row": 7,
+      "frame": 0,
+      "canonical_base_cell": [
+        7,
+        0
+      ],
+      "view": "front",
+      "action": "gather heart spell between forepaws and release"
+    },
+    {
+      "id": "review-anchor",
+      "state": "review",
+      "row": 8,
+      "frame": 0,
+      "canonical_base_cell": [
+        8,
+        0
+      ],
+      "view": "front",
+      "action": "inspect heart jewel with a forepaw"
+    },
+    {
+      "id": "sleeping-anchor",
+      "state": "sleeping",
+      "row": 11,
+      "frame": 0,
+      "canonical_base_cell": [
+        11,
+        0
+      ],
+      "view": "curled",
+      "action": "curled breathing and ear settling"
+    },
+    {
+      "id": "idle-key-08",
+      "state": "idle",
+      "row": 0,
+      "frame": 8,
+      "canonical_base_cell": [
+        0,
+        0
+      ],
+      "view": "front",
+      "action": "additional key pose for anatomical in-betweens"
+    },
+    {
+      "id": "running-key-06",
+      "state": "running",
+      "row": 7,
+      "frame": 6,
+      "canonical_base_cell": [
+        7,
+        0
+      ],
+      "view": "front",
+      "action": "additional key pose for anatomical in-betweens"
+    },
+    {
+      "id": "running-key-10",
+      "state": "running",
+      "row": 7,
+      "frame": 10,
+      "canonical_base_cell": [
+        7,
+        0
+      ],
+      "view": "front",
+      "action": "additional key pose for anatomical in-betweens"
+    },
+    {
+      "id": "waving-key-06",
+      "state": "waving",
+      "row": 3,
+      "frame": 6,
+      "canonical_base_cell": [
+        3,
+        0
+      ],
+      "view": "front",
+      "action": "additional key pose for anatomical in-betweens"
+    },
+    {
+      "id": "jumping-key-07",
+      "state": "jumping",
+      "row": 4,
+      "frame": 7,
+      "canonical_base_cell": [
+        4,
+        0
+      ],
+      "view": "front",
+      "action": "additional key pose for anatomical in-betweens"
+    },
+    {
+      "id": "jumping-key-12",
+      "state": "jumping",
+      "row": 4,
+      "frame": 12,
+      "canonical_base_cell": [
+        4,
+        0
+      ],
+      "view": "front",
+      "action": "additional key pose for anatomical in-betweens"
+    }
+  ],
+  "sequences": [
+    {
+      "state": "idle",
+      "row": 0,
+      "distinct_drawings": 16,
+      "cycle_seconds": 3.2,
+      "action": "relaxed breathing and gradual blink"
+    },
+    {
+      "state": "drag-right",
+      "row": 1,
+      "distinct_drawings": 16,
+      "cycle_seconds": 1.6,
+      "action": "rightward four-leg gait"
+    },
+    {
+      "state": "drag-left",
+      "row": 2,
+      "distinct_drawings": 16,
+      "cycle_seconds": 1.6,
+      "action": "leftward four-leg gait"
+    },
+    {
+      "state": "waving",
+      "row": 3,
+      "distinct_drawings": 16,
+      "cycle_seconds": 2.4,
+      "action": "raise right forepaw wave bow and recover"
+    },
+    {
+      "state": "jumping",
+      "row": 4,
+      "distinct_drawings": 16,
+      "cycle_seconds": 2.4,
+      "action": "crouch push off land compress and recover"
+    },
+    {
+      "state": "failed",
+      "row": 5,
+      "distinct_drawings": 16,
+      "cycle_seconds": 3.2,
+      "action": "small recoil then reassurance"
+    },
+    {
+      "state": "waiting",
+      "row": 6,
+      "distinct_drawings": 16,
+      "cycle_seconds": 3.2,
+      "action": "tap heart brooch and look toward cursor"
+    },
+    {
+      "state": "running",
+      "row": 7,
+      "distinct_drawings": 16,
+      "cycle_seconds": 2.4,
+      "action": "gather heart spell between forepaws and release"
+    },
+    {
+      "state": "review",
+      "row": 8,
+      "distinct_drawings": 16,
+      "cycle_seconds": 3.2,
+      "action": "inspect heart jewel with a forepaw"
+    },
+    {
+      "state": "sleeping",
+      "row": 11,
+      "distinct_drawings": 16,
+      "cycle_seconds": 6.4,
+      "action": "curled breathing and ear settling"
+    }
+  ],
+  "gaze": {
+    "count": 16,
+    "source_rows": [
+      9,
+      10
+    ],
+    "separate_from_anchors": true
+  },
+  "costume": {
+    "palette": [
+      "rose-red",
+      "blush-pink",
+      "ivory",
+      "champagne-gold"
+    ],
+    "anchors": [
+      "ear roots: slim rose bows with tiny crescent pins",
+      "neck/shoulders: short three-layer petal cape with open fluffy chest",
+      "sternum: small rose quartz heart clasp",
+      "anatomical right foreleg: single satin bracelet bow",
+      "back: short split ribbon tails with delayed follow-through"
+    ],
+    "depth": [
+      "rear cape and ribbon tails",
+      "base character with four attached legs",
+      "front petal panels and heart clasp",
+      "continuous effects on separate front/back layers"
+    ],
+    "materials": [
+      "soft short fur",
+      "rose silk",
+      "ivory felt petals",
+      "fine champagne-gold piping",
+      "translucent rose-quartz"
+    ],
+    "prohibited": [
+      "new companion",
+      "recolored fur",
+      "oversize jewelry",
+      "heavy face border",
+      "detached garments"
+    ]
+  },
+  "original_hashes": {
+    "assets/spritesheet.webp": "3a7d6c1cf341a5ffbe3e8903348698c99d2302bff352d37d735d2aa6da8801c9",
+    "assets/spritesheet-magical-heart.webp": "515aaf73a0174d542202e13299a6961c719a14673efeeec1e87bdd24f8998483",
+    "assets/spritesheet-magical-heart-effects-back.webp": "a7b99ff2226304aff0f29ff6e08091017069859a87f340d039a696bdbff4f9fa",
+    "assets/spritesheet-magical-heart-effects-front.webp": "676bedb3e99920fd2294ebc94355ae2c0205121c5073f4dce014f1495b43a6c3"
+  },
+  "delivery": {
+    "installed": false,
+    "production_atlas_replaced": false
+  },
+  "costume_choice": "resolved by full remake request: fresh heart-centered costume with crescent accents",
+  "completed_character_drawings": 0,
+  "legacy_playback": {
+    "idle": 6,
+    "drag-right": 8,
+    "drag-left": 8,
+    "waving": 4,
+    "jumping": 5,
+    "failed": 8,
+    "waiting": 6,
+    "running": 8,
+    "review": 6,
+    "sleeping": 6
+  },
+  "renderer_validation": "passed; native preview exported; not installed",
+  "scope": "new costume, 16 static anchors, 10 newly authored 16-drawing sequences, 16 gaze stills, state-specific continuous effects"
+}

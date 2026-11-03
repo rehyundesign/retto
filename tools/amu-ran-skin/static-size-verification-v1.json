@@ -1,0 +1,17 @@
+{
+  "registered_cells": 16,
+  "independent_sources": 16,
+  "same_input_rebuild_hashes_identical": true,
+  "approved_master_hashes_unchanged": true,
+  "cell_dimensions": [
+    448,
+    640
+  ],
+  "ground_baseline_error_2x": 0,
+  "clipped_character_pixels": 0,
+  "maximum_cheek_error_1x": 0.25,
+  "protected_head_pixel_changes_during_body_assembly": 0,
+  "light_and_dark_1x_visually_reviewed": true,
+  "animated": false,
+  "installed": false
+}

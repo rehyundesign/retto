@@ -1,0 +1,92 @@
+[
+  {
+    "id": "idle",
+    "path": "motion/idle-v2",
+    "row": 0,
+    "cycle": 3.2,
+    "label": "교복 · 란과 이야기",
+    "stateTitle": "기본 대기",
+    "stateNote": "작업 없이 곁에서 쉬는 상태"
+  },
+  {
+    "id": "drag-right",
+    "path": "motion/drag-right-v1",
+    "row": 1,
+    "cycle": 1.6,
+    "label": "교복 · 란과 오른쪽 이동",
+    "stateTitle": "오른쪽 이동",
+    "stateNote": "레토를 오른쪽으로 끌어 이동할 때"
+  },
+  {
+    "id": "drag-left",
+    "path": "motion/drag-left-v1",
+    "row": 2,
+    "cycle": 1.6,
+    "label": "교복 · 란과 왼쪽 이동",
+    "stateTitle": "왼쪽 이동",
+    "stateNote": "레토를 왼쪽으로 끌어 이동할 때"
+  },
+  {
+    "id": "waving",
+    "path": "motion/waving-v1",
+    "row": 3,
+    "cycle": 2.4,
+    "label": "변신 · 란과 하이파이브",
+    "stateTitle": "완료",
+    "stateNote": "작업을 마치고 인사하는 상태"
+  },
+  {
+    "id": "jumping",
+    "path": "motion/jumping-v1",
+    "row": 4,
+    "cycle": 2.4,
+    "label": "변신 · 함께 응원 점프",
+    "stateTitle": "점프 반응",
+    "stateNote": "짧게 뛰며 응원하는 반응"
+  },
+  {
+    "id": "failed",
+    "path": "motion/failed-v1",
+    "row": 5,
+    "cycle": 3.2,
+    "label": "교복 · 란의 응원",
+    "stateTitle": "오류·실패",
+    "stateNote": "작업이 실패했을 때"
+  },
+  {
+    "id": "waiting",
+    "path": "motion/waiting-v1",
+    "row": 6,
+    "cycle": 3.2,
+    "label": "교복 · 란과 완장 확인",
+    "stateTitle": "입력 대기",
+    "stateNote": "입력이나 승인을 기다리는 상태"
+  },
+  {
+    "id": "running",
+    "path": "motion/running-v1",
+    "row": 7,
+    "cycle": 2.4,
+    "label": "교복 · 함께 하트 언록 준비",
+    "stateTitle": "작업 중",
+    "stateNote": "생각하거나 답변을 만드는 상태"
+  },
+  {
+    "id": "review",
+    "path": "motion/review-v1",
+    "row": 8,
+    "cycle": 3.2,
+    "label": "교복 · 란과 하트 확인",
+    "stateTitle": "도구 사용 중",
+    "stateNote": "도구를 실행하는 상태"
+  },
+  {
+    "id": "sleeping",
+    "path": "motion/sleeping-v1",
+    "row": 11,
+    "cycle": 6.4,
+    "label": "교복 · 란과 잠들기",
+    "stateTitle": "수면",
+    "stateNote": "쉬면서 잠든 상태"
+  }
+]

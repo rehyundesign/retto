@@ -1,0 +1,7 @@
+
+const $=id=>document.getElementById(id),images=[];let elapsed=0,last=performance.now(),paused=false,frame=0,loaded=false;
+for(let i=0;i<16;i++){let b=document.createElement('button');b.textContent=i+1;b.onclick=()=>{frame=i;$('hold').checked=true;paint()};$('frames').append(b)}
+function paint(){if(!loaded)return;if(!$('hold').checked)frame=Math.floor(elapsed/.2)%16;$('cat').src=images[frame].src;const e=JeanneEffects.render('idle',elapsed,frame);$('back').innerHTML=$('effects').checked?e.back:'';$('front').innerHTML=$('effects').checked?e.front:'';$('status').textContent=`${frame+1} / 16 · 한 주기 3.2초 · 앱 적용 전 검토본`;[...$('frames').children].forEach((b,i)=>b.classList.toggle('active',i===frame))}
+Promise.all(Array.from({length:16},(_,i)=>new Promise((resolve,reject)=>{let im=new Image();im.onload=()=>{images[i]=im;resolve()};im.onerror=()=>reject(Error('프레임 '+(i+1)+' 로딩 실패'));im.src='idle-sky/idle-'+String(i).padStart(2,'0')+'.png'}))).then(()=>{loaded=true;paint()}).catch(e=>$('status').textContent=e.message);
+$('pause').onclick=()=>{paused=!paused;$('pause').textContent=paused?'재생':'일시정지'};$('theme').onclick=()=>document.body.classList.toggle('light');$('size').onclick=()=>{$('stage').classList.toggle('small')};$('effects').onchange=paint;
+function tick(now){if(!paused)elapsed+=(now-last)/1000;last=now;paint();requestAnimationFrame(tick)}requestAnimationFrame(tick);

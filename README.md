@@ -8,6 +8,10 @@ coming from VS Code, the Claude desktop app, the terminal, and Codex at once.
 
 Requires an Apple Silicon Mac (macOS 13 or later) and Node.js.
 
+Source builds include all 13 skins and their animation resources. Run
+`macos/scripts/build.sh --app-only` to build and verify every skin from this checkout.
+Existing Homebrew packages and release downloads retain their published versions.
+
 ```sh
 brew tap rehyundesign/retto
 brew install --cask retto
@@ -66,8 +70,9 @@ Homebrew 6.0 에서 `--no-quarantine` 이 없어졌고, 그 대신 cask 의 `pos
 오는지 스스로 알려준다. 발바닥 메뉴 **「AI 연동 확인」** 이 같은 창을 다시 연다.
 
 `~/.codex` 가 있으면 Codex 훅도 함께 등록한다. 레토는 훅이 꺼져 있어도 최근 Codex 작업 기록을
-읽어 작업·완료 상태를 보여 준다. 다만 권한 대기·도구 실패처럼 바로 알려야 하는 상태는 훅이 있어야
-정확하다. Codex 는 훅 설정이 바뀌면 시작할 때 승인 화면을 띄우므로, 설치 직후 한 번 다시 켜서
+읽어 작업·완료 상태를 보여 준다. 도구 실패와 명령 승인은 훅으로 받고, Codex 데스크탑의 로컬 상태
+연결로 파일 첨부 승인 등도 확인한다. 하늘색은 사용자 입력·승인이 필요한 동안만 표시한다.
+Codex 는 훅 설정이 바뀌면 시작할 때 승인 화면을 띄우므로, 설치 직후 한 번 다시 켜서
 허용해 준다. 발바닥 메뉴의 **Codex task → Codex 앱**에서 연결을 다시 설치할 수 있다.
 
 ### Windows (베타)
@@ -81,6 +86,11 @@ cd windows && npm install && npx electron-builder --win zip --x64   # ../dist/wi
 
 zip 을 풀어 `Retto.exe` 를 실행하면 연동 확인 창이 뜬다. 거기서 「훅 설치」를 누르고 Claude Code 를 다시 켠다.
 서명이 없어 처음 한 번 SmartScreen 의 「추가 정보 → 실행」을 거친다.
+
+## Slack 알림
+
+발바닥 메뉴 **Slack 설정…**에서 DM·내 멘션·선택 채널 알림과 내용 미리보기를 설정한다.
+개인용 Slack 앱의 사용자 토큰과 Socket Mode 앱 토큰이 필요하다. [연결 안내](docs/Slack-연결.md)를 참고한다.
 
 ## 무엇이 어디에
 

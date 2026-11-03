@@ -1,0 +1,106 @@
+{
+  "id": "jumping",
+  "cycle": 2.4,
+  "times": null,
+  "frames": [
+    {
+      "frame": 0,
+      "source": "00-source.png",
+      "sha256": "ca670d08176efa650a3cf1e831f9583180825a6a2095958aef4d2feccfa26266"
+    },
+    {
+      "frame": 1,
+      "source": "01-source.png",
+      "sha256": "5012b7f350bed547f868f664a85e7791627b80b69ef37267291e6009c0e4dd1a"
+    },
+    {
+      "frame": 2,
+      "source": "02-source.png",
+      "sha256": "4c7f7e053c5568d1baa7fcd081d0bb957ab1fece4e90a6071c2746ab24a708fd"
+    },
+    {
+      "frame": 3,
+      "source": "03-source.png",
+      "sha256": "0d95ce0a661b3efe448e9cb40ea8262acc1850a8a8141512bb3dd1cf6c014b04"
+    },
+    {
+      "frame": 4,
+      "source": "04-source.png",
+      "sha256": "fd28b589f1d548b1a3cf2cf984a275cc1c608c4415b75af8b82fad5cbf28f84b"
+    },
+    {
+      "frame": 5,
+      "source": "05-source.png",
+      "sha256": "acdb4279b896f398870fdd3b21572328ffbccef71a936bc864937287daf45316"
+    },
+    {
+      "frame": 6,
+      "source": "06-source.png",
+      "sha256": "2510f88fd519dab5ae4255d610697d4730f139995771551b821d564c5f9ffc49"
+    },
+    {
+      "frame": 7,
+      "source": "07-source.png",
+      "sha256": "4d5ae4025213c9584d6674720282cc63b6f33be4527b76ff1bd72a97b8cab3c5"
+    },
+    {
+      "frame": 8,
+      "source": "08-source.png",
+      "sha256": "aa3f2e83c164a20d6a83300437d57bdc54d7c8031d32f911f2165212c9353245"
+    },
+    {
+      "frame": 9,
+      "source": "09-source.png",
+      "sha256": "bf31595034c693a817d9eed8bfc8556428655a4183e64ae0bd6dacba931ea6d4"
+    },
+    {
+      "frame": 10,
+      "source": "10-source.png",
+      "sha256": "c06f0facb11f54e6398742b03eef4880ebfa0805c5577efaefa525cffc486d44"
+    },
+    {
+      "frame": 11,
+      "source": "11-source.png",
+      "sha256": "79bfcf0d7a499754896cea6e6915f5c168d73e6dda0e454043695e92847dcfb9"
+    },
+    {
+      "frame": 12,
+      "source": "12-source.png",
+      "sha256": "9c33ef3f30bd63834a09b92213166779e0dc96376d01201dd26bcbb301501aee"
+    },
+    {
+      "frame": 13,
+      "source": "13-source.png",
+      "sha256": "45e8ae6b3b7bd8936f2bdc3450b0b51f11fec4240532ab95f55557188ff6b5c7"
+    },
+    {
+      "frame": 14,
+      "source": "14-source.png",
+      "sha256": "e95e6bab979ce892f794dd683995844c1ea3be673c321c793df238fcec75d91f"
+    },
+    {
+      "frame": 15,
+      "source": "15-source.png",
+      "sha256": "80733ea25d22ba1c8e19f59abf4fc87a63c7b2a3cf26431bcec010b966f7dd4d"
+    }
+  ],
+  "playbackOrder": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "originalRegistration": "not certified"
+}

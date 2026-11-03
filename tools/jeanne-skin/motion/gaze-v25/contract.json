@@ -1,0 +1,15 @@
+{
+  "directions": 16,
+  "clockwiseFromUp": true,
+  "runtimeRows": [
+    9,
+    10
+  ],
+  "columnsPerRow": 8,
+  "stationaryBodyMaster": "registered-v23/idle/00-source.png",
+  "originalDirectionReferences": "assets/spritesheet.webp rows9 and10",
+  "anatomy": "Both forelegs and both hindlegs stay seated, far hindleg can be hidden by skirt. One tail stays screen-right. Only genuine head/neck yaw-pitch changes.",
+  "integrated": true,
+  "originalAbsoluteRegistration": "not certified; preserves accepted idle body placement",
+  "dragDecision": "User accepted v24 original8 gait provisionally; do not regenerate"
+}

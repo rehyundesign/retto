@@ -1,0 +1,22 @@
+{
+  "date": "2026-10-28",
+  "user_approval": "응 마음에들어.",
+  "scope": "Approved school outfit, center-scarf heart outfit with knot-attached Guardian Egg, Ran current design; production may continue within existing scope",
+  "sources": {
+    "school": {
+      "path": "anchors/idle-school-source.png",
+      "sha256": "5225312d506f69d10df69e5806e59ea03c5ac21f55adda9a4c36355e8d5c44cf"
+    },
+    "heart": {
+      "path": "anchors/idle-heart-scarf-v12-character.png",
+      "sha256": "859ee4d84e946703ea2afeba161d81cb40e385dc9bc2cbef00cc2ca0c9bf1382"
+    },
+    "ran": {
+      "path": "reference/ran-sculpted-v10-source.png",
+      "sha256": "1c7a4862a350dd012e1cb9d8ed546163a0801e6bb8ee16077b28689825ab5181"
+    }
+  },
+  "preserve_during_effect_or_composition_work": true,
+  "animation_states_unseen": true,
+  "installed": false
+}

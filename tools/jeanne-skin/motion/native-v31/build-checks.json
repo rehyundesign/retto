@@ -1,0 +1,27 @@
+{
+  "--jeanne-self-test": {
+    "exit": 0,
+    "output": "{\"jeanneOK\":true,\"cells\":144,\"gaze\":16,\"timing\":\"v31\"}\n"
+  },
+  "--self-test": {
+    "exit": 0,
+    "output": "{\"ok\":true,\"asset\":\"1792x3840\",\"skins\":12,\"skinsOK\":true,\"christmasEffects\":true,\"dragRun\":true,\"canJoinAllSpaces\":true,\"states\":8,\"deepLink\":true,\"clientRouting\":true,\"codexMenu\":true,\"integration\":true,\"setup\":true,\"legacy\":true,\"transcriptShapes\":true,\"sizePresets\":7,\"baselineLayout\":true,\"scaleDecoupled\":true,\"badgePlacement\":true,\"ribbonExpand\":true,\"lineBudget\":true,\"typefaces\":2,\"typefaceOK\":true,\"textDelta\":true,\"tones\":true,\"folderFold\":true,\"doneStays\":true,\"bubbleShape\":true,\"seenRule\":true,\"staleWorking\":true,\"headroomClean\":true,\"viewedElsewhere\":true,\"ancientNews\":true,\"sleeps\":true,\"sleepRow\":11,\"dozes\":true,\"displayState\":true,\"seenByLooking\":true,\"corners\":true,\"appFallback\":true,\"haloRows\":0,\"haloDeepest\":0,\"haloFaint\":42006,\"claudeRow\":true,\"font\":\"NanumMiNiSonGeurSsi\",\"fontLoaded\":true,\"multiSession\":true,\"sessionTitleFallback\":true,\"prioritySelection\":true,\"badgeLayout\":true,\"clickRouting\":true,\"sleepRowOK\":true,\"assetOK\":true,\"statesOK\":true,\"scales\":true,\"gazeStates\":true,\"label\":true,\"personalV2Layout\":true,\"codexTitleRefresh\":true,\"codexCompletionRefresh\":true,\"codexStateReconciliation\":true,\"rolloutDiscoveryPayload\":true,\"unnamedTitle\":true}\n"
+  },
+  "--hana-self-test": {
+    "exit": 0,
+    "output": "{\"hanaOK\":true}\n"
+  },
+  "--pichi-self-test": {
+    "exit": 0,
+    "output": "{\"pichiOK\":true}\n"
+  },
+  "--chocolat-self-test": {
+    "exit": 0,
+    "output": "chocolatOK: true\n"
+  },
+  "nativeRender": {
+    "exit": 0,
+    "output": ""
+  },
+  "binary": "04b87c3132e8394c00e0c7fdf0f229d5b04e00b794f2f351c33af5bfbcac1b8e"
+}

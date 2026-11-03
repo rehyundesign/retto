@@ -1,0 +1,21 @@
+{
+  "source": "/Users/luxia/.codex/worktrees/7bab/retto/tools/hana-skin/native/spritesheet-hana-16-character.webp",
+  "sha256": "fac5dd51e8d2c4823010d252f972f6b10aaeb6c01e07e797a2274a37692d2a39",
+  "row": 2,
+  "used_columns": [
+    0,
+    2,
+    4,
+    6,
+    8,
+    10,
+    12,
+    14
+  ],
+  "cycle_seconds": 1.6,
+  "display": [
+    224,
+    320
+  ],
+  "purpose": "read-only native material/motion reference; no Hana size exception adopted"
+}

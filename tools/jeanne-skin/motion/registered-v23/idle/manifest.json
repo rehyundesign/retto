@@ -1,0 +1,123 @@
+{
+  "id": "idle",
+  "cycle": 3.2,
+  "times": [
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2
+  ],
+  "frames": [
+    {
+      "frame": 0,
+      "source": "00-source.png",
+      "sha256": "62a8320a6cd0d64889ae748443421999260b2c0ae91963a21d6f4ff7859001b8"
+    },
+    {
+      "frame": 1,
+      "source": "01-source.png",
+      "sha256": "a8190251282a6b4aad7abbf1b23c081e0bc60e56a2590e0a814b09184dee8b1a"
+    },
+    {
+      "frame": 2,
+      "source": "02-source.png",
+      "sha256": "e1e2ebb441d7c219c87737c09df9535aa109e1b78e44e1f8b570e7ef23022753"
+    },
+    {
+      "frame": 3,
+      "source": "03-source.png",
+      "sha256": "ec02fbfa819eceaba74dc2a9f48775a8aa204a3f41135d326a5742446a83ac62"
+    },
+    {
+      "frame": 4,
+      "source": "04-source.png",
+      "sha256": "13662d0279fb81a7539090822b08f7a43bc646a98ce17b263946bb9453876ad8"
+    },
+    {
+      "frame": 5,
+      "source": "05-source.png",
+      "sha256": "daaa2ffd1d07d8412ee276a40e13af0c98a1f3c10c7c73a48502d5c01159d2ec"
+    },
+    {
+      "frame": 6,
+      "source": "06-source.png",
+      "sha256": "20006d5a14590f9e552504133cc3185466775e1dbb874b44772bb5b6fe3d7406"
+    },
+    {
+      "frame": 7,
+      "source": "07-source.png",
+      "sha256": "26a550df30097cef914ba668ab1e7dc1f475855949ec2306f6463dc1cc29c659"
+    },
+    {
+      "frame": 8,
+      "source": "08-source.png",
+      "sha256": "0733c2e64dfa93605556191bfeb15aca5554dea5fcd8fdf85d6c6d4bac4efd1a"
+    },
+    {
+      "frame": 9,
+      "source": "09-source.png",
+      "sha256": "edada65c4fb6ec7703d8346c3c2bd42c310293a7d8d80a912f4e8e24a30bf70c"
+    },
+    {
+      "frame": 10,
+      "source": "10-source.png",
+      "sha256": "a4483b89fd87164eb301debca5d91ffb972ae0f6915ae8c323c02e7bedf656fd"
+    },
+    {
+      "frame": 11,
+      "source": "11-source.png",
+      "sha256": "8864f780dd7ea98132357bf4c886d09a83fa781d5e968aedcccdda4067bcdd01"
+    },
+    {
+      "frame": 12,
+      "source": "12-source.png",
+      "sha256": "432eea6d4725816ca82f8907f0294baa5b83f6e4669ebb863437e2b4c278766c"
+    },
+    {
+      "frame": 13,
+      "source": "13-source.png",
+      "sha256": "767775484b43f606ad86c547d4a8c9e015c1e83a366b1e6bf347bf83d9f5dbdb"
+    },
+    {
+      "frame": 14,
+      "source": "14-source.png",
+      "sha256": "f65b192668b504d4f2a3f1ac81b75ad89d6d971e1f3f33d0911a1371cfa44d1c"
+    },
+    {
+      "frame": 15,
+      "source": "15-source.png",
+      "sha256": "e8ebe0c4ad5291a174370043336022c852ae81dc08c3a06d225f855950623d81"
+    }
+  ],
+  "playbackOrder": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "originalRegistration": "not certified"
+}

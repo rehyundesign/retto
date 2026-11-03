@@ -1,0 +1,194 @@
+[
+  {
+    "direction": 0,
+    "label": "위",
+    "row": 9,
+    "column": 0,
+    "dest": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/gaze-v25/00-source.png",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/registered-v23/idle/00-source.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/gaze-v25/base/00.png"
+    ],
+    "prompt": "EDIT FIRST approved full Jeanne Retto idle illustration into ONE complete cursor-gaze still, direction0/16: straight UP, chin raised, look overhead with nose tipped up. SECOND shows original Retto's exact head yaw/pitch/gaze for THIS direction, only the head/neck orientation is guidance. FIRST defines unchanged torso,4legs,foot positions, body center, tail anchor, camera, costume, Finn and effect placement/scale. Keep both forepaws and two hindlegs planted as FIRST, body FRONT-FACING, one tail on SAME SCREEN-RIGHT side. Do NOT rotate, shrink or translate body to follow head; do not mirror whole cat. Head turns anatomically at neck to follow SECOND yaw/pitch; pupils and blue irises look same target, eyelids follow pitch, no straight-ahead face when target is sideways/down/up. Preserve cream/brown Retto face markings, pinknose/muzzle/fur/softtexture. Head red-ivory bow remains attached between ears and rotates with head naturally; gold cloth tails stay attached, overlap shoulders plausibly. EXACT FIRST plain white-lavender sleeves/redskirt/goldobi/redcord/largewingedpinkRosario/whiteanklecuffs with goldbuttons, no redesign/extraornaments. Finn remains exact FIRST location/size/green-haired fluffy whitewinged design, not removed/enlarged. Preserve existing restrained ivory feather/redcloth/goldglint effects in FIRST location, no giant new aura. Direction is genuine HEAD TURN only, no human limb, no extra old paw, exactly4 limbs. One complete transparent7:10 cell with cat+clothing+Finn+FX generated TOGETHER, not parts, collage, sheet, head patch or mesh. Preserve FIRST fullcanvas and all stationary body geometry."
+  },
+  {
+    "direction": 1,
+    "label": "오른쪽 위22.5°",
+    "row": 9,
+    "column": 1,
+    "dest": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/gaze-v25/01-source.png",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/registered-v23/idle/00-source.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/gaze-v25/base/01.png"
+    ],
+    "prompt": "EDIT FIRST approved full Jeanne Retto idle illustration into ONE complete cursor-gaze still, direction1/16: UP and slightly SCREEN-RIGHT,22.5degrees clockwise from vertical. SECOND shows original Retto's exact head yaw/pitch/gaze for THIS direction, only the head/neck orientation is guidance. FIRST defines unchanged torso,4legs,foot positions, body center, tail anchor, camera, costume, Finn and effect placement/scale. Keep both forepaws and two hindlegs planted as FIRST, body FRONT-FACING, one tail on SAME SCREEN-RIGHT side. Do NOT rotate, shrink or translate body to follow head; do not mirror whole cat. Head turns anatomically at neck to follow SECOND yaw/pitch; pupils and blue irises look same target, eyelids follow pitch, no straight-ahead face when target is sideways/down/up. Preserve cream/brown Retto face markings, pinknose/muzzle/fur/softtexture. Head red-ivory bow remains attached between ears and rotates with head naturally; gold cloth tails stay attached, overlap shoulders plausibly. EXACT FIRST plain white-lavender sleeves/redskirt/goldobi/redcord/largewingedpinkRosario/whiteanklecuffs with goldbuttons, no redesign/extraornaments. Finn remains exact FIRST location/size/green-haired fluffy whitewinged design, not removed/enlarged. Preserve existing restrained ivory feather/redcloth/goldglint effects in FIRST location, no giant new aura. Direction is genuine HEAD TURN only, no human limb, no extra old paw, exactly4 limbs. One complete transparent7:10 cell with cat+clothing+Finn+FX generated TOGETHER, not parts, collage, sheet, head patch or mesh. Preserve FIRST fullcanvas and all stationary body geometry."
+  },
+  {
+    "direction": 2,
+    "label": "오른쪽 위45°",
+    "row": 9,
+    "column": 2,
+    "dest": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/gaze-v25/02-source.png",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/registered-v23/idle/00-source.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/gaze-v25/base/02.png"
+    ],
+    "prompt": "EDIT FIRST approved full Jeanne Retto idle illustration into ONE complete cursor-gaze still, direction2/16: UP-SCREEN-RIGHT diagonal45degrees. SECOND shows original Retto's exact head yaw/pitch/gaze for THIS direction, only the head/neck orientation is guidance. FIRST defines unchanged torso,4legs,foot positions, body center, tail anchor, camera, costume, Finn and effect placement/scale. Keep both forepaws and two hindlegs planted as FIRST, body FRONT-FACING, one tail on SAME SCREEN-RIGHT side. Do NOT rotate, shrink or translate body to follow head; do not mirror whole cat. Head turns anatomically at neck to follow SECOND yaw/pitch; pupils and blue irises look same target, eyelids follow pitch, no straight-ahead face when target is sideways/down/up. Preserve cream/brown Retto face markings, pinknose/muzzle/fur/softtexture. Head red-ivory bow remains attached between ears and rotates with head naturally; gold cloth tails stay attached, overlap shoulders plausibly. EXACT FIRST plain white-lavender sleeves/redskirt/goldobi/redcord/largewingedpinkRosario/whiteanklecuffs with goldbuttons, no redesign/extraornaments. Finn remains exact FIRST location/size/green-haired fluffy whitewinged design, not removed/enlarged. Preserve existing restrained ivory feather/redcloth/goldglint effects in FIRST location, no giant new aura. Direction is genuine HEAD TURN only, no human limb, no extra old paw, exactly4 limbs. One complete transparent7:10 cell with cat+clothing+Finn+FX generated TOGETHER, not parts, collage, sheet, head patch or mesh. Preserve FIRST fullcanvas and all stationary body geometry."
+  },
+  {
+    "direction": 3,
+    "label": "오른쪽 위67.5°",
+    "row": 9,
+    "column": 3,
+    "dest": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/gaze-v25/03-source.png",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/registered-v23/idle/00-source.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/gaze-v25/base/03.png"
+    ],
+    "prompt": "EDIT FIRST approved full Jeanne Retto idle illustration into ONE complete cursor-gaze still, direction3/16: mostly SCREEN-RIGHT and a little UP,67.5degrees. SECOND shows original Retto's exact head yaw/pitch/gaze for THIS direction, only the head/neck orientation is guidance. FIRST defines unchanged torso,4legs,foot positions, body center, tail anchor, camera, costume, Finn and effect placement/scale. Keep both forepaws and two hindlegs planted as FIRST, body FRONT-FACING, one tail on SAME SCREEN-RIGHT side. Do NOT rotate, shrink or translate body to follow head; do not mirror whole cat. Head turns anatomically at neck to follow SECOND yaw/pitch; pupils and blue irises look same target, eyelids follow pitch, no straight-ahead face when target is sideways/down/up. Preserve cream/brown Retto face markings, pinknose/muzzle/fur/softtexture. Head red-ivory bow remains attached between ears and rotates with head naturally; gold cloth tails stay attached, overlap shoulders plausibly. EXACT FIRST plain white-lavender sleeves/redskirt/goldobi/redcord/largewingedpinkRosario/whiteanklecuffs with goldbuttons, no redesign/extraornaments. Finn remains exact FIRST location/size/green-haired fluffy whitewinged design, not removed/enlarged. Preserve existing restrained ivory feather/redcloth/goldglint effects in FIRST location, no giant new aura. Direction is genuine HEAD TURN only, no human limb, no extra old paw, exactly4 limbs. One complete transparent7:10 cell with cat+clothing+Finn+FX generated TOGETHER, not parts, collage, sheet, head patch or mesh. Preserve FIRST fullcanvas and all stationary body geometry."
+  },
+  {
+    "direction": 4,
+    "label": "오른쪽",
+    "row": 9,
+    "column": 4,
+    "dest": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/gaze-v25/04-source.png",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/registered-v23/idle/00-source.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/gaze-v25/base/04.png"
+    ],
+    "prompt": "EDIT FIRST approved full Jeanne Retto idle illustration into ONE complete cursor-gaze still, direction4/16: directly SCREEN-RIGHT, horizontal profile head only. SECOND shows original Retto's exact head yaw/pitch/gaze for THIS direction, only the head/neck orientation is guidance. FIRST defines unchanged torso,4legs,foot positions, body center, tail anchor, camera, costume, Finn and effect placement/scale. Keep both forepaws and two hindlegs planted as FIRST, body FRONT-FACING, one tail on SAME SCREEN-RIGHT side. Do NOT rotate, shrink or translate body to follow head; do not mirror whole cat. Head turns anatomically at neck to follow SECOND yaw/pitch; pupils and blue irises look same target, eyelids follow pitch, no straight-ahead face when target is sideways/down/up. Preserve cream/brown Retto face markings, pinknose/muzzle/fur/softtexture. Head red-ivory bow remains attached between ears and rotates with head naturally; gold cloth tails stay attached, overlap shoulders plausibly. EXACT FIRST plain white-lavender sleeves/redskirt/goldobi/redcord/largewingedpinkRosario/whiteanklecuffs with goldbuttons, no redesign/extraornaments. Finn remains exact FIRST location/size/green-haired fluffy whitewinged design, not removed/enlarged. Preserve existing restrained ivory feather/redcloth/goldglint effects in FIRST location, no giant new aura. Direction is genuine HEAD TURN only, no human limb, no extra old paw, exactly4 limbs. One complete transparent7:10 cell with cat+clothing+Finn+FX generated TOGETHER, not parts, collage, sheet, head patch or mesh. Preserve FIRST fullcanvas and all stationary body geometry."
+  },
+  {
+    "direction": 5,
+    "label": "오른쪽 아래67.5°",
+    "row": 9,
+    "column": 5,
+    "dest": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/gaze-v25/05-source.png",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/registered-v23/idle/00-source.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/gaze-v25/base/05.png"
+    ],
+    "prompt": "EDIT FIRST approved full Jeanne Retto idle illustration into ONE complete cursor-gaze still, direction5/16: mostly SCREEN-RIGHT and a little DOWN,112.5degrees. SECOND shows original Retto's exact head yaw/pitch/gaze for THIS direction, only the head/neck orientation is guidance. FIRST defines unchanged torso,4legs,foot positions, body center, tail anchor, camera, costume, Finn and effect placement/scale. Keep both forepaws and two hindlegs planted as FIRST, body FRONT-FACING, one tail on SAME SCREEN-RIGHT side. Do NOT rotate, shrink or translate body to follow head; do not mirror whole cat. Head turns anatomically at neck to follow SECOND yaw/pitch; pupils and blue irises look same target, eyelids follow pitch, no straight-ahead face when target is sideways/down/up. Preserve cream/brown Retto face markings, pinknose/muzzle/fur/softtexture. Head red-ivory bow remains attached between ears and rotates with head naturally; gold cloth tails stay attached, overlap shoulders plausibly. EXACT FIRST plain white-lavender sleeves/redskirt/goldobi/redcord/largewingedpinkRosario/whiteanklecuffs with goldbuttons, no redesign/extraornaments. Finn remains exact FIRST location/size/green-haired fluffy whitewinged design, not removed/enlarged. Preserve existing restrained ivory feather/redcloth/goldglint effects in FIRST location, no giant new aura. Direction is genuine HEAD TURN only, no human limb, no extra old paw, exactly4 limbs. One complete transparent7:10 cell with cat+clothing+Finn+FX generated TOGETHER, not parts, collage, sheet, head patch or mesh. Preserve FIRST fullcanvas and all stationary body geometry."
+  },
+  {
+    "direction": 6,
+    "label": "오른쪽 아래45°",
+    "row": 9,
+    "column": 6,
+    "dest": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/gaze-v25/06-source.png",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/registered-v23/idle/00-source.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/gaze-v25/base/06.png"
+    ],
+    "prompt": "EDIT FIRST approved full Jeanne Retto idle illustration into ONE complete cursor-gaze still, direction6/16: DOWN-SCREEN-RIGHT diagonal135degrees. SECOND shows original Retto's exact head yaw/pitch/gaze for THIS direction, only the head/neck orientation is guidance. FIRST defines unchanged torso,4legs,foot positions, body center, tail anchor, camera, costume, Finn and effect placement/scale. Keep both forepaws and two hindlegs planted as FIRST, body FRONT-FACING, one tail on SAME SCREEN-RIGHT side. Do NOT rotate, shrink or translate body to follow head; do not mirror whole cat. Head turns anatomically at neck to follow SECOND yaw/pitch; pupils and blue irises look same target, eyelids follow pitch, no straight-ahead face when target is sideways/down/up. Preserve cream/brown Retto face markings, pinknose/muzzle/fur/softtexture. Head red-ivory bow remains attached between ears and rotates with head naturally; gold cloth tails stay attached, overlap shoulders plausibly. EXACT FIRST plain white-lavender sleeves/redskirt/goldobi/redcord/largewingedpinkRosario/whiteanklecuffs with goldbuttons, no redesign/extraornaments. Finn remains exact FIRST location/size/green-haired fluffy whitewinged design, not removed/enlarged. Preserve existing restrained ivory feather/redcloth/goldglint effects in FIRST location, no giant new aura. Direction is genuine HEAD TURN only, no human limb, no extra old paw, exactly4 limbs. One complete transparent7:10 cell with cat+clothing+Finn+FX generated TOGETHER, not parts, collage, sheet, head patch or mesh. Preserve FIRST fullcanvas and all stationary body geometry."
+  },
+  {
+    "direction": 7,
+    "label": "오른쪽 아래22.5°",
+    "row": 9,
+    "column": 7,
+    "dest": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/gaze-v25/07-source.png",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/registered-v23/idle/00-source.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/gaze-v25/base/07.png"
+    ],
+    "prompt": "EDIT FIRST approved full Jeanne Retto idle illustration into ONE complete cursor-gaze still, direction7/16: DOWN and slightly SCREEN-RIGHT,157.5degrees. SECOND shows original Retto's exact head yaw/pitch/gaze for THIS direction, only the head/neck orientation is guidance. FIRST defines unchanged torso,4legs,foot positions, body center, tail anchor, camera, costume, Finn and effect placement/scale. Keep both forepaws and two hindlegs planted as FIRST, body FRONT-FACING, one tail on SAME SCREEN-RIGHT side. Do NOT rotate, shrink or translate body to follow head; do not mirror whole cat. Head turns anatomically at neck to follow SECOND yaw/pitch; pupils and blue irises look same target, eyelids follow pitch, no straight-ahead face when target is sideways/down/up. Preserve cream/brown Retto face markings, pinknose/muzzle/fur/softtexture. Head red-ivory bow remains attached between ears and rotates with head naturally; gold cloth tails stay attached, overlap shoulders plausibly. EXACT FIRST plain white-lavender sleeves/redskirt/goldobi/redcord/largewingedpinkRosario/whiteanklecuffs with goldbuttons, no redesign/extraornaments. Finn remains exact FIRST location/size/green-haired fluffy whitewinged design, not removed/enlarged. Preserve existing restrained ivory feather/redcloth/goldglint effects in FIRST location, no giant new aura. Direction is genuine HEAD TURN only, no human limb, no extra old paw, exactly4 limbs. One complete transparent7:10 cell with cat+clothing+Finn+FX generated TOGETHER, not parts, collage, sheet, head patch or mesh. Preserve FIRST fullcanvas and all stationary body geometry."
+  },
+  {
+    "direction": 8,
+    "label": "아래",
+    "row": 10,
+    "column": 0,
+    "dest": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/gaze-v25/08-source.png",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/registered-v23/idle/00-source.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/gaze-v25/base/08.png"
+    ],
+    "prompt": "EDIT FIRST approved full Jeanne Retto idle illustration into ONE complete cursor-gaze still, direction8/16: straight DOWN, chin lowered, look between front paws. SECOND shows original Retto's exact head yaw/pitch/gaze for THIS direction, only the head/neck orientation is guidance. FIRST defines unchanged torso,4legs,foot positions, body center, tail anchor, camera, costume, Finn and effect placement/scale. Keep both forepaws and two hindlegs planted as FIRST, body FRONT-FACING, one tail on SAME SCREEN-RIGHT side. Do NOT rotate, shrink or translate body to follow head; do not mirror whole cat. Head turns anatomically at neck to follow SECOND yaw/pitch; pupils and blue irises look same target, eyelids follow pitch, no straight-ahead face when target is sideways/down/up. Preserve cream/brown Retto face markings, pinknose/muzzle/fur/softtexture. Head red-ivory bow remains attached between ears and rotates with head naturally; gold cloth tails stay attached, overlap shoulders plausibly. EXACT FIRST plain white-lavender sleeves/redskirt/goldobi/redcord/largewingedpinkRosario/whiteanklecuffs with goldbuttons, no redesign/extraornaments. Finn remains exact FIRST location/size/green-haired fluffy whitewinged design, not removed/enlarged. Preserve existing restrained ivory feather/redcloth/goldglint effects in FIRST location, no giant new aura. Direction is genuine HEAD TURN only, no human limb, no extra old paw, exactly4 limbs. One complete transparent7:10 cell with cat+clothing+Finn+FX generated TOGETHER, not parts, collage, sheet, head patch or mesh. Preserve FIRST fullcanvas and all stationary body geometry."
+  },
+  {
+    "direction": 9,
+    "label": "왼쪽 아래22.5°",
+    "row": 10,
+    "column": 1,
+    "dest": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/gaze-v25/09-source.png",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/registered-v23/idle/00-source.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/gaze-v25/base/09.png"
+    ],
+    "prompt": "EDIT FIRST approved full Jeanne Retto idle illustration into ONE complete cursor-gaze still, direction9/16: DOWN and slightly SCREEN-LEFT,202.5degrees. SECOND shows original Retto's exact head yaw/pitch/gaze for THIS direction, only the head/neck orientation is guidance. FIRST defines unchanged torso,4legs,foot positions, body center, tail anchor, camera, costume, Finn and effect placement/scale. Keep both forepaws and two hindlegs planted as FIRST, body FRONT-FACING, one tail on SAME SCREEN-RIGHT side. Do NOT rotate, shrink or translate body to follow head; do not mirror whole cat. Head turns anatomically at neck to follow SECOND yaw/pitch; pupils and blue irises look same target, eyelids follow pitch, no straight-ahead face when target is sideways/down/up. Preserve cream/brown Retto face markings, pinknose/muzzle/fur/softtexture. Head red-ivory bow remains attached between ears and rotates with head naturally; gold cloth tails stay attached, overlap shoulders plausibly. EXACT FIRST plain white-lavender sleeves/redskirt/goldobi/redcord/largewingedpinkRosario/whiteanklecuffs with goldbuttons, no redesign/extraornaments. Finn remains exact FIRST location/size/green-haired fluffy whitewinged design, not removed/enlarged. Preserve existing restrained ivory feather/redcloth/goldglint effects in FIRST location, no giant new aura. Direction is genuine HEAD TURN only, no human limb, no extra old paw, exactly4 limbs. One complete transparent7:10 cell with cat+clothing+Finn+FX generated TOGETHER, not parts, collage, sheet, head patch or mesh. Preserve FIRST fullcanvas and all stationary body geometry."
+  },
+  {
+    "direction": 10,
+    "label": "왼쪽 아래45°",
+    "row": 10,
+    "column": 2,
+    "dest": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/gaze-v25/10-source.png",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/registered-v23/idle/00-source.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/gaze-v25/base/10.png"
+    ],
+    "prompt": "EDIT FIRST approved full Jeanne Retto idle illustration into ONE complete cursor-gaze still, direction10/16: DOWN-SCREEN-LEFT diagonal225degrees. SECOND shows original Retto's exact head yaw/pitch/gaze for THIS direction, only the head/neck orientation is guidance. FIRST defines unchanged torso,4legs,foot positions, body center, tail anchor, camera, costume, Finn and effect placement/scale. Keep both forepaws and two hindlegs planted as FIRST, body FRONT-FACING, one tail on SAME SCREEN-RIGHT side. Do NOT rotate, shrink or translate body to follow head; do not mirror whole cat. Head turns anatomically at neck to follow SECOND yaw/pitch; pupils and blue irises look same target, eyelids follow pitch, no straight-ahead face when target is sideways/down/up. Preserve cream/brown Retto face markings, pinknose/muzzle/fur/softtexture. Head red-ivory bow remains attached between ears and rotates with head naturally; gold cloth tails stay attached, overlap shoulders plausibly. EXACT FIRST plain white-lavender sleeves/redskirt/goldobi/redcord/largewingedpinkRosario/whiteanklecuffs with goldbuttons, no redesign/extraornaments. Finn remains exact FIRST location/size/green-haired fluffy whitewinged design, not removed/enlarged. Preserve existing restrained ivory feather/redcloth/goldglint effects in FIRST location, no giant new aura. Direction is genuine HEAD TURN only, no human limb, no extra old paw, exactly4 limbs. One complete transparent7:10 cell with cat+clothing+Finn+FX generated TOGETHER, not parts, collage, sheet, head patch or mesh. Preserve FIRST fullcanvas and all stationary body geometry."
+  },
+  {
+    "direction": 11,
+    "label": "왼쪽 아래67.5°",
+    "row": 10,
+    "column": 3,
+    "dest": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/gaze-v25/11-source.png",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/registered-v23/idle/00-source.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/gaze-v25/base/11.png"
+    ],
+    "prompt": "EDIT FIRST approved full Jeanne Retto idle illustration into ONE complete cursor-gaze still, direction11/16: mostly SCREEN-LEFT and a little DOWN,247.5degrees. SECOND shows original Retto's exact head yaw/pitch/gaze for THIS direction, only the head/neck orientation is guidance. FIRST defines unchanged torso,4legs,foot positions, body center, tail anchor, camera, costume, Finn and effect placement/scale. Keep both forepaws and two hindlegs planted as FIRST, body FRONT-FACING, one tail on SAME SCREEN-RIGHT side. Do NOT rotate, shrink or translate body to follow head; do not mirror whole cat. Head turns anatomically at neck to follow SECOND yaw/pitch; pupils and blue irises look same target, eyelids follow pitch, no straight-ahead face when target is sideways/down/up. Preserve cream/brown Retto face markings, pinknose/muzzle/fur/softtexture. Head red-ivory bow remains attached between ears and rotates with head naturally; gold cloth tails stay attached, overlap shoulders plausibly. EXACT FIRST plain white-lavender sleeves/redskirt/goldobi/redcord/largewingedpinkRosario/whiteanklecuffs with goldbuttons, no redesign/extraornaments. Finn remains exact FIRST location/size/green-haired fluffy whitewinged design, not removed/enlarged. Preserve existing restrained ivory feather/redcloth/goldglint effects in FIRST location, no giant new aura. Direction is genuine HEAD TURN only, no human limb, no extra old paw, exactly4 limbs. One complete transparent7:10 cell with cat+clothing+Finn+FX generated TOGETHER, not parts, collage, sheet, head patch or mesh. Preserve FIRST fullcanvas and all stationary body geometry."
+  },
+  {
+    "direction": 12,
+    "label": "왼쪽",
+    "row": 10,
+    "column": 4,
+    "dest": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/gaze-v25/12-source.png",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/registered-v23/idle/00-source.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/gaze-v25/base/12.png"
+    ],
+    "prompt": "EDIT FIRST approved full Jeanne Retto idle illustration into ONE complete cursor-gaze still, direction12/16: directly SCREEN-LEFT, horizontal profile head only. SECOND shows original Retto's exact head yaw/pitch/gaze for THIS direction, only the head/neck orientation is guidance. FIRST defines unchanged torso,4legs,foot positions, body center, tail anchor, camera, costume, Finn and effect placement/scale. Keep both forepaws and two hindlegs planted as FIRST, body FRONT-FACING, one tail on SAME SCREEN-RIGHT side. Do NOT rotate, shrink or translate body to follow head; do not mirror whole cat. Head turns anatomically at neck to follow SECOND yaw/pitch; pupils and blue irises look same target, eyelids follow pitch, no straight-ahead face when target is sideways/down/up. Preserve cream/brown Retto face markings, pinknose/muzzle/fur/softtexture. Head red-ivory bow remains attached between ears and rotates with head naturally; gold cloth tails stay attached, overlap shoulders plausibly. EXACT FIRST plain white-lavender sleeves/redskirt/goldobi/redcord/largewingedpinkRosario/whiteanklecuffs with goldbuttons, no redesign/extraornaments. Finn remains exact FIRST location/size/green-haired fluffy whitewinged design, not removed/enlarged. Preserve existing restrained ivory feather/redcloth/goldglint effects in FIRST location, no giant new aura. Direction is genuine HEAD TURN only, no human limb, no extra old paw, exactly4 limbs. One complete transparent7:10 cell with cat+clothing+Finn+FX generated TOGETHER, not parts, collage, sheet, head patch or mesh. Preserve FIRST fullcanvas and all stationary body geometry."
+  },
+  {
+    "direction": 13,
+    "label": "왼쪽 위67.5°",
+    "row": 10,
+    "column": 5,
+    "dest": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/gaze-v25/13-source.png",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/registered-v23/idle/00-source.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/gaze-v25/base/13.png"
+    ],
+    "prompt": "EDIT FIRST approved full Jeanne Retto idle illustration into ONE complete cursor-gaze still, direction13/16: mostly SCREEN-LEFT and a little UP,292.5degrees. SECOND shows original Retto's exact head yaw/pitch/gaze for THIS direction, only the head/neck orientation is guidance. FIRST defines unchanged torso,4legs,foot positions, body center, tail anchor, camera, costume, Finn and effect placement/scale. Keep both forepaws and two hindlegs planted as FIRST, body FRONT-FACING, one tail on SAME SCREEN-RIGHT side. Do NOT rotate, shrink or translate body to follow head; do not mirror whole cat. Head turns anatomically at neck to follow SECOND yaw/pitch; pupils and blue irises look same target, eyelids follow pitch, no straight-ahead face when target is sideways/down/up. Preserve cream/brown Retto face markings, pinknose/muzzle/fur/softtexture. Head red-ivory bow remains attached between ears and rotates with head naturally; gold cloth tails stay attached, overlap shoulders plausibly. EXACT FIRST plain white-lavender sleeves/redskirt/goldobi/redcord/largewingedpinkRosario/whiteanklecuffs with goldbuttons, no redesign/extraornaments. Finn remains exact FIRST location/size/green-haired fluffy whitewinged design, not removed/enlarged. Preserve existing restrained ivory feather/redcloth/goldglint effects in FIRST location, no giant new aura. Direction is genuine HEAD TURN only, no human limb, no extra old paw, exactly4 limbs. One complete transparent7:10 cell with cat+clothing+Finn+FX generated TOGETHER, not parts, collage, sheet, head patch or mesh. Preserve FIRST fullcanvas and all stationary body geometry."
+  },
+  {
+    "direction": 14,
+    "label": "왼쪽 위45°",
+    "row": 10,
+    "column": 6,
+    "dest": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/gaze-v25/14-source.png",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/registered-v23/idle/00-source.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/gaze-v25/base/14.png"
+    ],
+    "prompt": "EDIT FIRST approved full Jeanne Retto idle illustration into ONE complete cursor-gaze still, direction14/16: UP-SCREEN-LEFT diagonal315degrees. SECOND shows original Retto's exact head yaw/pitch/gaze for THIS direction, only the head/neck orientation is guidance. FIRST defines unchanged torso,4legs,foot positions, body center, tail anchor, camera, costume, Finn and effect placement/scale. Keep both forepaws and two hindlegs planted as FIRST, body FRONT-FACING, one tail on SAME SCREEN-RIGHT side. Do NOT rotate, shrink or translate body to follow head; do not mirror whole cat. Head turns anatomically at neck to follow SECOND yaw/pitch; pupils and blue irises look same target, eyelids follow pitch, no straight-ahead face when target is sideways/down/up. Preserve cream/brown Retto face markings, pinknose/muzzle/fur/softtexture. Head red-ivory bow remains attached between ears and rotates with head naturally; gold cloth tails stay attached, overlap shoulders plausibly. EXACT FIRST plain white-lavender sleeves/redskirt/goldobi/redcord/largewingedpinkRosario/whiteanklecuffs with goldbuttons, no redesign/extraornaments. Finn remains exact FIRST location/size/green-haired fluffy whitewinged design, not removed/enlarged. Preserve existing restrained ivory feather/redcloth/goldglint effects in FIRST location, no giant new aura. Direction is genuine HEAD TURN only, no human limb, no extra old paw, exactly4 limbs. One complete transparent7:10 cell with cat+clothing+Finn+FX generated TOGETHER, not parts, collage, sheet, head patch or mesh. Preserve FIRST fullcanvas and all stationary body geometry."
+  },
+  {
+    "direction": 15,
+    "label": "왼쪽 위22.5°",
+    "row": 10,
+    "column": 7,
+    "dest": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/gaze-v25/15-source.png",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/registered-v23/idle/00-source.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/gaze-v25/base/15.png"
+    ],
+    "prompt": "EDIT FIRST approved full Jeanne Retto idle illustration into ONE complete cursor-gaze still, direction15/16: UP and slightly SCREEN-LEFT,337.5degrees. SECOND shows original Retto's exact head yaw/pitch/gaze for THIS direction, only the head/neck orientation is guidance. FIRST defines unchanged torso,4legs,foot positions, body center, tail anchor, camera, costume, Finn and effect placement/scale. Keep both forepaws and two hindlegs planted as FIRST, body FRONT-FACING, one tail on SAME SCREEN-RIGHT side. Do NOT rotate, shrink or translate body to follow head; do not mirror whole cat. Head turns anatomically at neck to follow SECOND yaw/pitch; pupils and blue irises look same target, eyelids follow pitch, no straight-ahead face when target is sideways/down/up. Preserve cream/brown Retto face markings, pinknose/muzzle/fur/softtexture. Head red-ivory bow remains attached between ears and rotates with head naturally; gold cloth tails stay attached, overlap shoulders plausibly. EXACT FIRST plain white-lavender sleeves/redskirt/goldobi/redcord/largewingedpinkRosario/whiteanklecuffs with goldbuttons, no redesign/extraornaments. Finn remains exact FIRST location/size/green-haired fluffy whitewinged design, not removed/enlarged. Preserve existing restrained ivory feather/redcloth/goldglint effects in FIRST location, no giant new aura. Direction is genuine HEAD TURN only, no human limb, no extra old paw, exactly4 limbs. One complete transparent7:10 cell with cat+clothing+Finn+FX generated TOGETHER, not parts, collage, sheet, head patch or mesh. Preserve FIRST fullcanvas and all stationary body geometry."
+  }
+]

@@ -1,0 +1,75 @@
+{
+  "installed": "/Users/luxia/Applications/Retto.app",
+  "backup": "/private/tmp/retto-skin-cache-20261029/installed-backup",
+  "resourcesPreserved": 15886,
+  "resourcesByteIdentical": true,
+  "signatureVerified": true,
+  "checks": [
+    {
+      "flag": "--jeanne-self-test",
+      "exit": 0,
+      "output": "{\"jeanneOK\":true,\"cells\":160,\"gaze\":16,\"timing\":\"v56\"}"
+    },
+    {
+      "flag": "--jeanne-effects-self-test",
+      "exit": 0,
+      "output": "Jeanne v56 independent back/front effects and pose-attached light: true"
+    },
+    {
+      "flag": "--jeanne-state-self-test",
+      "exit": 0,
+      "output": "Jeanne state/loop/drag/gaze transitions: true"
+    },
+    {
+      "flag": "--jeanne-fit-self-test",
+      "exit": 0,
+      "output": "Jeanne text cache invalidation: true"
+    },
+    {
+      "flag": "--self-test",
+      "exit": 0,
+      "output": "{\"ok\":true,\"asset\":\"1792x3840\",\"skins\":13,\"skinsOK\":true,\"christmasEffects\":true,\"dragRun\":true,\"canJoinAllSpaces\":true,\"states\":8,\"deepLink\":true,\"clientRouting\":true,\"codexMenu\":true,\"integration\":true,\"setup\":true,\"legacy\":true,\"transcriptShapes\":true,\"sizePresets\":7,\"baselineLayout\":true,\"scaleDecoupled\":true,\"badgePlacement\":true,\"ribbonExpand\":true,\"lineBudget\":true,\"typefaces\":2,\"typefaceOK\":true,\"textDelta\":true,\"tones\":true,\"folderFold\":true,\"doneStays\":true,\"bubbleShape\":true,\"seenRule\":true,\"staleWorking\":true,\"headroomClean\":true,\"viewedElsewhere\":true,\"ancientNews\":true,\"sleeps\":true,\"sleepRow\":11,\"dozes\":true,\"displayState\":true,\"seenByLooking\":true,\"corners\":true,\"appFallback\":true,\"haloRows\":0,\"haloDeepest\":0,\"haloFaint\":42006,\"claudeRow\":true,\"font\":\"NanumMiNiSonGeurSsi\",\"fontLoaded\":true,\"multiSession\":true,\"sessionTitleFallback\":true,\"prioritySelection\":true,\"badgeLayout\":true,\"clickRouting\":true,\"sleepRowOK\":true,\"assetOK\":true,\"statesOK\":true,\"scales\":true,\"gazeStates\":true,\"label\":true,\"personalV2Layout\":true,\"codexTitleRefresh\":true,\"codexCompletionRefresh\":true,\"codexStateReconciliation\":true,\"rolloutDiscoveryPayload\":true,\"rilakkumaTiming\":true,\"unnamedTitle\":true}"
+    },
+    {
+      "flag": "--self-test-amu-ran-clock",
+      "exit": 0,
+      "output": "PASS: Amu & Ran elapsed time, boundaries, state-relative partner response and held-gaze breathing"
+    },
+    {
+      "flag": "--hana-self-test",
+      "exit": 0,
+      "output": "{\"hanaOK\":true}"
+    },
+    {
+      "flag": "--hana-gaze-self-test",
+      "exit": 0,
+      "output": "hana gaze: 16 complete-source gaze poses, reset timer, state/drag/sleep/reaction gates and wrap transition passed"
+    },
+    {
+      "flag": "--pichi-self-test",
+      "exit": 0,
+      "output": "{\"pichiOK\":true}"
+    },
+    {
+      "flag": "--chocolat-self-test",
+      "exit": 0,
+      "output": "chocolatOK: true"
+    },
+    {
+      "flag": "--self-test-slack",
+      "exit": 0,
+      "output": "Slack: 56 checks, 0 failures"
+    },
+    {
+      "flag": "--self-test-codex-input",
+      "exit": 0,
+      "output": "Codex input self-test: 107 checks, 0 failures"
+    }
+  ],
+  "binary": "4574c118eb8e12660bbfd7aa4d4e2178334bb738776abca20037cb0c5dd37a77",
+  "restarted": true,
+  "stoppedPIDs": [
+    42423
+  ],
+  "runtimeVisualVerified": false
+}

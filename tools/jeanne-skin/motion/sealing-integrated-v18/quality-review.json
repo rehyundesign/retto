@@ -1,0 +1,17 @@
+{
+  "sourceCount": 16,
+  "playbackCount": 16,
+  "cycleSeconds": 2.4,
+  "syntax": "passed",
+  "alpha": "16 RGBA sources",
+  "existingSourceHashes": "178 unchanged",
+  "whiteAndDarkBoards": "inspected",
+  "browserPlayback": "not verified",
+  "originalRettoRegistration": "not certified",
+  "remaining": [
+    "Frame 9 character scale is smaller than adjacent frames",
+    "Some ribbon silhouettes shift substantially across frame transitions",
+    "Frame 8 and later ribbons approach horizontal safe margins"
+  ],
+  "status": "integrated-generation experiment; not final approved skin"
+}

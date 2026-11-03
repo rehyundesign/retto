@@ -1,0 +1,61 @@
+{
+  "common": "Create ONE independent character anchor cell for the approved CHRISTMAS RETTO animation, transparent background, no board, no labels, no text, no repetition. Reference 1 is the approved costume master and exact character identity. Reference 2 is the approved storyboard ONLY to explain the requested pose; NEVER copy or crop a panel from it. Re-render an independent full body image. Existing cream ragdoll kitten with gray-brown mask, bright blue eyes, pink nose, white muzzle, triangular ears, cream fur and fluffy gray-brown tail. Preserve original face shape, markings, eye color, paws, tail identity and body proportions. EXACT same red velvet Santa hat with white fur band/pompom, TWO gold buttons, red coat with white collar/cuffs/hem, dark brown belt with square gold buckle. Same soft detailed 3D style. Exactly FOUR attached limbs, anatomically correct, no duplicate paws. Do not redesign or change facial age or body size. Outfit follows pose and contact/occlusion realistically. No visual effects, snowflakes, stars, glow, sparkle, chime lines, ground shadow or scenery: those will be separate animation layers. Physical held objects explicitly requested below are allowed. Image is one isolated character with physical prop, all inside canvas and generous transparent margin. Keep foreground face/eye area crisp and clear. No blur around cutout, no dark halo.",
+  "poses": [
+    {
+      "id": "thinking",
+      "row": 7,
+      "frames": 8,
+      "interval": 0.25,
+      "label": "생각 중",
+      "pose": "Pose: front seated, head gently lowered while retaining same front-face size as master. Both rear paws rest on the floor behind forelegs. Viewer-left forepaw rests on the top-left of a small forest-green wrapped gift box; viewer-right forepaw is raised slightly holding a short loose red ribbon end to tie the bow on top. Box is below chest, not hiding foreleg attachments. Fluffy tail curves on viewer-right. This is the gift-wrapping pose from middle-left storyboard. Both forepaws appear ONCE only."
+    },
+    {
+      "id": "review",
+      "row": 8,
+      "frames": 6,
+      "interval": 0.155,
+      "label": "도구 사용",
+      "pose": "Pose: seated three-quarter toward viewer-left, small warm gold five-point Christmas ornament hanging on a small grounded wooden hook stand on viewer-left. Viewer-left forepaw raised to the hanger loop, viewer-right forepaw gently steadies the ornament. The two rear paws rest on floor below belly. Fluffy tail on viewer-right. Head only gently turned, body height equal master seated stance. This is middle-center storyboard decoration pose."
+    },
+    {
+      "id": "waiting",
+      "row": 6,
+      "frames": 6,
+      "interval": 0.31,
+      "label": "입력 대기",
+      "pose": "Pose: same front-facing seated stance, face, body center and rear-foot baseline as master. Viewer-right forepaw raised beside cheek holding a TINY gold jingle bell by a short red ribbon loop, clearly attached to lifted paw; its grounded counterpart is absent. Viewer-left forepaw rests on floor. Both rear paws support the body and peek behind front legs. Head has slight expectant tilt. Tail viewer-right. No chime graphics."
+    },
+    {
+      "id": "failed",
+      "row": 5,
+      "frames": 8,
+      "interval": 0.18,
+      "label": "실패",
+      "pose": "Pose: front seated, SAME face and body size as master, both front paws rest on floor, rear paws support behind them. Ears gently lower, sad cute expression. A SHORT dark green fairy-light cable lies loosely around the two front paws and across ground in foreground; small red/yellow/green/blue bulbs are plain unlit glass, without glow or sparks. Avoid cable obscuring paw attachment or forming limb shapes. Tail viewer-right. This is bottom-left storyboard pose."
+    },
+    {
+      "id": "jumping",
+      "row": 4,
+      "frames": 5,
+      "interval": 0.15,
+      "label": "시작",
+      "pose": "Pose: front-facing in the middle of a SHORT vertical hop, TWO front paws raised outward at chest/shoulder height, TWO rear legs extend down, exactly four paws and NO duplicate front paws at ground. Same face and torso size as the master. NO gift box or ground prop in this character-only image; the small closed gift box will be a separate grounded animation layer. Fluffy tail viewer-right. No confetti or stars. All parts remain inside generous transparent canvas margin."
+    },
+    {
+      "id": "sleeping",
+      "row": 11,
+      "frames": 6,
+      "interval": 0.46,
+      "label": "잠자기",
+      "pose": "Pose: curled sleeping ragdoll lying horizontally with closed eyes, head at viewer-left resting on TWO folded front paws, TWO hind limbs tucked naturally under torso (occluded by torso), brown fluffy tail curled along viewer-right. Same head scale as master, preserve face mask and coat design. Hat droops softly along head. Red coat follows reclining torso with belt wrapping side. No blanket, no ZZZ, no moon, no snowflake, no scenery."
+    },
+    {
+      "id": "moveRight",
+      "row": 1,
+      "frames": 8,
+      "interval": 0.085,
+      "label": "오른쪽 이동",
+      "pose": "Pose: ordinary base Retto RUNNING toward RIGHT, low horizontal torso, side three-quarter profile, head on right and tail extending left behind, exactly TWO forelegs and TWO hindlegs in a natural running stride. Forelegs one reaching forward and the other under chest, rear legs staggered behind. Same head/torso proportions as master; this is real base-cat locomotion, not a seated bob or upright walk. Santa coat naturally wraps side/back and sleeves follow legs, belt around midriff. Both ears visible, no objects."
+    }
+  ]
+}

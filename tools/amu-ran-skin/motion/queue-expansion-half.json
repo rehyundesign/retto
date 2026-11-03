@@ -1,0 +1,289 @@
+[
+  {
+    "state": "jumping",
+    "id": "F02",
+    "variant": "auto-half",
+    "phase": "Deeper anticipation crouch than starting pose: all4 paws grounded, short knees/elbows compress, head/body lower together a little, not airborne yet.",
+    "prompt": "ONE independently drawn whole transparent Retto jumping animation cell. Neighboring pose references are anatomy/costume authority. Deeper anticipation crouch than starting pose: all4 paws grounded, short knees/elbows compress, head/body lower together a little, not airborne yet. Same original-sized deep round3D muzzle/head, blue eyes if open, cream/brown short soft fur, COMPACT real cat torso and SHORT legs. Exactly4 actual feline limbs, hidden limbs plausibly occluded by torso/near limbs, no extra paw or empty hanging sleeve. Broad one-piece white/pale-pink scalloped cape covering shoulders/torso, red trim, layered hip cheer skirt, white/pink cuffs ONLY actual FRONT forelegs; hindlegs bare fur, no socks/garters. White/red visor ONE red heart/plume anatomical-left(viewer-right front), centered Ran-style red scarf with ONE attached pink-black plaid heart Guardian Egg. No foot pompoms or extra necklace. Clothing follows actual shoulder/elbow/hip joints. ONE original fluffy brown tail, unchanged volume. Full silhouette inside generous margin. No extra pet/effect/text. Not a repeated source, not crossfade or independent limb/head distortion.",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/jumping-v1/character/F00.png"
+    ],
+    "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/jumping-v1/requests/F02-auto-half.json"
+  },
+  {
+    "state": "jumping",
+    "id": "F06",
+    "variant": "auto-half",
+    "phase": "Mid-ascent: hind knees tuck toward belly, forepaws curl up, body turns a little toward Ran. Airborne, no grounded duplicate paw; bare furry hindlegs.",
+    "prompt": "ONE independently drawn whole transparent Retto jumping animation cell. Neighboring pose references are anatomy/costume authority. Mid-ascent: hind knees tuck toward belly, forepaws curl up, body turns a little toward Ran. Airborne, no grounded duplicate paw; bare furry hindlegs. Same original-sized deep round3D muzzle/head, blue eyes if open, cream/brown short soft fur, COMPACT real cat torso and SHORT legs. Exactly4 actual feline limbs, hidden limbs plausibly occluded by torso/near limbs, no extra paw or empty hanging sleeve. Broad one-piece white/pale-pink scalloped cape covering shoulders/torso, red trim, layered hip cheer skirt, white/pink cuffs ONLY actual FRONT forelegs; hindlegs bare fur, no socks/garters. White/red visor ONE red heart/plume anatomical-left(viewer-right front), centered Ran-style red scarf with ONE attached pink-black plaid heart Guardian Egg. No foot pompoms or extra necklace. Clothing follows actual shoulder/elbow/hip joints. ONE original fluffy brown tail, unchanged volume. Full silhouette inside generous margin. No extra pet/effect/text. Not a repeated source, not crossfade or independent limb/head distortion.",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/jumping-v1/character/F04.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/jumping-v1/character/F08.png"
+    ],
+    "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/jumping-v1/requests/F06-auto-half.json"
+  },
+  {
+    "state": "jumping",
+    "id": "F10",
+    "variant": "auto-half",
+    "phase": "Mid-descent: forepaws extend down halfway for landing, bare hindlegs unfold modestly under hips, still compact animal.",
+    "prompt": "ONE independently drawn whole transparent Retto jumping animation cell. Neighboring pose references are anatomy/costume authority. Mid-descent: forepaws extend down halfway for landing, bare hindlegs unfold modestly under hips, still compact animal. Same original-sized deep round3D muzzle/head, blue eyes if open, cream/brown short soft fur, COMPACT real cat torso and SHORT legs. Exactly4 actual feline limbs, hidden limbs plausibly occluded by torso/near limbs, no extra paw or empty hanging sleeve. Broad one-piece white/pale-pink scalloped cape covering shoulders/torso, red trim, layered hip cheer skirt, white/pink cuffs ONLY actual FRONT forelegs; hindlegs bare fur, no socks/garters. White/red visor ONE red heart/plume anatomical-left(viewer-right front), centered Ran-style red scarf with ONE attached pink-black plaid heart Guardian Egg. No foot pompoms or extra necklace. Clothing follows actual shoulder/elbow/hip joints. ONE original fluffy brown tail, unchanged volume. Full silhouette inside generous margin. No extra pet/effect/text. Not a repeated source, not crossfade or independent limb/head distortion.",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/jumping-v1/character/F08.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/jumping-v1/character/F12.png"
+    ],
+    "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/jumping-v1/requests/F10-auto-half.json"
+  },
+  {
+    "state": "jumping",
+    "id": "F14",
+    "variant": "auto-half",
+    "phase": "Landing recovery: head/body ease up from deepest compression toward starting crouch, paws settle, cape/plume lag and settle.",
+    "prompt": "ONE independently drawn whole transparent Retto jumping animation cell. Neighboring pose references are anatomy/costume authority. Landing recovery: head/body ease up from deepest compression toward starting crouch, paws settle, cape/plume lag and settle. Same original-sized deep round3D muzzle/head, blue eyes if open, cream/brown short soft fur, COMPACT real cat torso and SHORT legs. Exactly4 actual feline limbs, hidden limbs plausibly occluded by torso/near limbs, no extra paw or empty hanging sleeve. Broad one-piece white/pale-pink scalloped cape covering shoulders/torso, red trim, layered hip cheer skirt, white/pink cuffs ONLY actual FRONT forelegs; hindlegs bare fur, no socks/garters. White/red visor ONE red heart/plume anatomical-left(viewer-right front), centered Ran-style red scarf with ONE attached pink-black plaid heart Guardian Egg. No foot pompoms or extra necklace. Clothing follows actual shoulder/elbow/hip joints. ONE original fluffy brown tail, unchanged volume. Full silhouette inside generous margin. No extra pet/effect/text. Not a repeated source, not crossfade or independent limb/head distortion.",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/jumping-v1/character/F12.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/jumping-v1/character/F00.png"
+    ],
+    "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/jumping-v1/requests/F14-auto-half.json"
+  },
+  {
+    "state": "failed",
+    "id": "F02",
+    "variant": "auto-half",
+    "phase": "Ear tips begin turning back and eyes show brief surprise; right forepaw(viewer-left) just begins leaving ground near lower belly. Forepaw articulation stays BELOW cheeks/eyes; one actual foreleg may raise but the other and two rear paws support, no taller torso. Preserve original short body/legs.",
+    "prompt": "ONE independently drawn whole transparent Retto failed animation cell. Neighboring pose references are anatomy/costume authority. Ear tips begin turning back and eyes show brief surprise; right forepaw(viewer-left) just begins leaving ground near lower belly. Forepaw articulation stays BELOW cheeks/eyes; one actual foreleg may raise but the other and two rear paws support, no taller torso. Preserve original short body/legs. Same original-sized deep round3D muzzle/head, blue eyes if open, cream/brown short soft fur, COMPACT real cat torso and SHORT legs. Exactly4 actual feline limbs, hidden limbs plausibly occluded by torso/near limbs, no extra paw or empty hanging sleeve. Short fitted black blazer, white collar/cuffs, loose red tie, red-black plaid skirt ONLY rear hips behind forelegs. ONE red shield armband on actual LEFT upper foreleg(viewer-right front), right sleeve plain. Pink X left ear(viewer-right). Clothing follows actual shoulder/elbow/hip joints. ONE original fluffy brown tail, unchanged volume. Full silhouette inside generous margin. No extra pet/effect/text. Not a repeated source, not crossfade or independent limb/head distortion.",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/failed-v1/character/F00.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/failed-v1/character/F04.png"
+    ],
+    "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/failed-v1/requests/F02-auto-half.json"
+  },
+  {
+    "state": "failed",
+    "id": "F06",
+    "variant": "auto-half",
+    "phase": "Concern grows gently: head tips a little, ears partly folded, actual right paw halfway extending toward Ran, no huge crying face. Forepaw articulation stays BELOW cheeks/eyes; one actual foreleg may raise but the other and two rear paws support, no taller torso. Preserve original short body/legs.",
+    "prompt": "ONE independently drawn whole transparent Retto failed animation cell. Neighboring pose references are anatomy/costume authority. Concern grows gently: head tips a little, ears partly folded, actual right paw halfway extending toward Ran, no huge crying face. Forepaw articulation stays BELOW cheeks/eyes; one actual foreleg may raise but the other and two rear paws support, no taller torso. Preserve original short body/legs. Same original-sized deep round3D muzzle/head, blue eyes if open, cream/brown short soft fur, COMPACT real cat torso and SHORT legs. Exactly4 actual feline limbs, hidden limbs plausibly occluded by torso/near limbs, no extra paw or empty hanging sleeve. Short fitted black blazer, white collar/cuffs, loose red tie, red-black plaid skirt ONLY rear hips behind forelegs. ONE red shield armband on actual LEFT upper foreleg(viewer-right front), right sleeve plain. Pink X left ear(viewer-right). Clothing follows actual shoulder/elbow/hip joints. ONE original fluffy brown tail, unchanged volume. Full silhouette inside generous margin. No extra pet/effect/text. Not a repeated source, not crossfade or independent limb/head distortion.",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/failed-v1/character/F04.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/failed-v1/character/F08.png"
+    ],
+    "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/failed-v1/requests/F06-auto-half.json"
+  },
+  {
+    "state": "failed",
+    "id": "F10",
+    "variant": "auto-half",
+    "phase": "Confidence recovers: ears begin reopening, lifted right paw turns inward at LOWER chest, chin lifts slightly; never stand taller. Forepaw articulation stays BELOW cheeks/eyes; one actual foreleg may raise but the other and two rear paws support, no taller torso. Preserve original short body/legs.",
+    "prompt": "ONE independently drawn whole transparent Retto failed animation cell. Neighboring pose references are anatomy/costume authority. Confidence recovers: ears begin reopening, lifted right paw turns inward at LOWER chest, chin lifts slightly; never stand taller. Forepaw articulation stays BELOW cheeks/eyes; one actual foreleg may raise but the other and two rear paws support, no taller torso. Preserve original short body/legs. Same original-sized deep round3D muzzle/head, blue eyes if open, cream/brown short soft fur, COMPACT real cat torso and SHORT legs. Exactly4 actual feline limbs, hidden limbs plausibly occluded by torso/near limbs, no extra paw or empty hanging sleeve. Short fitted black blazer, white collar/cuffs, loose red tie, red-black plaid skirt ONLY rear hips behind forelegs. ONE red shield armband on actual LEFT upper foreleg(viewer-right front), right sleeve plain. Pink X left ear(viewer-right). Clothing follows actual shoulder/elbow/hip joints. ONE original fluffy brown tail, unchanged volume. Full silhouette inside generous margin. No extra pet/effect/text. Not a repeated source, not crossfade or independent limb/head distortion.",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/failed-v1/character/F08.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/failed-v1/character/F12.png"
+    ],
+    "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/failed-v1/requests/F10-auto-half.json"
+  },
+  {
+    "state": "failed",
+    "id": "F14",
+    "variant": "auto-half",
+    "phase": "Actual right paw lowers halfway toward ground, ears nearly normal, soft confident eyes with small natural blink; recover first posture. Forepaw articulation stays BELOW cheeks/eyes; one actual foreleg may raise but the other and two rear paws support, no taller torso. Preserve original short body/legs.",
+    "prompt": "ONE independently drawn whole transparent Retto failed animation cell. Neighboring pose references are anatomy/costume authority. Actual right paw lowers halfway toward ground, ears nearly normal, soft confident eyes with small natural blink; recover first posture. Forepaw articulation stays BELOW cheeks/eyes; one actual foreleg may raise but the other and two rear paws support, no taller torso. Preserve original short body/legs. Same original-sized deep round3D muzzle/head, blue eyes if open, cream/brown short soft fur, COMPACT real cat torso and SHORT legs. Exactly4 actual feline limbs, hidden limbs plausibly occluded by torso/near limbs, no extra paw or empty hanging sleeve. Short fitted black blazer, white collar/cuffs, loose red tie, red-black plaid skirt ONLY rear hips behind forelegs. ONE red shield armband on actual LEFT upper foreleg(viewer-right front), right sleeve plain. Pink X left ear(viewer-right). Clothing follows actual shoulder/elbow/hip joints. ONE original fluffy brown tail, unchanged volume. Full silhouette inside generous margin. No extra pet/effect/text. Not a repeated source, not crossfade or independent limb/head distortion.",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/failed-v1/character/F12.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/failed-v1/character/F00.png"
+    ],
+    "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/failed-v1/requests/F14-auto-half.json"
+  },
+  {
+    "state": "waiting",
+    "id": "F02",
+    "variant": "auto-half",
+    "phase": "Right paw(viewer-left) just begins leaving ground, below belly, preparing to cross chest toward left arm band. Forepaw articulation stays BELOW cheeks/eyes; one actual foreleg may raise but the other and two rear paws support, no taller torso. Preserve original short body/legs.",
+    "prompt": "ONE independently drawn whole transparent Retto waiting animation cell. Neighboring pose references are anatomy/costume authority. Right paw(viewer-left) just begins leaving ground, below belly, preparing to cross chest toward left arm band. Forepaw articulation stays BELOW cheeks/eyes; one actual foreleg may raise but the other and two rear paws support, no taller torso. Preserve original short body/legs. Same original-sized deep round3D muzzle/head, blue eyes if open, cream/brown short soft fur, COMPACT real cat torso and SHORT legs. Exactly4 actual feline limbs, hidden limbs plausibly occluded by torso/near limbs, no extra paw or empty hanging sleeve. Short fitted black blazer, white collar/cuffs, loose red tie, red-black plaid skirt ONLY rear hips behind forelegs. ONE red shield armband on actual LEFT upper foreleg(viewer-right front), right sleeve plain. Pink X left ear(viewer-right). Clothing follows actual shoulder/elbow/hip joints. ONE original fluffy brown tail, unchanged volume. Full silhouette inside generous margin. No extra pet/effect/text. Not a repeated source, not crossfade or independent limb/head distortion.",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/waiting-v1/character/F00.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/waiting-v1/character/F04.png"
+    ],
+    "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/waiting-v1/requests/F02-auto-half.json"
+  },
+  {
+    "state": "waiting",
+    "id": "F06",
+    "variant": "auto-half",
+    "phase": "Right paw halfway crosses center chest toward red LEFT upper-foreleg armband(viewer-right), almost touching it, other foreleg planted. Forepaw articulation stays BELOW cheeks/eyes; one actual foreleg may raise but the other and two rear paws support, no taller torso. Preserve original short body/legs.",
+    "prompt": "ONE independently drawn whole transparent Retto waiting animation cell. Neighboring pose references are anatomy/costume authority. Right paw halfway crosses center chest toward red LEFT upper-foreleg armband(viewer-right), almost touching it, other foreleg planted. Forepaw articulation stays BELOW cheeks/eyes; one actual foreleg may raise but the other and two rear paws support, no taller torso. Preserve original short body/legs. Same original-sized deep round3D muzzle/head, blue eyes if open, cream/brown short soft fur, COMPACT real cat torso and SHORT legs. Exactly4 actual feline limbs, hidden limbs plausibly occluded by torso/near limbs, no extra paw or empty hanging sleeve. Short fitted black blazer, white collar/cuffs, loose red tie, red-black plaid skirt ONLY rear hips behind forelegs. ONE red shield armband on actual LEFT upper foreleg(viewer-right front), right sleeve plain. Pink X left ear(viewer-right). Clothing follows actual shoulder/elbow/hip joints. ONE original fluffy brown tail, unchanged volume. Full silhouette inside generous margin. No extra pet/effect/text. Not a repeated source, not crossfade or independent limb/head distortion.",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/waiting-v1/character/F04.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/waiting-v1/character/F08.png"
+    ],
+    "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/waiting-v1/requests/F06-auto-half.json"
+  },
+  {
+    "state": "waiting",
+    "id": "F10",
+    "variant": "auto-half",
+    "phase": "After tap, right paw halfway withdraws from LEFT foreleg band toward center lower chest; small glance toward Ran. Forepaw articulation stays BELOW cheeks/eyes; one actual foreleg may raise but the other and two rear paws support, no taller torso. Preserve original short body/legs.",
+    "prompt": "ONE independently drawn whole transparent Retto waiting animation cell. Neighboring pose references are anatomy/costume authority. After tap, right paw halfway withdraws from LEFT foreleg band toward center lower chest; small glance toward Ran. Forepaw articulation stays BELOW cheeks/eyes; one actual foreleg may raise but the other and two rear paws support, no taller torso. Preserve original short body/legs. Same original-sized deep round3D muzzle/head, blue eyes if open, cream/brown short soft fur, COMPACT real cat torso and SHORT legs. Exactly4 actual feline limbs, hidden limbs plausibly occluded by torso/near limbs, no extra paw or empty hanging sleeve. Short fitted black blazer, white collar/cuffs, loose red tie, red-black plaid skirt ONLY rear hips behind forelegs. ONE red shield armband on actual LEFT upper foreleg(viewer-right front), right sleeve plain. Pink X left ear(viewer-right). Clothing follows actual shoulder/elbow/hip joints. ONE original fluffy brown tail, unchanged volume. Full silhouette inside generous margin. No extra pet/effect/text. Not a repeated source, not crossfade or independent limb/head distortion.",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/waiting-v1/character/F08.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/waiting-v1/character/F12.png"
+    ],
+    "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/waiting-v1/requests/F10-auto-half.json"
+  },
+  {
+    "state": "waiting",
+    "id": "F14",
+    "variant": "auto-half",
+    "phase": "Right forepaw lowers from center chest toward ground, still at lower belly; cool calm blink, original compact stature. Forepaw articulation stays BELOW cheeks/eyes; one actual foreleg may raise but the other and two rear paws support, no taller torso. Preserve original short body/legs.",
+    "prompt": "ONE independently drawn whole transparent Retto waiting animation cell. Neighboring pose references are anatomy/costume authority. Right forepaw lowers from center chest toward ground, still at lower belly; cool calm blink, original compact stature. Forepaw articulation stays BELOW cheeks/eyes; one actual foreleg may raise but the other and two rear paws support, no taller torso. Preserve original short body/legs. Same original-sized deep round3D muzzle/head, blue eyes if open, cream/brown short soft fur, COMPACT real cat torso and SHORT legs. Exactly4 actual feline limbs, hidden limbs plausibly occluded by torso/near limbs, no extra paw or empty hanging sleeve. Short fitted black blazer, white collar/cuffs, loose red tie, red-black plaid skirt ONLY rear hips behind forelegs. ONE red shield armband on actual LEFT upper foreleg(viewer-right front), right sleeve plain. Pink X left ear(viewer-right). Clothing follows actual shoulder/elbow/hip joints. ONE original fluffy brown tail, unchanged volume. Full silhouette inside generous margin. No extra pet/effect/text. Not a repeated source, not crossfade or independent limb/head distortion.",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/waiting-v1/character/F12.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/waiting-v1/character/F00.png"
+    ],
+    "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/waiting-v1/requests/F14-auto-half.json"
+  },
+  {
+    "state": "running",
+    "id": "F02",
+    "variant": "auto-half",
+    "phase": "Begin heart-unlock: actual right paw(viewer-left) just lifts from floor to lower belly, other foreleg planted. Forepaw articulation stays BELOW cheeks/eyes; one actual foreleg may raise but the other and two rear paws support, no taller torso. Preserve original short body/legs.",
+    "prompt": "ONE independently drawn whole transparent Retto running animation cell. Neighboring pose references are anatomy/costume authority. Begin heart-unlock: actual right paw(viewer-left) just lifts from floor to lower belly, other foreleg planted. Forepaw articulation stays BELOW cheeks/eyes; one actual foreleg may raise but the other and two rear paws support, no taller torso. Preserve original short body/legs. Same original-sized deep round3D muzzle/head, blue eyes if open, cream/brown short soft fur, COMPACT real cat torso and SHORT legs. Exactly4 actual feline limbs, hidden limbs plausibly occluded by torso/near limbs, no extra paw or empty hanging sleeve. Short fitted black blazer, white collar/cuffs, loose red tie, red-black plaid skirt ONLY rear hips behind forelegs. ONE red shield armband on actual LEFT upper foreleg(viewer-right front), right sleeve plain. Pink X left ear(viewer-right). Clothing follows actual shoulder/elbow/hip joints. ONE original fluffy brown tail, unchanged volume. Full silhouette inside generous margin. No extra pet/effect/text. Not a repeated source, not crossfade or independent limb/head distortion.",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/running-v1/character/F00.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/running-v1/character/F04.png"
+    ],
+    "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/running-v1/requests/F02-auto-half.json"
+  },
+  {
+    "state": "running",
+    "id": "F06",
+    "variant": "auto-half",
+    "phase": "Right paw approaches CENTER chest over red tie, halfway into Amu heart-unlock concentration. Focused but friendly eyes, no tall belly. Forepaw articulation stays BELOW cheeks/eyes; one actual foreleg may raise but the other and two rear paws support, no taller torso. Preserve original short body/legs.",
+    "prompt": "ONE independently drawn whole transparent Retto running animation cell. Neighboring pose references are anatomy/costume authority. Right paw approaches CENTER chest over red tie, halfway into Amu heart-unlock concentration. Focused but friendly eyes, no tall belly. Forepaw articulation stays BELOW cheeks/eyes; one actual foreleg may raise but the other and two rear paws support, no taller torso. Preserve original short body/legs. Same original-sized deep round3D muzzle/head, blue eyes if open, cream/brown short soft fur, COMPACT real cat torso and SHORT legs. Exactly4 actual feline limbs, hidden limbs plausibly occluded by torso/near limbs, no extra paw or empty hanging sleeve. Short fitted black blazer, white collar/cuffs, loose red tie, red-black plaid skirt ONLY rear hips behind forelegs. ONE red shield armband on actual LEFT upper foreleg(viewer-right front), right sleeve plain. Pink X left ear(viewer-right). Clothing follows actual shoulder/elbow/hip joints. ONE original fluffy brown tail, unchanged volume. Full silhouette inside generous margin. No extra pet/effect/text. Not a repeated source, not crossfade or independent limb/head distortion.",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/running-v1/character/F04.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/running-v1/character/F08.png"
+    ],
+    "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/running-v1/requests/F06-auto-half.json"
+  },
+  {
+    "state": "running",
+    "id": "F10",
+    "variant": "auto-half",
+    "phase": "Right paw turns a little outward from center heart area, releasing heart-unlock gesture toward Ran. Other foreleg planted, short seated torso. Forepaw articulation stays BELOW cheeks/eyes; one actual foreleg may raise but the other and two rear paws support, no taller torso. Preserve original short body/legs.",
+    "prompt": "ONE independently drawn whole transparent Retto running animation cell. Neighboring pose references are anatomy/costume authority. Right paw turns a little outward from center heart area, releasing heart-unlock gesture toward Ran. Other foreleg planted, short seated torso. Forepaw articulation stays BELOW cheeks/eyes; one actual foreleg may raise but the other and two rear paws support, no taller torso. Preserve original short body/legs. Same original-sized deep round3D muzzle/head, blue eyes if open, cream/brown short soft fur, COMPACT real cat torso and SHORT legs. Exactly4 actual feline limbs, hidden limbs plausibly occluded by torso/near limbs, no extra paw or empty hanging sleeve. Short fitted black blazer, white collar/cuffs, loose red tie, red-black plaid skirt ONLY rear hips behind forelegs. ONE red shield armband on actual LEFT upper foreleg(viewer-right front), right sleeve plain. Pink X left ear(viewer-right). Clothing follows actual shoulder/elbow/hip joints. ONE original fluffy brown tail, unchanged volume. Full silhouette inside generous margin. No extra pet/effect/text. Not a repeated source, not crossfade or independent limb/head distortion.",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/running-v1/character/F08.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/running-v1/character/F12.png"
+    ],
+    "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/running-v1/requests/F10-auto-half.json"
+  },
+  {
+    "state": "running",
+    "id": "F14",
+    "variant": "auto-half",
+    "phase": "Actual right paw descends to lower belly/waist, eyes relax into tiny blink, return neutral. No both-arms human stance. Forepaw articulation stays BELOW cheeks/eyes; one actual foreleg may raise but the other and two rear paws support, no taller torso. Preserve original short body/legs.",
+    "prompt": "ONE independently drawn whole transparent Retto running animation cell. Neighboring pose references are anatomy/costume authority. Actual right paw descends to lower belly/waist, eyes relax into tiny blink, return neutral. No both-arms human stance. Forepaw articulation stays BELOW cheeks/eyes; one actual foreleg may raise but the other and two rear paws support, no taller torso. Preserve original short body/legs. Same original-sized deep round3D muzzle/head, blue eyes if open, cream/brown short soft fur, COMPACT real cat torso and SHORT legs. Exactly4 actual feline limbs, hidden limbs plausibly occluded by torso/near limbs, no extra paw or empty hanging sleeve. Short fitted black blazer, white collar/cuffs, loose red tie, red-black plaid skirt ONLY rear hips behind forelegs. ONE red shield armband on actual LEFT upper foreleg(viewer-right front), right sleeve plain. Pink X left ear(viewer-right). Clothing follows actual shoulder/elbow/hip joints. ONE original fluffy brown tail, unchanged volume. Full silhouette inside generous margin. No extra pet/effect/text. Not a repeated source, not crossfade or independent limb/head distortion.",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/running-v1/character/F12.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/running-v1/character/F00.png"
+    ],
+    "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/running-v1/requests/F14-auto-half.json"
+  },
+  {
+    "state": "review",
+    "id": "F02",
+    "variant": "auto-half",
+    "phase": "Actual right paw begins reaching toward collar/lapel; heart charm still tucked and mostly hidden; head starts a gentle curious bow. Forepaw articulation stays BELOW cheeks/eyes; one actual foreleg may raise but the other and two rear paws support, no taller torso. Preserve original short body/legs.",
+    "prompt": "ONE independently drawn whole transparent Retto review animation cell. Neighboring pose references are anatomy/costume authority. Actual right paw begins reaching toward collar/lapel; heart charm still tucked and mostly hidden; head starts a gentle curious bow. Forepaw articulation stays BELOW cheeks/eyes; one actual foreleg may raise but the other and two rear paws support, no taller torso. Preserve original short body/legs. Same original-sized deep round3D muzzle/head, blue eyes if open, cream/brown short soft fur, COMPACT real cat torso and SHORT legs. Exactly4 actual feline limbs, hidden limbs plausibly occluded by torso/near limbs, no extra paw or empty hanging sleeve. Short fitted black blazer, white collar/cuffs, loose red tie, red-black plaid skirt ONLY rear hips behind forelegs. ONE red shield armband on actual LEFT upper foreleg(viewer-right front), right sleeve plain. Pink X left ear(viewer-right). Clothing follows actual shoulder/elbow/hip joints. ONE original fluffy brown tail, unchanged volume. Full silhouette inside generous margin. No extra pet/effect/text. Not a repeated source, not crossfade or independent limb/head distortion.",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/review-v1/character/F00.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/review-v1/character/F04.png"
+    ],
+    "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/review-v1/requests/F02-auto-half.json"
+  },
+  {
+    "state": "review",
+    "id": "F06",
+    "variant": "auto-half",
+    "phase": "Right paw draws small pink/gold heart charm a little out from lapel, partly hidden behind paw. Head looks down to inspect, round3D muzzle remains. Forepaw articulation stays BELOW cheeks/eyes; one actual foreleg may raise but the other and two rear paws support, no taller torso. Preserve original short body/legs.",
+    "prompt": "ONE independently drawn whole transparent Retto review animation cell. Neighboring pose references are anatomy/costume authority. Right paw draws small pink/gold heart charm a little out from lapel, partly hidden behind paw. Head looks down to inspect, round3D muzzle remains. Forepaw articulation stays BELOW cheeks/eyes; one actual foreleg may raise but the other and two rear paws support, no taller torso. Preserve original short body/legs. Same original-sized deep round3D muzzle/head, blue eyes if open, cream/brown short soft fur, COMPACT real cat torso and SHORT legs. Exactly4 actual feline limbs, hidden limbs plausibly occluded by torso/near limbs, no extra paw or empty hanging sleeve. Short fitted black blazer, white collar/cuffs, loose red tie, red-black plaid skirt ONLY rear hips behind forelegs. ONE red shield armband on actual LEFT upper foreleg(viewer-right front), right sleeve plain. Pink X left ear(viewer-right). Clothing follows actual shoulder/elbow/hip joints. ONE original fluffy brown tail, unchanged volume. Full silhouette inside generous margin. No extra pet/effect/text. Not a repeated source, not crossfade or independent limb/head distortion.",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/review-v1/character/F04.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/review-v1/character/F08.png"
+    ],
+    "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/review-v1/requests/F06-auto-half.json"
+  },
+  {
+    "state": "review",
+    "id": "F10",
+    "variant": "auto-half",
+    "phase": "Gently inspect/tap held tiny heart, paw/wrist rotates a little, eyes refocus toward charm, other foreleg and rear paws support. Forepaw articulation stays BELOW cheeks/eyes; one actual foreleg may raise but the other and two rear paws support, no taller torso. Preserve original short body/legs.",
+    "prompt": "ONE independently drawn whole transparent Retto review animation cell. Neighboring pose references are anatomy/costume authority. Gently inspect/tap held tiny heart, paw/wrist rotates a little, eyes refocus toward charm, other foreleg and rear paws support. Forepaw articulation stays BELOW cheeks/eyes; one actual foreleg may raise but the other and two rear paws support, no taller torso. Preserve original short body/legs. Same original-sized deep round3D muzzle/head, blue eyes if open, cream/brown short soft fur, COMPACT real cat torso and SHORT legs. Exactly4 actual feline limbs, hidden limbs plausibly occluded by torso/near limbs, no extra paw or empty hanging sleeve. Short fitted black blazer, white collar/cuffs, loose red tie, red-black plaid skirt ONLY rear hips behind forelegs. ONE red shield armband on actual LEFT upper foreleg(viewer-right front), right sleeve plain. Pink X left ear(viewer-right). Clothing follows actual shoulder/elbow/hip joints. ONE original fluffy brown tail, unchanged volume. Full silhouette inside generous margin. No extra pet/effect/text. Not a repeated source, not crossfade or independent limb/head distortion.",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/review-v1/character/F08.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/review-v1/character/F12.png"
+    ],
+    "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/review-v1/requests/F10-auto-half.json"
+  },
+  {
+    "state": "review",
+    "id": "F14",
+    "variant": "auto-half",
+    "phase": "Tuck tiny heart charm behind lapel again as right paw begins lowering; charm now mostly hidden, head looks back up toward Ran. Forepaw articulation stays BELOW cheeks/eyes; one actual foreleg may raise but the other and two rear paws support, no taller torso. Preserve original short body/legs.",
+    "prompt": "ONE independently drawn whole transparent Retto review animation cell. Neighboring pose references are anatomy/costume authority. Tuck tiny heart charm behind lapel again as right paw begins lowering; charm now mostly hidden, head looks back up toward Ran. Forepaw articulation stays BELOW cheeks/eyes; one actual foreleg may raise but the other and two rear paws support, no taller torso. Preserve original short body/legs. Same original-sized deep round3D muzzle/head, blue eyes if open, cream/brown short soft fur, COMPACT real cat torso and SHORT legs. Exactly4 actual feline limbs, hidden limbs plausibly occluded by torso/near limbs, no extra paw or empty hanging sleeve. Short fitted black blazer, white collar/cuffs, loose red tie, red-black plaid skirt ONLY rear hips behind forelegs. ONE red shield armband on actual LEFT upper foreleg(viewer-right front), right sleeve plain. Pink X left ear(viewer-right). Clothing follows actual shoulder/elbow/hip joints. ONE original fluffy brown tail, unchanged volume. Full silhouette inside generous margin. No extra pet/effect/text. Not a repeated source, not crossfade or independent limb/head distortion.",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/review-v1/character/F12.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/review-v1/character/F00.png"
+    ],
+    "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/review-v1/requests/F14-auto-half.json"
+  },
+  {
+    "state": "sleeping",
+    "id": "F02",
+    "variant": "auto-half",
+    "phase": "Chin begins settling toward actual tucked forepaws, near ear loosens a little, eyes remain closed, curled body unchanged. Keep curled sleep and CLOSED eyes throughout; independent subtle chin/paw/ear/tail articulation, not larger head or stretched breathing.",
+    "prompt": "ONE independently drawn whole transparent Retto sleeping animation cell. Neighboring pose references are anatomy/costume authority. Chin begins settling toward actual tucked forepaws, near ear loosens a little, eyes remain closed, curled body unchanged. Keep curled sleep and CLOSED eyes throughout; independent subtle chin/paw/ear/tail articulation, not larger head or stretched breathing. Same original-sized deep round3D muzzle/head, blue eyes if open, cream/brown short soft fur, COMPACT real cat torso and SHORT legs. Exactly4 actual feline limbs, hidden limbs plausibly occluded by torso/near limbs, no extra paw or empty hanging sleeve. Short fitted black blazer, white collar/cuffs, loose red tie, red-black plaid skirt ONLY rear hips behind forelegs. ONE red shield armband on actual LEFT upper foreleg(viewer-right front), right sleeve plain. Pink X left ear(viewer-right). Clothing follows actual shoulder/elbow/hip joints. ONE original fluffy brown tail, unchanged volume. Full silhouette inside generous margin. No extra pet/effect/text. Not a repeated source, not crossfade or independent limb/head distortion.",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/sleeping-v1/character/F00.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/sleeping-v1/character/F04.png"
+    ],
+    "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/sleeping-v1/requests/F02-auto-half.json"
+  },
+  {
+    "state": "sleeping",
+    "id": "F06",
+    "variant": "auto-half",
+    "phase": "Deeper sleep: chin settles halfway deeper on forepaws, one tiny paw tuck and tail curls fractionally closer, no stretching. Keep curled sleep and CLOSED eyes throughout; independent subtle chin/paw/ear/tail articulation, not larger head or stretched breathing.",
+    "prompt": "ONE independently drawn whole transparent Retto sleeping animation cell. Neighboring pose references are anatomy/costume authority. Deeper sleep: chin settles halfway deeper on forepaws, one tiny paw tuck and tail curls fractionally closer, no stretching. Keep curled sleep and CLOSED eyes throughout; independent subtle chin/paw/ear/tail articulation, not larger head or stretched breathing. Same original-sized deep round3D muzzle/head, blue eyes if open, cream/brown short soft fur, COMPACT real cat torso and SHORT legs. Exactly4 actual feline limbs, hidden limbs plausibly occluded by torso/near limbs, no extra paw or empty hanging sleeve. Short fitted black blazer, white collar/cuffs, loose red tie, red-black plaid skirt ONLY rear hips behind forelegs. ONE red shield armband on actual LEFT upper foreleg(viewer-right front), right sleeve plain. Pink X left ear(viewer-right). Clothing follows actual shoulder/elbow/hip joints. ONE original fluffy brown tail, unchanged volume. Full silhouette inside generous margin. No extra pet/effect/text. Not a repeated source, not crossfade or independent limb/head distortion.",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/sleeping-v1/character/F04.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/sleeping-v1/character/F08.png"
+    ],
+    "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/sleeping-v1/requests/F06-auto-half.json"
+  },
+  {
+    "state": "sleeping",
+    "id": "F10",
+    "variant": "auto-half",
+    "phase": "Gentle inhale: tiny shoulder/chin rise, eyes closed, curled tail and forepaws softly follow; same original head/body ratio. Keep curled sleep and CLOSED eyes throughout; independent subtle chin/paw/ear/tail articulation, not larger head or stretched breathing.",
+    "prompt": "ONE independently drawn whole transparent Retto sleeping animation cell. Neighboring pose references are anatomy/costume authority. Gentle inhale: tiny shoulder/chin rise, eyes closed, curled tail and forepaws softly follow; same original head/body ratio. Keep curled sleep and CLOSED eyes throughout; independent subtle chin/paw/ear/tail articulation, not larger head or stretched breathing. Same original-sized deep round3D muzzle/head, blue eyes if open, cream/brown short soft fur, COMPACT real cat torso and SHORT legs. Exactly4 actual feline limbs, hidden limbs plausibly occluded by torso/near limbs, no extra paw or empty hanging sleeve. Short fitted black blazer, white collar/cuffs, loose red tie, red-black plaid skirt ONLY rear hips behind forelegs. ONE red shield armband on actual LEFT upper foreleg(viewer-right front), right sleeve plain. Pink X left ear(viewer-right). Clothing follows actual shoulder/elbow/hip joints. ONE original fluffy brown tail, unchanged volume. Full silhouette inside generous margin. No extra pet/effect/text. Not a repeated source, not crossfade or independent limb/head distortion.",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/sleeping-v1/character/F08.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/sleeping-v1/character/F12.png"
+    ],
+    "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/sleeping-v1/requests/F10-auto-half.json"
+  },
+  {
+    "state": "sleeping",
+    "id": "F14",
+    "variant": "auto-half",
+    "phase": "Gentle exhale toward first pose: tucked paw relaxes and tail eases fractionally outward, near ear settles, eyes closed. Keep curled sleep and CLOSED eyes throughout; independent subtle chin/paw/ear/tail articulation, not larger head or stretched breathing.",
+    "prompt": "ONE independently drawn whole transparent Retto sleeping animation cell. Neighboring pose references are anatomy/costume authority. Gentle exhale toward first pose: tucked paw relaxes and tail eases fractionally outward, near ear settles, eyes closed. Keep curled sleep and CLOSED eyes throughout; independent subtle chin/paw/ear/tail articulation, not larger head or stretched breathing. Same original-sized deep round3D muzzle/head, blue eyes if open, cream/brown short soft fur, COMPACT real cat torso and SHORT legs. Exactly4 actual feline limbs, hidden limbs plausibly occluded by torso/near limbs, no extra paw or empty hanging sleeve. Short fitted black blazer, white collar/cuffs, loose red tie, red-black plaid skirt ONLY rear hips behind forelegs. ONE red shield armband on actual LEFT upper foreleg(viewer-right front), right sleeve plain. Pink X left ear(viewer-right). Clothing follows actual shoulder/elbow/hip joints. ONE original fluffy brown tail, unchanged volume. Full silhouette inside generous margin. No extra pet/effect/text. Not a repeated source, not crossfade or independent limb/head distortion.",
+    "refs": [
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/sleeping-v1/character/F12.png",
+      "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/sleeping-v1/character/F00.png"
+    ],
+    "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/sleeping-v1/requests/F14-auto-half.json"
+  }
+]

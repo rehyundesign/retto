@@ -76,6 +76,43 @@ private func setupButtons(for status: ClaudeIntegrationStatus) -> [String] {
     return window.visibleButtonTitles
 }
 
+/// 일반 파일명으로 저장된 내부 검토도 제외하고, 같은 제목의 사용자 대화는 유지한다.
+func codexInternalSessionFilterSelfTest() -> Bool {
+    let directory = FileManager.default.temporaryDirectory.appendingPathComponent("retto-codex-filter-\(UUID().uuidString)")
+    do { try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true) }
+    catch { return false }
+    defer { try? FileManager.default.removeItem(at: directory) }
+
+    func fixture(_ name: String, source: Any) -> String? {
+        let url = directory.appendingPathComponent("rollout-\(name).jsonl")
+        let record: [String: Any] = ["type": "session_meta", "payload": [
+            "id": name, "source": source, "base_instructions": String(repeating: "가", count: 60000)
+        ]]
+        guard let data = try? JSONSerialization.data(withJSONObject: record, options: [.sortedKeys]),
+              (try? (data + Data("\n".utf8)).write(to: url)) != nil else { return nil }
+        return url.path
+    }
+    func visible(_ path: String, source: String = "codex") -> Bool {
+        let record: [String: Any] = ["state": "waving", "source": source,
+            "sessionTitle": "Guardian review", "transcriptPath": path, "attention": true]
+        guard let data = try? JSONSerialization.data(withJSONObject: record),
+              let payload = try? JSONDecoder().decode(StatePayload.self, from: data) else { return false }
+        return payload.isRettoVisibleTask
+    }
+
+    guard let guardian = fixture("guardian", source: ["subagent": ["other": "guardian"]]),
+          let worker = fixture("worker", source: ["subagent": ["thread_spawn": ["parent_thread_id": "parent"]]]),
+          let legacy = fixture("legacy", source: "subagent"),
+          let user = fixture("user", source: "vscode") else { return false }
+    return isCodexSubagentTranscript(path: guardian)
+        && isCodexSubagentTranscript(path: worker)
+        && isCodexSubagentTranscript(path: legacy)
+        && !isCodexSubagentTranscript(path: user)
+        && !isCodexSubagentTranscript(path: directory.appendingPathComponent("missing.jsonl").path)
+        && !visible(guardian) && !visible(worker) && !visible(legacy)
+        && visible(user) && visible(guardian, source: "claude")
+}
+
 func runSelfTest() -> Int32 {
     let fontOK = registerRettoFont()
     guard let imageURL = Bundle.main.url(forResource: "spritesheet", withExtension: "webp"),
@@ -86,11 +123,38 @@ func runSelfTest() -> Int32 {
     let assetOK = SpriteSheetLayout.forImage(size: image.size) == .retto
     // 기본 스킨은 레토 규격이고, 개인 스킨은 Codex v2 규격도 쓸 수 있다.
     // 번들에 없는 스킨은 앱이 기본으로 물러나므로 통과로 본다.
+    let rilakkumaTimingOK = [PetSkin.rilakkuma, .rilakkumaCape].allSatisfy { skin in
+        (Array(animationCatalog.values) + Array(dragRunAnimations.values)).allSatisfy { original in
+            let playback = skinAnimation(original, skin: skin, columns: 8)
+            return playback.frames == (original.row == 7 ? 6 : original.frames)
+                && playback.interval == original.interval && playback.row == original.row
+                && playback.cycleLimit == original.cycleLimit
+        }
+    }
     let skinsOK = PetSkin.allCases.allSatisfy { skin in
+        guard skin.isAvailable else { return false }
+        if skin == .jeanne || skin == .pichiPitch || skin == .chocolatHeart { return true }
         guard let url = Bundle.main.url(forResource: skin.resourceName, withExtension: "webp"),
-              let sheet = NSImage(contentsOf: url) else { return skin != .classic }
+              let sheet = NSImage(contentsOf: url) else { return false }
         return SpriteSheetLayout.forImage(size: sheet.size) != nil
     }
+    let christmasTimingOK = (Array(animationCatalog.values) + Array(dragRunAnimations.values)).allSatisfy { original in
+        let extended = skinAnimation(original, skin: .christmas, columns: 16)
+        let legacy = skinAnimation(original, skin: .christmas, columns: 8)
+        let other = skinAnimation(original, skin: .classic, columns: 16)
+        return extended.frames == 16
+            && Christmas16Timing.duration(row: original.row) != nil
+            && abs(extended.interval * 16 - (Christmas16Timing.duration(row: original.row) ?? 0)) < 0.000001
+            && extended.interval >= 0.04
+            && Christmas16Timing.frameDurations(row: original.row)?.count == 16
+            && abs((Christmas16Timing.frameDurations(row: original.row) ?? []).reduce(0, +) - extended.interval * 16) < 0.000001
+            && (Christmas16Timing.frameDurations(row: original.row) ?? []).allSatisfy { $0 >= 0.04 }
+            && abs(legacy.interval - original.interval) < 0.000001
+            && abs(other.interval - original.interval) < 0.000001
+            && extended.cycleLimit == original.cycleLimit
+            && legacy.frames == original.frames && other.frames == original.frames
+    }
+    let christmasOK = christmasTimingOK && christmasEffectsSelfTest()
     let personalV2LayoutOK = SpriteSheetLayout.forImage(size: NSSize(width: 1536, height: 2288)) == .codexV2
         && SpriteSheetLayout.codexV2.rows == 11
     // 자는 행이 실제로 아틀라스에 있는지. 행을 새로 붙였는데 sheetHeight 를 안 고치면
@@ -155,10 +219,30 @@ func runSelfTest() -> Int32 {
         activeTaskSubject: nil, backgroundTaskCount: nil, attention: true, closed: false,
         updatedAtMs: 2000, stateSource: "rollout", client: "codex"
     )
-    let rolloutDiscoveryPayloadOK = discoveredCodexTask.sourceLabel == "Codex"
+    let rolloutDiscoveryPayloadOK = codexInternalSessionFilterSelfTest()
+        && discoveredCodexTask.sourceLabel == "Codex"
         && discoveredCodexTask.navigationSessionId == "thread-one"
         && discoveredCodexTask.needsAttention
         && sessionMenuLabel(for: discoveredCodexTask) == "● 완료  훅 없이 찾은 task · project · Codex"
+        && discoveredCodexTask.isRettoVisibleTask
+        && isCodexSubagentTranscript(path: "/tmp/rollout-parent_12345678-1234-1234-1234-123456789abc.jsonl")
+        && !isCodexSubagentTranscript(path: "/tmp/rollout-parent.jsonl")
+        && !(StatePayload(
+            state: PetState.running.rawValue, updatedAt: nil, event: nil,
+            sessionId: "codex:unnamed", rawSessionId: "unnamed", source: "codex", cwd: nil,
+            toolName: nil, notificationType: nil, error: nil, projectName: nil, displayTitle: "첫 요청",
+            sessionTitle: nil, transcriptPath: "/tmp/rollout.jsonl", lastAssistantMessage: nil,
+            activeTaskSubject: nil, backgroundTaskCount: nil, attention: nil, closed: false,
+            updatedAtMs: nil, stateSource: nil, client: "codex"
+        ).isRettoVisibleTask)
+        && !StatePayload(
+            state: PetState.running.rawValue, updatedAt: nil, event: nil,
+            sessionId: "codex:previously-recorded", rawSessionId: "previously-recorded", source: "codex", cwd: nil,
+            toolName: nil, notificationType: nil, error: nil, projectName: nil, displayTitle: nil,
+            sessionTitle: "상위 작업", transcriptPath: "/tmp/rollout-parent_12345678-1234-1234-1234-123456789abc.jsonl", lastAssistantMessage: nil,
+            activeTaskSubject: nil, backgroundTaskCount: nil, attention: nil, closed: false,
+            updatedAtMs: nil, stateSource: nil, client: "codex"
+        ).isRettoVisibleTask
     let unnamedPayload = StatePayload(
         state: PetState.running.rawValue, updatedAt: nil, event: nil,
         sessionId: "unnamed", rawSessionId: nil, source: "claude", cwd: "/tmp/project",
@@ -342,8 +426,39 @@ func runSelfTest() -> Int32 {
         && zip(supportedScales, supportedScales.dropFirst()).allSatisfy { small, large in
             petLayout(scale: large).ribbonRect.height > petLayout(scale: small).ribbonRect.height + 1
         }
+    // 완료는 모션을 유지하고, 시선 행으로 완료 자세를 덮으면 안 된다.
     // 시선은 코덱스와 같은 세 상태에서만 걸린다.
-    let gazeStatesOK = gazeStates == [.idle, .running, .waving]
+    let gazePathsOK = (0..<gazeDirectionCount).allSatisfy { start in
+        (0..<gazeDirectionCount).allSatisfy { target in
+            var current = start
+            var steps = 0
+            while current != target && steps <= gazeDirectionCount / 2 {
+                let next = nextGazeDirection(from: current, toward: target)
+                let distance = (next - current + gazeDirectionCount) % gazeDirectionCount
+                guard distance == 1 || distance == gazeDirectionCount - 1 else { return false }
+                current = next
+                steps += 1
+            }
+            let clockwise = (target - start + gazeDirectionCount) % gazeDirectionCount
+            return current == target && steps == min(clockwise, gazeDirectionCount - clockwise)
+        }
+    }
+    let gazeStatesOK = gazePathsOK && gazeStates == [.idle, .running, .waving]
+        && christmasGazeStepDuration * Double(gazeDirectionCount / 2) < gazeHoldDuration
+        && nextGazeDirection(from: 15, toward: 1) == 0
+        && nextGazeDirection(from: 1, toward: 15) == 0
+        && nextGazeDirection(from: 3, toward: 3) == 3
+        && gazeHoldDuration > 0
+        && gazeHoldDuration <= 1
+        && gazeDirectionCount == 16
+        && gazeDirection(dx: 0, dy: 1, previous: nil) == 0
+        && gazeDirection(dx: 1, dy: 0, previous: nil) == 4
+        && gazeDirection(dx: 0, dy: -1, previous: nil) == 8
+        && gazeDirection(dx: -1, dy: 0, previous: nil) == 12
+        // 11.25도 경계 바로 옆의 미세한 이동은 현재 고개 방향을 유지한다.
+        && gazeDirection(dx: 0.22, dy: 1, previous: 0) == 0
+        // 히스테리시스 바깥에서는 다음 방향으로 넘어간다.
+        && gazeDirection(dx: 0.34, dy: 1, previous: 0) == 1
     // 배지는 말풍선 오른쪽 위에 고정이고, 왼쪽 이름표와 같은 만큼 위로 솟는다.
     let badge = attentionBadgeRect(ribbon: baseline.ribbonRect, scale: baseline.chromeScale)
     let badgeLayoutOK = badge.width == attentionBadgeSide * baseline.chromeScale
@@ -357,9 +472,10 @@ func runSelfTest() -> Int32 {
         && petClickTarget(layout: baseline, badgeFrame: .zero, point: NSPoint(x: baseline.ribbonRect.midX, y: baseline.ribbonRect.midY), attentionCount: 2) == .ribbon
         && petClickTarget(layout: baseline, badgeFrame: badge, point: NSPoint(x: baseline.petRect.midX, y: baseline.petRect.midY), attentionCount: 2) == .body
         && petClickTarget(layout: baseline, badgeFrame: badge, point: NSPoint(x: 2, y: baseline.windowSize.height - 2), attentionCount: 2) == nil
-    // 내 답 대기 → 답변 완료 → 실패 순서를 지키면서, 셋 다 작업 중보다 위에 있어야 한다.
+    // 내 답 대기 → 실패 → 답변 완료 순서이며, 셋 다 작업 중보다 먼저 표시한다.
     let priorityOK = selectionPriority(state: .waiting, isClosed: false) > selectionPriority(state: .waving, isClosed: false)
-        && selectionPriority(state: .waving, isClosed: false) > selectionPriority(state: .failed, isClosed: false)
+        && selectionPriority(state: .waiting, isClosed: false) > selectionPriority(state: .failed, isClosed: false)
+        && selectionPriority(state: .failed, isClosed: false) > selectionPriority(state: .waving, isClosed: false)
         && needsInputStates.allSatisfy {
             selectionPriority(state: $0, isClosed: false) > selectionPriority(state: .running, isClosed: false)
                 && selectionPriority(state: $0, isClosed: false) > selectionPriority(state: .review, isClosed: false)
@@ -420,6 +536,26 @@ func runSelfTest() -> Int32 {
         && abs(half.windowSize.width - max(basePetWidth * 0.5 + 2 * petSideMargin * 0.5, (baseRibbonWidth + 2 * ribbonSideInset) * chromeScale(for: 0.5))) < 0.01
         // 글자가 작아졌다고 두 줄이 세 줄로 늘면 말풍선이 달라 보인다.
         && bodyLines(at: 0.5) == 2
+    // 레토 크기와 글자 크기를 서로 바꿔도 상대 설정과 말풍선 치수는 유지한다.
+    let chatReference: CGFloat = 0.5
+    let chatBaseline = petLayout(scale: chatReference)
+    let independentChatOK = supportedScales.allSatisfy { scale in
+        ChatFontSize.allCases.allSatisfy { size in
+            let layout = petLayout(scale: scale, chatScale: chatReference, fontSize: size)
+            let bodySize = 18 * layout.chromeScale + layout.textDelta
+            let expected = (18 * chatBaseline.chromeScale + chatBaseline.textDelta) * size.factor
+            return abs(bodySize - expected) < 0.0001
+                && layout.petRect.width == basePetWidth * scale
+                && layout.ribbonRect.height == chatBaseline.ribbonRect.height
+                && layout.ribbonRect.width == chatBaseline.ribbonRect.width
+                && PetTypeface.allCases.allSatisfy { face in
+                    let font = petFont(face, size: bodySize)
+                    return font.pointSize > 0 && font.ascender - font.descender + font.leading
+                        < layout.ribbonRect.height - 30 * layout.chromeScale
+                }
+        }
+    } && petLayout(scale: chatReference, chatScale: chatReference).textDelta == chatBaseline.textDelta
+        && zip(ChatFontSize.allCases, ChatFontSize.allCases.dropFirst()).allSatisfy { $0.factor < $1.factor }
     // 색은 뜻 단위 넷(+조용함)으로만 쓰고, 뜻이 섞이지 않아야 한다.
     let tonesOK = animationCatalog[.running]?.tone.key == toneWorking.key
         && animationCatalog[.review]?.tone.key == toneWorking.key
@@ -487,11 +623,12 @@ func runSelfTest() -> Int32 {
         && titleOf("{\"state\":\"running\",\"displayTitle\":\"아주 긴 프롬프트입니다\",\"projectName\":\"planning\"}") == "아주 긴 프롬프트입니다"
         && titleOf("{\"state\":\"running\",\"displayTitle\":\"B\",\"projectName\":\"planning\"}") == "No name"
         && titleOf("{\"state\":\"running\",\"displayTitle\":\"재진행\",\"projectName\":\"planning\"}") == "No name"
-    // 레토를 누르지 않고 직접 세션에 들어가 읽은 경우를 접근 시각으로 잡아내는지.
-    let viewedOK = wasViewedElsewhere(accessedAtMs: 10_000, updatedAtMs: 5_000)
-        && !wasViewedElsewhere(accessedAtMs: 6_000, updatedAtMs: 5_000)   // 2초 여유 안쪽은 훅이 읽은 것
-        && !wasViewedElsewhere(accessedAtMs: 4_000, updatedAtMs: 5_000)   // 완료보다 앞이면 안 본 것
-        && !wasViewedElsewhere(accessedAtMs: 10_000, updatedAtMs: nil)
+    // 같은 대화를 3초 확인해야 읽음으로 처리한다.
+    var readDwell = SessionReadDwell()
+    let viewedOK = !readDwell.observe(key: "session-a", nowMs: 0)
+        && !readDwell.observe(key: "session-b", nowMs: 3000)
+        && readDwell.observe(key: "session-b", nowMs: 6000)
+        && !readDwell.observe(key: nil, nowMs: 7000)
 
     // 전부 조용한 채로 10분이 지나면 자는지. 하나라도 일하고 있으면 안 잔다.
     let nowFixed: Double = 100_000_000
@@ -532,7 +669,7 @@ func runSelfTest() -> Int32 {
 
     // 창 제목으로 "그 세션을 보고 있다" 를 알아내는지. 짧은 폴더 이름에 낚이지 않아야 한다.
     let lookingOK = windowShowsSession(windowTitle: "백오피스 기획 — planning", sessionTitle: "백오피스 기획", folderName: "planning")
-        && windowShowsSession(windowTitle: "hook.cjs — git-rehyundesign", sessionTitle: "레토 공식", folderName: "git-rehyundesign")
+        && !windowShowsSession(windowTitle: "hook.cjs — git-rehyundesign", sessionTitle: "레토 공식", folderName: "git-rehyundesign")
         && !windowShowsSession(windowTitle: "hook.cjs — other-repo", sessionTitle: "레토 공식", folderName: "git-rehyundesign")
         && !windowShowsSession(windowTitle: "", sessionTitle: "레토 공식", folderName: "git-rehyundesign")
         && !windowShowsSession(windowTitle: "a — b", sessionTitle: nil, folderName: "ui")   // 두 글자 폴더는 안 믿는다
@@ -571,24 +708,26 @@ func runSelfTest() -> Int32 {
     // ⚠️ ok 에 넣은 항목은 아래 print 에도 반드시 넣는다. 안 그러면 그 항목이 실패해도
     // ok:false 만 뜨고 무엇이 깨졌는지 알 수 없다 — 실제로 두 번 헤맸다.
     // scripts/check.sh 가 두 줄을 대조해서 빠진 게 있으면 막는다.
-    let ok = claudeRowOK && fallbackOK && cornerOK && lookingOK && sleepRowOK && displayOK && dozeOK && sleepOK && ancientOK && viewedOK && haloOK && assetOK && skinsOK && dragRunOK && behaviorsOK && statesOK && deepLinkOK && clientRoutingOK && codexMenuOK && integrationOK && setupOK && legacyOK && transcriptShapesOK && scalesOK && baselineOK && decoupledOK && fontOK && priorityOK && registryOK && titleOK && badgeLayoutOK && clickRoutingOK && gazeStatesOK && expandOK && lineBudgetOK && typefaceOK && textDeltaOK && tonesOK && folderFoldOK && labelOK && doneStaysOK && bubbleShapeOK && seenOK && staleOK && personalV2LayoutOK && codexTitleRefreshOK && codexCompletionRefreshOK && codexStateReconciliationOK && rolloutDiscoveryPayloadOK && unnamedTitleOK
-    print("{\"ok\":\(ok),\"asset\":\"\(Int(image.size.width))x\(Int(image.size.height))\",\"skins\":\(PetSkin.allCases.count),\"skinsOK\":\(skinsOK),\"dragRun\":\(dragRunOK),\"canJoinAllSpaces\":\(behaviorsOK),\"states\":\(animationCatalog.count),\"deepLink\":\(deepLinkOK),\"clientRouting\":\(clientRoutingOK),\"codexMenu\":\(codexMenuOK),\"integration\":\(integrationOK),\"setup\":\(setupOK),\"legacy\":\(legacyOK),\"transcriptShapes\":\(transcriptShapesOK),\"sizePresets\":\(supportedScales.count),\"baselineLayout\":\(baselineOK),\"scaleDecoupled\":\(decoupledOK),\"badgePlacement\":\(badgeLayoutOK),\"ribbonExpand\":\(expandOK),\"lineBudget\":\(lineBudgetOK),\"typefaces\":\(PetTypeface.allCases.count),\"typefaceOK\":\(typefaceOK),\"textDelta\":\(textDeltaOK),\"tones\":\(tonesOK),\"folderFold\":\(folderFoldOK),\"doneStays\":\(doneStaysOK),\"bubbleShape\":\(bubbleShapeOK),\"seenRule\":\(seenOK),\"staleWorking\":\(staleOK),\"headroomClean\":\(haloOK),\"viewedElsewhere\":\(viewedOK),\"ancientNews\":\(ancientOK),\"sleeps\":\(sleepOK),\"sleepRow\":\(sleepRow),\"dozes\":\(dozeOK),\"displayState\":\(displayOK),\"seenByLooking\":\(lookingOK),\"corners\":\(cornerOK),\"appFallback\":\(fallbackOK),\"haloRows\":\(halo.rows),\"haloDeepest\":\(halo.deepest),\"haloFaint\":\(haloFaintPixels),\"claudeRow\":\(claudeRowOK),\"font\":\"\(rettoHandwritingFontName)\",\"fontLoaded\":\(fontOK),\"multiSession\":\(registryOK),\"sessionTitleFallback\":\(titleOK),\"prioritySelection\":\(priorityOK),\"badgeLayout\":\(badgeLayoutOK),\"clickRouting\":\(clickRoutingOK),\"sleepRowOK\":\(sleepRowOK),\"assetOK\":\(assetOK),\"statesOK\":\(statesOK),\"scales\":\(scalesOK),\"gazeStates\":\(gazeStatesOK),\"label\":\(labelOK),\"personalV2Layout\":\(personalV2LayoutOK),\"codexTitleRefresh\":\(codexTitleRefreshOK),\"codexCompletionRefresh\":\(codexCompletionRefreshOK),\"codexStateReconciliation\":\(codexStateReconciliationOK),\"rolloutDiscoveryPayload\":\(rolloutDiscoveryPayloadOK),\"unnamedTitle\":\(unnamedTitleOK)}")
+    let ok = rilakkumaTimingOK && christmasOK && claudeRowOK && fallbackOK && cornerOK && lookingOK && sleepRowOK && displayOK && dozeOK && sleepOK && ancientOK && viewedOK && haloOK && assetOK && skinsOK && dragRunOK && behaviorsOK && statesOK && deepLinkOK && clientRoutingOK && codexMenuOK && integrationOK && setupOK && legacyOK && transcriptShapesOK && scalesOK && baselineOK && decoupledOK && fontOK && priorityOK && registryOK && titleOK && badgeLayoutOK && clickRoutingOK && gazeStatesOK && expandOK && lineBudgetOK && typefaceOK && textDeltaOK && independentChatOK && tonesOK && folderFoldOK && labelOK && doneStaysOK && bubbleShapeOK && seenOK && staleOK && personalV2LayoutOK && codexTitleRefreshOK && codexCompletionRefreshOK && codexStateReconciliationOK && rolloutDiscoveryPayloadOK && unnamedTitleOK
+    print("{\"ok\":\(ok),\"asset\":\"\(Int(image.size.width))x\(Int(image.size.height))\",\"skins\":\(PetSkin.allCases.count),\"skinsOK\":\(skinsOK),\"christmasEffects\":\(christmasOK),\"dragRun\":\(dragRunOK),\"canJoinAllSpaces\":\(behaviorsOK),\"states\":\(animationCatalog.count),\"deepLink\":\(deepLinkOK),\"clientRouting\":\(clientRoutingOK),\"codexMenu\":\(codexMenuOK),\"integration\":\(integrationOK),\"setup\":\(setupOK),\"legacy\":\(legacyOK),\"transcriptShapes\":\(transcriptShapesOK),\"sizePresets\":\(supportedScales.count),\"baselineLayout\":\(baselineOK),\"scaleDecoupled\":\(decoupledOK),\"badgePlacement\":\(badgeLayoutOK),\"ribbonExpand\":\(expandOK),\"lineBudget\":\(lineBudgetOK),\"typefaces\":\(PetTypeface.allCases.count),\"typefaceOK\":\(typefaceOK),\"textDelta\":\(textDeltaOK),\"independentChat\":\(independentChatOK),\"tones\":\(tonesOK),\"folderFold\":\(folderFoldOK),\"doneStays\":\(doneStaysOK),\"bubbleShape\":\(bubbleShapeOK),\"seenRule\":\(seenOK),\"staleWorking\":\(staleOK),\"headroomClean\":\(haloOK),\"viewedElsewhere\":\(viewedOK),\"ancientNews\":\(ancientOK),\"sleeps\":\(sleepOK),\"sleepRow\":\(sleepRow),\"dozes\":\(dozeOK),\"displayState\":\(displayOK),\"seenByLooking\":\(lookingOK),\"corners\":\(cornerOK),\"appFallback\":\(fallbackOK),\"haloRows\":\(halo.rows),\"haloDeepest\":\(halo.deepest),\"haloFaint\":\(haloFaintPixels),\"claudeRow\":\(claudeRowOK),\"font\":\"\(rettoHandwritingFontName)\",\"fontLoaded\":\(fontOK),\"multiSession\":\(registryOK),\"sessionTitleFallback\":\(titleOK),\"prioritySelection\":\(priorityOK),\"badgeLayout\":\(badgeLayoutOK),\"clickRouting\":\(clickRoutingOK),\"sleepRowOK\":\(sleepRowOK),\"assetOK\":\(assetOK),\"statesOK\":\(statesOK),\"scales\":\(scalesOK),\"gazeStates\":\(gazeStatesOK),\"label\":\(labelOK),\"personalV2Layout\":\(personalV2LayoutOK),\"codexTitleRefresh\":\(codexTitleRefreshOK),\"codexCompletionRefresh\":\(codexCompletionRefreshOK),\"codexStateReconciliation\":\(codexStateReconciliationOK),\"rolloutDiscoveryPayload\":\(rolloutDiscoveryPayloadOK),\"rilakkumaTiming\":\(rilakkumaTimingOK),\"unnamedTitle\":\(unnamedTitleOK)}")
     return ok ? 0 : 1
 }
 
 /// 배율별 레이아웃을 화면 없이 PNG 한 장으로 뽑는다. 몸과 리본이 따로 자라는지 눈으로 확인하는 용도.
-func renderPreview(to path: String) -> Int32 {
+func renderPreview(to path: String, skin: PetSkin = .classic, chatFonts: Bool = false) -> Int32 {
     registerRettoFont()
-    guard let imageURL = Bundle.main.url(forResource: "spritesheet", withExtension: "webp"),
+    guard let imageURL = Bundle.main.url(forResource: skin.resourceName, withExtension: "webp"),
           let spriteSheet = NSImage(contentsOf: imageURL) else { return 1 }
-    let scales: [CGFloat] = [0.39, 0.5, 0.65, 1.0, 1.4]
+    let scales: [CGFloat] = chatFonts ? [0.5, 0.5, 0.5, 0.5] : [0.39, 0.5, 0.65, 1.0, 1.4]
     // 칸마다 다른 상태로 그려 색 넷이 한 장에서 비교되게 한다.
     let previewStates = ["idle", "running", "waiting", "sleeping", "failed"]
     // 배지 모서리 네 곳을 한 장에서 다 보이게 돌려 쓴다.
     let gap: CGFloat = 24
     // 마지막 칸은 말풍선을 펼친 모습으로 그린다.
     let expandedFlags = scales.indices.map { $0 == scales.count - 1 }
-    let layouts = zip(scales, expandedFlags).map { petLayout(scale: $0, expanded: $1) }
+    let layouts = zip(scales, expandedFlags).enumerated().map { index, pair in
+        petLayout(scale: pair.0, expanded: pair.1, chatScale: chatFonts ? 0.5 : nil, fontSize: chatFonts ? ChatFontSize.allCases[index] : .medium)
+    }
     let totalWidth = layouts.reduce(0) { $0 + $1.windowSize.width } + gap * CGFloat(layouts.count + 1)
     let bandHeight = (layouts.map(\.windowSize.height).max() ?? 0) + gap * 2 + 22
     // 어두운 배경만 보다가 흰 배경에서 머리 위 그림자를 놓친 적이 있다. 두 줄로 같이 본다.
@@ -606,17 +745,23 @@ func renderPreview(to path: String) -> Int32 {
     NSRect(x: 0, y: bandOrigin, width: totalWidth, height: bandHeight).fill()
     var x = gap
     for (index, (scale, layout)) in zip(scales, layouts).enumerated() {
-        let view = RettoView(frame: NSRect(origin: .zero, size: layout.windowSize), spriteSheet: spriteSheet, onOpenClaude: { _, _ in }, onOpenAttention: { _ in })
+        let view = RettoView(frame: NSRect(origin: .zero, size: layout.windowSize), spriteSheet: spriteSheet, skin: skin, onOpenClaude: { _, _ in }, onOpenAttention: { _ in })
         // 서체를 바꿔 놓고 미리보기를 뽑아 눈으로 비교할 수 있어야 한다.
         view.typeface = PetTypeface(rawValue: UserDefaults.standard.string(forKey: typefaceDefaultsKey) ?? "") ?? .handwriting
         view.petScale = scale
-        let petState = previewStates[min(index, previewStates.count - 1)]
+        if chatFonts {
+            view.chatScale = 0.5
+            view.chatFontSize = ChatFontSize.allCases[index]
+            view.typeface = bandIndex == 0 ? .handwriting : .system
+        }
+        let petState = chatFonts ? "waiting" : previewStates[min(index, previewStates.count - 1)]
         let body = "그 파란 숫자의 정체를 코드에서 확인하고 맞췄어. Claude Code 확장이 세션 목록 뷰에 붙이는 배지고, 기준 상태는 waiting_input 이야. 권한 요청만이 아니라 턴이 끝나 답을 기다리는 상태까지 포함해."
         let fixture = "{\"state\":\"\(petState)\",\"sessionId\":\"preview\",\"projectName\":\"platform-web-next\",\"displayTitle\":\"백오피스 조직별 화면 목업 다시 봐줘\",\"lastAssistantMessage\":\"\(body)\"}".data(using: .utf8)!
         guard let payload = try? JSONDecoder().decode(StatePayload.self, from: fixture) else { continue }
         view.apply(payload, sessionCount: 3, attentionCount: 2, attentionState: .waiting, isPinned: true)
         view.setExpandedForPreview(expandedFlags[index])
         view.settleAnimations()
+        if skin == .christmas { view.setChristmasTimeForPreview(0.37) }
         // 실제 창은 투명하므로 캐시 캡처(불투명 배경) 대신 뷰를 직접 그린다.
         let card = NSRect(x: x, y: bandOrigin + gap + 22, width: layout.windowSize.width, height: layout.windowSize.height)
         band.card.setFill()
@@ -627,7 +772,7 @@ func renderPreview(to path: String) -> Int32 {
         transform.concat()
         view.draw(view.bounds)
         NSGraphicsContext.restoreGraphicsState()
-        let label = String(format: "%.0f%%  %@  %@", scale * 100, petState, expandedFlags[index] ? "말풍선 펼침" : "접힘")
+        let label = chatFonts ? ChatFontSize.allCases[index].label : String(format: "%.0f%%  %@  %@", scale * 100, petState, expandedFlags[index] ? "말풍선 펼침" : "접힘")
         (label as NSString).draw(at: NSPoint(x: x, y: bandOrigin + 6), withAttributes: [
             .foregroundColor: band.ink,
             .font: NSFont.boldSystemFont(ofSize: 12)
@@ -641,5 +786,150 @@ func renderPreview(to path: String) -> Int32 {
           let png = rep.representation(using: .png, properties: [:]) else { return 1 }
     do { try png.write(to: URL(fileURLWithPath: path)) } catch { return 1 }
     print(path)
+    return 0
+}
+
+/// 진행중 변신 여덟 컷을 런타임 순서로 한 장에 그린다.
+func renderMagicalHeartTransformationPreview(to path: String) -> Int32 {
+    registerRettoFont()
+    guard let imageURL = Bundle.main.url(forResource: PetSkin.magicalHeart.resourceName, withExtension: "webp"),
+          let spriteSheet = NSImage(contentsOf: imageURL) else { return 1 }
+    let layout = petLayout(scale: 1)
+    let columns = 3
+    let frameCount = 8
+    let gap: CGFloat = 28
+    let labelHeight: CGFloat = 24
+    let cardSize = layout.windowSize
+    let totalWidth = gap + (cardSize.width + gap) * CGFloat(columns)
+    let rows = Int(ceil(CGFloat(frameCount) / CGFloat(columns)))
+    let totalHeight = gap + (cardSize.height + labelHeight + gap) * CGFloat(rows)
+    let sheet = NSImage(size: NSSize(width: totalWidth, height: totalHeight))
+    sheet.lockFocus()
+    NSColor(calibratedRed: 0.035, green: 0.07, blue: 0.23, alpha: 1).setFill()
+    NSRect(origin: .zero, size: sheet.size).fill()
+
+    for frame in 0..<frameCount {
+        let column = frame % columns
+        let row = frame / columns
+        let x = gap + CGFloat(column) * (cardSize.width + gap)
+        let y = totalHeight - gap - CGFloat(row + 1) * (cardSize.height + labelHeight) - CGFloat(row) * gap + labelHeight
+        let card = NSRect(x: x, y: y, width: cardSize.width, height: cardSize.height)
+        NSColor.white.withAlphaComponent(0.055).setFill()
+        NSBezierPath(roundedRect: card, xRadius: 18, yRadius: 18).fill()
+
+        let view = RettoView(frame: NSRect(origin: .zero, size: cardSize), spriteSheet: spriteSheet, skin: .magicalHeart, onOpenClaude: { _, _ in }, onOpenAttention: { _ in })
+        let fixture = "{\"state\":\"running\",\"sessionId\":\"preview\",\"projectName\":\"Retto\",\"displayTitle\":\"매지컬 하트 변신\"}".data(using: .utf8)!
+        guard let payload = try? JSONDecoder().decode(StatePayload.self, from: fixture) else { continue }
+        view.apply(payload, sessionCount: 1, attentionCount: 0, attentionState: nil, isPinned: false)
+        view.settleAnimations()
+        view.setFrameForPreview(frame)
+        NSGraphicsContext.saveGraphicsState()
+        let transform = NSAffineTransform()
+        transform.translateX(by: card.minX, yBy: card.minY)
+        transform.concat()
+        view.draw(view.bounds)
+        NSGraphicsContext.restoreGraphicsState()
+        ("진행중  \(frame + 1) / \(frameCount)" as NSString).draw(at: NSPoint(x: x + 8, y: y - labelHeight + 5), withAttributes: [
+            .foregroundColor: NSColor.white.withAlphaComponent(0.9),
+            .font: NSFont.boldSystemFont(ofSize: 12)
+        ])
+    }
+    sheet.unlockFocus()
+    guard let tiff = sheet.tiffRepresentation,
+          let rep = NSBitmapImageRep(data: tiff),
+          let png = rep.representation(using: .png, properties: [:]) else { return 1 }
+    do { try png.write(to: URL(fileURLWithPath: path)) } catch { return 1 }
+    print(path)
+    return 0
+}
+
+/// 매지컬 하트의 16방향 고개가 실제 뷰의 좌표 변환으로 모두 맞는지 확인하는 런타임 보드다.
+func renderMagicalHeartGazePreview(to path: String) -> Int32 {
+    registerRettoFont()
+    guard let imageURL = Bundle.main.url(forResource: PetSkin.magicalHeart.resourceName, withExtension: "webp"),
+          let spriteSheet = NSImage(contentsOf: imageURL) else { return 1 }
+    let layout = petLayout(scale: 1)
+    let columns = 4
+    let gap: CGFloat = 20
+    let labelHeight: CGFloat = 24
+    let rows = Int(ceil(CGFloat(gazeDirectionCount) / CGFloat(columns)))
+    let cardSize = layout.windowSize
+    let size = NSSize(
+        width: gap + (cardSize.width + gap) * CGFloat(columns),
+        height: gap + (cardSize.height + labelHeight + gap) * CGFloat(rows)
+    )
+    let sheet = NSImage(size: size)
+    sheet.lockFocus()
+    NSColor(calibratedRed: 0.035, green: 0.07, blue: 0.23, alpha: 1).setFill()
+    NSRect(origin: .zero, size: size).fill()
+    for direction in 0..<gazeDirectionCount {
+        let column = direction % columns
+        let row = direction / columns
+        let x = gap + CGFloat(column) * (cardSize.width + gap)
+        let y = size.height - gap - CGFloat(row + 1) * (cardSize.height + labelHeight) - CGFloat(row) * gap + labelHeight
+        let card = NSRect(x: x, y: y, width: cardSize.width, height: cardSize.height)
+        NSColor.white.withAlphaComponent(0.055).setFill()
+        NSBezierPath(roundedRect: card, xRadius: 18, yRadius: 18).fill()
+        let view = RettoView(frame: NSRect(origin: .zero, size: cardSize), spriteSheet: spriteSheet, skin: .magicalHeart, onOpenClaude: { _, _ in }, onOpenAttention: { _ in })
+        let fixture = "{\"state\":\"idle\",\"sessionId\":\"preview\",\"projectName\":\"Retto\",\"displayTitle\":\"매지컬 하트\"}".data(using: .utf8)!
+        guard let payload = try? JSONDecoder().decode(StatePayload.self, from: fixture) else { continue }
+        view.apply(payload, sessionCount: 1, attentionCount: 0, attentionState: nil, isPinned: false)
+        view.settleAnimations()
+        view.setGazeDirectionForPreview(direction)
+        NSGraphicsContext.saveGraphicsState()
+        let transform = NSAffineTransform()
+        transform.translateX(by: card.minX, yBy: card.minY)
+        transform.concat()
+        view.draw(view.bounds)
+        NSGraphicsContext.restoreGraphicsState()
+        ("방향  \(direction + 1) / \(gazeDirectionCount)" as NSString).draw(at: NSPoint(x: x + 8, y: y - labelHeight + 5), withAttributes: [
+            .foregroundColor: NSColor.white.withAlphaComponent(0.9),
+            .font: NSFont.boldSystemFont(ofSize: 12)
+        ])
+    }
+    sheet.unlockFocus()
+    guard let tiff = sheet.tiffRepresentation,
+          let rep = NSBitmapImageRep(data: tiff),
+          let png = rep.representation(using: .png, properties: [:]) else { return 1 }
+    do { try png.write(to: URL(fileURLWithPath: path)) } catch { return 1 }
+    print(path)
+    return 0
+}
+
+/// 16컷의 처음·중간·마지막을 모든 상태와 좌우 이동에서 실제 PetView로 확인한다.
+func renderChristmas16Preview(to path: String) -> Int32 {
+    registerRettoFont()
+    guard let url = Bundle.main.url(forResource: PetSkin.christmas.resourceName, withExtension: "webp"),
+          let atlas = NSImage(contentsOf: url) else { return 1 }
+    let states = PetState.allCases
+    let samples: [(PetState, DragRun?)] = states.map { ($0, nil) } + [(.idle, .right), (.idle, .left)]
+    let layout = petLayout(scale: 0.65), gap: CGFloat = 18, label: CGFloat = 22
+    let size = NSSize(width: (layout.windowSize.width + gap) * 4 + gap,
+                      height: (layout.windowSize.height + label + gap) * CGFloat(samples.count) + gap)
+    let board = NSImage(size: size); board.lockFocus()
+    NSColor(calibratedWhite: 0.95, alpha: 1).setFill(); NSRect(origin: .zero, size: size).fill()
+    for (row, sample) in samples.enumerated() {
+        for (column, index) in [0, 5, 10, 15].enumerated() {
+            let view = RettoView(frame: NSRect(origin: .zero, size: layout.windowSize), spriteSheet: atlas,
+                                 skin: .christmas, onOpenClaude: { _, _ in }, onOpenAttention: { _ in })
+            view.petScale = 0.65
+            let fixture = "{\"state\":\"\(sample.0.rawValue)\",\"sessionId\":\"preview\",\"projectName\":\"Retto\",\"displayTitle\":\"크리스마스 16프레임\"}".data(using: .utf8)!
+            guard let payload = try? JSONDecoder().decode(StatePayload.self, from: fixture) else { continue }
+            view.apply(payload, sessionCount: 1, attentionCount: 0, attentionState: nil, isPinned: false)
+            view.settleAnimations()
+            if let drag = sample.1 { view.setDragRunForPreview(drag) }
+            view.setFrameForPreview(index); view.setChristmasTimeForPreview(Double(index) * 0.06)
+            let x = gap + CGFloat(column) * (layout.windowSize.width + gap)
+            let y = size.height - gap - CGFloat(row + 1) * (layout.windowSize.height + label + gap)
+            NSGraphicsContext.saveGraphicsState(); let tr = NSAffineTransform(); tr.translateX(by: x, yBy: y + label); tr.concat()
+            view.draw(view.bounds); NSGraphicsContext.restoreGraphicsState()
+            let title = "\(sample.1.map { String(describing: $0) } ?? sample.0.rawValue) · \(index + 1)/16"
+            (title as NSString).draw(at: NSPoint(x: x, y: y), withAttributes: [.font: NSFont.systemFont(ofSize: 12), .foregroundColor: NSColor.black])
+        }
+    }
+    board.unlockFocus()
+    guard let tiff = board.tiffRepresentation, let rep = NSBitmapImageRep(data: tiff),
+          let png = rep.representation(using: .png, properties: [:]) else { return 1 }
+    do { try png.write(to: URL(fileURLWithPath: path)) } catch { return 1 }
     return 0
 }

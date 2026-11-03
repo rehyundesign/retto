@@ -1,0 +1,10 @@
+{
+  "scope": "one static sealing style candidate",
+  "characterSource": "latest-preview-assets/running/08.png",
+  "characterHash": "17c1eef4d0219686f43babc0e333a9d0fa51fd4670db6c9daf32ca9d6243415a",
+  "characterUnchanged": true,
+  "animationApplied": false,
+  "safetyMarginRuntimePixels": 8,
+  "protectedFaceOpaquePixels": 42,
+  "facePixelsPreserved": true
+}

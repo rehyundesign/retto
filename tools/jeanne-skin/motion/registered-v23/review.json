@@ -1,0 +1,29 @@
+{
+  "newStates": 8,
+  "newIndependentSources": 128,
+  "preservedStates": [
+    "running",
+    "waiting"
+  ],
+  "totalPreviewFrames": 160,
+  "frameBoardsReviewed": [
+    "dark",
+    "white"
+  ],
+  "sceneMethod": "each complete frame generated with Retto, clothing, Finn and effects together",
+  "jumpRepairs": [
+    2,
+    3,
+    16
+  ],
+  "wavingOrderChanged": true,
+  "idleUniformFrameMs": 200,
+  "nativeDisplay": [
+    224,
+    320
+  ],
+  "originalRegistration": "not certified",
+  "actualAppPlayback": "CUA app access denied; not verified",
+  "hanaActualPlaybackComparison": "not completed",
+  "remainingQualityReview": "strict original landmarks and live loop/state-return verification"
+}

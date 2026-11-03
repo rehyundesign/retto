@@ -1,0 +1,1529 @@
+// 창·메뉴·세션 감시. 클릭을 실제 동작으로 옮긴다.
+
+import AppKit
+import CoreText
+import Foundation
+import ServiceManagement
+
+final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
+    private struct TaskOpenChoice {
+        let sessionID: String
+        let app: OpenApp
+    }
+    private var panel: OverlayPanel!
+    private var petView: RettoView!
+    private var stateMonitor: StateMonitor!
+    private var statusItem: NSStatusItem!
+    private var visibilityItem: NSMenuItem!
+    private var clickThroughItem: NSMenuItem!
+    private var followClaudeItem: NSMenuItem!
+    private var codexOpenTargetItem: NSMenuItem!
+    private var claudeIntegrationItem: NSMenuItem!
+    private var setupWindow: SetupWindow?
+    /// 켤 때 스스로 정리한 것. 설정 창이 이걸 그대로 보여준다.
+    private var tidyNotes: [String] = []
+    /// Claude 앱에서 세션까지 따라갈지. 접근성으로 사이드바를 대신 누르는 방식이라,
+    /// 앱이 바뀌어 어긋나면 사용자가 여기서 끌 수 있어야 한다.
+    private var followsClaudeSession: Bool {
+        get { UserDefaults.standard.object(forKey: followClaudeDefaultsKey) as? Bool ?? true }
+        set { UserDefaults.standard.set(newValue, forKey: followClaudeDefaultsKey) }
+    }
+    private var launchAtLoginItem: NSMenuItem!
+    private var sizeItems: [NSMenuItem] = []
+    private var openTargetItems: [NSMenuItem] = []
+    private var currentScale: CGFloat = 1.0
+    private var sessionsMenu = NSMenu(title: "AI 세션")
+    private var autoSelectionItem: NSMenuItem!
+    private var sessions: [StatePayload] = []
+    private var selectedPayload: StatePayload?
+    private let transcriptReader = TranscriptReader()
+    private let codexTranscriptStatusReader = CodexTranscriptStatusReader()
+    private let codexThreadTitleReader = CodexThreadTitleReader()
+    private let codexRolloutDiscovery = CodexRolloutDiscovery()
+    private var clearAttentionItem: NSMenuItem!
+    private var typefaceItems: [NSMenuItem] = []
+    private var skinItems: [NSMenuItem] = []
+    /// 이 순간부터의 일만 새 소식으로 센다. 앱이 켜진 시각.
+    private let trackingStartedAtMs = Date().timeIntervalSince1970 * 1000
+    private var pinnedCorner: PetCorner {
+        get { PetCorner(rawValue: UserDefaults.standard.string(forKey: cornerDefaultsKey) ?? "") ?? .free }
+        set { UserDefaults.standard.set(newValue.rawValue, forKey: cornerDefaultsKey) }
+    }
+    private var cornerItems: [NSMenuItem] = []
+    /// 우리가 창을 옮기는 동안에는 windowDidMove 를 사용자의 드래그로 오해하지 않는다.
+    private var isRepositioning = false
+    /// 제거를 시작하면 켠다. 종료 직전에 설정을 한 번 더 지우는 근거다.
+    private var isUninstalling = false
+    /// 세션이 없을 때 쓰는 빈 껍데기. 상태·이름·멘트는 넘겨 주는 값으로 덮는다.
+    private static let placeholderPayload: StatePayload? = {
+        let fixture = "{\"state\":\"idle\",\"sessionId\":\"placeholder\"}".data(using: .utf8)!
+        return try? JSONDecoder().decode(StatePayload.self, from: fixture)
+    }()
+    private var lookingApp: String?
+    private var lookingSince: Date?
+    /// 세션마다 마지막으로 다녀온 시각. 다음 실행에도 유지한다.
+    private var seenSessions: [String: Double] {
+        get { UserDefaults.standard.dictionary(forKey: seenSessionsDefaultsKey) as? [String: Double] ?? [:] }
+        set { UserDefaults.standard.set(newValue, forKey: seenSessionsDefaultsKey) }
+    }
+
+    private func markSeen(_ payload: StatePayload?) {
+        guard let payload, !payload.id.isEmpty else { return }
+        var seen = seenSessions
+        seen[payload.id] = max(payload.updatedAtMs ?? 0, Date().timeIntervalSince1970 * 1000)
+        // 닫힌 세션 기록은 버린다
+        let live = Set(sessions.map(\.id))
+        seenSessions = seen.filter { live.contains($0.key) || $0.key == payload.id }
+        applySessions(sessions)
+    }
+
+    /// 읽고 넘어간 세션, 그리고 소식이 끊긴 "작업 중" 은 조용한 상태로 본다.
+    private func effectiveState(_ payload: StatePayload) -> PetState {
+        displayState(
+            state: payload.petState,
+            updatedAtMs: payload.updatedAtMs,
+            seenAtMs: seenSessions[payload.id],
+            transcriptModifiedAtMs: transcriptModifiedAtMs(path: payload.transcriptPath),
+            nowMs: Date().timeIntervalSince1970 * 1000
+        )
+    }
+
+    private func needsAttention(_ payload: StatePayload) -> Bool {
+        guard payload.needsAttention else { return false }
+        if isSeen(updatedAtMs: payload.updatedAtMs, seenAtMs: seenSessions[payload.id]) { return false }
+        // 앱이 켜지기 한참 전에 끝난 일은 조용히 읽음으로 넘긴다. 첫 설치나 재시작 뒤에
+        // 이레치 완료 세션이 한꺼번에 배지로 몰려오던 문제.
+        if seenSessions[payload.id] == nil,
+           isAncientNews(updatedAtMs: payload.updatedAtMs, trackingStartedAtMs: trackingStartedAtMs) {
+            recordSeenFromAccess(payload)
+            return false
+        }
+        // 레토를 누르지 않고 직접 세션에 들어가 읽은 경우. 트랜스크립트 접근 시각으로 알아낸다.
+        if let accessed = transcriptAccessedAtMs(path: payload.transcriptPath),
+           wasViewedElsewhere(accessedAtMs: accessed, updatedAtMs: payload.updatedAtMs) {
+            // 한 번 판정하면 붙잡아 둔다. 나중에 atime 이 다시 밀려도 흔들리지 않는다.
+            recordSeenFromAccess(payload)
+            return false
+        }
+        return true
+    }
+
+    /// 밖에서 읽은 것을 읽음 기록에 옮긴다. 다음 폴링부터는 stat 없이 바로 걸러진다.
+    private func recordSeenFromAccess(_ payload: StatePayload) {
+        guard seenSessions[payload.id] == nil || seenSessions[payload.id]! < (payload.updatedAtMs ?? 0) else { return }
+        var seen = seenSessions
+        seen[payload.id] = max(payload.updatedAtMs ?? 0, Date().timeIntervalSince1970 * 1000)
+        seenSessions = seen
+    }
+
+    /// 배지가 세는 집합. 배지를 눌렀을 때 나오는 목록도 반드시 같은 집합이어야 한다.
+    /// 예전에는 배지는 완료만 세고 목록은 대기·실패까지 보여줘서, 배지에 1 이 떴는데
+    /// 목록에 셋이 나오고 엉뚱한 세션이 열리는 일이 있었다.
+    private func badgeSessions() -> [StatePayload] {
+        sessions.filter { !$0.isClosed && needsAttention($0) && effectiveState($0) == .waving }
+    }
+
+    private var pinnedSessionId: String? {
+        get { UserDefaults.standard.string(forKey: "RettoClaudePetPinnedSession") }
+        set {
+            if let newValue { UserDefaults.standard.set(newValue, forKey: "RettoClaudePetPinnedSession") }
+            else { UserDefaults.standard.removeObject(forKey: "RettoClaudePetPinnedSession") }
+        }
+    }
+
+    /// 레토의 겉모습. 고르면 아틀라스를 갈아 끼우고 다음 실행에도 남는다.
+    private var skin: PetSkin {
+        get { PetSkin(rawValue: UserDefaults.standard.string(forKey: skinDefaultsKey) ?? "") ?? .classic }
+        set { UserDefaults.standard.set(newValue.rawValue, forKey: skinDefaultsKey) }
+    }
+
+    /// 스킨의 아틀라스를 읽는다. 파일이 없으면 기본 스킨으로 물러난다 —
+    /// 옛 앱에 새 스킨 설정만 남아 있는 경우에도 레토가 사라지지 않게.
+    private func loadSpriteSheet(_ skin: PetSkin) -> NSImage? {
+        if skin == .jeanne { return JeanneSkin.placeholder }
+        if skin == .pichiPitch { return PichiSkin.placeholder }
+        if skin == .chocolatHeart { return ChocolatHeart.placeholder }
+        if skin == .hana, Bundle.main.url(forResource: "character-0-0", withExtension: "png", subdirectory: "HanaFrames") != nil {
+            return HanaFrameCache.placeholder
+        }
+        if let url = Bundle.main.url(forResource: skin.resourceName, withExtension: "webp"),
+           let image = NSImage(contentsOf: url) { return image }
+        guard skin != .classic else { return nil }
+        return loadSpriteSheet(.classic)
+    }
+
+    /// 말풍선 글꼴. 고르면 바로 다시 그리고 다음 실행에도 남는다.
+    private var typeface: PetTypeface {
+        get { PetTypeface(rawValue: UserDefaults.standard.string(forKey: typefaceDefaultsKey) ?? "") ?? .handwriting }
+        set { UserDefaults.standard.set(newValue.rawValue, forKey: typefaceDefaultsKey) }
+    }
+
+    func applicationDidFinishLaunching(_ notification: Notification) {
+        ClaudeAppNavigator.log("앱 시작 · 접근성=\(ClaudeAppNavigator.isPermitted)")
+        // 설정을 하나라도 읽기 전에 옮겨 와야 한다. createPanel 이 크기·위치를 바로 읽는다.
+        migrateLegacyDefaults()
+        registerRettoFont()
+        guard let spriteSheet = loadSpriteSheet(skin) else {
+            NSAlert(error: NSError(domain: "RettoClaudePet", code: 1, userInfo: [NSLocalizedDescriptionKey: "레토 스프라이트를 불러오지 못했어요."])).runModal()
+            NSApp.terminate(nil)
+            return
+        }
+
+        createPanel(spriteSheet: spriteSheet)
+        createMenuBarItem()
+        startStateMonitor()
+        // 상태 파일을 한 번 읽고 나서 정한다. 곧바로 보면 소식이 있는 사람에게도 창이 뜬다.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
+            self?.tidyLegacyInstall()
+            self?.showSetupIfNeeded()
+        }
+        NotificationCenter.default.addObserver(self, selector: #selector(screenConfigurationChanged), name: NSApplication.didChangeScreenParametersNotification, object: nil)
+    }
+
+    /// 이름이 두 번 바뀌었고, 그때마다 번들 ID 가 함께 바뀌었다.
+    ///
+    ///   com.luxia.reto-claude-pet   Reto → Retto (t 하나가 빠져 있었다)
+    ///   com.luxia.retto-claude-pet  Retto Claude Pet → Retto (공개하면서 제품명에서 Claude 를 뺐다)
+    ///
+    /// macOS 는 번들 ID 로 설정 자리를 잡으므로, 그냥 두면 크기·위치·고정한 세션이 전부
+    /// 초기값으로 돌아간다. 옛 자리에서 한 번만 끌어오고 지운다.
+    /// 샌드박스가 아니라서 옛 도메인을 직접 읽을 수 있다.
+    private func migrateLegacyDefaults() {
+        let defaults = UserDefaults.standard
+        // 오래된 것부터 옮긴다. 뒤엣것이 더 최근이므로 겹치면 뒤엣것이 남아야 한다.
+        for legacyDomain in ["com.luxia.reto-claude-pet", "com.luxia.retto-claude-pet"] {
+            guard let legacy = defaults.persistentDomain(forName: legacyDomain), !legacy.isEmpty else { continue }
+            for (legacyKey, value) in legacy {
+                // 첫 번째 이름 바꿈 때는 키 이름도 같이 바뀌었다. 접두사만 갈아 끼운다.
+                let key = legacyKey.hasPrefix("RetoClaudePet")
+                    ? "RettoClaudePet" + legacyKey.dropFirst("RetoClaudePet".count)
+                    : legacyKey
+                if defaults.object(forKey: key) == nil { defaults.set(value, forKey: key) }
+            }
+            defaults.removePersistentDomain(forName: legacyDomain)
+        }
+    }
+
+    private func createPanel(spriteSheet: NSImage) {
+        let savedScale = UserDefaults.standard.double(forKey: "RettoClaudePetScale")
+        currentScale = supportedScales.min(by: { abs($0 - CGFloat(savedScale == 0 ? 1 : savedScale)) < abs($1 - CGFloat(savedScale == 0 ? 1 : savedScale)) }) ?? 1
+        let size = scaledWindowSize(currentScale)
+        // 화면이 여럿이면 마지막에 있던 화면에 붙인다. main 화면은 키보드 초점을 따라 바뀌어서,
+        // 그것만 보면 재시작할 때마다 레토가 다른 모니터로 건너간다.
+        let origin = cornerOrigin(corner: pinnedCorner, size: size, visible: lastKnownScreen(for: size).visibleFrame)
+            ?? initialOrigin(for: size)
+        panel = OverlayPanel(
+            contentRect: NSRect(origin: origin, size: size),
+            styleMask: [.borderless, .nonactivatingPanel],
+            backing: .buffered,
+            defer: false
+        )
+        panel.isOpaque = false
+        panel.backgroundColor = .clear
+        panel.hasShadow = false
+        panel.level = .floating
+        panel.collectionBehavior = allSpacesBehavior
+        panel.hidesOnDeactivate = false
+        panel.isReleasedWhenClosed = false
+        panel.acceptsMouseMovedEvents = true
+        panel.delegate = self
+
+        petView = RettoView(
+            frame: NSRect(origin: .zero, size: size),
+            spriteSheet: spriteSheet,
+            skin: skin,
+            onOpenClaude: { [weak self] payload, windowOnly in
+                self?.revealAgentSession(payload, windowOnly: windowOnly)
+            },
+            onOpenAttention: { [weak self] point in self?.showAttentionMenu(at: point) }
+        )
+        petView.petScale = currentScale
+        petView.typeface = typeface
+        petView.onExpansionChanged = { [weak self] expanded in
+            self?.applyRibbonExpansion(expanded)
+        }
+        panel.contentView = petView
+        panel.orderFrontRegardless()
+    }
+
+    /// 메뉴에서 고른 값. 저장된 게 없거나 알 수 없는 값이면 자동.
+    private var openTarget: OpenTarget {
+        get { OpenTarget(rawValue: UserDefaults.standard.string(forKey: openTargetDefaultsKey) ?? "") ?? .auto }
+        set { UserDefaults.standard.set(newValue.rawValue, forKey: openTargetDefaultsKey) }
+    }
+
+    /// 깔려 있지 않은 앱으로 보내지 않는다.
+    private func availableOpenApp(_ preferred: OpenApp) -> OpenApp {
+        installedOpenApp(preferred: preferred) { app in
+            NSWorkspace.shared.urlForApplication(withBundleIdentifier: app.bundleIdentifier) != nil
+                || FileManager.default.fileExists(atPath: app.fallbackPath)
+        }
+    }
+
+    private func resolveOpenApp(for payload: StatePayload?) -> OpenApp {
+        // Codex task id 는 Claude Code session id 와 호환되지 않는다. 사용자가 Claude 쪽 열기
+        // 대상을 고정했더라도 Codex 세션은 반드시 Codex 로 돌려보낸다.
+        if payload?.source == "codex" || payload?.client == "codex" {
+            return .codex
+        }
+        switch openTarget {
+        // 자동일 때만 되돌린다. 메뉴에서 직접 고른 것은 그 뜻을 지킨다.
+        case .auto: return availableOpenApp(openApp(forClient: payload?.client))
+        case .vscode: return .vscode
+        case .claude: return .claude
+        }
+    }
+
+    private func createMenuBarItem() {
+        statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
+        // 이름을 주면 메뉴 막대에서의 자리를 macOS 가 기억한다. 안 주면 실행할 때마다 새로 배정받고,
+        // 노치 있는 맥북처럼 자리가 빠듯하면 그대로 노치 뒤로 밀려 사라진 것처럼 보인다.
+        // 번들 ID 와 무관한 고정 문자열이라, 다음에 ID 가 또 바뀌어도 자리는 남는다.
+        statusItem.autosaveName = "RettoClaudePetStatusItem"
+        statusItem.button?.image = NSImage(systemSymbolName: "pawprint.fill", accessibilityDescription: Retto.englishName)
+        statusItem.button?.toolTip = Retto.englishName + " · " + Retto.character
+
+        let menu = NSMenu(title: "Retto")
+        // 항목의 isEnabled 를 우리가 정한다. 켜 두면 AppKit 이 target 유무만 보고 전부 켜 버린다.
+        menu.autoenablesItems = false
+
+        // 레토가 누구이고 누가 만들었는지가 맨 처음 눈에 들어와야 한다.
+        // 메뉴 중간에 두면 크기·세션 항목에 묻혀서 아무도 찾지 못한다.
+        let aboutItem = NSMenuItem(title: Retto.englishName + " · " + Retto.koreanName + " 정보", action: #selector(showAbout), keyEquivalent: "")
+        aboutItem.target = self
+        menu.addItem(aboutItem)
+        menu.addItem(.separator())
+
+        let displayItem = NSMenuItem(title: "표시", action: nil, keyEquivalent: "")
+        let displayMenu = NSMenu(title: "표시")
+        displayMenu.autoenablesItems = false
+        visibilityItem = NSMenuItem(title: "레토 숨기기", action: #selector(toggleVisibility), keyEquivalent: "")
+        visibilityItem.target = self
+        displayMenu.addItem(visibilityItem)
+
+        clickThroughItem = NSMenuItem(title: "클릭 통과 켜기", action: #selector(toggleClickThrough), keyEquivalent: "")
+        clickThroughItem.target = self
+        displayMenu.addItem(clickThroughItem)
+
+        let behaviorItem = NSMenuItem(title: "동작", action: nil, keyEquivalent: "")
+        let behaviorMenu = NSMenu(title: "동작")
+        behaviorMenu.autoenablesItems = false
+
+        followClaudeItem = NSMenuItem(title: "Claude 앱 안에서 세션 선택", action: #selector(toggleFollowClaude), keyEquivalent: "")
+        followClaudeItem.target = self
+        behaviorMenu.addItem(followClaudeItem)
+        updateFollowClaudeItem()
+
+        launchAtLoginItem = NSMenuItem(title: "로그인할 때 자동 실행", action: #selector(toggleLaunchAtLogin), keyEquivalent: "")
+        launchAtLoginItem.target = self
+        launchAtLoginItem.state = SMAppService.mainApp.status == .enabled ? .on : .off
+        behaviorMenu.addItem(launchAtLoginItem)
+
+        // 여기부터 세션 묶음. 무엇을 보여줄지 고르는 항목들이다.
+        menu.addItem(.separator())
+
+        let sessionsItem = NSMenuItem(title: "최근 작업", action: nil, keyEquivalent: "")
+        sessionsItem.submenu = sessionsMenu
+        menu.addItem(sessionsItem)
+        rebuildSessionsMenu()
+
+        let openTargetItem = NSMenuItem(title: "기본 열기 방식", action: nil, keyEquivalent: "")
+        let openTargetMenu = NSMenu(title: aiSessionOpenMenuTitle)
+        openTargetItems = OpenTarget.allCases.map { target in
+            let item = NSMenuItem(title: target.label, action: #selector(changeOpenTarget(_:)), keyEquivalent: "")
+            item.target = self
+            item.representedObject = target.rawValue
+            item.state = target == openTarget ? .on : .off
+            openTargetMenu.addItem(item)
+            return item
+        }
+        // Codex task는 Claude 세션 ID와 호환되지 않아 선택값과 무관하게 Codex 앱에서 연다.
+        // 숨기면 기본 열기 방식에 Codex가 빠진 것처럼 보이므로, 고정 경로도 함께 보여 준다.
+        openTargetMenu.addItem(.separator())
+        let codexDefaultItem = NSMenuItem(title: "Codex 작업 · Codex 앱에서 열기", action: nil, keyEquivalent: "")
+        codexDefaultItem.isEnabled = false
+        codexDefaultItem.toolTip = "Codex 작업은 항상 Codex 앱에서 열립니다"
+        openTargetMenu.addItem(codexDefaultItem)
+        openTargetItem.submenu = openTargetMenu
+        menu.addItem(openTargetItem)
+
+        // 레토를 누르지 않고 세션에 직접 다녀오는 경우가 있다. 그때 손으로 지울 길을 둔다.
+        // 시간이 지나면 저절로 조용해지게 하지는 않는다 — 돌려놓고 한참 뒤에 오는 게 배지의 쓸모다.
+        clearAttentionItem = NSMenuItem(title: "완료 표시 지우기", action: #selector(markAllSeen), keyEquivalent: "")
+        clearAttentionItem.target = self
+        menu.addItem(clearAttentionItem)
+
+        // 여기부터 모양 묶음. 레토가 어떻게 보일지 정하는 항목들이다.
+        menu.addItem(.separator())
+
+        let sizeItem = NSMenuItem(title: "크기", action: nil, keyEquivalent: "")
+        let sizeMenu = NSMenu(title: "크기")
+        sizeItems = supportedScales.map { scale in
+            let percent = Int((scale * 100).rounded())
+            let label: String
+            switch percent {
+            case 39: label = "초소형 · 39%"
+            case 50: label = "아주 작게 · 50%"
+            case 65: label = "작게 · 65%"
+            case 80: label = "조금 작게 · 80%"
+            case 100: label = "보통 · 100%"
+            case 120: label = "크게 · 120%"
+            default: label = "가장 크게 · 140%"
+            }
+            let item = NSMenuItem(title: label, action: #selector(changeScale(_:)), keyEquivalent: "")
+            item.target = self
+            item.representedObject = NSNumber(value: Double(scale))
+            item.state = abs(scale - currentScale) < 0.001 ? .on : .off
+            sizeMenu.addItem(item)
+            return item
+        }
+        sizeItem.submenu = sizeMenu
+        displayMenu.addItem(sizeItem)
+
+        // 겉모습. 아틀라스만 갈아 끼우므로 상태·말풍선 동작은 그대로다.
+        let skinMenu = NSMenu(title: "스킨")
+        skinMenu.autoenablesItems = false
+        skinItems = PetSkin.allCases.map { value in
+            // 개인 스킨은 받아 간 쪽 번들에 파일이 없다. 지우지 않고 자물쇠로 남겨 둔다 —
+            // 항목이 통째로 사라지면 고장인지 원래 없는 건지 알 수 없다.
+            let available = value.isAvailable
+            let title = available ? value.label : "\(value.label) 🔒"
+            let item = NSMenuItem(title: title, action: available ? #selector(changeSkin(_:)) : nil, keyEquivalent: "")
+            item.target = available ? self : nil
+            item.isEnabled = available
+            item.representedObject = value.rawValue
+            item.state = value == skin ? .on : .off
+            if !available { item.toolTip = "만든 사람만 쓰는 스킨이라 이 앱에는 그림이 들어 있지 않습니다." }
+            skinMenu.addItem(item)
+            return item
+        }
+        let skinItem = NSMenuItem(title: "스킨", action: nil, keyEquivalent: "")
+        skinItem.submenu = skinMenu
+        displayMenu.addItem(skinItem)
+
+        // 손글씨가 예쁘지만 작은 배율에서 읽기 힘들다는 사람이 있다. 골라 쓰게 둔다.
+        let typefaceMenu = NSMenu(title: "서체")
+        typefaceMenu.autoenablesItems = false
+        typefaceItems = PetTypeface.allCases.map { face in
+            let item = NSMenuItem(title: face.label, action: #selector(changeTypeface(_:)), keyEquivalent: "")
+            item.target = self
+            item.representedObject = face.rawValue
+            item.state = face == typeface ? .on : .off
+            typefaceMenu.addItem(item)
+            return item
+        }
+        let typefaceItem = NSMenuItem(title: "서체", action: nil, keyEquivalent: "")
+        typefaceItem.submenu = typefaceMenu
+        displayMenu.addItem(typefaceItem)
+
+        let cornerMenu = NSMenu(title: "위치")
+        cornerMenu.autoenablesItems = false
+        cornerItems = PetCorner.allCases.map { corner in
+            let item = NSMenuItem(title: corner.label, action: #selector(changeCorner(_:)), keyEquivalent: "")
+            item.target = self
+            item.representedObject = corner.rawValue
+            item.state = corner == pinnedCorner ? .on : .off
+            cornerMenu.addItem(item)
+            return item
+        }
+        let cornerItem = NSMenuItem(title: "위치", action: nil, keyEquivalent: "")
+        cornerItem.submenu = cornerMenu
+        displayMenu.addItem(cornerItem)
+        displayItem.submenu = displayMenu
+        menu.addItem(displayItem)
+        behaviorItem.submenu = behaviorMenu
+        menu.addItem(behaviorItem)
+
+        // 여기부터 손볼 일 묶음. 평소에는 누를 일이 없는 항목들이다.
+        menu.addItem(.separator())
+
+        let integrationItem = NSMenuItem(title: "연동 및 문제 해결", action: nil, keyEquivalent: "")
+        let integrationMenu = NSMenu(title: "연동 및 문제 해결")
+        integrationMenu.autoenablesItems = false
+        let stateItem = NSMenuItem(title: "AI 상태 파일 보기", action: #selector(revealStateFile), keyEquivalent: "")
+        stateItem.target = self
+        integrationMenu.addItem(stateItem)
+
+        // 훅이 한 번도 돈 적이 없어도 레토 화면은 정상 대기와 똑같다. 고장인지 아닌지
+        // 사용자가 스스로 확인할 자리를 둔다. 제목에 상태를 함께 적는다.
+        claudeIntegrationItem = NSMenuItem(title: "AI 연동 확인", action: #selector(showClaudeIntegration), keyEquivalent: "")
+        claudeIntegrationItem.target = self
+        integrationMenu.addItem(claudeIntegrationItem)
+        updateClaudeIntegrationItem()
+
+        codexOpenTargetItem = NSMenuItem(title: "Codex 연결 확인", action: #selector(showCodexIntegration), keyEquivalent: "")
+        codexOpenTargetItem.target = self
+        integrationMenu.addItem(codexOpenTargetItem)
+        updateCodexOpenTargetItem()
+        integrationItem.submenu = integrationMenu
+        menu.addItem(integrationItem)
+
+        let uninstallItem = NSMenuItem(title: "레토 제거…", action: #selector(uninstallRetto), keyEquivalent: "")
+        uninstallItem.target = self
+        menu.addItem(uninstallItem)
+
+        menu.addItem(.separator())
+        let quitItem = NSMenuItem(title: "레토 종료", action: #selector(quit), keyEquivalent: "q")
+        quitItem.target = self
+        menu.addItem(quitItem)
+        statusItem.menu = menu
+        petView.menu = menu
+    }
+
+    private func startStateMonitor() {
+        let petDirectory = FileManager.default.homeDirectoryForCurrentUser
+            .appendingPathComponent(".claude/retto-pet")
+        stateMonitor = StateMonitor(
+            registryURL: petDirectory.appendingPathComponent("sessions.json"),
+            fallbackStateURL: petDirectory.appendingPathComponent("state.json")
+        ) { [weak self] sessions in
+            self?.applySessions(sessions)
+        }
+        stateMonitor.start()
+    }
+
+    private func statePriority(_ payload: StatePayload) -> Int {
+        selectionPriority(state: effectiveState(payload), isClosed: payload.isClosed)
+    }
+
+    private func applySessions(_ incoming: [StatePayload]) {
+        // 훅이 갱신하기 전 기존 레지스트리에 남아 있을 수 있는 worker 기록도 여기서
+        // 걸러야, 앱을 다시 열었을 때 한 번이라도 말풍선·클릭 대상으로 돌아오지 않는다.
+        var merged = Dictionary(uniqueKeysWithValues: incoming
+            .filter(\.isRettoVisibleTask)
+            .map { ($0.id, $0) })
+        // 이미 훅으로 받은 task는 더 정밀한 상태가 있으므로 유지한다. 훅에 없는 task만
+        // 롤아웃에서 넣어, 연결을 꺼도 기본 표시가 사라지지 않게 한다.
+        for task in codexRolloutDiscovery.recentTasks() where task.isRettoVisibleTask && merged[task.id] == nil {
+            merged[task.id] = task
+        }
+        sessions = merged.values.map(reconciledCodexPayload).sorted {
+            let leftPriority = statePriority($0)
+            let rightPriority = statePriority($1)
+            if leftPriority != rightPriority { return leftPriority > rightPriority }
+            return ($0.updatedAtMs ?? 0) > ($1.updatedAtMs ?? 0)
+        }
+        let openSessions = sessions.filter { !$0.isClosed }
+        let attentionSessions = openSessions.filter { self.needsAttention($0) }
+        if let pinnedSessionId,
+           let pinned = openSessions.first(where: { $0.id == pinnedSessionId }) {
+            // 고정은 지켜주되, 손이 필요한 세션이 생기면 그쪽을 먼저 보여준다.
+            // Claude 사이드바에 파란 숫자가 떴는데 레토가 딴 데를 보고 있으면 배지가 무슨 뜻이 없다.
+            // openSessions 는 이미 우선순위대로 정렬돼 있어 첫 항목이 가장 급한 세션이다.
+            selectedPayload = needsAttention(pinned) ? pinned : (attentionSessions.first ?? pinned)
+        } else {
+            if pinnedSessionId != nil { self.pinnedSessionId = nil }
+            selectedPayload = openSessions.first ?? sessions.first
+        }
+        guard let selectedPayload else {
+            // 세션이 하나도 없다. 첫 실행이거나 Claude Code 를 아직 안 켠 것이다.
+            // 예전에는 여기서 아무것도 하지 않아서, 받는 사람이 이름표에 "Claude Code" 만
+            // 걸린 고양이를 보고 고장인지 아닌지 알 수 없었다.
+            updateClearAttentionItem(count: 0)
+            if let placeholder = Self.placeholderPayload {
+                petView.apply(
+                    placeholder,
+                    state: .sleeping,
+                    liveMessage: "Claude Code나 Codex를 켜면 여기서 알려줄게",
+                    liveTitle: Retto.koreanName,
+                    sessionCount: 0,
+                    attentionCount: 0,
+                    isPinned: false
+                )
+            }
+            rebuildSessionsMenu()
+            return
+        }
+        // 배지는 "답변이 끝났는데 아직 안 본" 세션만 센다. 대기·실패는 이름표 색이 이미 말해 준다.
+        markSeenByLooking()
+        let attention = badgeSessions()
+        updateClearAttentionItem(count: attention.count)
+        // 전부 회색인 채로 10분이 지나면 레토도 잔다. 그때는 세션 이름 대신 레토 이름을 걸고
+        // 말풍선에도 잠꼬대만 남긴다 — 보여 줄 새 소식이 없다는 뜻이다.
+        let nowMs = Date().timeIntervalSince1970 * 1000
+        let asleep = shouldSleep(
+            newestUpdatedAtMs: openSessions.compactMap(\.updatedAtMs).max(),
+            nowMs: nowMs,
+            hasBusySession: openSessions.contains { effectiveState($0) != .idle }
+        )
+        // 다 끝냈는데 아무도 보러 오지 않은 채 30분이 지난 경우. 알릴 것은 그대로 두고
+        // 그림만 잠든다 — 기다리다 졸았다는 뜻이다.
+        let dozing = !asleep && shouldDozeWhileWaiting(
+            newestAttentionAtMs: attention.compactMap(\.updatedAtMs).max(),
+            nowMs: nowMs,
+            everythingDone: openSessions.allSatisfy {
+                let live = effectiveState($0)
+                return live == .idle || live == .waving
+            }
+        )
+        petView.apply(
+            selectedPayload,
+            state: asleep ? .sleeping : effectiveState(selectedPayload),
+            liveMessage: asleep ? "Zzz…" : transcriptReader.latestAssistantText(at: selectedPayload.transcriptPath),
+            liveTitle: asleep ? "레토" : transcriptReader.latestTitle(at: selectedPayload.transcriptPath),
+            sleepPose: dozing,
+            sessionCount: openSessions.count,
+            attentionCount: attention.count,
+            attentionState: attention.max(by: { statePriority($0) < statePriority($1) })?.petState,
+            isPinned: selectedPayload.id == pinnedSessionId
+        )
+        rebuildSessionsMenu()
+    }
+
+    /// Codex가 Stop 훅을 보내지 않아도 롤아웃의 task_complete는 남는다. 그 이벤트가
+    /// 새 사용자 요청보다 뒤에 있는 완료 이벤트면 완료·읽지 않음으로 보정한다.
+    private func reconciledCodexPayload(_ payload: StatePayload) -> StatePayload {
+        guard payload.source == "codex" || payload.client == "codex" else { return payload }
+        var refreshed = payload
+        let task = reconcileCodexTask(
+            payload: payload,
+            indexTitle: codexThreadTitleReader.title(for: payload.navigationSessionId),
+            transcriptStatus: codexTranscriptStatusReader.status(at: payload.transcriptPath)
+        )
+        refreshed.state = task.state.rawValue
+        refreshed.updatedAtMs = task.observedAtMs
+        refreshed.attention = task.needsAttention
+        refreshed.sessionTitle = task.title
+        refreshed.stateSource = task.source.rawValue
+        return refreshed
+    }
+
+    /// 배지를 누르면 배지가 세던 세션들을 그대로 목록으로 보여준다. 하나뿐이면 묻지 않고 바로 연다.
+    private func showAttentionMenu(at point: NSPoint) {
+        let waiting = badgeSessions()
+        guard let first = waiting.first else {
+            revealAgentSession(nil, windowOnly: false)
+            return
+        }
+        if waiting.count == 1 {
+            revealAgentSession(first, windowOnly: false)
+            return
+        }
+        let menu = NSMenu(title: "손이 필요한 세션")
+        let header = NSMenuItem(title: "\(waiting.count)개 세션이 기다려요", action: nil, keyEquivalent: "")
+        header.isEnabled = false
+        menu.addItem(header)
+        menu.addItem(.separator())
+        for payload in waiting.prefix(12) {
+            let item = NSMenuItem(title: sessionMenuLabel(for: payload), action: #selector(openSessionFromBadge(_:)), keyEquivalent: "")
+            item.target = self
+            item.representedObject = payload.id
+            menu.addItem(item)
+        }
+        menu.popUp(positioning: nil, at: point, in: petView)
+    }
+
+    @objc private func openSessionFromBadge(_ sender: NSMenuItem) {
+        guard let sessionId = sender.representedObject as? String,
+              let payload = sessions.first(where: { $0.id == sessionId }) else { return }
+        // ⌥ 를 누른 채 고르면 창만 앞으로 보내고 탭은 건드리지 않는다.
+        revealAgentSession(payload, windowOnly: NSEvent.modifierFlags.contains(.option))
+    }
+
+    private func rebuildSessionsMenu() {
+        updateClaudeIntegrationItem()
+        if let open = setupWindow, open.isOpen {
+            open.refresh(status: ClaudeIntegration.status(sessions: sessions),
+                         environment: RettoHostEnvironment.detect())
+        }
+        sessionsMenu.removeAllItems()
+        autoSelectionItem = NSMenuItem(title: "중요한 세션 자동으로 따라가기", action: #selector(selectAutomaticSession), keyEquivalent: "")
+        autoSelectionItem.target = self
+        autoSelectionItem.state = pinnedSessionId == nil ? .on : .off
+        sessionsMenu.addItem(autoSelectionItem)
+        sessionsMenu.addItem(.separator())
+
+        let recent = Array(sessions.filter { !$0.isClosed }.prefix(12))
+        let header = NSMenuItem(title: "작업 이름을 고르면 레토가 그 작업을 보여줍니다", action: nil, keyEquivalent: "")
+        header.isEnabled = false
+        sessionsMenu.addItem(header)
+        if recent.isEmpty {
+            let empty = NSMenuItem(title: "최근 작업이 없습니다", action: nil, keyEquivalent: "")
+            empty.isEnabled = false
+            sessionsMenu.addItem(empty)
+            return
+        }
+        for payload in recent {
+            let item = NSMenuItem(title: sessionMenuLabel(for: payload), action: nil, keyEquivalent: "")
+            item.submenu = taskMenu(for: payload)
+            sessionsMenu.addItem(item)
+        }
+    }
+
+    /// 최근 작업은 출처별로 나누지 않는다. 고른 작업에서만 실제로 열 수 있는 앱을 보여 준다.
+    private func taskMenu(for payload: StatePayload) -> NSMenu {
+        let menu = NSMenu(title: payload.title)
+        let show = NSMenuItem(title: "레토에서 이 작업 보기", action: #selector(selectSession(_:)), keyEquivalent: "")
+        show.target = self
+        show.representedObject = payload.id
+        show.state = pinnedSessionId == payload.id ? .on : .off
+        menu.addItem(show)
+        menu.addItem(.separator())
+
+        let apps: [OpenApp] = payload.sourceLabel == "Codex" ? [.codex] : [.vscode, .claude]
+        for app in apps where isOpenAppInstalled(app) {
+            let choice = NSMenuItem(title: openTaskMenuTitle(app), action: #selector(openTask(_:)), keyEquivalent: "")
+            choice.target = self
+            choice.representedObject = TaskOpenChoice(sessionID: payload.id, app: app)
+            menu.addItem(choice)
+        }
+        if menu.items.count == 2 {
+            let unavailable = NSMenuItem(title: "열 수 있는 앱을 찾지 못했습니다", action: nil, keyEquivalent: "")
+            unavailable.isEnabled = false
+            menu.addItem(unavailable)
+        }
+        return menu
+    }
+
+    private func isOpenAppInstalled(_ app: OpenApp) -> Bool {
+        NSWorkspace.shared.urlForApplication(withBundleIdentifier: app.bundleIdentifier) != nil
+            || FileManager.default.fileExists(atPath: app.fallbackPath)
+    }
+
+    private func openTaskMenuTitle(_ app: OpenApp) -> String {
+        switch app {
+        case .vscode: return "VS Code에서 열기"
+        case .claude: return "Claude 앱에서 열기"
+        case .codex: return "Codex 앱에서 열기"
+        }
+    }
+
+    private func initialOrigin(for size: NSSize) -> NSPoint {
+        let defaults = UserDefaults.standard
+        if defaults.object(forKey: "RettoClaudePetOriginX") != nil,
+           defaults.object(forKey: "RettoClaudePetOriginY") != nil {
+            let saved = NSPoint(x: defaults.double(forKey: "RettoClaudePetOriginX"), y: defaults.double(forKey: "RettoClaudePetOriginY"))
+            let savedFrame = NSRect(origin: saved, size: size)
+            if NSScreen.screens.contains(where: { $0.visibleFrame.intersects(savedFrame) }) { return saved }
+        }
+        return defaultOrigin(for: size)
+    }
+
+    private func defaultOrigin(for size: NSSize) -> NSPoint {
+        let visible = NSScreen.main?.visibleFrame ?? NSRect(x: 0, y: 0, width: 1440, height: 900)
+        return NSPoint(x: visible.maxX - size.width - 24, y: visible.minY + 24)
+    }
+
+    private func scaledWindowSize(_ scale: CGFloat) -> NSSize {
+        petLayout(scale: scale).windowSize
+    }
+
+    /// 말풍선이 펼쳐지면 창을 아래로 늘린다. 위 변을 고정해야 레토가 화면에서 제자리에 있는다.
+    private func applyRibbonExpansion(_ expanded: Bool) {
+        let target = petLayout(scale: currentScale, expanded: expanded).windowSize
+        let current = panel.frame
+        guard abs(target.height - current.height) > 0.5 else { return }
+        // 위 변을 고정하면 레토가 제자리에 있는다. 아래 모서리에 고정한 경우에는 반대로
+        // 아래 변을 붙잡아야 창이 화면 밖으로 자라지 않는다.
+        var next = NSRect(
+            x: current.minX,
+            y: pinnedCorner.anchorsToBottom ? current.minY : current.maxY - target.height,
+            width: target.width,
+            height: target.height
+        )
+        if let visible = panel.screen?.visibleFrame ?? NSScreen.main?.visibleFrame, next.minY < visible.minY {
+            next.origin.y = visible.minY
+        }
+        isRepositioning = true
+        panel.setFrame(next, display: true, animate: false)
+        isRepositioning = false
+        applyPinnedCorner()
+    }
+
+    /// VS Code 가 지금 열어 둔 창들의 폴더. 세션의 작업 폴더가 창 폴더의 하위일 때가 많아서,
+    /// 그 하위 폴더를 그대로 열라고 하면 새 창이 생긴다. 그래서 조상이 되는 창 폴더로 바꿔 연다.
+    /// 방금 연 창은 이 기록에 빠져 있을 수 있고, 그때는 nil 로 떨어져 폴더를 열지 않는다.
+    private func editorWindowFolder(containing path: String) -> String? {
+        let storage = FileManager.default.homeDirectoryForCurrentUser
+            .appendingPathComponent("Library/Application Support/Code/User/globalStorage/storage.json")
+        guard let data = try? Data(contentsOf: storage),
+              let root = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+              let windows = root["windowsState"] as? [String: Any] else { return nil }
+
+        var folders: [String] = []
+        func collect(_ candidate: Any?) {
+            guard let window = candidate as? [String: Any],
+                  let folder = window["folder"] as? String,
+                  let url = URL(string: folder),
+                  url.isFileURL else { return }
+            folders.append(url.path)
+        }
+        collect(windows["lastActiveWindow"])
+        (windows["openedWindows"] as? [[String: Any]])?.forEach(collect)
+
+        return folders
+            .filter { path == $0 || path.hasPrefix($0.hasSuffix("/") ? $0 : $0 + "/") }
+            .max(by: { $0.count < $1.count })
+    }
+
+    /// 목표 앱이 화면 맨 앞에 올 때까지 기다린다. 제한 시간을 넘기면 그냥 넘어간다 —
+    /// 늦더라도 딥링크를 보내는 편이, 눌렀는데 아무 일도 없는 것보다 낫다.
+    private func whenFrontmost(_ bundleIdentifier: String, timeout: TimeInterval, then next: @escaping () -> Void) {
+        let deadline = Date().addingTimeInterval(timeout)
+        func poll() {
+            if NSWorkspace.shared.frontmostApplication?.bundleIdentifier == bundleIdentifier || Date() >= deadline {
+                next()
+                return
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05, execute: poll)
+        }
+        poll()
+    }
+
+    /// 이미 그 폴더를 열어 둔 VS Code 창을 앞으로 보낸다.
+    ///
+    /// 예전에는 `NSWorkspace.open(폴더)` 를 썼는데, 바깥(LaunchServices)에서 폴더를 열면
+    /// VS Code 는 `window.openFoldersInNewWindow` 기본값에 따라 **이미 열어 둔 창이 있어도 새 창**을 띄운다.
+    /// 눌렀을 때 창이 하나 더 생기던 원인이 이것이다. 번들 안의 `code` CLI 는 같은 폴더를 연 창을 찾아
+    /// 그 창을 앞으로 보내므로 이쪽을 쓴다. CLI 는 돌아오는 데 시간이 걸리니 메인 스레드를 잡지 않는다.
+    private func focusEditorFolder(_ folder: String, editorURL: URL, then next: @escaping (Bool) -> Void) {
+        let cli = editorURL.appendingPathComponent("Contents/Resources/app/bin/code")
+        guard FileManager.default.isExecutableFile(atPath: cli.path) else {
+            next(false)
+            return
+        }
+        DispatchQueue.global(qos: .userInitiated).async {
+            let process = Process()
+            process.executableURL = cli
+            process.arguments = [folder]
+            process.standardOutput = Pipe()
+            process.standardError = Pipe()
+            var ok = false
+            do {
+                try process.run()
+                process.waitUntilExit()
+                ok = process.terminationStatus == 0
+            } catch {
+                ok = false
+            }
+            DispatchQueue.main.async { next(ok) }
+        }
+    }
+
+    /// `matchedWindow` 는 그 세션을 담은 창을 실제로 앞으로 보냈는지다.
+    /// false 면 어느 창인지 모르므로 딥링크를 보내지 않는다 — 엉뚱한 창에 새 패널이 생기니까.
+    private func focusHostApp(for payload: StatePayload?, app: OpenApp, then next: @escaping (_ matchedWindow: Bool) -> Void) {
+        let editorURL = NSWorkspace.shared.urlForApplication(withBundleIdentifier: app.bundleIdentifier)
+            ?? URL(fileURLWithPath: app.fallbackPath)
+        let wasRunning = !NSRunningApplication.runningApplications(withBundleIdentifier: app.bundleIdentifier).isEmpty
+        let configuration = NSWorkspace.OpenConfiguration()
+        configuration.activates = true
+        // 딥링크는 "지금 앞에 있는" 창으로 배달된다. 그래서 목표 앱이 실제로 앞에 온 뒤에 보내야 한다.
+        // 예전에는 고정 시간(0.45초)만 세고 보냈는데, 그 안에 못 올라오면 딥링크가 직전에 보던 창에
+        // 떨어져 엉뚱한 자리에 세션이 열렸다. 시간을 재는 대신 앞에 왔는지를 본다.
+        let frontTimeout: TimeInterval = wasRunning ? 3 : 10
+        // 앞에 온 뒤에도 창 전환과 확장 활성화에 잠깐 걸린다. 그만큼만 더 둔다.
+        let settleDelay: TimeInterval = wasRunning ? 0.25 : 1.5
+
+        let handler: (Error?, Bool) -> Void = { [weak self] error, matchedWindow in
+            DispatchQueue.main.async {
+                if error != nil {
+                    NSSound.beep()
+                    return
+                }
+                self?.whenFrontmost(app.bundleIdentifier, timeout: frontTimeout) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + settleDelay) { next(matchedWindow) }
+                }
+            }
+        }
+
+        if app.needsWindowFocusFirst,
+           let cwd = payload?.cwd, !cwd.isEmpty,
+           let folder = editorWindowFolder(containing: cwd),
+           FileManager.default.fileExists(atPath: folder) {
+            // 번들 안의 `code` 로 그 폴더의 창을 앞으로 보낸다. 실패하면 예전 방식으로 떨어진다 —
+            // 창이 하나 더 뜰지언정 세션은 열리는 편이 아무 일도 안 일어나는 것보다 낫다.
+            focusEditorFolder(folder, editorURL: editorURL) { focused in
+                if focused {
+                    // CLI 는 창을 고를 뿐 앱을 앞으로 보내지는 않는다. 그건 여기서 한다.
+                    NSWorkspace.shared.openApplication(at: editorURL, configuration: configuration) { _, error in
+                        handler(error, true)
+                    }
+                } else {
+                    NSWorkspace.shared.open([URL(fileURLWithPath: folder)], withApplicationAt: editorURL, configuration: configuration) { _, error in
+                        handler(error, true)
+                    }
+                }
+            }
+            return
+        }
+        // 창을 특정하지 못했다. 그래도 딥링크는 보낸다 — 확장이 지금 활성 창에서 세션을 열어 준다.
+        // 예전에는 여기서 접었는데, 그러면 눌러도 아무 일이 없고 배지 숫자도 줄지 않았다.
+        // Claude 앱은 세션이 창 하나에 모여 있어서, 앱을 앞으로 보낸 것이 곧 그 세션을 띄운 것이다.
+        NSWorkspace.shared.openApplication(at: editorURL, configuration: configuration) { _, error in
+            handler(error, true)
+        }
+    }
+
+    private func openAgentSession(_ payload: StatePayload?, app: OpenApp) {
+        let target = payload ?? selectedPayload
+        guard let url = sessionDeepLink(sessionId: target?.navigationSessionId, app: app) else { return }
+        if !NSWorkspace.shared.open(url) {
+            NSSound.beep()
+        }
+    }
+
+    /// 기본 동작: 세션을 가진 창을 앞으로 보낸 뒤 딥링크를 보내 그 탭까지 되살린다.
+    /// ⌥ 를 누른 채면 창만 앞으로 보내고 탭은 건드리지 않는다.
+    /// 읽음은 "그 세션을 실제로 눈앞에 띄웠을 때" 만 찍는다.
+    /// 몸통·말풍선·배지 어느 쪽을 눌렀든 그 세션 탭이 앞으로 왔으면 다녀온 것이다.
+    /// 반대로 ⌥(창만 앞으로)나 창을 특정하지 못해 딥링크를 못 보낸 경우는 아직 안 본 것으로 남긴다.
+    private func revealAgentSession(_ payload: StatePayload?, windowOnly: Bool, preferredApp: OpenApp? = nil) {
+        let target = payload ?? selectedPayload
+        let app = preferredApp ?? resolveOpenApp(for: target)
+        focusHostApp(for: target, app: app) { [weak self] matchedWindow in
+            guard let self, !windowOnly, matchedWindow else { return }
+            // 세션을 집어 띄울 길이 없는 앱(Claude 데스크탑)은 앞으로 보낸 것으로 끝낸다.
+            // 예전에는 여기서도 딥링크를 보냈는데, 그게 세션을 앱으로 가져오는 길이라
+            // 누를 때마다 사본이 새 창으로 떴다.
+            if app.hasSessionDeepLink {
+                self.openAgentSession(target, app: app)
+            } else {
+                // 딥링크로는 세션을 못 바꾸는 앱(Claude 데스크탑). 사이드바 행을 대신 눌러 준다.
+                // 앱이 앞으로 나온 뒤라야 한다 — 뒤에 있을 때는 접근성 트리가 아예 만들어지지 않는다.
+                self.followClaudeSessionIfPossible(target)
+            }
+            // 눌렀다는 것 자체를 다녀온 것으로 센다. 그 앱 안에서 어느 세션을 보는지까지는
+            // 알 수 없지만, 배지가 안 지워지는 쪽이 더 성가시다. 손으로 지울 길도 따로 있다.
+            self.markSeen(target)
+        }
+    }
+
+    @objc private func changeSkin(_ sender: NSMenuItem) {
+        guard let raw = sender.representedObject as? String, let next = PetSkin(rawValue: raw) else { return }
+        // 파일을 못 읽으면 설정을 바꾸지 않는다. 체크 표시만 옮겨 두면 다음 실행에 엉뚱한 모습이 뜬다.
+        guard let sheet = loadSpriteSheet(next) else { return }
+        skin = next
+        petView.spriteSheet = sheet
+        petView.skin = next
+        for item in skinItems {
+            item.state = (item.representedObject as? String) == raw ? .on : .off
+        }
+    }
+
+    @objc private func changeTypeface(_ sender: NSMenuItem) {
+        guard let raw = sender.representedObject as? String, let next = PetTypeface(rawValue: raw) else { return }
+        typeface = next
+        petView.typeface = next
+        for item in typefaceItems {
+            item.state = (item.representedObject as? String) == raw ? .on : .off
+        }
+    }
+
+    @objc private func changeOpenTarget(_ sender: NSMenuItem) {
+        guard let raw = sender.representedObject as? String,
+              let next = OpenTarget(rawValue: raw) else { return }
+        openTarget = next
+        for item in openTargetItems {
+            item.state = (item.representedObject as? String) == raw ? .on : .off
+        }
+    }
+
+    @objc private func selectAutomaticSession() {
+        pinnedSessionId = nil
+        applySessions(sessions)
+    }
+
+    @objc private func selectSession(_ sender: NSMenuItem) {
+        guard let sessionId = sender.representedObject as? String else { return }
+        pinnedSessionId = sessionId
+        applySessions(sessions)
+        panel.orderFrontRegardless()
+    }
+
+    @objc private func openTask(_ sender: NSMenuItem) {
+        guard let choice = sender.representedObject as? TaskOpenChoice,
+              let payload = sessions.first(where: { $0.id == choice.sessionID }) else { return }
+        pinnedSessionId = payload.id
+        applySessions(sessions)
+        revealAgentSession(payload, windowOnly: false, preferredApp: choice.app)
+    }
+
+    @objc private func toggleVisibility() {
+        if panel.isVisible {
+            panel.orderOut(nil)
+            visibilityItem.title = "레토 보이기"
+        } else {
+            panel.orderFrontRegardless()
+            visibilityItem.title = "레토 숨기기"
+        }
+    }
+
+    @objc private func toggleFollowClaude() {
+        // 권한이 없으면 켜 봐야 아무 일도 안 일어난다. 끄고 켜는 대신 권한부터 청한다.
+        guard ClaudeAppNavigator.isPermitted else {
+            askAccessibility()
+            updateFollowClaudeItem()
+            return
+        }
+        followsClaudeSession.toggle()
+        updateFollowClaudeItem()
+    }
+
+    private var codexHooksURL: URL {
+        FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent(".codex/hooks.json")
+    }
+
+    /// 다른 훅의 내용은 해석하지 않고 레토 command가 등록되어 있는지만 본다.
+    /// Codex의 신뢰 승인은 Codex 자체가 관리하므로 여기서 "실행 허용됨"이라고 과장하지 않는다.
+    private func codexHooksRegistered() -> Bool {
+        guard let data = try? Data(contentsOf: codexHooksURL),
+              let text = String(data: data, encoding: .utf8) else { return false }
+        return (text.contains("retto-pet/hook.") || text.contains("reto-pet/hook.")) && text.contains("codex")
+    }
+
+    private func updateCodexOpenTargetItem() {
+        guard let item = codexOpenTargetItem else { return }
+        let registered = codexHooksRegistered()
+        item.title = codexOpenTargetMenuLabel(isRegistered: registered)
+        item.state = registered ? .on : .off
+    }
+
+    /// 자동 라우팅이라 선택지가 따로 없다는 사실과 실제 훅 등록 상태를 함께 설명한다.
+    @objc private func showCodexIntegration() {
+        let registered = codexHooksRegistered()
+        updateCodexOpenTargetItem()
+
+        let alert = NSAlert()
+        let hasCodexTask = sessions.contains { $0.sourceLabel == "Codex" }
+        alert.messageText = registered ? "Codex 실시간 연결이 준비됐어요" : "Codex 기본 상태를 직접 확인하고 있어요"
+        alert.informativeText = [
+            registered
+                ? "최근 Codex 소식도 \(hasCodexTask ? "확인됐습니다." : "아직 없습니다. 새 task를 한 번 시작해 보세요.")"
+                : "훅이 없어도 최근 task와 완료는 표시합니다. 권한 대기·도구 실패 같은 실시간 알림은 받을 수 없습니다.",
+            "",
+            "Codex task ID는 Claude session ID와 달라서, Codex 세션은 항상 Codex 앱의 해당 task로 엽니다.",
+            "「연결 다시 설치」 뒤 Codex를 다시 열고 훅 검토 안내가 나오면 승인해 주세요.",
+            "",
+            "설정: ~/.codex/hooks.json"
+        ].joined(separator: "\n")
+        alert.addButton(withTitle: "연결 다시 설치")
+        alert.addButton(withTitle: "설정 파일 보기")
+        alert.addButton(withTitle: "닫기")
+        switch alert.runModal() {
+        case .alertFirstButtonReturn:
+            let result = runHookInstaller(arguments: [])
+            updateCodexOpenTargetItem()
+            if !result.ok {
+                let failure = NSAlert()
+                failure.messageText = "Codex 연결을 다시 설치하지 못했습니다"
+                failure.informativeText = result.output
+                failure.addButton(withTitle: "확인")
+                failure.runModal()
+            }
+        case .alertSecondButtonReturn:
+            NSWorkspace.shared.activateFileViewerSelecting([codexHooksURL])
+        default:
+            break
+        }
+    }
+
+    private func updateClaudeIntegrationItem() {
+        guard let item = claudeIntegrationItem else { return }
+        item.title = ClaudeIntegration.status(sessions: sessions).menuTitle
+    }
+
+    /// 레토가 Claude Code 소식을 받고 있는지 보여 준다.
+    ///
+    /// 알림창이 아니라 창인 이유는, 소식이 들어오는 것을 그 자리에서 지켜봐야 하기 때문이다.
+    /// 처음 켰을 때 저절로 뜨는 것과 같은 창이다 — 같은 것을 두 벌 만들면 한쪽만 낡는다.
+    @objc private func showClaudeIntegration() {
+        presentSetup(firstRun: false)
+    }
+
+    /// 옛 이름으로 깔린 앱을 걷어내고, 훅이 없거나 옛 형식이면 다시 깐다.
+    ///
+    /// dmg 는 그냥 끌어다 놓는 것이라 설치 스크립트가 없다. 그래서 이 일을 앱이 켤 때 한다.
+    /// 그러지 않으면 두 가지가 남는다 — 고양이가 두 마리 뜨고, 훅은 0.7.0 형식 그대로다.
+    /// 옛 형식(`command` + `args`)은 최근 claude-code 만 읽는데, 데스크탑 앱은 CLI 와 별개로
+    /// 자기 버전을 쓰기 때문에 그 형식으로는 앱에서만 훅이 돌지 않는 일이 생긴다.
+    ///
+    /// 옛 앱의 「레토 제거」를 부르지 않는 이유는 Legacy.swift 에 적어 두었다.
+    private func tidyLegacyInstall() {
+        let moved = removeLegacyApps()
+        if !moved.isEmpty {
+            tidyNotes.append("옛 버전을 휴지통으로 옮겼습니다 — " + moved.joined(separator: " · "))
+        }
+
+        let status = ClaudeIntegration.status(sessions: sessions, fresh: true)
+        let needsHooks = status.registeredEvents == 0 || !status.shimInstalled || !status.hookInstalled
+        let outdated = status.outdatedEvents > 0
+        guard needsHooks || outdated else { return }
+
+        let result = runHookInstaller(arguments: [])
+        ClaudeIntegration.forgetCachedProbe()
+        updateClaudeIntegrationItem()
+        if result.ok {
+            tidyNotes.append(outdated && !needsHooks ? "훅을 새 형식으로 다시 등록했습니다" : "훅을 등록했습니다")
+        } else {
+            tidyNotes.append("훅을 등록하지 못했습니다 — " + (status.nodePath == nil ? "Node.js 가 필요합니다" : "아래 단추로 다시 시도해 주세요"))
+        }
+    }
+
+    /// 처음 켠 사람에게만 저절로 띄운다. 이미 소식이 오는 사람에게 설정 창이 뜨면
+    /// 잘 돌고 있는데도 무언가 잘못된 줄 안다 — 업데이트로 새로 깐 경우가 그렇다.
+    private func showSetupIfNeeded() {
+        let status = ClaudeIntegration.status(sessions: sessions, fresh: true)
+        guard shouldShowSetupOnLaunch(
+            hasSeen: UserDefaults.standard.bool(forKey: setupSeenDefaultsKey),
+            status: status
+        ) else { return }
+        presentSetup(firstRun: true)
+    }
+
+    private func presentSetup(firstRun: Bool) {
+        if let open = setupWindow, open.isOpen {
+            open.refresh(status: ClaudeIntegration.status(sessions: sessions, fresh: true),
+                         environment: RettoHostEnvironment.detect())
+            open.show()
+            return
+        }
+        let window = SetupWindow(firstRun: firstRun) { [weak self] in self?.reinstallHooks() }
+        window.notes = tidyNotes
+        setupWindow = window
+        window.refresh(status: ClaudeIntegration.status(sessions: sessions, fresh: true),
+                       environment: RettoHostEnvironment.detect())
+        window.show()
+    }
+
+    /// 번들에 넣어 둔 설치기를 그대로 돌린다. 설치 경로와 같은 코드를 써야
+    /// 메뉴로 고친 것과 설치기로 고친 것이 갈리지 않는다.
+    private func reinstallHooks() {
+        let result = runHookInstaller(arguments: [])
+        ClaudeIntegration.forgetCachedProbe()
+        updateClaudeIntegrationItem()
+        setupWindow?.refresh(status: ClaudeIntegration.status(sessions: sessions, fresh: true),
+                             environment: RettoHostEnvironment.detect())
+        let alert = NSAlert()
+        alert.messageText = result.ok ? "훅을 다시 설치했습니다" : "훅을 설치하지 못했습니다"
+        alert.informativeText = result.output.isEmpty
+            ? (result.ok ? "" : "Node.js 가 없는지 확인해 주세요 — https://nodejs.org")
+            : result.output
+        alert.addButton(withTitle: "닫기")
+        alert.runModal()
+    }
+
+    /// 켜짐·꺼짐과 권한 상태를 제목에 함께 보여 준다.
+    ///
+    /// 애드혹 서명이라 앱을 다시 빌드하면 손쉬운 사용 목록의 항목이 낡은 서명을 가리키게 되고,
+    /// 목록에는 켜져 있는데 실제로는 권한이 없는 상태가 된다. 그때 여기서 알아챌 수 있어야 한다.
+    private func updateFollowClaudeItem() {
+        guard let item = followClaudeItem else { return }
+        if ClaudeAppNavigator.isPermitted {
+            item.title = "Claude 앱 안에서 세션 선택"
+            item.state = followsClaudeSession ? .on : .off
+        } else {
+            item.title = "Claude 앱 안에서 세션 선택 — 권한 필요"
+            item.state = .off
+        }
+    }
+
+    /// Claude 앱 안에서 그 세션까지 따라간다. 안 되면 조용히 앞으로 보낸 것으로 끝낸다.
+    private func followClaudeSessionIfPossible(_ payload: StatePayload?) {
+        ClaudeAppNavigator.log("클릭 · 따라가기=\(followsClaudeSession) 권한=\(ClaudeAppNavigator.isPermitted) 세션=\(payload?.title ?? "없음")")
+        guard followsClaudeSession, let payload else { return }
+        guard ClaudeAppNavigator.isPermitted else {
+            askAccessibilityOnce()
+            return
+        }
+        ClaudeAppNavigator.focusSession(cliSessionId: payload.id, fallbackTitle: payload.title) { _ in }
+    }
+
+    /// 세션을 누르다 권한이 없을 때는 한 번만 청한다. 누를 때마다 물으면 성가시다.
+    /// 메뉴에서 직접 부를 때는 이 제한을 두지 않는다 — 그때는 사용자가 원해서 온 것이다.
+    private func askAccessibilityOnce() {
+        let defaults = UserDefaults.standard
+        guard !defaults.bool(forKey: accessibilityAskedDefaultsKey) else { return }
+        defaults.set(true, forKey: accessibilityAskedDefaultsKey)
+        askAccessibility()
+    }
+
+    private func askAccessibility() {
+        let alert = NSAlert()
+        alert.messageText = "Claude 앱에서 세션까지 따라가려면 권한이 필요해요"
+        alert.informativeText = [
+            "Claude 앱은 세션을 지정해 여는 길을 열어 두지 않았습니다.",
+            "그래서 레토가 사이드바에서 그 세션을 대신 눌러 줍니다.",
+            "",
+            "시스템 설정 > 개인정보 보호 및 보안 > 손쉬운 사용에서 레토를 켜 주세요.",
+            "권한을 주지 않아도 앱을 앞으로 보내는 것까지는 그대로 됩니다.",
+            "",
+            "발바닥 메뉴의 「Claude 앱에서 세션까지 따라가기」로 언제든 끌 수 있습니다.",
+            "",
+            "목록에 레토가 이미 있는데도 이 안내가 나온다면, 그 항목을 빼고(−) 다시 넣어 주세요.",
+            "베타는 서명이 매번 바뀌어서 예전 항목이 지금 앱을 가리키지 않습니다."
+        ].joined(separator: "\n")
+        alert.addButton(withTitle: "설정 열기")
+        alert.addButton(withTitle: "나중에")
+        if alert.runModal() == .alertFirstButtonReturn {
+            ClaudeAppNavigator.requestPermission()
+            if let url = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility") {
+                NSWorkspace.shared.open(url)
+            }
+        }
+    }
+
+    @objc private func toggleClickThrough() {
+        // 켜면 레토가 마우스를 아예 받지 않는다 — 우클릭 메뉴도 같이 막힌다.
+        // 그래서 끄는 길이 메뉴 막대 발바닥 하나뿐인데, 그 아이콘은 메뉴 막대가 빠듯하면
+        // 노치 뒤로 밀려 안 보인다. 둘이 겹치면 강제 종료 말고는 되돌릴 방법이 없다.
+        // 켤 때만 한 번 알려 주고, 아는 사람은 다시 안 보게 한다.
+        if !panel.ignoresMouseEvents, !UserDefaults.standard.bool(forKey: clickThroughNoticeDefaultsKey) {
+            let notice = NSAlert()
+            notice.messageText = "클릭 통과를 켤까요?"
+            notice.informativeText = [
+                "레토가 마우스를 받지 않게 됩니다. 뒤에 있는 창을 그대로 쓸 수 있는 대신,",
+                "레토를 눌러 세션을 열거나 우클릭 메뉴를 여는 것도 안 됩니다.",
+                "",
+                "끄려면 메뉴 막대의 발바닥 → 「클릭 통과 끄기」 를 누르세요.",
+                "발바닥이 안 보이면 ⌘ 를 누른 채 메뉴 막대 아이콘을 끌어 자리를 만들 수 있습니다."
+            ].joined(separator: "\n")
+            notice.addButton(withTitle: "켜기")
+            notice.addButton(withTitle: "취소")
+            notice.showsSuppressionButton = true
+            notice.suppressionButton?.title = "다시 보지 않기"
+            guard notice.runModal() == .alertFirstButtonReturn else { return }
+            if notice.suppressionButton?.state == .on {
+                UserDefaults.standard.set(true, forKey: clickThroughNoticeDefaultsKey)
+            }
+        }
+        panel.ignoresMouseEvents.toggle()
+        clickThroughItem.title = panel.ignoresMouseEvents ? "클릭 통과 끄기" : "클릭 통과 켜기"
+    }
+
+    @objc private func toggleLaunchAtLogin() {
+        do {
+            if SMAppService.mainApp.status == .enabled {
+                try SMAppService.mainApp.unregister()
+                launchAtLoginItem.state = .off
+            } else {
+                try SMAppService.mainApp.register()
+                launchAtLoginItem.state = .on
+            }
+        } catch {
+            let alert = NSAlert()
+            alert.messageText = "자동 실행 설정을 바꾸지 못했어요"
+            alert.informativeText = error.localizedDescription
+            alert.runModal()
+        }
+    }
+
+    @objc private func changeScale(_ sender: NSMenuItem) {
+        guard let number = sender.representedObject as? NSNumber else { return }
+        let nextScale = CGFloat(number.doubleValue)
+        let nextSize = petLayout(scale: nextScale).windowSize
+        let oldCenter = NSPoint(x: panel.frame.midX, y: panel.frame.midY)
+        var nextFrame = NSRect(
+            x: oldCenter.x - nextSize.width / 2,
+            y: oldCenter.y - nextSize.height / 2,
+            width: nextSize.width,
+            height: nextSize.height
+        )
+        let visible = panel.screen?.visibleFrame ?? NSScreen.main?.visibleFrame
+        if let visible {
+            nextFrame.origin.x = min(max(nextFrame.origin.x, visible.minX), visible.maxX - nextFrame.width)
+            nextFrame.origin.y = min(max(nextFrame.origin.y, visible.minY), visible.maxY - nextFrame.height)
+        }
+        currentScale = nextScale
+        petView.petScale = nextScale
+        UserDefaults.standard.set(Double(nextScale), forKey: "RettoClaudePetScale")
+        for item in sizeItems {
+            let itemScale = CGFloat((item.representedObject as? NSNumber)?.doubleValue ?? 0)
+            item.state = abs(itemScale - nextScale) < 0.001 ? .on : .off
+        }
+        isRepositioning = true
+        panel.setFrame(nextFrame, display: true, animate: true)
+        isRepositioning = false
+        applyPinnedCorner()
+    }
+
+    @objc private func changeCorner(_ sender: NSMenuItem) {
+        guard let raw = sender.representedObject as? String,
+              let corner = PetCorner(rawValue: raw) else { return }
+        pinnedCorner = corner
+        for item in cornerItems {
+            item.state = (item.representedObject as? String) == raw ? .on : .off
+        }
+        applyPinnedCorner()
+        panel.orderFrontRegardless()
+    }
+
+    /// 저장된 자리가 걸쳐 있던 화면. 없으면 main 화면.
+    private func lastKnownScreen(for size: NSSize) -> NSScreen {
+        let defaults = UserDefaults.standard
+        if defaults.object(forKey: "RettoClaudePetOriginX") != nil,
+           defaults.object(forKey: "RettoClaudePetOriginY") != nil {
+            let saved = NSRect(
+                origin: NSPoint(x: defaults.double(forKey: "RettoClaudePetOriginX"), y: defaults.double(forKey: "RettoClaudePetOriginY")),
+                size: size
+            )
+            if let screen = NSScreen.screens.first(where: { $0.visibleFrame.intersects(saved) }) { return screen }
+        }
+        return NSScreen.main ?? NSScreen.screens.first ?? NSScreen()
+    }
+
+    /// 고정된 모서리로 창을 옮긴다. 자유 위치면 아무것도 하지 않는다.
+    /// 배율을 바꾸거나 말풍선이 펼쳐져 창 크기가 변할 때도 불러서 모서리에 붙여 둔다.
+    private func applyPinnedCorner() {
+        guard panel != nil else { return }
+        let visible = panel.screen?.visibleFrame ?? NSScreen.main?.visibleFrame ?? NSRect(x: 0, y: 0, width: 1440, height: 900)
+        guard let origin = cornerOrigin(corner: pinnedCorner, size: panel.frame.size, visible: visible) else { return }
+        isRepositioning = true
+        panel.setFrameOrigin(origin)
+        isRepositioning = false
+        // 고정 중에도 자리를 적어 둔다. 다음에 켤 때 어느 화면에 있었는지 알아야 한다.
+        UserDefaults.standard.set(origin.x, forKey: "RettoClaudePetOriginX")
+        UserDefaults.standard.set(origin.y, forKey: "RettoClaudePetOriginY")
+    }
+
+    @objc private func resetPosition() {
+        pinnedCorner = .free
+        for item in cornerItems {
+            item.state = (item.representedObject as? String) == PetCorner.free.rawValue ? .on : .off
+        }
+        isRepositioning = true
+        panel.setFrameOrigin(defaultOrigin(for: panel.frame.size))
+        isRepositioning = false
+        panel.orderFrontRegardless()
+    }
+
+    func windowDidMove(_ notification: Notification) {
+        guard panel != nil, !isRepositioning else { return }
+        // 사용자가 직접 끌었다. 모서리 고정은 그 순간 풀린다 — 끌어다 놓은 자리를 지켜 주는 게 맞다.
+        if pinnedCorner != .free {
+            pinnedCorner = .free
+            for item in cornerItems {
+                item.state = (item.representedObject as? String) == PetCorner.free.rawValue ? .on : .off
+            }
+        }
+        UserDefaults.standard.set(panel.frame.origin.x, forKey: "RettoClaudePetOriginX")
+        UserDefaults.standard.set(panel.frame.origin.y, forKey: "RettoClaudePetOriginY")
+    }
+
+    /// 사용자가 그 세션 창을 보고 있으면 읽음으로 센다.
+    ///
+    /// 레토를 누르지 않고 직접 세션에 다녀오는 경우를 잡는 유일한 길이다. 디스크에는
+    /// "봤다" 는 기록이 없어서, 최상단 앱과 그 앱의 맨 앞 창 제목으로 알아낸다.
+    /// 창 제목을 읽지 못하는 환경에서는 아무 일도 하지 않고 수동 지우기만 남는다.
+    private func markSeenByLooking() {
+        // 지울 것이 없으면 창 목록을 뒤질 이유가 없다. 0.25초마다 도는 자리다.
+        let waiting = badgeSessions()
+        guard !waiting.isEmpty else {
+            lookingSince = nil
+            lookingApp = nil
+            return
+        }
+        guard let front = NSWorkspace.shared.frontmostApplication,
+              let bundleId = front.bundleIdentifier else {
+            lookingSince = nil
+            lookingApp = nil
+            return
+        }
+        if bundleId != lookingApp {
+            lookingApp = bundleId
+            lookingSince = Date()
+            return
+        }
+        guard let since = lookingSince, Date().timeIntervalSince(since) >= lookingDwell else { return }
+        guard let title = frontWindowTitle(pid: front.processIdentifier), !title.isEmpty else { return }
+
+        for payload in waiting where resolveOpenApp(for: payload).bundleIdentifier == bundleId {
+            let folder = payload.cwd.map { ($0 as NSString).lastPathComponent }
+            guard windowShowsSession(windowTitle: title, sessionTitle: payload.title, folderName: folder) else { continue }
+            recordSeenFromAccess(payload)
+        }
+    }
+
+    /// 다른 앱의 창 제목을 읽을 수 있나.
+    ///
+    /// macOS 는 창 제목 읽기를 화면 기록 권한으로 묶어 두었다. 권한이 없으면 제목이 빈 채로
+    /// 와서 "그 세션 창을 보고 있으면 읽음" 판정이 조용히 꺼진다. 조용히 꺼지는 게 문제라
+    /// 정보 창에서 상태를 보여 준다. 애드혹 서명이라 앱을 다시 빌드하면 권한이 풀릴 수 있다.
+    private func canReadWindowTitles() -> Bool {
+        let myPid = ProcessInfo.processInfo.processIdentifier
+        let windows = CGWindowListCopyWindowInfo([.optionOnScreenOnly, .excludeDesktopElements], kCGNullWindowID) as? [[String: Any]] ?? []
+        return windows.contains { window in
+            guard (window[kCGWindowOwnerPID as String] as? pid_t) != myPid,
+                  let name = window[kCGWindowName as String] as? String else { return false }
+            return !name.trimmingCharacters(in: .whitespaces).isEmpty
+        }
+    }
+
+    /// 그 앱의 맨 앞 창 제목 하나. 뒤에 있는 창까지 보면 보고 있지 않은 세션도 지워진다.
+    private func frontWindowTitle(pid: pid_t) -> String? {
+        let windows = CGWindowListCopyWindowInfo([.optionOnScreenOnly, .excludeDesktopElements], kCGNullWindowID) as? [[String: Any]] ?? []
+        for window in windows {
+            guard (window[kCGWindowOwnerPID as String] as? pid_t) == pid,
+                  (window[kCGWindowLayer as String] as? Int) == 0 else { continue }
+            return window[kCGWindowName as String] as? String
+        }
+        return nil
+    }
+
+    /// 지울 것이 몇 개인지 메뉴에 그대로 보여 준다. 없으면 흐리게 둔다.
+    private func updateClearAttentionItem(count: Int) {
+        guard let item = clearAttentionItem else { return }
+        item.title = count > 0 ? "완료 표시 지우기 (\(count)개)" : "완료 표시 지우기"
+        item.isEnabled = count > 0
+    }
+
+    /// 배지가 세는 세션(답이 끝났는데 아직 안 본 것)을 모두 읽음으로 옮긴다.
+    @objc private func markAllSeen() {
+        let targets = badgeSessions()
+        guard !targets.isEmpty else { return }
+        var seen = seenSessions
+        let now = Date().timeIntervalSince1970 * 1000
+        for payload in targets {
+            seen[payload.id] = max(payload.updatedAtMs ?? 0, now)
+        }
+        let live = Set(sessions.map(\.id))
+        seenSessions = seen.filter { live.contains($0.key) }
+        applySessions(sessions)
+    }
+
+    /// 레토가 누구이고 누가 만들었는지. 메일 주소는 눌러서 복사할 수 있게 둔다.
+    @objc private func showAbout() {
+        let alert = NSAlert()
+        alert.messageText = Retto.englishName + " · " + Retto.koreanName
+        alert.informativeText = [
+            Retto.character,
+            "",
+            "품종        " + Retto.sex + " " + Retto.breed,
+            "생일        " + Retto.birthdayLabel + " · " + Retto.ageLabel,
+            "",
+            "만든 사람   " + Retto.creator,
+            "메일        " + Retto.email,
+            "링크드인    " + Retto.linkedIn,
+            "버전        " + Retto.version,
+            Retto.buildStamp.isEmpty ? nil : "빌드        " + Retto.buildStamp,
+            "",
+            "자동 읽음 판정   " + (canReadWindowTitles()
+                ? "켜짐 — 세션 창을 3초 이상 보고 있으면 배지를 내려놓습니다"
+                : "꺼짐 — 화면 기록 권한이 필요합니다"),
+            "",
+            "여러 Claude Code·Codex 세션을 대신 지켜보다가 내 답이 필요할 때",
+            "알려 주고, 누르면 그 세션으로 데려다준다."
+        ].compactMap { $0 }.joined(separator: "\n")
+        if let icon = NSApp.applicationIconImage {
+            alert.icon = icon
+        }
+        alert.addButton(withTitle: "닫기")
+        alert.addButton(withTitle: "링크드인 열기")
+        alert.addButton(withTitle: "메일 주소 복사")
+        let needsPermission = !canReadWindowTitles()
+        if needsPermission {
+            alert.addButton(withTitle: "화면 기록 설정 열기")
+        }
+        // 알림창 글자는 눌러도 링크가 되지 않는다. 그래서 버튼으로 둔다.
+        switch alert.runModal() {
+        case .alertSecondButtonReturn:
+            if let url = URL(string: Retto.linkedIn) { NSWorkspace.shared.open(url) }
+        case NSApplication.ModalResponse(rawValue: NSApplication.ModalResponse.alertThirdButtonReturn.rawValue + 1) where needsPermission:
+            if let url = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_ScreenCapture") {
+                NSWorkspace.shared.open(url)
+            }
+        case .alertThirdButtonReturn:
+            NSPasteboard.general.clearContents()
+            NSPasteboard.general.setString(Retto.email, forType: .string)
+        default:
+            break
+        }
+    }
+
+    @objc private func revealStateFile() {
+        let url = FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent(".claude/retto-pet/state.json")
+        NSWorkspace.shared.activateFileViewerSelecting([url])
+    }
+
+    @objc private func screenConfigurationChanged() {
+        let screens = NSScreen.screens.map(\.visibleFrame)
+        if pinnedCorner != .free {
+            applyPinnedCorner()
+        } else if !screens.contains(where: { $0.intersects(panel.frame) }) {
+            resetPosition()
+        }
+    }
+
+    /// 레토를 깨끗이 걷어낸다. 훅 등록·상태 파일·앱 설정·로그인 항목·앱 본체까지.
+    /// 앱이 자기 번들을 지우는 일이라 되돌릴 수 없다. 그래서 먼저 묻는다.
+    @objc private func uninstallRetto() {
+        let confirm = NSAlert()
+        confirm.messageText = Retto.koreanName + "를 제거할까요?"
+        confirm.informativeText = [
+            "아래를 정리하고 레토가 종료됩니다.",
+            "",
+            "· Claude Code 훅 등록 (~/.claude/settings.json)",
+            "· Codex 훅 등록 (~/.codex/hooks.json)",
+            "· 상태 파일과 훅 (~/.claude/retto-pet/)",
+            "· 크기·위치 같은 앱 설정",
+            "· 로그인할 때 자동 실행",
+            "· 앱 본체 — 휴지통으로 갑니다",
+            "",
+            "Claude Code·Codex 자체와 다른 훅은 건드리지 않습니다."
+        ].joined(separator: "\n")
+        confirm.alertStyle = .warning
+        confirm.addButton(withTitle: "제거")
+        confirm.addButton(withTitle: "취소")
+        // 엔터를 잘못 쳐서 지우는 일이 없게 기본 단추를 취소로 옮긴다.
+        confirm.buttons[0].keyEquivalent = ""
+        confirm.buttons[1].keyEquivalent = "\r"
+        guard confirm.runModal() == .alertFirstButtonReturn else { return }
+
+        // 지운 것이 되살아나지 않게 먼저 손을 뗀다.
+        //   폴링 — 0.25초마다 도는 타이머가 알림창 중에도 살아 있어 읽음 기록을 되쓸 수 있다
+        //   창 위치 — AppKit 이 종료할 때 프레임을 설정에 도로 쓴다. 이름을 비우면 쓰지 않는다
+        isUninstalling = true
+        stateMonitor?.stop()
+        panel.setFrameAutosaveName("")
+
+        // 훅 등록·상태 파일·자동 실행. 실제 작업은 `--uninstall` 과 같은 코드를 쓴다.
+        let outcome = performUninstall()
+        var report = outcome.lines
+
+        // 4. 크기·위치·읽음 표시 같은 앱 설정. 실제로 지우는 것은 종료 직전이다 —
+        //    여기서 지우면 알림창과 종료 사이에 AppKit 이 창 프레임을 도로 써 넣는다.
+        report.append("· 앱 설정을 지웠습니다")
+
+        let done = NSAlert()
+        done.messageText = "정리했습니다"
+        done.informativeText = (report + ["", "이제 앱을 휴지통으로 옮기고 종료합니다."]).joined(separator: "\n")
+        done.addButton(withTitle: "확인")
+        done.runModal()
+
+        // 5. 앱 본체. 도는 중에 번들을 옮기는 건 macOS 가 허용한다 — 프로세스는 그대로 살아 있다.
+        //    옮긴 뒤에 종료해야 앱이 자기 무덤을 다 파고 나갈 수 있다.
+        let bundleURL = Bundle.main.bundleURL
+        NSWorkspace.shared.recycle([bundleURL]) { _, error in
+            DispatchQueue.main.async { [weak self] in
+                // 옮기지 못했으면 말해 준다. 앞에서 "휴지통으로 갑니다" 라고 해 놓고
+                // 조용히 남겨 두면, 지운 줄 알았던 앱이 다음에 또 뜬다.
+                if error != nil {
+                    let failed = NSAlert()
+                    failed.messageText = "앱을 휴지통으로 옮기지 못했어요"
+                    failed.informativeText = "다른 건 정리했습니다. 아래 앱을 직접 지워 주세요.\n\n" + bundleURL.path
+                    failed.addButton(withTitle: "위치 보기")
+                    failed.addButton(withTitle: "닫기")
+                    if failed.runModal() == .alertFirstButtonReturn {
+                        NSWorkspace.shared.activateFileViewerSelecting([bundleURL])
+                    }
+                }
+                self?.clearDefaultsIfUninstalling()
+                NSApp.terminate(nil)
+            }
+        }
+    }
+
+    /// 제거 중일 때만 설정을 지운다. 종료 직전과 종료 훅에서 두 번 부른다 —
+    /// AppKit 이 마지막에 창 프레임을 써 넣어 지운 설정이 되살아나던 것을 막는다.
+    private func clearDefaultsIfUninstalling() {
+        guard isUninstalling, let bundleID = Bundle.main.bundleIdentifier else { return }
+        UserDefaults.standard.removePersistentDomain(forName: bundleID)
+        UserDefaults.standard.synchronize()
+    }
+
+    func applicationWillTerminate(_ notification: Notification) {
+        clearDefaultsIfUninstalling()
+    }
+
+    @objc private func quit() { NSApp.terminate(nil) }
+}

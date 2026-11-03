@@ -1,14 +1,91 @@
+// Local performance validation uses generated temporary fixtures only.
 // 실행 진입점. 진단 플래그를 먼저 처리한다.
 
 import AppKit
 import CoreText
 import Foundation
+if CommandLine.arguments.contains("--self-test-all-skins") { exit(runAllSkinsSelfTest()) }
+if CommandLine.arguments.contains("--self-test-amu-ran-clock") { exit(runAmuRanClockSelfTest()) }
+if let i = CommandLine.arguments.firstIndex(of: "--render-amu-ran-motion-preview"), i + 1 < CommandLine.arguments.count { exit(renderAmuRanMotionPreview(to: CommandLine.arguments[i+1])) }
+if let i = CommandLine.arguments.firstIndex(of: "--render-amu-ran-gaze-preview"), i + 1 < CommandLine.arguments.count { exit(renderAmuRanGazePreview(to: CommandLine.arguments[i+1])) }
 
 // 접근성 권한이 이 앱에 실제로 붙어 있는지. 애드혹 서명이라 다시 빌드할 때마다 풀리고,
 // 손쉬운 사용 목록에는 켜져 보이는데 실제로는 없는 상태가 된다. 그때 이걸로 확인한다.
 if CommandLine.arguments.contains("--ax-check") {
     print(ClaudeAppNavigator.isPermitted ? "접근성 권한: 있음" : "접근성 권한: 없음")
     exit(ClaudeAppNavigator.isPermitted ? 0 : 1)
+}
+
+if CommandLine.arguments.contains("--jeanne-state-self-test") {
+    let v = RettoView(frame:NSRect(x:0,y:0,width:224,height:320),spriteSheet:JeanneSkin.placeholder,skin:.jeanne,onOpenClaude:{ _,_ in },onOpenAttention:{ _ in })
+    let ok = v.validateJeanneStateTransitions()
+    print("Jeanne state/loop/drag/gaze transitions: \(ok)")
+    exit(ok ? 0 : 1)
+}
+
+if CommandLine.arguments.contains("--discovery-cache-self-test") {
+    let ok = CodexRolloutDiscovery.validateTaskCache()
+    print("Task cache invalidation: \(ok)")
+    exit(ok ? 0 : 1)
+}
+
+if CommandLine.arguments.contains("--jeanne-fit-self-test") {
+    let v = RettoView(frame:NSRect(x:0,y:0,width:224,height:320),spriteSheet:JeanneSkin.placeholder,skin:.jeanne,onOpenClaude:{ _,_ in },onOpenAttention:{ _ in })
+    let ok = v.validateJeanneBodyFitCache()
+    print("Jeanne text cache invalidation: \(ok)")
+    exit(ok ? 0 : 1)
+}
+
+if CommandLine.arguments.contains("--jeanne-effects-self-test") { exit(JeanneSkin.validateEffects() ? 0 : 1) }
+if CommandLine.arguments.contains("--jeanne-self-test") { exit(JeanneSkin.validate() ? 0 : 1) }
+if let i = CommandLine.arguments.firstIndex(of: "--render-jeanne-preview"), i + 1 < CommandLine.arguments.count { exit(renderJeannePreview(to: CommandLine.arguments[i + 1])) }
+
+if CommandLine.arguments.contains("--pichi-self-test") { let ok = PichiSkin.validate(); print("{\"pichiOK\":\(ok)}"); exit(ok ? 0 : 1) }
+if let i = CommandLine.arguments.firstIndex(of: "--render-pichi-preview"), i + 1 < CommandLine.arguments.count { exit(renderPichiPreview(to: CommandLine.arguments[i + 1])) }
+
+if CommandLine.arguments.contains("--hana-gaze-self-test") { exit(HanaGaze.selfTest() ? 0 : 1) }
+if let i = CommandLine.arguments.firstIndex(of: "--render-hana-gaze-preview"), i + 1 < CommandLine.arguments.count { exit(HanaGaze.renderPreview(to: CommandLine.arguments[i+1])) }
+if CommandLine.arguments.contains("--hana-self-test") {
+    let ok = hanaSkinSelfTest(); print("{\"hanaOK\":\(ok)}"); exit(ok ? 0 : 1)
+}
+if let index = CommandLine.arguments.firstIndex(of: "--render-hana-motion-preview"), index + 1 < CommandLine.arguments.count {
+    exit(renderHanaMotionPreview(to: CommandLine.arguments[index + 1]))
+}
+
+if let index=CommandLine.arguments.firstIndex(of:"--render-chocolat-preview"),index+1<CommandLine.arguments.count { exit(renderChocolatHeartPreview(to:CommandLine.arguments[index+1])) }
+if CommandLine.arguments.contains("--chocolat-self-test") {
+    let ok=ChocolatHeart.validate();print("chocolatOK: \(ok)");exit(ok ? 0:1)
+}
+if let index = CommandLine.arguments.firstIndex(of: "--attention-preview"), index + 1 < CommandLine.arguments.count {
+    let app = NSApplication.shared
+    app.setActivationPolicy(.accessory)
+    app.appearance = NSAppearance(named: .aqua)
+    app.finishLaunching()
+    exit(renderAttentionPreview(to: CommandLine.arguments[index + 1]))
+}
+
+if CommandLine.arguments.contains("--self-test-codex-input") {
+    exit(runCodexInputSelfTest())
+}
+
+if CommandLine.arguments.contains("--self-test-status-rendering") {
+    let app = NSApplication.shared
+    app.setActivationPolicy(.prohibited)
+    app.appearance = NSAppearance(named: .aqua)
+    app.finishLaunching()
+    var output: URL?
+    if let flag = CommandLine.arguments.firstIndex(of: "--status-render-output"), flag + 1 < CommandLine.arguments.count {
+        output = URL(fileURLWithPath: CommandLine.arguments[flag + 1])
+    }
+    exit(runStatusRenderingSelfTest(outputDirectory: output))
+}
+
+if CommandLine.arguments.contains("--self-test-slack") {
+    let app = NSApplication.shared
+    app.setActivationPolicy(.accessory)
+    app.appearance = NSAppearance(named: .aqua)
+    app.finishLaunching()
+    exit(runSlackSelfTest())
 }
 
 if CommandLine.arguments.contains("--self-test") {
@@ -85,8 +162,29 @@ if let index = CommandLine.arguments.firstIndex(of: "--setup-preview"), index + 
     exit(renderSetupPreview(to: CommandLine.arguments[index + 1]))
 }
 
+if let index = CommandLine.arguments.firstIndex(of: "--render-christmas16-preview"), index + 1 < CommandLine.arguments.count {
+    exit(renderChristmas16Preview(to: CommandLine.arguments[index + 1]))
+}
+
+if let index = CommandLine.arguments.firstIndex(of: "--render-chat-font-preview"), index + 1 < CommandLine.arguments.count {
+    exit(renderPreview(to: CommandLine.arguments[index + 1], chatFonts: true))
+}
 if let index = CommandLine.arguments.firstIndex(of: "--render-preview"), index + 1 < CommandLine.arguments.count {
     exit(renderPreview(to: CommandLine.arguments[index + 1]))
+}
+
+if let index = CommandLine.arguments.firstIndex(of: "--render-skin-preview"),
+   index + 2 < CommandLine.arguments.count,
+   let skin = PetSkin(rawValue: CommandLine.arguments[index + 1]) {
+    exit(renderPreview(to: CommandLine.arguments[index + 2], skin: skin))
+}
+
+if let index = CommandLine.arguments.firstIndex(of: "--render-magical-heart-transformation-preview"), index + 1 < CommandLine.arguments.count {
+    exit(renderMagicalHeartTransformationPreview(to: CommandLine.arguments[index + 1]))
+}
+
+if let index = CommandLine.arguments.firstIndex(of: "--render-magical-heart-gaze-preview"), index + 1 < CommandLine.arguments.count {
+    exit(renderMagicalHeartGazePreview(to: CommandLine.arguments[index + 1]))
 }
 
 let app = NSApplication.shared

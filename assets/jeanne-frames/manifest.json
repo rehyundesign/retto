@@ -1,0 +1,5991 @@
+{
+  "version": 56,
+  "artRevision": 58,
+  "canvas": [
+    448,
+    640
+  ],
+  "display": [
+    224,
+    320
+  ],
+  "effectFps": 20,
+  "architecture": "independent characters + continuous back/front FX; raised central hand gesture, no pawn",
+  "glowFiles": [],
+  "states": [
+    {
+      "id": "idle",
+      "row": 0,
+      "cycle": 3.2,
+      "times": [
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2
+      ],
+      "files": [
+        "v56/characters/idle/00.png",
+        "v56/characters/idle/01.png",
+        "v56/characters/idle/02.png",
+        "v56/characters/idle/03.png",
+        "v56/characters/idle/04.png",
+        "v56/characters/idle/05.png",
+        "v56/characters/idle/06.png",
+        "v56/characters/idle/07.png",
+        "v56/characters/idle/08.png",
+        "v56/characters/idle/09.png",
+        "v56/characters/idle/10.png",
+        "v56/characters/idle/11.png",
+        "v56/characters/idle/12.png",
+        "v56/characters/idle/13.png",
+        "v56/characters/idle/14.png",
+        "v56/characters/idle/15.png"
+      ],
+      "anchors": [
+        [
+          201.5545665653793,
+          411.96127137403204
+        ],
+        [
+          202.12437092546534,
+          406.7208256153734
+        ],
+        [
+          201.5571508320198,
+          404.45211518574274
+        ],
+        [
+          208.18507557035474,
+          411.0303672970891
+        ],
+        [
+          209.1062724938831,
+          410.235783866027
+        ],
+        [
+          199.7810915237856,
+          406.7818159864744
+        ],
+        [
+          202.68475973342598,
+          404.5083304103805
+        ],
+        [
+          203.8614246129516,
+          404.1943219872517
+        ],
+        [
+          201.71746064299734,
+          408.9994137520651
+        ],
+        [
+          202.04880339431168,
+          409.38955694622933
+        ],
+        [
+          201.30514364093366,
+          407.77489168942026
+        ],
+        [
+          202.53066652797887,
+          408.85468896040203
+        ],
+        [
+          203.25855939608633,
+          410.24368992546727
+        ],
+        [
+          200.41738080215072,
+          410.98569273038623
+        ],
+        [
+          200.6038198264911,
+          409.3711604823894
+        ],
+        [
+          201.20699941871882,
+          408.29965560325786
+        ]
+      ],
+      "effects": [
+        {
+          "back": "v56/effects/idle/back-000.png",
+          "front": "v56/effects/idle/front-000.png"
+        },
+        {
+          "back": "v56/effects/idle/back-001.png",
+          "front": "v56/effects/idle/front-001.png"
+        },
+        {
+          "back": "v56/effects/idle/back-002.png",
+          "front": "v56/effects/idle/front-002.png"
+        },
+        {
+          "back": "v56/effects/idle/back-003.png",
+          "front": "v56/effects/idle/front-003.png"
+        },
+        {
+          "back": "v56/effects/idle/back-004.png",
+          "front": "v56/effects/idle/front-004.png"
+        },
+        {
+          "back": "v56/effects/idle/back-005.png",
+          "front": "v56/effects/idle/front-005.png"
+        },
+        {
+          "back": "v56/effects/idle/back-006.png",
+          "front": "v56/effects/idle/front-006.png"
+        },
+        {
+          "back": "v56/effects/idle/back-007.png",
+          "front": "v56/effects/idle/front-007.png"
+        },
+        {
+          "back": "v56/effects/idle/back-008.png",
+          "front": "v56/effects/idle/front-008.png"
+        },
+        {
+          "back": "v56/effects/idle/back-009.png",
+          "front": "v56/effects/idle/front-009.png"
+        },
+        {
+          "back": "v56/effects/idle/back-010.png",
+          "front": "v56/effects/idle/front-010.png"
+        },
+        {
+          "back": "v56/effects/idle/back-011.png",
+          "front": "v56/effects/idle/front-011.png"
+        },
+        {
+          "back": "v56/effects/idle/back-012.png",
+          "front": "v56/effects/idle/front-012.png"
+        },
+        {
+          "back": "v56/effects/idle/back-013.png",
+          "front": "v56/effects/idle/front-013.png"
+        },
+        {
+          "back": "v56/effects/idle/back-014.png",
+          "front": "v56/effects/idle/front-014.png"
+        },
+        {
+          "back": "v56/effects/idle/back-015.png",
+          "front": "v56/effects/idle/front-015.png"
+        },
+        {
+          "back": "v56/effects/idle/back-016.png",
+          "front": "v56/effects/idle/front-016.png"
+        },
+        {
+          "back": "v56/effects/idle/back-017.png",
+          "front": "v56/effects/idle/front-017.png"
+        },
+        {
+          "back": "v56/effects/idle/back-018.png",
+          "front": "v56/effects/idle/front-018.png"
+        },
+        {
+          "back": "v56/effects/idle/back-019.png",
+          "front": "v56/effects/idle/front-019.png"
+        },
+        {
+          "back": "v56/effects/idle/back-020.png",
+          "front": "v56/effects/idle/front-020.png"
+        },
+        {
+          "back": "v56/effects/idle/back-021.png",
+          "front": "v56/effects/idle/front-021.png"
+        },
+        {
+          "back": "v56/effects/idle/back-022.png",
+          "front": "v56/effects/idle/front-022.png"
+        },
+        {
+          "back": "v56/effects/idle/back-023.png",
+          "front": "v56/effects/idle/front-023.png"
+        },
+        {
+          "back": "v56/effects/idle/back-024.png",
+          "front": "v56/effects/idle/front-024.png"
+        },
+        {
+          "back": "v56/effects/idle/back-025.png",
+          "front": "v56/effects/idle/front-025.png"
+        },
+        {
+          "back": "v56/effects/idle/back-026.png",
+          "front": "v56/effects/idle/front-026.png"
+        },
+        {
+          "back": "v56/effects/idle/back-027.png",
+          "front": "v56/effects/idle/front-027.png"
+        },
+        {
+          "back": "v56/effects/idle/back-028.png",
+          "front": "v56/effects/idle/front-028.png"
+        },
+        {
+          "back": "v56/effects/idle/back-029.png",
+          "front": "v56/effects/idle/front-029.png"
+        },
+        {
+          "back": "v56/effects/idle/back-030.png",
+          "front": "v56/effects/idle/front-030.png"
+        },
+        {
+          "back": "v56/effects/idle/back-031.png",
+          "front": "v56/effects/idle/front-031.png"
+        },
+        {
+          "back": "v56/effects/idle/back-032.png",
+          "front": "v56/effects/idle/front-032.png"
+        },
+        {
+          "back": "v56/effects/idle/back-033.png",
+          "front": "v56/effects/idle/front-033.png"
+        },
+        {
+          "back": "v56/effects/idle/back-034.png",
+          "front": "v56/effects/idle/front-034.png"
+        },
+        {
+          "back": "v56/effects/idle/back-035.png",
+          "front": "v56/effects/idle/front-035.png"
+        },
+        {
+          "back": "v56/effects/idle/back-036.png",
+          "front": "v56/effects/idle/front-036.png"
+        },
+        {
+          "back": "v56/effects/idle/back-037.png",
+          "front": "v56/effects/idle/front-037.png"
+        },
+        {
+          "back": "v56/effects/idle/back-038.png",
+          "front": "v56/effects/idle/front-038.png"
+        },
+        {
+          "back": "v56/effects/idle/back-039.png",
+          "front": "v56/effects/idle/front-039.png"
+        },
+        {
+          "back": "v56/effects/idle/back-040.png",
+          "front": "v56/effects/idle/front-040.png"
+        },
+        {
+          "back": "v56/effects/idle/back-041.png",
+          "front": "v56/effects/idle/front-041.png"
+        },
+        {
+          "back": "v56/effects/idle/back-042.png",
+          "front": "v56/effects/idle/front-042.png"
+        },
+        {
+          "back": "v56/effects/idle/back-043.png",
+          "front": "v56/effects/idle/front-043.png"
+        },
+        {
+          "back": "v56/effects/idle/back-044.png",
+          "front": "v56/effects/idle/front-044.png"
+        },
+        {
+          "back": "v56/effects/idle/back-045.png",
+          "front": "v56/effects/idle/front-045.png"
+        },
+        {
+          "back": "v56/effects/idle/back-046.png",
+          "front": "v56/effects/idle/front-046.png"
+        },
+        {
+          "back": "v56/effects/idle/back-047.png",
+          "front": "v56/effects/idle/front-047.png"
+        },
+        {
+          "back": "v56/effects/idle/back-048.png",
+          "front": "v56/effects/idle/front-048.png"
+        },
+        {
+          "back": "v56/effects/idle/back-049.png",
+          "front": "v56/effects/idle/front-049.png"
+        },
+        {
+          "back": "v56/effects/idle/back-050.png",
+          "front": "v56/effects/idle/front-050.png"
+        },
+        {
+          "back": "v56/effects/idle/back-051.png",
+          "front": "v56/effects/idle/front-051.png"
+        },
+        {
+          "back": "v56/effects/idle/back-052.png",
+          "front": "v56/effects/idle/front-052.png"
+        },
+        {
+          "back": "v56/effects/idle/back-053.png",
+          "front": "v56/effects/idle/front-053.png"
+        },
+        {
+          "back": "v56/effects/idle/back-054.png",
+          "front": "v56/effects/idle/front-054.png"
+        },
+        {
+          "back": "v56/effects/idle/back-055.png",
+          "front": "v56/effects/idle/front-055.png"
+        },
+        {
+          "back": "v56/effects/idle/back-056.png",
+          "front": "v56/effects/idle/front-056.png"
+        },
+        {
+          "back": "v56/effects/idle/back-057.png",
+          "front": "v56/effects/idle/front-057.png"
+        },
+        {
+          "back": "v56/effects/idle/back-058.png",
+          "front": "v56/effects/idle/front-058.png"
+        },
+        {
+          "back": "v56/effects/idle/back-059.png",
+          "front": "v56/effects/idle/front-059.png"
+        },
+        {
+          "back": "v56/effects/idle/back-060.png",
+          "front": "v56/effects/idle/front-060.png"
+        },
+        {
+          "back": "v56/effects/idle/back-061.png",
+          "front": "v56/effects/idle/front-061.png"
+        },
+        {
+          "back": "v56/effects/idle/back-062.png",
+          "front": "v56/effects/idle/front-062.png"
+        },
+        {
+          "back": "v56/effects/idle/back-063.png",
+          "front": "v56/effects/idle/front-063.png"
+        },
+        {
+          "back": "v56/effects/idle/back-064.png",
+          "front": "v56/effects/idle/front-064.png"
+        },
+        {
+          "back": "v56/effects/idle/back-065.png",
+          "front": "v56/effects/idle/front-065.png"
+        },
+        {
+          "back": "v56/effects/idle/back-066.png",
+          "front": "v56/effects/idle/front-066.png"
+        },
+        {
+          "back": "v56/effects/idle/back-067.png",
+          "front": "v56/effects/idle/front-067.png"
+        },
+        {
+          "back": "v56/effects/idle/back-068.png",
+          "front": "v56/effects/idle/front-068.png"
+        },
+        {
+          "back": "v56/effects/idle/back-069.png",
+          "front": "v56/effects/idle/front-069.png"
+        },
+        {
+          "back": "v56/effects/idle/back-070.png",
+          "front": "v56/effects/idle/front-070.png"
+        },
+        {
+          "back": "v56/effects/idle/back-071.png",
+          "front": "v56/effects/idle/front-071.png"
+        },
+        {
+          "back": "v56/effects/idle/back-072.png",
+          "front": "v56/effects/idle/front-072.png"
+        },
+        {
+          "back": "v56/effects/idle/back-073.png",
+          "front": "v56/effects/idle/front-073.png"
+        },
+        {
+          "back": "v56/effects/idle/back-074.png",
+          "front": "v56/effects/idle/front-074.png"
+        },
+        {
+          "back": "v56/effects/idle/back-075.png",
+          "front": "v56/effects/idle/front-075.png"
+        },
+        {
+          "back": "v56/effects/idle/back-076.png",
+          "front": "v56/effects/idle/front-076.png"
+        },
+        {
+          "back": "v56/effects/idle/back-077.png",
+          "front": "v56/effects/idle/front-077.png"
+        },
+        {
+          "back": "v56/effects/idle/back-078.png",
+          "front": "v56/effects/idle/front-078.png"
+        },
+        {
+          "back": "v56/effects/idle/back-079.png",
+          "front": "v56/effects/idle/front-079.png"
+        },
+        {
+          "back": "v56/effects/idle/back-080.png",
+          "front": "v56/effects/idle/front-080.png"
+        },
+        {
+          "back": "v56/effects/idle/back-081.png",
+          "front": "v56/effects/idle/front-081.png"
+        },
+        {
+          "back": "v56/effects/idle/back-082.png",
+          "front": "v56/effects/idle/front-082.png"
+        },
+        {
+          "back": "v56/effects/idle/back-083.png",
+          "front": "v56/effects/idle/front-083.png"
+        },
+        {
+          "back": "v56/effects/idle/back-084.png",
+          "front": "v56/effects/idle/front-084.png"
+        },
+        {
+          "back": "v56/effects/idle/back-085.png",
+          "front": "v56/effects/idle/front-085.png"
+        },
+        {
+          "back": "v56/effects/idle/back-086.png",
+          "front": "v56/effects/idle/front-086.png"
+        },
+        {
+          "back": "v56/effects/idle/back-087.png",
+          "front": "v56/effects/idle/front-087.png"
+        },
+        {
+          "back": "v56/effects/idle/back-088.png",
+          "front": "v56/effects/idle/front-088.png"
+        },
+        {
+          "back": "v56/effects/idle/back-089.png",
+          "front": "v56/effects/idle/front-089.png"
+        },
+        {
+          "back": "v56/effects/idle/back-090.png",
+          "front": "v56/effects/idle/front-090.png"
+        },
+        {
+          "back": "v56/effects/idle/back-091.png",
+          "front": "v56/effects/idle/front-091.png"
+        },
+        {
+          "back": "v56/effects/idle/back-092.png",
+          "front": "v56/effects/idle/front-092.png"
+        },
+        {
+          "back": "v56/effects/idle/back-093.png",
+          "front": "v56/effects/idle/front-093.png"
+        },
+        {
+          "back": "v56/effects/idle/back-094.png",
+          "front": "v56/effects/idle/front-094.png"
+        },
+        {
+          "back": "v56/effects/idle/back-095.png",
+          "front": "v56/effects/idle/front-095.png"
+        },
+        {
+          "back": "v56/effects/idle/back-096.png",
+          "front": "v56/effects/idle/front-096.png"
+        },
+        {
+          "back": "v56/effects/idle/back-097.png",
+          "front": "v56/effects/idle/front-097.png"
+        },
+        {
+          "back": "v56/effects/idle/back-098.png",
+          "front": "v56/effects/idle/front-098.png"
+        },
+        {
+          "back": "v56/effects/idle/back-099.png",
+          "front": "v56/effects/idle/front-099.png"
+        },
+        {
+          "back": "v56/effects/idle/back-100.png",
+          "front": "v56/effects/idle/front-100.png"
+        },
+        {
+          "back": "v56/effects/idle/back-101.png",
+          "front": "v56/effects/idle/front-101.png"
+        },
+        {
+          "back": "v56/effects/idle/back-102.png",
+          "front": "v56/effects/idle/front-102.png"
+        },
+        {
+          "back": "v56/effects/idle/back-103.png",
+          "front": "v56/effects/idle/front-103.png"
+        },
+        {
+          "back": "v56/effects/idle/back-104.png",
+          "front": "v56/effects/idle/front-104.png"
+        },
+        {
+          "back": "v56/effects/idle/back-105.png",
+          "front": "v56/effects/idle/front-105.png"
+        },
+        {
+          "back": "v56/effects/idle/back-106.png",
+          "front": "v56/effects/idle/front-106.png"
+        },
+        {
+          "back": "v56/effects/idle/back-107.png",
+          "front": "v56/effects/idle/front-107.png"
+        },
+        {
+          "back": "v56/effects/idle/back-108.png",
+          "front": "v56/effects/idle/front-108.png"
+        },
+        {
+          "back": "v56/effects/idle/back-109.png",
+          "front": "v56/effects/idle/front-109.png"
+        },
+        {
+          "back": "v56/effects/idle/back-110.png",
+          "front": "v56/effects/idle/front-110.png"
+        },
+        {
+          "back": "v56/effects/idle/back-111.png",
+          "front": "v56/effects/idle/front-111.png"
+        },
+        {
+          "back": "v56/effects/idle/back-112.png",
+          "front": "v56/effects/idle/front-112.png"
+        },
+        {
+          "back": "v56/effects/idle/back-113.png",
+          "front": "v56/effects/idle/front-113.png"
+        },
+        {
+          "back": "v56/effects/idle/back-114.png",
+          "front": "v56/effects/idle/front-114.png"
+        },
+        {
+          "back": "v56/effects/idle/back-115.png",
+          "front": "v56/effects/idle/front-115.png"
+        },
+        {
+          "back": "v56/effects/idle/back-116.png",
+          "front": "v56/effects/idle/front-116.png"
+        },
+        {
+          "back": "v56/effects/idle/back-117.png",
+          "front": "v56/effects/idle/front-117.png"
+        },
+        {
+          "back": "v56/effects/idle/back-118.png",
+          "front": "v56/effects/idle/front-118.png"
+        },
+        {
+          "back": "v56/effects/idle/back-119.png",
+          "front": "v56/effects/idle/front-119.png"
+        },
+        {
+          "back": "v56/effects/idle/back-120.png",
+          "front": "v56/effects/idle/front-120.png"
+        },
+        {
+          "back": "v56/effects/idle/back-121.png",
+          "front": "v56/effects/idle/front-121.png"
+        },
+        {
+          "back": "v56/effects/idle/back-122.png",
+          "front": "v56/effects/idle/front-122.png"
+        },
+        {
+          "back": "v56/effects/idle/back-123.png",
+          "front": "v56/effects/idle/front-123.png"
+        },
+        {
+          "back": "v56/effects/idle/back-124.png",
+          "front": "v56/effects/idle/front-124.png"
+        },
+        {
+          "back": "v56/effects/idle/back-125.png",
+          "front": "v56/effects/idle/front-125.png"
+        },
+        {
+          "back": "v56/effects/idle/back-126.png",
+          "front": "v56/effects/idle/front-126.png"
+        },
+        {
+          "back": "v56/effects/idle/back-127.png",
+          "front": "v56/effects/idle/front-127.png"
+        }
+      ],
+      "effectCycle": 6.4,
+      "effectInterval": 0.05
+    },
+    {
+      "id": "running",
+      "row": 7,
+      "cycle": 2.4,
+      "times": [
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15
+      ],
+      "files": [
+        "v56/characters/running/00.png",
+        "v56/characters/running/01.png",
+        "v56/characters/running/02.png",
+        "v56/characters/running/03.png",
+        "v56/characters/running/04.png",
+        "v56/characters/running/05.png",
+        "v56/characters/running/06.png",
+        "v56/characters/running/07.png",
+        "v56/characters/running/08.png",
+        "v56/characters/running/09.png",
+        "v56/characters/running/10.png",
+        "v56/characters/running/11.png",
+        "v56/characters/running/12.png",
+        "v56/characters/running/13.png",
+        "v56/characters/running/14.png",
+        "v56/characters/running/15.png"
+      ],
+      "anchors": [
+        [
+          196.42279621858606,
+          354.66434540700226
+        ],
+        [
+          194.71010035844446,
+          353.29609008620866
+        ],
+        [
+          173.14236966909067,
+          349.9520991683336
+        ],
+        [
+          185.20795921560355,
+          349.8568350067495
+        ],
+        [
+          185.11465208427674,
+          350.85067338841066
+        ],
+        [
+          188.59071434702997,
+          341.0365725245256
+        ],
+        [
+          180.94230425455882,
+          321.90355738291
+        ],
+        [
+          195.6140660847877,
+          335.6411452618444
+        ],
+        [
+          195.18184053642284,
+          336.718463809586
+        ],
+        [
+          202.4808807974942,
+          340.4431602997249
+        ],
+        [
+          192.50190787536272,
+          335.95625116343246
+        ],
+        [
+          195.62774366711164,
+          351.78041196304736
+        ],
+        [
+          193.23982425205256,
+          352.3435580617581
+        ],
+        [
+          194.08412817490066,
+          349.9808166327288
+        ],
+        [
+          196.07687058622108,
+          353.3903118711258
+        ],
+        [
+          196.69134833068838,
+          352.93279310536894
+        ]
+      ],
+      "effects": [
+        {
+          "back": "v56/effects/running/back-000.png",
+          "front": "v56/effects/running/front-000.png"
+        },
+        {
+          "back": "v56/effects/running/back-001.png",
+          "front": "v56/effects/running/front-001.png"
+        },
+        {
+          "back": "v56/effects/running/back-002.png",
+          "front": "v56/effects/running/front-002.png"
+        },
+        {
+          "back": "v56/effects/running/back-003.png",
+          "front": "v56/effects/running/front-003.png"
+        },
+        {
+          "back": "v56/effects/running/back-004.png",
+          "front": "v56/effects/running/front-004.png"
+        },
+        {
+          "back": "v56/effects/running/back-005.png",
+          "front": "v56/effects/running/front-005.png"
+        },
+        {
+          "back": "v56/effects/running/back-006.png",
+          "front": "v56/effects/running/front-006.png"
+        },
+        {
+          "back": "v56/effects/running/back-007.png",
+          "front": "v56/effects/running/front-007.png"
+        },
+        {
+          "back": "v56/effects/running/back-008.png",
+          "front": "v56/effects/running/front-008.png"
+        },
+        {
+          "back": "v56/effects/running/back-009.png",
+          "front": "v56/effects/running/front-009.png"
+        },
+        {
+          "back": "v56/effects/running/back-010.png",
+          "front": "v56/effects/running/front-010.png"
+        },
+        {
+          "back": "v56/effects/running/back-011.png",
+          "front": "v56/effects/running/front-011.png"
+        },
+        {
+          "back": "v56/effects/running/back-012.png",
+          "front": "v56/effects/running/front-012.png"
+        },
+        {
+          "back": "v56/effects/running/back-013.png",
+          "front": "v56/effects/running/front-013.png"
+        },
+        {
+          "back": "v56/effects/running/back-014.png",
+          "front": "v56/effects/running/front-014.png"
+        },
+        {
+          "back": "v56/effects/running/back-015.png",
+          "front": "v56/effects/running/front-015.png"
+        },
+        {
+          "back": "v56/effects/running/back-016.png",
+          "front": "v56/effects/running/front-016.png"
+        },
+        {
+          "back": "v56/effects/running/back-017.png",
+          "front": "v56/effects/running/front-017.png"
+        },
+        {
+          "back": "v56/effects/running/back-018.png",
+          "front": "v56/effects/running/front-018.png"
+        },
+        {
+          "back": "v56/effects/running/back-019.png",
+          "front": "v56/effects/running/front-019.png"
+        },
+        {
+          "back": "v56/effects/running/back-020.png",
+          "front": "v56/effects/running/front-020.png"
+        },
+        {
+          "back": "v56/effects/running/back-021.png",
+          "front": "v56/effects/running/front-021.png"
+        },
+        {
+          "back": "v56/effects/running/back-022.png",
+          "front": "v56/effects/running/front-022.png"
+        },
+        {
+          "back": "v56/effects/running/back-023.png",
+          "front": "v56/effects/running/front-023.png"
+        },
+        {
+          "back": "v56/effects/running/back-024.png",
+          "front": "v56/effects/running/front-024.png"
+        },
+        {
+          "back": "v56/effects/running/back-025.png",
+          "front": "v56/effects/running/front-025.png"
+        },
+        {
+          "back": "v56/effects/running/back-026.png",
+          "front": "v56/effects/running/front-026.png"
+        },
+        {
+          "back": "v56/effects/running/back-027.png",
+          "front": "v56/effects/running/front-027.png"
+        },
+        {
+          "back": "v56/effects/running/back-028.png",
+          "front": "v56/effects/running/front-028.png"
+        },
+        {
+          "back": "v56/effects/running/back-029.png",
+          "front": "v56/effects/running/front-029.png"
+        },
+        {
+          "back": "v56/effects/running/back-030.png",
+          "front": "v56/effects/running/front-030.png"
+        },
+        {
+          "back": "v56/effects/running/back-031.png",
+          "front": "v56/effects/running/front-031.png"
+        },
+        {
+          "back": "v56/effects/running/back-032.png",
+          "front": "v56/effects/running/front-032.png"
+        },
+        {
+          "back": "v56/effects/running/back-033.png",
+          "front": "v56/effects/running/front-033.png"
+        },
+        {
+          "back": "v56/effects/running/back-034.png",
+          "front": "v56/effects/running/front-034.png"
+        },
+        {
+          "back": "v56/effects/running/back-035.png",
+          "front": "v56/effects/running/front-035.png"
+        },
+        {
+          "back": "v56/effects/running/back-036.png",
+          "front": "v56/effects/running/front-036.png"
+        },
+        {
+          "back": "v56/effects/running/back-037.png",
+          "front": "v56/effects/running/front-037.png"
+        },
+        {
+          "back": "v56/effects/running/back-038.png",
+          "front": "v56/effects/running/front-038.png"
+        },
+        {
+          "back": "v56/effects/running/back-039.png",
+          "front": "v56/effects/running/front-039.png"
+        },
+        {
+          "back": "v56/effects/running/back-040.png",
+          "front": "v56/effects/running/front-040.png"
+        },
+        {
+          "back": "v56/effects/running/back-041.png",
+          "front": "v56/effects/running/front-041.png"
+        },
+        {
+          "back": "v56/effects/running/back-042.png",
+          "front": "v56/effects/running/front-042.png"
+        },
+        {
+          "back": "v56/effects/running/back-043.png",
+          "front": "v56/effects/running/front-043.png"
+        },
+        {
+          "back": "v56/effects/running/back-044.png",
+          "front": "v56/effects/running/front-044.png"
+        },
+        {
+          "back": "v56/effects/running/back-045.png",
+          "front": "v56/effects/running/front-045.png"
+        },
+        {
+          "back": "v56/effects/running/back-046.png",
+          "front": "v56/effects/running/front-046.png"
+        },
+        {
+          "back": "v56/effects/running/back-047.png",
+          "front": "v56/effects/running/front-047.png"
+        },
+        {
+          "back": "v56/effects/running/back-048.png",
+          "front": "v56/effects/running/front-048.png"
+        },
+        {
+          "back": "v56/effects/running/back-049.png",
+          "front": "v56/effects/running/front-049.png"
+        },
+        {
+          "back": "v56/effects/running/back-050.png",
+          "front": "v56/effects/running/front-050.png"
+        },
+        {
+          "back": "v56/effects/running/back-051.png",
+          "front": "v56/effects/running/front-051.png"
+        },
+        {
+          "back": "v56/effects/running/back-052.png",
+          "front": "v56/effects/running/front-052.png"
+        },
+        {
+          "back": "v56/effects/running/back-053.png",
+          "front": "v56/effects/running/front-053.png"
+        },
+        {
+          "back": "v56/effects/running/back-054.png",
+          "front": "v56/effects/running/front-054.png"
+        },
+        {
+          "back": "v56/effects/running/back-055.png",
+          "front": "v56/effects/running/front-055.png"
+        },
+        {
+          "back": "v56/effects/running/back-056.png",
+          "front": "v56/effects/running/front-056.png"
+        },
+        {
+          "back": "v56/effects/running/back-057.png",
+          "front": "v56/effects/running/front-057.png"
+        },
+        {
+          "back": "v56/effects/running/back-058.png",
+          "front": "v56/effects/running/front-058.png"
+        },
+        {
+          "back": "v56/effects/running/back-059.png",
+          "front": "v56/effects/running/front-059.png"
+        },
+        {
+          "back": "v56/effects/running/back-060.png",
+          "front": "v56/effects/running/front-060.png"
+        },
+        {
+          "back": "v56/effects/running/back-061.png",
+          "front": "v56/effects/running/front-061.png"
+        },
+        {
+          "back": "v56/effects/running/back-062.png",
+          "front": "v56/effects/running/front-062.png"
+        },
+        {
+          "back": "v56/effects/running/back-063.png",
+          "front": "v56/effects/running/front-063.png"
+        },
+        {
+          "back": "v56/effects/running/back-064.png",
+          "front": "v56/effects/running/front-064.png"
+        },
+        {
+          "back": "v56/effects/running/back-065.png",
+          "front": "v56/effects/running/front-065.png"
+        },
+        {
+          "back": "v56/effects/running/back-066.png",
+          "front": "v56/effects/running/front-066.png"
+        },
+        {
+          "back": "v56/effects/running/back-067.png",
+          "front": "v56/effects/running/front-067.png"
+        },
+        {
+          "back": "v56/effects/running/back-068.png",
+          "front": "v56/effects/running/front-068.png"
+        },
+        {
+          "back": "v56/effects/running/back-069.png",
+          "front": "v56/effects/running/front-069.png"
+        },
+        {
+          "back": "v56/effects/running/back-070.png",
+          "front": "v56/effects/running/front-070.png"
+        },
+        {
+          "back": "v56/effects/running/back-071.png",
+          "front": "v56/effects/running/front-071.png"
+        },
+        {
+          "back": "v56/effects/running/back-072.png",
+          "front": "v56/effects/running/front-072.png"
+        },
+        {
+          "back": "v56/effects/running/back-073.png",
+          "front": "v56/effects/running/front-073.png"
+        },
+        {
+          "back": "v56/effects/running/back-074.png",
+          "front": "v56/effects/running/front-074.png"
+        },
+        {
+          "back": "v56/effects/running/back-075.png",
+          "front": "v56/effects/running/front-075.png"
+        },
+        {
+          "back": "v56/effects/running/back-076.png",
+          "front": "v56/effects/running/front-076.png"
+        },
+        {
+          "back": "v56/effects/running/back-077.png",
+          "front": "v56/effects/running/front-077.png"
+        },
+        {
+          "back": "v56/effects/running/back-078.png",
+          "front": "v56/effects/running/front-078.png"
+        },
+        {
+          "back": "v56/effects/running/back-079.png",
+          "front": "v56/effects/running/front-079.png"
+        },
+        {
+          "back": "v56/effects/running/back-080.png",
+          "front": "v56/effects/running/front-080.png"
+        },
+        {
+          "back": "v56/effects/running/back-081.png",
+          "front": "v56/effects/running/front-081.png"
+        },
+        {
+          "back": "v56/effects/running/back-082.png",
+          "front": "v56/effects/running/front-082.png"
+        },
+        {
+          "back": "v56/effects/running/back-083.png",
+          "front": "v56/effects/running/front-083.png"
+        },
+        {
+          "back": "v56/effects/running/back-084.png",
+          "front": "v56/effects/running/front-084.png"
+        },
+        {
+          "back": "v56/effects/running/back-085.png",
+          "front": "v56/effects/running/front-085.png"
+        },
+        {
+          "back": "v56/effects/running/back-086.png",
+          "front": "v56/effects/running/front-086.png"
+        },
+        {
+          "back": "v56/effects/running/back-087.png",
+          "front": "v56/effects/running/front-087.png"
+        },
+        {
+          "back": "v56/effects/running/back-088.png",
+          "front": "v56/effects/running/front-088.png"
+        },
+        {
+          "back": "v56/effects/running/back-089.png",
+          "front": "v56/effects/running/front-089.png"
+        },
+        {
+          "back": "v56/effects/running/back-090.png",
+          "front": "v56/effects/running/front-090.png"
+        },
+        {
+          "back": "v56/effects/running/back-091.png",
+          "front": "v56/effects/running/front-091.png"
+        },
+        {
+          "back": "v56/effects/running/back-092.png",
+          "front": "v56/effects/running/front-092.png"
+        },
+        {
+          "back": "v56/effects/running/back-093.png",
+          "front": "v56/effects/running/front-093.png"
+        },
+        {
+          "back": "v56/effects/running/back-094.png",
+          "front": "v56/effects/running/front-094.png"
+        },
+        {
+          "back": "v56/effects/running/back-095.png",
+          "front": "v56/effects/running/front-095.png"
+        }
+      ],
+      "effectCycle": 4.8,
+      "effectInterval": 0.05
+    },
+    {
+      "id": "waiting",
+      "row": 6,
+      "cycle": 3.2,
+      "times": [
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2
+      ],
+      "files": [
+        "v56/characters/waiting/00.png",
+        "v56/characters/waiting/01.png",
+        "v56/characters/waiting/02.png",
+        "v56/characters/waiting/03.png",
+        "v56/characters/waiting/04.png",
+        "v56/characters/waiting/05.png",
+        "v56/characters/waiting/06.png",
+        "v56/characters/waiting/07.png",
+        "v56/characters/waiting/08.png",
+        "v56/characters/waiting/09.png",
+        "v56/characters/waiting/10.png",
+        "v56/characters/waiting/11.png",
+        "v56/characters/waiting/12.png",
+        "v56/characters/waiting/13.png",
+        "v56/characters/waiting/14.png",
+        "v56/characters/waiting/15.png"
+      ],
+      "anchors": [
+        [
+          198.68140763690656,
+          414.0623672872056
+        ],
+        [
+          214.1600064919525,
+          406.0625732581397
+        ],
+        [
+          195.95780905882134,
+          407.9237842441403
+        ],
+        [
+          211.8479783130615,
+          373.70252313731004
+        ],
+        [
+          210.11557580379431,
+          378.5004962462165
+        ],
+        [
+          225.5187828618684,
+          379.42644950881964
+        ],
+        [
+          221.51473902127836,
+          373.512801810399
+        ],
+        [
+          218.8571556381825,
+          385.8331060318038
+        ],
+        [
+          213.58111268204064,
+          386.9528873931523
+        ],
+        [
+          213.70899446988818,
+          386.97858492817
+        ],
+        [
+          217.69076310093263,
+          383.69154459984657
+        ],
+        [
+          199.2655768457715,
+          384.06900710169975
+        ],
+        [
+          196.77114331950958,
+          387.8722443644728
+        ],
+        [
+          196.20525935987703,
+          391.5764553499913
+        ],
+        [
+          196.27426730250937,
+          388.16186225962446
+        ],
+        [
+          197.55847218903622,
+          413.3625242393774
+        ]
+      ],
+      "effects": [
+        {
+          "back": "v56/effects/waiting/back-000.png",
+          "front": "v56/effects/waiting/front-000.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-001.png",
+          "front": "v56/effects/waiting/front-001.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-002.png",
+          "front": "v56/effects/waiting/front-002.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-003.png",
+          "front": "v56/effects/waiting/front-003.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-004.png",
+          "front": "v56/effects/waiting/front-004.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-005.png",
+          "front": "v56/effects/waiting/front-005.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-006.png",
+          "front": "v56/effects/waiting/front-006.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-007.png",
+          "front": "v56/effects/waiting/front-007.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-008.png",
+          "front": "v56/effects/waiting/front-008.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-009.png",
+          "front": "v56/effects/waiting/front-009.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-010.png",
+          "front": "v56/effects/waiting/front-010.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-011.png",
+          "front": "v56/effects/waiting/front-011.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-012.png",
+          "front": "v56/effects/waiting/front-012.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-013.png",
+          "front": "v56/effects/waiting/front-013.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-014.png",
+          "front": "v56/effects/waiting/front-014.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-015.png",
+          "front": "v56/effects/waiting/front-015.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-016.png",
+          "front": "v56/effects/waiting/front-016.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-017.png",
+          "front": "v56/effects/waiting/front-017.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-018.png",
+          "front": "v56/effects/waiting/front-018.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-019.png",
+          "front": "v56/effects/waiting/front-019.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-020.png",
+          "front": "v56/effects/waiting/front-020.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-021.png",
+          "front": "v56/effects/waiting/front-021.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-022.png",
+          "front": "v56/effects/waiting/front-022.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-023.png",
+          "front": "v56/effects/waiting/front-023.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-024.png",
+          "front": "v56/effects/waiting/front-024.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-025.png",
+          "front": "v56/effects/waiting/front-025.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-026.png",
+          "front": "v56/effects/waiting/front-026.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-027.png",
+          "front": "v56/effects/waiting/front-027.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-028.png",
+          "front": "v56/effects/waiting/front-028.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-029.png",
+          "front": "v56/effects/waiting/front-029.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-030.png",
+          "front": "v56/effects/waiting/front-030.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-031.png",
+          "front": "v56/effects/waiting/front-031.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-032.png",
+          "front": "v56/effects/waiting/front-032.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-033.png",
+          "front": "v56/effects/waiting/front-033.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-034.png",
+          "front": "v56/effects/waiting/front-034.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-035.png",
+          "front": "v56/effects/waiting/front-035.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-036.png",
+          "front": "v56/effects/waiting/front-036.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-037.png",
+          "front": "v56/effects/waiting/front-037.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-038.png",
+          "front": "v56/effects/waiting/front-038.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-039.png",
+          "front": "v56/effects/waiting/front-039.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-040.png",
+          "front": "v56/effects/waiting/front-040.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-041.png",
+          "front": "v56/effects/waiting/front-041.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-042.png",
+          "front": "v56/effects/waiting/front-042.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-043.png",
+          "front": "v56/effects/waiting/front-043.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-044.png",
+          "front": "v56/effects/waiting/front-044.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-045.png",
+          "front": "v56/effects/waiting/front-045.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-046.png",
+          "front": "v56/effects/waiting/front-046.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-047.png",
+          "front": "v56/effects/waiting/front-047.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-048.png",
+          "front": "v56/effects/waiting/front-048.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-049.png",
+          "front": "v56/effects/waiting/front-049.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-050.png",
+          "front": "v56/effects/waiting/front-050.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-051.png",
+          "front": "v56/effects/waiting/front-051.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-052.png",
+          "front": "v56/effects/waiting/front-052.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-053.png",
+          "front": "v56/effects/waiting/front-053.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-054.png",
+          "front": "v56/effects/waiting/front-054.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-055.png",
+          "front": "v56/effects/waiting/front-055.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-056.png",
+          "front": "v56/effects/waiting/front-056.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-057.png",
+          "front": "v56/effects/waiting/front-057.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-058.png",
+          "front": "v56/effects/waiting/front-058.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-059.png",
+          "front": "v56/effects/waiting/front-059.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-060.png",
+          "front": "v56/effects/waiting/front-060.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-061.png",
+          "front": "v56/effects/waiting/front-061.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-062.png",
+          "front": "v56/effects/waiting/front-062.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-063.png",
+          "front": "v56/effects/waiting/front-063.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-064.png",
+          "front": "v56/effects/waiting/front-064.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-065.png",
+          "front": "v56/effects/waiting/front-065.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-066.png",
+          "front": "v56/effects/waiting/front-066.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-067.png",
+          "front": "v56/effects/waiting/front-067.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-068.png",
+          "front": "v56/effects/waiting/front-068.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-069.png",
+          "front": "v56/effects/waiting/front-069.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-070.png",
+          "front": "v56/effects/waiting/front-070.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-071.png",
+          "front": "v56/effects/waiting/front-071.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-072.png",
+          "front": "v56/effects/waiting/front-072.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-073.png",
+          "front": "v56/effects/waiting/front-073.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-074.png",
+          "front": "v56/effects/waiting/front-074.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-075.png",
+          "front": "v56/effects/waiting/front-075.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-076.png",
+          "front": "v56/effects/waiting/front-076.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-077.png",
+          "front": "v56/effects/waiting/front-077.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-078.png",
+          "front": "v56/effects/waiting/front-078.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-079.png",
+          "front": "v56/effects/waiting/front-079.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-080.png",
+          "front": "v56/effects/waiting/front-080.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-081.png",
+          "front": "v56/effects/waiting/front-081.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-082.png",
+          "front": "v56/effects/waiting/front-082.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-083.png",
+          "front": "v56/effects/waiting/front-083.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-084.png",
+          "front": "v56/effects/waiting/front-084.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-085.png",
+          "front": "v56/effects/waiting/front-085.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-086.png",
+          "front": "v56/effects/waiting/front-086.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-087.png",
+          "front": "v56/effects/waiting/front-087.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-088.png",
+          "front": "v56/effects/waiting/front-088.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-089.png",
+          "front": "v56/effects/waiting/front-089.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-090.png",
+          "front": "v56/effects/waiting/front-090.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-091.png",
+          "front": "v56/effects/waiting/front-091.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-092.png",
+          "front": "v56/effects/waiting/front-092.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-093.png",
+          "front": "v56/effects/waiting/front-093.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-094.png",
+          "front": "v56/effects/waiting/front-094.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-095.png",
+          "front": "v56/effects/waiting/front-095.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-096.png",
+          "front": "v56/effects/waiting/front-096.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-097.png",
+          "front": "v56/effects/waiting/front-097.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-098.png",
+          "front": "v56/effects/waiting/front-098.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-099.png",
+          "front": "v56/effects/waiting/front-099.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-100.png",
+          "front": "v56/effects/waiting/front-100.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-101.png",
+          "front": "v56/effects/waiting/front-101.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-102.png",
+          "front": "v56/effects/waiting/front-102.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-103.png",
+          "front": "v56/effects/waiting/front-103.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-104.png",
+          "front": "v56/effects/waiting/front-104.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-105.png",
+          "front": "v56/effects/waiting/front-105.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-106.png",
+          "front": "v56/effects/waiting/front-106.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-107.png",
+          "front": "v56/effects/waiting/front-107.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-108.png",
+          "front": "v56/effects/waiting/front-108.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-109.png",
+          "front": "v56/effects/waiting/front-109.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-110.png",
+          "front": "v56/effects/waiting/front-110.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-111.png",
+          "front": "v56/effects/waiting/front-111.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-112.png",
+          "front": "v56/effects/waiting/front-112.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-113.png",
+          "front": "v56/effects/waiting/front-113.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-114.png",
+          "front": "v56/effects/waiting/front-114.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-115.png",
+          "front": "v56/effects/waiting/front-115.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-116.png",
+          "front": "v56/effects/waiting/front-116.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-117.png",
+          "front": "v56/effects/waiting/front-117.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-118.png",
+          "front": "v56/effects/waiting/front-118.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-119.png",
+          "front": "v56/effects/waiting/front-119.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-120.png",
+          "front": "v56/effects/waiting/front-120.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-121.png",
+          "front": "v56/effects/waiting/front-121.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-122.png",
+          "front": "v56/effects/waiting/front-122.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-123.png",
+          "front": "v56/effects/waiting/front-123.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-124.png",
+          "front": "v56/effects/waiting/front-124.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-125.png",
+          "front": "v56/effects/waiting/front-125.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-126.png",
+          "front": "v56/effects/waiting/front-126.png"
+        },
+        {
+          "back": "v56/effects/waiting/back-127.png",
+          "front": "v56/effects/waiting/front-127.png"
+        }
+      ],
+      "effectCycle": 6.4,
+      "effectInterval": 0.05
+    },
+    {
+      "id": "review",
+      "row": 8,
+      "cycle": 3.2,
+      "times": [
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2
+      ],
+      "files": [
+        "v56/characters/review/00.png",
+        "v56/characters/review/01.png",
+        "v56/characters/review/02.png",
+        "v56/characters/review/03.png",
+        "v56/characters/review/04.png",
+        "v56/characters/review/05.png",
+        "v56/characters/review/06.png",
+        "v56/characters/review/07.png",
+        "v56/characters/review/08.png",
+        "v56/characters/review/09.png",
+        "v56/characters/review/10.png",
+        "v56/characters/review/11.png",
+        "v56/characters/review/12.png",
+        "v56/characters/review/13.png",
+        "v56/characters/review/14.png",
+        "v56/characters/review/15.png"
+      ],
+      "anchors": [
+        [
+          210.03061664510574,
+          413.4695989650715
+        ],
+        [
+          199.7810915237856,
+          406.7818159864744
+        ],
+        [
+          202.68475973342598,
+          404.5083304103805
+        ],
+        [
+          204.11405816564985,
+          409.2790492192281
+        ],
+        [
+          199.68183226435266,
+          410.3609687274798
+        ],
+        [
+          208.24944743829394,
+          412.07681137768475
+        ],
+        [
+          212.78758793671324,
+          406.1944520378327
+        ],
+        [
+          213.04676089299764,
+          408.1458725772972
+        ],
+        [
+          205.24502171907332,
+          410.57260207537666
+        ],
+        [
+          212.58976471785277,
+          405.8479470872937
+        ],
+        [
+          212.4468698832889,
+          407.34314498036247
+        ],
+        [
+          202.86394498821258,
+          409.99241222182087
+        ],
+        [
+          202.13675611871753,
+          412.24934796492414
+        ],
+        [
+          196.6402125405044,
+          414.54621212933284
+        ],
+        [
+          200.41738080215072,
+          410.98569273038623
+        ],
+        [
+          209.1062724938831,
+          410.235783866027
+        ]
+      ],
+      "effects": [
+        {
+          "back": "v56/effects/review/back-000.png",
+          "front": "v56/effects/review/front-000.png"
+        },
+        {
+          "back": "v56/effects/review/back-001.png",
+          "front": "v56/effects/review/front-001.png"
+        },
+        {
+          "back": "v56/effects/review/back-002.png",
+          "front": "v56/effects/review/front-002.png"
+        },
+        {
+          "back": "v56/effects/review/back-003.png",
+          "front": "v56/effects/review/front-003.png"
+        },
+        {
+          "back": "v56/effects/review/back-004.png",
+          "front": "v56/effects/review/front-004.png"
+        },
+        {
+          "back": "v56/effects/review/back-005.png",
+          "front": "v56/effects/review/front-005.png"
+        },
+        {
+          "back": "v56/effects/review/back-006.png",
+          "front": "v56/effects/review/front-006.png"
+        },
+        {
+          "back": "v56/effects/review/back-007.png",
+          "front": "v56/effects/review/front-007.png"
+        },
+        {
+          "back": "v56/effects/review/back-008.png",
+          "front": "v56/effects/review/front-008.png"
+        },
+        {
+          "back": "v56/effects/review/back-009.png",
+          "front": "v56/effects/review/front-009.png"
+        },
+        {
+          "back": "v56/effects/review/back-010.png",
+          "front": "v56/effects/review/front-010.png"
+        },
+        {
+          "back": "v56/effects/review/back-011.png",
+          "front": "v56/effects/review/front-011.png"
+        },
+        {
+          "back": "v56/effects/review/back-012.png",
+          "front": "v56/effects/review/front-012.png"
+        },
+        {
+          "back": "v56/effects/review/back-013.png",
+          "front": "v56/effects/review/front-013.png"
+        },
+        {
+          "back": "v56/effects/review/back-014.png",
+          "front": "v56/effects/review/front-014.png"
+        },
+        {
+          "back": "v56/effects/review/back-015.png",
+          "front": "v56/effects/review/front-015.png"
+        },
+        {
+          "back": "v56/effects/review/back-016.png",
+          "front": "v56/effects/review/front-016.png"
+        },
+        {
+          "back": "v56/effects/review/back-017.png",
+          "front": "v56/effects/review/front-017.png"
+        },
+        {
+          "back": "v56/effects/review/back-018.png",
+          "front": "v56/effects/review/front-018.png"
+        },
+        {
+          "back": "v56/effects/review/back-019.png",
+          "front": "v56/effects/review/front-019.png"
+        },
+        {
+          "back": "v56/effects/review/back-020.png",
+          "front": "v56/effects/review/front-020.png"
+        },
+        {
+          "back": "v56/effects/review/back-021.png",
+          "front": "v56/effects/review/front-021.png"
+        },
+        {
+          "back": "v56/effects/review/back-022.png",
+          "front": "v56/effects/review/front-022.png"
+        },
+        {
+          "back": "v56/effects/review/back-023.png",
+          "front": "v56/effects/review/front-023.png"
+        },
+        {
+          "back": "v56/effects/review/back-024.png",
+          "front": "v56/effects/review/front-024.png"
+        },
+        {
+          "back": "v56/effects/review/back-025.png",
+          "front": "v56/effects/review/front-025.png"
+        },
+        {
+          "back": "v56/effects/review/back-026.png",
+          "front": "v56/effects/review/front-026.png"
+        },
+        {
+          "back": "v56/effects/review/back-027.png",
+          "front": "v56/effects/review/front-027.png"
+        },
+        {
+          "back": "v56/effects/review/back-028.png",
+          "front": "v56/effects/review/front-028.png"
+        },
+        {
+          "back": "v56/effects/review/back-029.png",
+          "front": "v56/effects/review/front-029.png"
+        },
+        {
+          "back": "v56/effects/review/back-030.png",
+          "front": "v56/effects/review/front-030.png"
+        },
+        {
+          "back": "v56/effects/review/back-031.png",
+          "front": "v56/effects/review/front-031.png"
+        },
+        {
+          "back": "v56/effects/review/back-032.png",
+          "front": "v56/effects/review/front-032.png"
+        },
+        {
+          "back": "v56/effects/review/back-033.png",
+          "front": "v56/effects/review/front-033.png"
+        },
+        {
+          "back": "v56/effects/review/back-034.png",
+          "front": "v56/effects/review/front-034.png"
+        },
+        {
+          "back": "v56/effects/review/back-035.png",
+          "front": "v56/effects/review/front-035.png"
+        },
+        {
+          "back": "v56/effects/review/back-036.png",
+          "front": "v56/effects/review/front-036.png"
+        },
+        {
+          "back": "v56/effects/review/back-037.png",
+          "front": "v56/effects/review/front-037.png"
+        },
+        {
+          "back": "v56/effects/review/back-038.png",
+          "front": "v56/effects/review/front-038.png"
+        },
+        {
+          "back": "v56/effects/review/back-039.png",
+          "front": "v56/effects/review/front-039.png"
+        },
+        {
+          "back": "v56/effects/review/back-040.png",
+          "front": "v56/effects/review/front-040.png"
+        },
+        {
+          "back": "v56/effects/review/back-041.png",
+          "front": "v56/effects/review/front-041.png"
+        },
+        {
+          "back": "v56/effects/review/back-042.png",
+          "front": "v56/effects/review/front-042.png"
+        },
+        {
+          "back": "v56/effects/review/back-043.png",
+          "front": "v56/effects/review/front-043.png"
+        },
+        {
+          "back": "v56/effects/review/back-044.png",
+          "front": "v56/effects/review/front-044.png"
+        },
+        {
+          "back": "v56/effects/review/back-045.png",
+          "front": "v56/effects/review/front-045.png"
+        },
+        {
+          "back": "v56/effects/review/back-046.png",
+          "front": "v56/effects/review/front-046.png"
+        },
+        {
+          "back": "v56/effects/review/back-047.png",
+          "front": "v56/effects/review/front-047.png"
+        },
+        {
+          "back": "v56/effects/review/back-048.png",
+          "front": "v56/effects/review/front-048.png"
+        },
+        {
+          "back": "v56/effects/review/back-049.png",
+          "front": "v56/effects/review/front-049.png"
+        },
+        {
+          "back": "v56/effects/review/back-050.png",
+          "front": "v56/effects/review/front-050.png"
+        },
+        {
+          "back": "v56/effects/review/back-051.png",
+          "front": "v56/effects/review/front-051.png"
+        },
+        {
+          "back": "v56/effects/review/back-052.png",
+          "front": "v56/effects/review/front-052.png"
+        },
+        {
+          "back": "v56/effects/review/back-053.png",
+          "front": "v56/effects/review/front-053.png"
+        },
+        {
+          "back": "v56/effects/review/back-054.png",
+          "front": "v56/effects/review/front-054.png"
+        },
+        {
+          "back": "v56/effects/review/back-055.png",
+          "front": "v56/effects/review/front-055.png"
+        },
+        {
+          "back": "v56/effects/review/back-056.png",
+          "front": "v56/effects/review/front-056.png"
+        },
+        {
+          "back": "v56/effects/review/back-057.png",
+          "front": "v56/effects/review/front-057.png"
+        },
+        {
+          "back": "v56/effects/review/back-058.png",
+          "front": "v56/effects/review/front-058.png"
+        },
+        {
+          "back": "v56/effects/review/back-059.png",
+          "front": "v56/effects/review/front-059.png"
+        },
+        {
+          "back": "v56/effects/review/back-060.png",
+          "front": "v56/effects/review/front-060.png"
+        },
+        {
+          "back": "v56/effects/review/back-061.png",
+          "front": "v56/effects/review/front-061.png"
+        },
+        {
+          "back": "v56/effects/review/back-062.png",
+          "front": "v56/effects/review/front-062.png"
+        },
+        {
+          "back": "v56/effects/review/back-063.png",
+          "front": "v56/effects/review/front-063.png"
+        },
+        {
+          "back": "v56/effects/review/back-064.png",
+          "front": "v56/effects/review/front-064.png"
+        },
+        {
+          "back": "v56/effects/review/back-065.png",
+          "front": "v56/effects/review/front-065.png"
+        },
+        {
+          "back": "v56/effects/review/back-066.png",
+          "front": "v56/effects/review/front-066.png"
+        },
+        {
+          "back": "v56/effects/review/back-067.png",
+          "front": "v56/effects/review/front-067.png"
+        },
+        {
+          "back": "v56/effects/review/back-068.png",
+          "front": "v56/effects/review/front-068.png"
+        },
+        {
+          "back": "v56/effects/review/back-069.png",
+          "front": "v56/effects/review/front-069.png"
+        },
+        {
+          "back": "v56/effects/review/back-070.png",
+          "front": "v56/effects/review/front-070.png"
+        },
+        {
+          "back": "v56/effects/review/back-071.png",
+          "front": "v56/effects/review/front-071.png"
+        },
+        {
+          "back": "v56/effects/review/back-072.png",
+          "front": "v56/effects/review/front-072.png"
+        },
+        {
+          "back": "v56/effects/review/back-073.png",
+          "front": "v56/effects/review/front-073.png"
+        },
+        {
+          "back": "v56/effects/review/back-074.png",
+          "front": "v56/effects/review/front-074.png"
+        },
+        {
+          "back": "v56/effects/review/back-075.png",
+          "front": "v56/effects/review/front-075.png"
+        },
+        {
+          "back": "v56/effects/review/back-076.png",
+          "front": "v56/effects/review/front-076.png"
+        },
+        {
+          "back": "v56/effects/review/back-077.png",
+          "front": "v56/effects/review/front-077.png"
+        },
+        {
+          "back": "v56/effects/review/back-078.png",
+          "front": "v56/effects/review/front-078.png"
+        },
+        {
+          "back": "v56/effects/review/back-079.png",
+          "front": "v56/effects/review/front-079.png"
+        },
+        {
+          "back": "v56/effects/review/back-080.png",
+          "front": "v56/effects/review/front-080.png"
+        },
+        {
+          "back": "v56/effects/review/back-081.png",
+          "front": "v56/effects/review/front-081.png"
+        },
+        {
+          "back": "v56/effects/review/back-082.png",
+          "front": "v56/effects/review/front-082.png"
+        },
+        {
+          "back": "v56/effects/review/back-083.png",
+          "front": "v56/effects/review/front-083.png"
+        },
+        {
+          "back": "v56/effects/review/back-084.png",
+          "front": "v56/effects/review/front-084.png"
+        },
+        {
+          "back": "v56/effects/review/back-085.png",
+          "front": "v56/effects/review/front-085.png"
+        },
+        {
+          "back": "v56/effects/review/back-086.png",
+          "front": "v56/effects/review/front-086.png"
+        },
+        {
+          "back": "v56/effects/review/back-087.png",
+          "front": "v56/effects/review/front-087.png"
+        },
+        {
+          "back": "v56/effects/review/back-088.png",
+          "front": "v56/effects/review/front-088.png"
+        },
+        {
+          "back": "v56/effects/review/back-089.png",
+          "front": "v56/effects/review/front-089.png"
+        },
+        {
+          "back": "v56/effects/review/back-090.png",
+          "front": "v56/effects/review/front-090.png"
+        },
+        {
+          "back": "v56/effects/review/back-091.png",
+          "front": "v56/effects/review/front-091.png"
+        },
+        {
+          "back": "v56/effects/review/back-092.png",
+          "front": "v56/effects/review/front-092.png"
+        },
+        {
+          "back": "v56/effects/review/back-093.png",
+          "front": "v56/effects/review/front-093.png"
+        },
+        {
+          "back": "v56/effects/review/back-094.png",
+          "front": "v56/effects/review/front-094.png"
+        },
+        {
+          "back": "v56/effects/review/back-095.png",
+          "front": "v56/effects/review/front-095.png"
+        },
+        {
+          "back": "v56/effects/review/back-096.png",
+          "front": "v56/effects/review/front-096.png"
+        },
+        {
+          "back": "v56/effects/review/back-097.png",
+          "front": "v56/effects/review/front-097.png"
+        },
+        {
+          "back": "v56/effects/review/back-098.png",
+          "front": "v56/effects/review/front-098.png"
+        },
+        {
+          "back": "v56/effects/review/back-099.png",
+          "front": "v56/effects/review/front-099.png"
+        },
+        {
+          "back": "v56/effects/review/back-100.png",
+          "front": "v56/effects/review/front-100.png"
+        },
+        {
+          "back": "v56/effects/review/back-101.png",
+          "front": "v56/effects/review/front-101.png"
+        },
+        {
+          "back": "v56/effects/review/back-102.png",
+          "front": "v56/effects/review/front-102.png"
+        },
+        {
+          "back": "v56/effects/review/back-103.png",
+          "front": "v56/effects/review/front-103.png"
+        },
+        {
+          "back": "v56/effects/review/back-104.png",
+          "front": "v56/effects/review/front-104.png"
+        },
+        {
+          "back": "v56/effects/review/back-105.png",
+          "front": "v56/effects/review/front-105.png"
+        },
+        {
+          "back": "v56/effects/review/back-106.png",
+          "front": "v56/effects/review/front-106.png"
+        },
+        {
+          "back": "v56/effects/review/back-107.png",
+          "front": "v56/effects/review/front-107.png"
+        },
+        {
+          "back": "v56/effects/review/back-108.png",
+          "front": "v56/effects/review/front-108.png"
+        },
+        {
+          "back": "v56/effects/review/back-109.png",
+          "front": "v56/effects/review/front-109.png"
+        },
+        {
+          "back": "v56/effects/review/back-110.png",
+          "front": "v56/effects/review/front-110.png"
+        },
+        {
+          "back": "v56/effects/review/back-111.png",
+          "front": "v56/effects/review/front-111.png"
+        },
+        {
+          "back": "v56/effects/review/back-112.png",
+          "front": "v56/effects/review/front-112.png"
+        },
+        {
+          "back": "v56/effects/review/back-113.png",
+          "front": "v56/effects/review/front-113.png"
+        },
+        {
+          "back": "v56/effects/review/back-114.png",
+          "front": "v56/effects/review/front-114.png"
+        },
+        {
+          "back": "v56/effects/review/back-115.png",
+          "front": "v56/effects/review/front-115.png"
+        },
+        {
+          "back": "v56/effects/review/back-116.png",
+          "front": "v56/effects/review/front-116.png"
+        },
+        {
+          "back": "v56/effects/review/back-117.png",
+          "front": "v56/effects/review/front-117.png"
+        },
+        {
+          "back": "v56/effects/review/back-118.png",
+          "front": "v56/effects/review/front-118.png"
+        },
+        {
+          "back": "v56/effects/review/back-119.png",
+          "front": "v56/effects/review/front-119.png"
+        },
+        {
+          "back": "v56/effects/review/back-120.png",
+          "front": "v56/effects/review/front-120.png"
+        },
+        {
+          "back": "v56/effects/review/back-121.png",
+          "front": "v56/effects/review/front-121.png"
+        },
+        {
+          "back": "v56/effects/review/back-122.png",
+          "front": "v56/effects/review/front-122.png"
+        },
+        {
+          "back": "v56/effects/review/back-123.png",
+          "front": "v56/effects/review/front-123.png"
+        },
+        {
+          "back": "v56/effects/review/back-124.png",
+          "front": "v56/effects/review/front-124.png"
+        },
+        {
+          "back": "v56/effects/review/back-125.png",
+          "front": "v56/effects/review/front-125.png"
+        },
+        {
+          "back": "v56/effects/review/back-126.png",
+          "front": "v56/effects/review/front-126.png"
+        },
+        {
+          "back": "v56/effects/review/back-127.png",
+          "front": "v56/effects/review/front-127.png"
+        }
+      ],
+      "effectCycle": 6.4,
+      "effectInterval": 0.05
+    },
+    {
+      "id": "failed",
+      "row": 5,
+      "cycle": 3.2,
+      "times": [
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2
+      ],
+      "files": [
+        "v56/characters/failed/00.png",
+        "v56/characters/failed/01.png",
+        "v56/characters/failed/02.png",
+        "v56/characters/failed/03.png",
+        "v56/characters/failed/04.png",
+        "v56/characters/failed/05.png",
+        "v56/characters/failed/06.png",
+        "v56/characters/failed/07.png",
+        "v56/characters/failed/08.png",
+        "v56/characters/failed/09.png",
+        "v56/characters/failed/10.png",
+        "v56/characters/failed/11.png",
+        "v56/characters/failed/12.png",
+        "v56/characters/failed/13.png",
+        "v56/characters/failed/14.png",
+        "v56/characters/failed/15.png"
+      ],
+      "anchors": [
+        [
+          198.68140763690656,
+          414.0623672872056
+        ],
+        [
+          193.0499111852395,
+          399.623427565599
+        ],
+        [
+          203.0033241797938,
+          396.1441682324017
+        ],
+        [
+          190.66873278790004,
+          378.91305939321427
+        ],
+        [
+          193.2477713247057,
+          374.1165180225986
+        ],
+        [
+          195.86347189301165,
+          375.91948634127084
+        ],
+        [
+          194.0591025440697,
+          373.8203193858161
+        ],
+        [
+          202.7770940719868,
+          389.33514350836396
+        ],
+        [
+          201.29116516047551,
+          389.15777140653427
+        ],
+        [
+          200.14138940363407,
+          381.31127909015146
+        ],
+        [
+          200.93534650226962,
+          388.484266576454
+        ],
+        [
+          204.80210535288288,
+          395.3092473340228
+        ],
+        [
+          203.3331785178555,
+          398.57535913062486
+        ],
+        [
+          201.93594034176814,
+          401.9350157202328
+        ],
+        [
+          195.72904641898918,
+          410.5186570197526
+        ],
+        [
+          195.69106114074307,
+          409.704404598158
+        ]
+      ],
+      "effects": [
+        {
+          "back": "v56/effects/failed/back-000.png",
+          "front": "v56/effects/failed/front-000.png"
+        },
+        {
+          "back": "v56/effects/failed/back-001.png",
+          "front": "v56/effects/failed/front-001.png"
+        },
+        {
+          "back": "v56/effects/failed/back-002.png",
+          "front": "v56/effects/failed/front-002.png"
+        },
+        {
+          "back": "v56/effects/failed/back-003.png",
+          "front": "v56/effects/failed/front-003.png"
+        },
+        {
+          "back": "v56/effects/failed/back-004.png",
+          "front": "v56/effects/failed/front-004.png"
+        },
+        {
+          "back": "v56/effects/failed/back-005.png",
+          "front": "v56/effects/failed/front-005.png"
+        },
+        {
+          "back": "v56/effects/failed/back-006.png",
+          "front": "v56/effects/failed/front-006.png"
+        },
+        {
+          "back": "v56/effects/failed/back-007.png",
+          "front": "v56/effects/failed/front-007.png"
+        },
+        {
+          "back": "v56/effects/failed/back-008.png",
+          "front": "v56/effects/failed/front-008.png"
+        },
+        {
+          "back": "v56/effects/failed/back-009.png",
+          "front": "v56/effects/failed/front-009.png"
+        },
+        {
+          "back": "v56/effects/failed/back-010.png",
+          "front": "v56/effects/failed/front-010.png"
+        },
+        {
+          "back": "v56/effects/failed/back-011.png",
+          "front": "v56/effects/failed/front-011.png"
+        },
+        {
+          "back": "v56/effects/failed/back-012.png",
+          "front": "v56/effects/failed/front-012.png"
+        },
+        {
+          "back": "v56/effects/failed/back-013.png",
+          "front": "v56/effects/failed/front-013.png"
+        },
+        {
+          "back": "v56/effects/failed/back-014.png",
+          "front": "v56/effects/failed/front-014.png"
+        },
+        {
+          "back": "v56/effects/failed/back-015.png",
+          "front": "v56/effects/failed/front-015.png"
+        },
+        {
+          "back": "v56/effects/failed/back-016.png",
+          "front": "v56/effects/failed/front-016.png"
+        },
+        {
+          "back": "v56/effects/failed/back-017.png",
+          "front": "v56/effects/failed/front-017.png"
+        },
+        {
+          "back": "v56/effects/failed/back-018.png",
+          "front": "v56/effects/failed/front-018.png"
+        },
+        {
+          "back": "v56/effects/failed/back-019.png",
+          "front": "v56/effects/failed/front-019.png"
+        },
+        {
+          "back": "v56/effects/failed/back-020.png",
+          "front": "v56/effects/failed/front-020.png"
+        },
+        {
+          "back": "v56/effects/failed/back-021.png",
+          "front": "v56/effects/failed/front-021.png"
+        },
+        {
+          "back": "v56/effects/failed/back-022.png",
+          "front": "v56/effects/failed/front-022.png"
+        },
+        {
+          "back": "v56/effects/failed/back-023.png",
+          "front": "v56/effects/failed/front-023.png"
+        },
+        {
+          "back": "v56/effects/failed/back-024.png",
+          "front": "v56/effects/failed/front-024.png"
+        },
+        {
+          "back": "v56/effects/failed/back-025.png",
+          "front": "v56/effects/failed/front-025.png"
+        },
+        {
+          "back": "v56/effects/failed/back-026.png",
+          "front": "v56/effects/failed/front-026.png"
+        },
+        {
+          "back": "v56/effects/failed/back-027.png",
+          "front": "v56/effects/failed/front-027.png"
+        },
+        {
+          "back": "v56/effects/failed/back-028.png",
+          "front": "v56/effects/failed/front-028.png"
+        },
+        {
+          "back": "v56/effects/failed/back-029.png",
+          "front": "v56/effects/failed/front-029.png"
+        },
+        {
+          "back": "v56/effects/failed/back-030.png",
+          "front": "v56/effects/failed/front-030.png"
+        },
+        {
+          "back": "v56/effects/failed/back-031.png",
+          "front": "v56/effects/failed/front-031.png"
+        },
+        {
+          "back": "v56/effects/failed/back-032.png",
+          "front": "v56/effects/failed/front-032.png"
+        },
+        {
+          "back": "v56/effects/failed/back-033.png",
+          "front": "v56/effects/failed/front-033.png"
+        },
+        {
+          "back": "v56/effects/failed/back-034.png",
+          "front": "v56/effects/failed/front-034.png"
+        },
+        {
+          "back": "v56/effects/failed/back-035.png",
+          "front": "v56/effects/failed/front-035.png"
+        },
+        {
+          "back": "v56/effects/failed/back-036.png",
+          "front": "v56/effects/failed/front-036.png"
+        },
+        {
+          "back": "v56/effects/failed/back-037.png",
+          "front": "v56/effects/failed/front-037.png"
+        },
+        {
+          "back": "v56/effects/failed/back-038.png",
+          "front": "v56/effects/failed/front-038.png"
+        },
+        {
+          "back": "v56/effects/failed/back-039.png",
+          "front": "v56/effects/failed/front-039.png"
+        },
+        {
+          "back": "v56/effects/failed/back-040.png",
+          "front": "v56/effects/failed/front-040.png"
+        },
+        {
+          "back": "v56/effects/failed/back-041.png",
+          "front": "v56/effects/failed/front-041.png"
+        },
+        {
+          "back": "v56/effects/failed/back-042.png",
+          "front": "v56/effects/failed/front-042.png"
+        },
+        {
+          "back": "v56/effects/failed/back-043.png",
+          "front": "v56/effects/failed/front-043.png"
+        },
+        {
+          "back": "v56/effects/failed/back-044.png",
+          "front": "v56/effects/failed/front-044.png"
+        },
+        {
+          "back": "v56/effects/failed/back-045.png",
+          "front": "v56/effects/failed/front-045.png"
+        },
+        {
+          "back": "v56/effects/failed/back-046.png",
+          "front": "v56/effects/failed/front-046.png"
+        },
+        {
+          "back": "v56/effects/failed/back-047.png",
+          "front": "v56/effects/failed/front-047.png"
+        },
+        {
+          "back": "v56/effects/failed/back-048.png",
+          "front": "v56/effects/failed/front-048.png"
+        },
+        {
+          "back": "v56/effects/failed/back-049.png",
+          "front": "v56/effects/failed/front-049.png"
+        },
+        {
+          "back": "v56/effects/failed/back-050.png",
+          "front": "v56/effects/failed/front-050.png"
+        },
+        {
+          "back": "v56/effects/failed/back-051.png",
+          "front": "v56/effects/failed/front-051.png"
+        },
+        {
+          "back": "v56/effects/failed/back-052.png",
+          "front": "v56/effects/failed/front-052.png"
+        },
+        {
+          "back": "v56/effects/failed/back-053.png",
+          "front": "v56/effects/failed/front-053.png"
+        },
+        {
+          "back": "v56/effects/failed/back-054.png",
+          "front": "v56/effects/failed/front-054.png"
+        },
+        {
+          "back": "v56/effects/failed/back-055.png",
+          "front": "v56/effects/failed/front-055.png"
+        },
+        {
+          "back": "v56/effects/failed/back-056.png",
+          "front": "v56/effects/failed/front-056.png"
+        },
+        {
+          "back": "v56/effects/failed/back-057.png",
+          "front": "v56/effects/failed/front-057.png"
+        },
+        {
+          "back": "v56/effects/failed/back-058.png",
+          "front": "v56/effects/failed/front-058.png"
+        },
+        {
+          "back": "v56/effects/failed/back-059.png",
+          "front": "v56/effects/failed/front-059.png"
+        },
+        {
+          "back": "v56/effects/failed/back-060.png",
+          "front": "v56/effects/failed/front-060.png"
+        },
+        {
+          "back": "v56/effects/failed/back-061.png",
+          "front": "v56/effects/failed/front-061.png"
+        },
+        {
+          "back": "v56/effects/failed/back-062.png",
+          "front": "v56/effects/failed/front-062.png"
+        },
+        {
+          "back": "v56/effects/failed/back-063.png",
+          "front": "v56/effects/failed/front-063.png"
+        },
+        {
+          "back": "v56/effects/failed/back-064.png",
+          "front": "v56/effects/failed/front-064.png"
+        },
+        {
+          "back": "v56/effects/failed/back-065.png",
+          "front": "v56/effects/failed/front-065.png"
+        },
+        {
+          "back": "v56/effects/failed/back-066.png",
+          "front": "v56/effects/failed/front-066.png"
+        },
+        {
+          "back": "v56/effects/failed/back-067.png",
+          "front": "v56/effects/failed/front-067.png"
+        },
+        {
+          "back": "v56/effects/failed/back-068.png",
+          "front": "v56/effects/failed/front-068.png"
+        },
+        {
+          "back": "v56/effects/failed/back-069.png",
+          "front": "v56/effects/failed/front-069.png"
+        },
+        {
+          "back": "v56/effects/failed/back-070.png",
+          "front": "v56/effects/failed/front-070.png"
+        },
+        {
+          "back": "v56/effects/failed/back-071.png",
+          "front": "v56/effects/failed/front-071.png"
+        },
+        {
+          "back": "v56/effects/failed/back-072.png",
+          "front": "v56/effects/failed/front-072.png"
+        },
+        {
+          "back": "v56/effects/failed/back-073.png",
+          "front": "v56/effects/failed/front-073.png"
+        },
+        {
+          "back": "v56/effects/failed/back-074.png",
+          "front": "v56/effects/failed/front-074.png"
+        },
+        {
+          "back": "v56/effects/failed/back-075.png",
+          "front": "v56/effects/failed/front-075.png"
+        },
+        {
+          "back": "v56/effects/failed/back-076.png",
+          "front": "v56/effects/failed/front-076.png"
+        },
+        {
+          "back": "v56/effects/failed/back-077.png",
+          "front": "v56/effects/failed/front-077.png"
+        },
+        {
+          "back": "v56/effects/failed/back-078.png",
+          "front": "v56/effects/failed/front-078.png"
+        },
+        {
+          "back": "v56/effects/failed/back-079.png",
+          "front": "v56/effects/failed/front-079.png"
+        },
+        {
+          "back": "v56/effects/failed/back-080.png",
+          "front": "v56/effects/failed/front-080.png"
+        },
+        {
+          "back": "v56/effects/failed/back-081.png",
+          "front": "v56/effects/failed/front-081.png"
+        },
+        {
+          "back": "v56/effects/failed/back-082.png",
+          "front": "v56/effects/failed/front-082.png"
+        },
+        {
+          "back": "v56/effects/failed/back-083.png",
+          "front": "v56/effects/failed/front-083.png"
+        },
+        {
+          "back": "v56/effects/failed/back-084.png",
+          "front": "v56/effects/failed/front-084.png"
+        },
+        {
+          "back": "v56/effects/failed/back-085.png",
+          "front": "v56/effects/failed/front-085.png"
+        },
+        {
+          "back": "v56/effects/failed/back-086.png",
+          "front": "v56/effects/failed/front-086.png"
+        },
+        {
+          "back": "v56/effects/failed/back-087.png",
+          "front": "v56/effects/failed/front-087.png"
+        },
+        {
+          "back": "v56/effects/failed/back-088.png",
+          "front": "v56/effects/failed/front-088.png"
+        },
+        {
+          "back": "v56/effects/failed/back-089.png",
+          "front": "v56/effects/failed/front-089.png"
+        },
+        {
+          "back": "v56/effects/failed/back-090.png",
+          "front": "v56/effects/failed/front-090.png"
+        },
+        {
+          "back": "v56/effects/failed/back-091.png",
+          "front": "v56/effects/failed/front-091.png"
+        },
+        {
+          "back": "v56/effects/failed/back-092.png",
+          "front": "v56/effects/failed/front-092.png"
+        },
+        {
+          "back": "v56/effects/failed/back-093.png",
+          "front": "v56/effects/failed/front-093.png"
+        },
+        {
+          "back": "v56/effects/failed/back-094.png",
+          "front": "v56/effects/failed/front-094.png"
+        },
+        {
+          "back": "v56/effects/failed/back-095.png",
+          "front": "v56/effects/failed/front-095.png"
+        },
+        {
+          "back": "v56/effects/failed/back-096.png",
+          "front": "v56/effects/failed/front-096.png"
+        },
+        {
+          "back": "v56/effects/failed/back-097.png",
+          "front": "v56/effects/failed/front-097.png"
+        },
+        {
+          "back": "v56/effects/failed/back-098.png",
+          "front": "v56/effects/failed/front-098.png"
+        },
+        {
+          "back": "v56/effects/failed/back-099.png",
+          "front": "v56/effects/failed/front-099.png"
+        },
+        {
+          "back": "v56/effects/failed/back-100.png",
+          "front": "v56/effects/failed/front-100.png"
+        },
+        {
+          "back": "v56/effects/failed/back-101.png",
+          "front": "v56/effects/failed/front-101.png"
+        },
+        {
+          "back": "v56/effects/failed/back-102.png",
+          "front": "v56/effects/failed/front-102.png"
+        },
+        {
+          "back": "v56/effects/failed/back-103.png",
+          "front": "v56/effects/failed/front-103.png"
+        },
+        {
+          "back": "v56/effects/failed/back-104.png",
+          "front": "v56/effects/failed/front-104.png"
+        },
+        {
+          "back": "v56/effects/failed/back-105.png",
+          "front": "v56/effects/failed/front-105.png"
+        },
+        {
+          "back": "v56/effects/failed/back-106.png",
+          "front": "v56/effects/failed/front-106.png"
+        },
+        {
+          "back": "v56/effects/failed/back-107.png",
+          "front": "v56/effects/failed/front-107.png"
+        },
+        {
+          "back": "v56/effects/failed/back-108.png",
+          "front": "v56/effects/failed/front-108.png"
+        },
+        {
+          "back": "v56/effects/failed/back-109.png",
+          "front": "v56/effects/failed/front-109.png"
+        },
+        {
+          "back": "v56/effects/failed/back-110.png",
+          "front": "v56/effects/failed/front-110.png"
+        },
+        {
+          "back": "v56/effects/failed/back-111.png",
+          "front": "v56/effects/failed/front-111.png"
+        },
+        {
+          "back": "v56/effects/failed/back-112.png",
+          "front": "v56/effects/failed/front-112.png"
+        },
+        {
+          "back": "v56/effects/failed/back-113.png",
+          "front": "v56/effects/failed/front-113.png"
+        },
+        {
+          "back": "v56/effects/failed/back-114.png",
+          "front": "v56/effects/failed/front-114.png"
+        },
+        {
+          "back": "v56/effects/failed/back-115.png",
+          "front": "v56/effects/failed/front-115.png"
+        },
+        {
+          "back": "v56/effects/failed/back-116.png",
+          "front": "v56/effects/failed/front-116.png"
+        },
+        {
+          "back": "v56/effects/failed/back-117.png",
+          "front": "v56/effects/failed/front-117.png"
+        },
+        {
+          "back": "v56/effects/failed/back-118.png",
+          "front": "v56/effects/failed/front-118.png"
+        },
+        {
+          "back": "v56/effects/failed/back-119.png",
+          "front": "v56/effects/failed/front-119.png"
+        },
+        {
+          "back": "v56/effects/failed/back-120.png",
+          "front": "v56/effects/failed/front-120.png"
+        },
+        {
+          "back": "v56/effects/failed/back-121.png",
+          "front": "v56/effects/failed/front-121.png"
+        },
+        {
+          "back": "v56/effects/failed/back-122.png",
+          "front": "v56/effects/failed/front-122.png"
+        },
+        {
+          "back": "v56/effects/failed/back-123.png",
+          "front": "v56/effects/failed/front-123.png"
+        },
+        {
+          "back": "v56/effects/failed/back-124.png",
+          "front": "v56/effects/failed/front-124.png"
+        },
+        {
+          "back": "v56/effects/failed/back-125.png",
+          "front": "v56/effects/failed/front-125.png"
+        },
+        {
+          "back": "v56/effects/failed/back-126.png",
+          "front": "v56/effects/failed/front-126.png"
+        },
+        {
+          "back": "v56/effects/failed/back-127.png",
+          "front": "v56/effects/failed/front-127.png"
+        }
+      ],
+      "effectCycle": 6.4,
+      "effectInterval": 0.05
+    },
+    {
+      "id": "waving",
+      "row": 3,
+      "cycle": 3.2,
+      "times": [
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2
+      ],
+      "files": [
+        "v57/characters/waving/00.png",
+        "v57/characters/waving/01.png",
+        "v58/characters/waving/02.png",
+        "v57/characters/waving/03.png",
+        "v57/characters/waving/04.png",
+        "v57/characters/waving/05.png",
+        "v57/characters/waving/06.png",
+        "v57/characters/waving/07.png",
+        "v57/characters/waving/08.png",
+        "v57/characters/waving/09.png",
+        "v57/characters/waving/10.png",
+        "v57/characters/waving/11.png",
+        "v58/characters/waving/12.png",
+        "v57/characters/waving/13.png",
+        "v57/characters/waving/14.png",
+        "v57/characters/waving/15.png"
+      ],
+      "anchors": [
+        [
+          198.625,
+          385.5
+        ],
+        [
+          199.43333333333334,
+          392
+        ],
+        [
+          197.45833333333334,
+          380.5
+        ],
+        [
+          199.5,
+          392.5
+        ],
+        [
+          199.7,
+          394
+        ],
+        [
+          201.3181818181818,
+          388.1818181818182
+        ],
+        [
+          199.42857142857142,
+          394.5
+        ],
+        [
+          202.92857142857142,
+          386.5
+        ],
+        [
+          196.34615384615384,
+          380.0769230769231
+        ],
+        [
+          200.45454545454547,
+          393
+        ],
+        [
+          199,
+          395
+        ],
+        [
+          199.03125,
+          394.5
+        ],
+        [
+          197.45833333333334,
+          380.5
+        ],
+        [
+          199.375,
+          392.5625
+        ],
+        [
+          199.59375,
+          394.5
+        ],
+        [
+          198.625,
+          385.5
+        ]
+      ],
+      "effects": [
+        {
+          "back": "v57/effects/waving/back-000.png",
+          "front": "v57/effects/waving/front-000.png"
+        },
+        {
+          "back": "v57/effects/waving/back-001.png",
+          "front": "v57/effects/waving/front-001.png"
+        },
+        {
+          "back": "v57/effects/waving/back-002.png",
+          "front": "v57/effects/waving/front-002.png"
+        },
+        {
+          "back": "v57/effects/waving/back-003.png",
+          "front": "v57/effects/waving/front-003.png"
+        },
+        {
+          "back": "v57/effects/waving/back-004.png",
+          "front": "v57/effects/waving/front-004.png"
+        },
+        {
+          "back": "v57/effects/waving/back-005.png",
+          "front": "v57/effects/waving/front-005.png"
+        },
+        {
+          "back": "v57/effects/waving/back-006.png",
+          "front": "v57/effects/waving/front-006.png"
+        },
+        {
+          "back": "v57/effects/waving/back-007.png",
+          "front": "v57/effects/waving/front-007.png"
+        },
+        {
+          "back": "v57/effects/waving/back-008.png",
+          "front": "v57/effects/waving/front-008.png"
+        },
+        {
+          "back": "v57/effects/waving/back-009.png",
+          "front": "v57/effects/waving/front-009.png"
+        },
+        {
+          "back": "v57/effects/waving/back-010.png",
+          "front": "v57/effects/waving/front-010.png"
+        },
+        {
+          "back": "v57/effects/waving/back-011.png",
+          "front": "v57/effects/waving/front-011.png"
+        },
+        {
+          "back": "v57/effects/waving/back-012.png",
+          "front": "v57/effects/waving/front-012.png"
+        },
+        {
+          "back": "v57/effects/waving/back-013.png",
+          "front": "v57/effects/waving/front-013.png"
+        },
+        {
+          "back": "v57/effects/waving/back-014.png",
+          "front": "v57/effects/waving/front-014.png"
+        },
+        {
+          "back": "v57/effects/waving/back-015.png",
+          "front": "v57/effects/waving/front-015.png"
+        },
+        {
+          "back": "v57/effects/waving/back-016.png",
+          "front": "v57/effects/waving/front-016.png"
+        },
+        {
+          "back": "v57/effects/waving/back-017.png",
+          "front": "v57/effects/waving/front-017.png"
+        },
+        {
+          "back": "v57/effects/waving/back-018.png",
+          "front": "v57/effects/waving/front-018.png"
+        },
+        {
+          "back": "v57/effects/waving/back-019.png",
+          "front": "v57/effects/waving/front-019.png"
+        },
+        {
+          "back": "v57/effects/waving/back-020.png",
+          "front": "v57/effects/waving/front-020.png"
+        },
+        {
+          "back": "v57/effects/waving/back-021.png",
+          "front": "v57/effects/waving/front-021.png"
+        },
+        {
+          "back": "v57/effects/waving/back-022.png",
+          "front": "v57/effects/waving/front-022.png"
+        },
+        {
+          "back": "v57/effects/waving/back-023.png",
+          "front": "v57/effects/waving/front-023.png"
+        },
+        {
+          "back": "v57/effects/waving/back-024.png",
+          "front": "v57/effects/waving/front-024.png"
+        },
+        {
+          "back": "v57/effects/waving/back-025.png",
+          "front": "v57/effects/waving/front-025.png"
+        },
+        {
+          "back": "v57/effects/waving/back-026.png",
+          "front": "v57/effects/waving/front-026.png"
+        },
+        {
+          "back": "v57/effects/waving/back-027.png",
+          "front": "v57/effects/waving/front-027.png"
+        },
+        {
+          "back": "v57/effects/waving/back-028.png",
+          "front": "v57/effects/waving/front-028.png"
+        },
+        {
+          "back": "v57/effects/waving/back-029.png",
+          "front": "v57/effects/waving/front-029.png"
+        },
+        {
+          "back": "v57/effects/waving/back-030.png",
+          "front": "v57/effects/waving/front-030.png"
+        },
+        {
+          "back": "v57/effects/waving/back-031.png",
+          "front": "v57/effects/waving/front-031.png"
+        },
+        {
+          "back": "v57/effects/waving/back-032.png",
+          "front": "v57/effects/waving/front-032.png"
+        },
+        {
+          "back": "v57/effects/waving/back-033.png",
+          "front": "v57/effects/waving/front-033.png"
+        },
+        {
+          "back": "v57/effects/waving/back-034.png",
+          "front": "v57/effects/waving/front-034.png"
+        },
+        {
+          "back": "v57/effects/waving/back-035.png",
+          "front": "v57/effects/waving/front-035.png"
+        },
+        {
+          "back": "v57/effects/waving/back-036.png",
+          "front": "v57/effects/waving/front-036.png"
+        },
+        {
+          "back": "v57/effects/waving/back-037.png",
+          "front": "v57/effects/waving/front-037.png"
+        },
+        {
+          "back": "v57/effects/waving/back-038.png",
+          "front": "v57/effects/waving/front-038.png"
+        },
+        {
+          "back": "v57/effects/waving/back-039.png",
+          "front": "v57/effects/waving/front-039.png"
+        },
+        {
+          "back": "v57/effects/waving/back-040.png",
+          "front": "v57/effects/waving/front-040.png"
+        },
+        {
+          "back": "v57/effects/waving/back-041.png",
+          "front": "v57/effects/waving/front-041.png"
+        },
+        {
+          "back": "v57/effects/waving/back-042.png",
+          "front": "v57/effects/waving/front-042.png"
+        },
+        {
+          "back": "v57/effects/waving/back-043.png",
+          "front": "v57/effects/waving/front-043.png"
+        },
+        {
+          "back": "v57/effects/waving/back-044.png",
+          "front": "v57/effects/waving/front-044.png"
+        },
+        {
+          "back": "v57/effects/waving/back-045.png",
+          "front": "v57/effects/waving/front-045.png"
+        },
+        {
+          "back": "v57/effects/waving/back-046.png",
+          "front": "v57/effects/waving/front-046.png"
+        },
+        {
+          "back": "v57/effects/waving/back-047.png",
+          "front": "v57/effects/waving/front-047.png"
+        },
+        {
+          "back": "v57/effects/waving/back-048.png",
+          "front": "v57/effects/waving/front-048.png"
+        },
+        {
+          "back": "v57/effects/waving/back-049.png",
+          "front": "v57/effects/waving/front-049.png"
+        },
+        {
+          "back": "v57/effects/waving/back-050.png",
+          "front": "v57/effects/waving/front-050.png"
+        },
+        {
+          "back": "v57/effects/waving/back-051.png",
+          "front": "v57/effects/waving/front-051.png"
+        },
+        {
+          "back": "v57/effects/waving/back-052.png",
+          "front": "v57/effects/waving/front-052.png"
+        },
+        {
+          "back": "v57/effects/waving/back-053.png",
+          "front": "v57/effects/waving/front-053.png"
+        },
+        {
+          "back": "v57/effects/waving/back-054.png",
+          "front": "v57/effects/waving/front-054.png"
+        },
+        {
+          "back": "v57/effects/waving/back-055.png",
+          "front": "v57/effects/waving/front-055.png"
+        },
+        {
+          "back": "v57/effects/waving/back-056.png",
+          "front": "v57/effects/waving/front-056.png"
+        },
+        {
+          "back": "v57/effects/waving/back-057.png",
+          "front": "v57/effects/waving/front-057.png"
+        },
+        {
+          "back": "v57/effects/waving/back-058.png",
+          "front": "v57/effects/waving/front-058.png"
+        },
+        {
+          "back": "v57/effects/waving/back-059.png",
+          "front": "v57/effects/waving/front-059.png"
+        },
+        {
+          "back": "v57/effects/waving/back-060.png",
+          "front": "v57/effects/waving/front-060.png"
+        },
+        {
+          "back": "v57/effects/waving/back-061.png",
+          "front": "v57/effects/waving/front-061.png"
+        },
+        {
+          "back": "v57/effects/waving/back-062.png",
+          "front": "v57/effects/waving/front-062.png"
+        },
+        {
+          "back": "v57/effects/waving/back-063.png",
+          "front": "v57/effects/waving/front-063.png"
+        },
+        {
+          "back": "v57/effects/waving/back-064.png",
+          "front": "v57/effects/waving/front-064.png"
+        },
+        {
+          "back": "v57/effects/waving/back-065.png",
+          "front": "v57/effects/waving/front-065.png"
+        },
+        {
+          "back": "v57/effects/waving/back-066.png",
+          "front": "v57/effects/waving/front-066.png"
+        },
+        {
+          "back": "v57/effects/waving/back-067.png",
+          "front": "v57/effects/waving/front-067.png"
+        },
+        {
+          "back": "v57/effects/waving/back-068.png",
+          "front": "v57/effects/waving/front-068.png"
+        },
+        {
+          "back": "v57/effects/waving/back-069.png",
+          "front": "v57/effects/waving/front-069.png"
+        },
+        {
+          "back": "v57/effects/waving/back-070.png",
+          "front": "v57/effects/waving/front-070.png"
+        },
+        {
+          "back": "v57/effects/waving/back-071.png",
+          "front": "v57/effects/waving/front-071.png"
+        },
+        {
+          "back": "v57/effects/waving/back-072.png",
+          "front": "v57/effects/waving/front-072.png"
+        },
+        {
+          "back": "v57/effects/waving/back-073.png",
+          "front": "v57/effects/waving/front-073.png"
+        },
+        {
+          "back": "v57/effects/waving/back-074.png",
+          "front": "v57/effects/waving/front-074.png"
+        },
+        {
+          "back": "v57/effects/waving/back-075.png",
+          "front": "v57/effects/waving/front-075.png"
+        },
+        {
+          "back": "v57/effects/waving/back-076.png",
+          "front": "v57/effects/waving/front-076.png"
+        },
+        {
+          "back": "v57/effects/waving/back-077.png",
+          "front": "v57/effects/waving/front-077.png"
+        },
+        {
+          "back": "v57/effects/waving/back-078.png",
+          "front": "v57/effects/waving/front-078.png"
+        },
+        {
+          "back": "v57/effects/waving/back-079.png",
+          "front": "v57/effects/waving/front-079.png"
+        },
+        {
+          "back": "v57/effects/waving/back-080.png",
+          "front": "v57/effects/waving/front-080.png"
+        },
+        {
+          "back": "v57/effects/waving/back-081.png",
+          "front": "v57/effects/waving/front-081.png"
+        },
+        {
+          "back": "v57/effects/waving/back-082.png",
+          "front": "v57/effects/waving/front-082.png"
+        },
+        {
+          "back": "v57/effects/waving/back-083.png",
+          "front": "v57/effects/waving/front-083.png"
+        },
+        {
+          "back": "v57/effects/waving/back-084.png",
+          "front": "v57/effects/waving/front-084.png"
+        },
+        {
+          "back": "v57/effects/waving/back-085.png",
+          "front": "v57/effects/waving/front-085.png"
+        },
+        {
+          "back": "v57/effects/waving/back-086.png",
+          "front": "v57/effects/waving/front-086.png"
+        },
+        {
+          "back": "v57/effects/waving/back-087.png",
+          "front": "v57/effects/waving/front-087.png"
+        },
+        {
+          "back": "v57/effects/waving/back-088.png",
+          "front": "v57/effects/waving/front-088.png"
+        },
+        {
+          "back": "v57/effects/waving/back-089.png",
+          "front": "v57/effects/waving/front-089.png"
+        },
+        {
+          "back": "v57/effects/waving/back-090.png",
+          "front": "v57/effects/waving/front-090.png"
+        },
+        {
+          "back": "v57/effects/waving/back-091.png",
+          "front": "v57/effects/waving/front-091.png"
+        },
+        {
+          "back": "v57/effects/waving/back-092.png",
+          "front": "v57/effects/waving/front-092.png"
+        },
+        {
+          "back": "v57/effects/waving/back-093.png",
+          "front": "v57/effects/waving/front-093.png"
+        },
+        {
+          "back": "v57/effects/waving/back-094.png",
+          "front": "v57/effects/waving/front-094.png"
+        },
+        {
+          "back": "v57/effects/waving/back-095.png",
+          "front": "v57/effects/waving/front-095.png"
+        },
+        {
+          "back": "v57/effects/waving/back-096.png",
+          "front": "v57/effects/waving/front-096.png"
+        },
+        {
+          "back": "v57/effects/waving/back-097.png",
+          "front": "v57/effects/waving/front-097.png"
+        },
+        {
+          "back": "v57/effects/waving/back-098.png",
+          "front": "v57/effects/waving/front-098.png"
+        },
+        {
+          "back": "v57/effects/waving/back-099.png",
+          "front": "v57/effects/waving/front-099.png"
+        },
+        {
+          "back": "v57/effects/waving/back-100.png",
+          "front": "v57/effects/waving/front-100.png"
+        },
+        {
+          "back": "v57/effects/waving/back-101.png",
+          "front": "v57/effects/waving/front-101.png"
+        },
+        {
+          "back": "v57/effects/waving/back-102.png",
+          "front": "v57/effects/waving/front-102.png"
+        },
+        {
+          "back": "v57/effects/waving/back-103.png",
+          "front": "v57/effects/waving/front-103.png"
+        },
+        {
+          "back": "v57/effects/waving/back-104.png",
+          "front": "v57/effects/waving/front-104.png"
+        },
+        {
+          "back": "v57/effects/waving/back-105.png",
+          "front": "v57/effects/waving/front-105.png"
+        },
+        {
+          "back": "v57/effects/waving/back-106.png",
+          "front": "v57/effects/waving/front-106.png"
+        },
+        {
+          "back": "v57/effects/waving/back-107.png",
+          "front": "v57/effects/waving/front-107.png"
+        },
+        {
+          "back": "v57/effects/waving/back-108.png",
+          "front": "v57/effects/waving/front-108.png"
+        },
+        {
+          "back": "v57/effects/waving/back-109.png",
+          "front": "v57/effects/waving/front-109.png"
+        },
+        {
+          "back": "v57/effects/waving/back-110.png",
+          "front": "v57/effects/waving/front-110.png"
+        },
+        {
+          "back": "v57/effects/waving/back-111.png",
+          "front": "v57/effects/waving/front-111.png"
+        },
+        {
+          "back": "v57/effects/waving/back-112.png",
+          "front": "v57/effects/waving/front-112.png"
+        },
+        {
+          "back": "v57/effects/waving/back-113.png",
+          "front": "v57/effects/waving/front-113.png"
+        },
+        {
+          "back": "v57/effects/waving/back-114.png",
+          "front": "v57/effects/waving/front-114.png"
+        },
+        {
+          "back": "v57/effects/waving/back-115.png",
+          "front": "v57/effects/waving/front-115.png"
+        },
+        {
+          "back": "v57/effects/waving/back-116.png",
+          "front": "v57/effects/waving/front-116.png"
+        },
+        {
+          "back": "v57/effects/waving/back-117.png",
+          "front": "v57/effects/waving/front-117.png"
+        },
+        {
+          "back": "v57/effects/waving/back-118.png",
+          "front": "v57/effects/waving/front-118.png"
+        },
+        {
+          "back": "v57/effects/waving/back-119.png",
+          "front": "v57/effects/waving/front-119.png"
+        },
+        {
+          "back": "v57/effects/waving/back-120.png",
+          "front": "v57/effects/waving/front-120.png"
+        },
+        {
+          "back": "v57/effects/waving/back-121.png",
+          "front": "v57/effects/waving/front-121.png"
+        },
+        {
+          "back": "v57/effects/waving/back-122.png",
+          "front": "v57/effects/waving/front-122.png"
+        },
+        {
+          "back": "v57/effects/waving/back-123.png",
+          "front": "v57/effects/waving/front-123.png"
+        },
+        {
+          "back": "v57/effects/waving/back-124.png",
+          "front": "v57/effects/waving/front-124.png"
+        },
+        {
+          "back": "v57/effects/waving/back-125.png",
+          "front": "v57/effects/waving/front-125.png"
+        },
+        {
+          "back": "v57/effects/waving/back-126.png",
+          "front": "v57/effects/waving/front-126.png"
+        },
+        {
+          "back": "v57/effects/waving/back-127.png",
+          "front": "v57/effects/waving/front-127.png"
+        }
+      ],
+      "effectCycle": 6.4,
+      "effectInterval": 0.05
+    },
+    {
+      "id": "jumping",
+      "row": 4,
+      "cycle": 2.4,
+      "times": [
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15
+      ],
+      "files": [
+        "v56/characters/jumping/00.png",
+        "v56/characters/jumping/01.png",
+        "v56/characters/jumping/02.png",
+        "v56/characters/jumping/03.png",
+        "v56/characters/jumping/04.png",
+        "v56/characters/jumping/05.png",
+        "v56/characters/jumping/06.png",
+        "v56/characters/jumping/07.png",
+        "v56/characters/jumping/08.png",
+        "v56/characters/jumping/09.png",
+        "v56/characters/jumping/10.png",
+        "v56/characters/jumping/11.png",
+        "v56/characters/jumping/12.png",
+        "v56/characters/jumping/13.png",
+        "v56/characters/jumping/14.png",
+        "v56/characters/jumping/15.png"
+      ],
+      "anchors": [
+        [
+          201.0279166205131,
+          451.37328343570624
+        ],
+        [
+          196.0119210937132,
+          478.45172430105566
+        ],
+        [
+          178.48301082090333,
+          439.1202849413437
+        ],
+        [
+          179.41543384781366,
+          420.6944959110573
+        ],
+        [
+          190.7189982027936,
+          392.53052350860764
+        ],
+        [
+          182.45823776739826,
+          388.94392071330566
+        ],
+        [
+          188.316599861176,
+          383.3490352089292
+        ],
+        [
+          194.9930094445265,
+          378.63178649499696
+        ],
+        [
+          196.1755059602895,
+          383.23022364188404
+        ],
+        [
+          187.69317479709994,
+          382.1945105719085
+        ],
+        [
+          189.85064979773747,
+          397.7611500394691
+        ],
+        [
+          188.90654271995146,
+          417.7665757643283
+        ],
+        [
+          192.86093132132092,
+          469.0790021694096
+        ],
+        [
+          203.57949619466297,
+          474.4139379992082
+        ],
+        [
+          196.01428800184414,
+          416.7929572864211
+        ],
+        [
+          199.52909066096615,
+          464.6995764813649
+        ]
+      ],
+      "effects": [
+        {
+          "back": "v56/effects/jumping/back-000.png",
+          "front": "v56/effects/jumping/front-000.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-001.png",
+          "front": "v56/effects/jumping/front-001.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-002.png",
+          "front": "v56/effects/jumping/front-002.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-003.png",
+          "front": "v56/effects/jumping/front-003.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-004.png",
+          "front": "v56/effects/jumping/front-004.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-005.png",
+          "front": "v56/effects/jumping/front-005.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-006.png",
+          "front": "v56/effects/jumping/front-006.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-007.png",
+          "front": "v56/effects/jumping/front-007.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-008.png",
+          "front": "v56/effects/jumping/front-008.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-009.png",
+          "front": "v56/effects/jumping/front-009.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-010.png",
+          "front": "v56/effects/jumping/front-010.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-011.png",
+          "front": "v56/effects/jumping/front-011.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-012.png",
+          "front": "v56/effects/jumping/front-012.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-013.png",
+          "front": "v56/effects/jumping/front-013.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-014.png",
+          "front": "v56/effects/jumping/front-014.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-015.png",
+          "front": "v56/effects/jumping/front-015.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-016.png",
+          "front": "v56/effects/jumping/front-016.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-017.png",
+          "front": "v56/effects/jumping/front-017.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-018.png",
+          "front": "v56/effects/jumping/front-018.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-019.png",
+          "front": "v56/effects/jumping/front-019.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-020.png",
+          "front": "v56/effects/jumping/front-020.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-021.png",
+          "front": "v56/effects/jumping/front-021.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-022.png",
+          "front": "v56/effects/jumping/front-022.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-023.png",
+          "front": "v56/effects/jumping/front-023.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-024.png",
+          "front": "v56/effects/jumping/front-024.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-025.png",
+          "front": "v56/effects/jumping/front-025.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-026.png",
+          "front": "v56/effects/jumping/front-026.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-027.png",
+          "front": "v56/effects/jumping/front-027.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-028.png",
+          "front": "v56/effects/jumping/front-028.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-029.png",
+          "front": "v56/effects/jumping/front-029.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-030.png",
+          "front": "v56/effects/jumping/front-030.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-031.png",
+          "front": "v56/effects/jumping/front-031.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-032.png",
+          "front": "v56/effects/jumping/front-032.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-033.png",
+          "front": "v56/effects/jumping/front-033.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-034.png",
+          "front": "v56/effects/jumping/front-034.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-035.png",
+          "front": "v56/effects/jumping/front-035.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-036.png",
+          "front": "v56/effects/jumping/front-036.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-037.png",
+          "front": "v56/effects/jumping/front-037.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-038.png",
+          "front": "v56/effects/jumping/front-038.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-039.png",
+          "front": "v56/effects/jumping/front-039.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-040.png",
+          "front": "v56/effects/jumping/front-040.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-041.png",
+          "front": "v56/effects/jumping/front-041.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-042.png",
+          "front": "v56/effects/jumping/front-042.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-043.png",
+          "front": "v56/effects/jumping/front-043.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-044.png",
+          "front": "v56/effects/jumping/front-044.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-045.png",
+          "front": "v56/effects/jumping/front-045.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-046.png",
+          "front": "v56/effects/jumping/front-046.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-047.png",
+          "front": "v56/effects/jumping/front-047.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-048.png",
+          "front": "v56/effects/jumping/front-048.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-049.png",
+          "front": "v56/effects/jumping/front-049.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-050.png",
+          "front": "v56/effects/jumping/front-050.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-051.png",
+          "front": "v56/effects/jumping/front-051.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-052.png",
+          "front": "v56/effects/jumping/front-052.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-053.png",
+          "front": "v56/effects/jumping/front-053.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-054.png",
+          "front": "v56/effects/jumping/front-054.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-055.png",
+          "front": "v56/effects/jumping/front-055.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-056.png",
+          "front": "v56/effects/jumping/front-056.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-057.png",
+          "front": "v56/effects/jumping/front-057.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-058.png",
+          "front": "v56/effects/jumping/front-058.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-059.png",
+          "front": "v56/effects/jumping/front-059.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-060.png",
+          "front": "v56/effects/jumping/front-060.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-061.png",
+          "front": "v56/effects/jumping/front-061.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-062.png",
+          "front": "v56/effects/jumping/front-062.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-063.png",
+          "front": "v56/effects/jumping/front-063.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-064.png",
+          "front": "v56/effects/jumping/front-064.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-065.png",
+          "front": "v56/effects/jumping/front-065.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-066.png",
+          "front": "v56/effects/jumping/front-066.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-067.png",
+          "front": "v56/effects/jumping/front-067.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-068.png",
+          "front": "v56/effects/jumping/front-068.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-069.png",
+          "front": "v56/effects/jumping/front-069.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-070.png",
+          "front": "v56/effects/jumping/front-070.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-071.png",
+          "front": "v56/effects/jumping/front-071.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-072.png",
+          "front": "v56/effects/jumping/front-072.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-073.png",
+          "front": "v56/effects/jumping/front-073.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-074.png",
+          "front": "v56/effects/jumping/front-074.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-075.png",
+          "front": "v56/effects/jumping/front-075.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-076.png",
+          "front": "v56/effects/jumping/front-076.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-077.png",
+          "front": "v56/effects/jumping/front-077.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-078.png",
+          "front": "v56/effects/jumping/front-078.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-079.png",
+          "front": "v56/effects/jumping/front-079.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-080.png",
+          "front": "v56/effects/jumping/front-080.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-081.png",
+          "front": "v56/effects/jumping/front-081.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-082.png",
+          "front": "v56/effects/jumping/front-082.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-083.png",
+          "front": "v56/effects/jumping/front-083.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-084.png",
+          "front": "v56/effects/jumping/front-084.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-085.png",
+          "front": "v56/effects/jumping/front-085.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-086.png",
+          "front": "v56/effects/jumping/front-086.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-087.png",
+          "front": "v56/effects/jumping/front-087.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-088.png",
+          "front": "v56/effects/jumping/front-088.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-089.png",
+          "front": "v56/effects/jumping/front-089.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-090.png",
+          "front": "v56/effects/jumping/front-090.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-091.png",
+          "front": "v56/effects/jumping/front-091.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-092.png",
+          "front": "v56/effects/jumping/front-092.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-093.png",
+          "front": "v56/effects/jumping/front-093.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-094.png",
+          "front": "v56/effects/jumping/front-094.png"
+        },
+        {
+          "back": "v56/effects/jumping/back-095.png",
+          "front": "v56/effects/jumping/front-095.png"
+        }
+      ],
+      "effectCycle": 4.8,
+      "effectInterval": 0.05
+    },
+    {
+      "id": "sleeping",
+      "row": 11,
+      "cycle": 6.4,
+      "times": [
+        0.4,
+        0.4,
+        0.4,
+        0.4,
+        0.4,
+        0.4,
+        0.4,
+        0.4,
+        0.4,
+        0.4,
+        0.4,
+        0.4,
+        0.4,
+        0.4,
+        0.4,
+        0.4
+      ],
+      "files": [
+        "v56/characters/sleeping/00.png",
+        "v56/characters/sleeping/01.png",
+        "v56/characters/sleeping/02.png",
+        "v56/characters/sleeping/03.png",
+        "v56/characters/sleeping/04.png",
+        "v56/characters/sleeping/05.png",
+        "v56/characters/sleeping/06.png",
+        "v56/characters/sleeping/07.png",
+        "v56/characters/sleeping/08.png",
+        "v56/characters/sleeping/09.png",
+        "v56/characters/sleeping/10.png",
+        "v56/characters/sleeping/11.png",
+        "v56/characters/sleeping/12.png",
+        "v56/characters/sleeping/13.png",
+        "v56/characters/sleeping/14.png",
+        "v56/characters/sleeping/15.png"
+      ],
+      "anchors": [
+        [
+          276.3039509128996,
+          490.7810535767725
+        ],
+        [
+          275.19761411815955,
+          488.15460104872454
+        ],
+        [
+          275.23931623931617,
+          487.89059829059795
+        ],
+        [
+          277.193378206294,
+          486.9827178460974
+        ],
+        [
+          275.7351031773755,
+          487.792607177347
+        ],
+        [
+          275.968387536957,
+          488.6961564703204
+        ],
+        [
+          276.37221177102913,
+          488.10964794410086
+        ],
+        [
+          276.29517102615677,
+          488.2575452716295
+        ],
+        [
+          276.45516903478665,
+          488.039686428221
+        ],
+        [
+          276.31414473684197,
+          487.4569078947366
+        ],
+        [
+          275.0109371366754,
+          488.9386018553364
+        ],
+        [
+          275.8525322740812,
+          489.33788480635513
+        ],
+        [
+          276.611459141044,
+          486.98050318073217
+        ],
+        [
+          277.04463784390776,
+          488.3385738349242
+        ],
+        [
+          275.23951779173814,
+          487.7016615324902
+        ],
+        [
+          276.82125544250295,
+          488.1025565734132
+        ]
+      ],
+      "effects": [
+        {
+          "back": "v56/effects/sleeping/back-000.png",
+          "front": "v56/effects/sleeping/front-000.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-001.png",
+          "front": "v56/effects/sleeping/front-001.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-002.png",
+          "front": "v56/effects/sleeping/front-002.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-003.png",
+          "front": "v56/effects/sleeping/front-003.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-004.png",
+          "front": "v56/effects/sleeping/front-004.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-005.png",
+          "front": "v56/effects/sleeping/front-005.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-006.png",
+          "front": "v56/effects/sleeping/front-006.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-007.png",
+          "front": "v56/effects/sleeping/front-007.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-008.png",
+          "front": "v56/effects/sleeping/front-008.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-009.png",
+          "front": "v56/effects/sleeping/front-009.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-010.png",
+          "front": "v56/effects/sleeping/front-010.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-011.png",
+          "front": "v56/effects/sleeping/front-011.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-012.png",
+          "front": "v56/effects/sleeping/front-012.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-013.png",
+          "front": "v56/effects/sleeping/front-013.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-014.png",
+          "front": "v56/effects/sleeping/front-014.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-015.png",
+          "front": "v56/effects/sleeping/front-015.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-016.png",
+          "front": "v56/effects/sleeping/front-016.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-017.png",
+          "front": "v56/effects/sleeping/front-017.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-018.png",
+          "front": "v56/effects/sleeping/front-018.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-019.png",
+          "front": "v56/effects/sleeping/front-019.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-020.png",
+          "front": "v56/effects/sleeping/front-020.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-021.png",
+          "front": "v56/effects/sleeping/front-021.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-022.png",
+          "front": "v56/effects/sleeping/front-022.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-023.png",
+          "front": "v56/effects/sleeping/front-023.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-024.png",
+          "front": "v56/effects/sleeping/front-024.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-025.png",
+          "front": "v56/effects/sleeping/front-025.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-026.png",
+          "front": "v56/effects/sleeping/front-026.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-027.png",
+          "front": "v56/effects/sleeping/front-027.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-028.png",
+          "front": "v56/effects/sleeping/front-028.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-029.png",
+          "front": "v56/effects/sleeping/front-029.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-030.png",
+          "front": "v56/effects/sleeping/front-030.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-031.png",
+          "front": "v56/effects/sleeping/front-031.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-032.png",
+          "front": "v56/effects/sleeping/front-032.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-033.png",
+          "front": "v56/effects/sleeping/front-033.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-034.png",
+          "front": "v56/effects/sleeping/front-034.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-035.png",
+          "front": "v56/effects/sleeping/front-035.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-036.png",
+          "front": "v56/effects/sleeping/front-036.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-037.png",
+          "front": "v56/effects/sleeping/front-037.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-038.png",
+          "front": "v56/effects/sleeping/front-038.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-039.png",
+          "front": "v56/effects/sleeping/front-039.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-040.png",
+          "front": "v56/effects/sleeping/front-040.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-041.png",
+          "front": "v56/effects/sleeping/front-041.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-042.png",
+          "front": "v56/effects/sleeping/front-042.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-043.png",
+          "front": "v56/effects/sleeping/front-043.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-044.png",
+          "front": "v56/effects/sleeping/front-044.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-045.png",
+          "front": "v56/effects/sleeping/front-045.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-046.png",
+          "front": "v56/effects/sleeping/front-046.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-047.png",
+          "front": "v56/effects/sleeping/front-047.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-048.png",
+          "front": "v56/effects/sleeping/front-048.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-049.png",
+          "front": "v56/effects/sleeping/front-049.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-050.png",
+          "front": "v56/effects/sleeping/front-050.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-051.png",
+          "front": "v56/effects/sleeping/front-051.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-052.png",
+          "front": "v56/effects/sleeping/front-052.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-053.png",
+          "front": "v56/effects/sleeping/front-053.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-054.png",
+          "front": "v56/effects/sleeping/front-054.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-055.png",
+          "front": "v56/effects/sleeping/front-055.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-056.png",
+          "front": "v56/effects/sleeping/front-056.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-057.png",
+          "front": "v56/effects/sleeping/front-057.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-058.png",
+          "front": "v56/effects/sleeping/front-058.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-059.png",
+          "front": "v56/effects/sleeping/front-059.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-060.png",
+          "front": "v56/effects/sleeping/front-060.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-061.png",
+          "front": "v56/effects/sleeping/front-061.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-062.png",
+          "front": "v56/effects/sleeping/front-062.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-063.png",
+          "front": "v56/effects/sleeping/front-063.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-064.png",
+          "front": "v56/effects/sleeping/front-064.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-065.png",
+          "front": "v56/effects/sleeping/front-065.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-066.png",
+          "front": "v56/effects/sleeping/front-066.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-067.png",
+          "front": "v56/effects/sleeping/front-067.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-068.png",
+          "front": "v56/effects/sleeping/front-068.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-069.png",
+          "front": "v56/effects/sleeping/front-069.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-070.png",
+          "front": "v56/effects/sleeping/front-070.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-071.png",
+          "front": "v56/effects/sleeping/front-071.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-072.png",
+          "front": "v56/effects/sleeping/front-072.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-073.png",
+          "front": "v56/effects/sleeping/front-073.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-074.png",
+          "front": "v56/effects/sleeping/front-074.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-075.png",
+          "front": "v56/effects/sleeping/front-075.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-076.png",
+          "front": "v56/effects/sleeping/front-076.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-077.png",
+          "front": "v56/effects/sleeping/front-077.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-078.png",
+          "front": "v56/effects/sleeping/front-078.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-079.png",
+          "front": "v56/effects/sleeping/front-079.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-080.png",
+          "front": "v56/effects/sleeping/front-080.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-081.png",
+          "front": "v56/effects/sleeping/front-081.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-082.png",
+          "front": "v56/effects/sleeping/front-082.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-083.png",
+          "front": "v56/effects/sleeping/front-083.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-084.png",
+          "front": "v56/effects/sleeping/front-084.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-085.png",
+          "front": "v56/effects/sleeping/front-085.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-086.png",
+          "front": "v56/effects/sleeping/front-086.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-087.png",
+          "front": "v56/effects/sleeping/front-087.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-088.png",
+          "front": "v56/effects/sleeping/front-088.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-089.png",
+          "front": "v56/effects/sleeping/front-089.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-090.png",
+          "front": "v56/effects/sleeping/front-090.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-091.png",
+          "front": "v56/effects/sleeping/front-091.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-092.png",
+          "front": "v56/effects/sleeping/front-092.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-093.png",
+          "front": "v56/effects/sleeping/front-093.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-094.png",
+          "front": "v56/effects/sleeping/front-094.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-095.png",
+          "front": "v56/effects/sleeping/front-095.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-096.png",
+          "front": "v56/effects/sleeping/front-096.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-097.png",
+          "front": "v56/effects/sleeping/front-097.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-098.png",
+          "front": "v56/effects/sleeping/front-098.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-099.png",
+          "front": "v56/effects/sleeping/front-099.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-100.png",
+          "front": "v56/effects/sleeping/front-100.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-101.png",
+          "front": "v56/effects/sleeping/front-101.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-102.png",
+          "front": "v56/effects/sleeping/front-102.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-103.png",
+          "front": "v56/effects/sleeping/front-103.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-104.png",
+          "front": "v56/effects/sleeping/front-104.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-105.png",
+          "front": "v56/effects/sleeping/front-105.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-106.png",
+          "front": "v56/effects/sleeping/front-106.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-107.png",
+          "front": "v56/effects/sleeping/front-107.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-108.png",
+          "front": "v56/effects/sleeping/front-108.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-109.png",
+          "front": "v56/effects/sleeping/front-109.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-110.png",
+          "front": "v56/effects/sleeping/front-110.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-111.png",
+          "front": "v56/effects/sleeping/front-111.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-112.png",
+          "front": "v56/effects/sleeping/front-112.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-113.png",
+          "front": "v56/effects/sleeping/front-113.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-114.png",
+          "front": "v56/effects/sleeping/front-114.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-115.png",
+          "front": "v56/effects/sleeping/front-115.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-116.png",
+          "front": "v56/effects/sleeping/front-116.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-117.png",
+          "front": "v56/effects/sleeping/front-117.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-118.png",
+          "front": "v56/effects/sleeping/front-118.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-119.png",
+          "front": "v56/effects/sleeping/front-119.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-120.png",
+          "front": "v56/effects/sleeping/front-120.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-121.png",
+          "front": "v56/effects/sleeping/front-121.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-122.png",
+          "front": "v56/effects/sleeping/front-122.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-123.png",
+          "front": "v56/effects/sleeping/front-123.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-124.png",
+          "front": "v56/effects/sleeping/front-124.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-125.png",
+          "front": "v56/effects/sleeping/front-125.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-126.png",
+          "front": "v56/effects/sleeping/front-126.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-127.png",
+          "front": "v56/effects/sleeping/front-127.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-128.png",
+          "front": "v56/effects/sleeping/front-128.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-129.png",
+          "front": "v56/effects/sleeping/front-129.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-130.png",
+          "front": "v56/effects/sleeping/front-130.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-131.png",
+          "front": "v56/effects/sleeping/front-131.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-132.png",
+          "front": "v56/effects/sleeping/front-132.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-133.png",
+          "front": "v56/effects/sleeping/front-133.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-134.png",
+          "front": "v56/effects/sleeping/front-134.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-135.png",
+          "front": "v56/effects/sleeping/front-135.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-136.png",
+          "front": "v56/effects/sleeping/front-136.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-137.png",
+          "front": "v56/effects/sleeping/front-137.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-138.png",
+          "front": "v56/effects/sleeping/front-138.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-139.png",
+          "front": "v56/effects/sleeping/front-139.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-140.png",
+          "front": "v56/effects/sleeping/front-140.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-141.png",
+          "front": "v56/effects/sleeping/front-141.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-142.png",
+          "front": "v56/effects/sleeping/front-142.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-143.png",
+          "front": "v56/effects/sleeping/front-143.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-144.png",
+          "front": "v56/effects/sleeping/front-144.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-145.png",
+          "front": "v56/effects/sleeping/front-145.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-146.png",
+          "front": "v56/effects/sleeping/front-146.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-147.png",
+          "front": "v56/effects/sleeping/front-147.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-148.png",
+          "front": "v56/effects/sleeping/front-148.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-149.png",
+          "front": "v56/effects/sleeping/front-149.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-150.png",
+          "front": "v56/effects/sleeping/front-150.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-151.png",
+          "front": "v56/effects/sleeping/front-151.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-152.png",
+          "front": "v56/effects/sleeping/front-152.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-153.png",
+          "front": "v56/effects/sleeping/front-153.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-154.png",
+          "front": "v56/effects/sleeping/front-154.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-155.png",
+          "front": "v56/effects/sleeping/front-155.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-156.png",
+          "front": "v56/effects/sleeping/front-156.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-157.png",
+          "front": "v56/effects/sleeping/front-157.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-158.png",
+          "front": "v56/effects/sleeping/front-158.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-159.png",
+          "front": "v56/effects/sleeping/front-159.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-160.png",
+          "front": "v56/effects/sleeping/front-160.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-161.png",
+          "front": "v56/effects/sleeping/front-161.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-162.png",
+          "front": "v56/effects/sleeping/front-162.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-163.png",
+          "front": "v56/effects/sleeping/front-163.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-164.png",
+          "front": "v56/effects/sleeping/front-164.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-165.png",
+          "front": "v56/effects/sleeping/front-165.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-166.png",
+          "front": "v56/effects/sleeping/front-166.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-167.png",
+          "front": "v56/effects/sleeping/front-167.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-168.png",
+          "front": "v56/effects/sleeping/front-168.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-169.png",
+          "front": "v56/effects/sleeping/front-169.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-170.png",
+          "front": "v56/effects/sleeping/front-170.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-171.png",
+          "front": "v56/effects/sleeping/front-171.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-172.png",
+          "front": "v56/effects/sleeping/front-172.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-173.png",
+          "front": "v56/effects/sleeping/front-173.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-174.png",
+          "front": "v56/effects/sleeping/front-174.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-175.png",
+          "front": "v56/effects/sleeping/front-175.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-176.png",
+          "front": "v56/effects/sleeping/front-176.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-177.png",
+          "front": "v56/effects/sleeping/front-177.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-178.png",
+          "front": "v56/effects/sleeping/front-178.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-179.png",
+          "front": "v56/effects/sleeping/front-179.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-180.png",
+          "front": "v56/effects/sleeping/front-180.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-181.png",
+          "front": "v56/effects/sleeping/front-181.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-182.png",
+          "front": "v56/effects/sleeping/front-182.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-183.png",
+          "front": "v56/effects/sleeping/front-183.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-184.png",
+          "front": "v56/effects/sleeping/front-184.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-185.png",
+          "front": "v56/effects/sleeping/front-185.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-186.png",
+          "front": "v56/effects/sleeping/front-186.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-187.png",
+          "front": "v56/effects/sleeping/front-187.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-188.png",
+          "front": "v56/effects/sleeping/front-188.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-189.png",
+          "front": "v56/effects/sleeping/front-189.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-190.png",
+          "front": "v56/effects/sleeping/front-190.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-191.png",
+          "front": "v56/effects/sleeping/front-191.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-192.png",
+          "front": "v56/effects/sleeping/front-192.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-193.png",
+          "front": "v56/effects/sleeping/front-193.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-194.png",
+          "front": "v56/effects/sleeping/front-194.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-195.png",
+          "front": "v56/effects/sleeping/front-195.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-196.png",
+          "front": "v56/effects/sleeping/front-196.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-197.png",
+          "front": "v56/effects/sleeping/front-197.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-198.png",
+          "front": "v56/effects/sleeping/front-198.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-199.png",
+          "front": "v56/effects/sleeping/front-199.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-200.png",
+          "front": "v56/effects/sleeping/front-200.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-201.png",
+          "front": "v56/effects/sleeping/front-201.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-202.png",
+          "front": "v56/effects/sleeping/front-202.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-203.png",
+          "front": "v56/effects/sleeping/front-203.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-204.png",
+          "front": "v56/effects/sleeping/front-204.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-205.png",
+          "front": "v56/effects/sleeping/front-205.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-206.png",
+          "front": "v56/effects/sleeping/front-206.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-207.png",
+          "front": "v56/effects/sleeping/front-207.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-208.png",
+          "front": "v56/effects/sleeping/front-208.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-209.png",
+          "front": "v56/effects/sleeping/front-209.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-210.png",
+          "front": "v56/effects/sleeping/front-210.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-211.png",
+          "front": "v56/effects/sleeping/front-211.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-212.png",
+          "front": "v56/effects/sleeping/front-212.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-213.png",
+          "front": "v56/effects/sleeping/front-213.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-214.png",
+          "front": "v56/effects/sleeping/front-214.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-215.png",
+          "front": "v56/effects/sleeping/front-215.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-216.png",
+          "front": "v56/effects/sleeping/front-216.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-217.png",
+          "front": "v56/effects/sleeping/front-217.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-218.png",
+          "front": "v56/effects/sleeping/front-218.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-219.png",
+          "front": "v56/effects/sleeping/front-219.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-220.png",
+          "front": "v56/effects/sleeping/front-220.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-221.png",
+          "front": "v56/effects/sleeping/front-221.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-222.png",
+          "front": "v56/effects/sleeping/front-222.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-223.png",
+          "front": "v56/effects/sleeping/front-223.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-224.png",
+          "front": "v56/effects/sleeping/front-224.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-225.png",
+          "front": "v56/effects/sleeping/front-225.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-226.png",
+          "front": "v56/effects/sleeping/front-226.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-227.png",
+          "front": "v56/effects/sleeping/front-227.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-228.png",
+          "front": "v56/effects/sleeping/front-228.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-229.png",
+          "front": "v56/effects/sleeping/front-229.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-230.png",
+          "front": "v56/effects/sleeping/front-230.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-231.png",
+          "front": "v56/effects/sleeping/front-231.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-232.png",
+          "front": "v56/effects/sleeping/front-232.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-233.png",
+          "front": "v56/effects/sleeping/front-233.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-234.png",
+          "front": "v56/effects/sleeping/front-234.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-235.png",
+          "front": "v56/effects/sleeping/front-235.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-236.png",
+          "front": "v56/effects/sleeping/front-236.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-237.png",
+          "front": "v56/effects/sleeping/front-237.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-238.png",
+          "front": "v56/effects/sleeping/front-238.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-239.png",
+          "front": "v56/effects/sleeping/front-239.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-240.png",
+          "front": "v56/effects/sleeping/front-240.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-241.png",
+          "front": "v56/effects/sleeping/front-241.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-242.png",
+          "front": "v56/effects/sleeping/front-242.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-243.png",
+          "front": "v56/effects/sleeping/front-243.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-244.png",
+          "front": "v56/effects/sleeping/front-244.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-245.png",
+          "front": "v56/effects/sleeping/front-245.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-246.png",
+          "front": "v56/effects/sleeping/front-246.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-247.png",
+          "front": "v56/effects/sleeping/front-247.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-248.png",
+          "front": "v56/effects/sleeping/front-248.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-249.png",
+          "front": "v56/effects/sleeping/front-249.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-250.png",
+          "front": "v56/effects/sleeping/front-250.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-251.png",
+          "front": "v56/effects/sleeping/front-251.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-252.png",
+          "front": "v56/effects/sleeping/front-252.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-253.png",
+          "front": "v56/effects/sleeping/front-253.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-254.png",
+          "front": "v56/effects/sleeping/front-254.png"
+        },
+        {
+          "back": "v56/effects/sleeping/back-255.png",
+          "front": "v56/effects/sleeping/front-255.png"
+        }
+      ],
+      "effectCycle": 12.8,
+      "effectInterval": 0.05
+    },
+    {
+      "id": "drag-left",
+      "row": 2,
+      "cycle": 1.6,
+      "times": [
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1
+      ],
+      "files": [
+        "v56/characters/drag-left/00.png",
+        "v56/characters/drag-left/01.png",
+        "v56/characters/drag-left/02.png",
+        "v56/characters/drag-left/03.png",
+        "v56/characters/drag-left/04.png",
+        "v56/characters/drag-left/05.png",
+        "v56/characters/drag-left/06.png",
+        "v56/characters/drag-left/07.png",
+        "v56/characters/drag-left/08.png",
+        "v56/characters/drag-left/09.png",
+        "v56/characters/drag-left/10.png",
+        "v56/characters/drag-left/11.png",
+        "v56/characters/drag-left/12.png",
+        "v56/characters/drag-left/13.png",
+        "v56/characters/drag-left/14.png",
+        "v56/characters/drag-left/15.png"
+      ],
+      "anchors": [
+        [
+          134.1501362738755,
+          445.4694318205502
+        ],
+        [
+          123.28865761501744,
+          446.953335405324
+        ],
+        [
+          144.21492171088656,
+          450.87352251365417
+        ],
+        [
+          123.88065808541437,
+          452.1813997101679
+        ],
+        [
+          135.28799101195122,
+          444.8897684071178
+        ],
+        [
+          134.50640601748827,
+          445.0965158457328
+        ],
+        [
+          128.6485530140272,
+          432.63035511184006
+        ],
+        [
+          108.73772966600212,
+          453.54450753845424
+        ],
+        [
+          134.38799683841893,
+          445.3049194276605
+        ],
+        [
+          134.43726816834098,
+          444.4595033298217
+        ],
+        [
+          123.25669454101245,
+          445.2904256318692
+        ],
+        [
+          117.90944095957458,
+          451.605982968026
+        ],
+        [
+          134.06003039513647,
+          444.2090873229549
+        ],
+        [
+          134.47148390520402,
+          445.50406759614555
+        ],
+        [
+          119.99657954744738,
+          442.8458165234149
+        ],
+        [
+          134.23276899920606,
+          445.755452058521
+        ]
+      ],
+      "effects": [
+        {
+          "back": "v56/effects/drag-left/back-000.png",
+          "front": "v56/effects/drag-left/front-000.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-001.png",
+          "front": "v56/effects/drag-left/front-001.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-002.png",
+          "front": "v56/effects/drag-left/front-002.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-003.png",
+          "front": "v56/effects/drag-left/front-003.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-004.png",
+          "front": "v56/effects/drag-left/front-004.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-005.png",
+          "front": "v56/effects/drag-left/front-005.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-006.png",
+          "front": "v56/effects/drag-left/front-006.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-007.png",
+          "front": "v56/effects/drag-left/front-007.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-008.png",
+          "front": "v56/effects/drag-left/front-008.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-009.png",
+          "front": "v56/effects/drag-left/front-009.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-010.png",
+          "front": "v56/effects/drag-left/front-010.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-011.png",
+          "front": "v56/effects/drag-left/front-011.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-012.png",
+          "front": "v56/effects/drag-left/front-012.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-013.png",
+          "front": "v56/effects/drag-left/front-013.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-014.png",
+          "front": "v56/effects/drag-left/front-014.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-015.png",
+          "front": "v56/effects/drag-left/front-015.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-016.png",
+          "front": "v56/effects/drag-left/front-016.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-017.png",
+          "front": "v56/effects/drag-left/front-017.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-018.png",
+          "front": "v56/effects/drag-left/front-018.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-019.png",
+          "front": "v56/effects/drag-left/front-019.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-020.png",
+          "front": "v56/effects/drag-left/front-020.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-021.png",
+          "front": "v56/effects/drag-left/front-021.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-022.png",
+          "front": "v56/effects/drag-left/front-022.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-023.png",
+          "front": "v56/effects/drag-left/front-023.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-024.png",
+          "front": "v56/effects/drag-left/front-024.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-025.png",
+          "front": "v56/effects/drag-left/front-025.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-026.png",
+          "front": "v56/effects/drag-left/front-026.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-027.png",
+          "front": "v56/effects/drag-left/front-027.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-028.png",
+          "front": "v56/effects/drag-left/front-028.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-029.png",
+          "front": "v56/effects/drag-left/front-029.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-030.png",
+          "front": "v56/effects/drag-left/front-030.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-031.png",
+          "front": "v56/effects/drag-left/front-031.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-032.png",
+          "front": "v56/effects/drag-left/front-032.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-033.png",
+          "front": "v56/effects/drag-left/front-033.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-034.png",
+          "front": "v56/effects/drag-left/front-034.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-035.png",
+          "front": "v56/effects/drag-left/front-035.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-036.png",
+          "front": "v56/effects/drag-left/front-036.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-037.png",
+          "front": "v56/effects/drag-left/front-037.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-038.png",
+          "front": "v56/effects/drag-left/front-038.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-039.png",
+          "front": "v56/effects/drag-left/front-039.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-040.png",
+          "front": "v56/effects/drag-left/front-040.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-041.png",
+          "front": "v56/effects/drag-left/front-041.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-042.png",
+          "front": "v56/effects/drag-left/front-042.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-043.png",
+          "front": "v56/effects/drag-left/front-043.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-044.png",
+          "front": "v56/effects/drag-left/front-044.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-045.png",
+          "front": "v56/effects/drag-left/front-045.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-046.png",
+          "front": "v56/effects/drag-left/front-046.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-047.png",
+          "front": "v56/effects/drag-left/front-047.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-048.png",
+          "front": "v56/effects/drag-left/front-048.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-049.png",
+          "front": "v56/effects/drag-left/front-049.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-050.png",
+          "front": "v56/effects/drag-left/front-050.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-051.png",
+          "front": "v56/effects/drag-left/front-051.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-052.png",
+          "front": "v56/effects/drag-left/front-052.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-053.png",
+          "front": "v56/effects/drag-left/front-053.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-054.png",
+          "front": "v56/effects/drag-left/front-054.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-055.png",
+          "front": "v56/effects/drag-left/front-055.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-056.png",
+          "front": "v56/effects/drag-left/front-056.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-057.png",
+          "front": "v56/effects/drag-left/front-057.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-058.png",
+          "front": "v56/effects/drag-left/front-058.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-059.png",
+          "front": "v56/effects/drag-left/front-059.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-060.png",
+          "front": "v56/effects/drag-left/front-060.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-061.png",
+          "front": "v56/effects/drag-left/front-061.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-062.png",
+          "front": "v56/effects/drag-left/front-062.png"
+        },
+        {
+          "back": "v56/effects/drag-left/back-063.png",
+          "front": "v56/effects/drag-left/front-063.png"
+        }
+      ],
+      "effectCycle": 3.2,
+      "effectInterval": 0.05
+    },
+    {
+      "id": "drag-right",
+      "row": 1,
+      "cycle": 1.6,
+      "times": [
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1
+      ],
+      "files": [
+        "v56/characters/drag-right/00.png",
+        "v56/characters/drag-right/01.png",
+        "v56/characters/drag-right/02.png",
+        "v56/characters/drag-right/03.png",
+        "v56/characters/drag-right/04.png",
+        "v56/characters/drag-right/05.png",
+        "v56/characters/drag-right/06.png",
+        "v56/characters/drag-right/07.png",
+        "v56/characters/drag-right/08.png",
+        "v56/characters/drag-right/09.png",
+        "v56/characters/drag-right/10.png",
+        "v56/characters/drag-right/11.png",
+        "v56/characters/drag-right/12.png",
+        "v56/characters/drag-right/13.png",
+        "v56/characters/drag-right/14.png",
+        "v56/characters/drag-right/15.png"
+      ],
+      "anchors": [
+        [
+          338.790915792903,
+          450.9383705325551
+        ],
+        [
+          338.99728991371506,
+          448.6354476374086
+        ],
+        [
+          326.48649153968245,
+          455.1955688510778
+        ],
+        [
+          334.41487701227595,
+          453.36566111190297
+        ],
+        [
+          340.69787544457296,
+          448.1661994195339
+        ],
+        [
+          338.56215837095243,
+          450.7213474287322
+        ],
+        [
+          347.47289397896435,
+          445.83826486195784
+        ],
+        [
+          343.475273774949,
+          454.0435065831293
+        ],
+        [
+          341.0014500634397,
+          446.55229291281427
+        ],
+        [
+          341.0099935809181,
+          448.58073357370483
+        ],
+        [
+          333.118099064787,
+          457.45683298631025
+        ],
+        [
+          339.04070541629125,
+          449.5176830305774
+        ],
+        [
+          338.63712531005575,
+          450.010024782748
+        ],
+        [
+          341.372019674763,
+          449.3069152780551
+        ],
+        [
+          342.9138278931737,
+          445.23584569732805
+        ],
+        [
+          339.08510711759016,
+          447.8788401715499
+        ]
+      ],
+      "effects": [
+        {
+          "back": "v56/effects/drag-right/back-000.png",
+          "front": "v56/effects/drag-right/front-000.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-001.png",
+          "front": "v56/effects/drag-right/front-001.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-002.png",
+          "front": "v56/effects/drag-right/front-002.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-003.png",
+          "front": "v56/effects/drag-right/front-003.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-004.png",
+          "front": "v56/effects/drag-right/front-004.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-005.png",
+          "front": "v56/effects/drag-right/front-005.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-006.png",
+          "front": "v56/effects/drag-right/front-006.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-007.png",
+          "front": "v56/effects/drag-right/front-007.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-008.png",
+          "front": "v56/effects/drag-right/front-008.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-009.png",
+          "front": "v56/effects/drag-right/front-009.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-010.png",
+          "front": "v56/effects/drag-right/front-010.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-011.png",
+          "front": "v56/effects/drag-right/front-011.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-012.png",
+          "front": "v56/effects/drag-right/front-012.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-013.png",
+          "front": "v56/effects/drag-right/front-013.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-014.png",
+          "front": "v56/effects/drag-right/front-014.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-015.png",
+          "front": "v56/effects/drag-right/front-015.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-016.png",
+          "front": "v56/effects/drag-right/front-016.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-017.png",
+          "front": "v56/effects/drag-right/front-017.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-018.png",
+          "front": "v56/effects/drag-right/front-018.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-019.png",
+          "front": "v56/effects/drag-right/front-019.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-020.png",
+          "front": "v56/effects/drag-right/front-020.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-021.png",
+          "front": "v56/effects/drag-right/front-021.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-022.png",
+          "front": "v56/effects/drag-right/front-022.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-023.png",
+          "front": "v56/effects/drag-right/front-023.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-024.png",
+          "front": "v56/effects/drag-right/front-024.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-025.png",
+          "front": "v56/effects/drag-right/front-025.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-026.png",
+          "front": "v56/effects/drag-right/front-026.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-027.png",
+          "front": "v56/effects/drag-right/front-027.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-028.png",
+          "front": "v56/effects/drag-right/front-028.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-029.png",
+          "front": "v56/effects/drag-right/front-029.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-030.png",
+          "front": "v56/effects/drag-right/front-030.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-031.png",
+          "front": "v56/effects/drag-right/front-031.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-032.png",
+          "front": "v56/effects/drag-right/front-032.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-033.png",
+          "front": "v56/effects/drag-right/front-033.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-034.png",
+          "front": "v56/effects/drag-right/front-034.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-035.png",
+          "front": "v56/effects/drag-right/front-035.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-036.png",
+          "front": "v56/effects/drag-right/front-036.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-037.png",
+          "front": "v56/effects/drag-right/front-037.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-038.png",
+          "front": "v56/effects/drag-right/front-038.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-039.png",
+          "front": "v56/effects/drag-right/front-039.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-040.png",
+          "front": "v56/effects/drag-right/front-040.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-041.png",
+          "front": "v56/effects/drag-right/front-041.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-042.png",
+          "front": "v56/effects/drag-right/front-042.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-043.png",
+          "front": "v56/effects/drag-right/front-043.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-044.png",
+          "front": "v56/effects/drag-right/front-044.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-045.png",
+          "front": "v56/effects/drag-right/front-045.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-046.png",
+          "front": "v56/effects/drag-right/front-046.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-047.png",
+          "front": "v56/effects/drag-right/front-047.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-048.png",
+          "front": "v56/effects/drag-right/front-048.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-049.png",
+          "front": "v56/effects/drag-right/front-049.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-050.png",
+          "front": "v56/effects/drag-right/front-050.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-051.png",
+          "front": "v56/effects/drag-right/front-051.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-052.png",
+          "front": "v56/effects/drag-right/front-052.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-053.png",
+          "front": "v56/effects/drag-right/front-053.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-054.png",
+          "front": "v56/effects/drag-right/front-054.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-055.png",
+          "front": "v56/effects/drag-right/front-055.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-056.png",
+          "front": "v56/effects/drag-right/front-056.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-057.png",
+          "front": "v56/effects/drag-right/front-057.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-058.png",
+          "front": "v56/effects/drag-right/front-058.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-059.png",
+          "front": "v56/effects/drag-right/front-059.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-060.png",
+          "front": "v56/effects/drag-right/front-060.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-061.png",
+          "front": "v56/effects/drag-right/front-061.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-062.png",
+          "front": "v56/effects/drag-right/front-062.png"
+        },
+        {
+          "back": "v56/effects/drag-right/back-063.png",
+          "front": "v56/effects/drag-right/front-063.png"
+        }
+      ],
+      "effectCycle": 3.2,
+      "effectInterval": 0.05
+    }
+  ]
+}

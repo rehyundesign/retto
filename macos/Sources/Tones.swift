@@ -74,6 +74,14 @@ let toneDone = StatusTone(key: "done", background: hexColor(0xF06200), text: hex
 let toneFailed = StatusTone(key: "failed", background: hexColor(0xDC0714), text: hexColor(0xFFF499))     // 4.57:1
 let toneQuiet = StatusTone(key: "quiet", background: hexColor(0x757575), text: hexColor(0xFFFFFF))       // 4.61:1
 
+let toneSlack = StatusTone(key: "slack", background: hexColor(0x7C3AED), text: hexColor(0xFFFFFF))
+
+func notificationTone(source: String?, state: PetState, fallback: StatusTone) -> StatusTone {
+    if source == "slack" && state == .waving { return toneSlack }
+    if state == .failed { return toneFailed }
+    return fallback
+}
+
 struct Animation {
     let row: Int
     let frames: Int
@@ -95,7 +103,8 @@ let dragRunAnimations: [DragRun: Animation] = [
 
 let animationCatalog: [PetState: Animation] = [
     .idle: Animation(row: 0, frames: 6, interval: 0.23, cycleLimit: nil, kicker: "RESTING", title: "조용히 곁을 지키는 중", tone: toneQuiet),
-    .running: Animation(row: 7, frames: 6, interval: 0.125, cycleLimit: nil, kicker: "THINKING", title: "AI가 생각중…", tone: toneWorking),
+    // 매지컬 하트의 진행 중 행은 8프레임 변신 연출을 2초에 한 바퀴 돌린다.
+    .running: Animation(row: 7, frames: 8, interval: 0.25, cycleLimit: nil, kicker: "THINKING", title: "AI가 생각중…", tone: toneWorking),
     .review: Animation(row: 8, frames: 6, interval: 0.155, cycleLimit: nil, kicker: "USING A TOOL", title: "도구를 쓰는 중", tone: toneWorking),
     .waiting: Animation(row: 6, frames: 6, interval: 0.31, cycleLimit: nil, kicker: "NEEDS YOU", title: "네 결정을 기다리는 중", tone: toneNeedsYou),
     .failed: Animation(row: 5, frames: 8, interval: 0.18, cycleLimit: nil, kicker: "OOPS", title: "잠깐 발이 꼬였어", tone: toneFailed),
@@ -124,3 +133,44 @@ enum OpenTarget: String, CaseIterable {
 }
 
 /// 실제로 띄우는 앱. `auto` 를 세션의 클라이언트로 풀어낸 결과라 여기엔 `auto` 가 없다.
+
+/// 확장 크리스마스의 동작 시간. 이미지 제작과 웹 미리보기도 같은 설정을 사용한다.
+enum Christmas16Timing {
+    private struct Settings: Decodable {
+        let cycle_seconds: [String: Double]
+        let effect_periods: [String: Double]
+        let frame_seconds: [String: [Double]]?
+    }
+    private static let values: Settings? = {
+        guard let url = Bundle.main.url(forResource: "christmas-16-timing", withExtension: "json"),
+              let data = try? Data(contentsOf: url),
+              let decoded = try? JSONDecoder().decode(Settings.self, from: data) else { return nil }
+        return decoded
+    }()
+    static func duration(row: Int) -> Double? { values?.cycle_seconds[String(row)] }
+    static func effectPeriod(_ id: String) -> Double? { values?.effect_periods[id] }
+    static func frameDurations(row: Int) -> [Double]? { values?.frame_seconds?[String(row)] }
+    static func frameDuration(row: Int, frame: Int) -> Double? {
+        guard let times = frameDurations(row: row), times.indices.contains(frame) else { return nil }
+        return times[frame]
+    }
+}
+
+/// 각 제스처의 변화 폭에 맞춰 재생한다. 다른 스킨의 시간은 유지한다.
+func skinAnimation(_ animation: Animation, skin: PetSkin, columns: Int) -> Animation {
+    // 두 리락쿠마 스킨의 생각 중 행은 6칸이고, 마지막 2칸은 투명하다.
+    if (skin == .rilakkuma || skin == .rilakkumaCape), animation.row == 7 {
+        return Animation(row: animation.row, frames: 6, interval: animation.interval,
+                         cycleLimit: animation.cycleLimit, kicker: animation.kicker,
+                         title: animation.title, tone: animation.tone)
+    }
+    if skin == .jeanne { return JeanneSkin.animation(animation) }
+    if skin == .pichiPitch { return PichiSkin.animation(animation) }
+    if skin == .amuRan, columns == 16 { return AmuRanMotion.animation(animation) }
+    if skin == .hana, columns == 16 { return HanaMotion.animation(animation) }
+    guard skin == .christmas, columns == 16 else { return animation }
+    return Animation(row: animation.row, frames: 16,
+                     interval: (Christmas16Timing.duration(row: animation.row) ?? animation.interval * Double(animation.frames)) / 16,
+                     cycleLimit: animation.cycleLimit, kicker: animation.kicker,
+                     title: animation.title, tone: animation.tone)
+}

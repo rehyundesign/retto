@@ -1,0 +1,14 @@
+{
+  "state": "gaze-heart-v2",
+  "costume": "heart",
+  "id": "G14",
+  "direction": 14,
+  "prompt": "Use case: identity-preserve. One transparent full-body game sprite. EDIT IMAGE1 actual base Retto: preserve its exact seated anatomy, head-to-body ratio, four grounded paws, tail, face markings, blue eyes and natural connected head/neck/upper chest. Direction 14/16: UP-LEFT diagonal; match IMAGE1 exact head yaw and pitch, eyes track that direction, never face camera instead. Dress this SAME cat in the costume from IMAGE2: broad white cape covering shoulders and upper torso with two pink/red scalloped ruffle tiers, rear-hip cheer skirt, WHITE/PINK cuffs on FORELEGS only, BARE furry hindlegs, white visor with red trim and ONE heart/plume at anatomical LEFT temple, red scarf knotted at center chest with ONE pink/black plaid Guardian Egg pendant at knot. Scarf and cape attach to the actual neck/shoulders and follow their angle. IMAGE2 is CLOTHES and tactile material reference ONLY, never its larger head or squat posture. Keep Image1 body/face silhouette beneath clothes, short legs and small original round muzzle. Natural neck flexion, shoulder/chest compression and fur overlap follow IMAGE1, one coherent complete cat. No pasted head, no rigid neck join. Keep Image1 entire full-body framing and ground line with generous transparent space above; no crop. Fine plush fur and tactile matte cloth; consistent lighting and 3D depth. No pet, particles, props, writing, duplicated ornament, extra limb, raised paw, additional legwear, face flattening or human anatomy. Render one independent complete body image, never a strip.",
+  "refs": [
+    "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/gaze/reference/base-14.png",
+    "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/registered-static-v2/A06.png"
+  ],
+  "request_file": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/gaze-heart-v2/requests/G14.json",
+  "construction": "one complete source; no body/head compositing",
+  "profile": "original-seated-gaze-14"
+}

@@ -1,0 +1,348 @@
+[
+  {
+    "state": "waiting",
+    "i": 1,
+    "refs": [
+      0,
+      6
+    ],
+    "pose": "Small initial foreleg pickup. Move onlyimage-left realforepaw centerfrom originalground(x32%,y89%) to (x32%,y86%), barely off floor. Foreleg shoulderfixed, elbowstartsbending; threeotherfeetgrounded, no oldfloorcopy. Head stays3/4 towardFinn.",
+    "fx": "Originalsmallblessingfeathers nearFinn, singlependantglint, no newbig cloth.",
+    "targetPawPx": [
+      159,
+      548
+    ],
+    "guide": "waiting/01-pose-guide.png",
+    "key": 0,
+    "action": "Small initial foreleg pickup. Move onlyimage-left realforepaw centerfrom originalground[green target circle] to [green target circle], barely off floor. Foreleg shoulderfixed, elbowstartsbending; threeotherfeetgrounded, no oldfloorcopy. Head stays3/4 towardFinn."
+  },
+  {
+    "state": "waiting",
+    "i": 2,
+    "refs": [
+      0,
+      6
+    ],
+    "pose": "EARLY foreleg pickup, one-third toward chest. Raise only image-LEFT real forepaw from floor to BELOW BELT at center(x32%,y82%). Elbow begins flexion, upper foreleg stays attached at shoulder. Other foreleg plus two hindfeet grounded. Head keeps original three-quarter direction toward Finn, eyes open.",
+    "fx": "Tiny pendant glint,2 small ivory feathers descending near Finn, very short crimson silk tip behind hip. Not large blessing peak.",
+    "targetPawPx": [
+      165,
+      525
+    ],
+    "guide": "waiting/02-pose-guide.png",
+    "key": 0,
+    "action": "EARLY foreleg pickup, one-third toward chest. Raise only image-LEFT real forepaw from floor to BELOW BELT at center[green target circle]. Elbow begins flexion, upper foreleg stays attached at shoulder. Other foreleg plus two hindfeet grounded. Head keeps original three-quarter direction toward Finn, eyes open."
+  },
+  {
+    "state": "waiting",
+    "i": 3,
+    "refs": [
+      0,
+      6
+    ],
+    "pose": "Mid pickup: movingimage-left realforepaw center(x31%,y77%), LOWER THAN GOLD BELT; elbowflexes andpawhangsbackforward. 3supportfeet stayfloor, catseatedtorsofixed, headsame3/4view.",
+    "fx": "2ivoryfeathers descendfromFinn, softpinkgoldRosarioglint, shortred/goldsilktip beginscurl behindhip.",
+    "targetPawPx": [
+      168,
+      493
+    ],
+    "guide": "waiting/03-pose-guide.png",
+    "key": 0,
+    "action": "Mid pickup: movingimage-left realforepaw center[green target circle], LOWER THAN GOLD BELT; elbowflexes andpawhangsbackforward. 3supportfeet stayfloor, catseatedtorsofixed, headsame3/4view."
+  },
+  {
+    "state": "waiting",
+    "i": 4,
+    "refs": [
+      0,
+      6
+    ],
+    "pose": "Late pickup: movingimage-left realforepaw center(x31%,y73%) justbelowgoldbelt; elbowfolded besidebelly, no pinkpads. Headinclines1degree toFinn, skyblueeyesopen. Other3feetgrounded.",
+    "fx": "3ivoryfeathers follow gentledownward path, shortcrimson/goldclothcurl behindleft hip, pendantglow grows.",
+    "targetPawPx": [
+      173,
+      462
+    ],
+    "guide": "waiting/04-pose-guide.png",
+    "key": 0,
+    "action": "Late pickup: movingimage-left realforepaw center[green target circle] justbelowgoldbelt; elbowfolded besidebelly, no pinkpads. Headinclines1degree toFinn, skyblueeyesopen. Other3feetgrounded."
+  },
+  {
+    "state": "waiting",
+    "i": 5,
+    "refs": [
+      0,
+      6
+    ],
+    "pose": "Just before pendanttouch: image-left realforepaw center(x31%,y68%) justbelowRosario leftwing, elbowflexed. Pawalmosttouchesjewel butstill smallgap. Headsame3/4towardFinn, 3supportfeetfixed.",
+    "fx": "Rosario glow70percentblessingpeak,3feathersdescendingbesidesleeve, sameclothcurl50percent strength, notwreath.",
+    "targetPawPx": [
+      176,
+      433
+    ],
+    "guide": "waiting/05-pose-guide.png",
+    "key": 0,
+    "action": "Just before pendanttouch: image-left realforepaw center[green target circle] justbelowRosario leftwing, elbowflexed. Pawalmosttouchesjewel butstill smallgap. Headsame3/4towardFinn, 3supportfeetfixed."
+  },
+  {
+    "state": "waiting",
+    "i": 7,
+    "refs": [
+      6,
+      9
+    ],
+    "pose": "After pendanttouch: SAMEimage-left realforepaw toucheslowerRosario wing center(x31%,y65%), wristcupsjewelgently, eyes70percentopen withgratitude towardFinn; headtilts1degreeonly. Threeotherfeetfixed.",
+    "fx": "WarmRosarioblessingbrightens,3ivoryfeathers floatdownfromFinn, shortred/goldcurlstays besidehip progressingdownward, notnewwreath.",
+    "targetPawPx": [
+      180,
+      417
+    ],
+    "guide": "waiting/07-pose-guide.png",
+    "key": 6,
+    "action": "After pendanttouch: SAMEimage-left realforepaw toucheslowerRosario wing center[green target circle], wristcupsjewelgently, eyes70percentopen withgratitude towardFinn; headtilts1degreeonly. Threeotherfeetfixed."
+  },
+  {
+    "state": "waiting",
+    "i": 8,
+    "refs": [
+      6,
+      9
+    ],
+    "pose": "Prayer anticipation: SAMEimage-left realforepaw stayslightlyagainstpendant center(x31%,y65%), elbowstillattached. Eyes30percentopen andchin inclines2degrees towardgem. Torso/facevolume/Finncenter/supportsfixed.",
+    "fx": "Rosario glowpeaks softly,3ivoryfeathers gentlyseparateoutward, sameclothcurlopensslightly thenfades. No new huge arc.",
+    "targetPawPx": [
+      186,
+      423
+    ],
+    "guide": "waiting/08-pose-guide.png",
+    "key": 6,
+    "action": "Prayer anticipation: SAMEimage-left realforepaw stayslightlyagainstpendant center[green target circle], elbowstillattached. Eyes30percentopen andchin inclines2degrees towardgem. Torso/facevolume/Finncenter/supportsfixed."
+  },
+  {
+    "state": "waiting",
+    "i": 10,
+    "refs": [
+      9,
+      12
+    ],
+    "pose": "First lowering from prayer: movingimage-left realforepaw center(x31%,y73%) atlowerbelt, elbowextendsdownward. Eyes40percentopen, chinbeginsrise fromprayer. Threeotherfeet stay originalfloorpoints.",
+    "fx": "Rosarioglowhalfstrength,shortred/goldcurl fadingbyhip,2ivoryfeathers descendoutsidesleeve.",
+    "targetPawPx": [
+      180,
+      472
+    ],
+    "guide": "waiting/10-pose-guide.png",
+    "key": 9,
+    "action": "First lowering from prayer: movingimage-left realforepaw center[green target circle] atlowerbelt, elbowextendsdownward. Eyes40percentopen, chinbeginsrise fromprayer. Threeotherfeet stay originalfloorpoints."
+  },
+  {
+    "state": "waiting",
+    "i": 11,
+    "refs": [
+      9,
+      12
+    ],
+    "pose": "LATE lowering toward floor. Image-LEFT real forepaw passes BELOW BELT at center(x32%,y82%), elbow nearly extended toward its original floor point. Three other feet stay grounded, no copy of lifted foot. Eyes 70percent open after prayer; head angle same three-quarter, no body bounce.",
+    "fx": "Blessing fades to1ivory feather near shoulder,short red silk tail and2faint golden glints,no large aura.",
+    "targetPawPx": [
+      165,
+      525
+    ],
+    "guide": "waiting/11-pose-guide.png",
+    "key": 9,
+    "action": "LATE lowering toward floor. Image-LEFT real forepaw passes BELOW BELT at center[green target circle], elbow nearly extended toward its original floor point. Three other feet stay grounded, no copy of lifted foot. Eyes 70percent open after prayer; head angle same three-quarter, no body bounce."
+  },
+  {
+    "state": "waiting",
+    "i": 13,
+    "refs": [
+      12,
+      15
+    ],
+    "pose": "Allfourfeetgrounded, bodyexactreference. Small relaxedheadturn1degreetowardFinn, eyesfullyopen, oneeartipsoftlyturnstowardFinn. Keepheadsize/center, headbowandtwin goldtailsattached. Finnwingtipsfollowwithsmallflutter.",
+    "fx": "2smallfeatherssettlenearFinn, tinyRosarioglint, no largecloth."
+  },
+  {
+    "state": "waiting",
+    "i": 14,
+    "refs": [
+      12,
+      15
+    ],
+    "pose": "Allfourfeetgrounded andfixed. Headreturnsalmostneutral3/4gaze, slightsoftblinkeyes85percentopen, earssettle. Sameheadbowandallaccessories. Tailtiponlytinysettle, Finnwingtipsfoldslightly.",
+    "fx": "One smallivoryfeathernearFinn, twofaintglintsmatchingloopstart. No largecloth."
+  },
+  {
+    "state": "waving",
+    "i": 1,
+    "refs": [
+      0,
+      3
+    ],
+    "pose": "FIRST anatomical third between start and pendant touch. Move image-LEFT real forepaw center from ground (x30%,y89%) to (x29%,y82%), STILL WELL BELOW gold belt. Foreleg bends at elbow beside lower torso, paw hangs down naturally with back of paw facing camera, NO pink pads yet. Three other feet stay planted. This is small pickup, not a greeting.",
+    "fx": "Only 2 gold glints and 1 ivory feather near Finn; tiny pendant glint starts. No large ribbon yet.",
+    "targetPawPx": [
+      130,
+      525
+    ],
+    "guide": "waving/01-pose-guide.png",
+    "key": 0,
+    "action": "FIRST anatomical third between start and pendant touch. Move image-LEFT real forepaw center from ground [green target circle] to [green target circle], STILL WELL BELOW gold belt. Foreleg bends at elbow beside lower torso, paw hangs down naturally with back of paw facing camera, NO pink pads yet. Three other feet stay planted. This is small pickup, not a greeting."
+  },
+  {
+    "state": "waving",
+    "i": 2,
+    "refs": [
+      0,
+      3
+    ],
+    "pose": "SECOND anatomical third from neutral to touching pendant. Moving IMAGE-LEFT real forepaw center(x30%,y74%), slightly BELOW belt; elbow flexed beside belly. Paw back faces camera, no pads. This is between previous lowlift(x29%,y82%) and pendanttouch(x29%,y67%). Head inclines towardgem1degree, three other feet grounded.",
+    "fx": "Pendant glint increases slightly,2ivoryfeathers rise beside left hip; short crimson/goldsilk tip behindhip grows to20percentpeak.",
+    "targetPawPx": [
+      135,
+      470
+    ],
+    "guide": "waving/02-pose-guide.png",
+    "key": 0,
+    "action": "SECOND anatomical third from neutral to touching pendant. Moving IMAGE-LEFT real forepaw center[green target circle], slightly BELOW belt; elbow flexed beside belly. Paw back faces camera, no pads. This is between previous lowlift[green target circle] and pendanttouch[green target circle]. Head inclines towardgem1degree, three other feet grounded."
+  },
+  {
+    "state": "waving",
+    "i": 4,
+    "refs": [
+      3,
+      6
+    ],
+    "pose": "FIRST anatomical third between pendant touch and raised greeting. Image-LEFT real forepaw is BELOW CHEEK, center(x27%,y59%), elbow flexed at ribcage; wrist turns slightly outward but pads not fully face camera yet. Shoulder and torso do not move. Mouth closed with slight smile. This is not yet high wave.",
+    "fx": "Crimson gold-edged real silk grows from short hip tail into HALF of the reference peak arc, behind shoulder toward Finn;3 ivory feathers follow that same flow, modest pendant glow.",
+    "targetPawPx": [
+      120,
+      378
+    ],
+    "guide": "waving/04-pose-guide.png",
+    "key": 3,
+    "action": "FIRST anatomical third between pendant touch and raised greeting. Image-LEFT real forepaw is BELOW CHEEK, center[green target circle], elbow flexed at ribcage; wrist turns slightly outward but pads not fully face camera yet. Shoulder and torso do not move. Mouth closed with slight smile. This is not yet high wave."
+  },
+  {
+    "state": "waving",
+    "i": 5,
+    "refs": [
+      3,
+      6
+    ],
+    "pose": "SECOND anatomical third from pendanttouch to wave. Image-left realforepaw center(x26%,y52%) beside LOWER CHEEK, elbow opens onlypartway. Wrist turns outward halfway to reveal somepads, not fully raised high. Small smile just begins, head facevolume unchanged, body/support feet fixed.",
+    "fx": "Same crimson/goldcloth arc now70percentpeak, behindhead towardFinn,4ivoryfeathers advance upward; warmRosario shortgoldrays.",
+    "targetPawPx": [
+      116,
+      334
+    ],
+    "guide": "waving/05-pose-guide.png",
+    "key": 3,
+    "action": "SECOND anatomical third from pendanttouch to wave. Image-left realforepaw center[green target circle] beside LOWER CHEEK, elbow opens onlypartway. Wrist turns outward halfway to reveal somepads, not fully raised high. Small smile just begins, head facevolume unchanged, body/support feet fixed."
+  },
+  {
+    "state": "waving",
+    "i": 7,
+    "refs": [
+      6,
+      12
+    ],
+    "pose": "Just after high greeting key. SAME image-left realforepaw remains HIGH at center(x25%,y47%), wrist rotates8degrees outward for one littlewave; elbow stays sameheight. Happy smallmouth; torso/supports/headcenter fixed.",
+    "fx": "Peak silkarc follows sameexisting path, tip curls forward slightly and starts narrowing;4ivoryfeathers advanceupward, goldenRosario rays soften.",
+    "targetPawPx": [
+      111,
+      303
+    ],
+    "guide": "waving/07-pose-guide.png",
+    "key": 6,
+    "action": "Just after high greeting key. SAME image-left realforepaw remains HIGH at center[green target circle], wrist rotates8degrees outward for one littlewave; elbow stays sameheight. Happy smallmouth; torso/supports/headcenter fixed."
+  },
+  {
+    "state": "waving",
+    "i": 8,
+    "refs": [
+      6,
+      12
+    ],
+    "pose": "Wave follow-through: SAMEraised image-left forepaw center(x26%,y51%) now4percentcanvaslowerthan peak. Wrist rotatesbackinward, elbowbeginsflexdown, pads remainvisible butangled. Mouth beginsclosing, no changebody/supportfeet.",
+    "fx": "Sameclotharc retreats to70percentpeak; upper tip thins,4feathers driftoutwardalongflow, pendant rays fade.",
+    "targetPawPx": [
+      115,
+      328
+    ],
+    "guide": "waving/08-pose-guide.png",
+    "key": 6,
+    "action": "Wave follow-through: SAMEraised image-left forepaw center[green target circle] now4percentcanvaslowerthan peak. Wrist rotatesbackinward, elbowbeginsflexdown, pads remainvisible butangled. Mouth beginsclosing, no changebody/supportfeet."
+  },
+  {
+    "state": "waving",
+    "i": 9,
+    "refs": [
+      6,
+      12
+    ],
+    "pose": "First clear lowering: SAMEimage-left realforepaw center(x27%,y59%) belowcheek and aboveRosario, elbowfolds downwardat ribcage, wrist/pawturnsto show backofpaw again. Closedhappy mouth, chinbeginstinybow1degree. Three otherfeetgrounded.",
+    "fx": "Silk trail exitsupperright at45percentpeak,3feathers driftoutsidewaist, pendanttinyglint only.",
+    "targetPawPx": [
+      122,
+      377
+    ],
+    "guide": "waving/09-pose-guide.png",
+    "key": 6,
+    "action": "First clear lowering: SAMEimage-left realforepaw center[green target circle] belowcheek and aboveRosario, elbowfolds downwardat ribcage, wrist/pawturnsto show backofpaw again. Closedhappy mouth, chinbeginstinybow1degree. Three otherfeetgrounded."
+  },
+  {
+    "state": "waving",
+    "i": 10,
+    "refs": [
+      6,
+      12
+    ],
+    "pose": "Further lowering: SAMEimage-left realforepaw center(x29%,y69%) at upperbeltheight, muchlowerthan cheek. Elbowunfolds down and pawhangsnaturally. Head beginsgentlebow2degrees, eyeshalfclosed. Hip/torso/3supportfeetfixed.",
+    "fx": "Shortclothtrail20percent besidehip,2feathers descending,2tinygoldglints. No large arc.",
+    "targetPawPx": [
+      132,
+      441
+    ],
+    "guide": "waving/10-pose-guide.png",
+    "key": 6,
+    "action": "Further lowering: SAMEimage-left realforepaw center[green target circle] at upperbeltheight, muchlowerthan cheek. Elbowunfolds down and pawhangsnaturally. Head beginsgentlebow2degrees, eyeshalfclosed. Hip/torso/3supportfeetfixed."
+  },
+  {
+    "state": "waving",
+    "i": 11,
+    "refs": [
+      6,
+      12
+    ],
+    "pose": "Almost landing: SAMEimage-left realforepaw center(x30%,y81%), LOW BELOW BELT, onepawheight above originalfloorpoint. Elbownearlyextended, backofpawforward. Otherthreefeetfixed. Eyesnearlyclosedheadbows3degrees, samefacevolume.",
+    "fx": "Only1smallfeather descendingatlowerleft plus1nearFinn, faintRosarioglitter; silk nearlygone.",
+    "targetPawPx": [
+      135,
+      525
+    ],
+    "guide": "waving/11-pose-guide.png",
+    "key": 6,
+    "action": "Almost landing: SAMEimage-left realforepaw center[green target circle], LOW BELOW BELT, onepawheight above originalfloorpoint. Elbownearlyextended, backofpawforward. Otherthreefeetfixed. Eyesnearlyclosedheadbows3degrees, samefacevolume."
+  },
+  {
+    "state": "waving",
+    "i": 13,
+    "refs": [
+      12,
+      15
+    ],
+    "pose": "First recovery from thankyoubow. Allfourfeetgrounded exactlysame as endpoints. Head risespartway frombow, chin1.5degreesdown, eyelids30percentopen. No newlimbmotion, ear/headbowattachedandlagsoftly.",
+    "fx": "One smallivoryfeather settlesnearFinn, two faintgoldglints, no ribbonarc."
+  },
+  {
+    "state": "waving",
+    "i": 14,
+    "refs": [
+      12,
+      15
+    ],
+    "pose": "Late recovery: allfourfeetgrounded exactlysame. Headalmostneutral, eyelids80percentopen. Keep LARGE RED-IVORY HEADBOW INTACT, goldenbowsattached. Tailtip barelysettles, Finnwingtipsfoldslightly butfacecenterfixed.",
+    "fx": "One tinyfeather nearFinn and2goldglints returningto neutral, no ribbonarc."
+  }
+]

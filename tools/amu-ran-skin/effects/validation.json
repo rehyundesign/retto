@@ -1,0 +1,14 @@
+{
+  "scope": "effect layers, pose accents and preview state labels",
+  "protected_png_hashes": 224,
+  "character_gaze_atlas_unchanged": true,
+  "partner_response_tracks_unchanged": true,
+  "ambient_samples_checked": 1600,
+  "effect_period_seconds": 8,
+  "ambient_hz": 10,
+  "gesture_accents": "character pose epoch, no contact burst during held gaze",
+  "effect_margin_2x": 12,
+  "states_labelled": 10,
+  "reference": "macos/Sources/Tones.swift animationCatalog",
+  "installed": false
+}

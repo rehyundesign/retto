@@ -1,0 +1,10 @@
+{
+  "id": "A10",
+  "stage": "independent-static-anchor",
+  "source": "anchors/A10-character-source.png",
+  "master": "anchors/idle-school-source.png",
+  "pose_reference": "base/drag-left.png",
+  "generated_file": "/Users/luxia/.codex/generated_images/01a18151-f01e-7831-98b4-dca0f52b644c/exec-12a3114a-51af-40d6-8816-e2803cf7794b.png",
+  "prompt": "One independent static Retto costume anchor A10. Image1 is the approved identity and costume master. Image2 is only original Retto pose/direction reference. Pose: School outfit, real quadruped cat walking to SCREEN LEFT in full left-facing profile. Four limbs: near foreleg forward-grounded, far foreleg behind partly occluded by chest, near hindleg behind-grounded, far hindleg passing under hips. Single brown tail trails on right. Blazer wraps back/chest, red tie under throat; armband stays on anatomical left foreleg (near foreleg in this view). Pink X clip stays on anatomical left ear. No mirroring of asymmetry. Preserve the master cat's head as a round full-volume skull with normal forehead height, blue eyes, correct eye spacing, distinct muzzle and rounded chin. Do NOT flatten, widen or compress the face to make a low pose; lower torso and bend legs instead. For side profile keep realistic feline muzzle depth and round cranium, no brachycephalic face. Same brown-white markings, pink nose, brown tail, short soft fur, matte felt clothing, exact school uniform black blazer/white collar/red tie/red plaid skirt/pink X hairclip and red armband. Four anatomically attached feline limbs exactly once; any occluded limb must lie behind torso plausibly. Same portrait 7:10 full-body framing, same head/body scale as master, no zoom to fill canvas; ground contact near 97% height except airborne poses. No text, no props, no companion/effects, real transparent background; ignore stale RGB rays in original reference. One image not a sheet.",
+  "review": "pending-registration-and-anatomy"
+}

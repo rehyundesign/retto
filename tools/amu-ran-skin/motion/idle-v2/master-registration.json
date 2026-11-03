@@ -1,0 +1,23 @@
+{
+  "stage": "static costume master only",
+  "whole_body_uniform_correction": 0.9779846401436327,
+  "face_restored_at_original_size": true,
+  "head_translation_y": 5.2418149817787025,
+  "whole_master_final_translation_y": -1,
+  "original_atlas": {
+    "cheek_width": 228,
+    "head_center_x": 171.5,
+    "eye_line": 351.72089947089944,
+    "foot_baseline": 629
+  },
+  "final_master": {
+    "cheek_width": 228,
+    "head_center_x": 171.5,
+    "eye_line": 350.82269976574696,
+    "foot_baseline": 629,
+    "support_toe_x": 218.88550983899822
+  },
+  "motion_cell_patch_policy": "no regional replacements permitted in F01..F15",
+  "source_body_and_attached_tail": "raw/F00-master-body.png",
+  "separate_tail_graft": false
+}

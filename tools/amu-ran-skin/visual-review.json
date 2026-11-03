@@ -1,0 +1,1398 @@
+{
+  "scope": "10 states/directions x16 independent character cells;32 gaze stills;Ran and separate moving layers",
+  "authorization": "finish all remaining production without repeated user approval; no installation/push/PR authorization",
+  "states": [
+    {
+      "id": "idle",
+      "row": 0,
+      "cycle": 3.2,
+      "status": "internally reviewed",
+      "anatomy_by_cell": [
+        {
+          "id": "F00",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F01",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F02",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F03",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F04",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F05",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F06",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F07",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F08",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F09",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F10",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F11",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F12",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F13",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F14",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F15",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        }
+      ]
+    },
+    {
+      "id": "drag-right",
+      "row": 1,
+      "cycle": 1.6,
+      "status": "internally reviewed",
+      "anatomy_by_cell": [
+        {
+          "id": "F00",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F01",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F02",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F03",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F04",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F05",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F06",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F07",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F08",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F09",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F10",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F11",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F12",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F13",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F14",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F15",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        }
+      ]
+    },
+    {
+      "id": "drag-left",
+      "row": 2,
+      "cycle": 1.6,
+      "status": "internally reviewed",
+      "anatomy_by_cell": [
+        {
+          "id": "F00",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F01",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F02",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F03",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F04",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F05",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F06",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F07",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F08",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F09",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F10",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F11",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F12",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F13",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F14",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F15",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        }
+      ]
+    },
+    {
+      "id": "waving",
+      "row": 3,
+      "cycle": 2.4,
+      "status": "internally reviewed",
+      "anatomy_by_cell": [
+        {
+          "id": "F00",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F01",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F02",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F03",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F04",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F05",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F06",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F07",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F08",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F09",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F10",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F11",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F12",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F13",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F14",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F15",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        }
+      ]
+    },
+    {
+      "id": "jumping",
+      "row": 4,
+      "cycle": 2.4,
+      "status": "internally reviewed",
+      "anatomy_by_cell": [
+        {
+          "id": "F00",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F01",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F02",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F03",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F04",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F05",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F06",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F07",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F08",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F09",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F10",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F11",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F12",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F13",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F14",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F15",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        }
+      ]
+    },
+    {
+      "id": "failed",
+      "row": 5,
+      "cycle": 3.2,
+      "status": "internally reviewed",
+      "anatomy_by_cell": [
+        {
+          "id": "F00",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F01",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F02",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F03",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F04",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F05",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F06",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F07",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F08",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F09",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F10",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F11",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F12",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F13",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F14",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F15",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        }
+      ]
+    },
+    {
+      "id": "waiting",
+      "row": 6,
+      "cycle": 3.2,
+      "status": "internally reviewed",
+      "anatomy_by_cell": [
+        {
+          "id": "F00",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F01",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F02",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F03",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F04",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F05",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F06",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F07",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F08",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F09",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F10",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F11",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F12",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F13",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F14",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F15",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        }
+      ]
+    },
+    {
+      "id": "running",
+      "row": 7,
+      "cycle": 2.4,
+      "status": "internally reviewed",
+      "anatomy_by_cell": [
+        {
+          "id": "F00",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F01",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F02",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F03",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F04",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F05",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F06",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F07",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F08",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F09",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F10",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F11",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F12",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F13",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F14",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F15",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        }
+      ]
+    },
+    {
+      "id": "review",
+      "row": 8,
+      "cycle": 3.2,
+      "status": "internally reviewed",
+      "anatomy_by_cell": [
+        {
+          "id": "F00",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F01",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F02",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F03",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F04",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F05",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F06",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F07",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F08",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F09",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F10",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F11",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F12",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F13",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F14",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F15",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        }
+      ]
+    },
+    {
+      "id": "sleeping",
+      "row": 11,
+      "cycle": 6.4,
+      "status": "internally reviewed",
+      "anatomy_by_cell": [
+        {
+          "id": "F00",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F01",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F02",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F03",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F04",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F05",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F06",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F07",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F08",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F09",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F10",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F11",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F12",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F13",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F14",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        },
+        {
+          "id": "F15",
+          "front_left": "attached; grounded or folded/extended in declared jump",
+          "front_right": "attached actual articulating foreleg; no duplicated old planted paw",
+          "rear_left": "attached at far hip; upper leg occluded by torso/near hindleg, or folded beneath curled body in sleep",
+          "rear_right": "attached at near hip; bare furry hindleg, folded beneath torso/tail in sleep",
+          "tail": "one attached original brown tail"
+        }
+      ]
+    }
+  ],
+  "gaze": "v2: all32 complete original-seated gaze drawings; no head/body composites; neck, shoulder garment attachment, head pitch/yaw, four-limb occlusion and accessories inspected on light/dark at1x",
+  "native": "160 actual RettoView motion boards and four32-direction/costume/background boards; source and packaged resource hashes verified",
+  "browser": "http://127.0.0.1:8773/preview-full.html",
+  "original_registration_limit": "actual original pose diagnostics used; compact neutral gaze volume has declared205..228px2x profile range; exact original torso/tail mask certification not claimed",
+  "installed": false,
+  "gaze_repair_scope": {
+    "cells": 32,
+    "unchanged": "160 motion cells,1600 effects and16 companions",
+    "registration": "original seated fur stature, grounded toe baseline and center",
+    "limits": "original pixel-mask certification is not claimed; wardrobe covers torso landmarks"
+  },
+  "partner_interaction": {
+    "states": 10,
+    "source_poses": "left8,right8 independent, sleeping8 reused",
+    "interaction_review": "approach/action/follow-through/settle mapped to cat poses; pompom meets raised paw/cuff, armband inspection, shared heart check, resting against tail",
+    "corrected_occlusion": "drag fairy moved above muzzle; completion fairy face lowered beneath paw pads",
+    "source_painter_order": "back effects, locked cat, Ran, front effects",
+    "art_preserved": "all160 cat poses,32 whole-body gaze poses and32 partner PNGs remain unchanged; ambient effects have a separate v2 repair scope",
+    "native_review": "build,self-test,state-relative clock,160 real RettoView boards"
+  },
+  "effects_v2": {
+    "review": "all10 composited states at native1x on light/dark;gesture highlights on the actual paw/cuff,armband,charm;no character/partner repaint",
+    "state_labels": "10 state badges plus context captions;cursor gaze preserves idle/completion labels",
+    "controls": "effects toggle keeps Ran visible;ambient effects continue during pose hold",
+    "source_hashes": "224 protected PNGs and character/gaze atlas unchanged"
+  },
+  "effects_visibility_v3": {
+    "scope": "effect size,color,opacity and preview loading",
+    "retained": "all224 character/gaze/partner PNGs,full atlas and both pose/effect cycle timings",
+    "visual_review": "current1x light/dark native and browser review",
+    "pixel_visibility_comparison": "effects/visibility-v3.json"
+  }
+}

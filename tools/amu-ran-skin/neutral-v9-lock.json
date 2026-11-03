@@ -1,0 +1,13 @@
+{
+  "kind": "approved-neutral-character-lock",
+  "date": "2026-10-28",
+  "user_evidence": "오 마음에들어! 란은 어디갔어? 펫!",
+  "character_source": "anchors/idle-heart-cape-pose-v9-source.png",
+  "character_sha256": "0ed91b021ad472f22b6767a255d617f5c197f96c3686c6b934f6ef0b5be000ca",
+  "ran_source": "reference/ran-neutral-source.png",
+  "ran_sha256": "e8b38700dc9a888c9b8a50ca347d9ace039c84768211966fb9ed1c1d294eb41b",
+  "composition_only_edits_preserve_source_hashes": true,
+  "motion_poses_not_approved": true,
+  "production_ready": false,
+  "installed": false
+}

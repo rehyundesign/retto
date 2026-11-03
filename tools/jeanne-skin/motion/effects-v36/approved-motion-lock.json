@@ -1,0 +1,1030 @@
+{
+  "source": "/Users/luxia/Applications/Retto.app/Contents/Resources/JeanneFrames",
+  "states": [
+    {
+      "id": "idle",
+      "row": 0,
+      "cycle": 3.2,
+      "times": [
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2
+      ],
+      "files": [
+        "character-0-0.png",
+        "character-0-1.png",
+        "character-0-2.png",
+        "character-0-3.png",
+        "character-0-4.png",
+        "character-0-5.png",
+        "character-0-6.png",
+        "character-0-7.png",
+        "character-0-8.png",
+        "character-0-9.png",
+        "character-0-10.png",
+        "character-0-11.png",
+        "character-0-12.png",
+        "character-0-13.png",
+        "character-0-14.png",
+        "character-0-15.png"
+      ]
+    },
+    {
+      "id": "running",
+      "row": 7,
+      "cycle": 2.4,
+      "times": [
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15
+      ],
+      "files": [
+        "character-7-0.png",
+        "character-7-1.png",
+        "character-7-2.png",
+        "character-7-3.png",
+        "character-7-4.png",
+        "character-7-5.png",
+        "character-7-6.png",
+        "character-7-7.png",
+        "character-7-8.png",
+        "character-7-9.png",
+        "character-7-10.png",
+        "character-7-11.png",
+        "character-7-12.png",
+        "character-7-13.png",
+        "character-7-14.png",
+        "character-7-15.png"
+      ]
+    },
+    {
+      "id": "review",
+      "row": 8,
+      "cycle": 3.2,
+      "times": [
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2
+      ],
+      "files": [
+        "character-8-0.png",
+        "character-8-1.png",
+        "character-8-2.png",
+        "character-8-3.png",
+        "character-8-4.png",
+        "character-8-5.png",
+        "character-8-6.png",
+        "character-8-7.png",
+        "character-8-8.png",
+        "character-8-9.png",
+        "character-8-10.png",
+        "character-8-11.png",
+        "character-8-12.png",
+        "character-8-13.png",
+        "character-8-14.png",
+        "character-8-15.png"
+      ]
+    },
+    {
+      "id": "waiting",
+      "row": 6,
+      "cycle": 3.2,
+      "times": [
+        0.24,
+        0.16,
+        0.17,
+        0.18,
+        0.2,
+        0.21,
+        0.23,
+        0.22,
+        0.18,
+        0.2,
+        0.19,
+        0.18,
+        0.18,
+        0.21,
+        0.22,
+        0.23
+      ],
+      "files": [
+        "character-6-0.png",
+        "character-6-1.png",
+        "character-6-2.png",
+        "character-6-3.png",
+        "character-6-4.png",
+        "character-6-5.png",
+        "character-6-6.png",
+        "character-6-7.png",
+        "character-6-8.png",
+        "character-6-9.png",
+        "character-6-10.png",
+        "character-6-11.png",
+        "character-6-12.png",
+        "character-6-13.png",
+        "character-6-14.png",
+        "character-6-15.png"
+      ]
+    },
+    {
+      "id": "failed",
+      "row": 5,
+      "cycle": 3.2,
+      "times": [
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2
+      ],
+      "files": [
+        "character-5-0.png",
+        "character-5-1.png",
+        "character-5-2.png",
+        "character-5-3.png",
+        "character-5-4.png",
+        "character-5-5.png",
+        "character-5-6.png",
+        "character-5-7.png",
+        "character-5-8.png",
+        "character-5-9.png",
+        "character-5-10.png",
+        "character-5-11.png",
+        "character-5-12.png",
+        "character-5-13.png",
+        "character-5-14.png",
+        "character-5-15.png"
+      ]
+    },
+    {
+      "id": "waving",
+      "row": 3,
+      "cycle": 2.4,
+      "times": [
+        0.18,
+        0.12,
+        0.12,
+        0.15,
+        0.15,
+        0.16,
+        0.18,
+        0.16,
+        0.16,
+        0.15,
+        0.13,
+        0.12,
+        0.18,
+        0.15,
+        0.14,
+        0.15
+      ],
+      "files": [
+        "character-3-0.png",
+        "character-3-1.png",
+        "character-3-2.png",
+        "character-3-3.png",
+        "character-3-4.png",
+        "character-3-5.png",
+        "character-3-6.png",
+        "character-3-7.png",
+        "character-3-8.png",
+        "character-3-9.png",
+        "character-3-10.png",
+        "character-3-11.png",
+        "character-3-12.png",
+        "character-3-13.png",
+        "character-3-14.png",
+        "character-3-15.png"
+      ]
+    },
+    {
+      "id": "jumping",
+      "row": 4,
+      "cycle": 2.4,
+      "times": [
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15
+      ],
+      "files": [
+        "character-4-0.png",
+        "character-4-1.png",
+        "character-4-2.png",
+        "character-4-3.png",
+        "character-4-4.png",
+        "character-4-5.png",
+        "character-4-6.png",
+        "character-4-7.png",
+        "character-4-8.png",
+        "character-4-9.png",
+        "character-4-10.png",
+        "character-4-11.png",
+        "character-4-12.png",
+        "character-4-13.png",
+        "character-4-14.png",
+        "character-4-15.png"
+      ]
+    },
+    {
+      "id": "sleeping",
+      "row": 11,
+      "cycle": 6.4,
+      "times": [
+        0.4,
+        0.4,
+        0.4,
+        0.4,
+        0.4,
+        0.4,
+        0.4,
+        0.4,
+        0.4,
+        0.4,
+        0.4,
+        0.4,
+        0.4,
+        0.4,
+        0.4,
+        0.4
+      ],
+      "files": [
+        "character-11-0.png",
+        "character-11-1.png",
+        "character-11-2.png",
+        "character-11-3.png",
+        "character-11-4.png",
+        "character-11-5.png",
+        "character-11-6.png",
+        "character-11-7.png",
+        "character-11-8.png",
+        "character-11-9.png",
+        "character-11-10.png",
+        "character-11-11.png",
+        "character-11-12.png",
+        "character-11-13.png",
+        "character-11-14.png",
+        "character-11-15.png"
+      ]
+    },
+    {
+      "id": "drag-right",
+      "row": 1,
+      "cycle": 1.6,
+      "times": [
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2
+      ],
+      "files": [
+        "character-1-0.png",
+        "character-1-1.png",
+        "character-1-2.png",
+        "character-1-3.png",
+        "character-1-4.png",
+        "character-1-5.png",
+        "character-1-6.png",
+        "character-1-7.png"
+      ]
+    },
+    {
+      "id": "drag-left",
+      "row": 2,
+      "cycle": 1.6,
+      "times": [
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2
+      ],
+      "files": [
+        "character-2-0.png",
+        "character-2-1.png",
+        "character-2-2.png",
+        "character-2-3.png",
+        "character-2-4.png",
+        "character-2-5.png",
+        "character-2-6.png",
+        "character-2-7.png"
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "file": "character-8-2.png",
+      "sha256": "c402fc9a4f9689877a175b4492a777bd799d36e61a1399d7dd4d0efad55d078f"
+    },
+    {
+      "file": "character-8-13.png",
+      "sha256": "bb7d2917460265283716bcd59e7c7409147011adef7604d900dd5ec7eaa90195"
+    },
+    {
+      "file": "character-11-7.png",
+      "sha256": "614fb7570d3867351fc746c6378b09c24e8b5edabae469fe77dcb37522efe842"
+    },
+    {
+      "file": "character-4-13.png",
+      "sha256": "f40f3d56af68ec9a5b7db1bea820b793af19d9ea5c82f133e4024bab61c5e414"
+    },
+    {
+      "file": "gaze-6.png",
+      "sha256": "a610f18d1179c90edfe51d9e624b6de804f4f8d509e4142478adfdae12e5f7b9"
+    },
+    {
+      "file": "gaze-7.png",
+      "sha256": "5ed7746038a442ce45103da2b5c718a99fd25304e952b2c670bc2c1745b32e60"
+    },
+    {
+      "file": "character-4-12.png",
+      "sha256": "dc130c442066d23638d77db728e18664994aa67570b087026e4aceaf075f91fb"
+    },
+    {
+      "file": "character-11-6.png",
+      "sha256": "c57995115706b1dd0d07880214f14475104008f1648a4c66a3ac8eb03b4ed354"
+    },
+    {
+      "file": "character-8-12.png",
+      "sha256": "2cd5d040b5eb9b1e07f176acd3ccd7ae3558de1a522378a534141f71d0a3d218"
+    },
+    {
+      "file": "character-8-3.png",
+      "sha256": "9ba02d3d9b0c7830901b627201e9ab45107e474a10995d73a325109eb322b179"
+    },
+    {
+      "file": "character-8-1.png",
+      "sha256": "e801312b34df30f233702a7a81b32f607747b67eebd8af7f765aec3eb75f3987"
+    },
+    {
+      "file": "character-8-10.png",
+      "sha256": "972d2af2adc09f795339bd762638cdcbf1c49e5da976c5d4c32315335c44c948"
+    },
+    {
+      "file": "character-6-15.png",
+      "sha256": "f157a654a9010bba768a50b4334683b15d27083d48edb4279130d466d38af4df"
+    },
+    {
+      "file": "character-11-4.png",
+      "sha256": "1c4bbd4e6a34590ae0003fd8482761eef3062681c86ccb6cc41a2295f60182c6"
+    },
+    {
+      "file": "character-4-10.png",
+      "sha256": "f04193e337d7259c0bcde5a861340be061c88d28ed26ed7bdbeb5b9ce66e78f0"
+    },
+    {
+      "file": "character-0-8.png",
+      "sha256": "cc7672cafb61d7f5bcc0357d09f638382e841152f8818f7e5948a7bde37a2213"
+    },
+    {
+      "file": "gaze-5.png",
+      "sha256": "bc581d4b98d2a73a7054b812c5bae92af93ecee3134b553345978ce78c4acccc"
+    },
+    {
+      "file": "gaze-4.png",
+      "sha256": "4a9793ef260aca8838bcdf1213120360c8f577770db6e7d11c4e6d0a17a7f486"
+    },
+    {
+      "file": "character-0-9.png",
+      "sha256": "b1475826e8592156f443fdc57e87197cce0f2fdaff321f510cb54076b634634d"
+    },
+    {
+      "file": "character-4-11.png",
+      "sha256": "a028599c58195245d051f7012ac8a7d767a7d2482da966278c8449f5f4d15083"
+    },
+    {
+      "file": "character-11-5.png",
+      "sha256": "fb8a94ca708cc0736f42642f5d7490f9e6eded04177a45b7ff2cee89a2f5c4e1"
+    },
+    {
+      "file": "character-6-14.png",
+      "sha256": "f9a0c0057c0fed2a20cf4d07281d7802df561a17084e9bf6fdad25a5a473a2b5"
+    },
+    {
+      "file": "character-8-11.png",
+      "sha256": "614bc90849ea583875c328c5ee8ead01d449e66a7cf3f0f47fd4741fed5bf53a"
+    },
+    {
+      "file": "character-8-0.png",
+      "sha256": "4a0722f6253426073f80b1fdb34338514961e1bec8c1478ab1ed09d3b804599a"
+    },
+    {
+      "file": "character-8-4.png",
+      "sha256": "84f1b25d6321c1e59f5491106d0c23db0b1d7780da0a93fbd2ce5e4e63ea08f6"
+    },
+    {
+      "file": "character-6-10.png",
+      "sha256": "b5e2d533502b3f5bd7df008b8eb6f66a7057c3a53cd038e735a7beefc087b4fa"
+    },
+    {
+      "file": "character-8-15.png",
+      "sha256": "514838ca8c225c4ff84d08672b3d33b5b84370c1f736955d7b2930182020a70c"
+    },
+    {
+      "file": "character-11-1.png",
+      "sha256": "d84280fbc9f9183c8d5864c931495a2af803731cd3f2f0ebcfff0e3fb1575c9a"
+    },
+    {
+      "file": "character-4-9.png",
+      "sha256": "4048b744aec2ffbee0b2c2d0c3d05713de64522af47b680bdc41c755cd84fb63"
+    },
+    {
+      "file": "character-4-15.png",
+      "sha256": "3d151513b5992b4c428eb42e2769dc7983443f24ed7431474b2571eea63de309"
+    },
+    {
+      "file": "gaze-0.png",
+      "sha256": "a8fcea04fa46ef38c426e853fc67505205d29ff5438a4bcc5decc30ce1df3487"
+    },
+    {
+      "file": "gaze-1.png",
+      "sha256": "c33b43ed8ea09ec8ad97b561d93264b3ea1946f608081e04986b60d6d8a8f363"
+    },
+    {
+      "file": "character-4-14.png",
+      "sha256": "5fb492cd6199e7e82c49c1e0a878204ba0d8becf7599a9b2e0045a7e72d46fa7"
+    },
+    {
+      "file": "character-4-8.png",
+      "sha256": "2a2f25d70dfd03a58cc289f2d735ac44c2cac662216045be6c7af6bf00fa1df4"
+    },
+    {
+      "file": "character-11-0.png",
+      "sha256": "c3e1ad4c4b033fe3bbe28582d6001382b2358324fa98db14e7d93291001065ed"
+    },
+    {
+      "file": "character-8-14.png",
+      "sha256": "73b8fceb34e750c7ec09305e408f0f96ff6fd3e2598182c7354fad9239ed4970"
+    },
+    {
+      "file": "character-6-11.png",
+      "sha256": "41e13da0386fdd49226fdcf905dc1e382f5714fd55932d42079e0cea9bf5404a"
+    },
+    {
+      "file": "character-8-5.png",
+      "sha256": "bcc4b33f2adc0b487edf60437cb096f3d1b4d243e7dc16e31e8726a576b12dfb"
+    },
+    {
+      "file": "character-8-7.png",
+      "sha256": "02df39f25bba6606e0a09389f0f07454a92d4f62c5aee3dd44efdfcb595162d5"
+    },
+    {
+      "file": "character-6-8.png",
+      "sha256": "5fd920bb1243e048005ad763cc612e58230ec2a4d3a52b002dcf18081f9a744c"
+    },
+    {
+      "file": "character-6-13.png",
+      "sha256": "48a1a2722ed3e308b69d520922eeb85d0bf484ab5f3aae2527978ec0b2023053"
+    },
+    {
+      "file": "character-11-2.png",
+      "sha256": "ee5b8f66019cf1b589d9fb777dbede72bac4fe473180e7ed657e80b76c99d2dc"
+    },
+    {
+      "file": "gaze-3.png",
+      "sha256": "fa69f8a0fe62d9bb6c245072a80d0429fc017f23de306b32da1e6f72f4e89a3b"
+    },
+    {
+      "file": "gaze-2.png",
+      "sha256": "d16746cc9fb48b432c1e9baa9581e14d26bf52a24c75bea9ee82438ec9d2a323"
+    },
+    {
+      "file": "character-11-3.png",
+      "sha256": "fad091cf3077bd8a79c9a6b4e3067ceb2b4e670db89c0999aff24b56394c5b2e"
+    },
+    {
+      "file": "character-6-12.png",
+      "sha256": "3d7533af99f3e8b4768377759db4362790f082d969b87ff8b4fe061f9c6686a5"
+    },
+    {
+      "file": "character-6-9.png",
+      "sha256": "5458d50f53a7634eb7a641bdf9752c44e90ed2fab255de29c97a25d097fe2693"
+    },
+    {
+      "file": "character-8-6.png",
+      "sha256": "500a04a995608f4198080d76c4672a36d3c866236e585492b15dbd39b7926923"
+    },
+    {
+      "file": "character-0-14.png",
+      "sha256": "31b6487de74f3ccd761e0a92847ba52aeda5ea1b26ce09fe71f9b48283f24e0d"
+    },
+    {
+      "file": "character-0-15.png",
+      "sha256": "0b75fde5f3a2cbfbddd564bf034095d24866afef9a1c2f63907c1aece137c3c8"
+    },
+    {
+      "file": "character-3-9.png",
+      "sha256": "d16c5b6d2b0f92a6c3159f5d34b4a76f68be35ba53f98a49e46edbb3d110f512"
+    },
+    {
+      "file": "character-3-8.png",
+      "sha256": "93ae82d4eae507a124bade467c64f51d13a6c716b845d8ff65790d9771268be4"
+    },
+    {
+      "file": "character-0-12.png",
+      "sha256": "4957f49b14f61b3f50d1c42226133c4c62d5174dafd4e5e132c4915b8702e8c1"
+    },
+    {
+      "file": "character-7-8.png",
+      "sha256": "e80885ab173425528209df0b364720f648f67411c822f740e68997573ce82267"
+    },
+    {
+      "file": "character-7-9.png",
+      "sha256": "564cc55ffc133a6b6a6f79773f0fb9eeaafa6f0cbb3455dff6b138385c9f1bc1"
+    },
+    {
+      "file": "character-0-13.png",
+      "sha256": "e9b61154d4954fab8f2e0724c1a42a6c083d968fafae9dbf0b6489a8492c1d79"
+    },
+    {
+      "file": "character-5-9.png",
+      "sha256": "bc425b4a97a913a833daedcd6e5ecb1bf297ddb4dbf3714a03b6c064e8d370f4"
+    },
+    {
+      "file": "character-0-11.png",
+      "sha256": "684ce544dd9659a76db14851cd6de37465cc5abd7445c037419f7984ec8bbaaf"
+    },
+    {
+      "file": "character-0-10.png",
+      "sha256": "63574690be405c1f487d570061dd2f5fe44eb99e6cfe660aaf264df57a0c7554"
+    },
+    {
+      "file": "character-5-8.png",
+      "sha256": "1dc5f24dcc59cd01ea1692d437e17aaa83b238d99180e7af18a7678fa952108e"
+    },
+    {
+      "file": "character-5-11.png",
+      "sha256": "60ad55879dca9e7e1e98062ac1b04a05feea2bbcbd286aaac07a1af59695d5dd"
+    },
+    {
+      "file": "character-1-1.png",
+      "sha256": "0378096d0ddce490c5d7e3404c3d87f1e769f26e3aac431723e58306dd99dc93"
+    },
+    {
+      "file": "gaze-13.png",
+      "sha256": "7b4d0ee1b62c6e69fb9f9f76f398aef3818328a73e8397f921ea6d0762bfe071"
+    },
+    {
+      "file": "character-3-3.png",
+      "sha256": "3413276c611a24777cb3e508eb23a0a4d77f76ff89438ef636e707dd1b3b726a"
+    },
+    {
+      "file": "character-5-5.png",
+      "sha256": "5f8ef5beffcec389a267a59b5dfd2b4d6a96bc718b74c6e45452808ba2f87a99"
+    },
+    {
+      "file": "character-7-14.png",
+      "sha256": "ceaa14258c2e16a87c3d2ad8e22518bc4b29fbf35ed83049be9bb3cfd8beafee"
+    },
+    {
+      "file": "character-7-7.png",
+      "sha256": "988b418d4741e126af027ca562dc6b22e69f66ae15620b9778e8ce7c2009192f"
+    },
+    {
+      "file": "character-7-6.png",
+      "sha256": "510f317fcc6eeedc58b43590ba9ee2814ebbed67e3fa22a591aaf5c374169d6d"
+    },
+    {
+      "file": "character-7-15.png",
+      "sha256": "7823937552b65feaf7ecbdf483b1856b54144f6f9de4f78f96e5bec0fb1f3763"
+    },
+    {
+      "file": "character-5-4.png",
+      "sha256": "08ea925387e14822ee3430b413c3bb50c55cff5695f0c15ca4e77434c81cea49"
+    },
+    {
+      "file": "character-3-2.png",
+      "sha256": "b1e25e71167b7672d5107ffbb4dbbd142338fb5aeb3afb4f002647923ee9f12e"
+    },
+    {
+      "file": "gaze-12.png",
+      "sha256": "4f405322398e4bc4df8cf75a060b1a03f07c1086a606fedc8e80d96f3e848377"
+    },
+    {
+      "file": "character-1-0.png",
+      "sha256": "7a739fab68d266723d567b0e72d4ac013b3e3772d163ad2af7ce5c16b815659d"
+    },
+    {
+      "file": "character-5-10.png",
+      "sha256": "834c7fa212bf0b941397d0a99cb15958cb6c2e303c54998cab5b6c58c7f56c4a"
+    },
+    {
+      "file": "character-5-12.png",
+      "sha256": "30dc10d894a642cd259e653f1a3e04427031d1daac1f0eb109c2224a63af358c"
+    },
+    {
+      "file": "gaze-10.png",
+      "sha256": "87b06e6096e5efa21068ba137a34b8779e591e34653574f240d76556bca62ab4"
+    },
+    {
+      "file": "character-1-2.png",
+      "sha256": "e5e865fdab24b5653268dbe1716fe47ed22f89c07cbf26fc2ce9111180217669"
+    },
+    {
+      "file": "character-3-0.png",
+      "sha256": "6be8594a32a003c0c523d89065effdc755c3dea8ec86b209d5b3fc0ef44f606d"
+    },
+    {
+      "file": "character-5-6.png",
+      "sha256": "057b4253a433658804173821dbec84d979ebcf9429e3474e1475a71512ea6b56"
+    },
+    {
+      "file": "character-7-4.png",
+      "sha256": "c333e00825c89e57f3b9e446963b0148892ee202483746d62bcfd9eaf875b938"
+    },
+    {
+      "file": "character-11-14.png",
+      "sha256": "2540737a8922b05bfa332dae93fa7761bb8e3207edc7d29d1f120f79ee6c5761"
+    },
+    {
+      "file": "character-11-15.png",
+      "sha256": "4eef1336173b1e21e6196bbf7e1b4d4ad301add15fc4ea0cc6ec2033d13dbcaf"
+    },
+    {
+      "file": "character-7-5.png",
+      "sha256": "a73d0fd4831308b96f8fd555b547de07ead19f558b19f5fba7bfd241316224aa"
+    },
+    {
+      "file": "character-5-7.png",
+      "sha256": "eb3d88e9f6a594a1683dad2eb68a1c314f433b70911328f1321af013d8a86034"
+    },
+    {
+      "file": "character-3-1.png",
+      "sha256": "ce7f8a97507b7255ad1510f454075be12afe8296b5f0da7821ee40b2ee1aa16e"
+    },
+    {
+      "file": "character-1-3.png",
+      "sha256": "1f599d8b39784b2026169d90e2190e73d8794d226e6a1a864eb6ec6263e317ff"
+    },
+    {
+      "file": "gaze-11.png",
+      "sha256": "87d73f827d99756534a2e98cac3081e89565c412e39f1252dccaf4d33a280b0b"
+    },
+    {
+      "file": "character-5-13.png",
+      "sha256": "c728414ee15f6285856b92ed6aa9bdb606ea95dbabbb8a718e8c673825c88e43"
+    },
+    {
+      "file": "gaze-15.png",
+      "sha256": "6b045b76aec8883ef01712ea4179d1a253b6991919a808eb67073472c10b1664"
+    },
+    {
+      "file": "character-1-7.png",
+      "sha256": "0bf17792ac3e8800c4d1b698ee73ab067a365c72f0376c38c2c14fb886205797"
+    },
+    {
+      "file": "character-3-5.png",
+      "sha256": "87c0cd0fdc32afff9bd5bdbd4561db692e8980e7cb944a88ca1d4fd45536ed44"
+    },
+    {
+      "file": "character-5-3.png",
+      "sha256": "e4336d1c8b0297ee6d92143a5c63bc23a4d0e3d6dadf8b46c18c9d1013a8300b"
+    },
+    {
+      "file": "character-7-12.png",
+      "sha256": "c6ed7e5a3abe4c02cae1277f2b5a54474b15d91722a77cf5c30893a019b97b42"
+    },
+    {
+      "file": "character-7-1.png",
+      "sha256": "77dfce2ee4c1326ffaeea0df0e86e3777bb973dfbfe1c20cabff9a66047deaa8"
+    },
+    {
+      "file": "character-11-11.png",
+      "sha256": "ce5254ff871680f7e96b8122d6f3b7ff9399b4acebf9d907303d5f408b4e234d"
+    },
+    {
+      "file": "character-11-10.png",
+      "sha256": "76e4e389e5de953fdb2e9c60c0e5acf72e4d1cdacdb1c7a643f3e9541ad1730f"
+    },
+    {
+      "file": "character-7-0.png",
+      "sha256": "8763ef492c5813fd2474c08802fc7a21bf572e49616961f25a5f84cbb082eb75"
+    },
+    {
+      "file": "character-7-13.png",
+      "sha256": "6313a86933ceb8bcc5bf5a46defcab2e6ff96f864011a908aa58be82c8ee8488"
+    },
+    {
+      "file": "character-5-2.png",
+      "sha256": "202d4ececb80eeee3151ff25822b1239490db6e7f60bf814495d54a5d96b8dc1"
+    },
+    {
+      "file": "character-3-4.png",
+      "sha256": "0d31c8198143708714591f39697b8ad554cf221257b7aa5cafa6abcfca1980f6"
+    },
+    {
+      "file": "character-1-6.png",
+      "sha256": "ca24c21f91ce82dd5b3e3974dc3903fcf423a638092791e1b145d2c9f84067c5"
+    },
+    {
+      "file": "gaze-14.png",
+      "sha256": "48160da888d91fbaf8ca22d753aaad1a141bfaadcc520aefdeff13c48f81eea9"
+    },
+    {
+      "file": "character-5-14.png",
+      "sha256": "3737b3071d6d2bb7163bdd75821a80c21075d0f583f2d72ae27be17883984754"
+    },
+    {
+      "file": "character-1-4.png",
+      "sha256": "e8060080e8ab1b07bf6c4cfb2d1d883e7d1893adf73857de413ff1dc54b698a9"
+    },
+    {
+      "file": "manifest.json",
+      "sha256": "da16451c3902a718ec540151dc90f77a13396b58e5fb58daa57a452dbf4a564c"
+    },
+    {
+      "file": "character-3-6.png",
+      "sha256": "21413e7a94f1c24bbbc8399b494f0310a6d23c4292ca25ec77c7f1b13cbf3652"
+    },
+    {
+      "file": "character-5-0.png",
+      "sha256": "b52b4c8c48a433f240f836916a3d5b92f29ed8309c6817aeb503c0ae3519ead4"
+    },
+    {
+      "file": "character-7-11.png",
+      "sha256": "cbb6499e213ea1b17e0cb3d42c5ab0fc9854371112a5a3631d257d24eb576cdd"
+    },
+    {
+      "file": "character-11-12.png",
+      "sha256": "73fb0da9fc73b9f5211d23d9414487160eebc40310a636a52520d1c07d9adc2a"
+    },
+    {
+      "file": "character-7-2.png",
+      "sha256": "e98ac414de01c19c5a90936e883ab68ab1eb7713697ac65e907088893bbfb062"
+    },
+    {
+      "file": "character-7-3.png",
+      "sha256": "f64d9fbb8a60172b174fe5bb3b226a72b998abf5aa6e657a4cbaf08e04dcf76b"
+    },
+    {
+      "file": "character-11-13.png",
+      "sha256": "0d771bafe204138b5c3dedce8dcb84dc70631257f723b9b8e1e92319e339fc0b"
+    },
+    {
+      "file": "character-7-10.png",
+      "sha256": "e0ae2a617c9a428fedbe2b128aac0101d25811f4e46ca97ec9aca61baa5af576"
+    },
+    {
+      "file": "character-5-1.png",
+      "sha256": "b3a7a728c1ed0dc2a19dcce6538f85e8ce607adafde9840991542544a1644a33"
+    },
+    {
+      "file": "character-3-7.png",
+      "sha256": "d658c95c121ab85164a189902f256c60c5c761175d4257471feae13a7782542b"
+    },
+    {
+      "file": "character-1-5.png",
+      "sha256": "317ba4b84ecae44d83a69e15d6bc91bba821f4c07a48a24c824de629e7b4156b"
+    },
+    {
+      "file": "character-5-15.png",
+      "sha256": "04a4215d62764cae710ad8f071565a6f8fad83ddfa4fdf917367dc1254f5a02e"
+    },
+    {
+      "file": "character-6-4.png",
+      "sha256": "eef81272d83ebc83de65acbaa03fd3d8be43c2a66cc296f6a4bebc5f64e5a983"
+    },
+    {
+      "file": "character-4-6.png",
+      "sha256": "efe1f9d053d0515b4b7c3430107770468675819fef02423a4f4a6db88768887b"
+    },
+    {
+      "file": "character-3-13.png",
+      "sha256": "1cb2032cad85baa194ba3745711126fcc95b6753c6e2ac7bde300deafb2cf093"
+    },
+    {
+      "file": "character-2-0.png",
+      "sha256": "241e92477c14abf2cd8bb3b7d9574d4f6cc61ed0b76851f9c7f6b24387a0c595"
+    },
+    {
+      "file": "character-0-2.png",
+      "sha256": "03baddad9770e5a416d77ea5ffc7b5b211adc69b2dcd778b048152ecd72b49e6"
+    },
+    {
+      "file": "character-0-3.png",
+      "sha256": "2a90ed95594d654ebfa81fc1514afd0a852ad750f5f5c92bceee49daaf28aa5d"
+    },
+    {
+      "file": "character-2-1.png",
+      "sha256": "c89b701c9679a6fd1918c54e2c09b993e60dbc75c1f6aa66df9979d40912dfdb"
+    },
+    {
+      "file": "character-3-12.png",
+      "sha256": "29f763717d916a53e271a0bc13dd4101d60f945187fcb6f40a7b8c6736ce1e85"
+    },
+    {
+      "file": "character-4-7.png",
+      "sha256": "469583bd6dc96d3ae59e52ee1a807c9d4dc96841c03a5e8fe9c57fe127703cdb"
+    },
+    {
+      "file": "character-6-5.png",
+      "sha256": "ce65a94d2786b72ddea2a615d4d88a84a70603cf3bbffbb4912515cdbd156c7f"
+    },
+    {
+      "file": "character-8-8.png",
+      "sha256": "6315cc62ada0ea302ae909fae49a71335c00abf829c41ce49f6bdaefe496e4cd"
+    },
+    {
+      "file": "character-6-7.png",
+      "sha256": "29d8a59b067050c9b43e2e72589b7ba50562122c2984fad2fef6f34ff1017bed"
+    },
+    {
+      "file": "character-4-5.png",
+      "sha256": "fde73fac27e3ea0da9cc3dbef57c8779f1115bd7cb6d086cf9c02802247f147b"
+    },
+    {
+      "file": "character-3-10.png",
+      "sha256": "e0003067cc6b0d94b927228fd1b69927c01ee07d327a34cbca79e9fba74ae79f"
+    },
+    {
+      "file": "character-2-3.png",
+      "sha256": "96c73bed62ddd3af4af85eace735c89005d18fb8e12e84d4b1b19ba8f0d5b65e"
+    },
+    {
+      "file": "character-0-1.png",
+      "sha256": "53b278dea014c85956b4ee488ec63cced8f2adb17b048242f87aaae66dcfaf09"
+    },
+    {
+      "file": "character-0-0.png",
+      "sha256": "55d4d1d18c1cd8716881d2bee09a9ba39f8326a88c88d2d4c400c4144657c757"
+    },
+    {
+      "file": "character-2-2.png",
+      "sha256": "145ef106e948173922d5a6178e55d931b926ea9a878c12a837f9f3d4d94afebc"
+    },
+    {
+      "file": "character-3-11.png",
+      "sha256": "0f93b981eb9c916840831f54789f0583e4a034b9af1fde4cdec5e6fc5cc10f3a"
+    },
+    {
+      "file": "character-4-4.png",
+      "sha256": "eee56503e2be73044c7a80bd54e0b6f4c759077462142067858ceef2b4745a83"
+    },
+    {
+      "file": "character-6-6.png",
+      "sha256": "ad69257003dd697a088b1d581182b2bd76f0b3c408326bdf0fc8a4ed2f3dd591"
+    },
+    {
+      "file": "character-8-9.png",
+      "sha256": "ae6a6ed90d550d64488e2f1f023382bc2f5bb1745cb3f028e4c20c54a674aec5"
+    },
+    {
+      "file": "character-6-2.png",
+      "sha256": "2842415d2169d2443c7e5ffa9e004c5e6563c04d550dd8d9e6e18df50416e670"
+    },
+    {
+      "file": "character-4-0.png",
+      "sha256": "72d46d7f5145f0ee6310efa1eff33f72796e8ec00cb150c769b85eec567dc0e5"
+    },
+    {
+      "file": "character-11-8.png",
+      "sha256": "36a882f0697d035d1e9af8c7e5b6646a68a978b8652dc90e69285d897c6b6341"
+    },
+    {
+      "file": "character-3-15.png",
+      "sha256": "3ef2e49c90624226f577b47b667f558365cb8f34b5c7143c646d0b63e23ab923"
+    },
+    {
+      "file": "character-2-6.png",
+      "sha256": "d1e3491fa913dc8e6d8825bce7f51e60e24690cb7c64f32469559b1766bfcec6"
+    },
+    {
+      "file": "character-0-4.png",
+      "sha256": "b353dc23d25f90882b51f393639732ea94d38a9f7070b3354ca64a980f8b575e"
+    },
+    {
+      "file": "gaze-9.png",
+      "sha256": "dd8d63fd2068afd62dd70ad281b7ab502d128448fa497eec8f14dcebb3b22c0b"
+    },
+    {
+      "file": "gaze-8.png",
+      "sha256": "54ad0ff7c82f600e6ed5eb7735f6b00f91824e3dee3e77707433d1dc24b263fa"
+    },
+    {
+      "file": "character-0-5.png",
+      "sha256": "340242c43f77dbf9f56a1c15badac4c1fcbff9e5afc7e65d9f18143853bc8025"
+    },
+    {
+      "file": "character-2-7.png",
+      "sha256": "b55a66525f15267374b5343540a678f6536dbb59b2016b69ee895a0b1380779c"
+    },
+    {
+      "file": "character-3-14.png",
+      "sha256": "aafc99b8b20681e7fe02e30ed46b6970299a779a50166b8aa5600b91f4819cfe"
+    },
+    {
+      "file": "character-11-9.png",
+      "sha256": "fe613988066fe2e84b542a33728a93fdd0a1d241aedd195c306e1ba62bd770b6"
+    },
+    {
+      "file": "character-4-1.png",
+      "sha256": "50f31139033fdd3964708b6aefba794d6f79af5fc3eb050325859f68e05334e3"
+    },
+    {
+      "file": "character-6-3.png",
+      "sha256": "e7a4ce0b515c55716ed5332c865b2bbd58a6381dff9eae48849dfdcab4216d3d"
+    },
+    {
+      "file": "character-6-1.png",
+      "sha256": "5db03c6d033f5b1d2b85179b1b435d7e8df5d037ebab9c3cf1c8e489d0703ec4"
+    },
+    {
+      "file": "character-4-3.png",
+      "sha256": "8fa5cd792b641c9fd0eb906da93abafd2e2af5df12824aac005950784df91096"
+    },
+    {
+      "file": "character-2-5.png",
+      "sha256": "a4131e64aef1877742843dfd9121fda08f43bffbd75736d806f8aca22725a8e6"
+    },
+    {
+      "file": "character-0-7.png",
+      "sha256": "bd4a3d6e176349e31f5d130bb320a4dff7512ecece8051f91a0643f4c2a0e413"
+    },
+    {
+      "file": "character-0-6.png",
+      "sha256": "e953bce19b36866e5b3fd23a30b2f065acd6e9bfc6b4d26bcdf3de611b002789"
+    },
+    {
+      "file": "character-2-4.png",
+      "sha256": "f248e14973bcb9a6786f6b97c9cf4c4a86e44fc7eaf03877d52ee37c565cd525"
+    },
+    {
+      "file": "character-4-2.png",
+      "sha256": "15417ca329bee901208169e077cf22a12ad22e6f25155de9b4fb5fa6e7942599"
+    },
+    {
+      "file": "character-6-0.png",
+      "sha256": "cb55b851585ccf04cd016edff9edda316c544d24b65b4f231ba7394769ae5831"
+    }
+  ],
+  "policy": "User approved separated effect remake; preserve poses,anatomy,face/Finn scale,foot positions,frame order and durations. Remove baked effects with localized image edit."
+}

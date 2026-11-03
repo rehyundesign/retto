@@ -1,0 +1,226 @@
+[
+  {
+    "state": "drag-right",
+    "frame": 0,
+    "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/state-integrated-v19/drag-right/00-source.png",
+    "editing": true,
+    "dest": "tools/jeanne-skin/motion/state-integrated-v19/drag-soft/drag-right/00-source.png"
+  },
+  {
+    "state": "drag-right",
+    "frame": 1,
+    "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/state-integrated-v19/drag-right/01-source.png",
+    "editing": true,
+    "dest": "tools/jeanne-skin/motion/state-integrated-v19/drag-soft/drag-right/01-source.png"
+  },
+  {
+    "state": "drag-right",
+    "frame": 2,
+    "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/state-integrated-v19/drag-right/02-source.png",
+    "editing": true,
+    "dest": "tools/jeanne-skin/motion/state-integrated-v19/drag-soft/drag-right/02-source.png"
+  },
+  {
+    "state": "drag-right",
+    "frame": 3,
+    "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/state-integrated-v19/drag-right/03-source.png",
+    "editing": true,
+    "dest": "tools/jeanne-skin/motion/state-integrated-v19/drag-soft/drag-right/03-source.png"
+  },
+  {
+    "state": "drag-right",
+    "frame": 4,
+    "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/state-integrated-v19/drag-right/04-source.png",
+    "editing": true,
+    "dest": "tools/jeanne-skin/motion/state-integrated-v19/drag-soft/drag-right/04-source.png"
+  },
+  {
+    "state": "drag-right",
+    "frame": 5,
+    "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/state-integrated-v19/drag-right/05-source.png",
+    "editing": true,
+    "dest": "tools/jeanne-skin/motion/state-integrated-v19/drag-soft/drag-right/05-source.png"
+  },
+  {
+    "state": "drag-right",
+    "frame": 6,
+    "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/state-integrated-v19/drag-right/06-source.png",
+    "editing": true,
+    "dest": "tools/jeanne-skin/motion/state-integrated-v19/drag-soft/drag-right/06-source.png"
+  },
+  {
+    "state": "drag-right",
+    "frame": 7,
+    "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/state-integrated-v19/drag-right/07-source.png",
+    "editing": true,
+    "dest": "tools/jeanne-skin/motion/state-integrated-v19/drag-soft/drag-right/07-source.png"
+  },
+  {
+    "state": "drag-right",
+    "frame": 8,
+    "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/state-integrated-v19/drag-right/08-source.png",
+    "editing": true,
+    "dest": "tools/jeanne-skin/motion/state-integrated-v19/drag-soft/drag-right/08-source.png"
+  },
+  {
+    "state": "drag-right",
+    "frame": 9,
+    "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/state-integrated-v19/drag-right/09-source.png",
+    "editing": true,
+    "dest": "tools/jeanne-skin/motion/state-integrated-v19/drag-soft/drag-right/09-source.png"
+  },
+  {
+    "state": "drag-right",
+    "frame": 10,
+    "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/state-integrated-v19/drag-right/10-source.png",
+    "editing": true,
+    "dest": "tools/jeanne-skin/motion/state-integrated-v19/drag-soft/drag-right/10-source.png"
+  },
+  {
+    "state": "drag-right",
+    "frame": 11,
+    "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/state-integrated-v19/drag-right/11-source.png",
+    "editing": true,
+    "dest": "tools/jeanne-skin/motion/state-integrated-v19/drag-soft/drag-right/11-source.png"
+  },
+  {
+    "state": "drag-right",
+    "frame": 12,
+    "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/state-integrated-v19/drag-right/12-source.png",
+    "editing": true,
+    "dest": "tools/jeanne-skin/motion/state-integrated-v19/drag-soft/drag-right/12-source.png"
+  },
+  {
+    "state": "drag-right",
+    "frame": 13,
+    "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/state-integrated-v19/drag-right/13-source.png",
+    "editing": true,
+    "dest": "tools/jeanne-skin/motion/state-integrated-v19/drag-soft/drag-right/13-source.png"
+  },
+  {
+    "state": "drag-right",
+    "frame": 14,
+    "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/state-integrated-v19/drag-right/14-source.png",
+    "editing": true,
+    "dest": "tools/jeanne-skin/motion/state-integrated-v19/drag-soft/drag-right/14-source.png"
+  },
+  {
+    "state": "drag-right",
+    "frame": 15,
+    "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/state-integrated-v19/drag-right/15-source.png",
+    "editing": true,
+    "dest": "tools/jeanne-skin/motion/state-integrated-v19/drag-soft/drag-right/15-source.png"
+  },
+  {
+    "state": "drag-left",
+    "frame": 0,
+    "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/state-integrated-v19/drag-left/00-source.png",
+    "editing": true,
+    "dest": "tools/jeanne-skin/motion/state-integrated-v19/drag-soft/drag-left/00-source.png"
+  },
+  {
+    "state": "drag-left",
+    "frame": 1,
+    "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/state-integrated-v19/drag-left/01-source.png",
+    "editing": true,
+    "dest": "tools/jeanne-skin/motion/state-integrated-v19/drag-soft/drag-left/01-source.png"
+  },
+  {
+    "state": "drag-left",
+    "frame": 2,
+    "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/state-integrated-v19/drag-left/02-source.png",
+    "editing": true,
+    "dest": "tools/jeanne-skin/motion/state-integrated-v19/drag-soft/drag-left/02-source.png"
+  },
+  {
+    "state": "drag-left",
+    "frame": 3,
+    "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/state-integrated-v19/drag-left/03-source.png",
+    "editing": true,
+    "dest": "tools/jeanne-skin/motion/state-integrated-v19/drag-soft/drag-left/03-source.png"
+  },
+  {
+    "state": "drag-left",
+    "frame": 4,
+    "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/state-integrated-v19/drag-left/04-source.png",
+    "editing": true,
+    "dest": "tools/jeanne-skin/motion/state-integrated-v19/drag-soft/drag-left/04-source.png"
+  },
+  {
+    "state": "drag-left",
+    "frame": 5,
+    "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/state-integrated-v19/drag-left/05-source.png",
+    "editing": true,
+    "dest": "tools/jeanne-skin/motion/state-integrated-v19/drag-soft/drag-left/05-source.png"
+  },
+  {
+    "state": "drag-left",
+    "frame": 6,
+    "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/state-integrated-v19/drag-left/06-source.png",
+    "editing": true,
+    "dest": "tools/jeanne-skin/motion/state-integrated-v19/drag-soft/drag-left/06-source.png"
+  },
+  {
+    "state": "drag-left",
+    "frame": 7,
+    "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/state-integrated-v19/drag-left/07-source.png",
+    "editing": true,
+    "dest": "tools/jeanne-skin/motion/state-integrated-v19/drag-soft/drag-left/07-source.png"
+  },
+  {
+    "state": "drag-left",
+    "frame": 8,
+    "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/state-integrated-v19/drag-left/08-source.png",
+    "editing": true,
+    "dest": "tools/jeanne-skin/motion/state-integrated-v19/drag-soft/drag-left/08-source.png"
+  },
+  {
+    "state": "drag-left",
+    "frame": 9,
+    "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/state-integrated-v19/drag-left/09-source.png",
+    "editing": true,
+    "dest": "tools/jeanne-skin/motion/state-integrated-v19/drag-soft/drag-left/09-source.png"
+  },
+  {
+    "state": "drag-left",
+    "frame": 10,
+    "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/latest-preview-assets/drag-left/10.png",
+    "editing": false,
+    "dest": "tools/jeanne-skin/motion/state-integrated-v19/drag-soft/drag-left/10-source.png"
+  },
+  {
+    "state": "drag-left",
+    "frame": 11,
+    "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/latest-preview-assets/drag-left/11.png",
+    "editing": false,
+    "dest": "tools/jeanne-skin/motion/state-integrated-v19/drag-soft/drag-left/11-source.png"
+  },
+  {
+    "state": "drag-left",
+    "frame": 12,
+    "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/latest-preview-assets/drag-left/12.png",
+    "editing": false,
+    "dest": "tools/jeanne-skin/motion/state-integrated-v19/drag-soft/drag-left/12-source.png"
+  },
+  {
+    "state": "drag-left",
+    "frame": 13,
+    "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/latest-preview-assets/drag-left/13.png",
+    "editing": false,
+    "dest": "tools/jeanne-skin/motion/state-integrated-v19/drag-soft/drag-left/13-source.png"
+  },
+  {
+    "state": "drag-left",
+    "frame": 14,
+    "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/latest-preview-assets/drag-left/14.png",
+    "editing": false,
+    "dest": "tools/jeanne-skin/motion/state-integrated-v19/drag-soft/drag-left/14-source.png"
+  },
+  {
+    "state": "drag-left",
+    "frame": 15,
+    "source": "/Users/luxia/Documents/ChatGPT/retto/tools/jeanne-skin/motion/latest-preview-assets/drag-left/15.png",
+    "editing": false,
+    "dest": "tools/jeanne-skin/motion/state-integrated-v19/drag-soft/drag-left/15-source.png"
+  }
+]

@@ -1,0 +1,128 @@
+{
+  "tool": "built-in image_gen",
+  "common": "Edit the supplied approved Christmas Retto character into ONE independent animation keyframe. Same exact ragdoll cat: cream fur, gray face markings, blue irises and their highlights, pink nose, plush proportions. Same exact red velvet Santa hat and red coat, white trim, TWO gold buttons, brown belt with square gold buckle. Preserve camera, face/head position and scale, head orientation, body proportions, hip position, tail root, lighting and rendering. Change only the explicitly described limb posture, garment folds caused by that posture, and the held prop following its hand. Do not redraw or redesign the face. Exactly FOUR attached legs. No extra/detached paws. No glow, stars, shadow, ground, text or border. No storyboard/sheet/multiple characters. Transparent background with generous margins, whole character. This is a keyframe, not a stretched or liquified copy.",
+  "poses": [
+    {
+      "id": "moveRight",
+      "key": 1,
+      "desc": "Quarter-cycle running pose: right-facing side run. The two front legs fold inward under the chest with elbows flexed, forepaws draw back toward belly. Both hind legs start folding forward under hips, one hind paw under belt and one trailing behind. Keep all four distinct attached legs, same head/torso/tail placement. This is gathering/compression after the extended stride shown."
+    },
+    {
+      "id": "moveRight",
+      "key": 2,
+      "desc": "Half-cycle running pose: right-facing side run. Compact gathered stride: hind legs reach forward underneath belly, front legs reach down and slightly back under shoulders. Four distinct attached legs with clear overlap. Body stays horizontal and same size, head stays in same place, no seated stance. Contrast the source fully extended run by actually bending the leg joints."
+    },
+    {
+      "id": "moveRight",
+      "key": 3,
+      "desc": "Three-quarter-cycle run: right-facing side run. Opposite extended stride: the farther front leg extends ahead toward the right, nearer front leg trails below shoulder. Farther hind leg extends backward left, nearer hind leg sweeps down beneath hips. All four limbs attached. Match head/torso/tail exactly; change leg angles and sleeve folds only."
+    },
+    {
+      "id": "waiting",
+      "key": 1,
+      "desc": "Seated bell animation: keep the grounded paw, hips, head, torso and rear feet EXACTLY as supplied. Move the raised front paw holding the bell ribbon a small distance toward the cat's chest, elbow flexes naturally. Bell swings approximately 15 degrees INWARD beneath this paw with taut ribbon. Preserve fixed face. No drawn chime lines."
+    },
+    {
+      "id": "waiting",
+      "key": 2,
+      "desc": "Seated bell animation: keep grounded paw, hips, head, torso and rear feet EXACTLY as supplied. Raised front paw holding ribbon moves a small distance OUTWARD from chest. Gold bell swings 15 degrees OUTWARD, opposite from source. Sleeve folds follow bent wrist. Preserve fixed face. No drawn chime lines."
+    },
+    {
+      "id": "thinking",
+      "key": 1,
+      "source": "thinking.png",
+      "desc": "Gift wrapping, first action pose. KEEP the face, head, seated torso, hips and feet exactly fixed. Viewer-right forepaw now lowers onto the top of the small green gift box and presses the short red ribbon loop near the center. Viewer-left paw steadies the box. Red ribbon is looser and its free end falls toward box front. Actual bent wrist/sleeve folds, not a warped paw. Keep same box size/position/design."
+    },
+    {
+      "id": "thinking",
+      "key": 2,
+      "source": "thinking.png",
+      "desc": "Gift wrapping, second action pose. KEEP face, head, seated torso, hips and feet exactly fixed. Viewer-right forepaw reaches a little outward and pulls the short red ribbon sideways until taut across the top of green gift box. Viewer-left paw pins ribbon crossing on top. Change wrist/foreleg joint pose and ribbon shape. Keep green box grounded exactly same place and design."
+    },
+    {
+      "id": "review",
+      "key": 1,
+      "source": "review-repair.png",
+      "desc": "Hanging a star, lowered action pose. Keep same face/camera, head, hips and grounded rear feet. Viewer-left raised forepaw lowers a little to grasp the hanging loop just BELOW the wooden hook, and viewer-right forepaw supports bottom of gold star. Gold star tilts gently toward cat, connected to loop. Do not change wooden stand, its location or star size. Actual elbow/wrist pose with sleeve folds."
+    },
+    {
+      "id": "review",
+      "key": 2,
+      "source": "review-repair.png",
+      "desc": "Hanging a star, lifted action pose. Keep same face/camera, head, hips and grounded rear feet. Viewer-left forepaw lifts the hanging loop just ABOVE wooden hook, viewer-right forepaw supports star point and extends a little. Gold star tilts gently away from cat. Same wooden stand fixed to ground, same star design/size. Actual elbow/wrist pose, exactly 4legs."
+    },
+    {
+      "id": "failed",
+      "key": 1,
+      "source": "failed-repair.png",
+      "desc": "Tangled lights action pose: keep head and sad expression, seated hips and grounded rear feet fixed. Lift viewer-left front paw slightly (one paw only) to inspect the short light cable loop, while viewer-right paw holds other end on ground. Only FIVE small bulbs, exactly same short cable colors, no added lights. Sleeve folds show bending wrist."
+    },
+    {
+      "id": "failed",
+      "key": 2,
+      "source": "failed-repair.png",
+      "desc": "Tangled lights action pose: keep head and sad expression, seated hips and rear feet fixed. Viewer-left front paw places cable back on ground; viewer-right front paw lifts its wrist slightly to inspect other end of the short tangled cable. Exactly FIVE small bulbs, same cable compact below chest. Do not make face/body smaller."
+    },
+    {
+      "id": "idle",
+      "key": 1,
+      "source": "../../assets/retto-christmas-concept.png",
+      "desc": "Calm seated blink, halfway blink. Change ONLY eyelids: both upper eyelids halfway lowered over blue irises. Preserve face pixel arrangement, cheeks, head outline, nose, ears, coat, tail, all four legs, camera and framing exactly. No changes to expression beyond closing eyelids. This is the middle of a soft sleepy blink."
+    },
+    {
+      "id": "idle",
+      "key": 2,
+      "source": "../../assets/retto-christmas-concept.png",
+      "desc": "Calm seated blink, fully closed eyes. Change ONLY eyelids: both eyes softly closed as thin relaxed natural furry eyelid curves. Preserve face cheeks, head outline, nose, ears, coat, tail, all four legs, camera and framing exactly. No smile or extra makeup."
+    },
+    {
+      "id": "sleeping",
+      "key": 1,
+      "source": "sleeping.png",
+      "desc": "Curled sleeping, first breathing keypose: keep sleeping face and all grounded folded paws exactly fixed, same tail position. Subtle natural INHALE: upper chest/back rounds upward slightly, coat over the ribcage expands just a little through different folds. Body not stretched, no large displacement. Same clothing, closed eyes, head orientation."
+    },
+    {
+      "id": "sleeping",
+      "key": 2,
+      "source": "sleeping.png",
+      "desc": "Curled sleeping, second breathing keypose: keep sleeping face and grounded folded paws exactly fixed. Subtle natural EXHALE: chest and shoulder relax down slightly from source, coat ribcage folds gently settle. Same tail and hip position. No body stretching, no change to face/eye closure or outfit."
+    },
+    {
+      "id": "jumping",
+      "key": 1,
+      "source": "jumping.png",
+      "desc": "Jump anticipation keypose: same frontal camera/face size, costume and four limbs. Allow pose height change: knees bend into a low compact crouch, both HIND feet grounded, both FRONT paws drawn close to chest with elbows flexed ready to hop. Not four paws on ground, not extra paws. Head about one-quarter head-height LOWER than source, unchanged face proportions. Same horizontal hip axis."
+    },
+    {
+      "id": "jumping",
+      "key": 2,
+      "source": "jumping.png",
+      "desc": "Jump landing keypose: same frontal camera/face size, costume and four limbs. Allow pose height change: both HIND feet grounded with knees softly flexed on landing, both FRONT paws spread outward near waist level for balance, palms point slightly inward (not raised overhead). Head about one-fifth head-height LOWER than source, exact same face proportions. Same hip horizontal axis."
+    },
+    {
+      "key": 4,
+      "desc": "Running cycle in-between: just after the source full extension. Both front wrists start bending inward (halfway toward tucked under chest), farther hind leg still extended backward, nearer hind knee starting to fold underneath hips. Keep four attached legs. Same head/torso/tail. Legs halfway extended, not fully tucked.",
+      "id": "moveRight"
+    },
+    {
+      "key": 5,
+      "desc": "Running cycle in-between: near compact recovery. Both forelegs underneath chest pointing almost straight down with slightly bent elbows, hind legs drawn forward with bent knees, rear paws together under belly but visibly two distinct hind paws. Same body/head/tail. Actual four-leg run not hopping or sitting.",
+      "id": "moveRight"
+    },
+    {
+      "key": 6,
+      "desc": "Running cycle in-between: opening into opposite stride. Farther front leg reaching forward to right about halfway extension, nearer front paw sweeps backward under chest. Farther hind leg halfway extended backward left, nearer hind knee opening downward. Same head/body/tail and four attached legs.",
+      "id": "moveRight"
+    },
+    {
+      "key": 7,
+      "desc": "Running cycle in-between: finishing opposite extension then returning to initial stride. Nearer front foreleg reaches forward and downward right with paw not as far forward as source, farther front leg bends and lifts toward chest. Nearer hind foot sweeps backward left at a slightly LOWER level than source, farther hind knee bends under hips. Same head/body/tail. Four legs clearly attached.",
+      "id": "moveRight"
+    }
+  ],
+  "repairs": {
+    "run": "Preserve head, torso, tail and clothing; bend hind knee to keep paw within approved extent, lift front wrist to retain baseline.",
+    "thinking": "Keep viewer-left paw on original gift, pull short ribbon with viewer-right paw only; preserve original small gift geometry.",
+    "waiting": "Keep outward paw displacement within 4 percent of head width and bell swing at 10 degrees; complete bell with transparent margin."
+  }
+}

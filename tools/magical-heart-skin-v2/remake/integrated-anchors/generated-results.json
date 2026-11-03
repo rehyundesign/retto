@@ -1,0 +1,130 @@
+[
+  {
+    "id": "idle-anchor",
+    "state": "idle",
+    "row": 0,
+    "frame": 0,
+    "path": "/Users/luxia/.codex/generated_images/01a132d4-e1c4-7c30-8b73-478a14e44185/exec-5f151ee2-12a3-4691-ac99-8baccc4663d6.png",
+    "status": "generated-pending-review"
+  },
+  {
+    "id": "drag-right-anchor",
+    "state": "drag-right",
+    "row": 1,
+    "frame": 0,
+    "path": "/Users/luxia/.codex/generated_images/01a132d4-e1c4-7c30-8b73-478a14e44185/exec-84aa29c4-36e6-4197-9d79-8b97947ece1c.png",
+    "status": "generated-pending-review"
+  },
+  {
+    "id": "drag-left-anchor",
+    "state": "drag-left",
+    "row": 2,
+    "frame": 0,
+    "path": "/Users/luxia/.codex/generated_images/01a132d4-e1c4-7c30-8b73-478a14e44185/exec-f573a26c-c45a-4626-b793-751834e973ea.png",
+    "status": "generated-pending-review"
+  },
+  {
+    "id": "waving-anchor",
+    "state": "waving",
+    "row": 3,
+    "frame": 0,
+    "path": "/Users/luxia/.codex/generated_images/01a132d4-e1c4-7c30-8b73-478a14e44185/exec-9762be5c-5dfa-4ef7-bb79-926064bc1861.png",
+    "status": "generated-pending-review"
+  },
+  {
+    "id": "jumping-anchor",
+    "state": "jumping",
+    "row": 4,
+    "frame": 0,
+    "path": "/Users/luxia/.codex/generated_images/01a132d4-e1c4-7c30-8b73-478a14e44185/exec-dcc7a672-d52b-4278-931a-ea999dee8c89.png",
+    "status": "generated-pending-review"
+  },
+  {
+    "id": "failed-anchor",
+    "state": "failed",
+    "row": 5,
+    "frame": 0,
+    "path": "/Users/luxia/.codex/generated_images/01a132d4-e1c4-7c30-8b73-478a14e44185/exec-e75a2953-1aa4-4490-88b6-ffdcf35b475e.png",
+    "status": "generated-pending-review"
+  },
+  {
+    "id": "waiting-anchor",
+    "state": "waiting",
+    "row": 6,
+    "frame": 0,
+    "path": "/Users/luxia/.codex/generated_images/01a132d4-e1c4-7c30-8b73-478a14e44185/exec-397d768b-5aa1-4c0d-9525-2a9ac769bd24.png",
+    "status": "generated-pending-review"
+  },
+  {
+    "id": "running-anchor",
+    "state": "running",
+    "row": 7,
+    "frame": 0,
+    "path": "/Users/luxia/.codex/generated_images/01a132d4-e1c4-7c30-8b73-478a14e44185/exec-9c71ade7-53c3-4100-ab37-370a59e3434a.png",
+    "status": "generated-pending-review"
+  },
+  {
+    "id": "review-anchor",
+    "state": "review",
+    "row": 8,
+    "frame": 0,
+    "path": "/Users/luxia/.codex/generated_images/01a132d4-e1c4-7c30-8b73-478a14e44185/exec-eac250d5-511f-491b-a8a2-a52e694d5f1b.png",
+    "status": "generated-pending-review"
+  },
+  {
+    "id": "sleeping-anchor",
+    "state": "sleeping",
+    "row": 11,
+    "frame": 0,
+    "path": "/Users/luxia/.codex/generated_images/01a132d4-e1c4-7c30-8b73-478a14e44185/exec-a0a92fb1-8668-4a05-a1cc-625ecc5badb9.png",
+    "status": "generated-pending-review"
+  },
+  {
+    "id": "idle-key-08",
+    "state": "idle",
+    "row": 0,
+    "frame": 8,
+    "path": "/Users/luxia/.codex/generated_images/01a132d4-e1c4-7c30-8b73-478a14e44185/exec-11d5e1a6-da58-4a36-8681-1f50b302562b.png",
+    "status": "generated-pending-review"
+  },
+  {
+    "id": "running-key-10",
+    "state": "running",
+    "row": 7,
+    "frame": 10,
+    "path": "/Users/luxia/.codex/generated_images/01a132d4-e1c4-7c30-8b73-478a14e44185/exec-fa54e723-da0c-4a2b-ae9e-bbe177547472.png",
+    "status": "generated-pending-review"
+  },
+  {
+    "id": "waving-key-10",
+    "state": "waving",
+    "row": 3,
+    "frame": 10,
+    "path": "/Users/luxia/.codex/generated_images/01a132d4-e1c4-7c30-8b73-478a14e44185/exec-2e266881-4cf8-4553-9829-f40a6d85b3cf.png",
+    "status": "generated-pending-review"
+  },
+  {
+    "id": "jumping-key-07",
+    "state": "jumping",
+    "row": 4,
+    "frame": 7,
+    "path": "/Users/luxia/.codex/generated_images/01a132d4-e1c4-7c30-8b73-478a14e44185/exec-e8744e8d-6fb1-4f12-96c6-b20e06385e4a.png",
+    "status": "generated-pending-review"
+  },
+  {
+    "id": "failed-key-10",
+    "state": "failed",
+    "row": 5,
+    "frame": 10,
+    "path": "/Users/luxia/.codex/generated_images/01a132d4-e1c4-7c30-8b73-478a14e44185/exec-533c5deb-37ff-40a7-a561-795ebc4e7f86.png",
+    "status": "generated-pending-review"
+  },
+  {
+    "id": "waiting-key-10",
+    "state": "waiting",
+    "row": 6,
+    "frame": 10,
+    "path": "/Users/luxia/.codex/generated_images/01a132d4-e1c4-7c30-8b73-478a14e44185/exec-af1c9edd-f155-4713-9c15-a59169309898.png",
+    "status": "generated-pending-review"
+  }
+]

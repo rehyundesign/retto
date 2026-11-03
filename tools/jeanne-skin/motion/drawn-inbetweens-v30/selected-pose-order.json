@@ -1,0 +1,14 @@
+{
+  "waving": {
+    "2": "newly drawn job01,chosen for lower intermediate height",
+    "1": "new low pickup replacing too-high first attempt"
+  },
+  "originalDrawingsKept": 17,
+  "newlyDrawnFramesSelected": 15,
+  "waiting": {
+    "2": "new job03 lower pickup",
+    "3": "new job02 upper pickup",
+    "8": "existing half-closed-eye contact preserved"
+  },
+  "selectedEdgeRepair": "waving/04-edge-candidate.png"
+}

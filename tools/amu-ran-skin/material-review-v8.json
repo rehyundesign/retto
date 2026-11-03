@@ -1,0 +1,32 @@
+{
+  "kind": "material-comparison-only",
+  "display_cell": [
+    224,
+    320
+  ],
+  "production_ready": false,
+  "registration_certified": false,
+  "reference_and_candidate": [
+    {
+      "path": "reference/hana-material-reference.png",
+      "sha256": "8ef187550a5ca43890fda32948edcd6c9597af4e7414c0cdfab00a21a988d6c7"
+    },
+    {
+      "path": "anchors/idle-heart-hana-material-v8-source.png",
+      "sha256": "399bece46a4ab55b9e0cac9ebaf55d981572676c202677a4233968d2c635491b"
+    }
+  ],
+  "ran_source_preserved": true,
+  "visual_review": {
+    "fur": "candidate uses shorter softer flocked fur than prior long-fiber version",
+    "fabric": "felt texture visible on visor, cape, skirt, ponytail accessory and pompons",
+    "shine": "satin/plastic ribbon highlights removed; natural eye highlights retained",
+    "anatomy": "two actual forelegs visible; seated rear legs occluded by torso and skirt",
+    "pending": [
+      "original and Hana profile measurements",
+      "source alpha-edge fragments and cell margin",
+      "all-pose four-limb review",
+      "actual motion and native rendering"
+    ]
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "directions": [
+    "drag-right",
+    "drag-left"
+  ],
+  "framesEach": 16,
+  "effectAmount": "approximately half of original",
+  "fullCharacterCells": true,
+  "retainPoseAndTiming": true
+}

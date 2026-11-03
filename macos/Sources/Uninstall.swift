@@ -21,6 +21,12 @@ struct UninstallOutcome {
 /// 훅 등록·상태 파일·자동 실행을 걷어낸다.
 func performUninstall(bundle: Bundle = .main) -> UninstallOutcome {
     var outcome = UninstallOutcome()
+    do {
+        try SlackKeychain.delete()
+        outcome.ok("이 맥의 Slack 연결 토큰을 삭제했습니다")
+    } catch {
+        outcome.warn("Slack 토큰을 삭제하지 못했습니다. 키체인 접근에서 com.luxia.retto.slack 항목을 확인해 주세요")
+    }
     let fileManager = FileManager.default
     let home = fileManager.homeDirectoryForCurrentUser
 

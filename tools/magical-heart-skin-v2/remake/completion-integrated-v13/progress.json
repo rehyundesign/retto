@@ -1,0 +1,23 @@
+{
+  "state": "waving",
+  "status": "incomplete_image_generation_usage_limit",
+  "requested_cells": 16,
+  "usable_integrated_cells": 4,
+  "missing_cells": [
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "character_and_effects_generated_together": true,
+  "native_app_applied": false,
+  "error": "429 usage_limit_reached"
+}

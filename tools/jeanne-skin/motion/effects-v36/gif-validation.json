@@ -1,0 +1,102 @@
+[
+  {
+    "file": "exports/idle-dark.gif",
+    "frames": 125,
+    "durationMs": 6400
+  },
+  {
+    "file": "exports/idle-white.gif",
+    "frames": 125,
+    "durationMs": 6400
+  },
+  {
+    "file": "exports/running-dark.gif",
+    "frames": 93,
+    "durationMs": 4800
+  },
+  {
+    "file": "exports/running-white.gif",
+    "frames": 93,
+    "durationMs": 4800
+  },
+  {
+    "file": "exports/review-dark.gif",
+    "frames": 125,
+    "durationMs": 6400
+  },
+  {
+    "file": "exports/review-white.gif",
+    "frames": 125,
+    "durationMs": 6400
+  },
+  {
+    "file": "exports/waiting-dark.gif",
+    "frames": 124,
+    "durationMs": 6400
+  },
+  {
+    "file": "exports/waiting-white.gif",
+    "frames": 124,
+    "durationMs": 6400
+  },
+  {
+    "file": "exports/failed-dark.gif",
+    "frames": 125,
+    "durationMs": 6400
+  },
+  {
+    "file": "exports/failed-white.gif",
+    "frames": 125,
+    "durationMs": 6400
+  },
+  {
+    "file": "exports/waving-dark.gif",
+    "frames": 94,
+    "durationMs": 4800
+  },
+  {
+    "file": "exports/waving-white.gif",
+    "frames": 94,
+    "durationMs": 4800
+  },
+  {
+    "file": "exports/jumping-dark.gif",
+    "frames": 93,
+    "durationMs": 4800
+  },
+  {
+    "file": "exports/jumping-white.gif",
+    "frames": 93,
+    "durationMs": 4800
+  },
+  {
+    "file": "exports/sleeping-dark.gif",
+    "frames": 247,
+    "durationMs": 12800
+  },
+  {
+    "file": "exports/sleeping-white.gif",
+    "frames": 247,
+    "durationMs": 12800
+  },
+  {
+    "file": "exports/drag-right-dark.gif",
+    "frames": 64,
+    "durationMs": 3200
+  },
+  {
+    "file": "exports/drag-right-white.gif",
+    "frames": 64,
+    "durationMs": 3200
+  },
+  {
+    "file": "exports/drag-left-dark.gif",
+    "frames": 64,
+    "durationMs": 3200
+  },
+  {
+    "file": "exports/drag-left-white.gif",
+    "frames": 64,
+    "durationMs": 3200
+  }
+]

@@ -1,0 +1,925 @@
+{
+  "version": 4,
+  "scope": "Complete missing waving and gaze art while preserving approved Christmas preview",
+  "mode": "registered-character",
+  "cell": {
+    "width": 448,
+    "height": 640,
+    "columns": 8,
+    "rows": 12,
+    "runtime_width": 224,
+    "runtime_height": 320
+  },
+  "groups": [
+    {
+      "id": "idle",
+      "label": "기본",
+      "source": "../../assets/retto-christmas-concept.png",
+      "frames": 6,
+      "interval": 0.23,
+      "face_box": [
+        0.16,
+        0.173,
+        0.71,
+        0.53
+      ],
+      "body_center_x": 0.415,
+      "foot_baseline_y": 0.905,
+      "center": 174,
+      "baseline": 628,
+      "target_face_width": 228,
+      "grounded": true,
+      "limbs": {
+        "front_left": "grounded",
+        "front_right": "grounded",
+        "rear_left": "behind forelegs",
+        "rear_right": "behind forelegs"
+      },
+      "pose_group": "front-seated",
+      "target_eye_gap": 73.73886130941075,
+      "pose_sequence": [
+        0,
+        0,
+        0,
+        1,
+        2,
+        1
+      ],
+      "keyframes": [
+        "../../assets/retto-christmas-concept.png",
+        "../../assets/retto-christmas-concept.png",
+        "../../assets/retto-christmas-concept.png",
+        "gen-keypose-sources/idle-1.png",
+        "gen-keypose-sources/idle-2.png",
+        "gen-keypose-sources/idle-1.png"
+      ],
+      "row": 0
+    },
+    {
+      "id": "moveRight",
+      "label": "오른쪽 이동",
+      "source": "gen-anchors/moveRight-repair.png",
+      "frames": 8,
+      "interval": 0.085,
+      "face_box": [
+        0.545,
+        0.133,
+        0.916,
+        0.639
+      ],
+      "body_center_x": 0.43,
+      "foot_baseline_y": 0.952,
+      "center": 166,
+      "baseline": 628,
+      "target_face_width": 180,
+      "grounded": false,
+      "limbs": {
+        "front_left": "forward, profile stride",
+        "front_right": "under chest, profile stride",
+        "rear_left": "backward stride",
+        "rear_right": "under hips, profile stride"
+      },
+      "pose_group": "side-running",
+      "pose_sequence": [
+        0,
+        4,
+        1,
+        5,
+        2,
+        6,
+        3,
+        7
+      ],
+      "keyframes": [
+        "gen-anchors/moveRight-repair.png",
+        "gen-keypose-sources/moveRight-4.png",
+        "gen-keypose-sources/moveRight-1.png",
+        "gen-keypose-sources/moveRight-5.png",
+        "gen-keypose-sources/moveRight-2.png",
+        "gen-keypose-sources/moveRight-6-repair.png",
+        "gen-keypose-sources/moveRight-3-repair.png",
+        "gen-keypose-sources/moveRight-7-repair.png"
+      ],
+      "row": 1
+    },
+    {
+      "id": "moveLeft",
+      "label": "왼쪽 이동",
+      "mirror": "moveRight",
+      "frames": 8,
+      "interval": 0.085,
+      "row": 2
+    },
+    {
+      "id": "waving",
+      "label": "완료 인사",
+      "row": 3,
+      "frames": 4,
+      "interval": 0.185,
+      "cycle_limit": 2,
+      "pose_sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "pose_group": "front-seated-wave",
+      "source_dir": "gen-production"
+    },
+    {
+      "id": "thinking",
+      "label": "생각 중",
+      "source": "gen-anchors/thinking.png",
+      "frames": 8,
+      "interval": 0.25,
+      "face_box": [
+        0.183,
+        0.12,
+        0.719,
+        0.585
+      ],
+      "body_center_x": 0.44,
+      "foot_baseline_y": 0.89,
+      "center": 174,
+      "baseline": 596,
+      "target_face_width": 228,
+      "grounded": true,
+      "limbs": {
+        "front_left": "on gift top",
+        "front_right": "holding ribbon",
+        "rear_left": "grounded behind gift",
+        "rear_right": "grounded behind gift"
+      },
+      "pose_group": "front-leaning",
+      "target_eye_gap": 73.73886130941075,
+      "pose_sequence": [
+        0,
+        1,
+        2,
+        2,
+        1,
+        0,
+        0,
+        0
+      ],
+      "keyframes": [
+        "gen-anchors/thinking.png",
+        "gen-keypose-sources/thinking-1.png",
+        "gen-keypose-sources/thinking-2-repair.png",
+        "gen-keypose-sources/thinking-2-repair.png",
+        "gen-keypose-sources/thinking-1.png",
+        "gen-anchors/thinking.png",
+        "gen-anchors/thinking.png",
+        "gen-anchors/thinking.png"
+      ],
+      "row": 7
+    },
+    {
+      "id": "review",
+      "label": "도구 사용",
+      "source": "gen-anchors/review-repair.png",
+      "frames": 6,
+      "interval": 0.155,
+      "face_box": [
+        0.22,
+        0.19,
+        0.8,
+        0.55
+      ],
+      "body_center_x": 0.51,
+      "foot_baseline_y": 0.888,
+      "center": 208,
+      "baseline": 628,
+      "target_face_width": 228,
+      "grounded": true,
+      "limbs": {
+        "front_left": "holding hanger",
+        "front_right": "steadying ornament",
+        "rear_left": "grounded under coat",
+        "rear_right": "grounded under coat"
+      },
+      "pose_group": "three-quarter-crouched",
+      "pose_sequence": [
+        0,
+        1,
+        2,
+        2,
+        1,
+        0
+      ],
+      "keyframes": [
+        "gen-anchors/review-repair.png",
+        "gen-keypose-sources/review-1.png",
+        "gen-keypose-sources/review-2.png",
+        "gen-keypose-sources/review-2.png",
+        "gen-keypose-sources/review-1.png",
+        "gen-anchors/review-repair.png"
+      ],
+      "row": 8
+    },
+    {
+      "id": "waiting",
+      "label": "입력 대기",
+      "source": "gen-anchors/waiting.png",
+      "frames": 6,
+      "interval": 0.31,
+      "face_box": [
+        0.16,
+        0.17,
+        0.71,
+        0.53
+      ],
+      "body_center_x": 0.415,
+      "foot_baseline_y": 0.917,
+      "center": 174,
+      "baseline": 628,
+      "target_face_width": 228,
+      "grounded": true,
+      "limbs": {
+        "front_left": "grounded",
+        "front_right": "raised holding bell",
+        "rear_left": "grounded behind foreleg",
+        "rear_right": "grounded beneath body"
+      },
+      "pose_group": "front-head-tilt",
+      "target_eye_gap": 73.73886130941075,
+      "pose_sequence": [
+        0,
+        1,
+        0,
+        2,
+        0,
+        0
+      ],
+      "keyframes": [
+        "gen-anchors/waiting.png",
+        "gen-keypose-sources/waiting-1.png",
+        "gen-anchors/waiting.png",
+        "gen-keypose-sources/waiting-2-repair.png",
+        "gen-anchors/waiting.png",
+        "gen-anchors/waiting.png"
+      ],
+      "row": 6
+    },
+    {
+      "id": "failed",
+      "label": "실패",
+      "source": "gen-anchors/failed-repair.png",
+      "frames": 8,
+      "interval": 0.18,
+      "face_box": [
+        0.16,
+        0.23,
+        0.75,
+        0.55
+      ],
+      "body_center_x": 0.415,
+      "foot_baseline_y": 0.9075,
+      "center": 174,
+      "baseline": 626,
+      "target_face_width": 228,
+      "grounded": true,
+      "limbs": {
+        "front_left": "grounded cable across wrist",
+        "front_right": "grounded cable across wrist",
+        "rear_left": "behind forelegs and coat",
+        "rear_right": "behind forelegs and coat"
+      },
+      "pose_group": "front-ears-down",
+      "target_eye_gap": 73.73886130941075,
+      "pose_sequence": [
+        0,
+        1,
+        1,
+        0,
+        2,
+        2,
+        0,
+        0
+      ],
+      "keyframes": [
+        "gen-anchors/failed-repair.png",
+        "gen-keypose-sources/failed-1.png",
+        "gen-keypose-sources/failed-1.png",
+        "gen-anchors/failed-repair.png",
+        "gen-keypose-sources/failed-2.png",
+        "gen-keypose-sources/failed-2.png",
+        "gen-anchors/failed-repair.png",
+        "gen-anchors/failed-repair.png"
+      ],
+      "row": 5
+    },
+    {
+      "id": "jumping",
+      "label": "시작",
+      "source": "gen-anchors/jumping.png",
+      "frames": 5,
+      "interval": 0.15,
+      "face_box": [
+        0.17,
+        0.085,
+        0.731,
+        0.475
+      ],
+      "body_center_x": 0.475,
+      "foot_baseline_y": 0.91,
+      "center": 201,
+      "baseline": 628,
+      "target_face_width": 228,
+      "grounded": false,
+      "limbs": {
+        "front_left": "raised, grounded counterpart absent",
+        "front_right": "raised, grounded counterpart absent",
+        "rear_left": "extended under torso",
+        "rear_right": "extended under torso"
+      },
+      "pose_group": "front-standing-airborne",
+      "target_eye_gap": 73.73886130941075,
+      "pose_sequence": [
+        1,
+        0,
+        0,
+        0,
+        2
+      ],
+      "keyframes": [
+        "gen-keypose-sources/jumping-1.png",
+        "gen-anchors/jumping.png",
+        "gen-anchors/jumping.png",
+        "gen-anchors/jumping.png",
+        "gen-keypose-sources/jumping-2.png"
+      ],
+      "row": 4
+    },
+    {
+      "id": "sleeping",
+      "label": "잠자기",
+      "source": "gen-anchors/sleeping.png",
+      "frames": 6,
+      "interval": 0.46,
+      "face_box": [
+        0.065,
+        0.209,
+        0.531,
+        0.752
+      ],
+      "body_center_x": 0.7,
+      "foot_baseline_y": 0.85,
+      "center": 306,
+      "baseline": 626,
+      "target_face_width": 216,
+      "grounded": true,
+      "limbs": {
+        "front_left": "folded under muzzle",
+        "front_right": "folded under muzzle",
+        "rear_left": "occluded by reclining torso",
+        "rear_right": "partially visible tucked under coat"
+      },
+      "pose_group": "reclining-head-roll",
+      "pose_sequence": [
+        0,
+        1,
+        1,
+        0,
+        2,
+        2
+      ],
+      "keyframes": [
+        "gen-anchors/sleeping.png",
+        "gen-keypose-sources/sleeping-1.png",
+        "gen-keypose-sources/sleeping-1.png",
+        "gen-anchors/sleeping.png",
+        "gen-keypose-sources/sleeping-2.png",
+        "gen-keypose-sources/sleeping-2.png"
+      ],
+      "row": 11
+    }
+  ],
+  "anchors": [
+    {
+      "id": "anchor-01",
+      "group": "idle",
+      "frame": 0,
+      "canonical_base_cell": [
+        0,
+        0
+      ],
+      "destination": [
+        0,
+        0
+      ],
+      "view": "front-seated",
+      "status": "approved-preview-locked"
+    },
+    {
+      "id": "anchor-02",
+      "group": "thinking",
+      "frame": 0,
+      "canonical_base_cell": [
+        7,
+        0
+      ],
+      "destination": [
+        7,
+        0
+      ],
+      "view": "front-leaning",
+      "status": "approved-preview-locked"
+    },
+    {
+      "id": "anchor-03",
+      "group": "review",
+      "frame": 0,
+      "canonical_base_cell": [
+        8,
+        0
+      ],
+      "destination": [
+        8,
+        0
+      ],
+      "view": "three-quarter-crouched",
+      "status": "approved-preview-locked"
+    },
+    {
+      "id": "anchor-04",
+      "group": "waiting",
+      "frame": 0,
+      "canonical_base_cell": [
+        6,
+        0
+      ],
+      "destination": [
+        6,
+        0
+      ],
+      "view": "front-head-tilt",
+      "status": "approved-preview-locked"
+    },
+    {
+      "id": "anchor-05",
+      "group": "failed",
+      "frame": 0,
+      "canonical_base_cell": [
+        5,
+        0
+      ],
+      "destination": [
+        5,
+        0
+      ],
+      "view": "front-ears-down",
+      "status": "approved-preview-locked"
+    },
+    {
+      "id": "anchor-06",
+      "group": "waving",
+      "frame": 0,
+      "canonical_base_cell": [
+        3,
+        0
+      ],
+      "destination": [
+        3,
+        0
+      ],
+      "view": "front-seated-wave",
+      "status": "new"
+    },
+    {
+      "id": "anchor-07",
+      "group": "jumping",
+      "frame": 1,
+      "canonical_base_cell": [
+        4,
+        1
+      ],
+      "destination": [
+        4,
+        1
+      ],
+      "view": "front-standing-airborne",
+      "status": "approved-preview-locked"
+    },
+    {
+      "id": "anchor-08",
+      "group": "sleeping",
+      "frame": 0,
+      "canonical_base_cell": [
+        11,
+        0
+      ],
+      "destination": [
+        11,
+        0
+      ],
+      "view": "reclining-head-roll",
+      "status": "approved-preview-locked"
+    },
+    {
+      "id": "anchor-09",
+      "group": "moveRight",
+      "frame": 0,
+      "canonical_base_cell": [
+        1,
+        0
+      ],
+      "destination": [
+        1,
+        0
+      ],
+      "view": "side-running",
+      "status": "approved-preview-locked"
+    },
+    {
+      "id": "anchor-10",
+      "group": "moveLeft",
+      "frame": 0,
+      "canonical_base_cell": [
+        2,
+        0
+      ],
+      "destination": [
+        2,
+        0
+      ],
+      "view": "side-running",
+      "status": "approved-preview-locked"
+    },
+    {
+      "id": "anchor-11",
+      "group": "thinking",
+      "frame": 1,
+      "canonical_base_cell": [
+        7,
+        1
+      ],
+      "destination": [
+        7,
+        1
+      ],
+      "view": "front-leaning",
+      "status": "approved-preview-locked"
+    },
+    {
+      "id": "anchor-12",
+      "group": "review",
+      "frame": 2,
+      "canonical_base_cell": [
+        8,
+        2
+      ],
+      "destination": [
+        8,
+        2
+      ],
+      "view": "three-quarter-crouched",
+      "status": "approved-preview-locked"
+    },
+    {
+      "id": "anchor-13",
+      "group": "waiting",
+      "frame": 1,
+      "canonical_base_cell": [
+        6,
+        1
+      ],
+      "destination": [
+        6,
+        1
+      ],
+      "view": "front-head-tilt",
+      "status": "approved-preview-locked"
+    },
+    {
+      "id": "anchor-14",
+      "group": "failed",
+      "frame": 4,
+      "canonical_base_cell": [
+        5,
+        4
+      ],
+      "destination": [
+        5,
+        4
+      ],
+      "view": "front-ears-down",
+      "status": "approved-preview-locked"
+    },
+    {
+      "id": "anchor-15",
+      "group": "jumping",
+      "frame": 0,
+      "canonical_base_cell": [
+        4,
+        0
+      ],
+      "destination": [
+        4,
+        0
+      ],
+      "view": "front-standing-airborne",
+      "status": "approved-preview-locked"
+    },
+    {
+      "id": "anchor-16",
+      "group": "sleeping",
+      "frame": 1,
+      "canonical_base_cell": [
+        11,
+        1
+      ],
+      "destination": [
+        11,
+        1
+      ],
+      "view": "reclining-head-roll",
+      "status": "approved-preview-locked"
+    }
+  ],
+  "gaze": [
+    {
+      "id": "gaze-0",
+      "direction": 0,
+      "degrees_clockwise_from_up": 0,
+      "row": 9,
+      "column": 0,
+      "frames": 1,
+      "interval": 1,
+      "canonical_base_cell": [
+        9,
+        0
+      ]
+    },
+    {
+      "id": "gaze-1",
+      "direction": 1,
+      "degrees_clockwise_from_up": 22.5,
+      "row": 9,
+      "column": 1,
+      "frames": 1,
+      "interval": 1,
+      "canonical_base_cell": [
+        9,
+        1
+      ]
+    },
+    {
+      "id": "gaze-2",
+      "direction": 2,
+      "degrees_clockwise_from_up": 45,
+      "row": 9,
+      "column": 2,
+      "frames": 1,
+      "interval": 1,
+      "canonical_base_cell": [
+        9,
+        2
+      ]
+    },
+    {
+      "id": "gaze-3",
+      "direction": 3,
+      "degrees_clockwise_from_up": 67.5,
+      "row": 9,
+      "column": 3,
+      "frames": 1,
+      "interval": 1,
+      "canonical_base_cell": [
+        9,
+        3
+      ]
+    },
+    {
+      "id": "gaze-4",
+      "direction": 4,
+      "degrees_clockwise_from_up": 90,
+      "row": 9,
+      "column": 4,
+      "frames": 1,
+      "interval": 1,
+      "canonical_base_cell": [
+        9,
+        4
+      ]
+    },
+    {
+      "id": "gaze-5",
+      "direction": 5,
+      "degrees_clockwise_from_up": 112.5,
+      "row": 9,
+      "column": 5,
+      "frames": 1,
+      "interval": 1,
+      "canonical_base_cell": [
+        9,
+        5
+      ]
+    },
+    {
+      "id": "gaze-6",
+      "direction": 6,
+      "degrees_clockwise_from_up": 135,
+      "row": 9,
+      "column": 6,
+      "frames": 1,
+      "interval": 1,
+      "canonical_base_cell": [
+        9,
+        6
+      ]
+    },
+    {
+      "id": "gaze-7",
+      "direction": 7,
+      "degrees_clockwise_from_up": 157.5,
+      "row": 9,
+      "column": 7,
+      "frames": 1,
+      "interval": 1,
+      "canonical_base_cell": [
+        9,
+        7
+      ]
+    },
+    {
+      "id": "gaze-8",
+      "direction": 8,
+      "degrees_clockwise_from_up": 180,
+      "row": 10,
+      "column": 0,
+      "frames": 1,
+      "interval": 1,
+      "canonical_base_cell": [
+        10,
+        0
+      ]
+    },
+    {
+      "id": "gaze-9",
+      "direction": 9,
+      "degrees_clockwise_from_up": 202.5,
+      "row": 10,
+      "column": 1,
+      "frames": 1,
+      "interval": 1,
+      "canonical_base_cell": [
+        10,
+        1
+      ]
+    },
+    {
+      "id": "gaze-10",
+      "direction": 10,
+      "degrees_clockwise_from_up": 225,
+      "row": 10,
+      "column": 2,
+      "frames": 1,
+      "interval": 1,
+      "canonical_base_cell": [
+        10,
+        2
+      ]
+    },
+    {
+      "id": "gaze-11",
+      "direction": 11,
+      "degrees_clockwise_from_up": 247.5,
+      "row": 10,
+      "column": 3,
+      "frames": 1,
+      "interval": 1,
+      "canonical_base_cell": [
+        10,
+        3
+      ]
+    },
+    {
+      "id": "gaze-12",
+      "direction": 12,
+      "degrees_clockwise_from_up": 270,
+      "row": 10,
+      "column": 4,
+      "frames": 1,
+      "interval": 1,
+      "canonical_base_cell": [
+        10,
+        4
+      ]
+    },
+    {
+      "id": "gaze-13",
+      "direction": 13,
+      "degrees_clockwise_from_up": 292.5,
+      "row": 10,
+      "column": 5,
+      "frames": 1,
+      "interval": 1,
+      "canonical_base_cell": [
+        10,
+        5
+      ]
+    },
+    {
+      "id": "gaze-14",
+      "direction": 14,
+      "degrees_clockwise_from_up": 315,
+      "row": 10,
+      "column": 6,
+      "frames": 1,
+      "interval": 1,
+      "canonical_base_cell": [
+        10,
+        6
+      ]
+    },
+    {
+      "id": "gaze-15",
+      "direction": 15,
+      "degrees_clockwise_from_up": 337.5,
+      "row": 10,
+      "column": 7,
+      "frames": 1,
+      "interval": 1,
+      "canonical_base_cell": [
+        10,
+        7
+      ]
+    }
+  ],
+  "used_cells": 81,
+  "state_cells": 49,
+  "drag_cells": 16,
+  "gaze_cells": 16,
+  "unused_cells": 15,
+  "locked_character_hashes": {
+    "gen-festive/idle-0-character.png": "a09d0ec30ce2001c47ac87e9f114c86941b1d90b9de5166c6ca09046aab83796",
+    "gen-festive/idle-1-character.png": "a09d0ec30ce2001c47ac87e9f114c86941b1d90b9de5166c6ca09046aab83796",
+    "gen-festive/idle-2-character.png": "a09d0ec30ce2001c47ac87e9f114c86941b1d90b9de5166c6ca09046aab83796",
+    "gen-festive/idle-3-character.png": "ebd3b7273219c0682a1bf383bef2a9aecdbf3644f6e169acf9d16fc161b44896",
+    "gen-festive/idle-4-character.png": "08c9415fec6042195c24a7edaa17bebb9f0b0e49186cd98e658204c4269b4eeb",
+    "gen-festive/idle-5-character.png": "ebd3b7273219c0682a1bf383bef2a9aecdbf3644f6e169acf9d16fc161b44896",
+    "gen-festive/moveRight-0-character.png": "62c720db10b0bf60170d737449fecd7e712c5576deb98533c1adc4987ad13f57",
+    "gen-festive/moveRight-1-character.png": "6b2fb879bb7a71773b387464b9a836826c9579e734659bf07ae270ef38f0a754",
+    "gen-festive/moveRight-2-character.png": "59f2f31ee737d13ca8024e1bda6e52a4bb375834895d1041059b7e7470342a2b",
+    "gen-festive/moveRight-3-character.png": "dd144ee400e6f811e09a8e864e3b9efabbdd85b6a78027f776df227db3f25697",
+    "gen-festive/moveRight-4-character.png": "2aa51ff065b708e160ef5d6455e54418e7d3f68dff4fb894d0dd35d34eb4d123",
+    "gen-festive/moveRight-5-character.png": "2549c83f707a456b0304a38114ade26284719521385b0860a58147dd0ca178a0",
+    "gen-festive/moveRight-6-character.png": "66d9c10830bd8fd3f67e5b94c03882189155fdbf04059878465c1cc857942a89",
+    "gen-festive/moveRight-7-character.png": "5d7d73bc14a04e2257d8f18a3817333a4c99798a70415efb559cbe274b9db0f3",
+    "gen-festive/moveLeft-0-character.png": "f902df7483e1d576e83251bb7f48fba3bb661bd67b0d17975b52d189d5be1f31",
+    "gen-festive/moveLeft-1-character.png": "2ef6e0ce6b4ced8293c79c4641d2ce28b286af6479cc84b95ccd1c3e37fd38a5",
+    "gen-festive/moveLeft-2-character.png": "e7dddc035460267e1290b691c36d47cca6d0004d2cd4b25fe4dec89bb5e33d80",
+    "gen-festive/moveLeft-3-character.png": "3ca25b5aae522f21142db8442e28b02a4feaebc0c73bf29f865c5f48e60f7ee8",
+    "gen-festive/moveLeft-4-character.png": "921d78ff08f369fbc41ea963c136176b753f24715b76f697ab6956e0c306ea93",
+    "gen-festive/moveLeft-5-character.png": "e97990e8f3797c8b3a241b6a9aebb016517fa93b7d792ec6eaaf1ccb40a6ca18",
+    "gen-festive/moveLeft-6-character.png": "08c9a13f5de3d5a120d1376cc731217d56e2c9b139f1ee5a36079988f4686bec",
+    "gen-festive/moveLeft-7-character.png": "de285d692710f41cd8ceac7b477ace524ae7cd88e3ca74849e741bb4606744bf",
+    "gen-festive/thinking-0-character.png": "b5d67accfeffe379f03640ae1ed45705f2741cd7ceffe0ac677d3ca7671504ae",
+    "gen-festive/thinking-1-character.png": "669876bb66f2446c7d633b984fadab51f858f2f8c1a1c23d6cf9d2306ae9b4b0",
+    "gen-festive/thinking-2-character.png": "e7e9d2885039b853918cfbb087d1e6a25a5cbb1b7ec05f5bba7fe8ac4c099fb1",
+    "gen-festive/thinking-3-character.png": "e7e9d2885039b853918cfbb087d1e6a25a5cbb1b7ec05f5bba7fe8ac4c099fb1",
+    "gen-festive/thinking-4-character.png": "669876bb66f2446c7d633b984fadab51f858f2f8c1a1c23d6cf9d2306ae9b4b0",
+    "gen-festive/thinking-5-character.png": "b5d67accfeffe379f03640ae1ed45705f2741cd7ceffe0ac677d3ca7671504ae",
+    "gen-festive/thinking-6-character.png": "b5d67accfeffe379f03640ae1ed45705f2741cd7ceffe0ac677d3ca7671504ae",
+    "gen-festive/thinking-7-character.png": "b5d67accfeffe379f03640ae1ed45705f2741cd7ceffe0ac677d3ca7671504ae",
+    "gen-festive/review-0-character.png": "39900046d30374453bb124f0317179cd3ebfe1d5b48f14f30bd396260e64728f",
+    "gen-festive/review-1-character.png": "3606a49cefedbec4ceab1d0d69ca3297d814eb6c1d826b1286628470eda9787b",
+    "gen-festive/review-2-character.png": "35dfe3562c65a5987f2cf3c1c54f8b9c05b65d9c8047bd0b85aaef648057dee8",
+    "gen-festive/review-3-character.png": "35dfe3562c65a5987f2cf3c1c54f8b9c05b65d9c8047bd0b85aaef648057dee8",
+    "gen-festive/review-4-character.png": "3606a49cefedbec4ceab1d0d69ca3297d814eb6c1d826b1286628470eda9787b",
+    "gen-festive/review-5-character.png": "39900046d30374453bb124f0317179cd3ebfe1d5b48f14f30bd396260e64728f",
+    "gen-festive/waiting-0-character.png": "1de95abb4a9ed538b003e08088d2bec8321592bada5e74f487331741aa62a79a",
+    "gen-festive/waiting-1-character.png": "43ee7fc475096a9a569c33528e2c496ab92a7256e39d6347612cc6bf714db5a1",
+    "gen-festive/waiting-2-character.png": "1de95abb4a9ed538b003e08088d2bec8321592bada5e74f487331741aa62a79a",
+    "gen-festive/waiting-3-character.png": "1332efe4399cffcf52661eca9f5d2394fcd2ee7276ab93f83408c5eb15cb4d1d",
+    "gen-festive/waiting-4-character.png": "1de95abb4a9ed538b003e08088d2bec8321592bada5e74f487331741aa62a79a",
+    "gen-festive/waiting-5-character.png": "1de95abb4a9ed538b003e08088d2bec8321592bada5e74f487331741aa62a79a",
+    "gen-festive/failed-0-character.png": "3225eba502484d71f305fcd67d8b86d4238a380e816e8b2a55ee2c45c64c821f",
+    "gen-festive/failed-1-character.png": "69250a8cfcc4b9374c5389a543da2519afbe056bf104192c40bb3f28abc760ee",
+    "gen-festive/failed-2-character.png": "69250a8cfcc4b9374c5389a543da2519afbe056bf104192c40bb3f28abc760ee",
+    "gen-festive/failed-3-character.png": "3225eba502484d71f305fcd67d8b86d4238a380e816e8b2a55ee2c45c64c821f",
+    "gen-festive/failed-4-character.png": "4d5440e235c323270d15d0fa67756cfc805055e02c59bbbc5015c5fd46d937bd",
+    "gen-festive/failed-5-character.png": "4d5440e235c323270d15d0fa67756cfc805055e02c59bbbc5015c5fd46d937bd",
+    "gen-festive/failed-6-character.png": "3225eba502484d71f305fcd67d8b86d4238a380e816e8b2a55ee2c45c64c821f",
+    "gen-festive/failed-7-character.png": "3225eba502484d71f305fcd67d8b86d4238a380e816e8b2a55ee2c45c64c821f",
+    "gen-festive/jumping-0-character.png": "a72ca8c2f39c81af9d605cf6e73c80fa2c18a2909b1bfa55ca6f8e0531fcb646",
+    "gen-festive/jumping-1-character.png": "03d4b7c93669c21ce6a1effc14d73a08daded911134e9adb3807368ee0091473",
+    "gen-festive/jumping-2-character.png": "2b1dcd1ef84cf3df7dd704180d49155af1ee9b5109f911e3086e61aa97257956",
+    "gen-festive/jumping-3-character.png": "03d4b7c93669c21ce6a1effc14d73a08daded911134e9adb3807368ee0091473",
+    "gen-festive/jumping-4-character.png": "cea6a1f4cc20bdabbb563f26491f0117b6193ddec0b42af8c38f62028372c5fc",
+    "gen-festive/sleeping-0-character.png": "f470370aa88069efeea71a7a70dcc1052a2fb14ef8b3213a3f08738cb42fc4c7",
+    "gen-festive/sleeping-1-character.png": "99c2533eeac16017578cb6e56097ade6b887f5753132209f15be9f8e2df0ace5",
+    "gen-festive/sleeping-2-character.png": "99c2533eeac16017578cb6e56097ade6b887f5753132209f15be9f8e2df0ace5",
+    "gen-festive/sleeping-3-character.png": "f470370aa88069efeea71a7a70dcc1052a2fb14ef8b3213a3f08738cb42fc4c7",
+    "gen-festive/sleeping-4-character.png": "bb04dae979ca590f66c4540f498525366e7841452481f00593689736d775fbc3",
+    "gen-festive/sleeping-5-character.png": "bb04dae979ca590f66c4540f498525366e7841452481f00593689736d775fbc3"
+  },
+  "layer_order": [
+    "effect_back",
+    "character",
+    "effect_front"
+  ],
+  "costume": "Approved Santa hat, red plush coat, white collar/cuffs, two gold buttons, brown belt with square gold buckle",
+  "registration_note": "Existing approved pose variants are locked. New gaze head views use corresponding original Retto gaze cells as direction references; torso remains the approved seated master. Record original-reference differences separately from preview consistency."
+}

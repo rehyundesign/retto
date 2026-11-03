@@ -1,0 +1,17 @@
+{
+  "kind": "design-only-board",
+  "production_ready": false,
+  "not_an_atlas_source": true,
+  "display_height_not_registration": 330,
+  "sources": [
+    {
+      "path": "anchors/idle-school-source.png",
+      "sha256": "5225312d506f69d10df69e5806e59ea03c5ac21f55adda9a4c36355e8d5c44cf"
+    },
+    {
+      "path": "anchors/idle-heart-ornate-v3-source.png",
+      "sha256": "8e3b4b98592e4eae6366120b16cc5461d9809a44346b4c57be026b6c77cb872e"
+    }
+  ],
+  "ran_sha256": "e8b38700dc9a888c9b8a50ca347d9ace039c84768211966fb9ed1c1d294eb41b"
+}

@@ -1,0 +1,12 @@
+{
+  "changedEffectStates": [
+    "idle",
+    "running",
+    "waving"
+  ],
+  "unchangedOtherEffectStates": 7,
+  "unchangedCharacterPngs": 144,
+  "characterTimingAndAttachmentPreserved": true,
+  "gifDurationChecks": 6,
+  "nativeInstalled": false
+}

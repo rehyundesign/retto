@@ -1,0 +1,53 @@
+{
+  "kind": "static-pet-composition",
+  "source_cell": [
+    448,
+    640
+  ],
+  "runtime_display": [
+    224,
+    320
+  ],
+  "character": {
+    "path": "anchors/A07-face-repair-v3.png",
+    "sha256": "a7226d1c9a912f7305275b4d159eef42be393ca7bef01a65735d6b9d2c31ee51",
+    "redrawn": false
+  },
+  "companion": {
+    "path": "reference/ran-sculpted-v10-source.png",
+    "sha256": "1c7a4862a350dd012e1cb9d8ed546163a0801e6bb8ee16077b28689825ab5181",
+    "redrawn": false,
+    "position_2x": [
+      360,
+      282
+    ],
+    "size_2x": [
+      76,
+      90
+    ]
+  },
+  "layers": [
+    "character",
+    "ran"
+  ],
+  "source_hash_preservation": true,
+  "candidate": "amu-ran-pet-a07-face-v3.png",
+  "runtime_review": "pet-review-a07-face-v3-1x.png",
+  "animated": false,
+  "production_ready": false,
+  "installed": false,
+  "visual_review": {
+    "pose": "two central forelegs and two smaller outer rear paws visible; four limbs total",
+    "cape": "one broad shoulder/upper-chest mantle with pink lining and red edge",
+    "pendant": "single visibly suspended Guardian Egg",
+    "floor_pompons": "removed, including wrist loops",
+    "companion": "Ran floats beside shoulder, separate from visor/face/cape"
+  },
+  "remaining": [
+    "all static anchors",
+    "independent motion",
+    "gaze",
+    "effects",
+    "strict cell registration and native review"
+  ]
+}

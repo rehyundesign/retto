@@ -1,0 +1,17 @@
+{
+  "kind": "design-only-board",
+  "production_ready": false,
+  "not_an_atlas_source": true,
+  "display_height_not_registration": 330,
+  "sources": [
+    {
+      "path": "anchors/idle-school-source.png",
+      "sha256": "5225312d506f69d10df69e5806e59ea03c5ac21f55adda9a4c36355e8d5c44cf"
+    },
+    {
+      "path": "anchors/idle-heart-cape-pose-v9-source.png",
+      "sha256": "0ed91b021ad472f22b6767a255d617f5c197f96c3686c6b934f6ef0b5be000ca"
+    }
+  ],
+  "ran_sha256": "e8b38700dc9a888c9b8a50ca347d9ace039c84768211966fb9ed1c1d294eb41b"
+}

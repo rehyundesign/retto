@@ -1,0 +1,33 @@
+{
+  "preserved_resource_files": 11178,
+  "modified_baseline_sources": [
+    "Tones.swift",
+    "Geometry.swift",
+    "PetView.swift",
+    "main.swift"
+  ],
+  "added_sources": 4,
+  "baseline_checkout": "/Users/luxia/Documents/ChatGPT/retto-installed",
+  "approval": "install Amu and preserve other skins",
+  "source_commit": "739e65aad",
+  "installed": "/Users/luxia/Applications/Retto.app",
+  "backup": "/private/tmp/retto-amu-install-8cbaph4l/Retto-before-amu.bundle",
+  "executable_sha256": "be2460f08d068556bc8fde3fd328e46f779da5f4767af3f872bde79b39d30ef6",
+  "signature": true,
+  "selected_skin": "amuRan",
+  "selection_verified": "native menu and UserDefaults",
+  "installed_self_test": {
+    "ok": true,
+    "skins": 13,
+    "skinsOK": true,
+    "assetOK": true
+  },
+  "amu_clock_test": "passed",
+  "native_motion_boards": 160,
+  "native_gaze_boards": 4,
+  "approved_native_pixel_match": "164 boards, identical pixels",
+  "amu_resource_hashes_verified": 1825,
+  "runtime_visual_verified": true,
+  "other_checkout_modified": false,
+  "published": false
+}

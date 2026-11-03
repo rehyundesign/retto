@@ -1,0 +1,62 @@
+{
+  "model": "FILM PyTorch CPU",
+  "nativeAppPlayback": "not checked",
+  "originalAbsoluteRegistration": "not certified",
+  "states": [
+    {
+      "id": "waving",
+      "originalIndependentDrawings": 16,
+      "modelInferredMidpoints": 16,
+      "playbackFrames": 32,
+      "cycleMs": 2400,
+      "originalPixelsPreserved": true,
+      "matting": "paired black/white RGB inference; reconstructed soft alpha",
+      "sourceHashes": [
+        "6be8594a32a003c0c523d89065effdc755c3dea8ec86b209d5b3fc0ef44f606d",
+        "ed0923125fdf73d3e99af00c7d0b3175b03de55970750bc5ee6cf43e18cb1f22",
+        "0aaad13c25b9888bd9a1057fd649b560e76d3888625e0ca56e6670b38886f134",
+        "3413276c611a24777cb3e508eb23a0a4d77f76ff89438ef636e707dd1b3b726a",
+        "5e8f5b7ca3b92570139592833cd32c13d5e0aa408971637e1bfad3dadb7e895a",
+        "dec7ce1c8d72c599490f898c11865abd386aadd93c679e3d20dd89b910b4be57",
+        "21413e7a94f1c24bbbc8399b494f0310a6d23c4292ca25ec77c7f1b13cbf3652",
+        "d658c95c121ab85164a189902f256c60c5c761175d4257471feae13a7782542b",
+        "39a870ca219dc602a2524099cb13c3c3cedfc2c7d6ea08d0b37fe32a5a2d7019",
+        "bc19ae78ad22a2efc18a6c7d4074cf2302736ab2588dfb275974cd9810eef45f",
+        "da82bc445f1710c9d3fcbd9680dbfe47c414f66a37b3096b3464e6e7092190d3",
+        "cf777807eaeefe20dc15ae6c94cb6d9908c15c482fbad6a4d339f2ab9f3837bc",
+        "29f763717d916a53e271a0bc13dd4101d60f945187fcb6f40a7b8c6736ce1e85",
+        "1cb2032cad85baa194ba3745711126fcc95b6753c6e2ac7bde300deafb2cf093",
+        "aafc99b8b20681e7fe02e30ed46b6970299a779a50166b8aa5600b91f4819cfe",
+        "3ef2e49c90624226f577b47b667f558365cb8f34b5c7143c646d0b63e23ab923"
+      ]
+    },
+    {
+      "id": "waiting",
+      "originalIndependentDrawings": 16,
+      "modelInferredMidpoints": 16,
+      "playbackFrames": 32,
+      "cycleMs": 3200,
+      "originalPixelsPreserved": true,
+      "matting": "paired black/white RGB inference; reconstructed soft alpha",
+      "sourceHashes": [
+        "cb55b851585ccf04cd016edff9edda316c544d24b65b4f231ba7394769ae5831",
+        "dff3ca4fa126419413dc95f0d166fcb26e977bac3e8dffc2dc28d4ce4598eb9e",
+        "d92ce9d970788e60233787436e422cc318d5259f8cd3368af3674142ecd4aaef",
+        "e3ef2664eef91a19dd7e17a965c8a1e55853bea1761082339b60b1a585351c17",
+        "ec371c7bb952e1a8c849f5a2df049d52e14984a8b7d666379f99bee9a9906da3",
+        "6ec0b11adbc6a3c3d37853e0026dc6622e235a0a085f77c9a4de2087f4a1a7bc",
+        "ad69257003dd697a088b1d581182b2bd76f0b3c408326bdf0fc8a4ed2f3dd591",
+        "1ef869351a71d496d4e6c490c23cbefae58f20954c30f88ec443bb6e71312b71",
+        "5fd920bb1243e048005ad763cc612e58230ec2a4d3a52b002dcf18081f9a744c",
+        "5458d50f53a7634eb7a641bdf9752c44e90ed2fab255de29c97a25d097fe2693",
+        "b5e2d533502b3f5bd7df008b8eb6f66a7057c3a53cd038e735a7beefc087b4fa",
+        "423c03e28ee7100728d9c016438016fc679dbca6b4dee45d4a2087acb40ae6e7",
+        "3d7533af99f3e8b4768377759db4362790f082d969b87ff8b4fe061f9c6686a5",
+        "48a1a2722ed3e308b69d520922eeb85d0bf484ab5f3aae2527978ec0b2023053",
+        "f9a0c0057c0fed2a20cf4d07281d7802df561a17084e9bf6fdad25a5a473a2b5",
+        "f157a654a9010bba768a50b4334683b15d27083d48edb4279130d466d38af4df"
+      ]
+    }
+  ],
+  "scope": "existing16 integrated drawings preserved;16 inferred midpoints added per state; no new independent key poses"
+}

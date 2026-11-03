@@ -1,0 +1,219 @@
+{
+  "state": "running",
+  "cycle_seconds": 2.4,
+  "cell_interval_ms": 150,
+  "independent_integrated_drawings": 16,
+  "overlay_effect_renderer": false,
+  "original_registration": "not approved; scoped motion/style candidate",
+  "native_app_applied": false,
+  "records": [
+    {
+      "frame": 0,
+      "source": "sources/00.png",
+      "source_hash": "9db147b1f81e64744f66ec5f3236cc36e0761a591d6b27b3134036042004e56b",
+      "pixel_hash": "1e53305b90d5cfb9192a080e83a0c67e3177c7566de904811a9111446297d2ee",
+      "visible_bounds": [
+        18,
+        129,
+        437,
+        602
+      ],
+      "integrated_character_and_effect": true
+    },
+    {
+      "frame": 1,
+      "source": "sources/01.png",
+      "source_hash": "3da2094cd462d7cabe4fd029e4ed482d340f855c9e0f53fe317dc93e299fde48",
+      "pixel_hash": "4d509d0cbde564b442e7a301474ceca0298c3a067a75889f31ba2ad7b4221afa",
+      "visible_bounds": [
+        14,
+        145,
+        438,
+        597
+      ],
+      "integrated_character_and_effect": true
+    },
+    {
+      "frame": 2,
+      "source": "sources/02.png",
+      "source_hash": "f8ced3291f88968bd975de4ebd5ec011526559a9701927b4e57c162d4d7b86f7",
+      "pixel_hash": "182aad45ffbe2960b3d4a4029394afaeddc8d331dd1e019dd3437e38b67f2c64",
+      "visible_bounds": [
+        17,
+        128,
+        441,
+        603
+      ],
+      "integrated_character_and_effect": true
+    },
+    {
+      "frame": 3,
+      "source": "sources/03.png",
+      "source_hash": "d21cd8d750a4293e107677a126e19f6f2ea43f3f5704c6274f3188ea1c378a9e",
+      "pixel_hash": "b10ccb66c6514ad4d1178ace7f32a12240d21caf10f5e96e512d616c475acf36",
+      "visible_bounds": [
+        10,
+        141,
+        438,
+        594
+      ],
+      "integrated_character_and_effect": true
+    },
+    {
+      "frame": 4,
+      "source": "sources/04.png",
+      "source_hash": "d484eea65ae9948b1def6e5e19b91eaed9358cc9dff4566400a325b5b3c25fe9",
+      "pixel_hash": "19cf1f6033ea32ceee2f2291fce091ef4744bdc4af6e79e01addb06925811c76",
+      "visible_bounds": [
+        29,
+        122,
+        431,
+        606
+      ],
+      "integrated_character_and_effect": true
+    },
+    {
+      "frame": 5,
+      "source": "sources/05.png",
+      "source_hash": "297f39381d21594105cf1b033ecbd0cf1a22c59143ce14ecd5f6244d6c67819e",
+      "pixel_hash": "2767c3c720593484f0f759bf96c0ee4df73aa89fff4d611387ae81d3099328b6",
+      "visible_bounds": [
+        32,
+        123,
+        431,
+        583
+      ],
+      "integrated_character_and_effect": true
+    },
+    {
+      "frame": 6,
+      "source": "sources/06.png",
+      "source_hash": "32c6c5629955f331e0f506e956570552bac78bb9461af116abc6e78185ed8c65",
+      "pixel_hash": "42d79e6543c476e52a8be48e46782d9eb4bdc612e7fe99950c85434f52170422",
+      "visible_bounds": [
+        18,
+        139,
+        435,
+        580
+      ],
+      "integrated_character_and_effect": true
+    },
+    {
+      "frame": 7,
+      "source": "sources/07.png",
+      "source_hash": "87a3f4171370170d934b0501828cb0d0832088d00027f1993c6a82773246d402",
+      "pixel_hash": "8b7d68e323914524ee38f81ce74caa032bb58e337556d82c4bfb1fda1eb8a3c2",
+      "visible_bounds": [
+        7,
+        122,
+        444,
+        587
+      ],
+      "integrated_character_and_effect": true
+    },
+    {
+      "frame": 8,
+      "source": "sources/08.png",
+      "source_hash": "45407860f2ecaeca3d8d4946650bb6efa0f03b97905994b5c6d0605e4fc0d80e",
+      "pixel_hash": "03b05cf1f31f0d0b824fff604e3b4bc804c7aa5ae5496ae966674890f034ff23",
+      "visible_bounds": [
+        17,
+        86,
+        438,
+        572
+      ],
+      "integrated_character_and_effect": true
+    },
+    {
+      "frame": 9,
+      "source": "sources/09.png",
+      "source_hash": "5e724e601d15a68799c1fd769a2b607534c17cfa87849bb6d3111c9b8bf259ea",
+      "pixel_hash": "2cfee3ed9dfb138ed1d267c6ed9b22cb7b20d8eab02ad86a8ae4e7b6455f5da6",
+      "visible_bounds": [
+        14,
+        119,
+        438,
+        582
+      ],
+      "integrated_character_and_effect": true
+    },
+    {
+      "frame": 10,
+      "source": "sources/10.png",
+      "source_hash": "b15093f731c87cfc7b17bec2e8a04b8cbd142a6fc385710fc96d765e905d03ea",
+      "pixel_hash": "5ab0cc71a16cfd44e29bed49d59d2c51c8ac910190d777ef50f84090fbc02a55",
+      "visible_bounds": [
+        13,
+        121,
+        434,
+        590
+      ],
+      "integrated_character_and_effect": true
+    },
+    {
+      "frame": 11,
+      "source": "sources/11.png",
+      "source_hash": "12a7b8ff3f04f426b93ccf5c78f01dd13288d7dbfe431ca9d0d2eed85afd7e29",
+      "pixel_hash": "70b19ed338b234c9cc5518776c6bef27801e5db472c42c78beacac9669a9d104",
+      "visible_bounds": [
+        6,
+        143,
+        425,
+        588
+      ],
+      "integrated_character_and_effect": true
+    },
+    {
+      "frame": 12,
+      "source": "sources/12.png",
+      "source_hash": "ad2d5bc373dd67809511709985b8912ac9fc858a0e5d486a919669e7e616b2b9",
+      "pixel_hash": "41f1849d8341f35e4dfe0ac57ff011748217d68457ebff46c7d00b68914523cb",
+      "visible_bounds": [
+        28,
+        124,
+        435,
+        613
+      ],
+      "integrated_character_and_effect": true
+    },
+    {
+      "frame": 13,
+      "source": "sources/13.png",
+      "source_hash": "c0d4aadec65b1b82277a45abdcd412ccf6c31f8047e5f7ad2909320b812555a8",
+      "pixel_hash": "72b6500117dc87f0d23f65404d7892b37716ef0ed68bdcb7892556c4781ad91d",
+      "visible_bounds": [
+        19,
+        114,
+        428,
+        578
+      ],
+      "integrated_character_and_effect": true
+    },
+    {
+      "frame": 14,
+      "source": "sources/14.png",
+      "source_hash": "95d62668b5a5379d3ac07d7c1de54489ce21c1830282a1f2d5128e643ed212d3",
+      "pixel_hash": "b8544373dd5db38ace2aa6b07e4e05e3bce889fa940c3ca872f8910a3d346efd",
+      "visible_bounds": [
+        14,
+        128,
+        439,
+        600
+      ],
+      "integrated_character_and_effect": true
+    },
+    {
+      "frame": 15,
+      "source": "sources/15.png",
+      "source_hash": "f1f080755a097ebbc89ab5c3f1db0bf6241b09687a5fff50c870f518aa65c41f",
+      "pixel_hash": "b249606250fd5f7e1bcfe5f9cbbba51989e1c9ed6686bd93b57b490e4c08de1b",
+      "visible_bounds": [
+        13,
+        131,
+        442,
+        602
+      ],
+      "integrated_character_and_effect": true
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "idle": {
+    "playbackFrames": 16,
+    "distinctDecodedFrames": 16,
+    "cycle": 3.2
+  },
+  "running": {
+    "playbackFrames": 16,
+    "distinctDecodedFrames": 16,
+    "cycle": 2.4
+  },
+  "review": {
+    "playbackFrames": 16,
+    "distinctDecodedFrames": 16,
+    "cycle": 3.2
+  },
+  "waiting": {
+    "playbackFrames": 16,
+    "distinctDecodedFrames": 16,
+    "cycle": 3.2
+  },
+  "failed": {
+    "playbackFrames": 16,
+    "distinctDecodedFrames": 16,
+    "cycle": 3.2
+  },
+  "waving": {
+    "playbackFrames": 16,
+    "distinctDecodedFrames": 16,
+    "cycle": 2.4
+  },
+  "jumping": {
+    "playbackFrames": 16,
+    "distinctDecodedFrames": 16,
+    "cycle": 2.4
+  },
+  "sleeping": {
+    "playbackFrames": 16,
+    "distinctDecodedFrames": 16,
+    "cycle": 6.4
+  },
+  "drag-right": {
+    "playbackFrames": 8,
+    "distinctDecodedFrames": 8,
+    "cycle": 1.6
+  },
+  "drag-left": {
+    "playbackFrames": 8,
+    "distinctDecodedFrames": 8,
+    "cycle": 1.6
+  }
+}

@@ -1,0 +1,1298 @@
+[
+  {
+    "state": "idle",
+    "frame": 0,
+    "source": "clean-pilot/idle-00-source.png",
+    "sha256": "e28aeec5ee66247581876720a8b971660a3f23627a9387f336e1fa62a8488541",
+    "output": "characters/idle/00.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "idle",
+    "frame": 1,
+    "source": "clean-sources/idle-01.png",
+    "sha256": "6b6eb69039fbcd1c3140d0ebbc04be646a5d6714808c36de26a0a44a80e2bdf2",
+    "output": "characters/idle/01.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "idle",
+    "frame": 2,
+    "source": "clean-sources/idle-02.png",
+    "sha256": "1db45664a1641eb7a016187ab4b3ed343f57a24bbe83a693ac412611da45b44e",
+    "output": "characters/idle/02.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "idle",
+    "frame": 3,
+    "source": "clean-sources/idle-03.png",
+    "sha256": "2535c276b71d779660c49889240426fb54f4c623928ccb771d11497a7acb95bb",
+    "output": "characters/idle/03.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "idle",
+    "frame": 4,
+    "source": "clean-sources/idle-04.png",
+    "sha256": "32932eb94e737a8d422fbe90270b7406103b714c33a47b8a646739f71fc0d9fc",
+    "output": "characters/idle/04.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "idle",
+    "frame": 5,
+    "source": "clean-sources/idle-05.png",
+    "sha256": "68e2d92deaad0acd22a8142f305dfb4db9c4e087d20df8d440b283b19c962f33",
+    "output": "characters/idle/05.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "idle",
+    "frame": 6,
+    "source": "clean-sources/idle-06.png",
+    "sha256": "ef8c5e3d9dcc4f8d2503f4791a2eb4acbae6df6f9c7715cad9884eb650814ee5",
+    "output": "characters/idle/06.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "idle",
+    "frame": 7,
+    "source": "clean-sources/idle-07.png",
+    "sha256": "417f19fedb80b9408df82b4a314e8a0e434a6da6cfacf5289748f84649d3f819",
+    "output": "characters/idle/07.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "idle",
+    "frame": 8,
+    "source": "clean-sources/idle-08.png",
+    "sha256": "d2c06725e1509de7ce87a9de92ee5bb085adb082da01710735abeba67ad53016",
+    "output": "characters/idle/08.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "idle",
+    "frame": 9,
+    "source": "clean-sources/idle-09.png",
+    "sha256": "feaa50c0d42edcebebddff84d328a3e9bebc2b8315550521235b39eed76a6765",
+    "output": "characters/idle/09.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "idle",
+    "frame": 10,
+    "source": "clean-sources/idle-10.png",
+    "sha256": "f85326b737a28f1b0cd255a48e93f650bfda4beb8845be55c2c474895b4f81ad",
+    "output": "characters/idle/10.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "idle",
+    "frame": 11,
+    "source": "clean-sources/idle-11.png",
+    "sha256": "747b27ab0064ad47fe2ab258183ca007d22ecc1541115d6ac7849ed95908ed72",
+    "output": "characters/idle/11.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "idle",
+    "frame": 12,
+    "source": "clean-sources/idle-12.png",
+    "sha256": "dbb7a48a003003a2810ea61c8a274dbf3d71a351b3c29adbfa97efd1d4b599e5",
+    "output": "characters/idle/12.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "idle",
+    "frame": 13,
+    "source": "clean-sources/idle-13.png",
+    "sha256": "d305fae53cdada2a685e76fff6d05f6874361cbc13aaec20226cdf04f43ead42",
+    "output": "characters/idle/13.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "idle",
+    "frame": 14,
+    "source": "clean-sources/idle-14.png",
+    "sha256": "c76d4dfe43621f81ad574b66b7b499adffa347953069c7caecab742ed63c590d",
+    "output": "characters/idle/14.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "idle",
+    "frame": 15,
+    "source": "clean-sources/idle-15.png",
+    "sha256": "9d4a33fa08bdb223e852a50f1dca4abe5fe67f0660cfaee988b9a8ae3e9352a1",
+    "output": "characters/idle/15.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "running",
+    "frame": 0,
+    "source": "clean-sources/running-00.png",
+    "sha256": "2e05220323fc634a86dfef6bd0bbec10de7b9922a2991e58c8ed9cb6bc791f8e",
+    "output": "characters/running/00.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "running",
+    "frame": 1,
+    "source": "clean-sources/running-01.png",
+    "sha256": "fbde542665870f72a8e56a353e24cde90f24431b4bf6207aa9a7171ea7c9ecbd",
+    "output": "characters/running/01.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "running",
+    "frame": 2,
+    "source": "clean-sources/running-02.png",
+    "sha256": "e76458dd9dc469009ca8c1e3fffbad4ed92c590e4c9abbe4662570cca102e89f",
+    "output": "characters/running/02.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "running",
+    "frame": 3,
+    "source": "clean-sources/running-03.png",
+    "sha256": "f61246527037bc102173001a33ed4b5a06d823ccc53bd011b64b9353f48158eb",
+    "output": "characters/running/03.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "running",
+    "frame": 4,
+    "source": "clean-sources/running-04-edge-clean.png",
+    "sha256": "1b4231b1d34b24f4ac19bf53a37bbdd40674a1cde700c56046d318f3947f755d",
+    "output": "characters/running/04.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "running",
+    "frame": 5,
+    "source": "clean-pilot/running-05-source.png",
+    "sha256": "5c2a9d9d97581164e4d8eb70831b1677f4cfa027e1c324012e4b95d64853e64a",
+    "output": "characters/running/05.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "running",
+    "frame": 6,
+    "source": "clean-sources/running-06.png",
+    "sha256": "2732ad6ae6459c064553fbf6240f8e714c35570eb67c2cbd08be97e076ca60f4",
+    "output": "characters/running/06.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "running",
+    "frame": 7,
+    "source": "clean-sources/running-07-repaired.png",
+    "sha256": "3363073ef32e8eba5659a95dbf72e143128b9d843840eb30480e443db1e67981",
+    "output": "characters/running/07.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "running",
+    "frame": 8,
+    "source": "clean-sources/running-08.png",
+    "sha256": "de4d4078e8a77f098d270261e9978404dd7ee136df4ec9cc66d67048df2aaa57",
+    "output": "characters/running/08.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "running",
+    "frame": 9,
+    "source": "clean-sources/running-09.png",
+    "sha256": "4d588ff63e947906e617528b927a3dacdaaa5e960b1cea0596787fe7abaa1f03",
+    "output": "characters/running/09.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "running",
+    "frame": 10,
+    "source": "clean-sources/running-10.png",
+    "sha256": "5b5ae4df731650d8a76be9c3d3d5ad0990df42af998f1aa63dc5d9d4abd30f32",
+    "output": "characters/running/10.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "running",
+    "frame": 11,
+    "source": "clean-sources/running-11.png",
+    "sha256": "bff5ab76e46ec756d3013edab68624ef21016fef4b3fb5b2f300ed7968175c27",
+    "output": "characters/running/11.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "running",
+    "frame": 12,
+    "source": "clean-sources/running-12.png",
+    "sha256": "c5794e5adb88847937673a37281b7899fa5bcc31f2a710017fb892881a3db29a",
+    "output": "characters/running/12.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "running",
+    "frame": 13,
+    "source": "clean-sources/running-13.png",
+    "sha256": "051025a4f784eff58d05f5fc96f104509276b755e7987eab035cb24e56d4c2b9",
+    "output": "characters/running/13.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "running",
+    "frame": 14,
+    "source": "clean-sources/running-14.png",
+    "sha256": "ebed514523024fe7bd024d8252e021d08c1f9fa1ace786f5e10fb3c8193bdc39",
+    "output": "characters/running/14.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "running",
+    "frame": 15,
+    "source": "clean-sources/running-15.png",
+    "sha256": "18870cf01c5afc5c89ec0f0b71d7e26698b6c5d01bc728951568ff27cc506711",
+    "output": "characters/running/15.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "review",
+    "frame": 0,
+    "source": "clean-sources/review-00.png",
+    "sha256": "095698b0de3ad7df537862e8e4832d6696fa886ef4a5edb3b6feccd8c3490891",
+    "output": "characters/review/00.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "review",
+    "frame": 1,
+    "source": "clean-sources/review-01.png",
+    "sha256": "d572cdb22bb972dac649e7b26eb2fda18c82fed2da91e94bc27dd7a06abf265c",
+    "output": "characters/review/01.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "review",
+    "frame": 2,
+    "source": "clean-sources/review-02.png",
+    "sha256": "93ce24ff92869297d19dd7932f6b87951942647e4a4a24bdd07864b6ec05a672",
+    "output": "characters/review/02.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "review",
+    "frame": 3,
+    "source": "clean-sources/review-03.png",
+    "sha256": "c945f73e25733bba20fc90a0f1cd8ec8cbffdfadf8d1ba618b5d3cd42a4acb6e",
+    "output": "characters/review/03.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "review",
+    "frame": 4,
+    "source": "clean-sources/review-04.png",
+    "sha256": "535bc6735f4064f8cd33a4c3c5ec855f5d7dbb0483ff330ca14495308e066440",
+    "output": "characters/review/04.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "review",
+    "frame": 5,
+    "source": "clean-sources/review-05.png",
+    "sha256": "c9b0c5f034df47568a8ab6b9afe7987eb181562f1a4a25e92b823ca0fb1103c4",
+    "output": "characters/review/05.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "review",
+    "frame": 6,
+    "source": "clean-sources/review-06.png",
+    "sha256": "0ea5cae254981405b47b9a78a1c0469871c2ff4752006c4efa171b4344296c08",
+    "output": "characters/review/06.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "review",
+    "frame": 7,
+    "source": "clean-sources/review-07.png",
+    "sha256": "c7bc98e6dad888f0f210aafdeafba6b79fa54a490f0cfbb3181abf9e28bb880e",
+    "output": "characters/review/07.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "review",
+    "frame": 8,
+    "source": "clean-sources/review-08.png",
+    "sha256": "19696d9d3da71a76a6c396c0693a1970649df3a4b39e65cd49eeb572bff176cb",
+    "output": "characters/review/08.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "review",
+    "frame": 9,
+    "source": "clean-sources/review-09.png",
+    "sha256": "36be2e7944686482f9ab268cb49f05042f72fb2425ea35b011d01ca9a88f1843",
+    "output": "characters/review/09.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "review",
+    "frame": 10,
+    "source": "clean-sources/review-10.png",
+    "sha256": "99d64aa5860f78d0a9d7500179fe3556045ffa8439d314cc0b5a24fb45d04aa9",
+    "output": "characters/review/10.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "review",
+    "frame": 11,
+    "source": "clean-sources/review-11.png",
+    "sha256": "7df2a27ffcae327760cf6273367fe53766a4c9233b35be6265b326769eb42058",
+    "output": "characters/review/11.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "review",
+    "frame": 12,
+    "source": "clean-sources/review-12.png",
+    "sha256": "8421c72a4d411c90216585cc0649688bd2afd6ad720f843f9c865f458acc01c0",
+    "output": "characters/review/12.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "review",
+    "frame": 13,
+    "source": "clean-sources/review-13.png",
+    "sha256": "0bf13d9c3bbd2bfce8f9a04c523330d7225a1ef73e117664aa509272959d4ff9",
+    "output": "characters/review/13.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "review",
+    "frame": 14,
+    "source": "clean-sources/review-14.png",
+    "sha256": "64c9e35f176cd8401b8b41e696ca231cab7d169bfadb23b8806467cd8e3466e8",
+    "output": "characters/review/14.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "review",
+    "frame": 15,
+    "source": "clean-sources/review-15.png",
+    "sha256": "78770f73504e446f4f848f65da0ed31e36862979b87eced7a5c3c086e0beb2d4",
+    "output": "characters/review/15.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "waiting",
+    "frame": 0,
+    "source": "clean-sources/waiting-00.png",
+    "sha256": "f2a1fcd36d55f530fb00b1b628c692db99c57084428c161fed527b7c91f781f1",
+    "output": "characters/waiting/00.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "waiting",
+    "frame": 1,
+    "source": "clean-sources/waiting-01.png",
+    "sha256": "dffcff2cd22c4916d67c21637eaeae64a375369cdfef42389b76c02a08c52dd7",
+    "output": "characters/waiting/01.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "waiting",
+    "frame": 2,
+    "source": "clean-sources/waiting-02.png",
+    "sha256": "beb948c64e071dc9de3c380b2b6b817d875bd21142bca0fc45f876f4df5f3043",
+    "output": "characters/waiting/02.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "waiting",
+    "frame": 3,
+    "source": "clean-sources/waiting-03.png",
+    "sha256": "73b2bd91007e617b2723fc919a742fa2556f08a0eecc208de62404f89c8df227",
+    "output": "characters/waiting/03.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "waiting",
+    "frame": 4,
+    "source": "clean-sources/waiting-04.png",
+    "sha256": "4b0f6083a02fea3e563a5587c6f8a0ba533dc420dd491fb02e1bfdf9e5de4df2",
+    "output": "characters/waiting/04.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "waiting",
+    "frame": 5,
+    "source": "clean-sources/waiting-05.png",
+    "sha256": "ae8cb9581c93d0975e52073a9a62de0de3d486d3d17349b70daefead04ce9dc9",
+    "output": "characters/waiting/05.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "waiting",
+    "frame": 6,
+    "source": "clean-sources/waiting-06.png",
+    "sha256": "58f62ee58952b4ccb83a5e2c204f0f2280d46b299f75013be1a56766c361aab7",
+    "output": "characters/waiting/06.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "waiting",
+    "frame": 7,
+    "source": "clean-sources/waiting-07.png",
+    "sha256": "cbe1ae409a11ba5fc6a44f5de36adcc36cf25a4ecd795613da463ac0b11b8c68",
+    "output": "characters/waiting/07.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "waiting",
+    "frame": 8,
+    "source": "clean-sources/waiting-08.png",
+    "sha256": "cd5a79f0a04fa92e26fdcf2e4fa10b0de87875fa786ebf49a478588b9477918f",
+    "output": "characters/waiting/08.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "waiting",
+    "frame": 9,
+    "source": "clean-sources/waiting-09.png",
+    "sha256": "d61a22d4a5787e5171ffeef223567378b0bef1c9be3e892624867e7565696ebc",
+    "output": "characters/waiting/09.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "waiting",
+    "frame": 10,
+    "source": "clean-sources/waiting-10.png",
+    "sha256": "deff3929c1e0357f13b1bb007721076024481fd10917ae64fbb74d6913139a27",
+    "output": "characters/waiting/10.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "waiting",
+    "frame": 11,
+    "source": "clean-sources/waiting-11.png",
+    "sha256": "2ca8367b73e5dc310638daf47491e0d28964547e24fbd6ed5dff910e185da694",
+    "output": "characters/waiting/11.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "waiting",
+    "frame": 12,
+    "source": "clean-sources/waiting-12.png",
+    "sha256": "d331e8c32d16dc937cb1de8b776dfdaf4398b19d0fc8e21a0264fac8bc48409c",
+    "output": "characters/waiting/12.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "waiting",
+    "frame": 13,
+    "source": "clean-sources/waiting-13.png",
+    "sha256": "283b9efa0b2bcd9288e7b469edd0f1cf5543ce9e2b8f183bdb7877dbe0f3d21a",
+    "output": "characters/waiting/13.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "waiting",
+    "frame": 14,
+    "source": "clean-sources/waiting-14.png",
+    "sha256": "0ede0c2c7cc53fd38a8ef79f791dca5f85f1a685a73b25641f7af6c2c10aed72",
+    "output": "characters/waiting/14.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "waiting",
+    "frame": 15,
+    "source": "clean-sources/waiting-15.png",
+    "sha256": "b6bf0569f286f4b8864d84d38199f964b7459de3f270a1a1b20631dc7361be62",
+    "output": "characters/waiting/15.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "failed",
+    "frame": 0,
+    "source": "clean-sources/failed-00.png",
+    "sha256": "3ad12a71d6d2a600ee1bfd0b00dbe0e5550fc3fffd5939aa136ed4f1cb9ef87f",
+    "output": "characters/failed/00.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "failed",
+    "frame": 1,
+    "source": "clean-sources/failed-01.png",
+    "sha256": "7b91435ce1993968630c9870dbc90df9f3c5da8a960e3e29f571be9d845b2b41",
+    "output": "characters/failed/01.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "failed",
+    "frame": 2,
+    "source": "clean-sources/failed-02.png",
+    "sha256": "f32396431dda291061428e50b8b7e64bbe1cd411c4d41da377d650b5ed1662c7",
+    "output": "characters/failed/02.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "failed",
+    "frame": 3,
+    "source": "clean-sources/failed-03.png",
+    "sha256": "0c037c70ea817e345e112f160c020f5d139eb1c8b5959dc202f4d83c629df72a",
+    "output": "characters/failed/03.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "failed",
+    "frame": 4,
+    "source": "clean-sources/failed-04.png",
+    "sha256": "45c75c0ece6d2516c19842ea0c7c843c5519f4c07033e2397dd4bef8e471b091",
+    "output": "characters/failed/04.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "failed",
+    "frame": 5,
+    "source": "clean-sources/failed-05.png",
+    "sha256": "9d79cfe579d890ffb106c504c9754e2db5aa5c2f95113aa658166f79515ffd70",
+    "output": "characters/failed/05.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "failed",
+    "frame": 6,
+    "source": "clean-sources/failed-06.png",
+    "sha256": "1c49df653812def756a404c7781b687c7de4cddb5035e0fd0c5d779fece0bbe1",
+    "output": "characters/failed/06.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "failed",
+    "frame": 7,
+    "source": "clean-sources/failed-07.png",
+    "sha256": "b7896383826a1f8fbd3e2d1d36a6baa3cc76f5a7db8167cc48d5a591724a3f26",
+    "output": "characters/failed/07.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "failed",
+    "frame": 8,
+    "source": "clean-sources/failed-08.png",
+    "sha256": "e8fc0b7da4c69002905d52195df8d4c358d690e407de926227f64eb0ecd726b6",
+    "output": "characters/failed/08.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "failed",
+    "frame": 9,
+    "source": "clean-sources/failed-09.png",
+    "sha256": "5a7bf1cb84154dfbff8b1a2372c157c60dd5f171ef1bec9dcd271ec02235e6b6",
+    "output": "characters/failed/09.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "failed",
+    "frame": 10,
+    "source": "clean-sources/failed-10.png",
+    "sha256": "d5bc7717dc697a1e2bc4222da65243dee458d305c0a2b8d841d56481b9d9e9e8",
+    "output": "characters/failed/10.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "failed",
+    "frame": 11,
+    "source": "clean-sources/failed-11.png",
+    "sha256": "2b2031cc64531d4c9771e7dfcf20d120444d4239cc3cb1ef439b517038856396",
+    "output": "characters/failed/11.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "failed",
+    "frame": 12,
+    "source": "clean-sources/failed-12.png",
+    "sha256": "16d9751b79353b3b7cd54f42319f2184e7e5153ce36f74514dd9126be0a8919a",
+    "output": "characters/failed/12.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "failed",
+    "frame": 13,
+    "source": "clean-sources/failed-13.png",
+    "sha256": "2bd055c8f54cb34b597f6e582a124ce6a1b3733cdf4be14f3eb0dc89a7e2e5d0",
+    "output": "characters/failed/13.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "failed",
+    "frame": 14,
+    "source": "clean-sources/failed-14.png",
+    "sha256": "691756edba002e140d32b88f1f6996a4c32f4a13a006f143b4ebaf2de486aac9",
+    "output": "characters/failed/14.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "failed",
+    "frame": 15,
+    "source": "clean-sources/failed-15.png",
+    "sha256": "cb080763ad6d37e8072a3e959380b844c177ce3f3483b1a8f6197d818706babe",
+    "output": "characters/failed/15.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "waving",
+    "frame": 0,
+    "source": "clean-sources/waving-00-repaired.png",
+    "sha256": "c130888bd359b5d5bcc244b7a8673699831200a3a573cdb1b22950a0c877a32c",
+    "output": "characters/waving/00.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "waving",
+    "frame": 1,
+    "source": "clean-sources/waving-01-repaired.png",
+    "sha256": "528ebb1e30877233641596fffdb8fae977ad6c137bcd6476aeb1417feeb7edb6",
+    "output": "characters/waving/01.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "waving",
+    "frame": 2,
+    "source": "clean-sources/waving-02-repaired.png",
+    "sha256": "c746811fedb86e37d3f73d9e10682a92957a9631f6d81a4c13bd8f8c8a2be505",
+    "output": "characters/waving/02.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "waving",
+    "frame": 3,
+    "source": "clean-sources/waving-03.png",
+    "sha256": "239c60fbea125adea394be4155fe40a244d9e5fbb6de90197370cc4b1696860f",
+    "output": "characters/waving/03.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "waving",
+    "frame": 4,
+    "source": "clean-sources/waving-04.png",
+    "sha256": "e4385ff83dbafacdee9dc7a0db9efc1604852ffcedc1ac0a1185005d8917e26f",
+    "output": "characters/waving/04.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "waving",
+    "frame": 5,
+    "source": "clean-sources/waving-05.png",
+    "sha256": "ff8482d5c058aea40c9074f3f3878567ada97d9db7b4f67c71bb80eae5532ce2",
+    "output": "characters/waving/05.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "waving",
+    "frame": 6,
+    "source": "clean-pilot/waving-06-clean-source.png",
+    "sha256": "bc4ea5fc79008f404355cdf31cdfbf366bd9099757f03b98f014ccacbe5659cd",
+    "output": "characters/waving/06.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "waving",
+    "frame": 7,
+    "source": "clean-sources/waving-07.png",
+    "sha256": "de0e727a6c13b2e356ee961d7d4536c0453e49a14fb6a3a3ca80e6a717546944",
+    "output": "characters/waving/07.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "waving",
+    "frame": 8,
+    "source": "clean-sources/waving-08.png",
+    "sha256": "9e4a0e5d26e6f4fd9ae9317c762f74690d1e1ba9545513582a155e35b719c3a8",
+    "output": "characters/waving/08.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "waving",
+    "frame": 9,
+    "source": "clean-sources/waving-09.png",
+    "sha256": "bd6c9ed3d684ed65315d0ca7b422b2d95a6ef78399c3691866ec5d3c0caea994",
+    "output": "characters/waving/09.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "waving",
+    "frame": 10,
+    "source": "clean-sources/waving-10.png",
+    "sha256": "c3d5d5d6f1babae73ce0028d44bf81aa15b1e6f569b7d09fbb545cba451ef2ce",
+    "output": "characters/waving/10.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "waving",
+    "frame": 11,
+    "source": "clean-sources/waving-11.png",
+    "sha256": "e921e083816ba7a363d5567dbba03604bd3252002ab294126abbf522ed330876",
+    "output": "characters/waving/11.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "waving",
+    "frame": 12,
+    "source": "clean-sources/waving-12.png",
+    "sha256": "f9927c370873029f24f412f9e1334f063fa1c649ff6d915b81b7ed138d799707",
+    "output": "characters/waving/12.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "waving",
+    "frame": 13,
+    "source": "clean-sources/waving-13.png",
+    "sha256": "9d3f34468608b0ec1dc095a3561d64c031825b98d785ce79014a711dd406499c",
+    "output": "characters/waving/13.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "waving",
+    "frame": 14,
+    "source": "clean-sources/waving-14.png",
+    "sha256": "d82849f189eeb7a180e6fb96745e84d7933596c12164caacd61402f579592b1a",
+    "output": "characters/waving/14.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "waving",
+    "frame": 15,
+    "source": "clean-sources/waving-15.png",
+    "sha256": "b87421f9872b6ab45bcbde35bdcf8eabfbe9610f5c723220cb373e4dfecf3c0e",
+    "output": "characters/waving/15.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "jumping",
+    "frame": 0,
+    "source": "clean-sources/jumping-00.png",
+    "sha256": "db430231af7e52ceb0ef365c86410568451f3980e0d954a4d9f28ccc137109c2",
+    "output": "characters/jumping/00.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "jumping",
+    "frame": 1,
+    "source": "clean-sources/jumping-01.png",
+    "sha256": "902a5eb7b908661cdac8ad9884c399b963b304cf831439398b5d32c2fbafaef6",
+    "output": "characters/jumping/01.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "jumping",
+    "frame": 2,
+    "source": "clean-sources/jumping-02.png",
+    "sha256": "3000a7179aa3fcf122b440de9be271c64c10f343ee922de3b9965677e598dfc0",
+    "output": "characters/jumping/02.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "jumping",
+    "frame": 3,
+    "source": "clean-sources/jumping-03.png",
+    "sha256": "58ee5beb9e55d537ad34baee16b6017994272716ac533f4b43c6a98a14a4c449",
+    "output": "characters/jumping/03.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "jumping",
+    "frame": 4,
+    "source": "clean-sources/jumping-04.png",
+    "sha256": "c91035e9047b17cc5b778bf40d3f4b9441a66bd6c16679dc37375c1d6876e331",
+    "output": "characters/jumping/04.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "jumping",
+    "frame": 5,
+    "source": "clean-sources/jumping-05.png",
+    "sha256": "492f2a178cae43ee41de76c128b6b7edf18fe51f9bf54744c277c73c2f5af7b1",
+    "output": "characters/jumping/05.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "jumping",
+    "frame": 6,
+    "source": "clean-sources/jumping-06.png",
+    "sha256": "29619232df91691df5e67605acc03228d3c3dedf589dea28d4934317f8803ad6",
+    "output": "characters/jumping/06.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "jumping",
+    "frame": 7,
+    "source": "clean-sources/jumping-07.png",
+    "sha256": "d9aeed4bb15370de4e0e236ae464114ced8fa511725da0ee543d0e37ccffca52",
+    "output": "characters/jumping/07.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "jumping",
+    "frame": 8,
+    "source": "clean-sources/jumping-08.png",
+    "sha256": "38b589c1cce43ba7f28461d5a6576e21a0623393378f71987084a302c0521ba2",
+    "output": "characters/jumping/08.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "jumping",
+    "frame": 9,
+    "source": "clean-sources/jumping-09.png",
+    "sha256": "7b40476dd5464e4aebbb84f43a074911c3fdd721d1055e2aa681a3502de2a892",
+    "output": "characters/jumping/09.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "jumping",
+    "frame": 10,
+    "source": "clean-sources/jumping-10.png",
+    "sha256": "a0e8e35301373cd01b0d5d3453cd009f11dda328e38c41685ef6728f7e67ed54",
+    "output": "characters/jumping/10.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "jumping",
+    "frame": 11,
+    "source": "clean-sources/jumping-11.png",
+    "sha256": "bb33ad39394bb88c8aed5e1e4c55fb7b045f2977fccff45be4a10b327061ee50",
+    "output": "characters/jumping/11.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "jumping",
+    "frame": 12,
+    "source": "clean-sources/jumping-12.png",
+    "sha256": "8e5184289d7b20975952842952e37f8bc70d43da43aa596257da429b2f95512c",
+    "output": "characters/jumping/12.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "jumping",
+    "frame": 13,
+    "source": "clean-sources/jumping-13.png",
+    "sha256": "f27187301d60519683f6319206faca5a28f5fa38c43c3ae4e3b510e6bba2bbab",
+    "output": "characters/jumping/13.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "jumping",
+    "frame": 14,
+    "source": "clean-sources/jumping-14.png",
+    "sha256": "67b371adb650222d288d8d1fae1f304cb9441367b47615c5e8c009bdf1d2029b",
+    "output": "characters/jumping/14.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "jumping",
+    "frame": 15,
+    "source": "clean-sources/jumping-15.png",
+    "sha256": "91a41377c3084d33bd29dd8b262ac29e16fbfe4bb1099dbc8534e51b42a795ce",
+    "output": "characters/jumping/15.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "sleeping",
+    "frame": 0,
+    "source": "clean-sources/sleeping-00.png",
+    "sha256": "a78e20e68c3ec2d7102744dc4fb1e9f4e957b5b6f024ab8da82caea4ad41c5e2",
+    "output": "characters/sleeping/00.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "sleeping",
+    "frame": 1,
+    "source": "clean-sources/sleeping-01.png",
+    "sha256": "65ff3636365c80b2b3b45566292c79ae444fafc906968a4177e92a62ae21ded9",
+    "output": "characters/sleeping/01.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "sleeping",
+    "frame": 2,
+    "source": "clean-sources/sleeping-02.png",
+    "sha256": "ed73080c2a5dc1394e9091375e5932d6fddf1369668e529da1bde9d63bbb1dae",
+    "output": "characters/sleeping/02.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "sleeping",
+    "frame": 3,
+    "source": "clean-sources/sleeping-03.png",
+    "sha256": "fdde5916ce92690644b1462a06d993bc8caf632dbcbcba0a8e17776dcd8aee5c",
+    "output": "characters/sleeping/03.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "sleeping",
+    "frame": 4,
+    "source": "clean-sources/sleeping-04.png",
+    "sha256": "27c7bcd31b401bd30b09d77d195e932009bb4b58d5ac8e77c731a81adcec31ba",
+    "output": "characters/sleeping/04.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "sleeping",
+    "frame": 5,
+    "source": "clean-sources/sleeping-05.png",
+    "sha256": "09e11377e7916ad704fb76b1e6adf9fd3d1270d0e6fb9a25a79a5c26a9ec45b8",
+    "output": "characters/sleeping/05.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "sleeping",
+    "frame": 6,
+    "source": "clean-sources/sleeping-06.png",
+    "sha256": "65ced09c356a9f847282921b2a227d78c880215a85f5c0dd7d3177197a506c85",
+    "output": "characters/sleeping/06.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "sleeping",
+    "frame": 7,
+    "source": "clean-sources/sleeping-07.png",
+    "sha256": "f219557eb700b870197460504c2185b7262b860661912d80d2fc6a1db2191122",
+    "output": "characters/sleeping/07.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "sleeping",
+    "frame": 8,
+    "source": "clean-pilot/sleeping-08-source.png",
+    "sha256": "34d97f20cb81ea0ed2628e6c69f2b9f017f197d2ce6eaf2a850b8e4367438cb2",
+    "output": "characters/sleeping/08.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "sleeping",
+    "frame": 9,
+    "source": "clean-sources/sleeping-09.png",
+    "sha256": "f5ad244177232879800514e800d57b64e356a26c7522bcdb89b413807bb5a199",
+    "output": "characters/sleeping/09.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "sleeping",
+    "frame": 10,
+    "source": "clean-sources/sleeping-10.png",
+    "sha256": "4195ffe2db0a9f6b44a87acd9efeb156f2d4ab712c86c7ae2e8a5f9da7a429f0",
+    "output": "characters/sleeping/10.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "sleeping",
+    "frame": 11,
+    "source": "clean-sources/sleeping-11.png",
+    "sha256": "fc2a28087d78579857468e4b54500db0639f7c274718fcd7381493e6fb631ff7",
+    "output": "characters/sleeping/11.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "sleeping",
+    "frame": 12,
+    "source": "clean-sources/sleeping-12.png",
+    "sha256": "c1459c9e95c4976db616736ffca953d84c860cfca631a9c07e3801a31815b014",
+    "output": "characters/sleeping/12.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "sleeping",
+    "frame": 13,
+    "source": "clean-sources/sleeping-13.png",
+    "sha256": "6655e70ede2b45925f5d6aeefb40b5e445df250c564228f246fc0f53e3b6f647",
+    "output": "characters/sleeping/13.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "sleeping",
+    "frame": 14,
+    "source": "clean-sources/sleeping-14.png",
+    "sha256": "a8690ef108758eeb8b00508777482c85763e7d3be1971b2ec51b9cf1448c1089",
+    "output": "characters/sleeping/14.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "sleeping",
+    "frame": 15,
+    "source": "clean-sources/sleeping-15.png",
+    "sha256": "4666285d22fc1109995a69cb412e1431a0584c3e115605705ed29cc41b324800",
+    "output": "characters/sleeping/15.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "drag-right",
+    "frame": 0,
+    "source": "clean-sources/drag-right-00.png",
+    "sha256": "4c07d843df73e4d109433ac467c234d3d343dc4d548e9ee6476189daca875109",
+    "output": "characters/drag-right/00.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "drag-right",
+    "frame": 1,
+    "source": "clean-sources/drag-right-01.png",
+    "sha256": "ecd25cfaba3e5d6e6e3f6f0422950ed7479af02020dea68023f8c96968ddb51e",
+    "output": "characters/drag-right/01.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "drag-right",
+    "frame": 2,
+    "source": "clean-sources/drag-right-02.png",
+    "sha256": "a4e46e89ab8e39db53ea87db9ae4d9a47ae5016acfdbc838828c12e10a87bed6",
+    "output": "characters/drag-right/02.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "drag-right",
+    "frame": 3,
+    "source": "clean-sources/drag-right-03.png",
+    "sha256": "0a55685bbe26506bf2a666918ff3e948c2c5db475f16e4fc5c36766368144807",
+    "output": "characters/drag-right/03.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "drag-right",
+    "frame": 4,
+    "source": "clean-sources/drag-right-04.png",
+    "sha256": "4024538534a720593e2d47d112cb011615edf91486396cd878cc3ec5140b8f99",
+    "output": "characters/drag-right/04.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "drag-right",
+    "frame": 5,
+    "source": "clean-sources/drag-right-05.png",
+    "sha256": "63985a93f1ce5b7101f15bb5a973c4d20b2f6a96957f225e06ed8f80fc107cdc",
+    "output": "characters/drag-right/05.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "drag-right",
+    "frame": 6,
+    "source": "clean-sources/drag-right-06.png",
+    "sha256": "5bdb69dfefbd3da73d64af4e5bc284b6b61c00494f57646d28feb038cce222b8",
+    "output": "characters/drag-right/06.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "drag-right",
+    "frame": 7,
+    "source": "clean-sources/drag-right-07.png",
+    "sha256": "4e65cd61a2e54e742da9fc10b90e2e89098394895b65bac0f1714144f756aac2",
+    "output": "characters/drag-right/07.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "drag-left",
+    "frame": 0,
+    "source": "clean-sources/drag-left-00.png",
+    "sha256": "24e6d2ea191abcd22a86e83f439e3c9074daab28af03d0449ce0224d1a8487d1",
+    "output": "characters/drag-left/00.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "drag-left",
+    "frame": 1,
+    "source": "clean-sources/drag-left-01.png",
+    "sha256": "554817abcd70be68e74b96e3e909388f50f20f95bf4a2008a786ac109a230e3c",
+    "output": "characters/drag-left/01.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "drag-left",
+    "frame": 2,
+    "source": "clean-sources/drag-left-02.png",
+    "sha256": "32397b7b48feebd02ea1418f202b579bd4efe4e1662b7ee7e7ff83cf36b9645c",
+    "output": "characters/drag-left/02.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "drag-left",
+    "frame": 3,
+    "source": "clean-sources/drag-left-03.png",
+    "sha256": "21e6d7324b55e9e41aad08ad3c469a908d0e3bb5434bd72172ac44377879b31c",
+    "output": "characters/drag-left/03.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "drag-left",
+    "frame": 4,
+    "source": "clean-sources/drag-left-04.png",
+    "sha256": "f316dc858cd6ecd57f3bd902f5f3f12ab68bca48c52759423316a4ffbb4fdf7d",
+    "output": "characters/drag-left/04.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "drag-left",
+    "frame": 5,
+    "source": "clean-sources/drag-left-05.png",
+    "sha256": "8f11485da61756be40a9341a2bc7302435d3c3d1eb127148fbd34aa9fafc5132",
+    "output": "characters/drag-left/05.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "drag-left",
+    "frame": 6,
+    "source": "clean-sources/drag-left-06.png",
+    "sha256": "5c7837e59d5be45934be1d4bb9b20f2b3e34402c32e68ff55662f3a1747bcf45",
+    "output": "characters/drag-left/06.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  },
+  {
+    "state": "drag-left",
+    "frame": 7,
+    "source": "clean-sources/drag-left-07.png",
+    "sha256": "3ea478b56e82f5256059dd6334d7b6a1774d6df1ec6cdb15c0a4ea6b4af04b59",
+    "output": "characters/drag-left/07.png",
+    "operation": "whole-canvas resize 448x640; no per-character registration transform",
+    "visualReview": "pending"
+  }
+]

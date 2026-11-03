@@ -1,0 +1,150 @@
+{
+  "state": "idle",
+  "outfit": "school",
+  "runtime_row": 0,
+  "cell": [
+    448,
+    640
+  ],
+  "display": [
+    224,
+    320
+  ],
+  "cycle_seconds": 3.2,
+  "drawing_interval_seconds": 0.2,
+  "drawings_required": 16,
+  "frame_order": [
+    0,
+    2,
+    1,
+    3,
+    4,
+    6,
+    5,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "review_scope": "only this GIF; stop for user review before any next state",
+  "native_changed": false,
+  "installed": false,
+  "support": {
+    "front_left": "grounded unchanged",
+    "front_right": "grounded unchanged",
+    "rear_left": "grounded behind front_left",
+    "rear_right": "grounded behind front_right"
+  },
+  "registration": "approved A01 pose on original idle base; no enlargement allowed; register character before pet/effects",
+  "layers": [
+    "effect_back",
+    "character",
+    "companion",
+    "effect_front"
+  ],
+  "frozen_sources": {
+    "original-idle.png": "deabd52d55da035357e8fad8ced4f6b99efd0b562f306ca4a96e985995c61de9",
+    "ran-master.png": "1c7a4862a350dd012e1cb9d8ed546163a0801e6bb8ee16077b28689825ab5181",
+    "school-master.png": "b1946dddfdf1bc2bbe93dd6ae7b0bef18d0d30b98c295cc44f7b68d63e9f2a10"
+  },
+  "frames": [
+    {
+      "id": "F00",
+      "phase": "neutral resting, eyes fully open looking forward, tail relaxed to viewer right",
+      "independent_source": "raw/F00-approved.png"
+    },
+    {
+      "id": "F01",
+      "phase": "begin tiny inhale, pupil just starts moving right, tail root fixed tip begins outward curve",
+      "independent_source": "raw/F01.png"
+    },
+    {
+      "id": "F02",
+      "phase": "early inhale, pupils one-quarter toward Ran, ear subtly inclines toward Ran",
+      "independent_source": "raw/F02.png"
+    },
+    {
+      "id": "F03",
+      "phase": "approach inhale peak, pupils halfway toward Ran, tail tip slightly farther right",
+      "independent_source": "raw/F03.png"
+    },
+    {
+      "id": "F04",
+      "phase": "inhale peak, calm pupils looking toward Ran on viewer right without turning head, tail soft outward curve",
+      "independent_source": "raw/F04.png"
+    },
+    {
+      "id": "F05",
+      "phase": "begin exhale, eyelids 85 percent open while still looking toward Ran",
+      "independent_source": "raw/F05.png"
+    },
+    {
+      "id": "F06",
+      "phase": "eyelids 60 percent open, torso starts settling, tail tip easing inward",
+      "independent_source": "raw/F06.png"
+    },
+    {
+      "id": "F07",
+      "phase": "eyelids 25 percent open, ear relaxed, tail softly curved inward",
+      "independent_source": "raw/F07.png"
+    },
+    {
+      "id": "F08",
+      "phase": "gentle full blink BOTH eyes completely closed, soft smiling eyelid arcs, exhale midpoint, tail tip closest to body",
+      "independent_source": "raw/F08.png"
+    },
+    {
+      "id": "F09",
+      "phase": "eyes reopen to 25 percent, tail starts uncurling, torso relaxed",
+      "independent_source": "raw/F09.png"
+    },
+    {
+      "id": "F10",
+      "phase": "eyes reopen to 60 percent with pupils toward Ran, tail halfway out",
+      "independent_source": "raw/F10.png"
+    },
+    {
+      "id": "F11",
+      "phase": "eyes open 90 percent toward Ran, inhale restarts gently",
+      "independent_source": "raw/F11.png"
+    },
+    {
+      "id": "F12",
+      "phase": "eyes fully open and returning toward front, chest relaxed, tail slightly extended",
+      "independent_source": "raw/F12.png"
+    },
+    {
+      "id": "F13",
+      "phase": "pupils three-quarters back to front, soft exhale, ear returns neutral",
+      "independent_source": "raw/F13.png"
+    },
+    {
+      "id": "F14",
+      "phase": "pupils nearly straight forward, tail returns close to master curve, torso preparing next inhale",
+      "independent_source": "raw/F14.png"
+    },
+    {
+      "id": "F15",
+      "phase": "eyes fully open straight forward, near neutral recovery with a tiny different tail-tip bend to lead smoothly into F00",
+      "independent_source": "raw/F15.png"
+    }
+  ],
+  "ordering_review": "Assigned open-eye F02/F01 by connected-tail progression and closing F06/F05 by actual eyelid aperture after 1x review. All 16 independent drawings used exactly once; no reversed/repeated source padding.",
+  "runtime_source_check": {
+    "base_atlas": "assets/spritesheet.webp",
+    "base_atlas_sha256": "3a7d6c1cf341a5ffbe3e8903348698c99d2302bff352d37d735d2aa6da8801c9",
+    "current_cell_size": [
+      224,
+      320
+    ],
+    "cached_idle_matches_current_base": true,
+    "target_amu_atlas": "not assembled for this one-GIF review",
+    "app_source_changed": false
+  },
+  "status": "GIF ready for user review"
+}

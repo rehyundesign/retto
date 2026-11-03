@@ -1,0 +1,155 @@
+[
+  {
+    "id": "A02",
+    "outfit": "school",
+    "master": "anchors/idle-school-source.png",
+    "base": "base/running.png",
+    "pose": "Front seated, attentive working pose, anatomical RIGHT forepaw (viewer-left) raised to lower chest with pad cupped, other forepaw grounded; both rear legs support body. Raised forepaw REPLACES its grounded counterpart. This is school outfit. No props/effects.",
+    "destination": "anchors/A02-character-source.png",
+    "face_contract": "Keep approved round skull, forehead, eye spacing, muzzle and chin; do not flatten face to express crouch, bow or jump."
+  },
+  {
+    "id": "A03",
+    "outfit": "school",
+    "master": "anchors/idle-school-source.png",
+    "base": "base/review.png",
+    "pose": "Low front three-quarter crouch: front paws reach slightly forward side by side, head gently lowered to inspect space between paws, shoulders lower; rear legs folded behind. Same face width, not a shrunken cat. School uniform follows the low posture. No object/effects.",
+    "destination": "anchors/A03-character-source.png",
+    "face_contract": "Keep approved round skull, forehead, eye spacing, muzzle and chin; do not flatten face to express crouch, bow or jump."
+  },
+  {
+    "id": "A04",
+    "outfit": "school",
+    "master": "anchors/idle-school-source.png",
+    "base": "base/waiting.png",
+    "pose": "Front seated waiting pose: anatomical RIGHT forepaw (viewer-left) crosses chest halfway toward red armband on anatomical LEFT upper foreleg (viewer-right); left forepaw stays grounded. Rear-left and rear-right support seated hips. Do not leave a grounded duplicate of raised right forepaw. Eyes attentive. No effects.",
+    "destination": "anchors/A04-character-source.png",
+    "face_contract": "Keep approved round skull, forehead, eye spacing, muzzle and chin; do not flatten face to express crouch, bow or jump."
+  },
+  {
+    "id": "A05",
+    "outfit": "school",
+    "master": "anchors/idle-school-source.png",
+    "base": "base/failed.png",
+    "pose": "Front seated surprise: ears tilt slightly back, head draws back gently, both forepaws grounded with mild elbow bend, rear legs support body. Blue eyes surprised but original eye size. School jacket and tie follow recoil. No effects.",
+    "destination": "anchors/A05-character-source.png",
+    "face_contract": "Keep approved round skull, forehead, eye spacing, muzzle and chin; do not flatten face to express crouch, bow or jump."
+  },
+  {
+    "id": "A07",
+    "outfit": "heart",
+    "master": "anchors/idle-heart-scarf-v12-character.png",
+    "base": "base/jumping.png",
+    "pose": "V12 approved center-scarf Amulet Heart outfit. Front seated anticipatory jump crouch with all four actual paws flexed in contact with ground, shoulders/head lower slightly, hips compressed. Broad shoulder cape drapes over upper forelegs; Guardian Egg stays connected directly beneath the red scarf center knot. Exactly four attached limbs, no human arms. No pompons, wrist loops, props or effects.",
+    "destination": "anchors/A07-character-source.png",
+    "material": "Follow reference/hana-material-reference.png: soft short flocked fur, matte soft felt, simple broad cloth shapes, no satin/plastic shine or photographic long fur.",
+    "exclusions": [
+      "pompons",
+      "wrist-loop straps",
+      "floor props",
+      "human arms",
+      "duplicated grounded counterpart of raised paw"
+    ],
+    "neck_contract": "red neck scarf tied at front center; same single Guardian Egg directly attached beneath knot, separate cord absent",
+    "face_contract": "Keep approved round skull, forehead, eye spacing, muzzle and chin; do not flatten face to express crouch, bow or jump."
+  },
+  {
+    "id": "A08",
+    "outfit": "school",
+    "master": "anchors/idle-school-source.png",
+    "base": "base/sleeping.png",
+    "pose": "School uniform sleeping on side curled into a compact cat loaf, head tucked toward two visible front paws at viewer-right, eyes gently closed, rear legs curled under hips and hidden by torso, ONE brown fluffy tail curves around rear. Four-limb contract: two front paws visible; both rear legs occluded by curled body. Blazer must wrap side/back, skirt at hips, tie partly hidden by chin. Not frontal bib pasted sideways.",
+    "destination": "anchors/A08-character-source.png",
+    "face_contract": "Keep approved round skull, forehead, eye spacing, muzzle and chin; do not flatten face to express crouch, bow or jump."
+  },
+  {
+    "id": "A09",
+    "outfit": "school",
+    "master": "anchors/idle-school-source.png",
+    "base": "base/drag-right.png",
+    "pose": "School outfit, real quadruped cat walking to SCREEN RIGHT in full right-facing profile. Four limbs: near foreleg forward-grounded, far foreleg behind partly occluded by chest, near hindleg behind-grounded, far hindleg passing under hips. Single brown tail trails on left. Blazer wraps back/chest, red tie under throat; armband stays on anatomical left foreleg (far foreleg in this view). Pink X clip stays on anatomical left ear. No mirroring of asymmetry.",
+    "destination": "anchors/A09-character-source.png",
+    "face_contract": "Keep approved round skull, forehead, eye spacing, muzzle and chin; do not flatten face to express crouch, bow or jump."
+  },
+  {
+    "id": "A10",
+    "outfit": "school",
+    "master": "anchors/idle-school-source.png",
+    "base": "base/drag-left.png",
+    "pose": "School outfit, real quadruped cat walking to SCREEN LEFT in full left-facing profile. Four limbs: near foreleg forward-grounded, far foreleg behind partly occluded by chest, near hindleg behind-grounded, far hindleg passing under hips. Single brown tail trails on right. Blazer wraps back/chest, red tie under throat; armband stays on anatomical left foreleg (near foreleg in this view). Pink X clip stays on anatomical left ear. No mirroring of asymmetry.",
+    "destination": "anchors/A10-character-source.png",
+    "face_contract": "Keep approved round skull, forehead, eye spacing, muzzle and chin; do not flatten face to express crouch, bow or jump."
+  },
+  {
+    "id": "A11",
+    "outfit": "school",
+    "master": "anchors/idle-school-source.png",
+    "base": "base/idle.png",
+    "pose": "School outfit, front seated body same neutral stance, head turns only about 10 degrees toward viewer-right where Ran will float. Both forepaws grounded, rear-right visible beside front-left on viewer-right, far rear leg hidden behind front-right. No companion/effects.",
+    "destination": "anchors/A11-character-source.png",
+    "face_contract": "Keep approved round skull, forehead, eye spacing, muzzle and chin; do not flatten face to express crouch, bow or jump."
+  },
+  {
+    "id": "A12",
+    "outfit": "school",
+    "master": "anchors/idle-school-source.png",
+    "base": "base/running.png",
+    "pose": "School outfit, front seated, anatomical RIGHT forepaw (viewer-left) cupped forward at chest level to present a future tiny heart charm (DO NOT DRAW CHARM); other forepaw remains grounded, both rear feet support seated hips. Small happy focused expression. No extra paw or effects.",
+    "destination": "anchors/A12-character-source.png",
+    "face_contract": "Keep approved round skull, forehead, eye spacing, muzzle and chin; do not flatten face to express crouch, bow or jump."
+  },
+  {
+    "id": "A13",
+    "outfit": "school",
+    "master": "anchors/idle-school-source.png",
+    "base": "base/review.png",
+    "pose": "School outfit, low crouch as A03, anatomical RIGHT forepaw reaches forward just above ground as if touching a future charm, other forepaw grounded, rear legs folded behind torso. Gently curious blue eyes looking down. No object/effects. Lifted forepaw has NO grounded duplicate.",
+    "destination": "anchors/A13-character-source.png",
+    "face_contract": "Keep approved round skull, forehead, eye spacing, muzzle and chin; do not flatten face to express crouch, bow or jump."
+  },
+  {
+    "id": "A14",
+    "outfit": "heart",
+    "master": "anchors/idle-heart-scarf-v12-character.png",
+    "base": "base/waving.png",
+    "pose": "V12 approved center-scarf Amulet Heart outfit. Front seated greeting, anatomical RIGHT forepaw (viewer-left) raised beside cheek, anatomical LEFT forepaw grounded, both actual rear feet support hips. Raised right foreleg replaces its old grounded counterpart. Four limbs only, natural cat shoulder attachment and short foreleg proportions. Broad cape follows raised shoulder and drapes over upper chest; lower-leg warmers remain on actual forelegs. Guardian Egg remains connected beneath the red scarf center knot. No pompons, wrist loops, props or effects.",
+    "destination": "anchors/A14-character-source.png",
+    "material": "Follow reference/hana-material-reference.png: soft short flocked fur, matte soft felt, simple broad cloth shapes, no satin/plastic shine or photographic long fur.",
+    "exclusions": [
+      "pompons",
+      "wrist-loop straps",
+      "floor props",
+      "human arms",
+      "duplicated grounded counterpart of raised paw"
+    ],
+    "neck_contract": "red neck scarf tied at front center; same single Guardian Egg directly attached beneath knot, separate cord absent",
+    "face_contract": "Keep approved round skull, forehead, eye spacing, muzzle and chin; do not flatten face to express crouch, bow or jump."
+  },
+  {
+    "id": "A15",
+    "outfit": "heart",
+    "master": "anchors/idle-heart-scarf-v12-character.png",
+    "base": "base/jumping.png",
+    "pose": "V12 approved center-scarf Amulet Heart outfit. Front-facing airborne jump apex, both actual forepaws flexed near chest, two rear paws tucked below hips, exactly four attached limbs and one original tail, no grounded feet. Same head/body scale; purposeful upward translation only. Broad shoulder cape, Guardian Egg attached directly to the front-center red scarf knot, red hip ribbons and skirt respond to upward momentum. No pompons, wrist loops, props or effects.",
+    "destination": "anchors/A15-character-source.png",
+    "material": "Follow reference/hana-material-reference.png: soft short flocked fur, matte soft felt, simple broad cloth shapes, no satin/plastic shine or photographic long fur.",
+    "exclusions": [
+      "pompons",
+      "wrist-loop straps",
+      "floor props",
+      "human arms",
+      "duplicated grounded counterpart of raised paw"
+    ],
+    "neck_contract": "red neck scarf tied at front center; same single Guardian Egg directly attached beneath knot, separate cord absent",
+    "face_contract": "Keep approved round skull, forehead, eye spacing, muzzle and chin; do not flatten face to express crouch, bow or jump."
+  },
+  {
+    "id": "A16",
+    "outfit": "school",
+    "master": "anchors/idle-school-source.png",
+    "base": "base/failed.png",
+    "pose": "School outfit, front seated recovery from surprise: head dips slightly in gentle reassuring bow, eyes softly open, one forepaw lightly reaches toward space beside body, other forepaw grounded, both rear feet support body. Shoulder sleeve follows actual lifted foreleg, no grounded duplicate. No companion or effects.",
+    "destination": "anchors/A16-character-source.png",
+    "face_contract": "Keep approved round skull, forehead, eye spacing, muzzle and chin; do not flatten face to express crouch, bow or jump."
+  }
+]

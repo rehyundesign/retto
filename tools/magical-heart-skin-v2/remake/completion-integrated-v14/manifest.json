@@ -1,0 +1,219 @@
+{
+  "state": "waving",
+  "cycle_seconds": 2.4,
+  "cell_interval_ms": 150,
+  "independent_integrated_drawings": 16,
+  "overlay_effect_renderer": false,
+  "original_registration": "not approved; scoped motion/style candidate",
+  "native_app_applied": false,
+  "records": [
+    {
+      "frame": 0,
+      "source": "sources/00.png",
+      "source_hash": "e00e8b13e02905b28ecd7bf7eee6ebbd0158a8e755fbbf9596dc55de8706975a",
+      "pixel_hash": "afb3cacf5d342943e8049888375f72620394f610aa8068b19dc94838d76935fb",
+      "visible_bounds": [
+        11,
+        154,
+        440,
+        613
+      ],
+      "integrated_character_and_effect": true
+    },
+    {
+      "frame": 1,
+      "source": "sources/01.png",
+      "source_hash": "b35647223b9aec5af43100012abe79588291a63afa74323396619af046aa857d",
+      "pixel_hash": "5edbd695a15c19229c157d209c89dd09a15fcf231f7502449cfe90ea61855751",
+      "visible_bounds": [
+        18,
+        172,
+        442,
+        611
+      ],
+      "integrated_character_and_effect": true
+    },
+    {
+      "frame": 2,
+      "source": "sources/02.png",
+      "source_hash": "a5b75d76c93cdf8e5b486c017266a57d3746f9603b585ec126bd921444ded691",
+      "pixel_hash": "b07fdc00feeed3ce8e69ba401a0b7cfb536e12794e77200da8dccda101c69872",
+      "visible_bounds": [
+        19,
+        150,
+        439,
+        610
+      ],
+      "integrated_character_and_effect": true
+    },
+    {
+      "frame": 3,
+      "source": "sources/03.png",
+      "source_hash": "3dd4bc56f73523e4fbb8279d95670fa735bcdf9f14a910acc5768677faff6e73",
+      "pixel_hash": "173967c505542ea0336804a5e2df984fa41c67c68e7fe3c076e22f168edfedfb",
+      "visible_bounds": [
+        19,
+        191,
+        439,
+        619
+      ],
+      "integrated_character_and_effect": true
+    },
+    {
+      "frame": 4,
+      "source": "sources/04.png",
+      "source_hash": "e204a15c6c291f3dbae31865e02fd9d43af3cfb611226139bee34422adf1a63c",
+      "pixel_hash": "c16c17a50a9af24f7de3e701e66dd2497f1ad59dea4ecec6b3174c30f3d8b236",
+      "visible_bounds": [
+        17,
+        162,
+        440,
+        617
+      ],
+      "integrated_character_and_effect": true
+    },
+    {
+      "frame": 5,
+      "source": "sources/05.png",
+      "source_hash": "9b80a52d550d3a0236d68baf6cf9bdc4e4c4ad9fd2a30206136f265657e10189",
+      "pixel_hash": "5fdbd4b35105b2156f9b0be974e90567f3ada3ca43baad1f83c7d1fc6c460f21",
+      "visible_bounds": [
+        8,
+        161,
+        441,
+        616
+      ],
+      "integrated_character_and_effect": true
+    },
+    {
+      "frame": 6,
+      "source": "sources/06.png",
+      "source_hash": "6475825af8ef9bf1461ec57508bf965548bae4ab1770131c921bfca2b9183056",
+      "pixel_hash": "b465792f1c3abc2dab0c3aa983f58a0f02315b2254e50e31bef0724879d2ad41",
+      "visible_bounds": [
+        10,
+        183,
+        438,
+        614
+      ],
+      "integrated_character_and_effect": true
+    },
+    {
+      "frame": 7,
+      "source": "sources/07.png",
+      "source_hash": "a5ec804c73f549b0e2f7e05859f4701f7c81f5da2624befbdb9a50779d0aee20",
+      "pixel_hash": "6e06e77cb77d401c8becab4715d79b51575ba6683b7fe60597ea8712eaffaad7",
+      "visible_bounds": [
+        7,
+        165,
+        439,
+        606
+      ],
+      "integrated_character_and_effect": true
+    },
+    {
+      "frame": 8,
+      "source": "sources/08.png",
+      "source_hash": "478c3f685f9c97e8c652c95c019f90eefbf2af13f5bf48ee4357107221a7c1dd",
+      "pixel_hash": "40026447adf51d3d40f4335ec4dfd89c37bac85becfd744567a0aff8170d97fd",
+      "visible_bounds": [
+        6,
+        108,
+        442,
+        613
+      ],
+      "integrated_character_and_effect": true
+    },
+    {
+      "frame": 9,
+      "source": "sources/09.png",
+      "source_hash": "eca8f6204dd4fd1a834dc68e2035ef894a14604192a28bfd9cb0b572d8e110f1",
+      "pixel_hash": "3cf697f57db23fc0a677c3fb302525f345874c3deeea06ba8d9f05471cc44ce9",
+      "visible_bounds": [
+        17,
+        81,
+        443,
+        614
+      ],
+      "integrated_character_and_effect": true
+    },
+    {
+      "frame": 10,
+      "source": "sources/10.png",
+      "source_hash": "31c8608084fa0de020cdefbabc331468e04feead9282ebac275afbf8f28420b7",
+      "pixel_hash": "b17362f70def3114e91b88e424b89cf4583c0b84fd81e7ae406446459a79e689",
+      "visible_bounds": [
+        10,
+        174,
+        436,
+        618
+      ],
+      "integrated_character_and_effect": true
+    },
+    {
+      "frame": 11,
+      "source": "sources/11.png",
+      "source_hash": "33a2cb1e5e95dbcc77bc0693af3ec197432dc4c90c8f7c10ba0d0169e9090174",
+      "pixel_hash": "77d4a5d0d6f545637246eb23f8260ee9ddf6ba1caff16ba419b9d5d1008ecaaa",
+      "visible_bounds": [
+        10,
+        184,
+        441,
+        619
+      ],
+      "integrated_character_and_effect": true
+    },
+    {
+      "frame": 12,
+      "source": "sources/12.png",
+      "source_hash": "db768219f59faf481f8d958fd68ea95ea88f37fc4803e544a3c4dd1e5a15e183",
+      "pixel_hash": "9acf02b317673efcef64e8d4561965903562b25c1ce4bd9e1afd0fbf3f646d2e",
+      "visible_bounds": [
+        9,
+        160,
+        442,
+        619
+      ],
+      "integrated_character_and_effect": true
+    },
+    {
+      "frame": 13,
+      "source": "sources/13.png",
+      "source_hash": "26c6a46391baee5adb866d07b2e84e107ba314f1ce16153928eed7e28b007f84",
+      "pixel_hash": "d3a53e968ec2ef3fad696608a5dc64f0d85dcc07b8039d3c5933510bc736bdd4",
+      "visible_bounds": [
+        9,
+        194,
+        447,
+        632
+      ],
+      "integrated_character_and_effect": true
+    },
+    {
+      "frame": 14,
+      "source": "sources/14.png",
+      "source_hash": "ddebb18d64f9a59c25d0c28bd25c766170a2e91fb93c19f858dece4eabbd75e1",
+      "pixel_hash": "d4f58c461e96bad58a9b422d01c95b8adb100282eebc077dc4b28b935999fa0c",
+      "visible_bounds": [
+        5,
+        153,
+        444,
+        613
+      ],
+      "integrated_character_and_effect": true
+    },
+    {
+      "frame": 15,
+      "source": "sources/15.png",
+      "source_hash": "71d906aabc531864b5f54c9049febf5f4f4df7b1b51a1c921e074895c0b524fc",
+      "pixel_hash": "8b9500bbd787a49b9685f450390378fe576c61877e434b4af774d321df3d123b",
+      "visible_bounds": [
+        7,
+        153,
+        443,
+        614
+      ],
+      "integrated_character_and_effect": true
+    }
+  ]
+}

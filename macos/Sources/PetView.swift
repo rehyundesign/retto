@@ -7,20 +7,73 @@ import Foundation
 final class RettoView: NSView {
     /// 지금 그리는 아틀라스. 스킨을 고르면 앱이 갈아 끼운다.
     var spriteSheet: NSImage {
-        didSet { needsDisplay = true }
+        didSet { frameIndex = 0; completedCycles = 0; restartAnimation(); needsDisplay = true }
+    }
+    /// 아틀라스만으로는 표현하기 어려운 스킨 전용 효과를 고른다.
+    var skin: PetSkin {
+        didSet {
+            if oldValue != skin {
+                switch oldValue {
+                case .jeanne: JeanneSkin.removeCachedImages()
+                case .hana: HanaFrameCache.removeCachedImages()
+                case .pichiPitch: PichiSkin.removeCachedImages()
+                case .chocolatHeart: ChocolatHeart.removeCachedImages()
+                case .amuRan: AmuRanFrames.removeCachedImages()
+                default: break
+                }
+            }
+            if skin == .chocolatHeart { chocolatEpoch = ProcessInfo.processInfo.systemUptime }; clearGaze(); frameIndex = 0; completedCycles = 0; restartAnimation(); restartChristmasEffects(); needsDisplay = true }
     }
     private var spriteLayout: SpriteSheetLayout {
         SpriteSheetLayout.forImage(size: spriteSheet.size) ?? .retto
     }
+    /// 변신 효과는 캐릭터 아틀라스와 같은 칸·행을 쓰는 별도 투명 레이어다.
+    /// 뒤 레이어 → 레토 → 앞 레이어 순서로 그려서 마법진은 몸 뒤에, 리본 끝은 앞에 남긴다.
+    private lazy var magicalHeartEffectsBack = Self.loadEffectSheet("spritesheet-magical-heart-effects-back")
+    private lazy var magicalHeartEffectsFront = Self.loadEffectSheet("spritesheet-magical-heart-effects-front")
     private let onOpenClaude: (StatePayload?, Bool) -> Void
     private let onOpenAttention: (NSPoint) -> Void
     private var payload: StatePayload?
     private var state: PetState = .idle
+    private var chocolatPreviewTime: TimeInterval?
+    func setChocolatTimeForPreview(_ time: TimeInterval, drag: DragRun? = nil) { chocolatPreviewTime = time; dragRun = drag; needsDisplay = true }
+    private var chocolatEpoch = ProcessInfo.processInfo.systemUptime
+    private var amuRanPoseEpoch = ProcessInfo.processInfo.systemUptime
+    private let amuRanEffectEpoch = ProcessInfo.processInfo.systemUptime
+    private var amuRanPreviewTime: TimeInterval?
+    private var amuRanSpriteOnlyPreview = false
+    func setAmuRanTimeForPreview(_ time: TimeInterval) { amuRanPreviewTime = time; needsDisplay = true }
+    func setAmuRanSpriteOnlyForPreview() { amuRanSpriteOnlyPreview = true }
     private var frameIndex = 0
     private var completedCycles = 0
     private var animationTimer: Timer?
+    private var jeanneEpoch = ProcessInfo.processInfo.systemUptime
+    private var jeannePreviewTime: Double?
+    func setJeanneTimeForPreview(_ time: Double) {
+        jeannePreviewTime = time
+        if let a = currentAnimation { frameIndex = JeanneSkin.position(row: a.row, time: time).frame }
+        needsDisplay = true
+    }
+    private var pichiEpoch = ProcessInfo.processInfo.systemUptime
+    private var pichiPreviewTime: Double?
+    func setPichiTimeForPreview(_ time: Double) {
+        pichiPreviewTime = time
+        if let a = currentAnimation { frameIndex = PichiSkin.position(row: a.row, time: time).frame }
+        needsDisplay = true
+    }
+    private var hanaAnimationStart = ProcessInfo.processInfo.systemUptime
+    private let hanaEffects = HanaEffectLayers()
+    private var christmasEffectsTimer: Timer?
+    private var christmasEffectsStart = ProcessInfo.processInfo.systemUptime
+    private var christmasPreviewTime: TimeInterval?
+    private var christmasEffectState: String?
     private var trackingAreaRef: NSTrackingArea?
     private var lookDirection: Int?
+    /// 시선 행은 방향별 정지 그림 한 장이다. 커서가 멈춘 뒤에도 계속 쓰면 펫까지 멈춘 것처럼 보인다.
+    private var gazeResetTimer: Timer?
+    private var gazeTransitionTimer: Timer?
+    private var gazeTargetDirection: Int?
+    private var hanaLastMouseLocation: NSPoint?
     private var dragStartMouseLocation: NSPoint?
     private var dragStartWindowOrigin: NSPoint?
     private var pressedTarget: PetClickTarget?
@@ -32,9 +85,12 @@ final class RettoView: NSView {
     private var isRibbonHovering = false
     private var sessionCount = 0
     private var attentionCount = 0
+    private var inputCount = 0
+    private var connectionStatus: String?
     private var isPinned = false
     /// 배지가 대표하는 상태. 다른 세션에 고정해 둔 동안에도 배지 색은 기다리는 쪽을 따른다.
     private var attentionState: PetState?
+    private var attentionSource: String?
 
     /// 클릭 한 번에 한 바퀴만 돌고 원래 상태로 돌아가는 반응 동작. 코덱스의 transientState 와 같은 자리.
     private var transientState: PetState?
@@ -42,7 +98,7 @@ final class RettoView: NSView {
     /// 답변이 끝난 세션은 내가 볼 때까지 "완료"로 남아야 하므로 상태를 쉬는 중으로 바꾸지 않는다.
     private var spriteRestState: PetState?
     /// 말풍선에 마우스를 잠깐 올려두면 마지막 답을 읽을 수 있게 아래로 펼친다.
-    private var isRibbonExpanded = false
+    private(set) var isRibbonExpanded = false
     private var ribbonExpandTimer: Timer?
     var onExpansionChanged: ((Bool) -> Void)?
 
@@ -67,8 +123,15 @@ final class RettoView: NSView {
         didSet { needsDisplay = true }
     }
 
+    var chatScale: CGFloat? {
+        didSet { needsDisplay = true }
+    }
+    var chatFontSize: ChatFontSize = .medium {
+        didSet { needsDisplay = true }
+    }
+
     private var layout: PetLayout {
-        petLayout(scale: petScale, width: bounds.width, expanded: isRibbonExpanded)
+        petLayout(scale: petScale, width: bounds.width, expanded: isRibbonExpanded, chatScale: chatScale, fontSize: chatFontSize)
     }
 
     /// 지금 화면에 그려야 하는 상태. 반응 → 앉은 자리 → 실제 상태 순으로 이긴다.
@@ -87,6 +150,7 @@ final class RettoView: NSView {
     private var sleepPose = false {
         didSet {
             guard sleepPose != oldValue else { return }
+            if skin == .hana { clearGaze() }
             frameIndex = 0
             restartAnimation()
             needsDisplay = true
@@ -96,10 +160,12 @@ final class RettoView: NSView {
     init(
         frame frameRect: NSRect,
         spriteSheet: NSImage,
+        skin: PetSkin = .classic,
         onOpenClaude: @escaping (StatePayload?, Bool) -> Void,
         onOpenAttention: @escaping (NSPoint) -> Void
     ) {
         self.spriteSheet = spriteSheet
+        self.skin = skin
         self.onOpenClaude = onOpenClaude
         self.onOpenAttention = onOpenAttention
         super.init(frame: frameRect)
@@ -108,12 +174,16 @@ final class RettoView: NSView {
         setAccessibilityRole(.group)
         setAccessibilityLabel("Claude Code와 Codex 상태를 보여주는 " + Retto.character + " " + Retto.koreanName)
         restartAnimation()
+        restartChristmasEffects()
     }
 
     required init?(coder: NSCoder) { nil }
 
     deinit {
         animationTimer?.invalidate()
+        christmasEffectsTimer?.invalidate()
+        gazeResetTimer?.invalidate()
+        gazeTransitionTimer?.invalidate()
         badgeAnimator?.invalidate()
         ribbonExpandTimer?.invalidate()
         typeTimer?.invalidate()
@@ -132,7 +202,31 @@ final class RettoView: NSView {
         trackingAreaRef = area
     }
 
-    func apply(_ newPayload: StatePayload, state incoming: PetState? = nil, liveMessage: String? = nil, liveTitle: String? = nil, sleepPose: Bool = false, sessionCount: Int, attentionCount: Int, attentionState: PetState? = nil, isPinned: Bool) {
+    private struct ApplyInputs: Equatable {
+        let payload: StatePayload
+        let state: PetState?
+        let liveMessage: String?
+        let liveTitle: String?
+        let sleepPose: Bool
+        let sessionCount: Int
+        let attentionCount: Int
+        let attentionState: PetState?
+        let attentionSource: String?
+        let inputCount: Int
+        let connectionStatus: String?
+        let isPinned: Bool
+    }
+    /// 폴링은 0.25초마다 같은 값을 다시 넘긴다. 표시 상태는 여기서만 바뀌므로, 같은 값이면 다시 그리지 않는다.
+    private var lastApplyInputs: ApplyInputs?
+
+    func apply(_ newPayload: StatePayload, state incoming: PetState? = nil, liveMessage: String? = nil, liveTitle: String? = nil, sleepPose: Bool = false, sessionCount: Int, attentionCount: Int, attentionState: PetState? = nil, attentionSource: String? = nil, inputCount: Int = 0, connectionStatus: String? = nil, isPinned: Bool) {
+        let inputs = ApplyInputs(
+            payload: newPayload, state: incoming, liveMessage: liveMessage, liveTitle: liveTitle, sleepPose: sleepPose,
+            sessionCount: sessionCount, attentionCount: attentionCount, attentionState: attentionState,
+            attentionSource: attentionSource, inputCount: inputCount, connectionStatus: connectionStatus, isPinned: isPinned
+        )
+        guard inputs != lastApplyInputs else { return }
+        lastApplyInputs = inputs
         self.liveMessage = liveMessage
         self.liveTitle = liveTitle
         self.sleepPose = sleepPose
@@ -141,6 +235,9 @@ final class RettoView: NSView {
         let hadBadge = self.attentionCount > 0
         self.attentionCount = attentionCount
         self.attentionState = attentionState
+        self.attentionSource = attentionSource
+        self.inputCount = inputCount
+        self.connectionStatus = connectionStatus
         if !hadBadge && attentionCount > 0 {
             badgeAppearProgress = 0
             startBadgeAnimator()
@@ -156,7 +253,7 @@ final class RettoView: NSView {
             spriteRestState = nil
             frameIndex = 0
             completedCycles = 0
-            lookDirection = nil
+            clearGaze()
             restartAnimation()
         }
         restartTypingIfNeeded()
@@ -202,38 +299,174 @@ final class RettoView: NSView {
         needsDisplay = true
     }
 
+    /// 효과와 포즈를 함께 검수하는 오프스크린 시트용 프레임 고정값이다.
+    /// 실제 타이머·상태 전환에는 쓰지 않는다.
+    func setFrameForPreview(_ frame: Int) {
+        let count = max(1, currentAnimation?.frames ?? 1)
+        frameIndex = min(max(frame, 0), count - 1)
+        needsDisplay = true
+    }
+
+    /// 시선 행을 실제 렌더 경로로 점검하는 오프스크린 미리보기 전용 설정값이다.
+    func setGazeDirectionForPreview(_ direction: Int) {
+        lookDirection = min(max(direction, 0), gazeDirectionCount - 1)
+        needsDisplay = true
+    }
+
     private func updateAccessibility() {
         let animation = animationCatalog[state] ?? animationCatalog[.idle]!
         let selection = isPinned ? "고정한 세션" : "자동 선택 세션"
-        let attention = attentionCount > 0 ? " 손이 필요한 세션 \(attentionCount)개." : ""
+        let attention = inputCount > 0 ? " 입력 필요 \(inputCount)개." : (attentionCount > 0 ? " 새 알림 \(attentionCount)개." : "")
+        let connection = connectionStatus.map { " 연결 상태: \($0)." } ?? ""
         // 말풍선 내용도 읽어 준다. 소리로만 듣는 경우 이게 유일한 통로다.
         let spoken = bodyText()
         let message = spoken.isEmpty ? "" : " \(String(spoken.prefix(160)))."
         let source = payload?.sourceLabel ?? "AI"
-        setAccessibilityLabel("\(source), \(payload?.project ?? "AI 작업"), \(animation.title).\(message) \(selection), 총 \(sessionCount)개 세션.\(attention)")
+        setAccessibilityLabel("\(source), \(payload?.project ?? "AI 작업"), \(animation.title).\(message) \(selection), 총 \(sessionCount)개 세션.\(attention)\(connection)")
     }
 
     /// 지금 그려야 하는 동작. 끄는 중이면 달리기가 상태를 이긴다.
+    private var allowsGaze: Bool {
+        if skin == .hana { return HanaGaze.allows(state: visibleState, dragging: dragRun != nil) && transientState == nil }
+        guard skin != .hana, skin != .chocolatHeart, skin != .pichiPitch,
+              gazeStates.contains(state), transientState == nil else { return false }
+        return skin != .jeanne || (visibleState == .idle && dragRun == nil)
+    }
+    private var hasActiveGaze: Bool { lookDirection != nil && ((skin != .jeanne && skin != .hana) || allowsGaze) }
+
     private var currentAnimation: Animation? {
-        if let dragRun { return dragRunAnimations[dragRun] }
-        return animationCatalog[visibleState]
+        if let dragRun, let animation = dragRunAnimations[dragRun] { return skin == .chocolatHeart ? ChocolatHeart.animation(animation) : skinAnimation(animation, skin: skin, columns: spriteLayout.columns) }
+        guard let animation = animationCatalog[visibleState] else { return nil }
+        return skin == .chocolatHeart ? ChocolatHeart.animation(animation) : skinAnimation(animation, skin: skin, columns: spriteLayout.columns)
     }
 
     private func restartAnimation() {
+        let effectState = dragRun.map { String(describing: $0) } ?? visibleState.rawValue
+        if effectState != christmasEffectState {
+            christmasEffectState = effectState
+            christmasEffectsStart = ProcessInfo.processInfo.systemUptime
+            chocolatEpoch = ProcessInfo.processInfo.systemUptime
+        }
         animationTimer?.invalidate()
+        if skin == .amuRan { amuRanPoseEpoch = ProcessInfo.processInfo.systemUptime }
         guard let animation = currentAnimation else { return }
-        let timer = Timer(timeInterval: animation.interval, repeats: true) { [weak self] _ in
+        let poseTiming = skin == .christmas && spriteLayout.columns == 16
+            ? Christmas16Timing.frameDuration(row: animation.row, frame: frameIndex) : nil
+        if skin == .jeanne {
+            jeanneEpoch = ProcessInfo.processInfo.systemUptime - JeanneSkin.elapsed(row: animation.row, frame: frameIndex, cycles: completedCycles)
+        }
+        if skin == .pichiPitch {
+            pichiEpoch = ProcessInfo.processInfo.systemUptime - PichiSkin.elapsed(row: animation.row, frame: frameIndex, cycles: completedCycles)
+        }
+        if skin == .hana {
+            hanaAnimationStart = ProcessInfo.processInfo.systemUptime - Double(completedCycles * animation.frames + frameIndex) * animation.interval
+        }
+        let timer = Timer(timeInterval: skin == .jeanne ? 0.05 : (skin == .amuRan || skin == .hana || skin == .chocolatHeart || skin == .pichiPitch) ? 1.0 / 60 : (poseTiming ?? animation.interval), repeats: poseTiming == nil) { [weak self] _ in
             self?.advanceFrame()
+            if poseTiming != nil { self?.restartAnimation() }
         }
         animationTimer = timer
         RunLoop.main.add(timer, forMode: .common)
         needsDisplay = true
     }
 
+    private func restartChristmasEffects() {
+        christmasEffectsTimer?.invalidate()
+        christmasEffectsTimer = nil
+        guard skin == .christmas else { return }
+        christmasEffectsStart = ProcessInfo.processInfo.systemUptime
+        let timer = Timer(timeInterval: 0.05, repeats: true) { [weak self] _ in self?.needsDisplay = true }
+        christmasEffectsTimer = timer
+        RunLoop.main.add(timer, forMode: .common)
+    }
+
+    func setDragRunForPreview(_ direction: DragRun?) {
+        dragRun = direction
+        restartAnimation()
+    }
+
+    func setChristmasTimeForPreview(_ time: TimeInterval) {
+        christmasPreviewTime = time
+        needsDisplay = true
+    }
+
+    func validateJeanneStateTransitions() -> Bool {
+        for state in PetState.allCases {
+            guard let data = "{\"state\":\"\(state.rawValue)\",\"sessionId\":\"jeanne-state-fixture\"}".data(using:.utf8),
+                  let payload = try? JSONDecoder().decode(StatePayload.self,from:data) else { return false }
+            apply(payload,state:state,sessionCount:1,attentionCount:0,isPinned:false)
+            guard currentAnimation?.row == animationCatalog[state]?.row else { return false }
+            guard allowsGaze == (state == .idle) else { print("Unexpected gaze policy: \(state)"); return false }
+            if state != .idle {
+                lookDirection = 8
+                guard !hasActiveGaze else { return false }
+            }
+            let duration = JeanneSkin.state(row: animationCatalog[state]!.row)!.cycle
+            jeanneEpoch = ProcessInfo.processInfo.systemUptime - duration * 3 - 0.01
+            advanceFrame()
+            guard visibleState == state, currentAnimation?.row == animationCatalog[state]?.row else { print("State changed unexpectedly: \(state)"); return false }
+        }
+        clearGaze()
+        guard let payload = try? JSONDecoder().decode(StatePayload.self,from:Data("{\"state\":\"waving\",\"sessionId\":\"fixture\"}".utf8)) else { return false }
+        apply(payload,state:.waving,sessionCount:1,attentionCount:0,isPinned:false)
+        playReaction()
+        guard transientState == .jumping, !allowsGaze, currentAnimation?.row == animationCatalog[.jumping]?.row else { return false }
+        jeanneEpoch = ProcessInfo.processInfo.systemUptime - JeanneSkin.state(row:4)!.cycle - 0.01
+        advanceFrame()
+        guard transientState == nil, visibleState == .waving, currentAnimation?.row == 3 else { return false }
+        for direction in [DragRun.right,.left] {
+            dragRun = direction; restartAnimation()
+            guard let a = currentAnimation, a.row == dragRunAnimations[direction]?.row, a.frames == 16 else { return false }
+            jeanneEpoch = ProcessInfo.processInfo.systemUptime - 2.1
+            advanceFrame()
+            guard frameIndex < 16 else { return false }
+        }
+        dragRun = nil
+        apply(payload,state:.idle,sessionCount:1,attentionCount:0,isPinned:false)
+        for direction in 0..<16 { setGazeDirectionForPreview(direction); guard lookDirection == direction, hasActiveGaze else { return false } }
+        clearGaze()
+        apply(payload,state:.idle,sleepPose:true,sessionCount:1,attentionCount:0,isPinned:false)
+        guard visibleState == .sleeping, !allowsGaze, currentAnimation?.row == 11 else { return false }
+        apply(payload,state:.idle,sleepPose:false,sessionCount:1,attentionCount:0,isPinned:false)
+        return lookDirection == nil && allowsGaze && currentAnimation?.row == 0
+    }
+
     private func advanceFrame() {
-        guard dragRun != nil || lookDirection == nil, let animation = currentAnimation else { return }
-        frameIndex = (frameIndex + 1) % animation.frames
-        if frameIndex == 0 { completedCycles += 1 }
+        if skin == .hana {
+            needsDisplay = true
+            if let window, window.isVisible {
+                let cursor = NSEvent.mouseLocation
+                if let previous = hanaLastMouseLocation, hypot(cursor.x - previous.x, cursor.y - previous.y) > 0.5 {
+                    updateHanaGaze(at: convert(window.convertPoint(fromScreen: cursor), from: nil))
+                }
+                hanaLastMouseLocation = cursor
+            }
+        }
+        if skin == .amuRan || skin == .jeanne { needsDisplay = true }
+        guard dragRun != nil || !hasActiveGaze, let animation = currentAnimation else { return }
+        if skin == .jeanne {
+            if dragRun == nil && hasActiveGaze { return }
+            let p = JeanneSkin.position(row: animation.row, time: ProcessInfo.processInfo.systemUptime - jeanneEpoch)
+            frameIndex = p.frame; completedCycles = p.cycles
+        } else if skin == .pichiPitch {
+            let p = PichiSkin.position(row: animation.row, time: ProcessInfo.processInfo.systemUptime - pichiEpoch)
+            frameIndex = p.frame; completedCycles = p.cycles
+        } else if skin == .chocolatHeart {
+            let tick = Int(max(0, ProcessInfo.processInfo.systemUptime - chocolatEpoch) / animation.interval)
+            frameIndex = tick % animation.frames; completedCycles = tick / animation.frames
+        } else if skin == .amuRan {
+            let p = AmuRanMotion.position(elapsed: ProcessInfo.processInfo.systemUptime - amuRanPoseEpoch, interval: animation.interval)
+            frameIndex = p.frame; completedCycles = p.cycles
+        } else if skin == .hana {
+            // 타이머 호출이 늦어져도 실제 경과 시간의 프레임으로 진행한다.
+            let elapsed = max(0, ProcessInfo.processInfo.systemUptime - hanaAnimationStart)
+            let position = HanaMotion.position(elapsed: elapsed, interval: animation.interval, frames: animation.frames)
+            frameIndex = position.frame
+            completedCycles = position.cycles
+        } else {
+            frameIndex = (frameIndex + 1) % animation.frames
+            if frameIndex == 0 { completedCycles += 1 }
+        }
         // 반응은 한 바퀴만 돌고 실제 상태로 돌아간다.
         if transientState != nil, completedCycles >= 1 {
             transientState = nil
@@ -258,7 +491,7 @@ final class RettoView: NSView {
     private func playReaction() {
         spriteRestState = nil
         transientState = .jumping
-        lookDirection = nil
+        clearGaze()
         frameIndex = 0
         completedCycles = 0
         restartAnimation()
@@ -300,13 +533,105 @@ final class RettoView: NSView {
         case nil: NSCursor.arrow.set()
         }
 
-        guard gazeStates.contains(state), transientState == nil else { return }
+        if skin == .hana { updateHanaGaze(at: point); return }
+        guard allowsGaze else { return }
         let petRect = layout.petRect
         let dx = point.x - petRect.midX
         let dy = point.y - petRect.midY
         guard hypot(dx, dy) > 22 * petScale else { return }
-        let degrees = (atan2(dx, dy) * 180 / .pi + 360).truncatingRemainder(dividingBy: 360)
-        lookDirection = Int((degrees / 22.5).rounded()) % 16
+        let direction = gazeDirection(dx: dx, dy: dy, previous: gazeTargetDirection ?? lookDirection)
+        updateGaze(toward: direction)
+        scheduleGazeReset()
+        needsDisplay = true
+    }
+
+    func verifyHanaGazeBehaviorForTesting() -> Bool {
+        guard skin == .hana else { return false }
+        let point = NSPoint(x: layout.petRect.maxX + 100, y: layout.petRect.minY + layout.petRect.height * (1 - 260.0 / 640))
+        updateHanaGaze(at: point)
+        guard lookDirection == 4 else { return false }
+        let before = HanaMotion.effectFrame(time: 0.1)
+        guard before != HanaMotion.effectFrame(time: 0.8) else { return false }
+        RunLoop.main.run(until: Date(timeIntervalSinceNow: gazeHoldDuration + 0.12))
+        guard lookDirection == nil, frameIndex < 2 else { return false }
+        dragRun = .right
+        updateHanaGaze(at: point)
+        guard lookDirection == nil else { return false }
+        dragRun = nil
+        sleepPose = true
+        updateHanaGaze(at: point)
+        guard lookDirection == nil else { return false }
+        sleepPose = false
+        for testState in PetState.allCases where !gazeStates.contains(testState) {
+            state = testState
+            updateHanaGaze(at: point)
+            guard lookDirection == nil else { return false }
+        }
+        for testState in gazeStates {
+            state = testState
+            updateHanaGaze(at: point)
+            guard lookDirection == 4 else { return false }
+            clearGaze()
+        }
+        state = .idle
+        updateHanaGaze(at: point)
+        guard lookDirection == 4 else { return false }
+        playReaction()
+        guard lookDirection == nil else { return false }
+        return true
+    }
+
+    private func updateHanaGaze(at point: NSPoint) {
+        guard HanaGaze.allows(state: visibleState, dragging: dragRun != nil) else { return }
+        let dx = point.x - layout.petRect.midX
+        let dy = point.y - (layout.petRect.minY + layout.petRect.height * (1 - 260.0 / 640))
+        guard hypot(dx, dy) > 22 * petScale else { return }
+        updateGaze(toward: gazeDirection(dx: dx, dy: dy, previous: gazeTargetDirection ?? lookDirection))
+        scheduleGazeReset()
+        needsDisplay = true
+    }
+
+    /// 시선은 짧은 반응으로만 보이고, 커서가 멈추면 원래 idle 모션을 계속한다.
+    private func scheduleGazeReset() {
+        gazeResetTimer?.invalidate()
+        let timer = Timer(timeInterval: gazeHoldDuration, repeats: false) { [weak self] _ in
+            self?.clearGaze()
+        }
+        gazeResetTimer = timer
+        RunLoop.main.add(timer, forMode: .common)
+    }
+
+    private func updateGaze(toward direction: Int) {
+        gazeTargetDirection = direction
+        guard skin == .christmas || skin == .amuRan || skin == .hana, spriteLayout.columns == 16, lookDirection != nil else {
+            lookDirection = direction
+            return
+        }
+        guard lookDirection != direction, gazeTransitionTimer == nil else { return }
+        let timer = Timer(timeInterval: christmasGazeStepDuration, repeats: true) { [weak self] _ in
+            guard let self, let current = self.lookDirection, let target = self.gazeTargetDirection else { return }
+            self.lookDirection = nextGazeDirection(from: current, toward: target)
+            self.needsDisplay = true
+            if self.lookDirection == target {
+                self.gazeTransitionTimer?.invalidate()
+                self.gazeTransitionTimer = nil
+            }
+        }
+        gazeTransitionTimer = timer
+        RunLoop.main.add(timer, forMode: .common)
+    }
+
+    private func clearGaze() {
+        gazeResetTimer?.invalidate()
+        gazeResetTimer = nil
+        gazeTransitionTimer?.invalidate()
+        gazeTransitionTimer = nil
+        gazeTargetDirection = nil
+        guard lookDirection != nil else { return }
+        lookDirection = nil
+        frameIndex = 0
+        if skin == .amuRan { restartAnimation() }
+        if skin == .christmas || skin == .hana { restartAnimation() }
         needsDisplay = true
     }
 
@@ -347,9 +672,7 @@ final class RettoView: NSView {
             startBadgeAnimator()
         }
         NSCursor.arrow.set()
-        lookDirection = nil
-        frameIndex = 0
-        needsDisplay = true
+        clearGaze()
     }
 
     override func mouseDown(with event: NSEvent) {
@@ -386,7 +709,7 @@ final class RettoView: NSView {
         if next != dragRun {
             dragRun = next
             // 시선 추적은 끄는 동안 쉰다. 손을 놓으면 다시 따라간다.
-            lookDirection = nil
+            clearGaze()
             frameIndex = 0
             completedCycles = 0
             restartAnimation()
@@ -446,9 +769,13 @@ final class RettoView: NSView {
         if let dragRun, let run = dragRunAnimations[dragRun] {
             row = run.row
             column = frameIndex
-        } else if let direction = lookDirection {
-            row = direction < 8 ? 9 : 10
-            column = direction < 8 ? direction : direction - 8
+        } else if let direction = lookDirection, hasActiveGaze {
+            if skin == .amuRan {
+                row = AmuRanMotion.gazeRow(state: visibleState); column = direction
+            } else {
+                row = direction < 8 ? 9 : 10
+                column = direction < 8 ? direction : direction - 8
+            }
         } else {
             // v2 개인 스킨은 11행이라 레토 전용 잠자기 행이 없다. idle 자세에 호흡 효과를
             // 더해 잠든 모습을 유지한다. 나머지 상태와 시선 행은 같은 순서다.
@@ -462,25 +789,345 @@ final class RettoView: NSView {
             height: spriteLayout.cellHeight
         )
 
+        let hasBakedTransformation = skin == .magicalHeart && visibleState == .running
+
         // 발밑 바닥 그림자. 예전에는 실루엣 드롭 섀도(blur 16)를 썼는데, 흐림이 사방으로
         // 퍼져 머리 위에도 회색 안개가 생겼다. 흰 배경에서는 그게 투명한 사각형처럼 보였다.
         // 동물의 숲처럼 발밑에만 타원을 깔고, 몸에는 아주 얕은 그림자만 남긴다.
         drawGroundShadow(petRect: petRect, scale: uiScale)
 
+        let amuRanTime = amuRanPreviewTime ?? (ProcessInfo.processInfo.systemUptime - amuRanEffectEpoch)
+        let amuRanPoseTime = amuRanPreviewTime ?? (ProcessInfo.processInfo.systemUptime - amuRanPoseEpoch)
+        if skin == .amuRan { AmuRanFrames.drawEffects(state: visibleState, drag: dragRun, time: amuRanTime, poseTime: amuRanPoseTime, gazeDirection: dragRun == nil ? lookDirection : nil, in: petRect, front: false) }
+        let jeanneTime = jeannePreviewTime ?? (ProcessInfo.processInfo.systemUptime - jeanneEpoch)
+        if skin == .jeanne { JeanneSkin.drawEffects(row: row, frame: column, time: jeanneTime, front: false, in: petRect) }
+        let pichiTime = pichiPreviewTime ?? (ProcessInfo.processInfo.systemUptime - pichiEpoch)
+        if skin == .pichiPitch { PichiSkin.drawEffects(row: row, time: pichiTime, front: false, in: petRect) }
+        let christmasTime = christmasPreviewTime ?? (ProcessInfo.processInfo.systemUptime - christmasEffectsStart)
+        if skin == .christmas {
+            drawChristmasEffects(state: visibleState, drag: dragRun, gaze: lookDirection != nil,
+                                 in: petRect, time: christmasTime, frame: frameIndex, front: false)
+        }
+
+        if skin == .hana {
+            hanaEffects.draw(state: hasActiveGaze && dragRun == nil ? .idle : visibleState, drag: dragRun, in: petRect, time: christmasTime, front: false)
+        }
+
+        if skin == .chocolatHeart {
+            ChocolatHeart.drawEffects(row: row, time: chocolatPreviewTime ?? (ProcessInfo.processInfo.systemUptime - chocolatEpoch), front: false, in: petRect)
+        }
         NSGraphicsContext.saveGraphicsState()
         let shadow = NSShadow()
         shadow.shadowColor = NSColor.black.withAlphaComponent(0.16)
         shadow.shadowBlurRadius = 5 * uiScale
         shadow.shadowOffset = NSSize(width: 0, height: -2 * uiScale)
         shadow.set()
-        spriteSheet.draw(in: petRect, from: sourceRect, operation: .sourceOver, fraction: 1, respectFlipped: false, hints: [.interpolation: NSImageInterpolation.high])
+        if skin == .amuRan {
+            _ = AmuRanFrames.drawCharacter(row: row, frame: column, in: petRect)
+        } else if skin == .jeanne {
+            JeanneSkin.drawCharacter(row: row, frame: column, in: petRect)
+        } else if skin == .pichiPitch {
+            PichiSkin.drawCharacter(row: row, frame: column, in: petRect)
+        } else if skin == .chocolatHeart {
+            ChocolatHeart.drawCharacter(row: row, frame: column, in: petRect)
+        } else if skin != .hana || !HanaFrameCache.drawCharacter(row: row, frame: column, in: petRect) {
+            spriteSheet.draw(in: petRect, from: sourceRect, operation: .sourceOver, fraction: 1, respectFlipped: false, hints: [.interpolation: NSImageInterpolation.high])
+        }
         NSGraphicsContext.restoreGraphicsState()
 
-        if visibleState == .sleeping {
+        if skin == .christmas {
+            drawChristmasEffects(state: visibleState, drag: dragRun, gaze: lookDirection != nil,
+                                 in: petRect, time: christmasTime, frame: frameIndex, front: true)
+        }
+
+        if skin == .hana {
+            hanaEffects.draw(state: hasActiveGaze && dragRun == nil ? .idle : visibleState, drag: dragRun, in: petRect, time: christmasTime, front: true)
+        }
+
+        if skin == .magicalHeart {
+            if !hasBakedTransformation {
+                drawMagicalHeartAmbientEffects(petRect: petRect, scale: uiScale, frame: frameIndex)
+            }
+        }
+
+        if skin == .chocolatHeart {
+            ChocolatHeart.drawEffects(row: row, time: chocolatPreviewTime ?? (ProcessInfo.processInfo.systemUptime - chocolatEpoch), front: true, in: petRect)
+        }
+        if skin == .jeanne { JeanneSkin.drawEffects(row: row, frame: column, time: jeanneTime, front: true, in: petRect) }
+        if skin == .pichiPitch { PichiSkin.drawEffects(row: row, time: pichiTime, front: true, in: petRect) }
+        if skin == .amuRan { AmuRanFrames.drawEffects(state: visibleState, drag: dragRun, time: amuRanTime, poseTime: amuRanPoseTime, gazeDirection: dragRun == nil ? lookDirection : nil, in: petRect, front: true) }
+        if visibleState == .sleeping && skin != .amuRan && skin != .jeanne && skin != .hana && skin != .chocolatHeart && skin != .pichiPitch {
             drawSleepBreath(petRect: petRect, scale: uiScale)
         }
 
-        drawStatusRibbon(statusAnimation, layout: layout)
+        if skin != .amuRan || !amuRanSpriteOnlyPreview { drawStatusRibbon(statusAnimation, layout: layout) }
+    }
+
+    private static func loadEffectSheet(_ resource: String) -> NSImage? {
+        guard let url = Bundle.main.url(forResource: resource, withExtension: "webp") else { return nil }
+        return NSImage(contentsOf: url)
+    }
+
+    private func drawTransformationEffect(_ effectSheet: NSImage?, in petRect: NSRect, sourceRect: NSRect) {
+        guard let effectSheet else { return }
+        effectSheet.draw(in: petRect, from: sourceRect, operation: .sourceOver, fraction: 1, respectFlipped: false, hints: [.interpolation: NSImageInterpolation.high])
+    }
+
+    /// 변신은 확정한 여섯 포즈 위에만 그린다. 원본 스프라이트에는 효과를 굽지 않아
+    /// 포즈·신체 검수가 이펙트에 가려지지 않고, 런타임에서 앞뒤 레이어를 나눌 수 있다.
+    private func drawTransformationBackdrop(petRect: NSRect, scale: CGFloat, frame: Int) {
+        let stage = min(max(frame, 0), 5)
+        guard stage > 0 else { return }
+        // 가슴 장신구의 중심. 화면 가운데가 아니라, 실제 스프라이트의 흉부에 고정한다.
+        let center = magicPoint(petRect, x: 0.5, y: 0.37)
+
+        if stage == 1 {
+            let radius = petRect.width * 0.28
+            drawMagicGlow(center: center, radius: radius * 0.72, color: NSColor(calibratedRed: 1, green: 0.22, blue: 0.62, alpha: 1), alpha: 0.18)
+            drawMagicCircle(center: center, radius: radius, alpha: 0.72, scale: scale, detailed: false)
+        } else if stage >= 3 {
+            let radius = petRect.width * 0.56
+            drawMagicGlow(center: center, radius: radius * 0.72, color: NSColor(calibratedRed: 1, green: 0.22, blue: 0.62, alpha: 1), alpha: 0.30)
+            drawMagicCircle(center: center, radius: radius, alpha: 0.94, scale: scale, detailed: true)
+        }
+
+        if stage >= 2 {
+            let alpha: CGFloat = stage == 2 ? 0.86 : 0.92
+            drawMagicRibbon(
+                petRect: petRect,
+                y: 0.40,
+                tilt: -0.16,
+                alpha: alpha,
+                scale: scale,
+                behind: true
+            )
+        }
+
+        if stage >= 2 {
+            drawMagicRibbon(
+                petRect: petRect,
+                y: 0.25,
+                tilt: 0.18,
+                alpha: stage == 2 ? 0.74 : (stage == 3 ? 0.84 : 0.92),
+                scale: scale,
+                behind: true
+            )
+        }
+
+        if stage == 5 {
+            drawTransformationBurst(center: center, radius: petRect.width * 0.58, alpha: 0.82, scale: scale)
+        }
+    }
+
+    private func drawTransformationForeground(petRect: NSRect, scale: CGFloat, frame: Int) {
+        let stage = min(max(frame, 0), 5)
+        guard stage > 0 else { return }
+        let center = magicPoint(petRect, x: 0.5, y: 0.37)
+        let pink = NSColor(calibratedRed: 1.0, green: 0.32, blue: 0.63, alpha: 1)
+        let gold = NSColor(calibratedRed: 1.0, green: 0.78, blue: 0.32, alpha: 1)
+
+        if stage == 1 {
+            drawMagicGlow(center: center, radius: 20 * scale, color: pink, alpha: 0.48)
+            drawMagicHeart(center: center, radius: 10 * scale, color: pink.withAlphaComponent(0.98))
+            drawMagicSparkle(center: magicPoint(petRect, x: 0.31, y: 0.53), radius: 5 * scale, color: pink.withAlphaComponent(0.96))
+            drawMagicSparkle(center: magicPoint(petRect, x: 0.69, y: 0.53), radius: 5 * scale, color: gold.withAlphaComponent(0.96))
+            return
+        }
+
+        let sparkles: [(CGFloat, CGFloat, CGFloat, NSColor)] = stage == 2
+            ? [(0.17, 0.65, 7, pink), (0.83, 0.64, 7, gold), (0.23, 0.34, 5, pink), (0.77, 0.36, 5, gold)]
+            : [(0.10, 0.73, 7, pink), (0.90, 0.70, 8, gold), (0.16, 0.32, 6, gold), (0.84, 0.31, 6, pink), (0.50, 0.89, 6, pink)]
+        for (x, y, radius, color) in sparkles {
+            drawMagicSparkle(center: magicPoint(petRect, x: x, y: y), radius: radius * scale * (stage == 5 ? 1.28 : 1), color: color.withAlphaComponent(stage == 2 ? 0.76 : 0.94))
+        }
+
+        if stage >= 3 {
+            let hearts: [(CGFloat, CGFloat, CGFloat)] = stage == 3
+                ? [(0.12, 0.52, 10), (0.88, 0.52, 10), (0.50, 0.83, 8)]
+                : [(0.10, 0.57, 10), (0.90, 0.58, 10), (0.25, 0.82, 8), (0.75, 0.82, 8)]
+            for (x, y, radius) in hearts {
+                drawMagicHeart(center: magicPoint(petRect, x: x, y: y), radius: radius * scale, color: pink.withAlphaComponent(stage == 5 ? 0.92 : 0.80))
+            }
+        }
+
+        if stage >= 3 {
+            drawMagicRibbon(petRect: petRect, y: 0.28, tilt: -0.16, alpha: stage == 3 ? 0.80 : 0.95, scale: scale, behind: false)
+        }
+
+        if stage == 5 {
+            drawMagicGlow(center: center, radius: 38 * scale, color: NSColor.white, alpha: 0.62)
+            drawMagicHeart(center: center, radius: 15 * scale, color: NSColor.white.withAlphaComponent(0.98))
+            drawMagicHeart(center: center, radius: 10 * scale, color: pink.withAlphaComponent(1))
+        }
+    }
+
+    private func magicPoint(_ petRect: NSRect, x: CGFloat, y: CGFloat) -> NSPoint {
+        NSPoint(x: petRect.minX + petRect.width * x, y: petRect.minY + petRect.height * y)
+    }
+
+    private func drawMagicCircle(center: NSPoint, radius: CGFloat, alpha: CGFloat, scale: CGFloat, detailed: Bool) {
+        drawMagicGlow(center: center, radius: radius * 0.38, color: NSColor(calibratedRed: 1, green: 0.25, blue: 0.63, alpha: 1), alpha: alpha * 0.30)
+        let outer = NSBezierPath(ovalIn: NSRect(x: center.x - radius, y: center.y - radius, width: radius * 2, height: radius * 2))
+        NSGraphicsContext.saveGraphicsState()
+        let shadow = NSShadow()
+        shadow.shadowColor = NSColor(calibratedRed: 1, green: 0.14, blue: 0.56, alpha: alpha * 0.95)
+        shadow.shadowBlurRadius = 10 * scale
+        shadow.set()
+        NSColor(calibratedRed: 1.0, green: 0.30, blue: 0.64, alpha: alpha).setStroke()
+        outer.lineWidth = max(2.1, 3.4 * scale)
+        outer.stroke()
+        NSGraphicsContext.restoreGraphicsState()
+        let innerRadius = radius * 0.84
+        let inner = NSBezierPath(ovalIn: NSRect(x: center.x - innerRadius, y: center.y - innerRadius, width: innerRadius * 2, height: innerRadius * 2))
+        NSColor.white.withAlphaComponent(alpha * 0.92).setStroke()
+        inner.lineWidth = max(1.0, 1.7 * scale)
+        inner.stroke()
+        guard detailed else { return }
+        for index in 0..<8 {
+            let angle = CGFloat(index) * .pi / 4 + .pi / 8
+            let point = NSPoint(x: center.x + cos(angle) * radius, y: center.y + sin(angle) * radius)
+            drawMagicHeart(center: point, radius: 4.2 * scale, color: NSColor.white.withAlphaComponent(alpha * 0.98))
+        }
+    }
+
+    private func drawMagicRibbon(petRect: NSRect, y: CGFloat, tilt: CGFloat, alpha: CGFloat, scale: CGFloat, behind: Bool) {
+        let start = magicPoint(petRect, x: 0.08, y: y - tilt)
+        let end = magicPoint(petRect, x: 0.92, y: y + tilt)
+        let band = max(5.5, 13 * scale)
+        let path = NSBezierPath()
+        path.move(to: NSPoint(x: start.x, y: start.y + band / 2))
+        path.curve(to: NSPoint(x: end.x, y: end.y + band / 2),
+                   controlPoint1: NSPoint(x: magicPoint(petRect, x: 0.31, y: y + 0.20).x, y: magicPoint(petRect, x: 0.31, y: y + 0.20).y + band / 2),
+                   controlPoint2: NSPoint(x: magicPoint(petRect, x: 0.69, y: y - 0.20).x, y: magicPoint(petRect, x: 0.69, y: y - 0.20).y + band / 2))
+        path.line(to: NSPoint(x: end.x, y: end.y - band / 2))
+        path.curve(to: NSPoint(x: start.x, y: start.y - band / 2),
+                   controlPoint1: NSPoint(x: magicPoint(petRect, x: 0.69, y: y - 0.20).x, y: magicPoint(petRect, x: 0.69, y: y - 0.20).y - band / 2),
+                   controlPoint2: NSPoint(x: magicPoint(petRect, x: 0.31, y: y + 0.20).x, y: magicPoint(petRect, x: 0.31, y: y + 0.20).y - band / 2))
+        path.close()
+        let color = behind
+            ? NSColor(calibratedRed: 1.0, green: 0.45, blue: 0.72, alpha: alpha)
+            : NSColor(calibratedRed: 1.0, green: 0.32, blue: 0.62, alpha: alpha)
+        NSGraphicsContext.saveGraphicsState()
+        let shadow = NSShadow()
+        shadow.shadowColor = color.withAlphaComponent(alpha * 0.92)
+        shadow.shadowBlurRadius = 11 * scale
+        shadow.set()
+        color.setFill()
+        path.fill()
+        NSGraphicsContext.restoreGraphicsState()
+        NSColor(calibratedRed: 1, green: 0.80, blue: 0.91, alpha: alpha * 0.96).setStroke()
+        path.lineWidth = max(1.0, 1.5 * scale)
+        path.stroke()
+        let highlight = NSBezierPath()
+        highlight.move(to: start)
+        highlight.curve(to: end,
+                        controlPoint1: magicPoint(petRect, x: 0.31, y: y + 0.20),
+                        controlPoint2: magicPoint(petRect, x: 0.69, y: y - 0.20))
+        NSColor.white.withAlphaComponent(alpha * 0.78).setStroke()
+        highlight.lineWidth = max(0.9, 1.8 * scale)
+        highlight.stroke()
+    }
+
+    private func drawTransformationBurst(center: NSPoint, radius: CGFloat, alpha: CGFloat, scale: CGFloat) {
+        drawMagicGlow(center: center, radius: radius * 0.68, color: NSColor(calibratedRed: 1, green: 0.36, blue: 0.72, alpha: 1), alpha: alpha * 0.42)
+        for index in 0..<12 {
+            let angle = CGFloat(index) * .pi / 6
+            let start = NSPoint(x: center.x + cos(angle) * radius * 0.14, y: center.y + sin(angle) * radius * 0.14)
+            let end = NSPoint(x: center.x + cos(angle) * radius, y: center.y + sin(angle) * radius)
+            let ray = NSBezierPath()
+            ray.move(to: start)
+            ray.line(to: end)
+            NSColor(calibratedRed: 1.0, green: 0.72, blue: 0.90, alpha: alpha * (index.isMultiple(of: 2) ? 1 : 0.58)).setStroke()
+            ray.lineWidth = max(1.0, (index.isMultiple(of: 2) ? 3.4 : 1.8) * scale)
+            ray.stroke()
+        }
+    }
+
+    private func drawMagicHeart(center: NSPoint, radius: CGFloat, color: NSColor) {
+        let path = NSBezierPath()
+        path.move(to: NSPoint(x: center.x, y: center.y - radius * 0.82))
+        path.curve(to: NSPoint(x: center.x - radius, y: center.y + radius * 0.18),
+                   controlPoint1: NSPoint(x: center.x - radius * 0.78, y: center.y - radius * 0.18),
+                   controlPoint2: NSPoint(x: center.x - radius, y: center.y + radius * 0.58))
+        path.curve(to: NSPoint(x: center.x, y: center.y + radius * 0.92),
+                   controlPoint1: NSPoint(x: center.x - radius, y: center.y + radius * 1.02),
+                   controlPoint2: NSPoint(x: center.x - radius * 0.24, y: center.y + radius * 0.98))
+        path.curve(to: NSPoint(x: center.x + radius, y: center.y + radius * 0.18),
+                   controlPoint1: NSPoint(x: center.x + radius * 0.24, y: center.y + radius * 0.98),
+                   controlPoint2: NSPoint(x: center.x + radius, y: center.y + radius * 1.02))
+        path.curve(to: NSPoint(x: center.x, y: center.y - radius * 0.82),
+                   controlPoint1: NSPoint(x: center.x + radius, y: center.y + radius * 0.58),
+                   controlPoint2: NSPoint(x: center.x + radius * 0.78, y: center.y - radius * 0.18))
+        NSGraphicsContext.saveGraphicsState()
+        let shadow = NSShadow()
+        shadow.shadowColor = color.withAlphaComponent(color.alphaComponent * 0.92)
+        shadow.shadowBlurRadius = max(2, radius * 0.62)
+        shadow.set()
+        color.setFill()
+        path.fill()
+        NSGraphicsContext.restoreGraphicsState()
+        NSColor.white.withAlphaComponent(color.alphaComponent * 0.88).setStroke()
+        path.lineWidth = max(0.55, radius * 0.12)
+        path.stroke()
+    }
+
+    private func drawMagicGlow(center: NSPoint, radius: CGFloat, color: NSColor, alpha: CGFloat) {
+        guard radius > 0, alpha > 0 else { return }
+        for fraction in stride(from: CGFloat(1), through: CGFloat(0.20), by: -0.20) {
+            let current = radius * fraction
+            let glow = NSBezierPath(ovalIn: NSRect(x: center.x - current, y: center.y - current, width: current * 2, height: current * 2))
+            color.withAlphaComponent(alpha * (1 - fraction) * 0.36).setFill()
+            glow.fill()
+        }
+    }
+
+    /// 변신 이외 상태에서는 가벼운 별빛만 유지한다.
+    private func drawMagicalHeartAmbientEffects(petRect: NSRect, scale: CGFloat, frame: Int) {
+        let phase = CGFloat(frame % 8) / 8
+        let pulse = 0.72 + 0.28 * sin(phase * .pi * 2)
+        let activeMagic: Bool
+        switch visibleState {
+        case .waving, .jumping, .running, .waiting:
+            activeMagic = true
+        default:
+            activeMagic = false
+        }
+        let drift = activeMagic ? sin(phase * .pi * 2) * 0.035 : 0
+        let points: [(x: CGFloat, y: CGFloat, size: CGFloat, color: NSColor)] = [
+            (0.09, 0.78, 7, NSColor(calibratedRed: 1.0, green: 0.45, blue: 0.70, alpha: 0.88)),
+            (0.91, 0.72, 7, NSColor(calibratedRed: 1.0, green: 0.78, blue: 0.36, alpha: 0.86)),
+            (0.04, 0.51, 5, NSColor(calibratedRed: 1.0, green: 0.70, blue: 0.86, alpha: 0.84)),
+            (0.96, 0.47, 6, NSColor(calibratedRed: 1.0, green: 0.52, blue: 0.74, alpha: 0.88)),
+            (0.18, 0.26, 5, NSColor(calibratedRed: 1.0, green: 0.78, blue: 0.36, alpha: 0.80)),
+            (0.83, 0.25, 5, NSColor(calibratedRed: 1.0, green: 0.68, blue: 0.88, alpha: 0.82))
+        ]
+        for (index, point) in points.enumerated() {
+            let offset = index.isMultiple(of: 2) ? pulse : (1.45 - pulse)
+            let center = NSPoint(
+                x: petRect.minX + petRect.width * (point.x + (index.isMultiple(of: 2) ? drift : -drift)),
+                y: petRect.minY + petRect.height * (point.y + (activeMagic ? drift * 0.55 : 0))
+            )
+            let emphasis: CGFloat = activeMagic && index < 4 ? 1.25 : 1
+            drawMagicSparkle(center: center, radius: point.size * scale * offset * emphasis, color: point.color)
+        }
+    }
+
+    private func drawMagicSparkle(center: NSPoint, radius: CGFloat, color: NSColor) {
+        let path = NSBezierPath()
+        path.move(to: NSPoint(x: center.x, y: center.y + radius))
+        path.line(to: NSPoint(x: center.x + radius * 0.32, y: center.y + radius * 0.32))
+        path.line(to: NSPoint(x: center.x + radius, y: center.y))
+        path.line(to: NSPoint(x: center.x + radius * 0.32, y: center.y - radius * 0.32))
+        path.line(to: NSPoint(x: center.x, y: center.y - radius))
+        path.line(to: NSPoint(x: center.x - radius * 0.32, y: center.y - radius * 0.32))
+        path.line(to: NSPoint(x: center.x - radius, y: center.y))
+        path.line(to: NSPoint(x: center.x - radius * 0.32, y: center.y + radius * 0.32))
+        path.close()
+        color.setFill()
+        path.fill()
+        NSColor.white.withAlphaComponent(0.92).setStroke()
+        path.lineWidth = max(0.8, radius * 0.12)
+        path.stroke()
     }
 
     /// 이름표 오른쪽 위에 걸터앉는 알림 배지. 흰 테두리로 이름표 색과 분리한다.
@@ -490,12 +1137,16 @@ final class RettoView: NSView {
         let alpha = badgeAppearProgress
 
         var rect = attentionBadgeRect(ribbon: ribbon, scale: scale)
+        if inputCount > 0 {
+            let width = 65 * scale
+            rect.origin.x -= width - rect.width
+            rect.size.width = width
+        }
         badgeFrame = rect.insetBy(dx: -2, dy: -2)
-        let inset = rect.width * (1 - visualScale) / 2
-        rect = rect.insetBy(dx: inset, dy: inset)
+        rect = rect.insetBy(dx: rect.width * (1 - visualScale) / 2, dy: rect.height * (1 - visualScale) / 2)
 
         let ringWidth = chromeStrokeWidth(scale)
-        let ring = NSBezierPath(ovalIn: rect.insetBy(dx: -ringWidth, dy: -ringWidth))
+        let ring = NSBezierPath(roundedRect: rect.insetBy(dx: -ringWidth, dy: -ringWidth), xRadius: rect.height / 2, yRadius: rect.height / 2)
         NSGraphicsContext.saveGraphicsState()
         let shadow = NSShadow()
         shadow.shadowColor = NSColor.black.withAlphaComponent(0.18 * alpha)
@@ -506,9 +1157,10 @@ final class RettoView: NSView {
         ring.fill()
         NSGraphicsContext.restoreGraphicsState()
 
-        let circle = NSBezierPath(ovalIn: rect)
-        // 완료된 세션만 세므로 색도 완료 하나다.
-        toneDone.background.withAlphaComponent(0.97 * alpha).setFill()
+        let circle = NSBezierPath(roundedRect: rect, xRadius: rect.height / 2, yRadius: rect.height / 2)
+        let badgeTone = notificationTone(source: attentionSource, state: attentionState ?? .waving,
+                                         fallback: attentionState == .waiting ? toneNeedsYou : toneDone)
+        badgeTone.background.withAlphaComponent(0.97 * alpha).setFill()
         circle.fill()
         if isBadgePressed {
             NSColor.black.withAlphaComponent(0.12 * alpha).setFill()
@@ -517,14 +1169,17 @@ final class RettoView: NSView {
 
         let attributes: [NSAttributedString.Key: Any] = [
             .font: NSFont(name: "AvenirNext-DemiBold", size: 12 * scale * visualScale) ?? NSFont.boldSystemFont(ofSize: 12 * scale * visualScale),
-            .foregroundColor: toneDone.text.withAlphaComponent(alpha)
+            .foregroundColor: badgeTone.text.withAlphaComponent(alpha)
         ]
-        let label = attentionCount > 9 ? "9+" : "\(attentionCount)"
+        let count = inputCount > 0 ? inputCount : attentionCount
+        let number = count > 99 ? "99+" : "\(count)"
+        let label = inputCount > 0 ? "입력 \(number)" : (count > 9 ? "9+" : number)
         let size = label.size(withAttributes: attributes)
         label.draw(at: NSPoint(x: rect.midX - size.width / 2, y: rect.midY - size.height / 2), withAttributes: attributes)
     }
 
     private func drawStatusRibbon(_ animation: Animation, layout: PetLayout) {
+        let tone = notificationTone(source: payload?.source, state: state, fallback: animation.tone)
         let scale = layout.chromeScale
         let textDelta = layout.textDelta
         let ribbonRect = layout.ribbonRect
@@ -552,7 +1207,7 @@ final class RettoView: NSView {
         let nameAttributes: [NSAttributedString.Key: Any] = [
             // 이름표는 본문과 같은 글꼴, 크기만 1.5pt 작게.
             .font: petFont(typeface, size: 16.5 * scale + textDelta, bold: true),
-            .foregroundColor: animation.tone.text,
+            .foregroundColor: tone.text,
             .paragraphStyle: nameStyle
         ]
         let namePadding = 12 * scale
@@ -560,7 +1215,7 @@ final class RettoView: NSView {
         // 한글 12자 폭이 상한이다. 영문처럼 좁은 글자는 12자를 넘어도 이 폭까지는 다 보인다.
         let labelBudget = (sectionLabelWidthSample as NSString).size(withAttributes: nameAttributes).width
         // 오른쪽 배지와 부딧치지 않는 선까지만 허용한다.
-        let badgeGuard = ribbonRect.width - 14 * scale - (attentionBadgeSide + 14) * scale - 10 * scale
+        let badgeGuard = ribbonRect.width - 14 * scale - ((inputCount > 0 ? 65 : attentionBadgeSide) + 14) * scale - 10 * scale
         let nameTextBudget = min(labelBudget, max(40 * scale, badgeGuard - namePadding * 2))
         let name = fittedSingleLine(sectionLabel(), maxWidth: nameTextBudget, attributes: nameAttributes)
         let nameWidth = name.size(withAttributes: nameAttributes).width + namePadding * 2
@@ -579,7 +1234,7 @@ final class RettoView: NSView {
         nameShadow.shadowOffset = NSSize(width: 0, height: -1 * scale)
         nameShadow.set()
         let namePill = NSBezierPath(roundedRect: nameRect, xRadius: nameHeight / 2, yRadius: nameHeight / 2)
-        animation.tone.background.withAlphaComponent(0.97).setFill()
+        tone.background.withAlphaComponent(0.97).setFill()
         namePill.fill()
         NSGraphicsContext.restoreGraphicsState()
         NSColor.white.withAlphaComponent(0.85).setStroke()
@@ -607,7 +1262,20 @@ final class RettoView: NSView {
         )
         // 나머지 공간은 전부 멘트에 준다. 펼치면 아래로 더 자라고 그만큼 더 읽힌다.
         let messageAttributes = messageAttributes(scale: scale, textDelta: textDelta)
-        let messageRect = messageRect(in: ribbonRect, scale: scale)
+        var messageRect = messageRect(in: ribbonRect, scale: scale)
+        if let connectionStatus {
+            let lineHeight = 16 * scale
+            messageRect.origin.y += lineHeight
+            messageRect.size.height = max(0, messageRect.height - lineHeight)
+            let style = NSMutableParagraphStyle()
+            style.lineBreakMode = .byTruncatingTail
+            let attributes: [NSAttributedString.Key: Any] = [
+                .font: NSFont.systemFont(ofSize: 10.5 * scale, weight: .medium),
+                .foregroundColor: hexColor(0x925400), .paragraphStyle: style
+            ]
+            (connectionStatus as NSString).draw(in: NSRect(x: messageRect.minX, y: ribbonRect.minY + 9 * scale,
+                width: messageRect.width, height: lineHeight), withAttributes: attributes)
+        }
         let fullMessage = fullMessageText(for: animation)
         let bodyBox = bodyLineBox(in: messageRect, attributes: messageAttributes, scale: scale, textDelta: textDelta)
         let fittedFull = fittedBody(fullMessage, in: messageRect, attributes: messageAttributes, maxHeight: bodyBox.fit) as String
@@ -686,7 +1354,7 @@ final class RettoView: NSView {
 
     /// 접힌 상태에서 문장이 이미 다 보이는지. 다 보이면 펼쳐도 새로 읽을 게 없다.
     private func bodyFitsCollapsed() -> Bool {
-        let collapsed = petLayout(scale: petScale, width: bounds.width, expanded: false)
+        let collapsed = petLayout(scale: petScale, width: bounds.width, expanded: false, chatScale: chatScale, fontSize: chatFontSize)
         let full = fullMessageText(for: animationCatalog[state] ?? animationCatalog[.idle]!)
         guard !full.isEmpty else { return true }
         let attributes = messageAttributes(scale: collapsed.chromeScale, textDelta: collapsed.textDelta)
@@ -813,7 +1481,46 @@ final class RettoView: NSView {
         ).height
     }
 
+    private struct JeanneBodyFit {
+        let input: NSAttributedString
+        let width: CGFloat
+        let maxHeight: CGFloat
+        let result: NSString
+    }
+    private var jeanneBodyFits: [JeanneBodyFit] = []
+
     private func fittedBody(_ text: String, in rect: NSRect, attributes: [NSAttributedString.Key: Any], maxHeight: CGFloat) -> NSString {
+        let input = NSAttributedString(string: text, attributes: attributes)
+        // 일부 스킨은 60fps 로 다시 그린다. 그때마다 글자 높이를 다시 측정하지 않게 모든 스킨에 캐시를 쓴다.
+        if let cached = jeanneBodyFits.first(where: {
+            $0.width == rect.width && $0.maxHeight == maxHeight && $0.input.isEqual(to: input)
+        }) { return cached.result }
+        let result = uncachedFittedBody(text, in: rect, attributes: attributes, maxHeight: maxHeight)
+        if jeanneBodyFits.count >= 16 { jeanneBodyFits.removeFirst() }
+        jeanneBodyFits.append(JeanneBodyFit(input: input, width: rect.width, maxHeight: maxHeight, result: result))
+        return result
+    }
+    func validateJeanneBodyFitCache() -> Bool {
+        let originalSkin = skin
+        skin = .jeanne
+        defer { skin = originalSkin }
+        let long = String(repeating: "레토의 작업 결과와 다음 동작을 확인합니다. ", count: 30)
+        let inputs: [(String, CGFloat, CGFloat, CGFloat)] = [
+            (long, 150, 40, 12), (long, 150, 40, 12),
+            ("새 메시지", 150, 40, 12), (long, 220, 40, 12),
+            (long, 150, 80, 12), (long, 150, 40, 18)
+        ]
+        for (text, width, height, size) in inputs {
+            let rect = NSRect(x:0,y:0,width:width,height:height)
+            let attrs: [NSAttributedString.Key: Any] = [.font:NSFont.systemFont(ofSize:size)]
+            let actual = fittedBody(text,in:rect,attributes:attrs,maxHeight:height)
+            let expected = uncachedFittedBody(text,in:rect,attributes:attrs,maxHeight:height)
+            if actual != expected { return false }
+        }
+        return true
+    }
+
+    private func uncachedFittedBody(_ text: String, in rect: NSRect, attributes: [NSAttributedString.Key: Any], maxHeight: CGFloat) -> NSString {
         let box = NSSize(width: rect.width, height: .greatestFiniteMagnitude)
         func height(_ candidate: String) -> CGFloat {
             (candidate as NSString).boundingRect(
@@ -900,6 +1607,7 @@ final class RettoView: NSView {
     }
 
     private func detailText(for animation: Animation) -> String {
+        if payload?.source == "slack" { return state == .idle ? "Slack" : "Slack · 새 메시지" }
         if (state == .review || state == .running), let tool = payload?.toolName, !tool.isEmpty { return "\(animation.kicker) · \(tool.uppercased())" }
         if state == .failed, let error = payload?.error, !error.isEmpty { return "\(animation.kicker) · \(String(error.prefix(24)).uppercased())" }
         return animation.kicker

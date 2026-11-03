@@ -1,0 +1,128 @@
+{
+  "structural_checks": "pass",
+  "states": [
+    {
+      "id": "idle",
+      "row": 0,
+      "drawings": 16,
+      "unique_sources": 16,
+      "unique_decoded_cells": 16,
+      "cycle_seconds": 3.2,
+      "effects_samples_per_layer": 80,
+      "effects_hz": 10,
+      "checks": "pass"
+    },
+    {
+      "id": "drag-right",
+      "row": 1,
+      "drawings": 16,
+      "unique_sources": 16,
+      "unique_decoded_cells": 16,
+      "cycle_seconds": 1.6,
+      "effects_samples_per_layer": 80,
+      "effects_hz": 10,
+      "checks": "pass"
+    },
+    {
+      "id": "drag-left",
+      "row": 2,
+      "drawings": 16,
+      "unique_sources": 16,
+      "unique_decoded_cells": 16,
+      "cycle_seconds": 1.6,
+      "effects_samples_per_layer": 80,
+      "effects_hz": 10,
+      "checks": "pass"
+    },
+    {
+      "id": "waving",
+      "row": 3,
+      "drawings": 16,
+      "unique_sources": 16,
+      "unique_decoded_cells": 16,
+      "cycle_seconds": 2.4,
+      "effects_samples_per_layer": 80,
+      "effects_hz": 10,
+      "checks": "pass"
+    },
+    {
+      "id": "jumping",
+      "row": 4,
+      "drawings": 16,
+      "unique_sources": 16,
+      "unique_decoded_cells": 16,
+      "cycle_seconds": 2.4,
+      "effects_samples_per_layer": 80,
+      "effects_hz": 10,
+      "checks": "pass"
+    },
+    {
+      "id": "failed",
+      "row": 5,
+      "drawings": 16,
+      "unique_sources": 16,
+      "unique_decoded_cells": 16,
+      "cycle_seconds": 3.2,
+      "effects_samples_per_layer": 80,
+      "effects_hz": 10,
+      "checks": "pass"
+    },
+    {
+      "id": "waiting",
+      "row": 6,
+      "drawings": 16,
+      "unique_sources": 16,
+      "unique_decoded_cells": 16,
+      "cycle_seconds": 3.2,
+      "effects_samples_per_layer": 80,
+      "effects_hz": 10,
+      "checks": "pass"
+    },
+    {
+      "id": "running",
+      "row": 7,
+      "drawings": 16,
+      "unique_sources": 16,
+      "unique_decoded_cells": 16,
+      "cycle_seconds": 2.4,
+      "effects_samples_per_layer": 80,
+      "effects_hz": 10,
+      "checks": "pass"
+    },
+    {
+      "id": "review",
+      "row": 8,
+      "drawings": 16,
+      "unique_sources": 16,
+      "unique_decoded_cells": 16,
+      "cycle_seconds": 3.2,
+      "effects_samples_per_layer": 80,
+      "effects_hz": 10,
+      "checks": "pass"
+    },
+    {
+      "id": "sleeping",
+      "row": 11,
+      "drawings": 16,
+      "unique_sources": 16,
+      "unique_decoded_cells": 16,
+      "cycle_seconds": 6.4,
+      "effects_samples_per_layer": 80,
+      "effects_hz": 10,
+      "checks": "pass"
+    }
+  ],
+  "character_cells": 160,
+  "gaze_cells": 32,
+  "effect_cells": 1600,
+  "companion_cells": 32,
+  "native_resources": 1825,
+  "approved_character_hashes_preserved": true,
+  "atlas_visible_pixels_equal_native_cells": true,
+  "gaze_construction": "32 independent complete-source seated cells; no head/body compositing",
+  "original_mask_certification": false,
+  "proportion_scope": "original Retto neutral volume; user permits Hana-level pose/costume adaptations; pose-specific original diagnostics retained",
+  "visual_review": "see visual-review.json",
+  "native_build": "reported separately",
+  "installed": false
+}

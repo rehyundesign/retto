@@ -1,0 +1,19 @@
+{
+  "scope": "A02 raised foreleg school sleeve only",
+  "outside_clothing_mask_changed_pixels": 0,
+  "unchanged_other_cells": 15,
+  "face_and_body_landmarks_unchanged": true,
+  "clipped_pixels": 0,
+  "four_limb_visual_review": {
+    "front_right": "viewer-left raised paw; black sleeve joins shoulder, white cuff below paw",
+    "front_left": "viewer-right grounded foreleg, unchanged",
+    "rear_right": "viewer-left supporting rear leg, unchanged",
+    "rear_left": "viewer-right rear leg behind grounded foreleg, unchanged",
+    "verdict": "approved"
+  },
+  "depth_order": "rear skirt and torso, shoulder-attached bent blazer sleeve, white cuff, raised furry paw",
+  "light_dark_1x_review": true,
+  "animated": false,
+  "installed": false,
+  "visual_tailoring_correction": "removed downward empty-sleeve silhouette below raised elbow; shortened diagonal torso hem rises toward raised arm, plaid waist strip follows below; no cuff on rear thigh"
+}

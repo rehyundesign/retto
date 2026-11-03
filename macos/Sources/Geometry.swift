@@ -8,9 +8,9 @@ import Foundation
 // 고양이를 줄여야 했다. 여백은 투명이라 hitTest 가 클릭을 통과시킨다.
 let cellWidth: CGFloat = 224
 // 칸은 머리 위로도 여유를 둔다. 스킨의 후드 귀나 날개 끝이 여기로 들어간다.
-let cellHeight: CGFloat = 240
+let cellHeight: CGFloat = 320
 let sheetWidth: CGFloat = 1792
-let sheetHeight: CGFloat = 2880
+let sheetHeight: CGFloat = 3840
 let rettoHandwritingFontName = "NanumMiNiSonGeurSsi"
 
 /// 기본 스킨은 Retto가 쓰는 8×12 규격이다. 개인 v2 스킨은 Codex 펫 규격(8×11)을
@@ -19,12 +19,25 @@ struct SpriteSheetLayout: Equatable {
     let cellWidth: CGFloat
     let cellHeight: CGFloat
     let rows: Int
+    let columns: Int
 
-    static let retto = SpriteSheetLayout(cellWidth: 224, cellHeight: 240, rows: 12)
+    init(cellWidth: CGFloat, cellHeight: CGFloat, rows: Int, columns: Int = 8) {
+        self.cellWidth = cellWidth
+        self.cellHeight = cellHeight
+        self.rows = rows
+        self.columns = columns
+    }
+
+    static let retto = SpriteSheetLayout(cellWidth: 224, cellHeight: 320, rows: 12)
+    /// 고해상도 개인 스킨도 같은 8×12 프레임 수를 쓰고, 소스 이미지만 2배로 읽는다.
+    static let retto2x = SpriteSheetLayout(cellWidth: 448, cellHeight: 640, rows: 12)
+    static let retto16 = SpriteSheetLayout(cellWidth: 448, cellHeight: 640, rows: 12, columns: 16)
     static let codexV2 = SpriteSheetLayout(cellWidth: 192, cellHeight: 208, rows: 11)
 
     static func forImage(size: NSSize) -> SpriteSheetLayout? {
-        if Int(size.width) == 1792, Int(size.height) == 2880 { return .retto }
+        if Int(size.width) == 1792, Int(size.height) == 3840 { return .retto }
+        if Int(size.width) == 3584, Int(size.height) == 7680 { return .retto2x }
+        if Int(size.width) == 7168, Int(size.height) == 7680 { return .retto16 }
         if Int(size.width) == 1536, Int(size.height) == 2288 { return .codexV2 }
         return nil
     }
@@ -40,50 +53,66 @@ enum DragRun {
 }
 
 /// 레토의 겉모습. 아틀라스 파일을 통째로 갈아 끼운다.
-/// 스킨마다 칸 규격(224x240, 8x12)은 같아야 한다 — 그리는 자리 계산이 공용이다.
+/// 스킨마다 칸 규격(224x320, 8x12)은 같아야 한다 — 그리는 자리 계산이 공용이다.
 enum PetSkin: String, CaseIterable {
     case classic
+    case chocolatHeart
     case angelWings
     case bee
-    case luna
     case bunny
     case rilakkuma
+    case rilakkumaCape
+    case magicalHeart
+    case christmas
+    case hana
+    case amuRan
+    case pichiPitch
+    case jeanne
 
     var label: String {
         switch self {
+        case .chocolatHeart: return "쇼콜라 하트"
         case .classic: return "기본"
         case .angelWings: return "천사 날개"
         case .bee: return "꿀벌"
-        case .luna: return "달 고양이"
-        case .bunny: return "토끼"
+        case .bunny: return "딸기 토끼"
         case .rilakkuma: return "리락쿠마"
+        case .rilakkumaCape: return "리락쿠마 망토"
+        case .magicalHeart: return "매지컬 하트"
+        case .christmas: return "크리스마스"
+        case .amuRan: return "아무 · 란"
+        case .hana: return "하나 · 토토"
+        case .pichiPitch: return "피치핏치"
+        case .jeanne: return "잔느 · 핀"
         }
     }
 
     /// 번들 안 리소스 이름. 확장자는 webp 로 고정이다.
     var resourceName: String {
         switch self {
+        case .chocolatHeart: return "spritesheet-chocolat-heart"
         case .classic: return "spritesheet"
         case .angelWings: return "spritesheet-angel"
         case .bee: return "spritesheet-bee"
-        case .luna: return "spritesheet-luna"
         case .bunny: return "spritesheet-bunny"
         case .rilakkuma: return "spritesheet-rilakkuma"
-        }
-    }
-
-    /// 만든 사람만 쓰는 스킨. 아틀라스를 레포에도 배포 묶음에도 넣지 않는다.
-    /// 받아 간 쪽에서는 파일이 없으므로 메뉴에 자물쇠로 뜨고 고를 수 없다.
-    var isPersonal: Bool {
-        switch self {
-        case .rilakkuma: return true
-        default: return false
+        case .rilakkumaCape: return "spritesheet-rilakkuma-cape"
+        case .magicalHeart: return "spritesheet-magical-heart"
+        case .christmas: return "spritesheet-christmas-16-character"
+        case .amuRan: return "spritesheet-amu-ran"
+        case .hana: return "spritesheet-hana-16-character"
+        case .pichiPitch: return "pichi-character"
+        case .jeanne: return "jeanne-character"
         }
     }
 
     /// 이 기기의 앱 번들에 아틀라스가 실제로 들어 있는지.
     var isAvailable: Bool {
-        Bundle.main.url(forResource: resourceName, withExtension: "webp") != nil
+        if self == .amuRan { return Bundle.main.url(forResource: resourceName, withExtension: "webp") != nil && AmuRanFrames.hasAllFrames }
+        if self == .jeanne { return JeanneSkin.available }
+        if self == .pichiPitch { return PichiSkin.available }
+        if self == .chocolatHeart { return ChocolatHeart.available }
+        return Bundle.main.url(forResource: resourceName, withExtension: "webp") != nil
     }
 }
 
@@ -98,6 +127,32 @@ enum PetTypeface: String, CaseIterable {
         }
     }
 }
+
+/// 채팅 글자 크기. 중간은 분리 전 보이던 크기를 유지한다.
+enum ChatFontSize: String, CaseIterable {
+    case extraSmall, small, medium, normal
+
+    var label: String {
+        switch self {
+        case .extraSmall: return "더 작음"
+        case .small: return "작음"
+        case .medium: return "중간"
+        case .normal: return "일반"
+        }
+    }
+
+    var factor: CGFloat {
+        switch self {
+        case .extraSmall: return 0.75
+        case .small: return 0.875
+        case .medium: return 1
+        case .normal: return 1.125
+        }
+    }
+}
+
+let chatScaleDefaultsKey = "RettoChatReferenceScale"
+let chatFontSizeDefaultsKey = "RettoChatFontSize"
 
 /// 기본 서체는 같은 pt 에서 손글씨보다 크게 보인다 — 속공간이 넓어서다. 4.5pt 낮춰 눈에 맞춘다.
 let systemTypefaceDelta: CGFloat = -4.5
@@ -188,8 +243,9 @@ struct PetLayout {
     let isExpanded: Bool
 }
 
-func petLayout(scale: CGFloat, width overrideWidth: CGFloat? = nil, expanded: Bool = false) -> PetLayout {
-    let chromeScale = chromeScale(for: scale)
+func petLayout(scale: CGFloat, width overrideWidth: CGFloat? = nil, expanded: Bool = false, chatScale: CGFloat? = nil, fontSize: ChatFontSize = .medium) -> PetLayout {
+    let referenceScale = chatScale ?? scale
+    let chromeScale = chromeScale(for: referenceScale)
     let petWidth = basePetWidth * scale
     let petHeight = petWidth * cellHeight / cellWidth
     // 펼치면 말풍선만 아래로 자란다. 레토와 배지의 자리는 그대로 둔다.
@@ -199,18 +255,19 @@ func petLayout(scale: CGFloat, width overrideWidth: CGFloat? = nil, expanded: Bo
     let petBottom = ribbonBottomInset * chromeScale + ribbonHeight - petRibbonOverlap * scale
     let windowHeight = petBottom + petHeight + petBadgeHeadroom * scale
     let petRect = NSRect(x: (width - petWidth) / 2, y: petBottom, width: petWidth, height: petHeight)
+    let ribbonWidth = chatScale == nil ? width - 2 * ribbonSideInset * chromeScale : baseRibbonWidth * chromeScale
     return PetLayout(
         windowSize: NSSize(width: canonicalWidth, height: windowHeight),
         petRect: petRect,
         ribbonRect: NSRect(
-            x: ribbonSideInset * chromeScale,
+            x: (width - ribbonWidth) / 2,
             y: ribbonBottomInset * chromeScale,
-            width: width - 2 * ribbonSideInset * chromeScale,
+            width: ribbonWidth,
             height: ribbonHeight
         ),
         petScale: scale,
         chromeScale: chromeScale,
-        textDelta: chromeTextDelta(for: scale),
+        textDelta: chromeTextDelta(for: referenceScale) + (18 * chromeScale + chromeTextDelta(for: referenceScale)) * (fontSize.factor - 1),
         isExpanded: expanded
     )
 }
@@ -244,6 +301,38 @@ func petClickTarget(layout: PetLayout, badgeFrame: NSRect, point: NSPoint, atten
 
 /// 코덱스 펫은 idle·running·waving 에서만 시선을 따라간다. 나머지 상태에서는 자기 애니메이션을 지킨다.
 let gazeStates: Set<PetState> = [.idle, .running, .waving]
+
+/// 방향별 시선 칸은 정지 그림이므로, 이 시간 뒤 기본 모션으로 돌아간다.
+let gazeHoldDuration: TimeInterval = 0.8
+
+/// 시선 아틀라스는 위쪽부터 시계 방향으로 16개 머리 방향을 담는다.
+let gazeDirectionCount = 16
+
+/// 크리스마스 시선은 가장 짧은 경로로 인접 방향을 한 컷씩 표시한다.
+let christmasGazeStepDuration: TimeInterval = 0.06
+
+func nextGazeDirection(from current: Int, toward target: Int) -> Int {
+    let clockwise = (target - current + gazeDirectionCount) % gazeDirectionCount
+    guard clockwise != 0 else { return current }
+    let step = clockwise <= gazeDirectionCount / 2 ? 1 : -1
+    return (current + step + gazeDirectionCount) % gazeDirectionCount
+}
+
+/// 인접 방향의 경계에서 커서가 조금 흔들려도 고개가 매 이벤트마다 바뀌지 않게 남기는 여유 각도.
+let gazeDirectionHysteresisDegrees: CGFloat = 4
+
+/// 커서 위치를 시선 아틀라스의 열로 바꾼다. 기존 방향이 있으면 경계 바깥까지 그 방향을 유지한다.
+func gazeDirection(dx: CGFloat, dy: CGFloat, previous: Int?) -> Int {
+    let sectorDegrees = 360 / CGFloat(gazeDirectionCount)
+    let halfSector = sectorDegrees / 2
+    let degrees = (atan2(dx, dy) * 180 / .pi + 360).truncatingRemainder(dividingBy: 360)
+    let nearest = Int((degrees / sectorDegrees).rounded()) % gazeDirectionCount
+    guard let previous else { return nearest }
+
+    let previousCenter = CGFloat(previous) * sectorDegrees
+    let offset = abs((degrees - previousCenter + 540).truncatingRemainder(dividingBy: 360) - 180)
+    return offset <= halfSector + gazeDirectionHysteresisDegrees ? previous : nearest
+}
 
 /// 레토를 화면 어디에 둘지. 자유 위치는 끌어다 놓은 자리를 그대로 쓴다.
 enum PetCorner: String, CaseIterable {

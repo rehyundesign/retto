@@ -1,0 +1,17 @@
+{
+  "states": [
+    "waving",
+    "drag-right",
+    "drag-left",
+    "jumping"
+  ],
+  "feedback": {
+    "waving": "paw articulation rejected",
+    "drag": "paw gait rejected",
+    "jumping": "character motion approved; effects too strong"
+  },
+  "otherStates": "preserve v23 unchanged",
+  "gait": "user-requested original 8 poses per direction; 8 independent complete drawings at 200ms each",
+  "dragAcceptance": "User provisionally accepted v24 drag while saying quality remains unsatisfactory. Preserve both drag sequences for next work; do not describe as full quality approval.",
+  "jumpFx": "reduce to about one third; preserve approved pose/size/placements"
+}

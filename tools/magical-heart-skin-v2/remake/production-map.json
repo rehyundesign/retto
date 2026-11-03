@@ -1,0 +1,473 @@
+{
+  "status": "16 independently generated costume anchors in production; whole-character registration attempts retained as rejected",
+  "mode": "registered-character",
+  "runtime_profile": {
+    "cell": [
+      448,
+      640
+    ],
+    "columns": 16,
+    "rows": 12,
+    "scope": "magicalHeart only",
+    "gaze_rows": [
+      9,
+      10
+    ]
+  },
+  "anchors": [
+    {
+      "id": "idle-anchor",
+      "state": "idle",
+      "row": 0,
+      "frame": 0,
+      "canonical_base_cell": [
+        0,
+        0
+      ],
+      "view": "front",
+      "action": "standing front, relaxed eyes open, head centered, tail rests right",
+      "reference": "reference/idle-anchor-original.png",
+      "limb_contract": {
+        "front_right": "bracelet limb; lifted only if gesture specifies",
+        "front_left": "grounded or lifted only if specified",
+        "rear_right": "attached to right hip; support unless jumping or curled",
+        "rear_left": "attached to left hip; named torso occlusion in frontal view"
+      }
+    },
+    {
+      "id": "drag-right-anchor",
+      "state": "drag-right",
+      "row": 1,
+      "frame": 0,
+      "canonical_base_cell": [
+        1,
+        0
+      ],
+      "view": "profile",
+      "action": "right profile contact pose, left foreleg grounded front and right rear grounded; opposite diagonal lifted",
+      "reference": "reference/drag-right-anchor-original.png",
+      "limb_contract": {
+        "front_right": "bracelet limb; lifted only if gesture specifies",
+        "front_left": "grounded or lifted only if specified",
+        "rear_right": "attached to right hip; support unless jumping or curled",
+        "rear_left": "attached to left hip; named torso occlusion in frontal view"
+      }
+    },
+    {
+      "id": "drag-left-anchor",
+      "state": "drag-left",
+      "row": 2,
+      "frame": 0,
+      "canonical_base_cell": [
+        2,
+        0
+      ],
+      "view": "profile",
+      "action": "left profile contact pose, right foreleg grounded front and left rear grounded; opposite diagonal lifted",
+      "reference": "reference/drag-left-anchor-original.png",
+      "limb_contract": {
+        "front_right": "bracelet limb; lifted only if gesture specifies",
+        "front_left": "grounded or lifted only if specified",
+        "rear_right": "attached to right hip; support unless jumping or curled",
+        "rear_left": "attached to left hip; named torso occlusion in frontal view"
+      }
+    },
+    {
+      "id": "waving-anchor",
+      "state": "waving",
+      "row": 3,
+      "frame": 0,
+      "canonical_base_cell": [
+        3,
+        0
+      ],
+      "view": "front",
+      "action": "neutral front standing anticipation before kiss and wave",
+      "reference": "reference/waving-anchor-original.png",
+      "limb_contract": {
+        "front_right": "bracelet limb; lifted only if gesture specifies",
+        "front_left": "grounded or lifted only if specified",
+        "rear_right": "attached to right hip; support unless jumping or curled",
+        "rear_left": "attached to left hip; named torso occlusion in frontal view"
+      }
+    },
+    {
+      "id": "jumping-anchor",
+      "state": "jumping",
+      "row": 4,
+      "frame": 0,
+      "canonical_base_cell": [
+        4,
+        0
+      ],
+      "view": "front",
+      "action": "three-quarter grounded crouch before push off, all four paws attached",
+      "reference": "reference/jumping-anchor-original.png",
+      "limb_contract": {
+        "front_right": "bracelet limb; lifted only if gesture specifies",
+        "front_left": "grounded or lifted only if specified",
+        "rear_right": "attached to right hip; support unless jumping or curled",
+        "rear_left": "attached to left hip; named torso occlusion in frontal view"
+      }
+    },
+    {
+      "id": "failed-anchor",
+      "state": "failed",
+      "row": 5,
+      "frame": 0,
+      "canonical_base_cell": [
+        5,
+        0
+      ],
+      "view": "front",
+      "action": "front seated slight recoil, eyes softened, all four limbs accounted for",
+      "reference": "reference/failed-anchor-original.png",
+      "limb_contract": {
+        "front_right": "bracelet limb; lifted only if gesture specifies",
+        "front_left": "grounded or lifted only if specified",
+        "rear_right": "attached to right hip; support unless jumping or curled",
+        "rear_left": "attached to left hip; named torso occlusion in frontal view"
+      }
+    },
+    {
+      "id": "waiting-anchor",
+      "state": "waiting",
+      "row": 6,
+      "frame": 0,
+      "canonical_base_cell": [
+        6,
+        0
+      ],
+      "view": "front",
+      "action": "front seated paw touching clasp, attentive gaze",
+      "reference": "reference/waiting-anchor-original.png",
+      "limb_contract": {
+        "front_right": "bracelet limb; lifted only if gesture specifies",
+        "front_left": "grounded or lifted only if specified",
+        "rear_right": "attached to right hip; support unless jumping or curled",
+        "rear_left": "attached to left hip; named torso occlusion in frontal view"
+      }
+    },
+    {
+      "id": "running-anchor",
+      "state": "running",
+      "row": 7,
+      "frame": 0,
+      "canonical_base_cell": [
+        7,
+        5
+      ],
+      "view": "front",
+      "action": "seated, forepaws lowered, look down anticipating spell",
+      "reference": "reference/running-anchor-original.png",
+      "limb_contract": {
+        "front_right": "bracelet limb; lifted only if gesture specifies",
+        "front_left": "grounded or lifted only if specified",
+        "rear_right": "attached to right hip; support unless jumping or curled",
+        "rear_left": "attached to left hip; named torso occlusion in frontal view"
+      }
+    },
+    {
+      "id": "review-anchor",
+      "state": "review",
+      "row": 8,
+      "frame": 0,
+      "canonical_base_cell": [
+        8,
+        0
+      ],
+      "view": "front",
+      "action": "low crouch head bows examining clasp, one forepaw contacts jewelry",
+      "reference": "reference/review-anchor-original.png",
+      "limb_contract": {
+        "front_right": "bracelet limb; lifted only if gesture specifies",
+        "front_left": "grounded or lifted only if specified",
+        "rear_right": "attached to right hip; support unless jumping or curled",
+        "rear_left": "attached to left hip; named torso occlusion in frontal view"
+      }
+    },
+    {
+      "id": "sleeping-anchor",
+      "state": "sleeping",
+      "row": 11,
+      "frame": 0,
+      "canonical_base_cell": [
+        11,
+        0
+      ],
+      "view": "curled",
+      "action": "curled prone facing right, eyes closed, white forepaws tuck under chin, rear legs folded under torso, tail wraps belly",
+      "reference": "reference/sleeping-anchor-original.png",
+      "limb_contract": {
+        "front_right": "bracelet limb; lifted only if gesture specifies",
+        "front_left": "grounded or lifted only if specified",
+        "rear_right": "attached to right hip; support unless jumping or curled",
+        "rear_left": "attached to left hip; named torso occlusion in frontal view"
+      }
+    },
+    {
+      "id": "idle-key-08",
+      "state": "idle",
+      "row": 0,
+      "frame": 8,
+      "canonical_base_cell": [
+        0,
+        2
+      ],
+      "view": "front",
+      "action": "slow blink with both eyes closed; same standing stance",
+      "reference": "reference/idle-key-08-original.png",
+      "limb_contract": {
+        "front_right": "bracelet limb; lifted only if gesture specifies",
+        "front_left": "grounded or lifted only if specified",
+        "rear_right": "attached to right hip; support unless jumping or curled",
+        "rear_left": "attached to left hip; named torso occlusion in frontal view"
+      }
+    },
+    {
+      "id": "running-key-06",
+      "state": "running",
+      "row": 7,
+      "frame": 6,
+      "canonical_base_cell": [
+        7,
+        2
+      ],
+      "view": "front",
+      "action": "seated, two real forepaws turn inward to gather heart spell",
+      "reference": "reference/running-key-06-original.png",
+      "limb_contract": {
+        "front_right": "bracelet limb; lifted only if gesture specifies",
+        "front_left": "grounded or lifted only if specified",
+        "rear_right": "attached to right hip; support unless jumping or curled",
+        "rear_left": "attached to left hip; named torso occlusion in frontal view"
+      }
+    },
+    {
+      "id": "running-key-10",
+      "state": "running",
+      "row": 7,
+      "frame": 10,
+      "canonical_base_cell": [
+        7,
+        0
+      ],
+      "view": "front",
+      "action": "seated, real forepaws open at chest presenting heart spell",
+      "reference": "reference/running-key-10-original.png",
+      "limb_contract": {
+        "front_right": "bracelet limb; lifted only if gesture specifies",
+        "front_left": "grounded or lifted only if specified",
+        "rear_right": "attached to right hip; support unless jumping or curled",
+        "rear_left": "attached to left hip; named torso occlusion in frontal view"
+      }
+    },
+    {
+      "id": "waving-key-06",
+      "state": "waving",
+      "row": 3,
+      "frame": 6,
+      "canonical_base_cell": [
+        3,
+        1
+      ],
+      "view": "front",
+      "action": "standing front right forepaw raised at cheek sending a kiss, raised paw replaces ground counterpart",
+      "reference": "reference/waving-key-06-original.png",
+      "limb_contract": {
+        "front_right": "bracelet limb; lifted only if gesture specifies",
+        "front_left": "grounded or lifted only if specified",
+        "rear_right": "attached to right hip; support unless jumping or curled",
+        "rear_left": "attached to left hip; named torso occlusion in frontal view"
+      }
+    },
+    {
+      "id": "jumping-key-07",
+      "state": "jumping",
+      "row": 4,
+      "frame": 7,
+      "canonical_base_cell": [
+        4,
+        2
+      ],
+      "view": "front",
+      "action": "three-quarter airborne apex, forepaws folded inward, rear legs tuck, all four visible attached",
+      "reference": "reference/jumping-key-07-original.png",
+      "limb_contract": {
+        "front_right": "bracelet limb; lifted only if gesture specifies",
+        "front_left": "grounded or lifted only if specified",
+        "rear_right": "attached to right hip; support unless jumping or curled",
+        "rear_left": "attached to left hip; named torso occlusion in frontal view"
+      }
+    },
+    {
+      "id": "jumping-key-12",
+      "state": "jumping",
+      "row": 4,
+      "frame": 12,
+      "canonical_base_cell": [
+        4,
+        4
+      ],
+      "view": "front",
+      "action": "grounded return stance following landing compression",
+      "reference": "reference/jumping-key-12-original.png",
+      "limb_contract": {
+        "front_right": "bracelet limb; lifted only if gesture specifies",
+        "front_left": "grounded or lifted only if specified",
+        "rear_right": "attached to right hip; support unless jumping or curled",
+        "rear_left": "attached to left hip; named torso occlusion in frontal view"
+      }
+    }
+  ],
+  "sequences": [
+    {
+      "state": "idle",
+      "row": 0,
+      "distinct_drawings": 16,
+      "cycle_seconds": 3.2,
+      "action": "relaxed breathing and gradual blink"
+    },
+    {
+      "state": "drag-right",
+      "row": 1,
+      "distinct_drawings": 16,
+      "cycle_seconds": 1.6,
+      "action": "rightward four-leg gait"
+    },
+    {
+      "state": "drag-left",
+      "row": 2,
+      "distinct_drawings": 16,
+      "cycle_seconds": 1.6,
+      "action": "leftward four-leg gait"
+    },
+    {
+      "state": "waving",
+      "row": 3,
+      "distinct_drawings": 16,
+      "cycle_seconds": 2.4,
+      "action": "paw to cheek, send kiss, wave with same paw, soft bow and settle"
+    },
+    {
+      "state": "jumping",
+      "row": 4,
+      "distinct_drawings": 16,
+      "cycle_seconds": 2.4,
+      "action": "crouch push off land compress and recover"
+    },
+    {
+      "state": "failed",
+      "row": 5,
+      "distinct_drawings": 16,
+      "cycle_seconds": 3.2,
+      "action": "small recoil then reassurance"
+    },
+    {
+      "state": "waiting",
+      "row": 6,
+      "distinct_drawings": 16,
+      "cycle_seconds": 3.2,
+      "action": "tap heart brooch and look toward cursor"
+    },
+    {
+      "state": "running",
+      "row": 7,
+      "distinct_drawings": 16,
+      "cycle_seconds": 2.4,
+      "action": "gather heart spell in curved forepaws, unfold to present it, draw paws back and settle"
+    },
+    {
+      "state": "review",
+      "row": 8,
+      "distinct_drawings": 16,
+      "cycle_seconds": 3.2,
+      "action": "inspect heart jewel with a forepaw"
+    },
+    {
+      "state": "sleeping",
+      "row": 11,
+      "distinct_drawings": 16,
+      "cycle_seconds": 6.4,
+      "action": "curled breathing and ear settling"
+    }
+  ],
+  "gaze": {
+    "count": 16,
+    "source_rows": [
+      9,
+      10
+    ],
+    "separate_from_anchors": true
+  },
+  "costume": {
+    "reference": "reference/existing-magical-heart-idle-white.png",
+    "lock": [
+      "paired rose bows and gold crescent pearl ear pins",
+      "gold-edged blush/ivory petal cape with red ruffle",
+      "large gold crescent brooch containing round pink pearl and tiny jewels",
+      "red chest bow and dangling pink heart",
+      "crossed right wrist ribbons with heart jewel"
+    ],
+    "no_redesign": true
+  },
+  "original_hashes": {
+    "assets/spritesheet.webp": "3a7d6c1cf341a5ffbe3e8903348698c99d2302bff352d37d735d2aa6da8801c9",
+    "assets/spritesheet-magical-heart.webp": "515aaf73a0174d542202e13299a6961c719a14673efeeec1e87bdd24f8998483",
+    "assets/spritesheet-magical-heart-effects-back.webp": "a7b99ff2226304aff0f29ff6e08091017069859a87f340d039a696bdbff4f9fa",
+    "assets/spritesheet-magical-heart-effects-front.webp": "676bedb3e99920fd2294ebc94355ae2c0205121c5073f4dce014f1495b43a6c3"
+  },
+  "delivery": {
+    "installed": false,
+    "production_atlas_replaced": false
+  },
+  "costume_choice": "existing Magical Heart outfit/accessories retained per user correction",
+  "completed_character_drawings": 0,
+  "legacy_playback": {
+    "idle": 6,
+    "drag-right": 8,
+    "drag-left": 8,
+    "waving": 4,
+    "jumping": 5,
+    "failed": 8,
+    "waiting": 6,
+    "running": 8,
+    "review": 6,
+    "sleeping": 6
+  },
+  "renderer_validation": "passed; native preview exported; not installed",
+  "scope": "new costume, 16 static anchors, 10 newly authored 16-drawing sequences, 16 gaze stills, state-specific continuous effects",
+  "registration_profiles": {
+    "front-standing": {
+      "canonical_original": [
+        0,
+        0
+      ],
+      "face_box": [
+        56,
+        234,
+        294,
+        430
+      ],
+      "eye_line_y": 352,
+      "torso_box": [
+        80,
+        428,
+        282,
+        618
+      ],
+      "body_center_x": 174,
+      "foot_baseline_y": 630,
+      "tail_anchor": [
+        284,
+        462
+      ],
+      "status": "base reference measured; candidate validation pending"
+    },
+    "other_views": "individual original reference per declared anchor; do not normalize silhouettes"
+  },
+  "static_anchor_construction": "registered-character: cat and costume independently generated together per cell; prior costume overlay candidates rejected",
+  "static_overlay_master": "rejected",
+  "active_anchor_manifest": "integrated-anchors/manifest.json",
+  "static_validation": "pending; no static set approved"
+}

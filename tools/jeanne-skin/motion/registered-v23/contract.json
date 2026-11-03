@@ -1,0 +1,53 @@
+{
+  "states": [
+    "sleeping",
+    "jumping",
+    "drag-right",
+    "drag-left",
+    "review",
+    "waving",
+    "failed",
+    "idle"
+  ],
+  "framesPerState": 16,
+  "method": "independent integrated whole-cell generation; one locked master per state",
+  "idleTimes": [
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2
+  ],
+  "originalRegistration": "not yet certified",
+  "preserve": "all previous source versions and unaffected running/waiting",
+  "rejectedInitialJumpTarget448": [
+    0,
+    0,
+    0,
+    -12,
+    -38,
+    -68,
+    -94,
+    -110,
+    -112,
+    -100,
+    -78,
+    -48,
+    -20,
+    0,
+    0,
+    0
+  ],
+  "jumpConstruction": "Original jump anatomy keys and generated anatomical intermediates; grounded preparation frames2,3 and loop recovery16 replaced"
+}

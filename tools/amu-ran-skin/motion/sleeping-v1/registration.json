@@ -1,0 +1,850 @@
+[
+  {
+    "id": "F00",
+    "source": "raw/F00.png",
+    "source_sha256": "13dc74d3af3a1eed6e07ca6acf9a2e8cf658739feb5883e35b099682e8e4fd99",
+    "uniform_scale": 1.0000000000000002,
+    "translation": [
+      -5.684341886080802e-14,
+      -7.000000000000114
+    ],
+    "before": {
+      "nose_x": 288.1880341880342,
+      "nose_y": 579.2051282051282,
+      "foot_baseline": 636,
+      "bounds": [
+        53,
+        459,
+        391,
+        637
+      ]
+    },
+    "after": {
+      "nose_x": 288.11206896551727,
+      "nose_y": 572.2155172413793,
+      "foot_baseline": 629,
+      "bounds": [
+        53,
+        452,
+        391,
+        630
+      ]
+    },
+    "inner_face_match": {
+      "ncc_loss": 3.226393528166227e-05,
+      "scale_to_reference": 1.0000000000000002,
+      "translation_to_reference": [
+        -5.684341886080802e-14,
+        -1.1368683772161603e-13
+      ],
+      "roi": [
+        240,
+        539,
+        338,
+        615
+      ]
+    },
+    "regional_patches": false,
+    "warp": false,
+    "target": {
+      "foot_baseline": 629,
+      "view_group": "original curled sleep, not frontal seated"
+    },
+    "lowest_paw_residual_2x": 0
+  },
+  {
+    "id": "F01",
+    "source": "raw/F01.png",
+    "source_sha256": "b7e7b6f6f44ad7093da8e459e7877ea383ae99cd85f946e0f22fcef9fb030f0e",
+    "uniform_scale": 0.4356148713060058,
+    "translation": [
+      -5.0446776763726575,
+      -2.380000000000109
+    ],
+    "before": {
+      "nose_x": 287.4830508474576,
+      "nose_y": 567.3559322033898,
+      "foot_baseline": 619,
+      "bounds": [
+        52,
+        449,
+        393,
+        620
+      ]
+    },
+    "after": {
+      "nose_x": 288.21666666666664,
+      "nose_y": 576.9416666666667,
+      "foot_baseline": 629,
+      "bounds": [
+        48,
+        456,
+        396,
+        630
+      ]
+    },
+    "inner_face_match": {
+      "ncc_loss": 0.16789400577545166,
+      "scale_to_reference": 1.0200000000000002,
+      "translation_to_reference": [
+        -5.0446776763726575,
+        0.5020773576704869
+      ],
+      "roi": [
+        240,
+        539,
+        338,
+        615
+      ]
+    },
+    "regional_patches": false,
+    "warp": false,
+    "target": {
+      "foot_baseline": 629,
+      "view_group": "original curled sleep, not frontal seated"
+    },
+    "lowest_paw_residual_2x": 0
+  },
+  {
+    "id": "F02",
+    "source": "raw/F02.png",
+    "source_sha256": "c178dfe0ca5aaa3bc980a96dd0f0f48cdb296dbe79571338cd1cbda695c211f9",
+    "uniform_scale": 0.42579218303145866,
+    "translation": [
+      4.429112839719487,
+      9.862999999999829
+    ],
+    "before": {
+      "nose_x": 282.60674157303373,
+      "nose_y": 572.943820224719,
+      "foot_baseline": 621,
+      "bounds": [
+        55,
+        451,
+        390,
+        622
+      ]
+    },
+    "after": {
+      "nose_x": 287.6019417475728,
+      "nose_y": 581.5242718446602,
+      "foot_baseline": 630,
+      "bounds": [
+        59,
+        460,
+        393,
+        631
+      ]
+    },
+    "inner_face_match": {
+      "ncc_loss": 0.25658556818962097,
+      "scale_to_reference": 0.9970000000000002,
+      "translation_to_reference": [
+        4.429112839719487,
+        7.980139441083173
+      ],
+      "roi": [
+        240,
+        539,
+        338,
+        615
+      ]
+    },
+    "regional_patches": false,
+    "warp": false,
+    "target": {
+      "foot_baseline": 629,
+      "view_group": "original curled sleep, not frontal seated"
+    },
+    "lowest_paw_residual_2x": 1
+  },
+  {
+    "id": "F03",
+    "source": "raw/F03.png",
+    "source_sha256": "1b002f036bd391fc1d7bb5bb7c4fd0c86768aa24c91a48ab989b6561d107cba0",
+    "uniform_scale": 0.42579218303145866,
+    "translation": [
+      1.3811360398859653,
+      22.82399999999984
+    ],
+    "before": {
+      "nose_x": 289.6759259259259,
+      "nose_y": 559.6481481481482,
+      "foot_baseline": 608,
+      "bounds": [
+        49,
+        442,
+        398,
+        609
+      ]
+    },
+    "after": {
+      "nose_x": 290.01801801801804,
+      "nose_y": 581.8558558558559,
+      "foot_baseline": 629,
+      "bounds": [
+        50,
+        464,
+        398,
+        630
+      ]
+    },
+    "inner_face_match": {
+      "ncc_loss": 0.4436790943145752,
+      "scale_to_reference": 0.9970000000000002,
+      "translation_to_reference": [
+        1.3811360398859653,
+        23.235924501424336
+      ],
+      "roi": [
+        240,
+        539,
+        338,
+        615
+      ]
+    },
+    "regional_patches": false,
+    "warp": false,
+    "target": {
+      "foot_baseline": 629,
+      "view_group": "original curled sleep, not frontal seated"
+    },
+    "lowest_paw_residual_2x": 0
+  },
+  {
+    "id": "F04",
+    "source": "raw/F04.png",
+    "source_sha256": "f129a27839701fb9a4cbfdfd46823c021a4e5865b279d202332e70d3a8f121af",
+    "uniform_scale": 0.4275004766444234,
+    "translation": [
+      -7.020848164907065,
+      9.380999999999744
+    ],
+    "before": {
+      "nose_x": 292.9159663865546,
+      "nose_y": 569.6134453781513,
+      "foot_baseline": 619,
+      "bounds": [
+        33,
+        434,
+        416,
+        620
+      ]
+    },
+    "after": {
+      "nose_x": 287.60215053763443,
+      "nose_y": 581.2150537634409,
+      "foot_baseline": 629,
+      "bounds": [
+        26,
+        444,
+        409,
+        630
+      ]
+    },
+    "inner_face_match": {
+      "ncc_loss": 0.779391884803772,
+      "scale_to_reference": 1.0010000000000003,
+      "translation_to_reference": [
+        -7.020848164907065,
+        11.022069381598593
+      ],
+      "roi": [
+        240,
+        539,
+        338,
+        615
+      ]
+    },
+    "regional_patches": false,
+    "warp": false,
+    "target": {
+      "foot_baseline": 629,
+      "view_group": "original curled sleep, not frontal seated"
+    },
+    "lowest_paw_residual_2x": 0
+  },
+  {
+    "id": "F05",
+    "source": "raw/F05.png",
+    "source_sha256": "a3aebccb78e4ef3e7f33cd36f9eed59584fb384e6163bc4fe5fc8259c20ed2a4",
+    "uniform_scale": 0.4275004766444234,
+    "translation": [
+      -0.8782728985801009,
+      16.387999999999806
+    ],
+    "before": {
+      "nose_x": 286.7795275590551,
+      "nose_y": 556.1653543307086,
+      "foot_baseline": 612,
+      "bounds": [
+        18,
+        417,
+        417,
+        613
+      ]
+    },
+    "after": {
+      "nose_x": 287.6666666666667,
+      "nose_y": 574.9139784946236,
+      "foot_baseline": 629,
+      "bounds": [
+        17,
+        434,
+        417,
+        630
+      ]
+    },
+    "inner_face_match": {
+      "ncc_loss": 0.8177708983421326,
+      "scale_to_reference": 1.0010000000000003,
+      "translation_to_reference": [
+        -0.8782728985801009,
+        24.483608520088644
+      ],
+      "roi": [
+        240,
+        539,
+        338,
+        615
+      ]
+    },
+    "regional_patches": false,
+    "warp": false,
+    "target": {
+      "foot_baseline": 629,
+      "view_group": "original curled sleep, not frontal seated"
+    },
+    "lowest_paw_residual_2x": 0
+  },
+  {
+    "id": "F06",
+    "source": "raw/F06.png",
+    "source_sha256": "6b4b589b75220bd775a258cde2190b8531f11c8d8f661a877a92a9f7b297b797",
+    "uniform_scale": 0.47020781696854164,
+    "translation": [
+      -35.24020719127628,
+      -47.01400000000024
+    ],
+    "before": {
+      "nose_x": 293.7586206896552,
+      "nose_y": 570.6465517241379,
+      "foot_baseline": 614,
+      "bounds": [
+        42,
+        429,
+        415,
+        615
+      ]
+    },
+    "after": {
+      "nose_x": 288.25563909774434,
+      "nose_y": 582.0075187969925,
+      "foot_baseline": 630,
+      "bounds": [
+        10,
+        425,
+        422,
+        631
+      ]
+    },
+    "inner_face_match": {
+      "ncc_loss": 0.8509864807128906,
+      "scale_to_reference": 1.1010000000000004,
+      "translation_to_reference": [
+        -35.24020719127628,
+        -47.076725243147884
+      ],
+      "roi": [
+        240,
+        539,
+        338,
+        615
+      ]
+    },
+    "regional_patches": false,
+    "warp": false,
+    "target": {
+      "foot_baseline": 629,
+      "view_group": "original curled sleep, not frontal seated"
+    },
+    "lowest_paw_residual_2x": 1
+  },
+  {
+    "id": "F07",
+    "source": "raw/F07.png",
+    "source_sha256": "2897d8bd8b444ce25a84d3ad0b673ecc68bf512ed0108f6e873bbda6c47e6e7e",
+    "uniform_scale": 0.4001677788369877,
+    "translation": [
+      9.243895976652032,
+      48.059999999999945
+    ],
+    "before": {
+      "nose_x": 297.6991869918699,
+      "nose_y": 573.089430894309,
+      "foot_baseline": 620,
+      "bounds": [
+        25,
+        427,
+        431,
+        621
+      ]
+    },
+    "after": {
+      "nose_x": 288.4144144144144,
+      "nose_y": 585.2432432432432,
+      "foot_baseline": 630,
+      "bounds": [
+        33,
+        449,
+        413,
+        631
+      ]
+    },
+    "inner_face_match": {
+      "ncc_loss": 0.998825192451477,
+      "scale_to_reference": 0.9370000000000002,
+      "translation_to_reference": [
+        9.243895976652032,
+        46.22033145716054
+      ],
+      "roi": [
+        240,
+        539,
+        338,
+        615
+      ]
+    },
+    "regional_patches": false,
+    "warp": false,
+    "target": {
+      "foot_baseline": 629,
+      "view_group": "original curled sleep, not frontal seated"
+    },
+    "lowest_paw_residual_2x": 1
+  },
+  {
+    "id": "F08",
+    "source": "raw/F08.png",
+    "source_sha256": "f57111f2e04fde471c2518e3adbeb83f12eed713bc4b0535df907dca2c61ee66",
+    "uniform_scale": 0.4445834127740707,
+    "translation": [
+      -15.562271367521465,
+      -4.969000000000278
+    ],
+    "before": {
+      "nose_x": 291.787037037037,
+      "nose_y": 563.925925925926,
+      "foot_baseline": 609,
+      "bounds": [
+        51,
+        437,
+        405,
+        610
+      ]
+    },
+    "after": {
+      "nose_x": 288.3362831858407,
+      "nose_y": 582.5309734513274,
+      "foot_baseline": 630,
+      "bounds": [
+        37,
+        450,
+        406,
+        631
+      ]
+    },
+    "inner_face_match": {
+      "ncc_loss": 0.39655137062072754,
+      "scale_to_reference": 1.0410000000000004,
+      "translation_to_reference": [
+        -15.562271367521465,
+        -5.841760683761008
+      ],
+      "roi": [
+        240,
+        539,
+        338,
+        615
+      ]
+    },
+    "regional_patches": false,
+    "warp": false,
+    "target": {
+      "foot_baseline": 629,
+      "view_group": "original curled sleep, not frontal seated"
+    },
+    "lowest_paw_residual_2x": 1
+  },
+  {
+    "id": "F09",
+    "source": "raw/F09.png",
+    "source_sha256": "d644bf7940bdb1e85a870d11205c69bbdac333ece428f0d0f15eed7c88eb6beb",
+    "uniform_scale": 0.40999046711153486,
+    "translation": [
+      12.267404266774292,
+      30.919999999999845
+    ],
+    "before": {
+      "nose_x": 287.4173228346457,
+      "nose_y": 571.6850393700787,
+      "foot_baseline": 623,
+      "bounds": [
+        40,
+        451,
+        405,
+        624
+      ]
+    },
+    "after": {
+      "nose_x": 288.4732142857143,
+      "nose_y": 579.8214285714286,
+      "foot_baseline": 630,
+      "bounds": [
+        50,
+        464,
+        401,
+        631
+      ]
+    },
+    "inner_face_match": {
+      "ncc_loss": 0.401954710483551,
+      "scale_to_reference": 0.9600000000000002,
+      "translation_to_reference": [
+        12.267404266774292,
+        30.38749040985249
+      ],
+      "roi": [
+        240,
+        539,
+        338,
+        615
+      ]
+    },
+    "regional_patches": false,
+    "warp": false,
+    "target": {
+      "foot_baseline": 629,
+      "view_group": "original curled sleep, not frontal seated"
+    },
+    "lowest_paw_residual_2x": 1
+  },
+  {
+    "id": "F10",
+    "source": "raw/F10.png",
+    "source_sha256": "56fee70f241cc34182d7c28ba8d5f7b8a350c9894be642e691183a5f277f76ec",
+    "uniform_scale": 0.40187607244995244,
+    "translation": [
+      11.188713087116696,
+      48.402999999999906
+    ],
+    "before": {
+      "nose_x": 294.3669724770642,
+      "nose_y": 552.6422018348624,
+      "foot_baseline": 617,
+      "bounds": [
+        39,
+        432,
+        409,
+        618
+      ]
+    },
+    "after": {
+      "nose_x": 288.15294117647056,
+      "nose_y": 567.7058823529412,
+      "foot_baseline": 629,
+      "bounds": [
+        47,
+        455,
+        396,
+        630
+      ]
+    },
+    "inner_face_match": {
+      "ncc_loss": 0.20109635591506958,
+      "scale_to_reference": 0.9410000000000002,
+      "translation_to_reference": [
+        11.188713087116696,
+        59.16881627852259
+      ],
+      "roi": [
+        240,
+        539,
+        338,
+        615
+      ]
+    },
+    "regional_patches": false,
+    "warp": false,
+    "target": {
+      "foot_baseline": 629,
+      "view_group": "original curled sleep, not frontal seated"
+    },
+    "lowest_paw_residual_2x": 0
+  },
+  {
+    "id": "F11",
+    "source": "raw/F11.png",
+    "source_sha256": "25c9e57e39ecbae286844816438797b05db034b347786fbcfad600d9bb76fc55",
+    "uniform_scale": 0.44629170638703547,
+    "translation": [
+      -17.956258264796137,
+      -11.585000000000264
+    ],
+    "before": {
+      "nose_x": 291.04716981132077,
+      "nose_y": 556.066037735849,
+      "foot_baseline": 613,
+      "bounds": [
+        50,
+        445,
+        398,
+        614
+      ]
+    },
+    "after": {
+      "nose_x": 285.98214285714283,
+      "nose_y": 570.1964285714286,
+      "foot_baseline": 630,
+      "bounds": [
+        34,
+        454,
+        398,
+        631
+      ]
+    },
+    "inner_face_match": {
+      "ncc_loss": 0.16543374955654144,
+      "scale_to_reference": 1.0450000000000004,
+      "translation_to_reference": [
+        -17.956258264796137,
+        -1.883881228834221
+      ],
+      "roi": [
+        240,
+        539,
+        338,
+        615
+      ]
+    },
+    "regional_patches": false,
+    "warp": false,
+    "target": {
+      "foot_baseline": 629,
+      "view_group": "original curled sleep, not frontal seated"
+    },
+    "lowest_paw_residual_2x": 1
+  },
+  {
+    "id": "F12",
+    "source": "raw/F12.png",
+    "source_sha256": "39df457c604ee72e6f63ddf6d2a6db9b8b0b759b967071450cf216106ff82871",
+    "uniform_scale": 0.38820972354623456,
+    "translation": [
+      10.924356105842381,
+      82.69099999999992
+    ],
+    "before": {
+      "nose_x": 305.02054794520546,
+      "nose_y": 534.7260273972603,
+      "foot_baseline": 601,
+      "bounds": [
+        48,
+        414,
+        411,
+        602
+      ]
+    },
+    "after": {
+      "nose_x": 288.4672897196262,
+      "nose_y": 567.981308411215,
+      "foot_baseline": 629,
+      "bounds": [
+        54,
+        460,
+        385,
+        630
+      ]
+    },
+    "inner_face_match": {
+      "ncc_loss": 0.43002429604530334,
+      "scale_to_reference": 0.9090000000000001,
+      "translation_to_reference": [
+        10.924356105842381,
+        89.13916930101851
+      ],
+      "roi": [
+        240,
+        539,
+        338,
+        615
+      ]
+    },
+    "regional_patches": false,
+    "warp": false,
+    "target": {
+      "foot_baseline": 629,
+      "view_group": "original curled sleep, not frontal seated"
+    },
+    "lowest_paw_residual_2x": 0
+  },
+  {
+    "id": "F13",
+    "source": "raw/F13.png",
+    "source_sha256": "122bf2fde3f8236f35bb7a7fa048bcd0581ba2be048900090ebfe415e0f529c4",
+    "uniform_scale": 0.45312488083889435,
+    "translation": [
+      -16.95227588948526,
+      -23.515000000000214
+    ],
+    "before": {
+      "nose_x": 287.5968992248062,
+      "nose_y": 557.2713178294574,
+      "foot_baseline": 615,
+      "bounds": [
+        50,
+        448,
+        392,
+        616
+      ]
+    },
+    "after": {
+      "nose_x": 288.68888888888887,
+      "nose_y": 567.1851851851852,
+      "foot_baseline": 629,
+      "bounds": [
+        36,
+        452,
+        399,
+        630
+      ]
+    },
+    "inner_face_match": {
+      "ncc_loss": 0.19363954663276672,
+      "scale_to_reference": 1.0610000000000004,
+      "translation_to_reference": [
+        -16.95227588948526,
+        -14.059740011926337
+      ],
+      "roi": [
+        240,
+        539,
+        338,
+        615
+      ]
+    },
+    "regional_patches": false,
+    "warp": false,
+    "target": {
+      "foot_baseline": 629,
+      "view_group": "original curled sleep, not frontal seated"
+    },
+    "lowest_paw_residual_2x": 0
+  },
+  {
+    "id": "F14",
+    "source": "raw/F14.png",
+    "source_sha256": "c28e43423e47f54f06b987e2d76b1873e422179945045a94b91542916b57d94c",
+    "uniform_scale": 0.42066730219256443,
+    "translation": [
+      -4.7042414529914955,
+      21.25499999999988
+    ],
+    "before": {
+      "nose_x": 297.3525641025641,
+      "nose_y": 557.6474358974359,
+      "foot_baseline": 617,
+      "bounds": [
+        41,
+        445,
+        409,
+        618
+      ]
+    },
+    "after": {
+      "nose_x": 288.4848484848485,
+      "nose_y": 569.5,
+      "foot_baseline": 630,
+      "bounds": [
+        35,
+        460,
+        398,
+        631
+      ]
+    },
+    "inner_face_match": {
+      "ncc_loss": 0.16999857127666473,
+      "scale_to_reference": 0.9850000000000002,
+      "translation_to_reference": [
+        -4.7042414529914955,
+        27.922403846153642
+      ],
+      "roi": [
+        240,
+        539,
+        338,
+        615
+      ]
+    },
+    "regional_patches": false,
+    "warp": false,
+    "target": {
+      "foot_baseline": 629,
+      "view_group": "original curled sleep, not frontal seated"
+    },
+    "lowest_paw_residual_2x": 1
+  },
+  {
+    "id": "F15",
+    "source": "raw/F15.png",
+    "source_sha256": "9884dc28eae34e272246585c09312325fd26c41865ad94a8af2361349b381f92",
+    "uniform_scale": 0.4445834127740707,
+    "translation": [
+      -17.850887240537304,
+      -4.969000000000278
+    ],
+    "before": {
+      "nose_x": 292.0642857142857,
+      "nose_y": 551.3071428571428,
+      "foot_baseline": 609,
+      "bounds": [
+        48,
+        439,
+        401,
+        610
+      ]
+    },
+    "after": {
+      "nose_x": 286.2025316455696,
+      "nose_y": 569.6012658227849,
+      "foot_baseline": 630,
+      "bounds": [
+        33,
+        452,
+        400,
+        631
+      ]
+    },
+    "inner_face_match": {
+      "ncc_loss": 0.16049344837665558,
+      "scale_to_reference": 1.0410000000000004,
+      "translation_to_reference": [
+        -17.850887240537304,
+        3.294392490842286
+      ],
+      "roi": [
+        240,
+        539,
+        338,
+        615
+      ]
+    },
+    "regional_patches": false,
+    "warp": false,
+    "target": {
+      "foot_baseline": 629,
+      "view_group": "original curled sleep, not frontal seated"
+    },
+    "lowest_paw_residual_2x": 1
+  }
+]

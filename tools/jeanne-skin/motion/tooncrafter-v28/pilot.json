@@ -1,0 +1,78 @@
+{
+  "model": "Doubiiu/ToonCrafter",
+  "phase": "GPU task aborted; free quota wait until next day",
+  "segment": "waving neutral to Rosario touch",
+  "integratedCharacterAndEffects": true,
+  "framesExpected": 16,
+  "inputCanvas": [
+    512,
+    320
+  ],
+  "originalRuntimeCell": [
+    224,
+    320
+  ],
+  "outputAlpha": "RGB model; transparency reconstruction not validated",
+  "records": [
+    {
+      "input": "start.png",
+      "source": "tools/jeanne-skin/motion/integrated-repair-v27/waving/00.png",
+      "sourceSha256": "6be8594a32a003c0c523d89065effdc755c3dea8ec86b209d5b3fc0ef44f606d",
+      "fullCellScale": 0.5,
+      "paddingLeft": 144,
+      "finalCellTransform": null
+    },
+    {
+      "input": "end.png",
+      "source": "tools/jeanne-skin/motion/integrated-repair-v27/waving/03.png",
+      "sourceSha256": "3413276c611a24777cb3e508eb23a0a4d77f76ff89438ef636e707dd1b3b726a",
+      "fullCellScale": 0.5,
+      "paddingLeft": 144,
+      "finalCellTransform": null
+    }
+  ],
+  "generatedFrames": 0,
+  "destination": "https://huggingface.co/spaces/Doubiiu/tooncrafter",
+  "approvalReviewReason": "Explicit approval needed to transmit two Retto images and the motion prompt to this external demo",
+  "checks": {
+    "scriptSyntax": "pass",
+    "inputDimensions": "pass",
+    "sourceHashesUnchanged": "pass"
+  },
+  "productionPreviewUnchanged": "state-integrated-v27.html",
+  "externalTransmissionApproved": true,
+  "retryScheduled": "2026-10-16T17:20:00+09:00",
+  "automationId": "tooncrafter",
+  "blockedReason": "Official demo GPU aborted; subsequent request blocked by free quota",
+  "validation": {
+    "runScriptSyntax": "pass",
+    "extractScriptSyntax": "pass",
+    "actualModelOutput": "none yet"
+  },
+  "latestAttempts": [
+    {
+      "steps": 40,
+      "result": "GPU task aborted after processing started"
+    },
+    {
+      "steps": 20,
+      "result": "ZeroGPU quota180s requested vs173s left; wait23:59:17"
+    }
+  ],
+  "localAlternative": {
+    "preview": "../state-interpolated-v29.html",
+    "modelsExecuted": [
+      "RIFE4.6 CPU",
+      "FILM CPU"
+    ],
+    "states": [
+      "waving",
+      "waiting"
+    ],
+    "framesPerState": 32,
+    "sourceDrawingsPerState": 16,
+    "inferredMidpointsPerState": 16,
+    "status": "comparison only;large-change smearing remains",
+    "qualityReview": "../local-interpolation-v29/visual-review.json"
+  }
+}

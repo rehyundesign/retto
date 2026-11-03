@@ -1,0 +1,124 @@
+{
+  "stage": "static transformed-body size repair, not completed animation",
+  "corrected_cells": [
+    "A07.png",
+    "A06.png",
+    "A15.png",
+    "A14.png"
+  ],
+  "unchanged_cells": 12,
+  "all_registered_cell_dimensions": [
+    448,
+    640
+  ],
+  "grounded_neutral_body_distance_error_max_1x": 0.25149999999999295,
+  "face_identity_templates": [
+    {
+      "id": "A06",
+      "protected_face_template_changed_pixels": 0,
+      "final_roi_2x": [
+        108,
+        325,
+        243,
+        414
+      ]
+    },
+    {
+      "id": "A07",
+      "protected_face_template_changed_pixels": 0,
+      "final_roi_2x": [
+        108,
+        334,
+        243,
+        424
+      ]
+    },
+    {
+      "id": "A14",
+      "protected_face_template_changed_pixels": 0,
+      "final_roi_2x": [
+        109,
+        327,
+        243,
+        416
+      ]
+    },
+    {
+      "id": "A15",
+      "protected_face_template_changed_pixels": 0,
+      "final_roi_2x": [
+        108,
+        286,
+        243,
+        370
+      ]
+    }
+  ],
+  "body_metrics": [
+    {
+      "id": "A01",
+      "eye_line_2x": 355.584,
+      "paw_line_2x": 628,
+      "eye_to_paw_distance_2x": 272.416,
+      "skull_top_2x": 243.065
+    },
+    {
+      "id": "A06",
+      "eye_line_2x": 355.964,
+      "paw_line_2x": 628,
+      "eye_to_paw_distance_2x": 272.036,
+      "skull_top_2x": 236.56
+    },
+    {
+      "id": "A07",
+      "eye_line_2x": 364.974,
+      "paw_line_2x": 628,
+      "eye_to_paw_distance_2x": 263.026,
+      "skull_top_2x": 247.549
+    },
+    {
+      "id": "A14",
+      "eye_line_2x": 355.081,
+      "paw_line_2x": 628,
+      "eye_to_paw_distance_2x": 272.919,
+      "skull_top_2x": 235.565
+    },
+    {
+      "id": "A15",
+      "eye_line_2x": 315.07,
+      "paw_line_2x": 596,
+      "eye_to_paw_distance_2x": 280.93,
+      "skull_top_2x": 197.003
+    }
+  ],
+  "clipped_character_pixels": 0,
+  "approved_school_heart_design_and_ran_master_hashes_unchanged": true,
+  "material_reference": "actual Hana costume-master.md, A01-display.png and register-drag-gait.py reviewed",
+  "light_dark_1x_review": true,
+  "animated": false,
+  "installed": false,
+  "deterministic_rebuild_verified": true,
+  "regression_verifier": "verify-heart-size-v2.py",
+  "cross_costume_body_gate": [
+    {
+      "id": "A06",
+      "eye_error_2x": 0.379594,
+      "paw_error_2x": 0
+    },
+    {
+      "id": "A07",
+      "eye_error_2x": -0.610346,
+      "paw_error_2x": 0
+    },
+    {
+      "id": "A14",
+      "eye_error_2x": -0.503636,
+      "paw_error_2x": 0
+    },
+    {
+      "id": "A15",
+      "eye_error_2x": -0.514651,
+      "paw_error_2x": 0
+    }
+  ]
+}

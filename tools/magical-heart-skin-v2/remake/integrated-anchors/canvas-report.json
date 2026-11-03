@@ -1,0 +1,338 @@
+[
+  {
+    "id": "idle-anchor",
+    "source_size": [
+      1049,
+      1499
+    ],
+    "canvas_scale": 0.4269513008672448,
+    "cell_size": [
+      448,
+      640
+    ],
+    "alpha_bounds": [
+      0,
+      11,
+      434,
+      638
+    ],
+    "original_face_registration": "not checked",
+    "original_torso_registration": "not checked",
+    "four_limbs": "not checked"
+  },
+  {
+    "id": "drag-right-anchor",
+    "source_size": [
+      1049,
+      1500
+    ],
+    "canvas_scale": 0.4266666666666667,
+    "cell_size": [
+      448,
+      640
+    ],
+    "alpha_bounds": [
+      20,
+      10,
+      447,
+      619
+    ],
+    "original_face_registration": "not checked",
+    "original_torso_registration": "not checked",
+    "four_limbs": "not checked"
+  },
+  {
+    "id": "drag-left-anchor",
+    "source_size": [
+      1049,
+      1499
+    ],
+    "canvas_scale": 0.4269513008672448,
+    "cell_size": [
+      448,
+      640
+    ],
+    "alpha_bounds": [
+      11,
+      9,
+      443,
+      636
+    ],
+    "original_face_registration": "not checked",
+    "original_torso_registration": "not checked",
+    "four_limbs": "not checked"
+  },
+  {
+    "id": "waving-anchor",
+    "source_size": [
+      1049,
+      1500
+    ],
+    "canvas_scale": 0.4266666666666667,
+    "cell_size": [
+      448,
+      640
+    ],
+    "alpha_bounds": [
+      21,
+      29,
+      434,
+      620
+    ],
+    "original_face_registration": "not checked",
+    "original_torso_registration": "not checked",
+    "four_limbs": "not checked"
+  },
+  {
+    "id": "jumping-anchor",
+    "source_size": [
+      1049,
+      1499
+    ],
+    "canvas_scale": 0.4269513008672448,
+    "cell_size": [
+      448,
+      640
+    ],
+    "alpha_bounds": [
+      18,
+      70,
+      440,
+      630
+    ],
+    "original_face_registration": "not checked",
+    "original_torso_registration": "not checked",
+    "four_limbs": "not checked"
+  },
+  {
+    "id": "failed-anchor",
+    "source_size": [
+      1049,
+      1500
+    ],
+    "canvas_scale": 0.4266666666666667,
+    "cell_size": [
+      448,
+      640
+    ],
+    "alpha_bounds": [
+      8,
+      15,
+      443,
+      630
+    ],
+    "original_face_registration": "not checked",
+    "original_torso_registration": "not checked",
+    "four_limbs": "not checked"
+  },
+  {
+    "id": "waiting-anchor",
+    "source_size": [
+      1049,
+      1499
+    ],
+    "canvas_scale": 0.4269513008672448,
+    "cell_size": [
+      448,
+      640
+    ],
+    "alpha_bounds": [
+      53,
+      29,
+      421,
+      625
+    ],
+    "original_face_registration": "not checked",
+    "original_torso_registration": "not checked",
+    "four_limbs": "not checked"
+  },
+  {
+    "id": "running-anchor",
+    "source_size": [
+      1049,
+      1500
+    ],
+    "canvas_scale": 0.4266666666666667,
+    "cell_size": [
+      448,
+      640
+    ],
+    "alpha_bounds": [
+      0,
+      8,
+      440,
+      640
+    ],
+    "original_face_registration": "not checked",
+    "original_torso_registration": "not checked",
+    "four_limbs": "not checked"
+  },
+  {
+    "id": "review-anchor",
+    "source_size": [
+      1049,
+      1500
+    ],
+    "canvas_scale": 0.4266666666666667,
+    "cell_size": [
+      448,
+      640
+    ],
+    "alpha_bounds": [
+      25,
+      27,
+      433,
+      617
+    ],
+    "original_face_registration": "not checked",
+    "original_torso_registration": "not checked",
+    "four_limbs": "not checked"
+  },
+  {
+    "id": "sleeping-anchor",
+    "source_size": [
+      1049,
+      1500
+    ],
+    "canvas_scale": 0.4266666666666667,
+    "cell_size": [
+      448,
+      640
+    ],
+    "alpha_bounds": [
+      7,
+      20,
+      443,
+      605
+    ],
+    "original_face_registration": "not checked",
+    "original_torso_registration": "not checked",
+    "four_limbs": "not checked"
+  },
+  {
+    "id": "idle-key-08",
+    "source_size": [
+      1049,
+      1500
+    ],
+    "canvas_scale": 0.4266666666666667,
+    "cell_size": [
+      448,
+      640
+    ],
+    "alpha_bounds": [
+      28,
+      10,
+      429,
+      620
+    ],
+    "original_face_registration": "not checked",
+    "original_torso_registration": "not checked",
+    "four_limbs": "not checked"
+  },
+  {
+    "id": "running-key-10",
+    "source_size": [
+      1049,
+      1500
+    ],
+    "canvas_scale": 0.4266666666666667,
+    "cell_size": [
+      448,
+      640
+    ],
+    "alpha_bounds": [
+      8,
+      14,
+      440,
+      636
+    ],
+    "original_face_registration": "not checked",
+    "original_torso_registration": "not checked",
+    "four_limbs": "not checked"
+  },
+  {
+    "id": "waving-key-10",
+    "source_size": [
+      1049,
+      1500
+    ],
+    "canvas_scale": 0.4266666666666667,
+    "cell_size": [
+      448,
+      640
+    ],
+    "alpha_bounds": [
+      16,
+      15,
+      436,
+      640
+    ],
+    "original_face_registration": "not checked",
+    "original_torso_registration": "not checked",
+    "four_limbs": "not checked"
+  },
+  {
+    "id": "jumping-key-07",
+    "source_size": [
+      1049,
+      1500
+    ],
+    "canvas_scale": 0.4266666666666667,
+    "cell_size": [
+      448,
+      640
+    ],
+    "alpha_bounds": [
+      14,
+      18,
+      406,
+      601
+    ],
+    "original_face_registration": "not checked",
+    "original_torso_registration": "not checked",
+    "four_limbs": "not checked"
+  },
+  {
+    "id": "failed-key-10",
+    "source_size": [
+      1049,
+      1500
+    ],
+    "canvas_scale": 0.4266666666666667,
+    "cell_size": [
+      448,
+      640
+    ],
+    "alpha_bounds": [
+      27,
+      28,
+      434,
+      630
+    ],
+    "original_face_registration": "not checked",
+    "original_torso_registration": "not checked",
+    "four_limbs": "not checked"
+  },
+  {
+    "id": "waiting-key-10",
+    "source_size": [
+      1049,
+      1500
+    ],
+    "canvas_scale": 0.4266666666666667,
+    "cell_size": [
+      448,
+      640
+    ],
+    "alpha_bounds": [
+      0,
+      8,
+      435,
+      629
+    ],
+    "original_face_registration": "not checked",
+    "original_torso_registration": "not checked",
+    "four_limbs": "not checked"
+  }
+]

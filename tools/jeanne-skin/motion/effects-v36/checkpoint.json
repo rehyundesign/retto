@@ -1,0 +1,19 @@
+{
+  "phase": "10 state/direction separated VFX previews and PNG/GIF/WebP exports ready",
+  "architecture": "character + effect_back + effect_front; independent effect clock; Rosario attachment per character frame",
+  "characterCells": 144,
+  "dragFramesPerDirection": 8,
+  "otherStateFrames": 16,
+  "poseFrameOrderAndDurations": "preserved from v35 installed source",
+  "userOverride": "Separate effect remake explicitly approved",
+  "characterEdit": "Removed baked effects with built-in imagegen; restored obscured cloth/fur; no separate body-part or garment compositing; complete canvases normalized to 448x640",
+  "visualReview": "All 144 cleaned character cells inspected at native 1x on dark boards; final VFX sequences sampled on light and dark backgrounds; Hana and Pichi compared at 224x320",
+  "limitations": [
+    "No claim of exact original pixel equality after removal of baked effects",
+    "No native installation or native performance verification for v36",
+    "Browser visual playback was not inspected; actual preview controller tested with DOM/image harness"
+  ],
+  "preview": "../state-effects-separated-v36.html",
+  "nativeInstalled": false,
+  "gifValidation": "20 decoded GIFs match exact dimensions and durations"
+}

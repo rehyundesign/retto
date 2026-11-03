@@ -1,0 +1,834 @@
+[
+  {
+    "id": "F00",
+    "source": "raw/F00.png",
+    "source_sha256": "c6549b03ed2e7478f38e83410ce55c80eec56932b862017577d40a56d736f114",
+    "uniform_scale": 1.0,
+    "translation": [
+      0.0,
+      0.0
+    ],
+    "before": {
+      "eye_center_x": 174.4107723841749,
+      "cheek_width": 228,
+      "head_center_x": 171.5,
+      "eye_line": 350.82269976574696,
+      "foot_baseline": 629,
+      "support_toe_x": 218.88550983899822
+    },
+    "after": {
+      "eye_center_x": 174.4190921009505,
+      "cheek_width": 228,
+      "head_center_x": 171.5,
+      "eye_line": 350.833661094723,
+      "foot_baseline": 629,
+      "support_toe_x": 218.88550983899822
+    },
+    "inner_face_match": {
+      "ncc_loss": 0.08560358732938766,
+      "scale_to_reference": 1.0010000000000003,
+      "translation_to_reference": [
+        -1.085183156559114,
+        0.3264775344871662
+      ],
+      "roi": [
+        108,
+        325,
+        243,
+        414
+      ]
+    },
+    "occluded_cheek_template_scale": false,
+    "reference": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/idle-v2/reference/costume-master.png",
+    "face_template_only_for_measurement": true,
+    "target": {
+      "reference_face_unit_scale": 1.0,
+      "body_center_x": 171.5,
+      "lowest_paw_y": 629
+    },
+    "regional_patches": false,
+    "warp": false,
+    "original_eye_y_residual_2x": -0.8872383761764127,
+    "lowest_paw_residual_2x": 0
+  },
+  {
+    "id": "F01",
+    "source": "raw/F01.png",
+    "source_sha256": "42cb88eb8a9d67894c33e8e28e34dc2a8845ec1df5819cd1507618a12bdd88d0",
+    "uniform_scale": 0.42895478387220054,
+    "translation": [
+      1.2533039647576913,
+      16.31277533039645
+    ],
+    "before": {
+      "eye_center_x": 172.40769085411944,
+      "cheek_width": 227,
+      "head_center_x": 169.5,
+      "eye_line": 336.0395880574452,
+      "foot_baseline": 610,
+      "support_toe_x": 218.08445945945945
+    },
+    "after": {
+      "eye_center_x": 174.40776522056143,
+      "cheek_width": 228,
+      "head_center_x": 171.5,
+      "eye_line": 354.25850042532505,
+      "foot_baseline": 630,
+      "support_toe_x": 220.24601769911504
+    },
+    "inner_face_match": {
+      "ncc_loss": 0.13267557322978973,
+      "scale_to_reference": 1.0290000000000004,
+      "translation_to_reference": [
+        -1.9075138888889682,
+        5.715263888888773
+      ],
+      "roi": [
+        108,
+        325,
+        243,
+        414
+      ]
+    },
+    "occluded_cheek_template_scale": false,
+    "reference": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/idle-v2/reference/costume-master.png",
+    "face_template_only_for_measurement": true,
+    "target": {
+      "reference_face_unit_scale": 1.0,
+      "body_center_x": 171.5,
+      "lowest_paw_y": 629
+    },
+    "regional_patches": false,
+    "warp": false,
+    "original_eye_y_residual_2x": 2.5376009544256135,
+    "lowest_paw_residual_2x": 1
+  },
+  {
+    "id": "F02",
+    "source": "raw/F02.png",
+    "source_sha256": "a1ba8a57dd6a5b9bdaff22cdade9c128f362a3127cc3363d7cca32ba6b521e52",
+    "uniform_scale": 0.4161228031580748,
+    "translation": [
+      7.807692307692321,
+      24.897435897435912
+    ],
+    "before": {
+      "eye_center_x": 171.35052759038228,
+      "cheek_width": 234,
+      "head_center_x": 168.0,
+      "eye_line": 346.1098252897423,
+      "foot_baseline": 620,
+      "support_toe_x": 219.41996830427894
+    },
+    "after": {
+      "eye_center_x": 174.67362119394818,
+      "cheek_width": 228,
+      "head_center_x": 171.5,
+      "eye_line": 362.40890726595546,
+      "foot_baseline": 630,
+      "support_toe_x": 221.71746575342465
+    },
+    "inner_face_match": {
+      "ncc_loss": 0.11198404431343079,
+      "scale_to_reference": 1.0210000000000004,
+      "translation_to_reference": [
+        0.5511113302196242,
+        -1.8781316208269772
+      ],
+      "roi": [
+        108,
+        325,
+        243,
+        414
+      ]
+    },
+    "occluded_cheek_template_scale": false,
+    "reference": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/idle-v2/reference/costume-master.png",
+    "face_template_only_for_measurement": true,
+    "target": {
+      "reference_face_unit_scale": 1.0,
+      "body_center_x": 171.5,
+      "lowest_paw_y": 629
+    },
+    "regional_patches": false,
+    "warp": false,
+    "original_eye_y_residual_2x": 10.688007795056023,
+    "lowest_paw_residual_2x": 1
+  },
+  {
+    "id": "F03",
+    "source": "raw/F03.png",
+    "source_sha256": "6c862b4d25b7f58d69c98a6247c268982297743b86a21a83c2321636d4f731e4",
+    "uniform_scale": 0.4270734032411821,
+    "translation": [
+      -0.5,
+      12.0
+    ],
+    "before": {
+      "eye_center_x": 175.5197947947948,
+      "cheek_width": 228,
+      "head_center_x": 172.0,
+      "eye_line": 354.16596596596594,
+      "foot_baseline": 617,
+      "support_toe_x": 225.64941569282138
+    },
+    "after": {
+      "eye_center_x": 174.85789049919487,
+      "cheek_width": 228,
+      "head_center_x": 171.5,
+      "eye_line": 366.3549718196457,
+      "foot_baseline": 629,
+      "support_toe_x": 224.89465408805032
+    },
+    "inner_face_match": {
+      "ncc_loss": 0.12072379887104034,
+      "scale_to_reference": 1.0410000000000004,
+      "translation_to_reference": [
+        -7.216106381381454,
+        -17.18677057057065
+      ],
+      "roi": [
+        108,
+        325,
+        243,
+        414
+      ]
+    },
+    "occluded_cheek_template_scale": false,
+    "reference": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/idle-v2/reference/costume-master.png",
+    "face_template_only_for_measurement": true,
+    "target": {
+      "reference_face_unit_scale": 1.0,
+      "body_center_x": 171.5,
+      "lowest_paw_y": 629
+    },
+    "regional_patches": false,
+    "warp": false,
+    "original_eye_y_residual_2x": 14.634072348746258,
+    "lowest_paw_residual_2x": 0
+  },
+  {
+    "id": "F04",
+    "source": "raw/F04.png",
+    "source_sha256": "9f00fd54dfc07b80cffe9d2af7d29383cadfe6907f57a6fdb850adb6c731dc82",
+    "uniform_scale": 0.42152699540688104,
+    "translation": [
+      2.720779220779235,
+      14.090909090909122
+    ],
+    "before": {
+      "eye_center_x": 173.73211768851303,
+      "cheek_width": 231,
+      "head_center_x": 171.0,
+      "eye_line": 348.1189393939394,
+      "foot_baseline": 623,
+      "support_toe_x": 223.22435897435898
+    },
+    "after": {
+      "eye_center_x": 174.24918417104277,
+      "cheek_width": 228,
+      "head_center_x": 171.5,
+      "eye_line": 358.064759939985,
+      "foot_baseline": 630,
+      "support_toe_x": 222.9278523489933
+    },
+    "inner_face_match": {
+      "ncc_loss": 0.12038610130548477,
+      "scale_to_reference": 1.0210000000000004,
+      "translation_to_reference": [
+        -3.880492159971854,
+        -5.929437121212251
+      ],
+      "roi": [
+        108,
+        325,
+        243,
+        414
+      ]
+    },
+    "occluded_cheek_template_scale": false,
+    "reference": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/idle-v2/reference/costume-master.png",
+    "face_template_only_for_measurement": true,
+    "target": {
+      "reference_face_unit_scale": 1.0,
+      "body_center_x": 171.5,
+      "lowest_paw_y": 629
+    },
+    "regional_patches": false,
+    "warp": false,
+    "original_eye_y_residual_2x": 6.343860469085541,
+    "lowest_paw_residual_2x": 1
+  },
+  {
+    "id": "F05",
+    "source": "raw/F05.png",
+    "source_sha256": "fb28de4a3dc801bf38b12898f64e38ee35bb45a7f7134ced8e6857fabce96438",
+    "uniform_scale": 0.42895478387220054,
+    "translation": [
+      -5.7775330396475795,
+      9.281938325991177
+    ],
+    "before": {
+      "eye_center_x": 178.78679468942624,
+      "cheek_width": 227,
+      "head_center_x": 176.5,
+      "eye_line": 353.89796111901376,
+      "foot_baseline": 617,
+      "support_toe_x": 227.77504105090313
+    },
+    "after": {
+      "eye_center_x": 173.88709114479457,
+      "cheek_width": 228,
+      "head_center_x": 171.5,
+      "eye_line": 365.0253789389709,
+      "foot_baseline": 630,
+      "support_toe_x": 223.0121951219512
+    },
+    "inner_face_match": {
+      "ncc_loss": 0.13155889511108398,
+      "scale_to_reference": 1.0810000000000004,
+      "translation_to_reference": [
+        -17.768525059269855,
+        -31.06369596965402
+      ],
+      "roi": [
+        108,
+        325,
+        243,
+        414
+      ]
+    },
+    "occluded_cheek_template_scale": false,
+    "reference": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/idle-v2/reference/costume-master.png",
+    "face_template_only_for_measurement": true,
+    "target": {
+      "reference_face_unit_scale": 1.0,
+      "body_center_x": 171.5,
+      "lowest_paw_y": 629
+    },
+    "regional_patches": false,
+    "warp": false,
+    "original_eye_y_residual_2x": 13.304479468071463,
+    "lowest_paw_residual_2x": 1
+  },
+  {
+    "id": "F06",
+    "source": "raw/F06.png",
+    "source_sha256": "4132ce65fcafb94ecb10dfea79cf02e4c46faaa26afed31900b99502e4f70705",
+    "uniform_scale": 0.4007108474855535,
+    "translation": [
+      13.870370370370381,
+      59.46913580246917
+    ],
+    "before": {
+      "eye_center_x": 170.44202861867637,
+      "cheek_width": 243,
+      "head_center_x": 168.0,
+      "eye_line": 322.0037798251831,
+      "foot_baseline": 607,
+      "support_toe_x": 223.14927768860355
+    },
+    "after": {
+      "eye_center_x": 173.60036200087757,
+      "cheek_width": 228,
+      "head_center_x": 171.5,
+      "eye_line": 361.7324594120228,
+      "foot_baseline": 629,
+      "support_toe_x": 223.30483870967743
+    },
+    "inner_face_match": {
+      "ncc_loss": 0.14876289665699005,
+      "scale_to_reference": 1.0010000000000003,
+      "translation_to_reference": [
+        2.887529352704883,
+        27.174216394991642
+      ],
+      "roi": [
+        108,
+        325,
+        243,
+        414
+      ]
+    },
+    "occluded_cheek_template_scale": false,
+    "reference": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/idle-v2/reference/costume-master.png",
+    "face_template_only_for_measurement": true,
+    "target": {
+      "reference_face_unit_scale": 1.0,
+      "body_center_x": 171.5,
+      "lowest_paw_y": 629
+    },
+    "regional_patches": false,
+    "warp": false,
+    "original_eye_y_residual_2x": 10.01155994112338,
+    "lowest_paw_residual_2x": 0
+  },
+  {
+    "id": "F07",
+    "source": "raw/F07.png",
+    "source_sha256": "c675272452e515a6c68aee3a17f61821cee0b133aaaedd5ac0d49f1c94559e8e",
+    "uniform_scale": 0.42895478387220054,
+    "translation": [
+      0.7511013215859066,
+      -1.7665198237885988
+    ],
+    "before": {
+      "eye_center_x": 172.58782230977096,
+      "cheek_width": 227,
+      "head_center_x": 170.0,
+      "eye_line": 365.0947546531303,
+      "foot_baseline": 628,
+      "support_toe_x": 221.00818330605566
+    },
+    "after": {
+      "eye_center_x": 174.12827053898482,
+      "cheek_width": 229,
+      "head_center_x": 172.0,
+      "eye_line": 365.36669283097854,
+      "foot_baseline": 629,
+      "support_toe_x": 222.76780185758514
+    },
+    "inner_face_match": {
+      "ncc_loss": 0.18467558920383453,
+      "scale_to_reference": 1.0810000000000004,
+      "translation_to_reference": [
+        -11.067435916862472,
+        -43.16742978003397
+      ],
+      "roi": [
+        108,
+        325,
+        243,
+        414
+      ]
+    },
+    "occluded_cheek_template_scale": false,
+    "reference": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/idle-v2/reference/costume-master.png",
+    "face_template_only_for_measurement": true,
+    "target": {
+      "reference_face_unit_scale": 1.0,
+      "body_center_x": 171.5,
+      "lowest_paw_y": 629
+    },
+    "regional_patches": false,
+    "warp": false,
+    "original_eye_y_residual_2x": 13.645793360079097,
+    "lowest_paw_residual_2x": 0
+  },
+  {
+    "id": "F08",
+    "source": "raw/F08.png",
+    "source_sha256": "3237957a28fe9c1b4a124223bf8d0012155af75ca6e35d831e367fbedbbc2b62",
+    "uniform_scale": 0.39582412983329074,
+    "translation": [
+      6.060975609756099,
+      48.80487804878044
+    ],
+    "before": {
+      "eye_center_x": 179.51846419327006,
+      "cheek_width": 246,
+      "head_center_x": 178.5,
+      "eye_line": 343.5602243313201,
+      "foot_baseline": 626,
+      "support_toe_x": 227.5943396226415
+    },
+    "after": {
+      "eye_center_x": 172.3295303605313,
+      "cheek_width": 228,
+      "head_center_x": 171.5,
+      "eye_line": 367.4316492726123,
+      "foot_baseline": 629,
+      "support_toe_x": 216.79458598726114
+    },
+    "inner_face_match": {
+      "ncc_loss": 0.11746297031641006,
+      "scale_to_reference": 0.9530000000000002,
+      "translation_to_reference": [
+        4.418903623813599,
+        22.087106212251864
+      ],
+      "roi": [
+        108,
+        325,
+        243,
+        414
+      ]
+    },
+    "occluded_cheek_template_scale": false,
+    "reference": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/idle-v2/reference/costume-master.png",
+    "face_template_only_for_measurement": true,
+    "target": {
+      "reference_face_unit_scale": 1.0,
+      "body_center_x": 171.5,
+      "lowest_paw_y": 629
+    },
+    "regional_patches": false,
+    "warp": false,
+    "original_eye_y_residual_2x": 15.710749801712836,
+    "lowest_paw_residual_2x": 0
+  },
+  {
+    "id": "F09",
+    "source": "raw/F09.png",
+    "source_sha256": "05986f405e94385fe2b1f31fefecfbfc8529100452c47fc3b5810da02bd59888",
+    "uniform_scale": 0.44462436501821695,
+    "translation": [
+      -25.26712328767121,
+      -9.191780821917746
+    ],
+    "before": {
+      "eye_center_x": 227.3548193802431,
+      "cheek_width": 219,
+      "head_center_x": 189.0,
+      "eye_line": 342.83474576271186,
+      "foot_baseline": 613,
+      "support_toe_x": 226.2576
+    },
+    "after": {
+      "eye_center_x": 211.2875299043062,
+      "cheek_width": 226,
+      "head_center_x": 171.5,
+      "eye_line": 348.10965535287085,
+      "foot_baseline": 630,
+      "support_toe_x": 209.8216039279869
+    },
+    "inner_face_match": {
+      "ncc_loss": 0.5116422772407532,
+      "scale_to_reference": 1.2170000000000005,
+      "translation_to_reference": [
+        -107.19081518575597,
+        -65.72988559322053
+      ],
+      "roi": [
+        108,
+        325,
+        243,
+        414
+      ]
+    },
+    "occluded_cheek_template_scale": false,
+    "reference": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/idle-v2/reference/costume-master.png",
+    "face_template_only_for_measurement": true,
+    "target": {
+      "reference_face_unit_scale": 1.0,
+      "body_center_x": 171.5,
+      "lowest_paw_y": 629
+    },
+    "regional_patches": false,
+    "warp": false,
+    "original_eye_y_residual_2x": -3.611244118028594,
+    "lowest_paw_residual_2x": 1
+  },
+  {
+    "id": "F10",
+    "source": "raw/F10.png",
+    "source_sha256": "073cb87f60ef79af046f4915bcefb05b91f6990b65672c3921ade052b9a929e1",
+    "uniform_scale": 0.39263199975399,
+    "translation": [
+      2.7983870967742064,
+      64.51612903225805
+    ],
+    "before": {
+      "eye_center_x": 219.7109388270122,
+      "cheek_width": 248,
+      "head_center_x": 183.5,
+      "eye_line": 313.62683506830706,
+      "foot_baseline": 614,
+      "support_toe_x": 228.91087613293053
+    },
+    "after": {
+      "eye_center_x": 204.50757575757575,
+      "cheek_width": 228,
+      "head_center_x": 171.0,
+      "eye_line": 353.10195707070704,
+      "foot_baseline": 630,
+      "support_toe_x": 213.146804835924
+    },
+    "inner_face_match": {
+      "ncc_loss": 0.39317524433135986,
+      "scale_to_reference": 1.0370000000000004,
+      "translation_to_reference": [
+        -58.340243563611736,
+        26.26897203416546
+      ],
+      "roi": [
+        108,
+        325,
+        243,
+        414
+      ]
+    },
+    "occluded_cheek_template_scale": false,
+    "reference": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/idle-v2/reference/costume-master.png",
+    "face_template_only_for_measurement": true,
+    "target": {
+      "reference_face_unit_scale": 1.0,
+      "body_center_x": 171.5,
+      "lowest_paw_y": 629
+    },
+    "regional_patches": false,
+    "warp": false,
+    "original_eye_y_residual_2x": 1.3810575998076047,
+    "lowest_paw_residual_2x": 1
+  },
+  {
+    "id": "F11",
+    "source": "raw/F11.png",
+    "source_sha256": "48e50bf8d0eef5f7d147939cd1f2da5dcfc9ca109c6f1919803cd6723b4ee8dd",
+    "uniform_scale": 0.4007108474855535,
+    "translation": [
+      5.425925925925924,
+      44.45679012345681
+    ],
+    "before": {
+      "eye_center_x": 215.29951071761417,
+      "cheek_width": 243,
+      "head_center_x": 177.0,
+      "eye_line": 336.06174277726,
+      "foot_baseline": 623,
+      "support_toe_x": 219.99836333878886
+    },
+    "after": {
+      "eye_center_x": 206.79951269035533,
+      "cheek_width": 229,
+      "head_center_x": 171.5,
+      "eye_line": 360.1703147208122,
+      "foot_baseline": 630,
+      "support_toe_x": 211.84029038112521
+    },
+    "inner_face_match": {
+      "ncc_loss": 0.5332670211791992,
+      "scale_to_reference": 1.2010000000000005,
+      "translation_to_reference": [
+        -91.07471237185474,
+        -50.11015307548946
+      ],
+      "roi": [
+        108,
+        325,
+        243,
+        414
+      ]
+    },
+    "occluded_cheek_template_scale": false,
+    "reference": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/idle-v2/reference/costume-master.png",
+    "face_template_only_for_measurement": true,
+    "target": {
+      "reference_face_unit_scale": 1.0,
+      "body_center_x": 171.5,
+      "lowest_paw_y": 629
+    },
+    "regional_patches": false,
+    "warp": false,
+    "original_eye_y_residual_2x": 8.44941524991276,
+    "lowest_paw_residual_2x": 1
+  },
+  {
+    "id": "F12",
+    "source": "raw/F12.png",
+    "source_sha256": "dc5f6d7898282dc011bb3eb600bb48503a8663fa78f8e24002c218e2161a4dbc",
+    "uniform_scale": 0.4091291426007963,
+    "translation": [
+      0.021008403361349792,
+      47.50420168067228
+    ],
+    "before": {
+      "eye_center_x": 211.6762162162162,
+      "cheek_width": 238,
+      "head_center_x": 179.0,
+      "eye_line": 303.5785810810811,
+      "foot_baseline": 607,
+      "support_toe_x": 219.88198757763973
+    },
+    "after": {
+      "eye_center_x": 202.8211900425015,
+      "cheek_width": 228,
+      "head_center_x": 171.5,
+      "eye_line": 338.5399210686096,
+      "foot_baseline": 630,
+      "support_toe_x": 210.7310924369748
+    },
+    "inner_face_match": {
+      "ncc_loss": 0.426837295293808,
+      "scale_to_reference": 1.0410000000000004,
+      "translation_to_reference": [
+        -48.85494108108114,
+        37.474697094594454
+      ],
+      "roi": [
+        108,
+        325,
+        243,
+        414
+      ]
+    },
+    "occluded_cheek_template_scale": false,
+    "reference": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/idle-v2/reference/costume-master.png",
+    "face_template_only_for_measurement": true,
+    "target": {
+      "reference_face_unit_scale": 1.0,
+      "body_center_x": 171.5,
+      "lowest_paw_y": 629
+    },
+    "regional_patches": false,
+    "warp": false,
+    "original_eye_y_residual_2x": -13.180978402289838,
+    "lowest_paw_residual_2x": 1
+  },
+  {
+    "id": "F13",
+    "source": "raw/F13.png",
+    "source_sha256": "13d3302284c58d231a0dcc73cdca050b97b523b86a6786cd7cff801a5738b8ba",
+    "uniform_scale": 0.4161228031580748,
+    "translation": [
+      2.448717948717956,
+      24.897435897435912
+    ],
+    "before": {
+      "eye_center_x": 201.10238095238094,
+      "cheek_width": 234,
+      "head_center_x": 173.5,
+      "eye_line": 337.3763736263736,
+      "foot_baseline": 620,
+      "support_toe_x": 220.11311475409838
+    },
+    "after": {
+      "eye_center_x": 198.41464367431217,
+      "cheek_width": 228,
+      "head_center_x": 171.5,
+      "eye_line": 353.7864975724092,
+      "foot_baseline": 630,
+      "support_toe_x": 216.97163120567376
+    },
+    "inner_face_match": {
+      "ncc_loss": 0.47955524921417236,
+      "scale_to_reference": 1.0200000000000002,
+      "translation_to_reference": [
+        -33.62442857142861,
+        11.376098901098828
+      ],
+      "roi": [
+        108,
+        325,
+        243,
+        414
+      ]
+    },
+    "occluded_cheek_template_scale": false,
+    "reference": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/idle-v2/reference/costume-master.png",
+    "face_template_only_for_measurement": true,
+    "target": {
+      "reference_face_unit_scale": 1.0,
+      "body_center_x": 171.5,
+      "lowest_paw_y": 629
+    },
+    "regional_patches": false,
+    "warp": false,
+    "original_eye_y_residual_2x": 2.0655981015097495,
+    "lowest_paw_residual_2x": 1
+  },
+  {
+    "id": "F14",
+    "source": "raw/F14.png",
+    "source_sha256": "be0266cee2c89ecd0fbda14c88a2f01eba7835412293fb3b7463983e719e7e30",
+    "uniform_scale": 0.42520845388205025,
+    "translation": [
+      3.237991266375559,
+      6.729257641921436
+    ],
+    "before": {
+      "eye_center_x": 194.77700274139505,
+      "cheek_width": 229,
+      "head_center_x": 169.0,
+      "eye_line": 336.426906284902,
+      "foot_baseline": 625,
+      "support_toe_x": 214.14772727272728
+    },
+    "after": {
+      "eye_center_x": 197.2609447004608,
+      "cheek_width": 229,
+      "head_center_x": 172.0,
+      "eye_line": 342.2235023041475,
+      "foot_baseline": 630,
+      "support_toe_x": 216.45622895622895
+    },
+    "inner_face_match": {
+      "ncc_loss": 0.4011596143245697,
+      "scale_to_reference": 1.0330000000000004,
+      "translation_to_reference": [
+        -29.704643831861173,
+        5.971005807696116
+      ],
+      "roi": [
+        108,
+        325,
+        243,
+        414
+      ]
+    },
+    "occluded_cheek_template_scale": false,
+    "reference": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/idle-v2/reference/costume-master.png",
+    "face_template_only_for_measurement": true,
+    "target": {
+      "reference_face_unit_scale": 1.0,
+      "body_center_x": 171.5,
+      "lowest_paw_y": 629
+    },
+    "regional_patches": false,
+    "warp": false,
+    "original_eye_y_residual_2x": -9.497397166751966,
+    "lowest_paw_residual_2x": 1
+  },
+  {
+    "id": "F15",
+    "source": "raw/F15.png",
+    "source_sha256": "cc175fe038f201bd92acba0574da9b78224b0790b2032575949894b674790f0d",
+    "uniform_scale": 0.4161228031580748,
+    "translation": [
+      8.294871794871796,
+      29.76923076923083
+    ],
+    "before": {
+      "eye_center_x": 169.95439463338982,
+      "cheek_width": 234,
+      "head_center_x": 167.5,
+      "eye_line": 339.8363147834241,
+      "foot_baseline": 615,
+      "support_toe_x": 215.02662229617306
+    },
+    "after": {
+      "eye_center_x": 174.0378917043918,
+      "cheek_width": 228,
+      "head_center_x": 171.5,
+      "eye_line": 361.07590099359163,
+      "foot_baseline": 630,
+      "support_toe_x": 217.65461121157324
+    },
+    "inner_face_match": {
+      "ncc_loss": 0.07927152514457703,
+      "scale_to_reference": 0.9970000000000002,
+      "translation_to_reference": [
+        4.055468550510317,
+        12.68319416092613
+      ],
+      "roi": [
+        108,
+        325,
+        243,
+        414
+      ]
+    },
+    "occluded_cheek_template_scale": false,
+    "reference": "/Users/luxia/Documents/ChatGPT/retto/tools/amu-ran-skin/motion/idle-v2/reference/costume-master.png",
+    "face_template_only_for_measurement": true,
+    "target": {
+      "reference_face_unit_scale": 1.0,
+      "body_center_x": 171.5,
+      "lowest_paw_y": 629
+    },
+    "regional_patches": false,
+    "warp": false,
+    "original_eye_y_residual_2x": 9.355001522692191,
+    "lowest_paw_residual_2x": 1
+  }
+]

@@ -1,0 +1,9 @@
+{
+  "id": "A16",
+  "stage": "independent-static-anchor",
+  "source": "anchors/A16-character-source.png",
+  "master": "anchors/idle-school-source.png",
+  "generated_file": "/Users/luxia/.codex/generated_images/01a18151-f01e-7831-98b4-dca0f52b644c/exec-bf10b86c-390f-4798-9417-0a51682cd0c0.png",
+  "prompt": "One independent full-body static Retto skin anchor A16. Edit this APPROVED identity/costume master into the following anatomical pose: School outfit, front seated recovery from surprise: head dips slightly in gentle reassuring bow, eyes softly open, one forepaw lightly reaches toward space beside body, other forepaw grounded, both rear feet support body. Shoulder sleeve follows actual lifted foreleg, no grounded duplicate. No companion or effects. Preserve the exact master head width-to-height proportions, ROUND upright full-volume skull, forehead height, blue eyes/eye spacing, muzzle depth, rounded chin and brown-white markings; never squash, widen or flatten head to express a crouch/bow/jump. Head movement is gentle, with face height preserved. Same head/body size, portrait7:10 framing with space above for jump; do not enlarge cat to fill canvas. All FOUR anatomical cat limbs exist exactly once; a lifted forepaw REPLACES its previous grounded counterpart. One fluffy brown tail. Exact approved clothing palette/materials/accessory positions from master; no new decoration. Keep black school blazer, white collar, red tie, red plaid skirt, pink X clip on anatomical LEFT ear and armband on anatomical LEFT upper foreleg. Short soft fur and matte felt. No companion, effect, text, object or shadow-floor. True transparent background. Exactly one independent character sprite, not a grid.",
+  "review": "pending-registration-and-anatomy"
+}

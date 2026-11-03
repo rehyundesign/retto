@@ -1,0 +1,20 @@
+[
+  {
+    "id": "F04",
+    "prompt": "One independently drawn full-body transparent Retto pose for Amu Amulet Heart cheer jump. IMAGE1 approved compact crouch costume/identity; IMAGE2 approved airborne cat pose. Launch phase: extend actual hindlegs to push from ground, front forepaws raise just above floor and elbows bend. Body rises slightly from crouch, not a standing human. Lowest real paw target at y600 on448x640, natural short legs, head width unchanged. Preserve original Retto compact body, short feline limbs, deep round muzzle and original-sized blue-eyed head, cream/brown short fur. Four real attached limbs exactly once, ONE fluffy brown tail. Exact costume continuity: broad one-piece white/pale-pink scalloped cape covering shoulders/torso, pink/red piping, layered cheer skirt at hips, white/pink foreleg cuffs, white visor red stripe and ONE red heart/plume on viewer-right, Ran-style red scarf centered around neck, ONE pink/black plaid heart Guardian Egg attached at scarf knot as reference. No foot pompoms, human hands, extra necklace, long legs or duplicate sleeve. Cape/skirts articulate around true shoulders/hips and delay behind jump; accessories stay attached. Full plume/tail/paws inside margins; no pet/effects/text.",
+    "generated_path": "/Users/luxia/.codex/generated_images/01a18151-f01e-7831-98b4-dca0f52b644c/exec-0ab65901-ea4a-4edd-a094-a309443e071a.png"
+  },
+  {
+    "id": "F12",
+    "prompt": "One independently drawn full-body transparent Retto pose for Amu Amulet Heart cheer jump. IMAGE1 approved compact crouch costume/identity; IMAGE2 approved airborne cat pose. Landing phase: all paws have come back toward ground, knees/elbows visibly compress to cushion a tiny athletic cheer hop. Forepaws reaching down, hind paws under hips; compact cat body with head slightly dipped, not flattened. Lowest paw near ground y629 on448x640. Preserve original Retto compact body, short feline limbs, deep round muzzle and original-sized blue-eyed head, cream/brown short fur. Four real attached limbs exactly once, ONE fluffy brown tail. Exact costume continuity: broad one-piece white/pale-pink scalloped cape covering shoulders/torso, pink/red piping, layered cheer skirt at hips, white/pink foreleg cuffs, white visor red stripe and ONE red heart/plume on viewer-right, Ran-style red scarf centered around neck, ONE pink/black plaid heart Guardian Egg attached at scarf knot as reference. No foot pompoms, human hands, extra necklace, long legs or duplicate sleeve. Cape/skirts articulate around true shoulders/hips and delay behind jump; accessories stay attached. Full plume/tail/paws inside margins; no pet/effects/text.",
+    "generated_path": "/Users/luxia/.codex/generated_images/01a18151-f01e-7831-98b4-dca0f52b644c/exec-c30cebfa-cbf3-4e93-90f5-a419f28336a6.png"
+  },
+  {
+    "id": "F04",
+    "generated_path": "/Users/luxia/.codex/generated_images/01a18151-f01e-7831-98b4-dca0f52b644c/exec-e5c35a99-b1f7-4327-890b-58f28989be91.png",
+    "recovered_after_interrupted_tool_turn": true,
+    "pose_assignment": "visual inspection matched completed output to requested phase",
+    "requested_phase": "first compact push-off; bare furry hindlegs; foreleg cuffs only",
+    "generator": "built-in image_gen"
+  }
+]

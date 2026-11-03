@@ -1,0 +1,226 @@
+[
+  {
+    "id": "F00",
+    "source": "raw/F00-approved.png",
+    "source_sha256": "b1946dddfdf1bc2bbe93dd6ae7b0bef18d0d30b98c295cc44f7b68d63e9f2a10",
+    "uniform_scale": 1.0,
+    "translation": [
+      0,
+      0
+    ],
+    "identity_template_mse": 0,
+    "final_sha256": "326a66f8cdf5d93ba0624176b9c142f556f59a95e83cbce8889f6d289fcb1086",
+    "planted_paws_preserved": true,
+    "face_body_warp": false
+  },
+  {
+    "id": "F01",
+    "source": "raw/F01.png",
+    "source_sha256": "1cd8f61aa3803c9d1a280aae6d9fdb2dfbf08926f79a59fa9b16e1b1c19470d7",
+    "uniform_scale": 0.44244804575786484,
+    "translation": [
+      -7,
+      -10
+    ],
+    "identity_template_mse": 174.66806030273438,
+    "final_sha256": "f6a4802830f5b0f943732cefe01c922bda2ce04967229369beef43005c22fdba",
+    "planted_paws_preserved": true,
+    "face_body_warp": false
+  },
+  {
+    "id": "F02",
+    "source": "raw/F02.png",
+    "source_sha256": "a3de3678804a17abc345c31922359d84a92e8f5475eecc7915ec842deea0a37a",
+    "uniform_scale": 0.42942230695900874,
+    "translation": [
+      -2,
+      -1
+    ],
+    "identity_template_mse": 126.47898864746094,
+    "final_sha256": "85c48b98a30b0b30f0a0f16c9f2cb36f747214ab29916fa3552a9caea45647ea",
+    "planted_paws_preserved": true,
+    "face_body_warp": false
+  },
+  {
+    "id": "F03",
+    "source": "raw/F03.png",
+    "source_sha256": "79e8372bc55250831721702d5334831d43afebe8a469c70d53a9155db1d8d51d",
+    "uniform_scale": 0.4300629170638705,
+    "translation": [
+      -2,
+      -2
+    ],
+    "identity_template_mse": 103.83053588867188,
+    "final_sha256": "c43eae80388e0d8a9157f1d943e620ed93503377668b697cfc7eca928b139e88",
+    "planted_paws_preserved": true,
+    "face_body_warp": false
+  },
+  {
+    "id": "F04",
+    "source": "raw/F04.png",
+    "source_sha256": "b52e770f50069ddf55198956c5d4822a16b5226e79dc49c75777c13b408e16c2",
+    "uniform_scale": 0.43412011439466175,
+    "translation": [
+      -16,
+      -2
+    ],
+    "identity_template_mse": 568.97900390625,
+    "final_sha256": "0665e63cc67d36fce12ee771a5a2d41fed50cb1410897e00f4bbfc52e681ed67",
+    "planted_paws_preserved": true,
+    "face_body_warp": false
+  },
+  {
+    "id": "F05",
+    "source": "raw/F05.png",
+    "source_sha256": "cec083002d1204022d2a3f21ef6e6af93598e8ad30c297f4d14109621efb5576",
+    "uniform_scale": 0.42130791229742626,
+    "translation": [
+      -1,
+      7
+    ],
+    "identity_template_mse": 139.46498107910156,
+    "final_sha256": "2283b7b3002bd00173f7dada8e01d02b3a910d564a10ee63ce654d6aa6beddfa",
+    "planted_paws_preserved": true,
+    "face_body_warp": false
+  },
+  {
+    "id": "F06",
+    "source": "raw/F06.png",
+    "source_sha256": "5660fbe0b2d34b5f39519d41f9950ac4d87d932ce0408f90d129a72475f85c87",
+    "uniform_scale": 0.4275004766444234,
+    "translation": [
+      -1,
+      0
+    ],
+    "identity_template_mse": 123.29692077636719,
+    "final_sha256": "b6fc91ae3dbae64a6650173ebb7b4092df4dc3130a444eb5386cb847dc9c00bd",
+    "planted_paws_preserved": true,
+    "face_body_warp": false
+  },
+  {
+    "id": "F07",
+    "source": "raw/F07.png",
+    "source_sha256": "6fe3a83e4c3ac762caee133811e5b39224ce71b27ddfe739a32fd53c9a443bed",
+    "uniform_scale": 0.4300629170638705,
+    "translation": [
+      -1,
+      -3
+    ],
+    "identity_template_mse": 106.05322265625,
+    "final_sha256": "1c8626ddb4d7743d4fbe30aa600210a683b785e56b9d36bddec774a549209f86",
+    "planted_paws_preserved": true,
+    "face_body_warp": false
+  },
+  {
+    "id": "F08",
+    "source": "raw/F08.png",
+    "source_sha256": "3eb196d186984776d918d879283979fa5b2a69263627f37fe1a1be8a85044939",
+    "uniform_scale": 0.42942230695900874,
+    "translation": [
+      -1,
+      -2
+    ],
+    "identity_template_mse": 103.41876983642578,
+    "final_sha256": "823942456b4408916590a029589f57e081f1be3f78ac0b2933522f1ebcd34ca3",
+    "planted_paws_preserved": true,
+    "face_body_warp": false
+  },
+  {
+    "id": "F09",
+    "source": "raw/F09.png",
+    "source_sha256": "e22719e4d8d13c5250f58f7289b9bfabf1cd81c6c92cebe5f229013d2a182787",
+    "uniform_scale": 0.42878169685414697,
+    "translation": [
+      0,
+      -2
+    ],
+    "identity_template_mse": 83.8963623046875,
+    "final_sha256": "034a87b66a97a7bc004e932eaa96b52a36b7908f1e5af349ff51e249db40b903",
+    "planted_paws_preserved": true,
+    "face_body_warp": false
+  },
+  {
+    "id": "F10",
+    "source": "raw/F10.png",
+    "source_sha256": "dc5691b426e0ab638e58d0bbb8bf4475c48976c3efe2bfcfd698b64102020803",
+    "uniform_scale": 0.4300629170638705,
+    "translation": [
+      0,
+      -2
+    ],
+    "identity_template_mse": 59.27450942993164,
+    "final_sha256": "2378c4eb10a78294998bb952acc18d83a90bea038fda70fa77164d7999e391d9",
+    "planted_paws_preserved": true,
+    "face_body_warp": false
+  },
+  {
+    "id": "F11",
+    "source": "raw/F11.png",
+    "source_sha256": "df871c7373ea91567779086cc3135ee4ecd46f6a5ff9c62282cbb07499fc7ac3",
+    "uniform_scale": 0.42942230695900874,
+    "translation": [
+      -1,
+      -2
+    ],
+    "identity_template_mse": 78.76890563964844,
+    "final_sha256": "2ced9a29690e09e877bfbecaedf568fdb0d64cc2bf43ea8ba74ce1f15a712448",
+    "planted_paws_preserved": true,
+    "face_body_warp": false
+  },
+  {
+    "id": "F12",
+    "source": "raw/F12.png",
+    "source_sha256": "d87b0c517d6bd41a9da1c08a14cfa1c67bedfe949361f468dc0bd7cc0e8230f3",
+    "uniform_scale": 0.42942230695900874,
+    "translation": [
+      -1,
+      -2
+    ],
+    "identity_template_mse": 118.90055847167969,
+    "final_sha256": "9af11fa3330f6f369bc17cadb3a06bbc71e17bf2e9b7be6a8d0eda622837a992",
+    "planted_paws_preserved": true,
+    "face_body_warp": false
+  },
+  {
+    "id": "F13",
+    "source": "raw/F13.png",
+    "source_sha256": "9dd8b6811acae4ef94428890033b6e994bb8b11823ce3cf4621aaaff1dd67c37",
+    "uniform_scale": 0.4300629170638705,
+    "translation": [
+      -1,
+      -3
+    ],
+    "identity_template_mse": 88.6302490234375,
+    "final_sha256": "8765955d8bc4974c61f7af1a48fa3ced92fb874cc0173d61d86b17d05ec6a42f",
+    "planted_paws_preserved": true,
+    "face_body_warp": false
+  },
+  {
+    "id": "F14",
+    "source": "raw/F14.png",
+    "source_sha256": "843937cb32dc830d8d19f5e9f1c8b0fd7d4eee40eadbcee96e05146d8445aedf",
+    "uniform_scale": 0.4275004766444234,
+    "translation": [
+      1,
+      0
+    ],
+    "identity_template_mse": 89.9117660522461,
+    "final_sha256": "8c9ae6037c11d30947a1f555213ed804e336b0cfb9ecb9c3e99d04383fa14251",
+    "planted_paws_preserved": true,
+    "face_body_warp": false
+  },
+  {
+    "id": "F15",
+    "source": "raw/F15.png",
+    "source_sha256": "d08363c86995c0d9a1abd0768f8fe4e2eadbd1ad842729e9cccdd2cfd1583655",
+    "uniform_scale": 0.4307035271687323,
+    "translation": [
+      0,
+      -3
+    ],
+    "identity_template_mse": 85.84873962402344,
+    "final_sha256": "0b4e1cdb15fc55debe4a0bdc7d173a02e3e50abf1abf0bb4b74e857fdba58781",
+    "planted_paws_preserved": true,
+    "face_body_warp": false
+  }
+]

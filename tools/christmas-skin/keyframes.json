@@ -1,0 +1,365 @@
+{
+  "version": 2,
+  "status": "keyframe-motion-candidate",
+  "mode": "registered-character",
+  "groups": [
+    {
+      "id": "idle",
+      "label": "기본 · 완료",
+      "source": "../../assets/retto-christmas-concept.png",
+      "frames": 6,
+      "interval": 0.23,
+      "face_box": [
+        0.16,
+        0.173,
+        0.71,
+        0.53
+      ],
+      "body_center_x": 0.415,
+      "foot_baseline_y": 0.905,
+      "center": 174,
+      "baseline": 628,
+      "target_face_width": 228,
+      "grounded": true,
+      "limbs": {
+        "front_left": "grounded",
+        "front_right": "grounded",
+        "rear_left": "behind forelegs",
+        "rear_right": "behind forelegs"
+      },
+      "pose_group": "front-seated",
+      "target_eye_gap": 73.73886130941075,
+      "pose_sequence": [
+        0,
+        0,
+        0,
+        1,
+        2,
+        1
+      ],
+      "keyframes": [
+        "../../assets/retto-christmas-concept.png",
+        "../../assets/retto-christmas-concept.png",
+        "../../assets/retto-christmas-concept.png",
+        "gen-keypose-sources/idle-1.png",
+        "gen-keypose-sources/idle-2.png",
+        "gen-keypose-sources/idle-1.png"
+      ]
+    },
+    {
+      "id": "moveRight",
+      "label": "오른쪽 이동",
+      "source": "gen-anchors/moveRight-repair.png",
+      "frames": 8,
+      "interval": 0.085,
+      "face_box": [
+        0.545,
+        0.133,
+        0.916,
+        0.639
+      ],
+      "body_center_x": 0.43,
+      "foot_baseline_y": 0.952,
+      "center": 166,
+      "baseline": 628,
+      "target_face_width": 180,
+      "grounded": false,
+      "limbs": {
+        "front_left": "forward, profile stride",
+        "front_right": "under chest, profile stride",
+        "rear_left": "backward stride",
+        "rear_right": "under hips, profile stride"
+      },
+      "pose_group": "side-running",
+      "pose_sequence": [
+        0,
+        4,
+        1,
+        5,
+        2,
+        6,
+        3,
+        7
+      ],
+      "keyframes": [
+        "gen-anchors/moveRight-repair.png",
+        "gen-keypose-sources/moveRight-4.png",
+        "gen-keypose-sources/moveRight-1.png",
+        "gen-keypose-sources/moveRight-5.png",
+        "gen-keypose-sources/moveRight-2.png",
+        "gen-keypose-sources/moveRight-6-repair.png",
+        "gen-keypose-sources/moveRight-3-repair.png",
+        "gen-keypose-sources/moveRight-7-repair.png"
+      ]
+    },
+    {
+      "id": "moveLeft",
+      "label": "왼쪽 이동",
+      "mirror": "moveRight",
+      "frames": 8,
+      "interval": 0.085
+    },
+    {
+      "id": "thinking",
+      "label": "생각 중",
+      "source": "gen-anchors/thinking.png",
+      "frames": 8,
+      "interval": 0.25,
+      "face_box": [
+        0.183,
+        0.12,
+        0.719,
+        0.585
+      ],
+      "body_center_x": 0.44,
+      "foot_baseline_y": 0.89,
+      "center": 174,
+      "baseline": 596,
+      "target_face_width": 228,
+      "grounded": true,
+      "limbs": {
+        "front_left": "on gift top",
+        "front_right": "holding ribbon",
+        "rear_left": "grounded behind gift",
+        "rear_right": "grounded behind gift"
+      },
+      "pose_group": "front-leaning",
+      "target_eye_gap": 73.73886130941075,
+      "pose_sequence": [
+        0,
+        1,
+        2,
+        2,
+        1,
+        0,
+        0,
+        0
+      ],
+      "keyframes": [
+        "gen-anchors/thinking.png",
+        "gen-keypose-sources/thinking-1.png",
+        "gen-keypose-sources/thinking-2-repair.png",
+        "gen-keypose-sources/thinking-2-repair.png",
+        "gen-keypose-sources/thinking-1.png",
+        "gen-anchors/thinking.png",
+        "gen-anchors/thinking.png",
+        "gen-anchors/thinking.png"
+      ]
+    },
+    {
+      "id": "review",
+      "label": "도구 사용",
+      "source": "gen-anchors/review-repair.png",
+      "frames": 6,
+      "interval": 0.155,
+      "face_box": [
+        0.22,
+        0.19,
+        0.8,
+        0.55
+      ],
+      "body_center_x": 0.51,
+      "foot_baseline_y": 0.888,
+      "center": 208,
+      "baseline": 628,
+      "target_face_width": 228,
+      "grounded": true,
+      "limbs": {
+        "front_left": "holding hanger",
+        "front_right": "steadying ornament",
+        "rear_left": "grounded under coat",
+        "rear_right": "grounded under coat"
+      },
+      "pose_group": "three-quarter-crouched",
+      "pose_sequence": [
+        0,
+        1,
+        2,
+        2,
+        1,
+        0
+      ],
+      "keyframes": [
+        "gen-anchors/review-repair.png",
+        "gen-keypose-sources/review-1.png",
+        "gen-keypose-sources/review-2.png",
+        "gen-keypose-sources/review-2.png",
+        "gen-keypose-sources/review-1.png",
+        "gen-anchors/review-repair.png"
+      ]
+    },
+    {
+      "id": "waiting",
+      "label": "입력 대기",
+      "source": "gen-anchors/waiting.png",
+      "frames": 6,
+      "interval": 0.31,
+      "face_box": [
+        0.16,
+        0.17,
+        0.71,
+        0.53
+      ],
+      "body_center_x": 0.415,
+      "foot_baseline_y": 0.917,
+      "center": 174,
+      "baseline": 628,
+      "target_face_width": 228,
+      "grounded": true,
+      "limbs": {
+        "front_left": "grounded",
+        "front_right": "raised holding bell",
+        "rear_left": "grounded behind foreleg",
+        "rear_right": "grounded beneath body"
+      },
+      "pose_group": "front-head-tilt",
+      "target_eye_gap": 73.73886130941075,
+      "pose_sequence": [
+        0,
+        1,
+        0,
+        2,
+        0,
+        0
+      ],
+      "keyframes": [
+        "gen-anchors/waiting.png",
+        "gen-keypose-sources/waiting-1.png",
+        "gen-anchors/waiting.png",
+        "gen-keypose-sources/waiting-2-repair.png",
+        "gen-anchors/waiting.png",
+        "gen-anchors/waiting.png"
+      ]
+    },
+    {
+      "id": "failed",
+      "label": "실패",
+      "source": "gen-anchors/failed-repair.png",
+      "frames": 8,
+      "interval": 0.18,
+      "face_box": [
+        0.16,
+        0.23,
+        0.75,
+        0.55
+      ],
+      "body_center_x": 0.415,
+      "foot_baseline_y": 0.9075,
+      "center": 174,
+      "baseline": 626,
+      "target_face_width": 228,
+      "grounded": true,
+      "limbs": {
+        "front_left": "grounded cable across wrist",
+        "front_right": "grounded cable across wrist",
+        "rear_left": "behind forelegs and coat",
+        "rear_right": "behind forelegs and coat"
+      },
+      "pose_group": "front-ears-down",
+      "target_eye_gap": 73.73886130941075,
+      "pose_sequence": [
+        0,
+        1,
+        1,
+        0,
+        2,
+        2,
+        0,
+        0
+      ],
+      "keyframes": [
+        "gen-anchors/failed-repair.png",
+        "gen-keypose-sources/failed-1.png",
+        "gen-keypose-sources/failed-1.png",
+        "gen-anchors/failed-repair.png",
+        "gen-keypose-sources/failed-2.png",
+        "gen-keypose-sources/failed-2.png",
+        "gen-anchors/failed-repair.png",
+        "gen-anchors/failed-repair.png"
+      ]
+    },
+    {
+      "id": "jumping",
+      "label": "시작",
+      "source": "gen-anchors/jumping.png",
+      "frames": 5,
+      "interval": 0.15,
+      "face_box": [
+        0.17,
+        0.085,
+        0.731,
+        0.475
+      ],
+      "body_center_x": 0.475,
+      "foot_baseline_y": 0.91,
+      "center": 201,
+      "baseline": 628,
+      "target_face_width": 228,
+      "grounded": false,
+      "limbs": {
+        "front_left": "raised, grounded counterpart absent",
+        "front_right": "raised, grounded counterpart absent",
+        "rear_left": "extended under torso",
+        "rear_right": "extended under torso"
+      },
+      "pose_group": "front-standing-airborne",
+      "target_eye_gap": 73.73886130941075,
+      "pose_sequence": [
+        1,
+        0,
+        0,
+        0,
+        2
+      ],
+      "keyframes": [
+        "gen-keypose-sources/jumping-1.png",
+        "gen-anchors/jumping.png",
+        "gen-anchors/jumping.png",
+        "gen-anchors/jumping.png",
+        "gen-keypose-sources/jumping-2.png"
+      ]
+    },
+    {
+      "id": "sleeping",
+      "label": "잠자기",
+      "source": "gen-anchors/sleeping.png",
+      "frames": 6,
+      "interval": 0.46,
+      "face_box": [
+        0.065,
+        0.209,
+        0.531,
+        0.752
+      ],
+      "body_center_x": 0.7,
+      "foot_baseline_y": 0.85,
+      "center": 306,
+      "baseline": 626,
+      "target_face_width": 216,
+      "grounded": true,
+      "limbs": {
+        "front_left": "folded under muzzle",
+        "front_right": "folded under muzzle",
+        "rear_left": "occluded by reclining torso",
+        "rear_right": "partially visible tucked under coat"
+      },
+      "pose_group": "reclining-head-roll",
+      "pose_sequence": [
+        0,
+        1,
+        1,
+        0,
+        2,
+        2
+      ],
+      "keyframes": [
+        "gen-anchors/sleeping.png",
+        "gen-keypose-sources/sleeping-1.png",
+        "gen-keypose-sources/sleeping-1.png",
+        "gen-anchors/sleeping.png",
+        "gen-keypose-sources/sleeping-2.png",
+        "gen-keypose-sources/sleeping-2.png"
+      ]
+    }
+  ]
+}

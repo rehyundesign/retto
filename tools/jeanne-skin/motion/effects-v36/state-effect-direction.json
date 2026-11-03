@@ -1,0 +1,65 @@
+{
+  "concept": "Jeanne scarlet silk,ivory feathers,wings,warm gold,pink Rosario light; retain current theme",
+  "states": [
+    {
+      "id": "idle",
+      "cycle": 3.2,
+      "characterFrames": 16,
+      "direction": "Sparse drifting white feathers,soft gold glints,pink Rosario breathing glow"
+    },
+    {
+      "id": "running",
+      "cycle": 2.4,
+      "characterFrames": 16,
+      "direction": "Scarlet silk flourish follows raised forepaw,white feather spiral,small gold seals,pendant response"
+    },
+    {
+      "id": "review",
+      "cycle": 3.2,
+      "characterFrames": 16,
+      "direction": "Compact feather fan and warm gold inspection glints around Rosario,clear face"
+    },
+    {
+      "id": "waiting",
+      "cycle": 3.2,
+      "characterFrames": 16,
+      "direction": "Gentle feather/wing-shaped light response between Finn and Rosario,small silk flutter"
+    },
+    {
+      "id": "failed",
+      "cycle": 3.2,
+      "characterFrames": 16,
+      "direction": "Ribbon loosens after recoil,short sparkle burst then reassuring falling feathers"
+    },
+    {
+      "id": "waving",
+      "cycle": 2.4,
+      "characterFrames": 16,
+      "direction": "Celebratory silk sweep,white wing fan,rose petals and pendant flash timed to greeting"
+    },
+    {
+      "id": "jumping",
+      "cycle": 2.4,
+      "characterFrames": 16,
+      "direction": "Small trailing feathers and brief landing glints,half the celebration intensity"
+    },
+    {
+      "id": "sleeping",
+      "cycle": 6.4,
+      "characterFrames": 16,
+      "direction": "Slow floating down feathers and subdued pearl/gold points,soft tiny glow"
+    },
+    {
+      "id": "drag-right",
+      "cycle": 1.6,
+      "characterFrames": 8,
+      "direction": "Half-strength feather/silk trail behind movement to left; paw contact stays visible"
+    },
+    {
+      "id": "drag-left",
+      "cycle": 1.6,
+      "characterFrames": 8,
+      "direction": "Half-strength feather/silk trail behind movement to right; paw contact stays visible"
+    }
+  ]
+}

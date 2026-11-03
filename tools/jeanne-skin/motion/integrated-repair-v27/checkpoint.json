@@ -1,0 +1,24 @@
+{
+  "phase": "repaired32 integrated frames reviewed and exported; HTML delivered",
+  "states": [
+    "waving",
+    "waiting"
+  ],
+  "userAuthorization": "Complete both repairs without asking; retry failed art and deliver final HTML",
+  "method": "Every independently generated frame contains Retto, costume, Finn and effects together",
+  "prohibited": [
+    "separate character composition",
+    "mesh deformation",
+    "whole-cell registration transforms"
+  ],
+  "waitingAction": "One real foreleg touches Rosario; other foreleg and two hindlegs support seated torso",
+  "currentPreview": "state-integrated-v27.html",
+  "originalAbsoluteRegistration": "not certified",
+  "completedSourceCounts": {
+    "waving": 16,
+    "waiting": 16
+  },
+  "remainingReview": [],
+  "permissionRequired": false,
+  "nativePlayback": "not checked"
+}

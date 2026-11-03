@@ -1,0 +1,13 @@
+{
+  "changed": [
+    "running effects"
+  ],
+  "unchangedOtherStates": 9,
+  "characterSourcesAndTiming": "unchanged",
+  "sharedRosarioGlow": "unchanged",
+  "gifDurationsMs": [
+    4800,
+    4800
+  ],
+  "nativeInstalled": false
+}

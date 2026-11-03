@@ -1,0 +1,638 @@
+[
+  {
+    "id": "idle-anchor",
+    "reference": {
+      "status": "diagnostic only; manual eye-region confirmation required",
+      "components": [
+        {
+          "pixels": 384,
+          "center": [
+            136.83333333333334,
+            350.875
+          ]
+        },
+        {
+          "pixels": 344,
+          "center": [
+            208.17441860465115,
+            352.0348837209302
+          ]
+        }
+      ],
+      "distance": 71.3505135085622
+    },
+    "candidate": {
+      "status": "diagnostic only; manual eye-region confirmation required",
+      "components": [
+        {
+          "pixels": 109,
+          "center": [
+            154.348623853211,
+            341.5045871559633
+          ]
+        },
+        {
+          "pixels": 182,
+          "center": [
+            226.7912087912088,
+            351.8626373626374
+          ]
+        }
+      ],
+      "distance": 73.17935034272308
+    },
+    "registration_approved": false,
+    "eye_spacing_ratio": 1.0256317263076378
+  },
+  {
+    "id": "drag-right-anchor",
+    "reference": {
+      "status": "diagnostic only; manual eye-region confirmation required",
+      "components": [
+        {
+          "pixels": 260,
+          "center": [
+            348.0076923076923,
+            433.76153846153846
+          ]
+        },
+        {
+          "pixels": 44,
+          "center": [
+            383.95454545454544,
+            431.22727272727275
+          ]
+        }
+      ],
+      "distance": 36.03607572937567
+    },
+    "candidate": {
+      "status": "diagnostic only; manual eye-region confirmation required",
+      "components": [
+        {
+          "pixels": 192,
+          "center": [
+            353.484375,
+            386.9739583333333
+          ]
+        },
+        {
+          "pixels": 57,
+          "center": [
+            394.6842105263158,
+            385.4035087719298
+          ]
+        }
+      ],
+      "distance": 41.22975575019071
+    },
+    "registration_approved": false,
+    "eye_spacing_ratio": 1.1441244618259387
+  },
+  {
+    "id": "drag-left-anchor",
+    "reference": {
+      "status": "diagnostic only; manual eye-region confirmation required",
+      "components": [
+        {
+          "pixels": 44,
+          "center": [
+            63.04545454545455,
+            431.22727272727275
+          ]
+        },
+        {
+          "pixels": 260,
+          "center": [
+            98.99230769230769,
+            433.76153846153846
+          ]
+        }
+      ],
+      "distance": 36.03607572937568
+    },
+    "candidate": {
+      "status": "diagnostic only; manual eye-region confirmation required",
+      "components": [
+        {
+          "pixels": 190,
+          "center": [
+            87.88421052631578,
+            344.9263157894737
+          ]
+        },
+        {
+          "pixels": 27,
+          "center": [
+            150.25925925925927,
+            443.2962962962963
+          ]
+        }
+      ],
+      "distance": 116.47875243729965
+    },
+    "registration_approved": false,
+    "eye_spacing_ratio": 3.232281819808397
+  },
+  {
+    "id": "waving-anchor",
+    "reference": {
+      "status": "diagnostic only; manual eye-region confirmation required",
+      "components": [
+        {
+          "pixels": 360,
+          "center": [
+            137.94444444444446,
+            350.94444444444446
+          ]
+        },
+        {
+          "pixels": 352,
+          "center": [
+            206.8409090909091,
+            350.97727272727275
+          ]
+        }
+      ],
+      "distance": 68.8964724675923
+    },
+    "candidate": {
+      "status": "diagnostic only; manual eye-region confirmation required",
+      "components": [
+        {
+          "pixels": 331,
+          "center": [
+            146.5407854984894,
+            283.87311178247734
+          ]
+        },
+        {
+          "pixels": 353,
+          "center": [
+            223.97167138810198,
+            299.77053824362605
+          ]
+        }
+      ],
+      "distance": 79.04600089655285
+    },
+    "registration_approved": false,
+    "eye_spacing_ratio": 1.1473156471651682
+  },
+  {
+    "id": "jumping-anchor",
+    "reference": {
+      "status": "diagnostic only; manual eye-region confirmation required",
+      "components": [
+        {
+          "pixels": 456,
+          "center": [
+            295.219298245614,
+            445.55263157894734
+          ]
+        },
+        {
+          "pixels": 352,
+          "center": [
+            356.0,
+            445.90909090909093
+          ]
+        }
+      ],
+      "distance": 60.78174700524545
+    },
+    "candidate": {
+      "status": "diagnostic only; manual eye-region confirmation required",
+      "components": [
+        {
+          "pixels": 414,
+          "center": [
+            276.47584541062804,
+            422.7463768115942
+          ]
+        },
+        {
+          "pixels": 369,
+          "center": [
+            346.67750677506774,
+            423.04336043360433
+          ]
+        }
+      ],
+      "distance": 70.2022895467036
+    },
+    "registration_approved": false,
+    "eye_spacing_ratio": 1.1549896639306065
+  },
+  {
+    "id": "failed-anchor",
+    "reference": {
+      "status": "not measurable",
+      "components": []
+    },
+    "candidate": {
+      "status": "diagnostic only; manual eye-region confirmation required",
+      "components": [
+        {
+          "pixels": 337,
+          "center": [
+            161.973293768546,
+            296.69436201780417
+          ]
+        },
+        {
+          "pixels": 329,
+          "center": [
+            230.2644376899696,
+            307.0425531914894
+          ]
+        }
+      ],
+      "distance": 69.07072750929825
+    },
+    "registration_approved": false
+  },
+  {
+    "id": "waiting-anchor",
+    "reference": {
+      "status": "diagnostic only; manual eye-region confirmation required",
+      "components": [
+        {
+          "pixels": 316,
+          "center": [
+            153.31012658227849,
+            345.86708860759495
+          ]
+        },
+        {
+          "pixels": 336,
+          "center": [
+            220.92857142857142,
+            351.3333333333333
+          ]
+        }
+      ],
+      "distance": 67.83902943610575
+    },
+    "candidate": {
+      "status": "diagnostic only; manual eye-region confirmation required",
+      "components": [
+        {
+          "pixels": 434,
+          "center": [
+            186.88709677419354,
+            294.2972350230415
+          ]
+        },
+        {
+          "pixels": 388,
+          "center": [
+            255.69329896907217,
+            315.2938144329897
+          ]
+        }
+      ],
+      "distance": 71.9385140755686
+    },
+    "registration_approved": false,
+    "eye_spacing_ratio": 1.0604295885943351
+  },
+  {
+    "id": "running-anchor",
+    "reference": {
+      "status": "diagnostic only; manual eye-region confirmation required",
+      "components": [
+        {
+          "pixels": 108,
+          "center": [
+            220.87037037037038,
+            383.24074074074076
+          ]
+        },
+        {
+          "pixels": 16,
+          "center": [
+            284.5,
+            380.0
+          ]
+        }
+      ],
+      "distance": 63.7121037743421
+    },
+    "candidate": {
+      "status": "diagnostic only; manual eye-region confirmation required",
+      "components": [
+        {
+          "pixels": 255,
+          "center": [
+            177.56470588235294,
+            301.1294117647059
+          ]
+        },
+        {
+          "pixels": 213,
+          "center": [
+            250.57276995305165,
+            310.59154929577466
+          ]
+        }
+      ],
+      "distance": 73.61867606802032
+    },
+    "registration_approved": false,
+    "eye_spacing_ratio": 1.15548964336142
+  },
+  {
+    "id": "review-anchor",
+    "reference": {
+      "status": "diagnostic only; manual eye-region confirmation required",
+      "components": [
+        {
+          "pixels": 152,
+          "center": [
+            204.39473684210526,
+            419.2894736842105
+          ]
+        },
+        {
+          "pixels": 36,
+          "center": [
+            278.94444444444446,
+            407.8333333333333
+          ]
+        }
+      ],
+      "distance": 75.4248106085343
+    },
+    "candidate": {
+      "status": "diagnostic only; manual eye-region confirmation required",
+      "components": [
+        {
+          "pixels": 73,
+          "center": [
+            171.95890410958904,
+            335.6849315068493
+          ]
+        },
+        {
+          "pixels": 52,
+          "center": [
+            231.94230769230768,
+            358.96153846153845
+          ]
+        }
+      ],
+      "distance": 64.34134857687074
+    },
+    "registration_approved": false,
+    "eye_spacing_ratio": 0.85305283576795
+  },
+  {
+    "id": "sleeping-anchor",
+    "reference": {
+      "status": "not measurable",
+      "components": []
+    },
+    "candidate": {
+      "status": "not measurable",
+      "components": [
+        {
+          "pixels": 14,
+          "center": [
+            303.57142857142856,
+            525.4285714285714
+          ]
+        }
+      ]
+    },
+    "registration_approved": false
+  },
+  {
+    "id": "idle-key-08",
+    "reference": {
+      "status": "not measurable",
+      "components": []
+    },
+    "candidate": {
+      "status": "not measurable",
+      "components": [
+        {
+          "pixels": 49,
+          "center": [
+            203.77551020408163,
+            450.55102040816325
+          ]
+        }
+      ]
+    },
+    "registration_approved": false
+  },
+  {
+    "id": "running-key-10",
+    "reference": {
+      "status": "diagnostic only; manual eye-region confirmation required",
+      "components": [
+        {
+          "pixels": 168,
+          "center": [
+            209.83333333333334,
+            362.64285714285717
+          ]
+        },
+        {
+          "pixels": 12,
+          "center": [
+            267.8333333333333,
+            352.5
+          ]
+        }
+      ],
+      "distance": 58.8801965946141
+    },
+    "candidate": {
+      "status": "diagnostic only; manual eye-region confirmation required",
+      "components": [
+        {
+          "pixels": 434,
+          "center": [
+            171.36175115207374,
+            280.09447004608296
+          ]
+        },
+        {
+          "pixels": 416,
+          "center": [
+            246.58894230769232,
+            267.21153846153845
+          ]
+        }
+      ],
+      "distance": 76.32234414230234
+    },
+    "registration_approved": false,
+    "eye_spacing_ratio": 1.2962311363831913
+  },
+  {
+    "id": "waving-key-10",
+    "reference": {
+      "status": "diagnostic only; manual eye-region confirmation required",
+      "components": [
+        {
+          "pixels": 360,
+          "center": [
+            137.94444444444446,
+            350.94444444444446
+          ]
+        },
+        {
+          "pixels": 352,
+          "center": [
+            206.8409090909091,
+            350.97727272727275
+          ]
+        }
+      ],
+      "distance": 68.8964724675923
+    },
+    "candidate": {
+      "status": "diagnostic only; manual eye-region confirmation required",
+      "components": [
+        {
+          "pixels": 300,
+          "center": [
+            179.71666666666667,
+            304.37333333333333
+          ]
+        },
+        {
+          "pixels": 322,
+          "center": [
+            246.88819875776397,
+            324.4130434782609
+          ]
+        }
+      ],
+      "distance": 70.09710911412843
+    },
+    "registration_approved": false,
+    "eye_spacing_ratio": 1.0174266780799393
+  },
+  {
+    "id": "jumping-key-07",
+    "reference": {
+      "status": "diagnostic only; manual eye-region confirmation required",
+      "components": [
+        {
+          "pixels": 316,
+          "center": [
+            203.20886075949366,
+            325.7911392405063
+          ]
+        },
+        {
+          "pixels": 288,
+          "center": [
+            259.97222222222223,
+            325.97222222222223
+          ]
+        }
+      ],
+      "distance": 56.76365030188462
+    },
+    "candidate": {
+      "status": "diagnostic only; manual eye-region confirmation required",
+      "components": [
+        {
+          "pixels": 271,
+          "center": [
+            184.8819188191882,
+            263.56826568265683
+          ]
+        },
+        {
+          "pixels": 260,
+          "center": [
+            248.56923076923076,
+            274.0
+          ]
+        }
+      ],
+      "distance": 64.53599603546589
+    },
+    "registration_approved": false,
+    "eye_spacing_ratio": 1.1369246990326698
+  },
+  {
+    "id": "failed-key-10",
+    "reference": {
+      "status": "not measurable",
+      "components": []
+    },
+    "candidate": {
+      "status": "diagnostic only; manual eye-region confirmation required",
+      "components": [
+        {
+          "pixels": 372,
+          "center": [
+            168.3494623655914,
+            289.9516129032258
+          ]
+        },
+        {
+          "pixels": 339,
+          "center": [
+            245.6047197640118,
+            303.0825958702065
+          ]
+        }
+      ],
+      "distance": 78.36324080444433
+    },
+    "registration_approved": false
+  },
+  {
+    "id": "waiting-key-10",
+    "reference": {
+      "status": "diagnostic only; manual eye-region confirmation required",
+      "components": [
+        {
+          "pixels": 316,
+          "center": [
+            153.31012658227849,
+            345.86708860759495
+          ]
+        },
+        {
+          "pixels": 336,
+          "center": [
+            220.92857142857142,
+            351.3333333333333
+          ]
+        }
+      ],
+      "distance": 67.83902943610575
+    },
+    "candidate": {
+      "status": "diagnostic only; manual eye-region confirmation required",
+      "components": [
+        {
+          "pixels": 317,
+          "center": [
+            170.42586750788644,
+            297.44164037854887
+          ]
+        },
+        {
+          "pixels": 310,
+          "center": [
+            237.19354838709677,
+            276.9225806451613
+          ]
+        }
+      ],
+      "distance": 69.8495169799362
+    },
+    "registration_approved": false,
+    "eye_spacing_ratio": 1.0296361484022118
+  }
+]

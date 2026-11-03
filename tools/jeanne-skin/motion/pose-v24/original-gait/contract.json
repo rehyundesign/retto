@@ -1,0 +1,9 @@
+{
+  "userRequestedOriginalEight": true,
+  "independentDrawingsPerDirection": 8,
+  "cycleSeconds": 1.6,
+  "durationMs": 200,
+  "noGeneratedIntermediates": true,
+  "originalSource": "assets/spritesheet.webp row1 (left flipped per runtime)",
+  "referencesOnly": "costume/Finn detail crops, never composed into final"
+}

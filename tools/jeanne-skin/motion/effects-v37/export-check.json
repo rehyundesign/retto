@@ -1,0 +1,35 @@
+[
+  {
+    "state": "idle",
+    "characterCount": 16,
+    "characterCycle": 3.2,
+    "effectCycle": 6.4,
+    "effectFps": 20,
+    "exportFrames": 128,
+    "exportDurationMs": 6400,
+    "frozenPoseEffectProgression": true,
+    "nativeInstallation": "not performed"
+  },
+  {
+    "state": "running",
+    "characterCount": 16,
+    "characterCycle": 2.4,
+    "effectCycle": 4.8,
+    "effectFps": 20,
+    "exportFrames": 96,
+    "exportDurationMs": 4800,
+    "frozenPoseEffectProgression": true,
+    "nativeInstallation": "not performed"
+  },
+  {
+    "state": "waving",
+    "characterCount": 16,
+    "characterCycle": 2.4,
+    "effectCycle": 4.8,
+    "effectFps": 20,
+    "exportFrames": 96,
+    "exportDurationMs": 4800,
+    "frozenPoseEffectProgression": true,
+    "nativeInstallation": "not performed"
+  }
+]
