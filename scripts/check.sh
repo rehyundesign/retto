@@ -30,6 +30,12 @@ else
     print -- "$output" >&2
     exit 1
   fi
+  # Windows 판의 상태 판정은 맥 앱과 같은 값을 써야 한다. Electron 없이 node 만으로 돈다.
+  print -- "› Windows 판 테스트"
+  if ! output=$( (cd "$APP_ROOT/windows" && "$NODE" --test test/*.test.js) 2>&1 ); then
+    print -- "$output" >&2
+    exit 1
+  fi
 fi
 
 print -- "통과"
