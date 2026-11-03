@@ -56,6 +56,27 @@ function shellQuote(value) {
   return `'${String(value).replaceAll("'", "'\\''")}'`;
 }
 
+/// Windows 에서 settings.json 에 적을 경로. 백슬래시는 bash 에서 이스케이프로 읽히고
+/// HOOK_PATH_MARKERS 와도 안 맞으므로 슬래시로 적는다. node 는 두 모양을 다 읽는다.
+function windowsPath(value) {
+  return String(value).replaceAll('\\', '/');
+}
+
+/// 훅 한 줄. 맥·리눅스는 hook.sh 가 node 를 찾아 준다.
+///
+/// Windows 는 hook.sh 를 못 돌린다. 그리고 Claude Code 가 훅을 어느 셸로 돌리는지가
+/// 버전마다 다르다는 보고가 있다(Git Bash · PowerShell). 그래서 세 셸(bash · PowerShell ·
+/// cmd)에서 같은 뜻이 되는 꼴만 쓴다 — 맨 앞은 따옴표 없는 `node`, 인자는 큰따옴표.
+/// PowerShell 은 따옴표로 시작하는 줄을 명령이 아니라 문자열로 읽으므로 node 경로를
+/// 따옴표로 감쌀 수 없다. Windows 의 GUI 앱은 사용자 PATH 를 그대로 받으므로 맥처럼
+/// node 를 따로 찾을 필요가 적다.
+function hookCommand(hookPath, args, platform = process.platform) {
+  if (platform === 'win32') {
+    return ['node', ...[windowsPath(hookPath), ...args].map((value) => `"${value}"`)].join(' ');
+  }
+  return [shimPathFor(hookPath), ...args].map(shellQuote).join(' ');
+}
+
 /// 설치된 훅 파일(hook.sh)이 있는 폴더에서 hook.cjs 도 같이 산다.
 function shimPathFor(installedHookPath) {
   return path.join(path.dirname(installedHookPath), 'hook.sh');
@@ -140,9 +161,9 @@ function removeRettoCodexHooks(settings, hookPath) {
 /// `minimal` 이면 필수 여덟 개만 등록한다.
 function mergeRettoHooks(settings, hookPath, options = {}) {
   const minimal = options.minimal === true;
+  const platform = options.platform || process.platform;
   const next = removeRettoHooks(settings, hookPath);
   next.hooks = next.hooks || {};
-  const shim = shimPathFor(hookPath);
 
   for (const entry of minimal ? REQUIRED_EVENT_STATES : EVENT_STATES) {
     const group = {
@@ -150,7 +171,7 @@ function mergeRettoHooks(settings, hookPath, options = {}) {
       hooks: [
         {
           type: 'command',
-          command: [shim, entry.state].map(shellQuote).join(' '),
+          command: hookCommand(hookPath, [entry.state], platform),
           timeout: 5,
           async: true
         }
@@ -162,14 +183,14 @@ function mergeRettoHooks(settings, hookPath, options = {}) {
   return next;
 }
 
-function mergeRettoCodexHooks(settings, hookPath) {
+function mergeRettoCodexHooks(settings, hookPath, options = {}) {
+  const platform = options.platform || process.platform;
   const next = removeRettoCodexHooks(settings, hookPath);
   next.description = next.description || 'User lifecycle hooks for Codex.';
   next.hooks = next.hooks || {};
-  const shim = shimPathFor(hookPath);
 
   for (const entry of CODEX_EVENT_STATES) {
-    const command = [shim, entry.state, 'codex'].map(shellQuote).join(' ');
+    const command = hookCommand(hookPath, [entry.state, 'codex'], platform);
     const group = {
       hooks: [
         {
@@ -239,15 +260,17 @@ function installClaudeHooks({
   packagedShimPath,
   installedHookPath,
   nodeCommand = 'node',
-  minimal = false
+  minimal = false,
+  platform = process.platform
 }) {
   const settings = readSettings(settingsPath);
   fs.mkdirSync(path.dirname(installedHookPath), { recursive: true });
   fs.copyFileSync(packagedHookPath, installedHookPath);
-  const installedShimPath = shimPathFor(installedHookPath);
-  installShim({ packagedShimPath, installedShimPath, nodeCommand });
+  // Windows 는 hook.sh 를 부르지 않으므로 깔지 않는다. 쓰지 않는 파일은 고장 원인만 늘린다.
+  const installedShimPath = platform === 'win32' ? undefined : shimPathFor(installedHookPath);
+  if (installedShimPath) installShim({ packagedShimPath, installedShimPath, nodeCommand });
   const backupPath = backupSettings(settingsPath);
-  writeSettingsAtomic(settingsPath, mergeRettoHooks(settings, installedHookPath, { minimal }));
+  writeSettingsAtomic(settingsPath, mergeRettoHooks(settings, installedHookPath, { minimal, platform }));
   return { settingsPath, installedHookPath, installedShimPath, backupPath };
 }
 
@@ -261,10 +284,10 @@ function uninstallClaudeHooks({ settingsPath, installedHookPath }) {
   return { settingsPath, backupPath };
 }
 
-function installCodexHooks({ hooksPath, installedHookPath }) {
+function installCodexHooks({ hooksPath, installedHookPath, platform = process.platform }) {
   const settings = readSettings(hooksPath);
   const backupPath = backupSettings(hooksPath);
-  writeSettingsAtomic(hooksPath, mergeRettoCodexHooks(settings, installedHookPath));
+  writeSettingsAtomic(hooksPath, mergeRettoCodexHooks(settings, installedHookPath, { platform }));
   return { hooksPath, installedHookPath, backupPath };
 }
 
@@ -281,6 +304,7 @@ module.exports = {
   CODEX_EVENT_STATES,
   EVENT_STATES,
   REQUIRED_EVENT_STATES,
+  hookCommand,
   installClaudeHooks,
   installCodexHooks,
   isRettoCodexHandler,

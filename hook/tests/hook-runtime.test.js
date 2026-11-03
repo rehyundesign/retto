@@ -344,7 +344,7 @@ test('names a Codex session from the thread index', async () => {
   assert.equal(sessions['codex:thread-unnamed'].displayTitle, '이름 없는 스레드');
 });
 
-test('the shim finds node even when the path chosen at install time is gone', async () => {
+test('the shim finds node even when the path chosen at install time is gone', { skip: process.platform === 'win32' && 'hook.sh 는 Windows 에서 쓰지 않는다' }, async () => {
   // settings.json 에 node 절대경로를 직접 넣던 시절에는, nvm 으로 버전을 바꿔
   // 그 경로가 사라지면 훅 전체가 동작을 멈췄다. hook.sh 는 다른 자리를 마저 찾아본다.
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'retto-shim-'));
@@ -372,7 +372,7 @@ test('the shim finds node even when the path chosen at install time is gone', as
   assert.equal(registry.sessions['shim-session'].displayTitle, '실행기로 들어온 작업');
 });
 
-test('the shim ends without an error when no node exists at all', async () => {
+test('the shim ends without an error when no node exists at all', { skip: process.platform === 'win32' && 'hook.sh 는 Windows 에서 쓰지 않는다' }, async () => {
   // 훅이 실패하면 Claude Code 가 경고를 띄운다. node 가 없는 사람 화면에
   // 레토 때문에 경고가 붙는 것은 과하다.
   //
@@ -422,3 +422,44 @@ test('names a session by its first request, not by the replies that follow', asy
   assert.equal(registry.sessions.first.displayTitle, '세션명 오류를 고쳐줘');
   assert.equal(registry.sessions.joined.displayTitle, '');
 });
+
+// Windows 의 Claude Code 는 훅을 버전에 따라 Git Bash 나 PowerShell 로 돌린다는 보고가 있다.
+// 그래서 Windows 용 한 줄을 이 기계에 있는 셸마다 실제로 돌려 상태가 적히는지 본다.
+// 맥에서는 sh 하나, Windows CI 에서는 cmd · PowerShell · bash 셋을 본다.
+function shellsHere() {
+  if (process.platform !== 'win32') return [['sh', '/bin/sh', ['-c']]];
+  const shells = [
+    ['cmd', 'cmd.exe', ['/d', '/s', '/c']],
+    ['PowerShell', 'powershell.exe', ['-NoProfile', '-NonInteractive', '-Command']]
+  ];
+  const gitBash = 'C:/Program Files/Git/bin/bash.exe';
+  if (fs.existsSync(gitBash)) shells.push(['Git Bash', gitBash, ['-c']]);
+  return shells;
+}
+
+for (const [label, shell, flags] of shellsHere()) {
+  test(`the Windows-form hook line records state when run by ${label}`, async () => {
+    const { hookCommand } = require('../lib/hook-settings');
+    const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'retto 셸 '));
+    const hookPath = path.join(directory, 'hook.cjs');
+    fs.copyFileSync(path.join(__dirname, '..', 'hook.cjs'), hookPath);
+    const nodeDir = path.dirname(process.execPath);
+    const command = hookCommand(hookPath, ['running'], 'win32');
+    await new Promise((resolve, reject) => {
+      const child = spawn(shell, [...flags, command], {
+        stdio: ['pipe', 'ignore', 'pipe'],
+        windowsVerbatimArguments: label === 'cmd',
+        env: { ...process.env, PATH: `${nodeDir}${path.delimiter}${process.env.PATH || ''}`, CLAUDE_CODE_ENTRYPOINT: '' }
+      });
+      let stderr = '';
+      child.stderr.on('data', (chunk) => { stderr += chunk; });
+      child.on('error', reject);
+      child.on('exit', (code) => code === 0 ? resolve() : reject(new Error(stderr || `exit ${code}`)));
+      child.stdin.end(JSON.stringify({ session_id: 'shell-check', hook_event_name: 'UserPromptSubmit', prompt: '셸 확인용 요청', cwd: directory }));
+    });
+    const registry = JSON.parse(fs.readFileSync(path.join(directory, 'sessions.json'), 'utf8'));
+    const record = Object.values(registry.sessions || registry).find((item) => item && item.rawSessionId === 'shell-check' || item?.sessionId === 'shell-check');
+    assert.ok(record, `${label}: sessions.json 에 세션이 없다`);
+    assert.equal(record.state, 'running');
+  });
+}
