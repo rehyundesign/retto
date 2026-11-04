@@ -1134,9 +1134,8 @@ final class RettoView: NSView {
     }
 
     /// 이름표 오른쪽 위에 걸터앉는 알림 배지. 흰 테두리로 이름표 색과 분리한다.
-    /// 「2/3」 — 같은 상태 중 지금 말풍선이 몇 번째인지. 눌러서 넘길 때 한 바퀴 돌았는지 보인다.
     private func badgeLabel(_ chip: BadgeChip) -> String {
-        chip.count > 99 ? "\(min(chip.position, 99))/99+" : "\(chip.position)/\(chip.count)"
+        chip.count > 99 ? "99+" : "\(chip.count)"
     }
 
     private func drawAttentionBadge(ribbon: NSRect, scale: CGFloat) {
@@ -1226,7 +1225,7 @@ final class RettoView: NSView {
         // 한글 12자 폭이 상한이다. 영문처럼 좁은 글자는 12자를 넘어도 이 폭까지는 다 보인다.
         let labelBudget = (sectionLabelWidthSample as NSString).size(withAttributes: nameAttributes).width
         // 오른쪽 배지와 부딧치지 않는 선까지만 허용한다.
-        let badgeGuard = ribbonRect.width - 14 * scale - ((badgeChips.isEmpty ? attentionBadgeSide : 40) + 14) * scale - 10 * scale
+        let badgeGuard = ribbonRect.width - 14 * scale - ((badgeChips.isEmpty ? attentionBadgeSide : 28) + 14) * scale - 10 * scale
         let nameTextBudget = min(labelBudget, max(40 * scale, badgeGuard - namePadding * 2))
         let name = fittedSingleLine(sectionLabel(), maxWidth: nameTextBudget, attributes: nameAttributes)
         let nameWidth = name.size(withAttributes: nameAttributes).width + namePadding * 2

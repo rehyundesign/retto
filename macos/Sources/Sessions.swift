@@ -990,8 +990,6 @@ struct BadgeChip: Equatable {
     /// StatusTone.key
     let tone: String
     let count: Int
-    /// 지금 말풍선이 그중 몇 번째인가(1부터). 배지에 「2/3」 으로 쓴다
-    let position: Int
 }
 
 func badgeToneKey(source: String?, state: PetState) -> String? {
@@ -1030,15 +1028,15 @@ func sameStateSessions(as current: StatePayload, in sessions: [StatePayload], st
         .sorted { $0.id < $1.id }
 }
 
-/// 이름표 배지의 숫자 칩. 지금 말풍선에 보이는 상태의 「몇 번째/몇 개」 하나만 띄운다. 슬랙 말풍선이면 슬랙 개수다.
+/// 이름표 배지의 숫자 칩. 지금 말풍선에 보이는 상태의 개수 하나만 띄운다. 슬랙 말풍선이면 슬랙 개수다.
 /// 같은 상태가 2개 이상일 때만 띄운다 — 1개면 말풍선과 레토 색으로 이미 보인다 (2026-11-04 luxia).
 /// 주황 완료 말풍선 위에 초록 작업 중 숫자가 뜨면 무슨 숫자인지 읽히지 않는다.
 func badgeChips(selected: StatePayload, in sessions: [StatePayload], state: (StatePayload) -> PetState,
                 needsAttention: (StatePayload) -> Bool) -> [BadgeChip] {
     guard let key = badgeToneKey(source: selected.source, state: state(selected)) else { return [] }
     let group = sameStateSessions(as: selected, in: sessions, state: state, needsAttention: needsAttention)
-    guard group.count >= 2, let index = group.firstIndex(where: { $0.id == selected.id }) else { return [] }
-    return [BadgeChip(tone: key, count: group.count, position: index + 1)]
+    guard group.count >= 2 else { return [] }
+    return [BadgeChip(tone: key, count: group.count)]
 }
 
 /// 말풍선을 눌렀을 때 다음에 보여 줄 같은 상태의 세션. 같은 상태가 하나뿐이면 nil.
