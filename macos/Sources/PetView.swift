@@ -86,6 +86,7 @@ final class RettoView: NSView {
     private var sessionCount = 0
     private var attentionCount = 0
     private var inputCount = 0
+    private var badgeChips: [BadgeChip] = []
     private var connectionStatus: String?
     private var isPinned = false
     /// 배지가 대표하는 상태. 다른 세션에 고정해 둔 동안에도 배지 색은 기다리는 쪽을 따른다.
@@ -213,17 +214,18 @@ final class RettoView: NSView {
         let attentionState: PetState?
         let attentionSource: String?
         let inputCount: Int
+        let badgeChips: [BadgeChip]
         let connectionStatus: String?
         let isPinned: Bool
     }
     /// 폴링은 0.25초마다 같은 값을 다시 넘긴다. 표시 상태는 여기서만 바뀌므로, 같은 값이면 다시 그리지 않는다.
     private var lastApplyInputs: ApplyInputs?
 
-    func apply(_ newPayload: StatePayload, state incoming: PetState? = nil, liveMessage: String? = nil, liveTitle: String? = nil, sleepPose: Bool = false, sessionCount: Int, attentionCount: Int, attentionState: PetState? = nil, attentionSource: String? = nil, inputCount: Int = 0, connectionStatus: String? = nil, isPinned: Bool) {
+    func apply(_ newPayload: StatePayload, state incoming: PetState? = nil, liveMessage: String? = nil, liveTitle: String? = nil, sleepPose: Bool = false, sessionCount: Int, attentionCount: Int, attentionState: PetState? = nil, attentionSource: String? = nil, inputCount: Int = 0, badgeChips: [BadgeChip] = [], connectionStatus: String? = nil, isPinned: Bool) {
         let inputs = ApplyInputs(
             payload: newPayload, state: incoming, liveMessage: liveMessage, liveTitle: liveTitle, sleepPose: sleepPose,
             sessionCount: sessionCount, attentionCount: attentionCount, attentionState: attentionState,
-            attentionSource: attentionSource, inputCount: inputCount, connectionStatus: connectionStatus, isPinned: isPinned
+            attentionSource: attentionSource, inputCount: inputCount, badgeChips: badgeChips, connectionStatus: connectionStatus, isPinned: isPinned
         )
         guard inputs != lastApplyInputs else { return }
         lastApplyInputs = inputs
@@ -232,17 +234,18 @@ final class RettoView: NSView {
         self.sleepPose = sleepPose
         payload = newPayload
         self.sessionCount = sessionCount
-        let hadBadge = self.attentionCount > 0
+        let hadBadge = !self.badgeChips.isEmpty
         self.attentionCount = attentionCount
+        self.badgeChips = badgeChips
         self.attentionState = attentionState
         self.attentionSource = attentionSource
         self.inputCount = inputCount
         self.connectionStatus = connectionStatus
-        if !hadBadge && attentionCount > 0 {
+        if !hadBadge && !badgeChips.isEmpty {
             badgeAppearProgress = 0
             startBadgeAnimator()
         }
-        if attentionCount == 0 {
+        if badgeChips.isEmpty {
             isBadgeHovering = false
             isBadgePressed = false
         }
@@ -499,7 +502,7 @@ final class RettoView: NSView {
 
     override func hitTest(_ point: NSPoint) -> NSView? {
         let local = convert(point, from: superview)
-        guard petClickTarget(layout: layout, badgeFrame: badgeFrame, point: local, attentionCount: attentionCount) != nil else { return nil }
+        guard petClickTarget(layout: layout, badgeFrame: badgeFrame, point: local, attentionCount: badgeChips.count) != nil else { return nil }
         return super.hitTest(point)
     }
 
@@ -513,7 +516,7 @@ final class RettoView: NSView {
 
     private func updateHover(at point: NSPoint) {
         let layout = self.layout
-        let target = petClickTarget(layout: layout, badgeFrame: badgeFrame, point: point, attentionCount: attentionCount)
+        let target = petClickTarget(layout: layout, badgeFrame: badgeFrame, point: point, attentionCount: badgeChips.count)
 
         let wasBadgeHovering = isBadgeHovering
         isBadgeHovering = target == .badge
@@ -679,7 +682,7 @@ final class RettoView: NSView {
         dragStartMouseLocation = NSEvent.mouseLocation
         dragStartWindowOrigin = window?.frame.origin
         let local = convert(event.locationInWindow, from: nil)
-        pressedTarget = petClickTarget(layout: layout, badgeFrame: badgeFrame, point: local, attentionCount: attentionCount)
+        pressedTarget = petClickTarget(layout: layout, badgeFrame: badgeFrame, point: local, attentionCount: badgeChips.count)
         didDrag = false
         if pressedTarget == .badge {
             isBadgePressed = true
@@ -1131,51 +1134,58 @@ final class RettoView: NSView {
     }
 
     /// 이름표 오른쪽 위에 걸터앉는 알림 배지. 흰 테두리로 이름표 색과 분리한다.
+    private func badgeLabel(_ chip: BadgeChip) -> String {
+        chip.count > 99 ? "99+" : "\(chip.count)"
+    }
+
     private func drawAttentionBadge(ribbon: NSRect, scale: CGFloat) {
         let appear = easeOutBack(badgeAppearProgress)
         let visualScale = badgeVisualScale * (0.7 + 0.3 * appear)
         let alpha = badgeAppearProgress
+        let font = NSFont(name: "AvenirNext-DemiBold", size: 12 * scale * visualScale) ?? NSFont.boldSystemFont(ofSize: 12 * scale * visualScale)
+        let tones = ["slack": toneSlack, "failed": toneFailed, "needsYou": toneNeedsYou, "done": toneDone, "working": toneWorking]
 
-        var rect = attentionBadgeRect(ribbon: ribbon, scale: scale)
-        if inputCount > 0 {
-            let width = 65 * scale
-            rect.origin.x -= width - rect.width
-            rect.size.width = width
+        // 오른쪽 끝을 원래 배지 자리에 맞추고 왼쪽으로 늘어놓는다. 배열 첫 칩(슬랙)이 맨 앞(왼쪽)이다.
+        let base = attentionBadgeRect(ribbon: ribbon, scale: scale)
+        let gap = 3 * scale
+        var rects: [NSRect] = []
+        var right = base.maxX
+        for chip in badgeChips.reversed() {
+            let label = badgeLabel(chip)
+            let width = max(base.width, label.size(withAttributes: [.font: font]).width + 10 * scale)
+            rects.insert(NSRect(x: right - width, y: base.minY, width: width, height: base.height), at: 0)
+            right -= width + gap
         }
-        badgeFrame = rect.insetBy(dx: -2, dy: -2)
-        rect = rect.insetBy(dx: rect.width * (1 - visualScale) / 2, dy: rect.height * (1 - visualScale) / 2)
+        guard let first = rects.first else { badgeFrame = .zero; return }
+        badgeFrame = rects.reduce(first) { $0.union($1) }.insetBy(dx: -2, dy: -2)
 
         let ringWidth = chromeStrokeWidth(scale)
-        let ring = NSBezierPath(roundedRect: rect.insetBy(dx: -ringWidth, dy: -ringWidth), xRadius: rect.height / 2, yRadius: rect.height / 2)
-        NSGraphicsContext.saveGraphicsState()
-        let shadow = NSShadow()
-        shadow.shadowColor = NSColor.black.withAlphaComponent(0.18 * alpha)
-        shadow.shadowBlurRadius = 4 * scale
-        shadow.shadowOffset = NSSize(width: 0, height: -1 * scale)
-        shadow.set()
-        NSColor.white.withAlphaComponent(0.96 * alpha).setFill()
-        ring.fill()
-        NSGraphicsContext.restoreGraphicsState()
+        for (chip, full) in zip(badgeChips, rects) {
+            let tone = tones[chip.tone] ?? toneDone
+            let rect = full.insetBy(dx: full.width * (1 - visualScale) / 2, dy: full.height * (1 - visualScale) / 2)
+            let ring = NSBezierPath(roundedRect: rect.insetBy(dx: -ringWidth, dy: -ringWidth), xRadius: rect.height / 2, yRadius: rect.height / 2)
+            NSGraphicsContext.saveGraphicsState()
+            let shadow = NSShadow()
+            shadow.shadowColor = NSColor.black.withAlphaComponent(0.18 * alpha)
+            shadow.shadowBlurRadius = 4 * scale
+            shadow.shadowOffset = NSSize(width: 0, height: -1 * scale)
+            shadow.set()
+            NSColor.white.withAlphaComponent(0.96 * alpha).setFill()
+            ring.fill()
+            NSGraphicsContext.restoreGraphicsState()
 
-        let circle = NSBezierPath(roundedRect: rect, xRadius: rect.height / 2, yRadius: rect.height / 2)
-        let badgeTone = notificationTone(source: attentionSource, state: attentionState ?? .waving,
-                                         fallback: attentionState == .waiting ? toneNeedsYou : toneDone)
-        badgeTone.background.withAlphaComponent(0.97 * alpha).setFill()
-        circle.fill()
-        if isBadgePressed {
-            NSColor.black.withAlphaComponent(0.12 * alpha).setFill()
-            circle.fill()
+            let pill = NSBezierPath(roundedRect: rect, xRadius: rect.height / 2, yRadius: rect.height / 2)
+            tone.background.withAlphaComponent(0.97 * alpha).setFill()
+            pill.fill()
+            if isBadgePressed {
+                NSColor.black.withAlphaComponent(0.12 * alpha).setFill()
+                pill.fill()
+            }
+            let attributes: [NSAttributedString.Key: Any] = [.font: font, .foregroundColor: tone.text.withAlphaComponent(alpha)]
+            let label = badgeLabel(chip)
+            let size = label.size(withAttributes: attributes)
+            label.draw(at: NSPoint(x: rect.midX - size.width / 2, y: rect.midY - size.height / 2), withAttributes: attributes)
         }
-
-        let attributes: [NSAttributedString.Key: Any] = [
-            .font: NSFont(name: "AvenirNext-DemiBold", size: 12 * scale * visualScale) ?? NSFont.boldSystemFont(ofSize: 12 * scale * visualScale),
-            .foregroundColor: badgeTone.text.withAlphaComponent(alpha)
-        ]
-        let count = inputCount > 0 ? inputCount : attentionCount
-        let number = count > 99 ? "99+" : "\(count)"
-        let label = inputCount > 0 ? "입력 \(number)" : (count > 9 ? "9+" : number)
-        let size = label.size(withAttributes: attributes)
-        label.draw(at: NSPoint(x: rect.midX - size.width / 2, y: rect.midY - size.height / 2), withAttributes: attributes)
     }
 
     private func drawStatusRibbon(_ animation: Animation, layout: PetLayout) {
@@ -1215,7 +1225,7 @@ final class RettoView: NSView {
         // 한글 12자 폭이 상한이다. 영문처럼 좁은 글자는 12자를 넘어도 이 폭까지는 다 보인다.
         let labelBudget = (sectionLabelWidthSample as NSString).size(withAttributes: nameAttributes).width
         // 오른쪽 배지와 부딧치지 않는 선까지만 허용한다.
-        let badgeGuard = ribbonRect.width - 14 * scale - ((inputCount > 0 ? 65 : attentionBadgeSide) + 14) * scale - 10 * scale
+        let badgeGuard = ribbonRect.width - 14 * scale - ((badgeChips.isEmpty ? attentionBadgeSide : 28) + 14) * scale - 10 * scale
         let nameTextBudget = min(labelBudget, max(40 * scale, badgeGuard - namePadding * 2))
         let name = fittedSingleLine(sectionLabel(), maxWidth: nameTextBudget, attributes: nameAttributes)
         let nameWidth = name.size(withAttributes: nameAttributes).width + namePadding * 2
@@ -1241,7 +1251,7 @@ final class RettoView: NSView {
         namePill.lineWidth = chromeStrokeWidth(scale)
         namePill.stroke()
 
-        if attentionCount > 0 {
+        if !badgeChips.isEmpty {
             drawAttentionBadge(ribbon: ribbonRect, scale: scale)
         } else {
             badgeFrame = .zero

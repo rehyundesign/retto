@@ -983,6 +983,70 @@ func attentionBadgeSessions(_ sessions: [StatePayload], needsAttention: (StatePa
     return input.isEmpty ? unread.filter { $0.petState == .waving || $0.petState == .failed } : input
 }
 
+/// 이름표 배지의 숫자 칩. 지금 말풍선에 보이는 상태의 개수 하나만 띄운다. 슬랙 말풍선이면 슬랙 개수다.
+/// 같은 상태가 2개 이상일 때만 띄운다 — 1개면 말풍선과 레토 색으로 이미 보인다 (2026-11-04 luxia).
+/// 주황 완료 말풍선 위에 초록 작업 중 숫자가 뜨면 무슨 숫자인지 읽히지 않는다.
+struct BadgeChip: Equatable {
+    /// StatusTone.key
+    let tone: String
+    let count: Int
+}
+
+func badgeToneKey(source: String?, state: PetState) -> String? {
+    if source == "slack" { return "slack" }
+    switch state {
+    case .failed: return "failed"
+    case .waiting: return "needsYou"
+    case .waving: return "done"
+    case .running, .review, .jumping: return "working"
+    default: return nil
+    }
+}
+
+/// 배지 메뉴 머리 줄에 쓰는 상태 이름.
+func badgeToneName(_ key: String) -> String {
+    switch key {
+    case "slack": return "슬랙 새 메시지"
+    case "failed": return "실패"
+    case "needsYou": return "입력 기다림"
+    case "done": return "완료"
+    default: return "작업 중"
+    }
+}
+
+/// 지금 세션과 같은 상태의 세션들. 배지 숫자 · 배지 메뉴 · 눌러서 넘기기가 모두 이 목록을 쓴다.
+/// 순서는 세션 id 로 고정한다 — 갱신 시각으로 줄 세우면 작업 중 세션끼리 순서가 계속 바뀌어 a → b → a 가 안 된다.
+/// 완료·슬랙은 아직 안 본 것만 넣는다 — 이미 본 완료까지 넣으면 지난 세션이 수십 개 끼어든다. 지금 세션은 늘 넣는다.
+func sameStateSessions(as current: StatePayload, in sessions: [StatePayload], state: (StatePayload) -> PetState,
+                       needsAttention: (StatePayload) -> Bool) -> [StatePayload] {
+    guard let key = badgeToneKey(source: current.source, state: state(current)) else { return [] }
+    let unreadOnly = key == "done" || key == "slack"
+    return sessions.filter {
+        !$0.isClosed && badgeToneKey(source: $0.source, state: state($0)) == key
+            && ($0.id == current.id || !unreadOnly || needsAttention($0))
+    }
+        .sorted { $0.id < $1.id }
+}
+
+/// 이름표 배지의 숫자 칩. 지금 말풍선에 보이는 상태의 개수 하나만 띄운다. 슬랙 말풍선이면 슬랙 개수다.
+/// 같은 상태가 2개 이상일 때만 띄운다 — 1개면 말풍선과 레토 색으로 이미 보인다 (2026-11-04 luxia).
+/// 주황 완료 말풍선 위에 초록 작업 중 숫자가 뜨면 무슨 숫자인지 읽히지 않는다.
+func badgeChips(selected: StatePayload, in sessions: [StatePayload], state: (StatePayload) -> PetState,
+                needsAttention: (StatePayload) -> Bool) -> [BadgeChip] {
+    guard let key = badgeToneKey(source: selected.source, state: state(selected)) else { return [] }
+    let group = sameStateSessions(as: selected, in: sessions, state: state, needsAttention: needsAttention)
+    guard group.count >= 2 else { return [] }
+    return [BadgeChip(tone: key, count: group.count)]
+}
+
+/// 말풍선을 눌렀을 때 다음에 보여 줄 같은 상태의 세션. 같은 상태가 하나뿐이면 nil.
+func nextSameStateSession(after current: StatePayload, in sessions: [StatePayload], state: (StatePayload) -> PetState,
+                          needsAttention: (StatePayload) -> Bool) -> StatePayload? {
+    let group = sameStateSessions(as: current, in: sessions, state: state, needsAttention: needsAttention)
+    guard group.count >= 2, let index = group.firstIndex(where: { $0.id == current.id }) else { return nil }
+    return group[(index + 1) % group.count]
+}
+
 func attentionSummary(_ sessions: [StatePayload]) -> String {
     let input = sessions.filter { $0.petState == .waiting }.count
     return input > 0 ? "입력 필요 \(input)개" : "새 알림 \(sessions.count)개"

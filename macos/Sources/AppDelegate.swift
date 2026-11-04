@@ -44,6 +44,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     private var autoSelectionItem: NSMenuItem!
     private var sessions: [StatePayload] = []
     private var selectedPayload: StatePayload?
+    /// 말풍선을 눌러 같은 상태의 다음 세션으로 넘긴 고정. 그 세션의 상태가 바뀌면 고정을 풀고 자동 선택으로 돌아간다.
+    private var cyclePinKey: String?
     private let transcriptReader = TranscriptReader()
     private let codexTranscriptStatusReader = CodexTranscriptStatusReader()
     private let codexThreadTitleReader = CodexThreadTitleReader()
@@ -257,6 +259,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             skin: skin,
             onOpenClaude: { [weak self] payload, windowOnly in
                 self?.revealAgentSession(payload, windowOnly: windowOnly)
+                self?.showNextSameStateSession(after: payload)
             },
             onOpenAttention: { [weak self] point in self?.showAttentionMenu(at: point) }
         )
@@ -595,6 +598,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             .map(\.payload)
         let openSessions = sessions.filter { !$0.isClosed }
         let attentionSessions = openSessions.filter { self.needsAttention($0) }
+        if let key = cyclePinKey {
+            // 눌러서 넘긴 세션이 끝나거나 상태가 바뀌면 고정을 풀어, 다른 세션 소식을 가리지 않게 한다.
+            let pinned = openSessions.first(where: { $0.id == pinnedSessionId })
+            if pinned.map({ badgeToneKey(source: $0.source, state: effectiveState($0)) }) != key {
+                pinnedSessionId = nil
+                cyclePinKey = nil
+            }
+        }
         if let pinnedSessionId,
            let pinned = openSessions.first(where: { $0.id == pinnedSessionId }) {
             // 고정은 지켜주되, 손이 필요한 세션이 생기면 그쪽을 먼저 보여준다.
@@ -662,6 +673,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             attentionState: attention.max(by: { statePriority($0) < statePriority($1) })?.petState,
             attentionSource: attention.first?.source,
             inputCount: attention.filter { $0.petState == .waiting }.count,
+            badgeChips: asleep ? [] : badgeChips(selected: selectedPayload, in: sessions,
+                state: effectiveState, needsAttention: needsAttention),
             connectionStatus: taskConnectionNotice(for: selectedPayload,
                 unreadablePaths: codexTranscriptStatusReader.unreadablePaths, slackNotice: slack.connectionIssue),
             isPinned: selectedPayload.id == pinnedSessionId
@@ -701,6 +714,26 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
 
     /// 배지를 누르면 배지가 세던 세션들을 그대로 목록으로 보여준다. 하나뿐이면 묻지 않고 바로 연다.
     private func showAttentionMenu(at point: NSPoint) {
+        // 배지는 지금 말풍선 상태의 개수다. 누르면 그 상태의 세션을 늘어놓는다 — 숫자와 목록이 같은 것을 센다.
+        if let current = selectedPayload, let key = badgeToneKey(source: current.source, state: effectiveState(current)) {
+            let group = sameStateSessions(as: current, in: sessions, state: effectiveState, needsAttention: needsAttention)
+            if group.count >= 2 {
+                let menu = NSMenu(title: badgeToneName(key))
+                let header = NSMenuItem(title: "\(badgeToneName(key)) \(group.count)개", action: nil, keyEquivalent: "")
+                header.isEnabled = false
+                menu.addItem(header)
+                menu.addItem(.separator())
+                for payload in group {
+                    let item = NSMenuItem(title: sessionMenuLabel(for: payload), action: #selector(openSessionFromBadge(_:)), keyEquivalent: "")
+                    item.target = self
+                    item.representedObject = payload.id
+                    item.state = payload.id == current.id ? .on : .off
+                    menu.addItem(item)
+                }
+                menu.popUp(positioning: nil, at: point, in: petView)
+                return
+            }
+        }
         let waiting = badgeSessions()
         guard let first = waiting.first else {
             revealAgentSession(nil, windowOnly: false)
@@ -729,6 +762,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
               let payload = sessions.first(where: { $0.id == sessionId }) else { return }
         // ⌥ 를 누른 채 고르면 창만 앞으로 보내고 탭은 건드리지 않는다.
         revealAgentSession(payload, windowOnly: NSEvent.modifierFlags.contains(.option))
+        // 고른 세션을 말풍선에도 띄운다. 상태가 바뀌면 고정을 풀고 자동 선택으로 돌아간다
+        if let key = badgeToneKey(source: payload.source, state: effectiveState(payload)) {
+            pinnedSessionId = payload.id
+            cyclePinKey = key
+            applySessions(hookSessions)
+        }
     }
 
     private func rebuildSessionsMenu() {
@@ -1070,13 +1109,24 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         }
     }
 
+    /// 같은 상태(작업 중 a·b 등)가 여럿이면 누를 때마다 다음 세션을 말풍선에 띄운다. a → b → a (2026-11-04 luxia).
+    private func showNextSameStateSession(after payload: StatePayload?) {
+        guard let current = payload ?? selectedPayload,
+              let next = nextSameStateSession(after: current, in: sessions, state: effectiveState, needsAttention: needsAttention) else { return }
+        pinnedSessionId = next.id
+        cyclePinKey = badgeToneKey(source: next.source, state: effectiveState(next))
+        applySessions(hookSessions)
+    }
+
     @objc private func selectAutomaticSession() {
+        cyclePinKey = nil
         pinnedSessionId = nil
         applySessions(hookSessions)
     }
 
     @objc private func selectSession(_ sender: NSMenuItem) {
         guard let sessionId = sender.representedObject as? String else { return }
+        cyclePinKey = nil
         pinnedSessionId = sessionId
         applySessions(hookSessions)
         panel.orderFrontRegardless()
