@@ -983,6 +983,28 @@ func attentionBadgeSessions(_ sessions: [StatePayload], needsAttention: (StatePa
     return input.isEmpty ? unread.filter { $0.petState == .waving || $0.petState == .failed } : input
 }
 
+/// 이름표 배지의 상태별 숫자 칩. 슬랙이 맨 앞이고 오류 → 입력 대기 → 완료 → 작업 중 순서다.
+/// 같은 상태가 2개 이상일 때만 띄운다 — 1개면 말풍선과 레토 색으로 이미 보인다 (2026-11-04 luxia).
+struct BadgeChip: Equatable {
+    /// StatusTone.key
+    let tone: String
+    let count: Int
+}
+
+func badgeChips(_ sessions: [StatePayload], state: (StatePayload) -> PetState, needsAttention: (StatePayload) -> Bool) -> [BadgeChip] {
+    let open = sessions.filter { !$0.isClosed }
+    let tasks = open.filter { $0.source != "slack" }
+    let working: Set<PetState> = [.running, .review, .jumping]
+    let counts: [(String, Int)] = [
+        ("slack", open.filter { $0.source == "slack" && needsAttention($0) }.count),
+        ("failed", tasks.filter { state($0) == .failed }.count),
+        ("needsYou", tasks.filter { state($0) == .waiting }.count),
+        ("done", tasks.filter { state($0) == .waving && needsAttention($0) }.count),
+        ("working", tasks.filter { working.contains(state($0)) }.count),
+    ]
+    return counts.filter { $0.1 >= 2 }.map { BadgeChip(tone: $0.0, count: $0.1) }
+}
+
 func attentionSummary(_ sessions: [StatePayload]) -> String {
     let input = sessions.filter { $0.petState == .waiting }.count
     return input > 0 ? "입력 필요 \(input)개" : "새 알림 \(sessions.count)개"

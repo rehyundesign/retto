@@ -662,6 +662,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             attentionState: attention.max(by: { statePriority($0) < statePriority($1) })?.petState,
             attentionSource: attention.first?.source,
             inputCount: attention.filter { $0.petState == .waiting }.count,
+            badgeChips: badgeChips(sessions, state: effectiveState, needsAttention: needsAttention),
             connectionStatus: taskConnectionNotice(for: selectedPayload,
                 unreadablePaths: codexTranscriptStatusReader.unreadablePaths, slackNotice: slack.connectionIssue),
             isPinned: selectedPayload.id == pinnedSessionId
