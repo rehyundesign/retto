@@ -990,6 +990,8 @@ struct BadgeChip: Equatable {
     /// StatusTone.key
     let tone: String
     let count: Int
+    /// 지금 말풍선이 그중 몇 번째인가(1부터). 배지에 「2/3」 으로 쓴다
+    let position: Int
 }
 
 func badgeToneKey(source: String?, state: PetState) -> String? {
@@ -1003,32 +1005,46 @@ func badgeToneKey(source: String?, state: PetState) -> String? {
     }
 }
 
-func badgeChips(_ sessions: [StatePayload], current: String?, state: (StatePayload) -> PetState, needsAttention: (StatePayload) -> Bool) -> [BadgeChip] {
-    let open = sessions.filter { !$0.isClosed }
-    let tasks = open.filter { $0.source != "slack" }
-    let working: Set<PetState> = [.running, .review, .jumping]
-    let counts: [(String, Int)] = [
-        ("slack", open.filter { $0.source == "slack" && needsAttention($0) }.count),
-        ("failed", tasks.filter { state($0) == .failed }.count),
-        ("needsYou", tasks.filter { state($0) == .waiting }.count),
-        ("done", tasks.filter { state($0) == .waving && needsAttention($0) }.count),
-        ("working", tasks.filter { working.contains(state($0)) }.count),
-    ]
-    return counts.filter { $0.1 >= 2 && $0.0 == current }.map { BadgeChip(tone: $0.0, count: $0.1) }
+/// 배지 메뉴 머리 줄에 쓰는 상태 이름.
+func badgeToneName(_ key: String) -> String {
+    switch key {
+    case "slack": return "슬랙 새 메시지"
+    case "failed": return "실패"
+    case "needsYou": return "입력 기다림"
+    case "done": return "완료"
+    default: return "작업 중"
+    }
 }
 
-/// 말풍선을 눌렀을 때 다음에 보여 줄 같은 상태의 세션. 같은 상태가 하나뿐이면 nil.
+/// 지금 세션과 같은 상태의 세션들. 배지 숫자 · 배지 메뉴 · 눌러서 넘기기가 모두 이 목록을 쓴다.
 /// 순서는 세션 id 로 고정한다 — 갱신 시각으로 줄 세우면 작업 중 세션끼리 순서가 계속 바뀌어 a → b → a 가 안 된다.
-/// 완료·슬랙은 아직 안 본 것만 돈다 — 이미 본 완료까지 돌면 지난 세션이 수십 개 끼어든다.
-func nextSameStateSession(after current: StatePayload, in sessions: [StatePayload], state: (StatePayload) -> PetState,
-                          needsAttention: (StatePayload) -> Bool) -> StatePayload? {
-    guard let key = badgeToneKey(source: current.source, state: state(current)) else { return nil }
+/// 완료·슬랙은 아직 안 본 것만 넣는다 — 이미 본 완료까지 넣으면 지난 세션이 수십 개 끼어든다. 지금 세션은 늘 넣는다.
+func sameStateSessions(as current: StatePayload, in sessions: [StatePayload], state: (StatePayload) -> PetState,
+                       needsAttention: (StatePayload) -> Bool) -> [StatePayload] {
+    guard let key = badgeToneKey(source: current.source, state: state(current)) else { return [] }
     let unreadOnly = key == "done" || key == "slack"
-    let group = sessions.filter {
+    return sessions.filter {
         !$0.isClosed && badgeToneKey(source: $0.source, state: state($0)) == key
             && ($0.id == current.id || !unreadOnly || needsAttention($0))
     }
         .sorted { $0.id < $1.id }
+}
+
+/// 이름표 배지의 숫자 칩. 지금 말풍선에 보이는 상태의 「몇 번째/몇 개」 하나만 띄운다. 슬랙 말풍선이면 슬랙 개수다.
+/// 같은 상태가 2개 이상일 때만 띄운다 — 1개면 말풍선과 레토 색으로 이미 보인다 (2026-11-04 luxia).
+/// 주황 완료 말풍선 위에 초록 작업 중 숫자가 뜨면 무슨 숫자인지 읽히지 않는다.
+func badgeChips(selected: StatePayload, in sessions: [StatePayload], state: (StatePayload) -> PetState,
+                needsAttention: (StatePayload) -> Bool) -> [BadgeChip] {
+    guard let key = badgeToneKey(source: selected.source, state: state(selected)) else { return [] }
+    let group = sameStateSessions(as: selected, in: sessions, state: state, needsAttention: needsAttention)
+    guard group.count >= 2, let index = group.firstIndex(where: { $0.id == selected.id }) else { return [] }
+    return [BadgeChip(tone: key, count: group.count, position: index + 1)]
+}
+
+/// 말풍선을 눌렀을 때 다음에 보여 줄 같은 상태의 세션. 같은 상태가 하나뿐이면 nil.
+func nextSameStateSession(after current: StatePayload, in sessions: [StatePayload], state: (StatePayload) -> PetState,
+                          needsAttention: (StatePayload) -> Bool) -> StatePayload? {
+    let group = sameStateSessions(as: current, in: sessions, state: state, needsAttention: needsAttention)
     guard group.count >= 2, let index = group.firstIndex(where: { $0.id == current.id }) else { return nil }
     return group[(index + 1) % group.count]
 }

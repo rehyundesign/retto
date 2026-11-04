@@ -502,7 +502,7 @@ final class RettoView: NSView {
 
     override func hitTest(_ point: NSPoint) -> NSView? {
         let local = convert(point, from: superview)
-        guard petClickTarget(layout: layout, badgeFrame: badgeFrame, point: local, attentionCount: attentionCount) != nil else { return nil }
+        guard petClickTarget(layout: layout, badgeFrame: badgeFrame, point: local, attentionCount: badgeChips.count) != nil else { return nil }
         return super.hitTest(point)
     }
 
@@ -516,7 +516,7 @@ final class RettoView: NSView {
 
     private func updateHover(at point: NSPoint) {
         let layout = self.layout
-        let target = petClickTarget(layout: layout, badgeFrame: badgeFrame, point: point, attentionCount: attentionCount)
+        let target = petClickTarget(layout: layout, badgeFrame: badgeFrame, point: point, attentionCount: badgeChips.count)
 
         let wasBadgeHovering = isBadgeHovering
         isBadgeHovering = target == .badge
@@ -682,7 +682,7 @@ final class RettoView: NSView {
         dragStartMouseLocation = NSEvent.mouseLocation
         dragStartWindowOrigin = window?.frame.origin
         let local = convert(event.locationInWindow, from: nil)
-        pressedTarget = petClickTarget(layout: layout, badgeFrame: badgeFrame, point: local, attentionCount: attentionCount)
+        pressedTarget = petClickTarget(layout: layout, badgeFrame: badgeFrame, point: local, attentionCount: badgeChips.count)
         didDrag = false
         if pressedTarget == .badge {
             isBadgePressed = true
@@ -1134,6 +1134,11 @@ final class RettoView: NSView {
     }
 
     /// 이름표 오른쪽 위에 걸터앉는 알림 배지. 흰 테두리로 이름표 색과 분리한다.
+    /// 「2/3」 — 같은 상태 중 지금 말풍선이 몇 번째인지. 눌러서 넘길 때 한 바퀴 돌았는지 보인다.
+    private func badgeLabel(_ chip: BadgeChip) -> String {
+        chip.count > 99 ? "\(min(chip.position, 99))/99+" : "\(chip.position)/\(chip.count)"
+    }
+
     private func drawAttentionBadge(ribbon: NSRect, scale: CGFloat) {
         let appear = easeOutBack(badgeAppearProgress)
         let visualScale = badgeVisualScale * (0.7 + 0.3 * appear)
@@ -1147,7 +1152,7 @@ final class RettoView: NSView {
         var rects: [NSRect] = []
         var right = base.maxX
         for chip in badgeChips.reversed() {
-            let label = chip.count > 99 ? "99+" : "\(chip.count)"
+            let label = badgeLabel(chip)
             let width = max(base.width, label.size(withAttributes: [.font: font]).width + 10 * scale)
             rects.insert(NSRect(x: right - width, y: base.minY, width: width, height: base.height), at: 0)
             right -= width + gap
@@ -1178,7 +1183,7 @@ final class RettoView: NSView {
                 pill.fill()
             }
             let attributes: [NSAttributedString.Key: Any] = [.font: font, .foregroundColor: tone.text.withAlphaComponent(alpha)]
-            let label = chip.count > 99 ? "99+" : "\(chip.count)"
+            let label = badgeLabel(chip)
             let size = label.size(withAttributes: attributes)
             label.draw(at: NSPoint(x: rect.midX - size.width / 2, y: rect.midY - size.height / 2), withAttributes: attributes)
         }
@@ -1221,7 +1226,7 @@ final class RettoView: NSView {
         // 한글 12자 폭이 상한이다. 영문처럼 좁은 글자는 12자를 넘어도 이 폭까지는 다 보인다.
         let labelBudget = (sectionLabelWidthSample as NSString).size(withAttributes: nameAttributes).width
         // 오른쪽 배지와 부딧치지 않는 선까지만 허용한다.
-        let badgeGuard = ribbonRect.width - 14 * scale - ((inputCount > 0 ? 65 : attentionBadgeSide) + 14) * scale - 10 * scale
+        let badgeGuard = ribbonRect.width - 14 * scale - ((badgeChips.isEmpty ? attentionBadgeSide : 40) + 14) * scale - 10 * scale
         let nameTextBudget = min(labelBudget, max(40 * scale, badgeGuard - namePadding * 2))
         let name = fittedSingleLine(sectionLabel(), maxWidth: nameTextBudget, attributes: nameAttributes)
         let nameWidth = name.size(withAttributes: nameAttributes).width + namePadding * 2
