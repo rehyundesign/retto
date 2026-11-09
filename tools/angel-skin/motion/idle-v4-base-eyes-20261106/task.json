@@ -1,0 +1,34 @@
+{
+  "mode": "still-repair",
+  "scope": "same-pose eye/eyelid appearance repair on14 open-eye frames of retained16-drawing idle; preserve approved motion entirely",
+  "user_correction": "restore default Retto eye-to-face proportions, not tiny eyes. Motion approved; reduce excessive exposed sclera through eyelid/gaze, not by shrinking eye apertures.",
+  "closed_eyes_preserved": [
+    "05",
+    "12"
+  ],
+  "preserve": [
+    "every pixel outside two tightly protected main-eye masks",
+    "all alpha",
+    "head/neck/body/face size and placement",
+    "pets, star, wings, paws, tail and all motions",
+    "all3.2s clocks and original effects",
+    "all other6 states"
+  ],
+  "status": "default-eye-proportion repair candidate; user review pending",
+  "native_installed": false,
+  "anchor_review": "00 patched eye region viewed: naturally rounded iris-filled blue-grey eyes, close to original eye/face ratios; original body/face outline/nose/mouth and both pets remain exact. Closed happy05/12 retained.",
+  "retained_independent_complete_drawings": 16,
+  "open_eye_regions_repaired": 14,
+  "closed_smiling_drawings_retained": 2,
+  "source_pose_ms": 200,
+  "effect_ms": 50,
+  "cycle_ms": 3200,
+  "review_gif": "review/idle.gif",
+  "transparent_animation": "review/night.webp",
+  "motion_approval": "user explicitly likes the v3 motion; retain every body/pet/star/effect motion and all alpha",
+  "eye_guidance": {
+    "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v4-base-eyes-20261106/reference-proportions.json",
+    "sha256": "f30faeed32759620f1fee6387a87f6f82060ff6fa452e262ac2531c34108a16b"
+  },
+  "original_registration": "inherited unverified; manual eye/face guide is not full anatomical certification"
+}

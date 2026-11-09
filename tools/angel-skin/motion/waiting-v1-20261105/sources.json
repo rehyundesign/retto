@@ -1,0 +1,514 @@
+[
+  {
+    "id": "00",
+    "path": "character/00.png",
+    "sha256": "42a1f7733ad78dcee214d2e3e5970fd6a3fcb8692ff36f0c6fb2c1d736e4b73f",
+    "raw_sha256": "52ee966de13cb68472f69904b24f67d7408a7f32f7a807fad220fb821c6d6b1a",
+    "raw_size": [
+      1254,
+      1254
+    ],
+    "method": "independent complete-character drawing; fixed-camera uniform resolution conversion; rigid character-only support registration before FX",
+    "support_proxy_before": {
+      "x": 246.0,
+      "y": 484,
+      "width": 127
+    },
+    "support_proxy_reference": {
+      "x": 245.5,
+      "y": 484,
+      "width": 126
+    },
+    "registration_translation_scene_px": [
+      0,
+      0
+    ],
+    "fixed_preview_padding_px": [
+      16,
+      0,
+      16,
+      0
+    ],
+    "original_anatomical_landmarks": "unverified; foot proxies are not anatomical certification"
+  },
+  {
+    "id": "01",
+    "path": "character/01.png",
+    "sha256": "a0eee2e1715b8c8d459f567b434d17a36aa71c4bd37ac0323df9580fefd832fc",
+    "raw_sha256": "3b3042f8445dd65fd316c08c1f0f9245f70267a75db941ca144a1f641f65ff72",
+    "raw_size": [
+      1254,
+      1254
+    ],
+    "method": "independent complete-character drawing; fixed-camera uniform resolution conversion; rigid character-only support registration before FX",
+    "support_proxy_before": {
+      "x": 245.5,
+      "y": 484,
+      "width": 126
+    },
+    "support_proxy_reference": {
+      "x": 245.5,
+      "y": 484,
+      "width": 126
+    },
+    "registration_translation_scene_px": [
+      0,
+      0
+    ],
+    "fixed_preview_padding_px": [
+      16,
+      0,
+      16,
+      0
+    ],
+    "original_anatomical_landmarks": "unverified; foot proxies are not anatomical certification"
+  },
+  {
+    "id": "02",
+    "path": "character/02.png",
+    "sha256": "51e2d98ab38b57b70626ddf43a7858ae47cafbc972e74da0ba8892f9aa2fc1e9",
+    "raw_sha256": "54ba915e3ea0ef38f07ec856965e81253b059a2950f4ec462e066bea9971c3ec",
+    "raw_size": [
+      1254,
+      1254
+    ],
+    "method": "independent complete-character drawing; fixed-camera uniform resolution conversion; rigid character-only support registration before FX",
+    "support_proxy_before": {
+      "x": 246.0,
+      "y": 484,
+      "width": 127
+    },
+    "support_proxy_reference": {
+      "x": 245.5,
+      "y": 484,
+      "width": 126
+    },
+    "registration_translation_scene_px": [
+      0,
+      0
+    ],
+    "fixed_preview_padding_px": [
+      16,
+      0,
+      16,
+      0
+    ],
+    "original_anatomical_landmarks": "unverified; foot proxies are not anatomical certification"
+  },
+  {
+    "id": "03",
+    "path": "character/03.png",
+    "sha256": "df49407ded926dbb1622db63c299c3b1cbe65954e143716cd7a6adb0ebc27524",
+    "raw_sha256": "4d3e81d7eb989a4990d7ebd24a2ba81558e6fac62bd7089fa609b4774071e877",
+    "raw_size": [
+      1254,
+      1254
+    ],
+    "method": "independent complete-character drawing; fixed-camera uniform resolution conversion; rigid character-only support registration before FX",
+    "support_proxy_before": {
+      "x": 246.5,
+      "y": 484,
+      "width": 126
+    },
+    "support_proxy_reference": {
+      "x": 245.5,
+      "y": 484,
+      "width": 126
+    },
+    "registration_translation_scene_px": [
+      -1,
+      0
+    ],
+    "fixed_preview_padding_px": [
+      16,
+      0,
+      16,
+      0
+    ],
+    "original_anatomical_landmarks": "unverified; foot proxies are not anatomical certification"
+  },
+  {
+    "id": "04",
+    "path": "character/04.png",
+    "sha256": "a215aae17216dfbf6a60281dbbb802932cdccb230b7f751ad1fe8667f5346459",
+    "raw_sha256": "c4a482a1745298dbc4fb84a7117de0e3879666bf479cc64185aae46030f31027",
+    "raw_size": [
+      1254,
+      1254
+    ],
+    "method": "independent complete-character drawing; fixed-camera uniform resolution conversion; rigid character-only support registration before FX",
+    "support_proxy_before": {
+      "x": 245.5,
+      "y": 484,
+      "width": 126
+    },
+    "support_proxy_reference": {
+      "x": 245.5,
+      "y": 484,
+      "width": 126
+    },
+    "registration_translation_scene_px": [
+      0,
+      0
+    ],
+    "fixed_preview_padding_px": [
+      16,
+      0,
+      16,
+      0
+    ],
+    "original_anatomical_landmarks": "unverified; foot proxies are not anatomical certification"
+  },
+  {
+    "id": "05",
+    "path": "character/05.png",
+    "sha256": "e748b4fc11cea955cc730c741b57f17cf13cfb786f28e970de8129582c1df498",
+    "raw_sha256": "ac27229362b6fa6837d2ed86d8d4e1fa7cfcf3ae406d425c11488db78400645e",
+    "raw_size": [
+      1254,
+      1254
+    ],
+    "method": "independent complete-character drawing; fixed-camera uniform resolution conversion; rigid character-only support registration before FX",
+    "support_proxy_before": {
+      "x": 245.5,
+      "y": 484,
+      "width": 126
+    },
+    "support_proxy_reference": {
+      "x": 245.5,
+      "y": 484,
+      "width": 126
+    },
+    "registration_translation_scene_px": [
+      0,
+      0
+    ],
+    "fixed_preview_padding_px": [
+      16,
+      0,
+      16,
+      0
+    ],
+    "original_anatomical_landmarks": "unverified; foot proxies are not anatomical certification"
+  },
+  {
+    "id": "06",
+    "path": "character/06.png",
+    "sha256": "79a56f8a94155894fd07212c2406211aea368a4761bc46334b4724dd2eeac3d7",
+    "raw_sha256": "a740ae6078ab63c7a2105ff90640d69571605367f84e64c4499a334d30f6706f",
+    "raw_size": [
+      1254,
+      1254
+    ],
+    "method": "independent complete-character drawing; fixed-camera uniform resolution conversion; rigid character-only support registration before FX",
+    "support_proxy_before": {
+      "x": 245.5,
+      "y": 484,
+      "width": 126
+    },
+    "support_proxy_reference": {
+      "x": 245.5,
+      "y": 484,
+      "width": 126
+    },
+    "registration_translation_scene_px": [
+      0,
+      0
+    ],
+    "fixed_preview_padding_px": [
+      16,
+      0,
+      16,
+      0
+    ],
+    "original_anatomical_landmarks": "unverified; foot proxies are not anatomical certification"
+  },
+  {
+    "id": "07",
+    "path": "character/07.png",
+    "sha256": "60a9907982add6f0ff96ca10ac3e8f9ef340f2a03d208faaa3e45288e1ecdb50",
+    "raw_sha256": "704d4ea9aa5604b381a07228e70488588d2111e1082423d90d50f5658b30c183",
+    "raw_size": [
+      1254,
+      1254
+    ],
+    "method": "independent complete-character drawing; fixed-camera uniform resolution conversion; rigid character-only support registration before FX",
+    "support_proxy_before": {
+      "x": 245.5,
+      "y": 484,
+      "width": 126
+    },
+    "support_proxy_reference": {
+      "x": 245.5,
+      "y": 484,
+      "width": 126
+    },
+    "registration_translation_scene_px": [
+      0,
+      0
+    ],
+    "fixed_preview_padding_px": [
+      16,
+      0,
+      16,
+      0
+    ],
+    "original_anatomical_landmarks": "unverified; foot proxies are not anatomical certification"
+  },
+  {
+    "id": "08",
+    "path": "character/08.png",
+    "sha256": "4f31b9e40453ae2439b0f635c24326181e90950519533f55534853fc52893712",
+    "raw_sha256": "699b4841f57d57f90bda9fdfdfd7e32cc21998538b4fef531269705832c2451c",
+    "raw_size": [
+      1254,
+      1254
+    ],
+    "method": "independent complete-character drawing; fixed-camera uniform resolution conversion; rigid character-only support registration before FX",
+    "support_proxy_before": {
+      "x": 245.5,
+      "y": 484,
+      "width": 126
+    },
+    "support_proxy_reference": {
+      "x": 245.5,
+      "y": 484,
+      "width": 126
+    },
+    "registration_translation_scene_px": [
+      0,
+      0
+    ],
+    "fixed_preview_padding_px": [
+      16,
+      0,
+      16,
+      0
+    ],
+    "original_anatomical_landmarks": "unverified; foot proxies are not anatomical certification"
+  },
+  {
+    "id": "09",
+    "path": "character/09.png",
+    "sha256": "0c126862403231df1dc25cbdd74f78583da2b2d925cbf21da8a80308f2207ab9",
+    "raw_sha256": "2d0fad2576505b4611182170fd230d13ea94c8d5133a13bfbba8fac4c4346f9e",
+    "raw_size": [
+      1254,
+      1254
+    ],
+    "method": "independent complete-character drawing; fixed-camera uniform resolution conversion; rigid character-only support registration before FX",
+    "support_proxy_before": {
+      "x": 246.5,
+      "y": 484,
+      "width": 126
+    },
+    "support_proxy_reference": {
+      "x": 245.5,
+      "y": 484,
+      "width": 126
+    },
+    "registration_translation_scene_px": [
+      -1,
+      0
+    ],
+    "fixed_preview_padding_px": [
+      16,
+      0,
+      16,
+      0
+    ],
+    "original_anatomical_landmarks": "unverified; foot proxies are not anatomical certification"
+  },
+  {
+    "id": "10",
+    "path": "character/10.png",
+    "sha256": "9bc795459088a06ccb5a8e208efb010caf9a72532c90113875054df9c841c6f6",
+    "raw_sha256": "380d5235165637456fa4db2b493982c99050c70f847e04aa134bede15ec605eb",
+    "raw_size": [
+      1254,
+      1254
+    ],
+    "method": "independent complete-character drawing; fixed-camera uniform resolution conversion; rigid character-only support registration before FX",
+    "support_proxy_before": {
+      "x": 246.0,
+      "y": 484,
+      "width": 125
+    },
+    "support_proxy_reference": {
+      "x": 245.5,
+      "y": 484,
+      "width": 126
+    },
+    "registration_translation_scene_px": [
+      0,
+      0
+    ],
+    "fixed_preview_padding_px": [
+      16,
+      0,
+      16,
+      0
+    ],
+    "original_anatomical_landmarks": "unverified; foot proxies are not anatomical certification"
+  },
+  {
+    "id": "11",
+    "path": "character/11.png",
+    "sha256": "8ef8fa37e45f6743c7eb187479a47b0e0d1f99f53bd303755ca19c854a75df82",
+    "raw_sha256": "25a80a4cb5a7fb07fa65a3911b8b89ea757b3d13d385b82652da0014a3909f71",
+    "raw_size": [
+      1254,
+      1254
+    ],
+    "method": "independent complete-character drawing; fixed-camera uniform resolution conversion; rigid character-only support registration before FX",
+    "support_proxy_before": {
+      "x": 246.0,
+      "y": 484,
+      "width": 125
+    },
+    "support_proxy_reference": {
+      "x": 245.5,
+      "y": 484,
+      "width": 126
+    },
+    "registration_translation_scene_px": [
+      0,
+      0
+    ],
+    "fixed_preview_padding_px": [
+      16,
+      0,
+      16,
+      0
+    ],
+    "original_anatomical_landmarks": "unverified; foot proxies are not anatomical certification"
+  },
+  {
+    "id": "12",
+    "path": "character/12.png",
+    "sha256": "92bdebeb940ea3009b520037ead50682733d6ac9fe8be414d84395770d2a4550",
+    "raw_sha256": "2c979f94770246730e1ecbecd7945916d49022fb73be0c1a6fa4ab5bddec97df",
+    "raw_size": [
+      1254,
+      1254
+    ],
+    "method": "independent complete-character drawing; fixed-camera uniform resolution conversion; rigid character-only support registration before FX",
+    "support_proxy_before": {
+      "x": 245.5,
+      "y": 484,
+      "width": 126
+    },
+    "support_proxy_reference": {
+      "x": 245.5,
+      "y": 484,
+      "width": 126
+    },
+    "registration_translation_scene_px": [
+      0,
+      0
+    ],
+    "fixed_preview_padding_px": [
+      16,
+      0,
+      16,
+      0
+    ],
+    "original_anatomical_landmarks": "unverified; foot proxies are not anatomical certification"
+  },
+  {
+    "id": "13",
+    "path": "character/13.png",
+    "sha256": "b98ba89a6786c382727d79ab291c75da75229c9355cc482d249e1995538df5f6",
+    "raw_sha256": "0e1b0783496a3023af140e52e74e99fa77eb4af4e8128782d937cb4daed81551",
+    "raw_size": [
+      1254,
+      1254
+    ],
+    "method": "independent complete-character drawing; fixed-camera uniform resolution conversion; rigid character-only support registration before FX",
+    "support_proxy_before": {
+      "x": 246.0,
+      "y": 483,
+      "width": 127
+    },
+    "support_proxy_reference": {
+      "x": 245.5,
+      "y": 484,
+      "width": 126
+    },
+    "registration_translation_scene_px": [
+      0,
+      1
+    ],
+    "fixed_preview_padding_px": [
+      16,
+      0,
+      16,
+      0
+    ],
+    "original_anatomical_landmarks": "unverified; foot proxies are not anatomical certification"
+  },
+  {
+    "id": "14",
+    "path": "character/14.png",
+    "sha256": "281ebb5bfa32cb6f39533ef91737232241285bb113b5b4ddb1ed297aff96812a",
+    "raw_sha256": "e804d29c1c3b99b05d010030bf7c69b3b252585cfa3388d7b6a018852b2981db",
+    "raw_size": [
+      1254,
+      1254
+    ],
+    "method": "independent complete-character drawing; fixed-camera uniform resolution conversion; rigid character-only support registration before FX",
+    "support_proxy_before": {
+      "x": 245.5,
+      "y": 484,
+      "width": 126
+    },
+    "support_proxy_reference": {
+      "x": 245.5,
+      "y": 484,
+      "width": 126
+    },
+    "registration_translation_scene_px": [
+      0,
+      0
+    ],
+    "fixed_preview_padding_px": [
+      16,
+      0,
+      16,
+      0
+    ],
+    "original_anatomical_landmarks": "unverified; foot proxies are not anatomical certification"
+  },
+  {
+    "id": "15",
+    "path": "character/15.png",
+    "sha256": "17240ed50c401fd3fcaa9f5795377a1cab2561996336e54913b732313baa62b6",
+    "raw_sha256": "29d0d884532dd34c972c4e0d45c6e8198371faea161f0499af4515b0e3245dff",
+    "raw_size": [
+      1254,
+      1254
+    ],
+    "method": "independent complete-character drawing; fixed-camera uniform resolution conversion; rigid character-only support registration before FX",
+    "support_proxy_before": {
+      "x": 246.0,
+      "y": 484,
+      "width": 125
+    },
+    "support_proxy_reference": {
+      "x": 245.5,
+      "y": 484,
+      "width": 126
+    },
+    "registration_translation_scene_px": [
+      0,
+      0
+    ],
+    "fixed_preview_padding_px": [
+      16,
+      0,
+      16,
+      0
+    ],
+    "original_anatomical_landmarks": "unverified; foot proxies are not anatomical certification"
+  }
+]

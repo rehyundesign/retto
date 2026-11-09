@@ -1,0 +1,40 @@
+{
+  "retained_independent_complete_drawings": 16,
+  "open_eye_cosmetic_repairs": 14,
+  "closed_smile_frames_unchanged": [
+    "05",
+    "12"
+  ],
+  "source_pose_interval_ms": 200,
+  "effect_interval_ms": 50,
+  "cycle_ms": 3200,
+  "original_effect_code_and_inputs_preserved": true,
+  "entire_RGBA_unchanged_outside_eye_masks": true,
+  "all_alpha_unchanged": true,
+  "head_body_companion_motion_changed": false,
+  "opaque_star_or_grip_changed": false,
+  "native_installed": false,
+  "original_registration": "inherited unverified",
+  "media": {
+    "character.webp": {
+      "frames": 16,
+      "cycle_ms": 3200,
+      "sha256": "12ecf72555c8c9e1d54a494b99887e9efc429692ff2b1e5743bb1a59ec03cdc4"
+    },
+    "character.gif": {
+      "frames": 16,
+      "cycle_ms": 3200,
+      "sha256": "2a59b7270c04097cc82495f24ba42ed53b8def66e6ef004073f75966d37035ca"
+    },
+    "night.webp": {
+      "frames": 64,
+      "cycle_ms": 3200,
+      "sha256": "196b90f50dc0cae29671e2d906335fae77286de7a26b784bec89de93448b4986"
+    },
+    "idle.gif": {
+      "frames": 64,
+      "cycle_ms": 3200,
+      "sha256": "4f649a85acc6f4b99575203585d8e41038627d7517acad420b2b7b9daa1face3"
+    }
+  }
+}

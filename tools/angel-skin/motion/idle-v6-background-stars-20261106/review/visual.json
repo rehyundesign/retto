@@ -1,0 +1,52 @@
+{
+  "source_sha256": {
+    "00": "82b8bac930e3190945ddc8a3adf3804e2eda2c6f5d496d68d3013ab3e30ee902",
+    "01": "0fdc917e2eae3a965d579020ac8901d9a908bf02ad7c4172096ebb41195ad911",
+    "02": "a8c55ed36a8e04d1acaa361e3b843f9b9209797c44a98e35d2234e937959af89",
+    "03": "e29f319caff7b69b6746350546cf543e496e7da7cd7334bb684ff1c926751df5",
+    "04": "0730a6b90b14730a2d0a849f8067ce7a9d997c40f470b0fa63bd6f2ab56d0638",
+    "05": "9653bff71432488b686e2f4d70ac9c6877608fb54199548078538121ff56e0ca",
+    "06": "fbe31d3c020b9e72c96ed7fa0645b3d3ab902ac62818c783be9e0283142d3c44",
+    "07": "3752dbc7f91a8269aa3847851a83f67b6f9c14e856075327bf621fa6d98bbe14",
+    "08": "4526749ebfe7b8aff7e33ed8daa03888993f339ad211a4b550f118e067389add",
+    "09": "348ee7614f7c4c9ec0992acee9db431b481b5af85ecb55ee8098dce9489b51aa",
+    "10": "893b04d694c517933d1253184278c9e277732ea464fd5f1f521d7ac8a37502f9",
+    "11": "28f34882e0e60a48d62a8938209ae4e7df734937742a819c5e206c9207a2b884",
+    "12": "8d6a3bffd48411aa9a7582a61c751ee36fde846b99c57bb31d1994ad004fd35f",
+    "13": "6d0b849d5628913688937d99040f74344da4fd698977529be8ede47267a744ad",
+    "14": "d686912755f4aa6e79b9bd5db771faecd938873873fba6032f9de3a92c8a1b58",
+    "15": "27b47d89b57878057ece158225b4faf9ba0c4101859a4eb937fe9a8b6462eec3"
+  },
+  "gif_sha256": "88244b93174f1ea44fc80ceee5c8ca3d3ca2793eaa27d7bb2d9120cab2d1aace",
+  "runtime_size_comparison": {
+    "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v6-background-stars-20261106/review/runtime-dark.png",
+    "sha256": "5cf8136a0df78b349054d9723b88d97c2b68f7af1149f325212d5dbe6d77b6db"
+  },
+  "checks": {
+    "identity_eyes": {
+      "status": "pass",
+      "finding": "All16 final224px cells inspected light/dark; original character PNGs/animation unchanged, every opaque character/face/physical-star pixel exact."
+    },
+    "anatomy_grip": {
+      "status": "pass",
+      "finding": "Approved star-passing action, four-limb anatomy, actual physical-star grips, wing articulation and flying pet poses retained without redraw/warp."
+    },
+    "material_canon": {
+      "status": "pass",
+      "finding": "Small yellow five-point background stars, gentle slow drift, independently phased twinkles; original moon/feathers and blue/red companion effects retained."
+    },
+    "legibility": {
+      "status": "pass",
+      "finding": "All16 effect-on cells inspected dark/light. Added gold visible at224px, stars behind silhouettes with transparent-edge fade, no rectangle or foreground explosion."
+    },
+    "secondary_motion": {
+      "status": "unverified",
+      "finding": "Original motion retained; periodic3.2s/frozen-pose star progression checked. Actual live/native playback not observed."
+    },
+    "loop_return": {
+      "status": "unverified",
+      "finding": "Original motion retained; periodic3.2s/frozen-pose star progression checked. Actual live/native playback not observed."
+    }
+  },
+  "native_installed": false
+}

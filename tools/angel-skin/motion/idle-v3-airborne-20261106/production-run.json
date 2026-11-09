@@ -1,0 +1,310 @@
+{
+  "schema_version": 1,
+  "mode": "new-motion",
+  "resolution_scale": 2,
+  "repo": "/Users/luxia/Documents/ChatGPT/retto",
+  "task_record": {
+    "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v3-airborne-20261106/task.json",
+    "sha256": "171b62466fa96b066b47102ecea330a4d416b9968f65a85384393cfee93e78bf"
+  },
+  "references": {
+    "original_retto": {
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v3-airborne-20261106/references/original.png",
+      "sha256": "d8ddb37a8046165e35ae4a5f0825dcf739f8abfcecc34aa89a3dc2be63d8898a"
+    },
+    "material": {
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v3-airborne-20261106/references/material.png",
+      "sha256": "ddc6df1afbe77fca269cc12be30e2b2bbb8f20dd87c9138fed4e7e307293dada"
+    }
+  },
+  "body_profiles": {
+    "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v3-airborne-20261106/body-profiles.json",
+    "sha256": "ad6f11969185d2c4d33811ced3901eff33a4d50ac1e159476d8db0455101f7be"
+  },
+  "atlas_spec": null,
+  "native_review": null,
+  "groups": [
+    {
+      "id": "idle-airborne-star-game",
+      "view_stance": "seated-handovers-small-head-turns",
+      "body_profile": "original-seated-star-game",
+      "costume_master": {
+        "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v3-airborne-20261106/character/00.png",
+        "sha256": "f57112337128d68d9de1942840a3268d8623bcf5955bb24d410eca99ff21214b"
+      },
+      "drawing_policy": {
+        "retained_count": null,
+        "retained_map": null,
+        "reason": ""
+      },
+      "sources": [
+        {
+          "id": "00",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v3-airborne-20261106/character/00.png",
+          "sha256": "f57112337128d68d9de1942840a3268d8623bcf5955bb24d410eca99ff21214b",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "01",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v3-airborne-20261106/character/01.png",
+          "sha256": "3d7d06fcaf6f4cbf777a231c938200e14eb972468aad2be211a5f39f666d90b7",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "02",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v3-airborne-20261106/character/02.png",
+          "sha256": "ecfef4d3ebbcf954d3e2d9bcc0ec61e497a2590227391431a89945181257193b",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "03",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v3-airborne-20261106/character/03.png",
+          "sha256": "ea54f4fe3b8c91b461c70f33f90cb03dcde6828d40d83fba93637ccf7e0fd708",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "04",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v3-airborne-20261106/character/04.png",
+          "sha256": "86ff97551c4f271174d94ebaf6229b8406a46969365df85ce6042e14fba3018b",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "05",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v3-airborne-20261106/character/05.png",
+          "sha256": "28d9110364a845561326549d04fa673289d3aef81b3ec334743b0e67a5fc4252",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "06",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v3-airborne-20261106/character/06.png",
+          "sha256": "4639d5d9c97b3c973afe34d83f9cfbf9d2ddcb74d7fadc1c89d8cb6741ac1839",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "07",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v3-airborne-20261106/character/07.png",
+          "sha256": "8ee783bdf4e7bedf45a34e5f900de31d8cac2ac943eb37808e4649df47b5710c",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "08",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v3-airborne-20261106/character/08.png",
+          "sha256": "cbd415a4be04375d61fec8d1876d84f26416b1eb52edd006098afc6b6d4b3fe8",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "09",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v3-airborne-20261106/character/09.png",
+          "sha256": "6bf28a01a1e359b70968819bfc6e3b600680267200c6ed1bc2b4b9390e95c5d7",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "10",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v3-airborne-20261106/character/10.png",
+          "sha256": "f5cf54c9367b2d29d851434386c202eef94bc274c40564d87eb49ae852479d41",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "11",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v3-airborne-20261106/character/11.png",
+          "sha256": "556f352452c50bee424138e823b51abc56c9c1bcd1ed3ad528546a0d6033a402",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "12",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v3-airborne-20261106/character/12.png",
+          "sha256": "3f9af34c435231ccef7ea78e96ac2e4265be3b55de394475dcccb9b690608be6",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "13",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v3-airborne-20261106/character/13.png",
+          "sha256": "69d915db36cb48627ad1b25ca1ff536c11683f706ac637aae566d787e930362c",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "14",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v3-airborne-20261106/character/14.png",
+          "sha256": "36a3a57298b21204955c9d858e45c2a310715c6d2bffbf31ba3524cca9b43be3",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "15",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v3-airborne-20261106/character/15.png",
+          "sha256": "9468f827d4e8cbf4420a957150acf9ed6f83794cb1c2b03abe4d86b671f9ff31",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        }
+      ],
+      "playback_ids": [
+        "00",
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08",
+        "09",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15"
+      ],
+      "pose_durations_ms": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "cycle_ms": 3200,
+      "review_gif": {
+        "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v3-airborne-20261106/review/idle.gif",
+        "sha256": "e2a7f14ab13bc57f46a41265bd19a7cd40909da89854f1147f48080dce0147a5"
+      },
+      "visual_review": {
+        "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v3-airborne-20261106/review/visual.json",
+        "sha256": "b79494dcb6c4d404e1aee915f6095951c9cfb277a422a65d735cb0e10ccea410"
+      },
+      "approved_character_lock": null,
+      "runtime_states": [
+        "idle"
+      ],
+      "destination_cells": [],
+      "source_provenance": {
+        "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v3-airborne-20261106/sources.json",
+        "sha256": "aa71b0eed28105d314a22ec3284ecde7037142f7c574bafbc615d22dc0cbb3cc"
+      },
+      "transparent_animation": {
+        "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v3-airborne-20261106/review/night.webp",
+        "sha256": "f3c8bfd7028f76b8f4b56d913f4f5b7445f71a5697d71c7abf9ef0ad27daee50"
+      }
+    }
+  ]
+}

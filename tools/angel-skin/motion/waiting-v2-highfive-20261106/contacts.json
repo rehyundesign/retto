@@ -1,0 +1,61 @@
+{
+  "method": "manual pad-contact seam coordinates inspected on independent source03/04/10/11, then cleaned/registered544px comparison; coordinates are scene points, not anatomical certification",
+  "measurement_image": {
+    "path": "review/contact-beats.png",
+    "sha256": "c5066306d9e6ff2b4dd490aeac8166c95ac84ff739bed570a40838ebee5897c9"
+  },
+  "raw_sha256": {
+    "03": "472d91482956ead3d9bc1b0878ed85af451c5b4600ebe0175c7638e52e4033ea",
+    "04": "9a179ae2b395fd86f1aabc4580788036eeb7094e852181a28b602a91f8616173",
+    "10": "a888bce74f038082231085126228c1601992490486a6cf50585728a4ef4bda80",
+    "11": "1ece4e2442606c25153dfed7ceb6e7df127b975110372ea4e0a98047c6e8779d"
+  },
+  "events": [
+    {
+      "actor": "Tato",
+      "start_ms": 600,
+      "contact_source_ids": [
+        "03",
+        "04"
+      ],
+      "points": [
+        [
+          139,
+          252
+        ],
+        [
+          143,
+          269
+        ],
+        [
+          143,
+          269
+        ]
+      ],
+      "release_ms": 1000
+    },
+    {
+      "actor": "Melody",
+      "start_ms": 2000,
+      "contact_source_ids": [
+        "10",
+        "11"
+      ],
+      "points": [
+        [
+          375,
+          238
+        ],
+        [
+          367,
+          257
+        ],
+        [
+          367,
+          257
+        ]
+      ],
+      "release_ms": 2400
+    }
+  ]
+}

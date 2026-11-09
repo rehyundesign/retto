@@ -1,0 +1,17 @@
+{
+  "original16_PNGs_and_character_animation_unchanged": true,
+  "decoded_opaque_character_and_physical_star_RGBA_exact": true,
+  "decoded_alpha_outside_new_stars_exact": true,
+  "decoded_visible_outside_star_footprints_max_delta": 0,
+  "edge_alpha_max": 0,
+  "cycle_ms": 3200,
+  "export_frames": 64,
+  "all7_character_animations_unchanged": true,
+  "other6_state_effects_unchanged": true,
+  "verified_media_hashes": 92,
+  "current_states": 7,
+  "archived": 39,
+  "javascript_syntax": "pass",
+  "native_installed": false,
+  "live_browser_verified": false
+}

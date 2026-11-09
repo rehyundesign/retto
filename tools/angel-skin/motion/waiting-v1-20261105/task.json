@@ -1,0 +1,39 @@
+{
+  "scope": "one waiting GIF; pause for user approval before next state",
+  "mode": "new-motion",
+  "production_states": [
+    "waiting"
+  ],
+  "approved_previous": "running-v1-20261105/review/running.gif approved by user 2026-11-05",
+  "design_lock": "approved-idle references; smaller Retto eyes, natural ears; Tato dot/^^ eyes; Melody burgundy rectangles",
+  "action": "both companions offer outer paws toward viewer and beckon inward; Retto attentive tiny head tilt and gentle cupped wing flutter",
+  "pose_count": 16,
+  "pose_ms": 200,
+  "cycle_ms": 3200,
+  "effect_sample_ms": 50,
+  "preview_canvas": [
+    576,
+    544
+  ],
+  "native_registered": false,
+  "installed": false,
+  "original_anatomical_registration": "unverified",
+  "generation": "built-in image_gen; one independent complete drawing per pose",
+  "next_stage": "await user approval of waiting GIF before failed state",
+  "layer_order": [
+    "warm preview background",
+    "ambient gold and sparse ivory feathers",
+    "whole-character trio"
+  ],
+  "played_with_prop": null,
+  "status": "input-waiting GIF review candidate; app not modified",
+  "selected_gif": "review/waiting.gif",
+  "selected_sources": 16,
+  "framing": "fixed544 square camera plus16px side padding, no silhouette normalization or anatomical warp",
+  "matte_repair": "connected weak white-fur contours retained for Tato forehead/main crown; original source RGB and poses unchanged",
+  "unresolved": [
+    "pose-specific original anatomical landmarks",
+    "native fit and state-return transitions",
+    "user approval and live playback review"
+  ]
+}

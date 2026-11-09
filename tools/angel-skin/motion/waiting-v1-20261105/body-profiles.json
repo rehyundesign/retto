@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "original_sha256": "d8ddb37a8046165e35ae4a5f0825dcf739f8abfcecc34aa89a3dc2be63d8898a",
+  "measurement_method": "isolated-character-landmarks",
+  "profiles": {
+    "original-seated-front": {
+      "canonical_cell": "current grown Retto idle/00.png; measurements pending direct review",
+      "face_box": null,
+      "torso_box": null,
+      "body_center_x": null,
+      "foot_baseline_y": null,
+      "tail_anchor": null,
+      "eye_line_y": null
+    }
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "idle": {
+    "character": {
+      "src": "../motion/idle-v4-base-eyes-20261106/review/character.webp?v=12ecf72555c8",
+      "sha256": "12ecf72555c8c9e1d54a494b99887e9efc429692ff2b1e5743bb1a59ec03cdc4",
+      "ms": 3200
+    },
+    "effect": {
+      "src": "../motion/idle-v4-base-eyes-20261106/review/night.webp?v=196b90f50dc0",
+      "sha256": "196b90f50dc0cae29671e2d906335fae77286de7a26b784bec89de93448b4986",
+      "ms": 3200
+    }
+  },
+  "running": {
+    "character": {
+      "src": "../motion/running-v3-proportion-20261105/review/character.webp?v=46190d567f1e",
+      "sha256": "46190d567f1e213253b1698a0dd2410e7acf0800e9b01c482d24ada2bbd8b7bf",
+      "ms": 3200
+    },
+    "effect": {
+      "src": "../motion/pet-effects-v2-clean-idle-20261106/running/night.webp?v=695214442aef",
+      "sha256": "695214442aef10fa432b010a83d017b840277dfefc2e502d266e19797e7e260a",
+      "ms": 3200
+    }
+  },
+  "waiting": {
+    "character": {
+      "src": "../motion/matte-repair-v3-holes-20261105/waiting/character.webp?v=0b9a3c4c44a7",
+      "sha256": "0b9a3c4c44a72e7d2d440ab3d3dfc2469e8db96e78118351a2fd35aa72622328",
+      "ms": 3200
+    },
+    "effect": {
+      "src": "../motion/pet-effects-v2-clean-idle-20261106/waiting/night.webp?v=0601e43dbc11",
+      "sha256": "0601e43dbc113874c1942809ff23e24f64c31d3eafe1a9ceaaffc0d4f34437fb",
+      "ms": 3200
+    }
+  },
+  "failed": {
+    "character": {
+      "src": "../motion/matte-repair-v3-holes-20261105/failed/character.webp?v=66b7bd517c72",
+      "sha256": "66b7bd517c72dfcb74c06ddb68916bdf595c12aa548482e16c3492c45446bbee",
+      "ms": 3200
+    },
+    "effect": {
+      "src": "../motion/pet-effects-v2-clean-idle-20261106/failed/night.webp?v=0a577107ded1",
+      "sha256": "0a577107ded197c538c811644aa8d372ba16716c109033750fb0f040c25e45e0",
+      "ms": 3200
+    }
+  },
+  "waving": {
+    "character": {
+      "src": "../motion/matte-repair-v3-holes-20261105/waving/character.webp?v=5c7320fd386e",
+      "sha256": "5c7320fd386ef76da05b83c30b720d4badba639037fb472c8b0af51e22651205",
+      "ms": 2400
+    },
+    "effect": {
+      "src": "../motion/pet-effects-v2-clean-idle-20261106/waving/night.webp?v=10f2bf08b471",
+      "sha256": "10f2bf08b471e9e1d1146f148df75b0d10030883bbe75b170f0e979b2d7ace26",
+      "ms": 2400
+    }
+  },
+  "jumping": {
+    "character": {
+      "src": "../motion/jumping-v3-wink-20261105/review/character.webp?v=58bb7dcc69c3",
+      "sha256": "58bb7dcc69c36a34b23428d65d4fa1719750e88f4c75c576b355e166aba95a0a",
+      "ms": 2400
+    },
+    "effect": {
+      "src": "../motion/pet-effects-v2-clean-idle-20261106/jumping/night.webp?v=e8f49c7ae997",
+      "sha256": "e8f49c7ae9972ea572b8490efd07e261d8d0b7428f83016bfae1ee926b96927c",
+      "ms": 2400
+    }
+  },
+  "sleeping": {
+    "character": {
+      "src": "../motion/sleeping-v1-20261105/review/character.webp?v=696eb8af2435",
+      "sha256": "696eb8af24351d96855db38d3db3f2b9bd7dfa607c830184314a8e83eb48c75e",
+      "ms": 6400
+    },
+    "effect": {
+      "src": "../motion/pet-effects-v2-clean-idle-20261106/sleeping/night.webp?v=4624eb7a2052",
+      "sha256": "4624eb7a20524b9e4ae58918c81d86d3b78f9ce026c7d8fd91f63963994a9740",
+      "ms": 6400
+    }
+  }
+}

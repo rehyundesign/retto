@@ -1,0 +1,514 @@
+[
+  {
+    "id": "00",
+    "path": "character/00.png",
+    "sha256": "f0fe0ce921749660c5960ae5aedf4e063c391767bab37572758aa4d98ec034c9",
+    "target_sha256": "87807b18ff6eff917afce87dade7357eab52324a4df47ee7c029b0e4f822a470",
+    "generated_sha256": "61789ab103a17eebfa8128cca79ad38a82dfbf0877a1f246942d3366e6fbbc51",
+    "eye_regions_raw": [
+      [
+        337,
+        676,
+        406,
+        741
+      ],
+      [
+        460,
+        700,
+        528,
+        766
+      ]
+    ],
+    "character_only_translation_raw": [
+      0,
+      -2
+    ],
+    "fixed_preview_padding_px": [
+      16,
+      0,
+      16,
+      0
+    ],
+    "changed_outside_permitted_regions": 0
+  },
+  {
+    "id": "01",
+    "path": "character/01.png",
+    "sha256": "0aad57749a085d163bc4c05130c5c8ffc0dddb6d6b8918e759cfde150a450aa5",
+    "target_sha256": "d815430de4cbc30dc65355b3a5902e6bd5eb0c5c40e35c768824846f985f16e4",
+    "generated_sha256": "c73a4fe18ef22bf88c52a7d5fd14675f5bad920b93e8fd01e62d36b567199e26",
+    "eye_regions_raw": [
+      [
+        326,
+        749,
+        392,
+        802
+      ],
+      [
+        433,
+        745,
+        504,
+        799
+      ]
+    ],
+    "character_only_translation_raw": [
+      0,
+      1
+    ],
+    "fixed_preview_padding_px": [
+      16,
+      0,
+      16,
+      0
+    ],
+    "changed_outside_permitted_regions": 0
+  },
+  {
+    "id": "02",
+    "path": "character/02.png",
+    "sha256": "491692db4852131ba44747c562308a9cdca082896722be778eed19ce70bcd5d9",
+    "target_sha256": "69abbd677d81c2a17b2fdf691e25cea27c4ec2d316e64a40e8b36369cd603cba",
+    "generated_sha256": "b2036b35ad5691e07315a8e0bb48c8c48981a522016eb8c74db30644c4d3fa6c",
+    "eye_regions_raw": [
+      [
+        318,
+        752,
+        387,
+        809
+      ],
+      [
+        424,
+        731,
+        496,
+        790
+      ]
+    ],
+    "character_only_translation_raw": [
+      0,
+      0
+    ],
+    "fixed_preview_padding_px": [
+      16,
+      0,
+      16,
+      0
+    ],
+    "changed_outside_permitted_regions": 0
+  },
+  {
+    "id": "03",
+    "path": "character/03.png",
+    "sha256": "b2915f3b2aef1c22017f7368eecf79348bcbdaf97aec600c4a76ea1e6620b1c5",
+    "target_sha256": "427f272f94e4c3be6a0e82481a0728fd0b4ee13ec19f6ebade8373ebc52ad608",
+    "generated_sha256": "6a6844f3bcd897d99c57f6b8c8bfe8c84fd85af0aa056eb5c19bd9e1da41d8e0",
+    "eye_regions_raw": [
+      [
+        329,
+        746,
+        396,
+        800
+      ],
+      [
+        437,
+        734,
+        507,
+        792
+      ]
+    ],
+    "character_only_translation_raw": [
+      0,
+      1
+    ],
+    "fixed_preview_padding_px": [
+      16,
+      0,
+      16,
+      0
+    ],
+    "changed_outside_permitted_regions": 0
+  },
+  {
+    "id": "04",
+    "path": "character/04.png",
+    "sha256": "aca3b1309e93a6a3663ac01c6bae14afc293dc196247a5cebdfa77dfd40a8a60",
+    "target_sha256": "71745de046851edd8a63eb8354967870975ae0421998cb2ee95938997bf5811c",
+    "generated_sha256": "7e60f86b88f5f4488d539e2e3a8cc6765d246bc1e93c0290c3e80221c0b4bc07",
+    "eye_regions_raw": [
+      [
+        325,
+        744,
+        391,
+        802
+      ],
+      [
+        435,
+        740,
+        505,
+        800
+      ]
+    ],
+    "character_only_translation_raw": [
+      0,
+      1
+    ],
+    "fixed_preview_padding_px": [
+      16,
+      0,
+      16,
+      0
+    ],
+    "changed_outside_permitted_regions": 0
+  },
+  {
+    "id": "05",
+    "path": "character/05.png",
+    "sha256": "a4c3b2aa5122aae985cb1cd1cdab712bf7bab78e8b0d424c1a6aa37aab1a5ca6",
+    "target_sha256": "a6a1ebd42820e160771f5833f458524410b363239269841b0645f62afa963e66",
+    "generated_sha256": "53588f071c148e9b616e7810020e24b3dc92836f8acd34896c3faca65b27ae12",
+    "eye_regions_raw": [
+      [
+        324,
+        702,
+        390,
+        766
+      ],
+      [
+        431,
+        730,
+        501,
+        795
+      ]
+    ],
+    "character_only_translation_raw": [
+      0,
+      1
+    ],
+    "fixed_preview_padding_px": [
+      16,
+      0,
+      16,
+      0
+    ],
+    "changed_outside_permitted_regions": 0
+  },
+  {
+    "id": "06",
+    "path": "character/06.png",
+    "sha256": "eed5ccfa1af74c65c24070685073d3d44abea2da3d4e517d23625ee6024d2a1c",
+    "target_sha256": "0a278b997f407ac3fd5aada834bf33168538c955bb0117d9c96860c7b7e13e32",
+    "generated_sha256": "a075b914e3cba7536edfcca0ac9215a5081780d644e3e0b4934c87124a394044",
+    "eye_regions_raw": [
+      [
+        324,
+        743,
+        392,
+        801
+      ],
+      [
+        434,
+        739,
+        505,
+        798
+      ]
+    ],
+    "character_only_translation_raw": [
+      0,
+      1
+    ],
+    "fixed_preview_padding_px": [
+      16,
+      0,
+      16,
+      0
+    ],
+    "changed_outside_permitted_regions": 0
+  },
+  {
+    "id": "07",
+    "path": "character/07.png",
+    "sha256": "f93cd4905f9505c5a6369ba1fb05bb84cfd25db0b891337ca136d36bd1c00c3f",
+    "target_sha256": "8148450c3eb5441754d7f9496404e6bfa64632c85c0fedf77e2a7699e29f293e",
+    "generated_sha256": "5dbca29edc101dbb2bfceef44ecd672182bf9b7e90ca252ffa6cf613b37827f3",
+    "eye_regions_raw": [
+      [
+        333,
+        734,
+        404,
+        790
+      ],
+      [
+        444,
+        710,
+        517,
+        768
+      ]
+    ],
+    "character_only_translation_raw": [
+      0,
+      0
+    ],
+    "fixed_preview_padding_px": [
+      16,
+      0,
+      16,
+      0
+    ],
+    "changed_outside_permitted_regions": 0
+  },
+  {
+    "id": "08",
+    "path": "character/08.png",
+    "sha256": "1f67dd28cada23e1151a0f999e4d8d1b3a08928337c9becc56093a3f85307551",
+    "target_sha256": "ef9a98d4e93bb38db6bbdd0adcaecd1a5a3fe6e42b47287e874c8aa781d29e65",
+    "generated_sha256": "fea9cb64790ae0677af3dc83372486b66b44b70bbc8e9bcb5af3945760739c9b",
+    "eye_regions_raw": [
+      [
+        401,
+        724,
+        471,
+        786
+      ],
+      [
+        514,
+        704,
+        583,
+        766
+      ]
+    ],
+    "character_only_translation_raw": [
+      0,
+      1
+    ],
+    "fixed_preview_padding_px": [
+      16,
+      0,
+      16,
+      0
+    ],
+    "changed_outside_permitted_regions": 0
+  },
+  {
+    "id": "09",
+    "path": "character/09.png",
+    "sha256": "356ac6012163acd37165bd7172ff7fd6d32756cc2d70a17a859090297f2e3267",
+    "target_sha256": "cd59339bffd20e35e73be10d10233393c0e52caabd9550fc0d2dcff36a2094bf",
+    "generated_sha256": "313211bc0d582a0b1ea6f44319387e75ad44e1f93feddffbae77d617239cefa2",
+    "eye_regions_raw": [
+      [
+        438,
+        693,
+        510,
+        757
+      ],
+      [
+        554,
+        670,
+        617,
+        736
+      ]
+    ],
+    "character_only_translation_raw": [
+      0,
+      2
+    ],
+    "fixed_preview_padding_px": [
+      16,
+      0,
+      16,
+      0
+    ],
+    "changed_outside_permitted_regions": 0
+  },
+  {
+    "id": "10",
+    "path": "character/10.png",
+    "sha256": "ce897a59c7b6dbeb2d97404ee161eac68a2116fe4d80878f27f1f703ce79e654",
+    "target_sha256": "f5b5cc8fa6639ded15b90125412b56b18aef4d93f0436b5ce10de214b667adf0",
+    "generated_sha256": "ddd7e681c1520caa112d58d8942afe6f1b02b4d8cc21caa2da7f51fb46ca6571",
+    "eye_regions_raw": [
+      [
+        436,
+        684,
+        509,
+        751
+      ],
+      [
+        557,
+        665,
+        623,
+        731
+      ]
+    ],
+    "character_only_translation_raw": [
+      0,
+      -2
+    ],
+    "fixed_preview_padding_px": [
+      16,
+      0,
+      16,
+      0
+    ],
+    "changed_outside_permitted_regions": 0
+  },
+  {
+    "id": "11",
+    "path": "character/11.png",
+    "sha256": "e418d3c37860a382e06aab5eaa72836d1d98b6986221ec0d5471bcd495df7500",
+    "target_sha256": "248017b26fc09b4f2af7e460b175c4f869b942d9d0a3aa41ac57622642d95f4f",
+    "generated_sha256": "dbadb8eea8f736c6ce35ac18a5f7754d6321ae9bfce9c44f5e04392208685282",
+    "eye_regions_raw": [
+      [
+        454,
+        697,
+        527,
+        762
+      ],
+      [
+        572,
+        676,
+        635,
+        740
+      ]
+    ],
+    "character_only_translation_raw": [
+      0,
+      3
+    ],
+    "fixed_preview_padding_px": [
+      16,
+      0,
+      16,
+      0
+    ],
+    "changed_outside_permitted_regions": 0
+  },
+  {
+    "id": "12",
+    "path": "character/12.png",
+    "sha256": "f7fbe0c180943d05e8c6c0092a502e5e39fe56bfab1fe11c4a1007b2a90d1095",
+    "target_sha256": "6be93f7b0d1fa349fe1b90e37b440522caa431016d9ddbbe1cc1d05e56df66b8",
+    "generated_sha256": "ac23f49316a70490a8c8375b5296edd3dd1463ec6d86b9bb395a67e4b029965c",
+    "eye_regions_raw": [
+      [
+        445,
+        653,
+        517,
+        720
+      ],
+      [
+        548,
+        613,
+        610,
+        677
+      ]
+    ],
+    "character_only_translation_raw": [
+      0,
+      11
+    ],
+    "fixed_preview_padding_px": [
+      16,
+      0,
+      16,
+      0
+    ],
+    "changed_outside_permitted_regions": 0
+  },
+  {
+    "id": "13",
+    "path": "character/13.png",
+    "sha256": "f036f8c5b880123e70bcce8138016c37a343a67fb525a5b2c82cf58181bdb817",
+    "target_sha256": "183795cdc28f394ea2e241cfb638f4df764036f4b6f19096125a8d34ef691a15",
+    "generated_sha256": "bbca3d90397dc9f1957f12043f8f9571ec159b7aad6c312683451b43e20207af",
+    "eye_regions_raw": [
+      [
+        417,
+        696,
+        463,
+        743
+      ],
+      [
+        544,
+        681,
+        611,
+        734
+      ]
+    ],
+    "character_only_translation_raw": [
+      0,
+      -2
+    ],
+    "fixed_preview_padding_px": [
+      16,
+      0,
+      16,
+      0
+    ],
+    "changed_outside_permitted_regions": 0
+  },
+  {
+    "id": "14",
+    "path": "character/14.png",
+    "sha256": "1f813cafd5bfcd548fcb8aa2972dd200054a124ce79f5b4770885218db4ad16b",
+    "target_sha256": "3afd63354166077dc336cfabb5a42dc1452f3e31a03f85fb3133d6c30453736d",
+    "generated_sha256": "27889bbf087f24a7cb225a035ce944547e8c0c85be7a5437c6dc44f72779b848",
+    "eye_regions_raw": [
+      [
+        378,
+        686,
+        451,
+        739
+      ],
+      [
+        501,
+        682,
+        576,
+        736
+      ]
+    ],
+    "character_only_translation_raw": [
+      0,
+      16
+    ],
+    "fixed_preview_padding_px": [
+      16,
+      0,
+      16,
+      0
+    ],
+    "changed_outside_permitted_regions": 0
+  },
+  {
+    "id": "15",
+    "path": "character/15.png",
+    "sha256": "3db22e794710ef33f4202b3c5d1e52dd279f1465a5530bc3f43a51ab251ce4f1",
+    "target_sha256": "6670ddef0275ab0bbbc0fd0e5b3a0dacaab222554bd493c58c544a73ea5cb26f",
+    "generated_sha256": "a5f450bb8970e187b890ac1449f67c23d9769489e4e4448f1841aeb5b77a8b3b",
+    "eye_regions_raw": [
+      [
+        326,
+        679,
+        393,
+        743
+      ],
+      [
+        443,
+        704,
+        512,
+        770
+      ]
+    ],
+    "character_only_translation_raw": [
+      0,
+      -2
+    ],
+    "fixed_preview_padding_px": [
+      16,
+      0,
+      16,
+      0
+    ],
+    "changed_outside_permitted_regions": 0
+  }
+]

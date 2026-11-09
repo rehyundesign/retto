@@ -1,0 +1,22 @@
+{
+  "mode": "effect-repair",
+  "scope": "idle only: small natural yellow background stars, gentle drift and staggered twinkle, behind unchanged characters",
+  "preserve": "approved idle-v5 entire16 drawings/face/paws/physical star game/flying pets/blue-red effects/moon/feathers/3.2s cadence",
+  "edge": "smooth transparent fade at all cell edges, no scene rectangle",
+  "native_installed": false,
+  "pending_completion": "all three smile, cheer with both arms and wave; keep one-motion-at-a-time review",
+  "status": "background-star effect repair candidate; user review pending",
+  "renderer": {
+    "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v6-background-stars-20261106/render.py",
+    "sha256": "c93dd4ef50ac80219149981fa08e1bbff1bfdcd45392d57a853011fe5f6eb5a4"
+  },
+  "validation": {
+    "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v6-background-stars-20261106/review/validation.json",
+    "sha256": "3e7bc2d10d3ad389f0b641c0e4f95e573b9d7a9ce0b896b1bb9fc7a7a47a15db"
+  },
+  "approved_character_lock": {
+    "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v6-background-stars-20261106/pre-edit-lock.json",
+    "sha256": "59b6a5f3a014f94c5482ce4dcbf0df5db7c7b223f29ed78f735f9f0ae7649ae8"
+  },
+  "original_registration": "inherited unverified; original characters unchanged, no native installation"
+}
