@@ -1,0 +1,17 @@
+{
+  "installed_scene_samples_pixel_identical_to_approved_HTML": 416,
+  "all7_source_character_movies_unchanged": true,
+  "all30197_previous_resources_unchanged": true,
+  "codesign": "pass",
+  "selected_skin": "angelWings",
+  "actual_app_observation": {
+    "method": "CUA real installed app context-menu switch classic->angelWings at unchanged size setting",
+    "observed_main_body": "classic ears approxy154 through paws435 vs angel approxy147 through paws437 in same668x640 app screenshot; perspective/gesture vary but body height within3percent",
+    "observed_states": [
+      "waving"
+    ],
+    "wings_companions_uncropped": true,
+    "complete_native_state_coverage": "7 states+review alias at3 native fixture times; actual live observation limited to completion"
+  },
+  "original_landmarks_certification": "unverified; full105-error production/atlas certification did not pass; separate scoped native self-tests and real app comparison passed"
+}

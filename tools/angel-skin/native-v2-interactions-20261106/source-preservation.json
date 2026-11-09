@@ -1,0 +1,12 @@
+{
+  "installed_source_files": 47,
+  "unchanged_sources": 45,
+  "patched_existing_sources": [
+    "PetView.swift",
+    "main.swift"
+  ],
+  "added_sources": [
+    "AngelInteractions.swift"
+  ],
+  "prior_resource_hashes_preserved": 30614
+}

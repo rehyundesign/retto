@@ -1,0 +1,49 @@
+{
+  "installed": "/Users/luxia/Applications/Retto.app",
+  "executableSha256": "69a30dde6ae8718ae1895aac13080b3f48e5e2c57755ff03749b7bd0bf44912c",
+  "binaryBefore": "11bdcc4ac7736494d1e009dbf4de6872ad1086a86c658b64e288691ecb1ea5bf",
+  "preserved_resources": 30197,
+  "added_angel_files": 417,
+  "signatureVerified": true,
+  "sourceArchive": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/native-v1-20261106/source-snapshot.tar.gz",
+  "sourceArchive_sha256": "d93bb698d2661fdd9390e8dfa2caa111b5bdd835b7b5f9f28db20308e34a979c",
+  "source_files": 47,
+  "backup": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/native-v1-20261106/recovery",
+  "installed_checks": {
+    "--angel-self-test": "PASS Angel:7 states,16 retained drawings each,10/20Hz scene/effect samples,exact2.4/3.2/6.4s clocks,body-derived uniform fit and support,overscan at7 scales; review aliases running; legacy drag retained\n",
+    "--angel-state-self-test": "PASS Angel:7 states,16 retained drawings each,10/20Hz scene/effect samples,exact2.4/3.2/6.4s clocks,body-derived uniform fit and support,overscan at7 scales; review aliases running; legacy drag retained\nPASS Angel actual state transitions,review-to-running alias,gaze gate,legacy drag,click returns to sleep\n",
+    "--self-test-all-skins": "{\"jeanneOK\":true,\"cells\":160,\"gaze\":16,\"timing\":\"v56\"}\nJeanne v56 independent back/front effects and pose-attached light: true\n{\"completeFrameResources\":true,\"ok\":true,\"skinCount\":15,\"skins\":[{\"available\":true,\"skin\":\"classic\"},{\"available\":true,\"skin\":\"howl\"},{\"available\":true,\"skin\":\"chocolatHeart\"},{\"available\":true,\"skin\":\"angelWings\"},{\"available\":true,\"skin\":\"bee\"},{\"available\":true,\"skin\":\"bunny\"},{\"available\":true,\"skin\":\"rilakkuma\"},{\"available\":true,\"skin\":\"rilakkumaCape\"},{\"available\":true,\"skin\":\"magicalHeart\"},{\"available\":true,\"skin\":\"christmas\"},{\"available\":true,\"skin\":\"hana\"},{\"available\":true,\"skin\":\"amuRan\"},{\"available\":true,\"skin\":\"pichiPitch\"},{\"available\":true,\"skin\":\"jeanne\"},{\"available\":true,\"skin\":\"hachupingping\"}]}\n",
+    "--amu-random-state-test": "PASS Amu choice: all4 working/all2 completion outcomes, stable repeated refresh/review alias, new episode/session redraws\nPASS actual Amu: stable4-way work, review phase preserved, stable2-way completion beyond60s, no idle fallback, click returns to same completion\n"
+  },
+  "selected_skin_verified": true,
+  "actual_app_appearance_verified": true,
+  "display_fit": {
+    "basis": "body landmarks at source resolution, not cell or effect alpha bounds",
+    "reference": "installed ClassicGrownFrames/idle/00.png 448x640",
+    "reference_ear_to_front_paw_span_px_approx": 433,
+    "angel_idle_ear_to_front_paw_span_px_approx": 404,
+    "uniform_body_scale": 1.06,
+    "displayed_span_ratio": 0.989,
+    "calibration_method": "direct side-by-side main-body review on dark/light at common units; full foreleg/torso and facial-fur outline cross-check, exclude wings/pets/tail extent from size fitting",
+    "same_view_policy": "fixed1.06 transform across all16 drawings and7 states, retain actual pose displacement; no per-frame silhouette normalization",
+    "standing_support_y_in_544_scene": 484,
+    "sleeping_support_y_in_544_scene": 468,
+    "native_ground": "628/640 from canvas top; same native baseline used by classic/Hana/Jeanne",
+    "scene_draw_width_ratio_to_pet_canvas": 1.2871428571,
+    "native_window_minimum_width": "1.30 * petWidth +12 * petScale, only angel; prevents fitting main body down to wings and companion bounds",
+    "original_all_landmarks_certification": "inherited unverified; this is a display/body-span calibration, not original anatomy certification"
+  },
+  "original_anatomical_landmarks_certification": "inherited unverified",
+  "selected_skin": "angelWings",
+  "app_restart_verified": true,
+  "live_comparison": {
+    "method": "CUA real installed app context-menu switch classic->angelWings at unchanged size setting",
+    "observed_main_body": "classic ears approxy154 through paws435 vs angel approxy147 through paws437 in same668x640 app screenshot; perspective/gesture vary but body height within3percent",
+    "observed_states": [
+      "waving"
+    ],
+    "wings_companions_uncropped": true,
+    "complete_native_state_coverage": "7 states+review alias at3 native fixture times; actual live observation limited to completion"
+  },
+  "ui_completion": "Applied angel skin at body scale"
+}

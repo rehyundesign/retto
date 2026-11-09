@@ -1,0 +1,16 @@
+{
+  "basis": "body landmarks at source resolution, not cell or effect alpha bounds",
+  "reference": "installed ClassicGrownFrames/idle/00.png 448x640",
+  "reference_ear_to_front_paw_span_px_approx": 433,
+  "angel_idle_ear_to_front_paw_span_px_approx": 404,
+  "uniform_body_scale": 1.06,
+  "displayed_span_ratio": 0.989,
+  "calibration_method": "direct side-by-side main-body review on dark/light at common units; full foreleg/torso and facial-fur outline cross-check, exclude wings/pets/tail extent from size fitting",
+  "same_view_policy": "fixed1.06 transform across all16 drawings and7 states, retain actual pose displacement; no per-frame silhouette normalization",
+  "standing_support_y_in_544_scene": 484,
+  "sleeping_support_y_in_544_scene": 468,
+  "native_ground": "628/640 from canvas top; same native baseline used by classic/Hana/Jeanne",
+  "scene_draw_width_ratio_to_pet_canvas": 1.2871428571,
+  "native_window_minimum_width": "1.30 * petWidth +12 * petScale, only angel; prevents fitting main body down to wings and companion bounds",
+  "original_all_landmarks_certification": "inherited unverified; this is a display/body-span calibration, not original anatomy certification"
+}

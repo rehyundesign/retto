@@ -1,0 +1,21 @@
+    func validateAngelTransitions()->Bool {
+        guard skin == .angelWings,AngelSkin.validate() else{return false}
+        func enter(_ s:PetState){
+            let data=Data("{\"state\":\"\(s.rawValue)\",\"sessionId\":\"angel-state-fixture\"}".utf8)
+            if let p=try? JSONDecoder().decode(StatePayload.self,from:data){apply(p,state:s,sessionCount:1,attentionCount:0,isPinned:false)}
+        }
+        for s in PetState.allCases {
+            enter(s)
+            guard let a=currentAnimation,let k=AngelSkin.key(row:a.row),let m=AngelSkin.manifest?.states[k],a.frames==16,abs(a.interval*16-m.cycle)<0.000001,!allowsGaze else{print("Angel state mismatch",s);return false}
+            setGazeDirectionForPreview(3);guard !hasActiveGaze else{return false};clearGaze()
+        }
+        enter(.running);let run=currentAnimation!;enter(.review)
+        guard currentAnimation?.row==run.row,currentAnimation?.interval==run.interval else{return false}
+        for d in [DragRun.left,.right]{setDragRunForPreview(d);guard currentAnimation?.row==(d == .right ? 1:2) else{return false}}
+        setDragRunForPreview(nil);enter(.sleeping);playReaction()
+        guard transientState == .jumping,currentAnimation?.row==4 else{return false}
+        angelEpoch=ProcessInfo.processInfo.systemUptime-2.401;advanceFrame()
+        guard transientState==nil,currentAnimation?.row==11 else{print("Angel click return failure");return false}
+        print("PASS Angel actual state transitions,review-to-running alias,gaze gate,legacy drag,click returns to sleep")
+        return true
+    }

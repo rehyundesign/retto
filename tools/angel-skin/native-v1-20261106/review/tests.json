@@ -1,0 +1,27 @@
+[
+  {
+    "flag": "--angel-self-test",
+    "exit": 0,
+    "output": "PASS Angel:7 states,16 retained drawings each,10/20Hz scene/effect samples,exact2.4/3.2/6.4s clocks,body-derived uniform fit and support,overscan at7 scales; review aliases running; legacy drag retained\n"
+  },
+  {
+    "flag": "--angel-state-self-test",
+    "exit": 0,
+    "output": "PASS Angel:7 states,16 retained drawings each,10/20Hz scene/effect samples,exact2.4/3.2/6.4s clocks,body-derived uniform fit and support,overscan at7 scales; review aliases running; legacy drag retained\nPASS Angel actual state transitions,review-to-running alias,gaze gate,legacy drag,click returns to sleep\n"
+  },
+  {
+    "flag": "--self-test-all-skins",
+    "exit": 0,
+    "output": "{\"jeanneOK\":true,\"cells\":160,\"gaze\":16,\"timing\":\"v56\"}\nJeanne v56 independent back/front effects and pose-attached light: true\n{\"completeFrameResources\":true,\"ok\":true,\"skinCount\":15,\"skins\":[{\"available\":true,\"skin\":\"classic\"},{\"available\":true,\"skin\":\"howl\"},{\"available\":true,\"skin\":\"chocolatHeart\"},{\"available\":true,\"skin\":\"angelWings\"},{\"available\":true,\"skin\":\"bee\"},{\"available\":true,\"skin\":\"bunny\"},{\"available\":true,\"skin\":\"rilakkuma\"},{\"available\":true,\"skin\":\"rilakkumaCape\"},{\"available\":true,\"skin\":\"magicalHeart\"},{\"available\":true,\"skin\":\"christmas\"},{\"available\":true,\"skin\":\"hana\"},{\"available\":true,\"skin\":\"amuRan\"},{\"available\":true,\"skin\":\"pichiPitch\"},{\"available\":true,\"skin\":\"jeanne\"},{\"available\":true,\"skin\":\"hachupingping\"}]}\n"
+  },
+  {
+    "flag": "--self-test",
+    "exit": 0,
+    "output": "{\"ok\":true,\"asset\":\"1792x3840\",\"skins\":15,\"skinsOK\":true,\"christmasEffects\":true,\"dragRun\":true,\"canJoinAllSpaces\":true,\"states\":8,\"deepLink\":true,\"clientRouting\":true,\"codexMenu\":true,\"integration\":true,\"setup\":true,\"legacy\":true,\"transcriptShapes\":true,\"sizePresets\":7,\"baselineLayout\":true,\"scaleDecoupled\":true,\"badgePlacement\":true,\"ribbonExpand\":true,\"lineBudget\":true,\"typefaces\":2,\"typefaceOK\":true,\"textDelta\":true,\"independentChat\":true,\"tones\":true,\"folderFold\":true,\"doneStays\":true,\"bubbleShape\":true,\"seenRule\":true,\"staleWorking\":true,\"headroomClean\":true,\"viewedElsewhere\":true,\"ancientNews\":true,\"sleeps\":true,\"sleepRow\":11,\"dozes\":true,\"displayState\":true,\"seenByLooking\":true,\"corners\":true,\"appFallback\":true,\"haloRows\":0,\"haloDeepest\":0,\"haloFaint\":40203,\"claudeRow\":true,\"font\":\"NanumMiNiSonGeurSsi\",\"fontLoaded\":true,\"multiSession\":true,\"sessionTitleFallback\":true,\"prioritySelection\":true,\"badgeLayout\":true,\"clickRouting\":true,\"sleepRowOK\":true,\"assetOK\":true,\"statesOK\":true,\"scales\":true,\"gazeStates\":true,\"label\":true,\"personalV2Layout\":true,\"codexTitleRefresh\":true,\"codexCompletionRefresh\":true,\"codexStateReconciliation\":true,\"rolloutDiscoveryPayload\":true,\"rilakkumaTiming\":true,\"unnamedTitle\":true}\n"
+  },
+  {
+    "flag": "--amu-random-state-test",
+    "exit": 0,
+    "output": "PASS Amu choice: all4 working/all2 completion outcomes, stable repeated refresh/review alias, new episode/session redraws\nPASS actual Amu: stable4-way work, review phase preserved, stable2-way completion beyond60s, no idle fallback, click returns to same completion\n"
+  }
+]
