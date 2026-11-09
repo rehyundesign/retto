@@ -1,0 +1,60 @@
+{
+  "scope": "ONE working/running GIF next after approved idle; await approval before subsequent state",
+  "mode": "new-motion",
+  "production_states": [
+    "running"
+  ],
+  "compatibility": "No separate tool-use/review motion; all work-in-progress uses running. No runtime mapping edited.",
+  "approved_design": "../idle-v2-20261105; user approved smaller open eyes, natural screen-right ear, articulated feather wings, gold light/feather language",
+  "action": "Retto crouches and gathers wings; rises and unfolds wings with one clear outward gust; Tato and Melody react with articulated balance gestures; both recover toward Retto; Retto checks them and returns to start",
+  "prop": "none held or played with in this action; yellow-star handoff belongs to approved idle",
+  "expression": "warm positive curious eyes/closed feline smile; Tato dot or^^ eyes only; Melody burgundy rectangular eyes",
+  "body_contract": "same head/body size and identity as approved master; paws/hips supported; real joint flex and continuous complete-character head/neck/chest for every new pose; no body/head patch assembly",
+  "pose_count": 16,
+  "pose_ms": 150,
+  "cycle_ms": 2400,
+  "effect_sample_ms": 50,
+  "preview_canvas": [
+    576,
+    544
+  ],
+  "not_in_scope": [
+    "other states",
+    "idle changes",
+    "app integration/installation"
+  ],
+  "next_stage": "await user approval of running GIF before any subsequent state",
+  "unresolved": [
+    "pose-specific original anatomical landmarks",
+    "native app display fit and transitions",
+    "user approval of art/live playback"
+  ],
+  "status": "working GIF review candidate; app not modified",
+  "selected_gif": "review/running.gif",
+  "selected_sources": [
+    "character/00.png",
+    "character/01.png",
+    "character/02.png",
+    "character/03.png",
+    "character/04.png",
+    "character/05.png",
+    "character/06.png",
+    "character/07.png",
+    "character/08.png",
+    "character/09.png",
+    "character/10.png",
+    "character/11.png",
+    "character/12.png",
+    "character/13.png",
+    "character/14.png",
+    "character/15.png"
+  ],
+  "framing": "fixed-camera resolution conversion to544square and16px side padding; no alpha-bound fitting or independent body scaling",
+  "refinement": "six complete anatomical in-betweens redrawn to ease neutral->crouch->upright, keeping4 main paws on floor; no head/neck/body patching",
+  "pose_groups": [
+    "neutral supported sitting",
+    "joint-flexed seated compression",
+    "upright wing-powered gust",
+    "whole-character left/right glance and recovery"
+  ]
+}

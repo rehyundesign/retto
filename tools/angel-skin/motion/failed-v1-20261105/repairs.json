@@ -1,0 +1,34 @@
+{
+  "01": {
+    "before": "raw/01-before-repair.png",
+    "prompt": "prompts/01-repair.txt",
+    "neighbours": [
+      "00",
+      "02"
+    ]
+  },
+  "06": {
+    "before": "raw/06-before-repair.png",
+    "prompt": "prompts/06-repair.txt",
+    "neighbours": [
+      "05",
+      "07"
+    ]
+  },
+  "15": {
+    "before": "raw/15-before-repair.png",
+    "prompt": "prompts/15-repair.txt",
+    "neighbours": [
+      "14",
+      "00"
+    ]
+  },
+  "02": {
+    "before": "raw/02-before-repair.png",
+    "prompt": "prompts/02-repair.txt",
+    "neighbours": [
+      "00",
+      "05"
+    ]
+  }
+}

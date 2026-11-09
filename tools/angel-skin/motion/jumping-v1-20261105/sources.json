@@ -1,0 +1,530 @@
+[
+  {
+    "id": "00",
+    "path": "character/00.png",
+    "sha256": "075b0f0cfab899f734e1b141d2335349472d6e04b76e4f5bd1bca531c247c8b2",
+    "raw_sha256": "c3c3a1f9c4395cf1cbcc8e20a032bf3fea174204f6a59cae8479d92f89c77409",
+    "raw_size": [
+      1254,
+      1254
+    ],
+    "method": "independent whole-character drawing; fixed resolution conversion; same neutral-camera calibration for all poses, preserving drawn jump height",
+    "neutral_camera_support_proxy": {
+      "x": 245.5,
+      "y": 484,
+      "width": 124
+    },
+    "support_proxy_reference": {
+      "x": 245.5,
+      "y": 484,
+      "width": 126
+    },
+    "registration_translation_scene_px": [
+      0,
+      0
+    ],
+    "per_pose_regrounding": false,
+    "fixed_preview_padding_px": [
+      16,
+      0,
+      16,
+      0
+    ],
+    "original_anatomical_landmarks": "unverified; foot proxies are not anatomical certification"
+  },
+  {
+    "id": "01",
+    "path": "character/01.png",
+    "sha256": "e05e75a728f62f14d0c2e2e24995aa21cef581207c051561e02e37e041cb26e2",
+    "raw_sha256": "0474587566f97da6201858c56865d8ded0c3402034b76936de2bfc02445ba8dd",
+    "raw_size": [
+      1254,
+      1254
+    ],
+    "method": "independent whole-character drawing; fixed resolution conversion; same neutral-camera calibration for all poses, preserving drawn jump height",
+    "neutral_camera_support_proxy": {
+      "x": 245.5,
+      "y": 484,
+      "width": 124
+    },
+    "support_proxy_reference": {
+      "x": 245.5,
+      "y": 484,
+      "width": 126
+    },
+    "registration_translation_scene_px": [
+      0,
+      0
+    ],
+    "per_pose_regrounding": false,
+    "fixed_preview_padding_px": [
+      16,
+      0,
+      16,
+      0
+    ],
+    "original_anatomical_landmarks": "unverified; foot proxies are not anatomical certification"
+  },
+  {
+    "id": "02",
+    "path": "character/02.png",
+    "sha256": "4ba9d3310f62cf42772ce6e4cd67f598331c17cdf828f2c93c52efcdf41bb3b3",
+    "raw_sha256": "af36bf4bb0423e17fbc4e42c2a31513d617b71b3865cf592555fa4d29561ffd2",
+    "raw_size": [
+      1254,
+      1254
+    ],
+    "method": "independent whole-character drawing; fixed resolution conversion; same neutral-camera calibration for all poses, preserving drawn jump height",
+    "neutral_camera_support_proxy": {
+      "x": 245.5,
+      "y": 484,
+      "width": 124
+    },
+    "support_proxy_reference": {
+      "x": 245.5,
+      "y": 484,
+      "width": 126
+    },
+    "registration_translation_scene_px": [
+      0,
+      0
+    ],
+    "per_pose_regrounding": false,
+    "fixed_preview_padding_px": [
+      16,
+      0,
+      16,
+      0
+    ],
+    "original_anatomical_landmarks": "unverified; foot proxies are not anatomical certification"
+  },
+  {
+    "id": "03",
+    "path": "character/03.png",
+    "sha256": "8206094cee0735ade870879f3761bd73be93ff44ac9cae35812b286c013d7f1b",
+    "raw_sha256": "fd07960797ee068be897e1bd24d2f55f8b5f7a73c3052fbf6aa9a9cc418441e2",
+    "raw_size": [
+      1254,
+      1254
+    ],
+    "method": "independent whole-character drawing; fixed resolution conversion; same neutral-camera calibration for all poses, preserving drawn jump height",
+    "neutral_camera_support_proxy": {
+      "x": 245.5,
+      "y": 484,
+      "width": 124
+    },
+    "support_proxy_reference": {
+      "x": 245.5,
+      "y": 484,
+      "width": 126
+    },
+    "registration_translation_scene_px": [
+      0,
+      0
+    ],
+    "per_pose_regrounding": false,
+    "fixed_preview_padding_px": [
+      16,
+      0,
+      16,
+      0
+    ],
+    "original_anatomical_landmarks": "unverified; foot proxies are not anatomical certification"
+  },
+  {
+    "id": "04",
+    "path": "character/04.png",
+    "sha256": "84e3ec701d4f9e1a9adb108f2226d400f5c68046a7ec42bf34a214cf9dde6787",
+    "raw_sha256": "e8ed596d9728dff412ae045a76d5010ef28e374ec988b64a4c1f98b47b780038",
+    "raw_size": [
+      1254,
+      1254
+    ],
+    "method": "independent whole-character drawing; fixed resolution conversion; same neutral-camera calibration for all poses, preserving drawn jump height",
+    "neutral_camera_support_proxy": {
+      "x": 245.5,
+      "y": 484,
+      "width": 124
+    },
+    "support_proxy_reference": {
+      "x": 245.5,
+      "y": 484,
+      "width": 126
+    },
+    "registration_translation_scene_px": [
+      0,
+      0
+    ],
+    "per_pose_regrounding": false,
+    "fixed_preview_padding_px": [
+      16,
+      0,
+      16,
+      0
+    ],
+    "original_anatomical_landmarks": "unverified; foot proxies are not anatomical certification"
+  },
+  {
+    "id": "05",
+    "path": "character/05.png",
+    "sha256": "5f85107a1740bd4d8e83cc54e271a81077dac6bba54a72b86fe7a305e54ef80b",
+    "raw_sha256": "fbcb444b2c356f4ea5725e71c431ecd3f9ae42543903f517558a67e1776c89c2",
+    "raw_size": [
+      1254,
+      1254
+    ],
+    "method": "independent whole-character drawing; fixed resolution conversion; same neutral-camera calibration for all poses, preserving drawn jump height",
+    "neutral_camera_support_proxy": {
+      "x": 245.5,
+      "y": 484,
+      "width": 124
+    },
+    "support_proxy_reference": {
+      "x": 245.5,
+      "y": 484,
+      "width": 126
+    },
+    "registration_translation_scene_px": [
+      0,
+      0
+    ],
+    "per_pose_regrounding": false,
+    "fixed_preview_padding_px": [
+      16,
+      0,
+      16,
+      0
+    ],
+    "original_anatomical_landmarks": "unverified; foot proxies are not anatomical certification"
+  },
+  {
+    "id": "06",
+    "path": "character/06.png",
+    "sha256": "67976bdbf2de1319b5f4780b443aab9b5ab34a735711153cd8257a1b07fc4220",
+    "raw_sha256": "b8647d8387e7cfdf63d593e9898bab016facb802f124d72c1207efe46a9d1b0a",
+    "raw_size": [
+      1254,
+      1254
+    ],
+    "method": "independent whole-character drawing; fixed resolution conversion; same neutral-camera calibration for all poses, preserving drawn jump height",
+    "neutral_camera_support_proxy": {
+      "x": 245.5,
+      "y": 484,
+      "width": 124
+    },
+    "support_proxy_reference": {
+      "x": 245.5,
+      "y": 484,
+      "width": 126
+    },
+    "registration_translation_scene_px": [
+      0,
+      0
+    ],
+    "per_pose_regrounding": false,
+    "fixed_preview_padding_px": [
+      16,
+      0,
+      16,
+      0
+    ],
+    "original_anatomical_landmarks": "unverified; foot proxies are not anatomical certification"
+  },
+  {
+    "id": "07",
+    "path": "character/07.png",
+    "sha256": "7b6b46834473cd0b7405b554f57ac53574842379431a8e6979373b69ba4577ef",
+    "raw_sha256": "c337b6e4cc37399b15b5565ca9419b33a2339c3f3f42dc6dc67b0f97ab708ccf",
+    "raw_size": [
+      1254,
+      1254
+    ],
+    "method": "independent whole-character drawing; fixed resolution conversion; same neutral-camera calibration for all poses, preserving drawn jump height",
+    "neutral_camera_support_proxy": {
+      "x": 245.5,
+      "y": 484,
+      "width": 124
+    },
+    "support_proxy_reference": {
+      "x": 245.5,
+      "y": 484,
+      "width": 126
+    },
+    "registration_translation_scene_px": [
+      0,
+      0
+    ],
+    "per_pose_regrounding": false,
+    "fixed_preview_padding_px": [
+      16,
+      0,
+      16,
+      0
+    ],
+    "original_anatomical_landmarks": "unverified; foot proxies are not anatomical certification"
+  },
+  {
+    "id": "08",
+    "path": "character/08.png",
+    "sha256": "6154c57ccd34fcdaa6f0197d683145f04da69e0bb323e3c0d8cb4a5eba808287",
+    "raw_sha256": "fa17c03449ba068060a27c6eab5231940e8bc0b89c7ef8eb1282ee083b69e753",
+    "raw_size": [
+      1254,
+      1254
+    ],
+    "method": "independent whole-character drawing; fixed resolution conversion; same neutral-camera calibration for all poses, preserving drawn jump height",
+    "neutral_camera_support_proxy": {
+      "x": 245.5,
+      "y": 484,
+      "width": 124
+    },
+    "support_proxy_reference": {
+      "x": 245.5,
+      "y": 484,
+      "width": 126
+    },
+    "registration_translation_scene_px": [
+      0,
+      0
+    ],
+    "per_pose_regrounding": false,
+    "fixed_preview_padding_px": [
+      16,
+      0,
+      16,
+      0
+    ],
+    "original_anatomical_landmarks": "unverified; foot proxies are not anatomical certification"
+  },
+  {
+    "id": "09",
+    "path": "character/09.png",
+    "sha256": "5398d5dd2b32fc42de9cdfea38924dcad5688c49aae19ae3368e3be7a71eb417",
+    "raw_sha256": "00930ace5870ed3ba3536b0ac05dc3be974021211fa4458711c57ab08abe4cfa",
+    "raw_size": [
+      1254,
+      1254
+    ],
+    "method": "independent whole-character drawing; fixed resolution conversion; same neutral-camera calibration for all poses, preserving drawn jump height",
+    "neutral_camera_support_proxy": {
+      "x": 245.5,
+      "y": 484,
+      "width": 124
+    },
+    "support_proxy_reference": {
+      "x": 245.5,
+      "y": 484,
+      "width": 126
+    },
+    "registration_translation_scene_px": [
+      0,
+      0
+    ],
+    "per_pose_regrounding": false,
+    "fixed_preview_padding_px": [
+      16,
+      0,
+      16,
+      0
+    ],
+    "original_anatomical_landmarks": "unverified; foot proxies are not anatomical certification"
+  },
+  {
+    "id": "10",
+    "path": "character/10.png",
+    "sha256": "baf3ded06f3bd277c90a40d69cbfe5bdd6dc054984cb99c721fca1206aab5eb4",
+    "raw_sha256": "dfa7ed495c6106b042b03f6553bbed5acf4f3af9b2af84c58339ec41dfa4ce44",
+    "raw_size": [
+      1254,
+      1254
+    ],
+    "method": "independent whole-character drawing; fixed resolution conversion; same neutral-camera calibration for all poses, preserving drawn jump height",
+    "neutral_camera_support_proxy": {
+      "x": 245.5,
+      "y": 484,
+      "width": 124
+    },
+    "support_proxy_reference": {
+      "x": 245.5,
+      "y": 484,
+      "width": 126
+    },
+    "registration_translation_scene_px": [
+      0,
+      0
+    ],
+    "per_pose_regrounding": false,
+    "fixed_preview_padding_px": [
+      16,
+      0,
+      16,
+      0
+    ],
+    "original_anatomical_landmarks": "unverified; foot proxies are not anatomical certification"
+  },
+  {
+    "id": "11",
+    "path": "character/11.png",
+    "sha256": "7a42c724e7535fabbec34de45143d1ccdf5666c1b36984f35f38b28769b0f244",
+    "raw_sha256": "1f73484a4c7789348de677502eda74cbeeaf9ba355d34d9c7bb18f106944da05",
+    "raw_size": [
+      1254,
+      1254
+    ],
+    "method": "independent whole-character drawing; fixed resolution conversion; same neutral-camera calibration for all poses, preserving drawn jump height",
+    "neutral_camera_support_proxy": {
+      "x": 245.5,
+      "y": 484,
+      "width": 124
+    },
+    "support_proxy_reference": {
+      "x": 245.5,
+      "y": 484,
+      "width": 126
+    },
+    "registration_translation_scene_px": [
+      0,
+      0
+    ],
+    "per_pose_regrounding": false,
+    "fixed_preview_padding_px": [
+      16,
+      0,
+      16,
+      0
+    ],
+    "original_anatomical_landmarks": "unverified; foot proxies are not anatomical certification"
+  },
+  {
+    "id": "12",
+    "path": "character/12.png",
+    "sha256": "45dd62dffb474193cc2aba84582cecf5c19a0d53e2c17adab17fc7b6b796e38a",
+    "raw_sha256": "eff7fe21649d2929ac567e6e7bc3b2559f50ab9cc7c3cdc25d5782501864b442",
+    "raw_size": [
+      1254,
+      1254
+    ],
+    "method": "independent whole-character drawing; fixed resolution conversion; same neutral-camera calibration for all poses, preserving drawn jump height",
+    "neutral_camera_support_proxy": {
+      "x": 245.5,
+      "y": 484,
+      "width": 124
+    },
+    "support_proxy_reference": {
+      "x": 245.5,
+      "y": 484,
+      "width": 126
+    },
+    "registration_translation_scene_px": [
+      0,
+      0
+    ],
+    "per_pose_regrounding": false,
+    "fixed_preview_padding_px": [
+      16,
+      0,
+      16,
+      0
+    ],
+    "original_anatomical_landmarks": "unverified; foot proxies are not anatomical certification"
+  },
+  {
+    "id": "13",
+    "path": "character/13.png",
+    "sha256": "41fdc62a2ef417afe21da6cbdf10b51151e469989a0b9dec90acac2d9dc5e6d1",
+    "raw_sha256": "931e43dc50273376d6143f9d0b3e21f72c736fa73a3044fda7c3aa5aceca3eb3",
+    "raw_size": [
+      1254,
+      1254
+    ],
+    "method": "independent whole-character drawing; fixed resolution conversion; same neutral-camera calibration for all poses, preserving drawn jump height",
+    "neutral_camera_support_proxy": {
+      "x": 245.5,
+      "y": 484,
+      "width": 124
+    },
+    "support_proxy_reference": {
+      "x": 245.5,
+      "y": 484,
+      "width": 126
+    },
+    "registration_translation_scene_px": [
+      0,
+      0
+    ],
+    "per_pose_regrounding": false,
+    "fixed_preview_padding_px": [
+      16,
+      0,
+      16,
+      0
+    ],
+    "original_anatomical_landmarks": "unverified; foot proxies are not anatomical certification"
+  },
+  {
+    "id": "14",
+    "path": "character/14.png",
+    "sha256": "f2d292cd545fde572a2a069f261af280d3a06a15cf33958862833bbb5a51a157",
+    "raw_sha256": "415cc45c938e46bcb1d41cba848248ee1f29f4b4b84e480f48d2de6e597e3408",
+    "raw_size": [
+      1254,
+      1254
+    ],
+    "method": "independent whole-character drawing; fixed resolution conversion; same neutral-camera calibration for all poses, preserving drawn jump height",
+    "neutral_camera_support_proxy": {
+      "x": 245.5,
+      "y": 484,
+      "width": 124
+    },
+    "support_proxy_reference": {
+      "x": 245.5,
+      "y": 484,
+      "width": 126
+    },
+    "registration_translation_scene_px": [
+      0,
+      0
+    ],
+    "per_pose_regrounding": false,
+    "fixed_preview_padding_px": [
+      16,
+      0,
+      16,
+      0
+    ],
+    "original_anatomical_landmarks": "unverified; foot proxies are not anatomical certification"
+  },
+  {
+    "id": "15",
+    "path": "character/15.png",
+    "sha256": "f53fe97dd4800b5c5e36305b70da46393155fadbf0afd28b5142d3e36179cfe6",
+    "raw_sha256": "5ada36f845a2941c7b11394a9e6c7794bf9bb1c947a6d94a8a9c1b633bcdfbab",
+    "raw_size": [
+      1254,
+      1254
+    ],
+    "method": "independent whole-character drawing; fixed resolution conversion; same neutral-camera calibration for all poses, preserving drawn jump height",
+    "neutral_camera_support_proxy": {
+      "x": 245.5,
+      "y": 484,
+      "width": 124
+    },
+    "support_proxy_reference": {
+      "x": 245.5,
+      "y": 484,
+      "width": 126
+    },
+    "registration_translation_scene_px": [
+      0,
+      0
+    ],
+    "per_pose_regrounding": false,
+    "fixed_preview_padding_px": [
+      16,
+      0,
+      16,
+      0
+    ],
+    "original_anatomical_landmarks": "unverified; foot proxies are not anatomical certification"
+  }
+]

@@ -1,0 +1,54 @@
+{
+  "source_sha256": {
+    "00": "6f31f96261220691cf0750dbade5414d6cbcfb6cf928057968b6f84fc496ff6d",
+    "01": "ca8e93807f60d28bd865f6b1e16168f792e392e311200615f675c07312732c8b",
+    "02": "93ab5b7cc35a0186b75b92f7c3e313cd5dc5cc80c9babc1872f41432653363d5",
+    "03": "88356b5043a1b92309385fd2a2383176c6680626d02e82411e244817a3108a5a",
+    "04": "9d253147587414ab850e1bad08e6b789113b4690b49486b3dde6dc5f870a0a26",
+    "05": "9c8d7dfd91e2f96974c640f8fd0f4344495fa2cc87466ef90b646472986a8313",
+    "06": "c66d59455ba9b0bc2e18648f1fca9d33d58552edb7e512588855879d5aca15ad",
+    "07": "18cce9d6d01ec7bfd1d1c3775e57b86e13976d0c71338c385e220451df333de5",
+    "08": "09729cc6ac3e0f14e893a5c435c0399e393185c4396abe969021c425e2433cc8",
+    "09": "2a2b920156580c4d9ca2282bf83a5a4d5defbe8770dda80275442e2a45930a4f",
+    "10": "b90c4dec752c5d2b11e478ab078d60cc4c7fe62f32237952f329216bd523e13f",
+    "11": "ab741ada9fb23722b7dac18c2dce4b936596c021d5b844b2f47a10670d6a9c14",
+    "12": "03e6511ba8a1f1c3bdd2f4944162a0b474fbfe16ace45c64e3941ff9c2e9102f",
+    "13": "029c6f53a4f5fa7f14dbc6c4d0e541de5689e9c89824d29884b7b37805a20e2c",
+    "14": "1e19b3e867a7060ee276d6f782889fcb542cc30429d7984360017cdcb6904e12",
+    "15": "840f4fbcfa7f715dd4850ee35efe09d1d72b299954061adea1c77de614d020ee"
+  },
+  "gif_sha256": "06e1170d9608caf13feb4bc1324ab71ce5a879403b5e1e9d80841038767916b6",
+  "runtime_size_comparison": {
+    "path": "review/size-comparison.png",
+    "sha256": "3ac0330eb3e7ea18f802bd0dbc7b25f7b086e567c52b1b473096be3b9b5da338"
+  },
+  "checks": {
+    "identity_eyes": {
+      "status": "pass",
+      "finding": "All16 corrected complete poses inspected on light/dark boards. Small blue-grey Retto eyes, happy blink07/08, Tato dots/^^, Melody burgundy rectangles retained."
+    },
+    "anatomy_grip": {
+      "status": "pass",
+      "finding": "All16 show two forepaws continuously cradling base and two short tucked hindfeet; compact rounded feline torso replaces rejected long legs/torso. No extra limbs or added Tato wings."
+    },
+    "material_canon": {
+      "status": "pass",
+      "finding": "Pink polygonal base, silver mirrored rim, gold rail, front heart lock, dome and two unequal-height crystals retained from supplied reference."
+    },
+    "secondary_motion": {
+      "status": "unverified",
+      "finding": "All16 static cells inspected: articulated wing strokes and companion hand/bow/ear changes. Live playback and detailed crystal rotation continuity at native draw size remain unverified."
+    },
+    "legibility": {
+      "status": "pass",
+      "finding": "Light/dark board all16 and full544px side-by-side with approved idle inspected; ear height/main face width restored, pelvis compact, pet relative sizes comparable. All64 full frames zero border alpha; lossless composites checked on dark/light."
+    },
+    "loop_return": {
+      "status": "unverified",
+      "finding": "15->00 source board and cyclic effect clock inspected,3.2s export verified; native state-return/live loop not directly observed."
+    }
+  },
+  "original_registration": "unverified; measured ear landmark is rigid display registration only",
+  "native_installed": false,
+  "user_approval": "pending"
+}

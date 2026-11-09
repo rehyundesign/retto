@@ -1,0 +1,21 @@
+{
+  "mode": "effect-repair",
+  "retained_drawings": 16,
+  "cycle_ms": 3200,
+  "effect_ms": 50,
+  "character_files_and_animation_byte_identical": true,
+  "old_full_effect_animation_unchanged": true,
+  "RGBA_unchanged_outside_registered_glass_mask": true,
+  "all_alpha_unchanged": true,
+  "distinct_light_samples": 64,
+  "frozen_pose_light_progression": true,
+  "changed_pixel_range": [
+    5236,
+    6100
+  ],
+  "night_webp_sha256": "ecba260d7290b47f65bffa4ec2b13faf6d008c9ff6cec7c4f0bfca278a292a36",
+  "native_installed": false,
+  "decoded_alpha_all64_exact": true,
+  "decoded_visible_outside_glass_max_delta": 0,
+  "light_loop_periodic": true
+}

@@ -1,0 +1,54 @@
+{
+  "source_sha256": {
+    "00": "55cbe2cbbe9383b0712468799b6d6fa9c7a5c5c7bb89ef77fc14e797ed28f04a",
+    "01": "eb15ceaff969b55268305ecf3fe8111d13e6ab27e431f4f27c08f01f76bc4e75",
+    "02": "5dca1d86f64f5e79d397649103898eb1e023ce495abd4619fcb4363a9963ca47",
+    "03": "792d245a06911118eb00d75c3c6768469e5d7d3eba50c64ffc40a2c460c8a41d",
+    "04": "7c4f649885783ed43589fc76acc624bd67bd987a40e8c55ea192dfc416a0e452",
+    "05": "50beca0093a14791d9f92d454f7ba6b203dc6df05d3f3ebbf85e323651daa819",
+    "06": "19f222ee77fdd3cf2da590f7c7c9ad7017930eeb4e82fb0f21f4173f32d9f247",
+    "07": "4f38a01a688230aad9daaa56ba67129a220b2fe031e96f8667c37ca2641f4855",
+    "08": "0bc5c65a868ba6218b035325aebddb6adb4e06f877da00bc8a02afbcfde77481",
+    "09": "d0509d3d21cdd7ed9b1afed8a55118d7ca49d21ac9810aecff18d22ea8f64547",
+    "10": "dff71533a41199bd9b71cc1b14af2175495649fef2e80435db94455d7ebbbc2d",
+    "11": "539cde260a193fadaa2c1792409706e08ef05c95e1e72c6e895ed972555e921c",
+    "12": "27ef271504240aa3cdc74af3662bc3d338f037a6f5efd8ca4807cda955873bce",
+    "13": "3672a1b7498c65cd8c9757bcd7307cb2f24d3993b02f035772b1a6ff55d150d1",
+    "14": "9751c07239f6b3fce274482605d462ac17be46229679f8b4b6d9a83f22ee2359",
+    "15": "fb2e01d6d7da77e1a68be60a381e0f31632bae7b826e3d9fbf33be04d41e188e"
+  },
+  "gif_sha256": "1d6371f5cf0926a4bb33e5a775b0dc5f3b417849455446d2a4e8a020d769de9c",
+  "runtime_size_comparison": {
+    "path": "review/size-comparison.png",
+    "sha256": "a0c4efa1e669fb9201964769b9f954b8906063ac9a1ded143c66275d38560461"
+  },
+  "checks": {
+    "identity_eyes": {
+      "status": "pass",
+      "finding": "Inspected all16 effects-off cells on light/dark boards: small blue-grey main eyes, soft closure07/08, Tato dots or^^, Melody burgundy rectangles."
+    },
+    "anatomy_grip": {
+      "status": "pass",
+      "finding": "All16 inspected: two continuous forelegs support left/right base corners, two hindfeet dangle below hips, single right-attached tail; faces unobscured. No added Tato wings."
+    },
+    "material_canon": {
+      "status": "pass",
+      "finding": "Pink polygonal base, silver rim, gold rail, front heart lock, glass dome and two different-height crystals retained. Exterior frontal while crystals change front/back positions."
+    },
+    "secondary_motion": {
+      "status": "unverified",
+      "finding": "All16 static poses show wing, companion hand/ear/bow changes; full live playback at native draw size has not been directly observed."
+    },
+    "legibility": {
+      "status": "pass",
+      "finding": "16-cell light/dark boards and first effects-on cell inspected; same-pose alpha cleanup removes generated white haze. All64 exported effect frames have zero border alpha."
+    },
+    "loop_return": {
+      "status": "unverified",
+      "finding": "Source15->00 board and cyclic effect equations inspected; actual-size live animation/state return not directly verified."
+    }
+  },
+  "original_registration": "unverified",
+  "native_installed": false,
+  "user_approval": "pending"
+}

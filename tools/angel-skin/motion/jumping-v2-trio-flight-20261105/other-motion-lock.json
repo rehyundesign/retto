@@ -1,0 +1,22 @@
+{
+  "idle": {
+    "effect": "b6b153171300a0e57c1d91b704f956c5c64391dc9ae4d49af35d7324f4ec66f3",
+    "character": "900cc90e218497b1ee1ce5af3f4f45d987ebc44c216d78c62f3c868f08773efc"
+  },
+  "running": {
+    "effect": "e2454936ca0276d4380efb72621832410bf5070a8b3c1598763421fd29dee9f7",
+    "character": "46190d567f1e213253b1698a0dd2410e7acf0800e9b01c482d24ada2bbd8b7bf"
+  },
+  "waiting": {
+    "effect": "36526a536ebf686e60dc8e4ff7d78bad0545cea0bfb80c162601bed2ad400ee5",
+    "character": "0b9a3c4c44a72e7d2d440ab3d3dfc2469e8db96e78118351a2fd35aa72622328"
+  },
+  "failed": {
+    "effect": "50cdf83c161e5425dbe2225adc3e3035e62a719a743770daa2ba2b7cd5bd751c",
+    "character": "66b7bd517c72dfcb74c06ddb68916bdf595c12aa548482e16c3492c45446bbee"
+  },
+  "waving": {
+    "effect": "8d2d6da3bd3b035f692b7c493d513858e978be44c8f992ac58de39a8b5cc20f0",
+    "character": "5c7320fd386ef76da05b83c30b720d4badba639037fb472c8b0af51e22651205"
+  }
+}

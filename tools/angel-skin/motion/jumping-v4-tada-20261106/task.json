@@ -1,0 +1,21 @@
+{
+  "mode": "effect-repair",
+  "scope": "jumping only, ornate tada at shared wink apex",
+  "preserve": "16 approved drawings, wink/flight/landing,2.4s clock, existing blue/red magic, all other states",
+  "beats": {
+    "550_1650ms": "gold burst and radiating rays, blue/rose side arcs",
+    "950_2100ms": "falling small golden stars"
+  },
+  "new_layers": "back glow/rays, front stars masked outside expanded character silhouette, all edges fade to0",
+  "native_installed": false,
+  "original_landmark_certification": "inherited unverified",
+  "status": "review candidate, no native installation",
+  "renderer": {
+    "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v4-tada-20261106/render.py",
+    "sha256": "847ccc54d164974722ff40bac6d03cc86e495074759ef4a09d0dcb93499da252"
+  },
+  "validation": {
+    "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v4-tada-20261106/review/validation.json",
+    "sha256": "90a605096aeef6ed84e012138839d89f378687060e990d8b6e6f653406b9fe7d"
+  }
+}

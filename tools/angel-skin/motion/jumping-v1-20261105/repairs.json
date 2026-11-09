@@ -1,0 +1,68 @@
+{
+  "completed": {
+    "03": {
+      "prompt": "prompts/03-repair.txt",
+      "before": "raw/03-before-repair.png",
+      "reason": "restore grounded floor/scale"
+    },
+    "11": {
+      "prompt": "prompts/11-repair.txt",
+      "before": "raw/11-before-repair.png",
+      "reason": "restore actual landing contact floor"
+    }
+  },
+  "pending": [
+    {
+      "id": "02",
+      "prompt": "prompts/02-repair.txt",
+      "references": [
+        "references/approved-idle-white.png",
+        "references/original-identity.png",
+        "references/jumping-key-00.png",
+        "references/jumping-key-03.png"
+      ],
+      "current_character_sha256": "4ba9d3310f62cf42772ce6e4cd67f598331c17cdf828f2c93c52efcdf41bb3b3",
+      "status": "not generated: usage_limit_reached",
+      "reason": "grounded sole proxy474 vs484; restore floor with whole-character crouch redraw"
+    },
+    {
+      "id": "05",
+      "prompt": "prompts/05-repair.txt",
+      "references": [
+        "references/approved-idle-white.png",
+        "references/original-identity.png",
+        "references/jumping-key-00.png",
+        "references/jumping-key-10.png"
+      ],
+      "current_character_sha256": "5f85107a1740bd4d8e83cc54e271a81077dac6bba54a72b86fe7a305e54ef80b",
+      "status": "not generated: usage_limit_reached",
+      "reason": "visible reduced main face/body scale and excessive early tuck; redo full-scale low liftoff"
+    },
+    {
+      "id": "06",
+      "prompt": "prompts/06-repair.txt",
+      "references": [
+        "references/approved-idle-white.png",
+        "references/original-identity.png",
+        "references/jumping-key-07.png",
+        "references/jumping-key-10.png"
+      ],
+      "current_character_sha256": "67976bdbf2de1319b5f4780b443aab9b5ab34a735711153cd8257a1b07fc4220",
+      "status": "not generated: usage_limit_reached",
+      "reason": "partial leg tuck needed between low liftoff and apex, retaining scale"
+    },
+    {
+      "id": "12",
+      "prompt": "prompts/12-repair.txt",
+      "references": [
+        "references/approved-idle-white.png",
+        "references/original-identity.png",
+        "references/jumping-key-11.png",
+        "references/jumping-key-13.png"
+      ],
+      "current_character_sha256": "45dd62dffb474193cc2aba84582cecf5c19a0d53e2c17adab17fc7b6b796e38a",
+      "status": "not generated: usage_limit_reached",
+      "reason": "grounded sole proxy476 vs484; landing compression must retain supported floor"
+    }
+  ]
+}

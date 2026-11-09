@@ -1,0 +1,34 @@
+{
+  "independent_drawings": 16,
+  "pose_ms": 400,
+  "cycle_ms": 6400,
+  "effect_ms": 100,
+  "effect_unique_samples": 64,
+  "effect_outer_edge_alpha_max": 0,
+  "frozen_pose_effect_progression": true,
+  "effect_loop_periodic": true,
+  "original_registration": "unverified",
+  "native_installed": false,
+  "media": {
+    "review/character.webp": {
+      "frames": 16,
+      "cycle_ms": 6400,
+      "sha256": "696eb8af24351d96855db38d3db3f2b9bd7dfa607c830184314a8e83eb48c75e"
+    },
+    "review/character.gif": {
+      "frames": 16,
+      "cycle_ms": 6400,
+      "sha256": "b920fdcd75db9abfd1b6bba917c9e7056e7caee9fe07033d5e8a283f035e7c26"
+    },
+    "review/night.webp": {
+      "frames": 64,
+      "cycle_ms": 6400,
+      "sha256": "4d1d3e5454a46087911564d183e056c327583ab2e7bbe25ec02ff6359b767bcb"
+    },
+    "review/sleeping.gif": {
+      "frames": 64,
+      "cycle_ms": 6400,
+      "sha256": "e04b91374c7c5e5055ea893a02889547830e16fb84270ef7ec73d3e6e5701e53"
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "coordinate_space": "544x544 registered character-only cell",
+  "method": "manually inspected primary-feather tip emission points; only4 actual emission poses recorded",
+  "points": {
+    "4": [
+      [
+        24,
+        206
+      ],
+      [
+        522,
+        238
+      ]
+    ],
+    "6": [
+      [
+        35,
+        168
+      ],
+      [
+        518,
+        147
+      ]
+    ],
+    "8": [
+      [
+        29,
+        165
+      ],
+      [
+        499,
+        158
+      ]
+    ],
+    "10": [
+      [
+        18,
+        280
+      ],
+      [
+        520,
+        278
+      ]
+    ]
+  },
+  "source_sha256": {
+    "4": "c236db6080bf76bea9786f02ce4b429793a7041e8a7273fcda72b2053618f6b4",
+    "6": "03af24964dfa540f27722670de17b7594fed5b1158a7e05b0fc1ea4d2b28d7a2",
+    "8": "12efded150ddcb9127dd962dc497ec76467c3d633b648bd8a3349a27e51ee74d",
+    "10": "f4d125d6f80592beba41203d60331778ad7b7a292e4d609b17a74a041360a3f0"
+  }
+}

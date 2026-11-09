@@ -1,0 +1,302 @@
+{
+  "schema_version": 1,
+  "mode": "new-motion",
+  "resolution_scale": 2,
+  "repo": "/Users/luxia/Documents/ChatGPT/retto",
+  "task_record": {
+    "path": "task.json",
+    "sha256": "7148d25bc7215a8cf82f135c015d98602047dfaf160130f7a452b02e1ee0bb54"
+  },
+  "references": {
+    "original_retto": {
+      "path": "references/original-identity.png",
+      "sha256": "d8ddb37a8046165e35ae4a5f0825dcf739f8abfcecc34aa89a3dc2be63d8898a"
+    },
+    "material": {
+      "path": "references/material.png",
+      "sha256": "ddc6df1afbe77fca269cc12be30e2b2bbb8f20dd87c9138fed4e7e307293dada"
+    }
+  },
+  "body_profiles": {
+    "path": "body-profiles.json",
+    "sha256": "06c87bdc3346f5e12fd5fb146bedc9e838331d51685900cd0df3fd1970ea8641"
+  },
+  "atlas_spec": null,
+  "native_review": null,
+  "groups": [
+    {
+      "id": "DRAFT-click-wing-hop-companion-response",
+      "view_stance": "crouch-airborne-four-paw-tuck-and-supported-landing",
+      "body_profile": "original-seated-front",
+      "costume_master": {
+        "path": "references/approved-idle.png",
+        "sha256": "f0fe0ce921749660c5960ae5aedf4e063c391767bab37572758aa4d98ec034c9"
+      },
+      "drawing_policy": {
+        "retained_count": null,
+        "retained_map": null,
+        "reason": ""
+      },
+      "sources": [
+        {
+          "id": "00",
+          "path": "character/00.png",
+          "sha256": "075b0f0cfab899f734e1b141d2335349472d6e04b76e4f5bd1bca531c247c8b2",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "01",
+          "path": "character/01.png",
+          "sha256": "e05e75a728f62f14d0c2e2e24995aa21cef581207c051561e02e37e041cb26e2",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "02",
+          "path": "character/02.png",
+          "sha256": "4ba9d3310f62cf42772ce6e4cd67f598331c17cdf828f2c93c52efcdf41bb3b3",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "03",
+          "path": "character/03.png",
+          "sha256": "8206094cee0735ade870879f3761bd73be93ff44ac9cae35812b286c013d7f1b",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "04",
+          "path": "character/04.png",
+          "sha256": "84e3ec701d4f9e1a9adb108f2226d400f5c68046a7ec42bf34a214cf9dde6787",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "05",
+          "path": "character/05.png",
+          "sha256": "5f85107a1740bd4d8e83cc54e271a81077dac6bba54a72b86fe7a305e54ef80b",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "06",
+          "path": "character/06.png",
+          "sha256": "67976bdbf2de1319b5f4780b443aab9b5ab34a735711153cd8257a1b07fc4220",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "07",
+          "path": "character/07.png",
+          "sha256": "7b6b46834473cd0b7405b554f57ac53574842379431a8e6979373b69ba4577ef",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "08",
+          "path": "character/08.png",
+          "sha256": "6154c57ccd34fcdaa6f0197d683145f04da69e0bb323e3c0d8cb4a5eba808287",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "09",
+          "path": "character/09.png",
+          "sha256": "5398d5dd2b32fc42de9cdfea38924dcad5688c49aae19ae3368e3be7a71eb417",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "10",
+          "path": "character/10.png",
+          "sha256": "baf3ded06f3bd277c90a40d69cbfe5bdd6dc054984cb99c721fca1206aab5eb4",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "11",
+          "path": "character/11.png",
+          "sha256": "7a42c724e7535fabbec34de45143d1ccdf5666c1b36984f35f38b28769b0f244",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "12",
+          "path": "character/12.png",
+          "sha256": "45dd62dffb474193cc2aba84582cecf5c19a0d53e2c17adab17fc7b6b796e38a",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "13",
+          "path": "character/13.png",
+          "sha256": "41fdc62a2ef417afe21da6cbdf10b51151e469989a0b9dec90acac2d9dc5e6d1",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "14",
+          "path": "character/14.png",
+          "sha256": "f2d292cd545fde572a2a069f261af280d3a06a15cf33958862833bbb5a51a157",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "15",
+          "path": "character/15.png",
+          "sha256": "f53fe97dd4800b5c5e36305b70da46393155fadbf0afd28b5142d3e36179cfe6",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        }
+      ],
+      "playback_ids": [
+        "00",
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08",
+        "09",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15"
+      ],
+      "pose_durations_ms": [
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150
+      ],
+      "cycle_ms": 2400,
+      "review_gif": {
+        "path": "review/jumping.gif",
+        "sha256": "600c16e7e3efabf9764cd55906ed1acb156d1019d9c156ab7c17306a98f48e3f"
+      },
+      "visual_review": {
+        "path": "review/visual.json",
+        "sha256": "091debd0c67da046e21dd242b45b28778e40de12fbf9ef45cb2b77a6f23409c6"
+      },
+      "approved_character_lock": null,
+      "runtime_states": [
+        "jumping"
+      ],
+      "destination_cells": []
+    }
+  ]
+}

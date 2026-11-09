@@ -1,0 +1,53 @@
+{
+  "source_sha256": {
+    "00": "9a4f321b74834214755d5debd9b45d0dbf7fd7fc1764581234772ac537b65542",
+    "01": "79747d757c73d642ad8d3c758b0e11c5d57f7524bd61fd2a75b51378ea1b39bc",
+    "02": "a4827eaf423a76851979776061816c236f57e5576c71bb534c0bf1d065939265",
+    "03": "4f958482fb140926f4e106720c40e4bd1ad4f0c1490e102121dfbe7829b1f986",
+    "04": "c236db6080bf76bea9786f02ce4b429793a7041e8a7273fcda72b2053618f6b4",
+    "05": "16cd0c212511b3d4ccd2f68826666d908eef79318e6fc61acb081dd3a097aa1b",
+    "06": "03af24964dfa540f27722670de17b7594fed5b1158a7e05b0fc1ea4d2b28d7a2",
+    "07": "2f5336498a69d7d739bb82478582d1e1913d5a85ce9bfc26556e73e39117939e",
+    "08": "12efded150ddcb9127dd962dc497ec76467c3d633b648bd8a3349a27e51ee74d",
+    "09": "6c8d117a8c6d80779e4a38dcd34ba4342c594fb7876da0d2237213cc5293f37f",
+    "10": "f4d125d6f80592beba41203d60331778ad7b7a292e4d609b17a74a041360a3f0",
+    "11": "02c6ab1998c58100ed9a877961c366ea6c14aec23f1f4c77faa7cc51a739cc62",
+    "12": "1eb787988adf70b5451815da1a7717257001c723ec294bff5919a82ef0906ffd",
+    "13": "ff8eaf662dc6869b14d4800b64c8d9273e4e61d6b3375a985d21acbfef64f45e",
+    "14": "82a209015cab324e5077fd423c82d1df7e12ea546ea3bf28d6c5d53a04035c39",
+    "15": "748aa7646bbb2b9af03fe0587d234ea6f021a8ed9928ea05aaff0e87496be28d"
+  },
+  "gif_sha256": "e7160cfbb348c7f033aef02fa50425c13d97116c3b9e6a9fc906a96786787598",
+  "runtime_size_comparison": {
+    "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v2-trio-flight-20261105/review/224x320-character-board.png",
+    "sha256": "49c99260c3816c32a9e0641b1ef976de4c85d3c71bed67c0d34d80b78ef86b75"
+  },
+  "checks": {
+    "identity_eyes": {
+      "status": "pass",
+      "finding": "All16 character-only drawings inspected on dark/light and224x320 boards. Retto frontal small blue-grey eyes, happy closed blink07/08; Tato dots/^^ only; Melody burgundy rectangles retained."
+    },
+    "anatomy_grip": {
+      "status": "pass",
+      "finding": "Continuous complete feline anatomy inspected all16. Four main limbs; forepaws bend and rearfeet tuck in05..08, rearfeet partly occluded by extending forelegs in09/10. Both pets lift their feet during05..10 and return to support; no added Tato wings.02/12 redrawn to reduce excessive crouch."
+    },
+    "material_canon": {
+      "status": "pass",
+      "finding": "Original cream/brown identity, ivory feathers, white bell-wearing Tato and pink red-bow Melody retained; no held prop or outfit redesign. Main neutral/apex compared to approved idle at544square."
+    },
+    "secondary_motion": {
+      "status": "unverified",
+      "finding": "Static16-cell boards show articulated wing strokes, companion arm/foot changes and ear/tail/bow response. Live playback at actual native display size not directly observed."
+    },
+    "legibility": {
+      "status": "pass",
+      "finding": "All16 character and effect cells inspected on dark/light backgrounds and224x320 study board. Empty spaces between white parts are transparent, isolated background noise check passed; no effect obscures face or action."
+    },
+    "loop_return": {
+      "status": "unverified",
+      "finding": "15->00 support/pose board and2.4s clocks inspected; effect phase0/2400 pixels exactly match. Native transient-to-idle return/live temporal smoothness not directly verified."
+    }
+  },
+  "user_approval": "pending",
+  "native_installed": false
+}

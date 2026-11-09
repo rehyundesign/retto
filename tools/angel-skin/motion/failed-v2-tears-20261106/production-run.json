@@ -1,0 +1,314 @@
+{
+  "schema_version": 1,
+  "mode": "new-motion",
+  "resolution_scale": 2,
+  "repo": "/Users/luxia/Documents/ChatGPT/retto",
+  "task_record": {
+    "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v2-tears-20261106/task.json",
+    "sha256": "e04d8dd99c1906b37ea05baf4f865d1d101b24bea8eb61a019684b83a98e61fd"
+  },
+  "references": {
+    "original_retto": {
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v2-tears-20261106/references/runtime-base.png",
+      "sha256": "b8a513bbd8578f702fdc35c116e681588853e2da329fe5a080536498edbc008a"
+    },
+    "approved_design": {
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v2-tears-20261106/references/canonical-master.png",
+      "sha256": "0d3524d171bb0aaacaf051fdd0d99516cbd8003151a0320c488a2c4ff844aa6c"
+    },
+    "material": {
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v2-tears-20261106/references/material.png",
+      "sha256": "ddc6df1afbe77fca269cc12be30e2b2bbb8f20dd87c9138fed4e7e307293dada"
+    }
+  },
+  "body_profiles": {
+    "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v2-tears-20261106/body-profiles.json",
+    "sha256": "4e62aa60dfcd25718df5f4124075de68e514cec22a342f965bf766c9e514228d"
+  },
+  "atlas_spec": null,
+  "native_review": null,
+  "groups": [
+    {
+      "id": "failed-canonical-tears",
+      "view_stance": "seated-crying-comfort",
+      "body_profile": "canonical-seated-crying",
+      "costume_master": {
+        "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v2-tears-20261106/character/00.png",
+        "sha256": "4de790f98feeb0903ebb2accfe5618ffa3ffa18f82709b2bd77dabfa0f5324e6"
+      },
+      "drawing_policy": {
+        "retained_count": null,
+        "retained_map": null,
+        "reason": ""
+      },
+      "sources": [
+        {
+          "id": "00",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v2-tears-20261106/character/00.png",
+          "sha256": "4de790f98feeb0903ebb2accfe5618ffa3ffa18f82709b2bd77dabfa0f5324e6",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "01",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v2-tears-20261106/character/01.png",
+          "sha256": "cc858546a8a8c959c3864b4cea22629e7e3a28c7f34d2c9b16787322879efc61",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "02",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v2-tears-20261106/character/02.png",
+          "sha256": "797600e3017064585c0c8316c3aa114847178dbd3ad4deb6adb5c4dfe7224336",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "03",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v2-tears-20261106/character/03.png",
+          "sha256": "a2eac072def614f761c0df4425feaf8223976f1d4853cf739221a34138ba342c",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "04",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v2-tears-20261106/character/04.png",
+          "sha256": "4555435e10fec9dd412156c6b7d1b4c7111f6964aadc79e76e0e5aff5949cb3b",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "05",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v2-tears-20261106/character/05.png",
+          "sha256": "552a6cc52d114df9d83af534e83e3feb62af2514e90e7dde0e5aeaa31b2beb69",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "06",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v2-tears-20261106/character/06.png",
+          "sha256": "d37f29e8ef3d944d51c434f9ed09f645e9ff3863fb60c2160de5917e4ee3a105",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "07",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v2-tears-20261106/character/07.png",
+          "sha256": "8f56bb12f7e9da6a418c9d5527e4750648bb004ee220fa35a29c5942e7bfe3cf",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "08",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v2-tears-20261106/character/08.png",
+          "sha256": "f73dc2183cb4162114d6f256838398abe7fbfc99fc1acc1e6b352313fbe156e9",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "09",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v2-tears-20261106/character/09.png",
+          "sha256": "61796cc2fd91655dc18f84937e240064c20e1a1cfd2d20a705b93a8f58e83747",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "10",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v2-tears-20261106/character/10.png",
+          "sha256": "82ec474c4650bd1b8dce1a83fb30e92f8f3ee2fcbf28c5b965b6a217e0e163fd",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "11",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v2-tears-20261106/character/11.png",
+          "sha256": "dd117620a31ee2a0d8f7f043c30806f2888cb8500bcb7635982127ef3808fb4a",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "12",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v2-tears-20261106/character/12.png",
+          "sha256": "4b14c9b0963268972a315cbb9e9460da22e1b01c788c3ebbc886c8923d41ec35",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "13",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v2-tears-20261106/character/13.png",
+          "sha256": "90157fdd43d29def0be2f16245bdad8786d4784fd138d554e2fdedc799dd8dc6",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "14",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v2-tears-20261106/character/14.png",
+          "sha256": "d1f96be70f65d088e7caf0db180980d3e7589bc66b70dbe7b6a035eea20b4362",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "15",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v2-tears-20261106/character/15.png",
+          "sha256": "8283dead2c06d76cda58ebc65273ecad57e68ce8bc359987364c4d6447d81b54",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        }
+      ],
+      "playback_ids": [
+        "00",
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08",
+        "09",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15"
+      ],
+      "pose_durations_ms": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "cycle_ms": 3200,
+      "review_gif": {
+        "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v2-tears-20261106/review/failed.gif",
+        "sha256": "a5e641c52d74e4d471ebf6ec0f1bdd14302e0cffe5ea7ef11a9506808f0ecc7e"
+      },
+      "visual_review": {
+        "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v2-tears-20261106/review/visual.json",
+        "sha256": "357727e52fa2eb783e36917853ba4277b9f8230e75cea11b792cac6cee5ee86e"
+      },
+      "approved_character_lock": null,
+      "runtime_states": [
+        "failed"
+      ],
+      "destination_cells": [],
+      "source_provenance": {
+        "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v2-tears-20261106/sources.json",
+        "sha256": "82a4ef208b9e36fbb32c162cd014dc8f5649e3a077030d5b3ecb1642f0176ba2"
+      },
+      "transparent_animation": {
+        "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v2-tears-20261106/review/night.webp",
+        "sha256": "d62979511d4754ee76ae55dd9849ca062bca3ac4c5a6a05a56d2646ab7e87375"
+      }
+    }
+  ]
+}

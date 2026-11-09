@@ -1,0 +1,17 @@
+{
+  "current_states": 7,
+  "gallery_cards": 47,
+  "media_hashes_verified": 94,
+  "other_states_preserved": [
+    "idle",
+    "running",
+    "waiting",
+    "waving",
+    "jumping",
+    "sleeping"
+  ],
+  "old_failed_sources_and_effect_unchanged": true,
+  "javascript_syntax": "pass",
+  "live_browser_verified": false,
+  "native_installed": false
+}

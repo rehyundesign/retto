@@ -1,0 +1,85 @@
+{
+  "scope": "one revised click GIF, three characters flying together; stop for user review before another state",
+  "status": "new shared-flight click review candidate; user approval pending",
+  "mode": "new-motion",
+  "production_states": [
+    "jumping"
+  ],
+  "supersedes": "../jumping-v1-20261105/review/jumping.gif (unfinished draft with grounded companion concept; not the new requested result)",
+  "user_direction": "Retto faces front and smiles; Tato and Melody fly up alongside Retto; create the agreed GIF",
+  "design_lock": {
+    "retto": "same cream/brown identity, original body/face proportions, small natural blue-grey eyes, smooth triangular ears, natural articulated ivory wings; forward-facing happy smile",
+    "tato": "left white cat, solid dot or happy ^^ eyes only, gold bell/dark collar, thin tail; flies magically without adding wings",
+    "melody": "right pink rabbit, burgundy rectangular eyes, red neck bow, long pink ears and small fluttering white winglets"
+  },
+  "action": "Three rise together, Retto frontal joyful smile; Tato ^^ spreads arms and lifts feet, Melody opens arms and flutters winglets, then all descend and recover. Ears/tails/bow/feathers follow physical lag.",
+  "character_drawings_required": 16,
+  "character_drawings_generated": 16,
+  "pose_ms": 150,
+  "cycle_ms": 2400,
+  "effect_sample_ms": 50,
+  "generation": "built-in image_gen, independent complete trio drawing per source; no head/body assembly, anatomical warps, sliced sheets, static-cutout flight or duplicated poses",
+  "reference_paths": [
+    "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v1-20261105/references/approved-idle-white.png",
+    "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v1-20261105/references/original-identity.png"
+  ],
+  "layer_order": [
+    "transparent fading moonlit aura and flight wake",
+    "independently drawn complete trio",
+    "sparse localized star/feather highlights away from faces"
+  ],
+  "pose_plan": [
+    "00: front-facing smiling Retto and both companions neutral/grounded",
+    "01: all3 notice click, start positive anticipation, ears/arms respond",
+    "02: small supported crouch/main wing gathering; both pets prepare to lift",
+    "03: deepest small supported anticipation; original body sizes/camera",
+    "04: all3 push off, toes last contact, main downstroke begins",
+    "05: all3 lift off, limbs only partially tuck, positive front-facing Retto",
+    "06: all3 ascend at same sides/spacing; main partially tucked4 limbs, both pets arms open",
+    "07: all3 at gentle apex; Retto FRONT happy closed blink/smile, Tato ^^ airborne, Melody burgundy eyes/winglets airborne",
+    "08: soft wing recovery at apex; ears/tails/bow lag naturally",
+    "09: all3 begin descent, limbs extend gradually, Retto reopens small eyes forward",
+    "10: all3 near-ground approach, wings softly brake, pet arms start lowering",
+    "11: all3 supported first contact at each original floor position",
+    "12: small landing compression with4 main feet and both pet feet supported",
+    "13: all3 recover upright, main wings/companion ears/bow settle",
+    "14: front-facing smile and relaxed original spacing/hands",
+    "15: complete neutral return, no new jump or raised paw; bridge to00"
+  ],
+  "next_stage": "user review of this one click motion; no other new state started; original/native registration remains unverified",
+  "original_anatomical_registration": "unverified",
+  "native_registered": false,
+  "installed": false,
+  "review_gif": "review/jumping.gif",
+  "generation_history": [
+    {
+      "http_status": 429,
+      "error": "usage_limit_reached",
+      "reset_at": "2026-11-05T17:05:12+09:00",
+      "automatic_retry_scheduled": false
+    }
+  ],
+  "framing": "fixed544x544 full source camera from1254square; no per-frame silhouette fitting; neutral floor89% and ear tips12% match approved idle at same display size",
+  "pose_profiles": [
+    "frontal-supported-smile",
+    "frontal-airborne-tucked"
+  ],
+  "neutral_anchor_review": "frontal master visually compared to approved idle on544square; original/native anatomical certification still unverified",
+  "selected_independent_drawings": 16,
+  "generation_attempts": 18,
+  "rejected_source_ids": {
+    "02-rejected-deep-crouch": "anticipation too deep, replaced by independent02 redraw",
+    "12-rejected-deep-landing": "landing compression too deep, replaced by independent12 redraw"
+  },
+  "transparent_animation": "review/night.webp",
+  "character_animation": "review/character.webp",
+  "quality_reference": {
+    "path": "/Users/luxia/.codex/skills/retto-skin/assets/quality-baseline/hana-toto-16-half-speed.webp",
+    "review": "reference board inspected alongside224x320 candidate board; live/native comparison not directly observed"
+  },
+  "body_registration": "complete-drawing rigid y registration using support/ear proxies; common544/1254 resolution conversion; no per-frame silhouette fitting or anatomy warp",
+  "historical_queued_key": {
+    "id": "07",
+    "prompt": "Use case: stylized-concept. ONE independent complete-character animation key, SQUARE1024x1024, fixed front camera, no grid/strip. Image1 approved angel Retto and companions is the EXACT design/body-size/material reference. Image2 is original Retto body identity only, not its larger eyes.\nNEW USER-APPROVED CLICK MOTION: all THREE characters fly upward TOGETHER, retaining original left/centre/right positions and sizes. This is the apex key07. Retto faces DIRECTLY FORWARD to viewer with a visibly happy gentle closed-eye smile. Both eyes are softly curved closed in a happy blink; no sad/angry brows. Pink nose/white muzzle/blaze, original cream/brown fur and SMALL natural blue-grey eye scale when open in other poses; no giant baby eyes or human grin. Main head/body proportions remain EXACT image1, face width36% square, hips centre47% width. Body/head rise only about5% square from its neutral pose, while four legs naturally tuck under chest/hips. FOUR real main limbs total: two bent forepaws below chest, two rear feet below hips on sides, all four visibly airborne above fixed neutral89% ground. Natural continuous neck/shoulder/chest/torso, no scaling, shrunken body, pasted head, static body translation, extra paws or leftover floor paws. Brown fluffy tail follows right hip naturally.\nRetto ivory feather wings genuinely flap from shoulder/elbow/wrist with layered curved primaries trailing. At apex they make a soft raised/curved recovery from downstroke, not rigid rotated fans; wing tips inside5..95% width, above4% image height. No face/paw occlusion.\nLEFT TATO is the same small white CAT with happy closed ^^ eyes (or tiny BLACK DOTS only), small w smile, dark collar/gold round bell with black T slit, thin white tail. Tato has NO WINGS added: it can magically fly as its original character. BOTH arms spread joyfully and TWO small feet lifted clear of original floor, torso/neck anatomically articulate, original small head/body proportions/material. No new halo, costume, star or prop.\nRIGHT MELODY is the same small pale-pink RABBIT with original BURGUNDY RECTANGULAR half-lidded eyes and positive small w smile, long pink-inner ears, red bow at neck and small white WINGLETS actively fluttering. Both arms open with joy, two feet lift clear of its original floor. Original tiny plush head/body ratio and scale; never big anime eyes. Rabbit ears and bow stream gently downward/back in the ascent with plausible lag.\nBoth pets fly alongside Retto at their original outer spacing, same modest rise (~5% square) from each own original floor, with visible gaps under ALL their feet. NO grounded cheering pets, no crossing/orbiting or floating unarticulated cutout dolls. Tato is left, Melody right, main Retto centred. Three happy characters rise together, not a one-paw greeting or human dancing.\nDraw the ENTIRE trio independently in this precise single pose. Heads/necks/shoulders/chests/torsos/limbs/tails remain natural continuous anatomy. GENUINELY TRANSPARENT ALPHA character-only background, no line/ground shadow/gradient/glow/particles/loose feather/halo/star/heart/text. Ambient gold and drifting feathers will be separate layers later. No zoom-out or whole-cat shrinking."
+  }
+}

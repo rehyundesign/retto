@@ -1,0 +1,14 @@
+{
+  "service": "built-in image_gen",
+  "http_status": 429,
+  "error": "usage_limit_reached",
+  "service_reset_at": "2026-11-05T17:05:12+09:00",
+  "pose_ids": [
+    "02",
+    "05",
+    "06",
+    "12"
+  ],
+  "automatic_retry_scheduled": false,
+  "next_step": "after service availability returns, regenerate these four complete drawings using saved prompts and references; preserve the other selected sources and rebuild affected evidence"
+}

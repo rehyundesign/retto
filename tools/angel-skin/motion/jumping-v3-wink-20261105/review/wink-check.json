@@ -1,0 +1,114 @@
+[
+  {
+    "id": "05",
+    "retto_closed_open_blue_iris_pixels": [
+      0,
+      57
+    ],
+    "tato_closed_open_glyph_size": [
+      [
+        15,
+        8
+      ],
+      [
+        7,
+        7
+      ]
+    ],
+    "melody_closed_open_glyph_size": [
+      [
+        19,
+        8
+      ],
+      [
+        12,
+        19
+      ]
+    ],
+    "all3_synchronous_left_wink": true
+  },
+  {
+    "id": "06",
+    "retto_closed_open_blue_iris_pixels": [
+      0,
+      93
+    ],
+    "tato_closed_open_glyph_size": [
+      [
+        17,
+        9
+      ],
+      [
+        7,
+        8
+      ]
+    ],
+    "melody_closed_open_glyph_size": [
+      [
+        21,
+        8
+      ],
+      [
+        19,
+        23
+      ]
+    ],
+    "all3_synchronous_left_wink": true
+  },
+  {
+    "id": "07",
+    "retto_closed_open_blue_iris_pixels": [
+      0,
+      128
+    ],
+    "tato_closed_open_glyph_size": [
+      [
+        18,
+        9
+      ],
+      [
+        7,
+        8
+      ]
+    ],
+    "melody_closed_open_glyph_size": [
+      [
+        15,
+        5
+      ],
+      [
+        23,
+        23
+      ]
+    ],
+    "all3_synchronous_left_wink": true
+  },
+  {
+    "id": "08",
+    "retto_closed_open_blue_iris_pixels": [
+      0,
+      117
+    ],
+    "tato_closed_open_glyph_size": [
+      [
+        19,
+        9
+      ],
+      [
+        7,
+        7
+      ]
+    ],
+    "melody_closed_open_glyph_size": [
+      [
+        14,
+        6
+      ],
+      [
+        24,
+        22
+      ]
+    ],
+    "all3_synchronous_left_wink": true
+  }
+]

@@ -1,0 +1,391 @@
+{
+  "schema_version": 1,
+  "mode": "new-motion",
+  "resolution_scale": 2,
+  "repo": "/Users/luxia/Documents/ChatGPT/retto",
+  "task_record": {
+    "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/sleeping-v1-20261105/task.json",
+    "sha256": "49f9475e69b2f039d4e64f4e78522ed00ba31dee49f2dcdfa6e809c2e2f6db9d"
+  },
+  "references": {
+    "original_retto": {
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/sleeping-v1-20261105/references/original-sleep.png",
+      "sha256": "4e8aa93c36e47a7544b0b5b72dcd845045cad50c27487686b576f57a0c800fbf"
+    },
+    "material": {
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/sleeping-v1-20261105/references/material.png",
+      "sha256": "ddc6df1afbe77fca269cc12be30e2b2bbb8f20dd87c9138fed4e7e307293dada"
+    }
+  },
+  "body_profiles": {
+    "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/sleeping-v1-20261105/body-profiles.json",
+    "sha256": "122d42430680ab01e91972e6c66e003bded2cfa92bae232b4dc0984be6d96d9b"
+  },
+  "atlas_spec": null,
+  "native_review": null,
+  "groups": [
+    {
+      "id": "sleeping-celestial-lullaby",
+      "view_stance": "curled-sleep-face-on-forepaws",
+      "body_profile": "original-curled-sleep",
+      "costume_master": {
+        "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/sleeping-v1-20261105/references/costume.png",
+        "sha256": "d039f8bd153f733422b4395cf9d0c6647631c7679d37e261e1bead1ea7606a2b"
+      },
+      "drawing_policy": {
+        "retained_count": null,
+        "retained_map": null,
+        "reason": ""
+      },
+      "sources": [
+        {
+          "id": "00",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/sleeping-v1-20261105/character/00.png",
+          "sha256": "696f706eb3cb44e54d36b56c96b9591a4598e492537662953a97475025108cc6",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "01",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/sleeping-v1-20261105/character/01.png",
+          "sha256": "8910194db5eb3dee6246f0608fc57fdeb02b1aafb01137533a03456c12d42c7a",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "02",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/sleeping-v1-20261105/character/02.png",
+          "sha256": "c12183f37f41fbd20d764d6bb72b2dc2dd5bfc5bd25aa1604c787ca2c88902fb",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "03",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/sleeping-v1-20261105/character/03.png",
+          "sha256": "7db670a1209a692eb9f51b9a73f624ae18bd6b6f2ea1a84880019c4d6af80e43",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "04",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/sleeping-v1-20261105/character/04.png",
+          "sha256": "0cfbe1f460bc55c31ce9c2edd1d2699eb685142f9df71ebaafbf06a82c969333",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "05",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/sleeping-v1-20261105/character/05.png",
+          "sha256": "7f7678b4f8fa02a41c507e99fa5644c18a3808015a4296d0f19a31916d4f9f44",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "06",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/sleeping-v1-20261105/character/06.png",
+          "sha256": "8a074879f0ff60228c5294f5b109d2ac2ffd2373207fbd2023a93049bb557edb",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "07",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/sleeping-v1-20261105/character/07.png",
+          "sha256": "6064fb5c90d4ce22fb18ebf3b8733b9be356b830722c2449d6a9a65bb8f7132f",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "08",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/sleeping-v1-20261105/character/08.png",
+          "sha256": "cbcba2647dda9ad7dd50d0319d4bdf947675d0e9abba7fb6c2e19bd32c9518b4",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "09",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/sleeping-v1-20261105/character/09.png",
+          "sha256": "7a54688f622ae603adba8ed16094777ee62bef1e730d892c57b2f54d45d9449d",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "10",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/sleeping-v1-20261105/character/10.png",
+          "sha256": "bad1c85e1ec8013e20752036b5087fdce4a2351efb2c9c47c8832a38a4e2587b",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "11",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/sleeping-v1-20261105/character/11.png",
+          "sha256": "6176b124d00038758ccc06e6fd49adb860a3ca074f4d768ab922f995da154699",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "12",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/sleeping-v1-20261105/character/12.png",
+          "sha256": "c3d2a3a5c2dd21a10fda9276a9bde1ef2619d2ccc47a4426c47e82bf647dd4db",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "13",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/sleeping-v1-20261105/character/13.png",
+          "sha256": "f8c99f39f7b74a7fde7cbd91f5782395d47b9e1c2e57e0ca9369dd22188d995a",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "14",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/sleeping-v1-20261105/character/14.png",
+          "sha256": "3fffb3bb69af6784707a125fb8fd87dd199a28631004118d11a2c0c13da3e254",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "15",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/sleeping-v1-20261105/character/15.png",
+          "sha256": "6c6c420621802084ae60f610e4c081366bc09d9b023340b9482c9edd733d449c",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        }
+      ],
+      "playback_ids": [
+        "00",
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08",
+        "09",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15"
+      ],
+      "pose_durations_ms": [
+        400,
+        400,
+        400,
+        400,
+        400,
+        400,
+        400,
+        400,
+        400,
+        400,
+        400,
+        400,
+        400,
+        400,
+        400,
+        400
+      ],
+      "cycle_ms": 6400,
+      "review_gif": {
+        "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/sleeping-v1-20261105/review/sleeping.gif",
+        "sha256": "e04b91374c7c5e5055ea893a02889547830e16fb84270ef7ec73d3e6e5701e53"
+      },
+      "visual_review": {
+        "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/sleeping-v1-20261105/review/visual.json",
+        "sha256": "87725d99fa58dc70aba640d913f95dec14d02758a41c8bdcf4cb94db8b6e0807"
+      },
+      "approved_character_lock": null,
+      "runtime_states": [
+        "sleeping"
+      ],
+      "destination_cells": [
+        {
+          "row": 11,
+          "frame": 0,
+          "status": "future mapping; not installed"
+        },
+        {
+          "row": 11,
+          "frame": 1,
+          "status": "future mapping; not installed"
+        },
+        {
+          "row": 11,
+          "frame": 2,
+          "status": "future mapping; not installed"
+        },
+        {
+          "row": 11,
+          "frame": 3,
+          "status": "future mapping; not installed"
+        },
+        {
+          "row": 11,
+          "frame": 4,
+          "status": "future mapping; not installed"
+        },
+        {
+          "row": 11,
+          "frame": 5,
+          "status": "future mapping; not installed"
+        },
+        {
+          "row": 11,
+          "frame": 6,
+          "status": "future mapping; not installed"
+        },
+        {
+          "row": 11,
+          "frame": 7,
+          "status": "future mapping; not installed"
+        },
+        {
+          "row": 11,
+          "frame": 8,
+          "status": "future mapping; not installed"
+        },
+        {
+          "row": 11,
+          "frame": 9,
+          "status": "future mapping; not installed"
+        },
+        {
+          "row": 11,
+          "frame": 10,
+          "status": "future mapping; not installed"
+        },
+        {
+          "row": 11,
+          "frame": 11,
+          "status": "future mapping; not installed"
+        },
+        {
+          "row": 11,
+          "frame": 12,
+          "status": "future mapping; not installed"
+        },
+        {
+          "row": 11,
+          "frame": 13,
+          "status": "future mapping; not installed"
+        },
+        {
+          "row": 11,
+          "frame": 14,
+          "status": "future mapping; not installed"
+        },
+        {
+          "row": 11,
+          "frame": 15,
+          "status": "future mapping; not installed"
+        }
+      ],
+      "transparent_animation": {
+        "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/sleeping-v1-20261105/review/night.webp",
+        "sha256": "4d1d3e5454a46087911564d183e056c327583ab2e7bbe25ec02ff6359b767bcb"
+      },
+      "source_provenance": {
+        "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/sleeping-v1-20261105/sources.json",
+        "sha256": "6250e6dc3656f6156d39778ce42b3af3a46608f0a133acf333818eea53d14ae5"
+      }
+    }
+  ]
+}

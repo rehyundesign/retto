@@ -1,0 +1,21 @@
+"""Hash-bound review candidate, keeping original registration and native evidence explicit."""
+from pathlib import Path
+import json,hashlib
+ROOT=Path(__file__).resolve().parent
+SKILL=Path('/Users/luxia/.codex/skills/retto-skin')
+def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+def ref(p):return {'path':str(p.resolve()),'sha256':sha(p)}
+def write(p,v):p.write_text(json.dumps(v,ensure_ascii=False,indent=2)+'\n')
+t=json.loads((ROOT/'task.json').read_text());t.update(status='completed sleeping review candidate; user approval pending',independent_character_drawings=16,review_gif='review/sleeping.gif',transparent_animation='review/night.webp',character_animation='review/character.webp',original_registration='unverified; canonical original curled sleep inspected; quantitative anatomical landmarks not certified',native_installed=False,quality_reference=ref(SKILL/'assets/quality-baseline/hana-toto-16-half-speed.webp'),quality_reference_review='Reference full-state frame inspected, including curled sleep with crescent; texture/action vocabulary compared. Direct live/native cadence comparison not observed.',next_stage='review this one sleeping motion; no application installation')
+write(ROOT/'task.json',t)
+keys=['face_box','torso_box','body_center_x','foot_baseline_y','tail_anchor','eye_line_y'];landmarks={k:None for k in keys}
+profile={'schema_version':1,'original_sha256':sha(ROOT/'references/original-sleep.png'),'measurement_method':'isolated-character-landmarks','profiles':{'original-curled-sleep':{'canonical_cell':'assets/spritesheet.webp row11 column0; genuine curled sleep view, no seated profile reuse',**landmarks}}}
+write(ROOT/'body-profiles.json',profile)
+records=json.loads((ROOT/'sources.json').read_text())
+checks={'identity_eyes':{'status':'pass','finding':'All16 sleep cells inspected character-only. Main cream/brown mask, white blaze, closed sleep eyes and pink nose; Tato closed^curves and gold bell; pink Melody closed curves/red bow/winglets; no Tato wings.'},'anatomy_grip':{'status':'pass','finding':'Main two forepaws support muzzle; two rear legs tucked and occluded by curled belly/near folded wing; continuous brown tail. Pets recline with paws supporting cheeks. All16 cells directly inspected for continuity.'},'material_canon':{'status':'pass','finding':'Warm plush fur and layered ivory feathers compared with costume00 and Hana material board; original proportions quantitatively unverified.'},'secondary_motion':{'status':'unverified','finding':'Independent16-cell boards show breathing, folded feather changes and small attached ear/tail/bow followthrough; native/live playback has not been directly observed.'},'legibility':{'status':'pass','finding':'Character and composed16-cell boards reviewed dark/light and224x320; effects stay away from sleeping faces and alpha fades to0 at all outer edges.'},'loop_return':{'status':'unverified','finding':'15-to00 static seam inspected and effect periodic/frozen-pose checks passed; live temporal seam and native transition to/from idle not directly observed.'}}
+visual={'source_sha256':{r['id']:r['sha256'] for r in records},'gif_sha256':sha(ROOT/'review/sleeping.gif'),'runtime_size_comparison':ref(ROOT/'review/runtime-size-board.png'),'checks':checks,'user_approval':'pending','native_installed':False}
+write(ROOT/'review/visual.json',visual)
+run=json.loads((SKILL/'references/production-run.template.json').read_text());run.update(mode='new-motion',repo=str(ROOT.parents[3]),task_record=ref(ROOT/'task.json'),references={'original_retto':ref(ROOT/'references/original-sleep.png'),'material':ref(ROOT/'references/material.png')},body_profiles=ref(ROOT/'body-profiles.json'))
+g=run['groups'][0];g.update(id='sleeping-celestial-lullaby',view_stance='curled-sleep-face-on-forepaws',body_profile='original-curled-sleep',costume_master=ref(ROOT/'references/costume.png'),pose_durations_ms=[400]*16,cycle_ms=6400,runtime_states=['sleeping'],review_gif=ref(ROOT/'review/sleeping.gif'),visual_review=ref(ROOT/'review/visual.json'),transparent_animation=ref(ROOT/'review/night.webp'),source_provenance=ref(ROOT/'sources.json'),destination_cells=[{'row':11,'frame':i,'status':'future mapping; not installed'} for i in range(16)])
+for r,s in zip(records,g['sources']):s.update(ref(ROOT/r['path']))
+write(ROOT/'production-run.json',run)

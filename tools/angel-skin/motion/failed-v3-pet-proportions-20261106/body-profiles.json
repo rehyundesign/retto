@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "original_sha256": "b8a513bbd8578f702fdc35c116e681588853e2da329fe5a080536498edbc008a",
+  "measurement_method": "isolated-character-landmarks",
+  "profiles": {
+    "canonical-seated-crying": {
+      "canonical_cell": "approved concept-v5; original quantitative landmarks unverified",
+      "face_box": null,
+      "torso_box": null,
+      "body_center_x": null,
+      "foot_baseline_y": null,
+      "tail_anchor": null,
+      "eye_line_y": null
+    }
+  }
+}
