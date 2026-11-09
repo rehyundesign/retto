@@ -1,0 +1,44 @@
+{
+  "idle": {
+    "drawings": 16,
+    "all_input_RGB_preserved": true,
+    "white_gap_pixels_removed": 31732,
+    "noise_pixels_removed": 28798,
+    "cycle_ms": 3200
+  },
+  "waiting": {
+    "drawings": 16,
+    "all_input_RGB_preserved": true,
+    "white_gap_pixels_removed": 16916,
+    "noise_pixels_removed": 37015,
+    "cycle_ms": 3200
+  },
+  "failed": {
+    "drawings": 16,
+    "all_input_RGB_preserved": true,
+    "white_gap_pixels_removed": 8688,
+    "noise_pixels_removed": 32285,
+    "cycle_ms": 3200
+  },
+  "waving": {
+    "drawings": 16,
+    "all_input_RGB_preserved": true,
+    "white_gap_pixels_removed": 15827,
+    "noise_pixels_removed": 41429,
+    "cycle_ms": 2400
+  },
+  "jumping": {
+    "drawings": 16,
+    "all_input_RGB_preserved": true,
+    "white_gap_pixels_removed": 22616,
+    "noise_pixels_removed": 41213,
+    "cycle_ms": 2400
+  },
+  "regression_background_pockets": "4 opaque original points now alpha0",
+  "musicbox_unchanged": true,
+  "code_sha256": {
+    "render.py": "ef4cb60fe27f450e3086de31b79c942261e768ef51bbbd93c97783e2e8fcc08c",
+    "holes.py": "76415c6d1127a1df4073cfd3241952da4c6f54cb5e3d7460d29c7469f43b3313",
+    "protected-white-fur.json": "ccf510bc579e2afaa3dbe3debb9983e4818af57e16f8212755f66720e97ab73e"
+  }
+}

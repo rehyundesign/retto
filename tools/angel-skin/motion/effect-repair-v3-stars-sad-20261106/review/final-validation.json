@@ -1,0 +1,26 @@
+{
+  "original32_PNGs_unchanged": true,
+  "both_character_animations_byte_identical": true,
+  "contact_gold_pixels": {
+    "700": 564,
+    "2100": 682
+  },
+  "tear_pixel_area_ratios": {
+    "main_left": 2.48,
+    "main_right": 2.47,
+    "tato": 2.5,
+    "melody": 2.9
+  },
+  "periodic_and_frozen_pose_effects": {
+    "waiting": true,
+    "failed": true
+  },
+  "current_states": 7,
+  "archived": 38,
+  "verified_media_hashes": 90,
+  "all7_character_animations_unchanged": true,
+  "other5_states_effects_unchanged": true,
+  "javascript_syntax": "pass",
+  "live_browser_verified": false,
+  "native_installed": false
+}

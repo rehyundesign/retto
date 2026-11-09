@@ -1,0 +1,18 @@
+{
+  "scope": "waiting/failed effects only; no character or timing redraw",
+  "waiting": "yellow five-point star pop at actual high-five contacts, preserve blue Tato/red Melody trails",
+  "failed": "more visible clear tears, falling pale feathers and muted blue moonlight/drizzle; no celebration burst",
+  "cycle_ms": 3200,
+  "pose_ms": 200,
+  "effect_ms": 50,
+  "other5_states": "hash locked unchanged",
+  "pending_completion": "all three smile, cheer and wave both arms; retain one-motion-at-a-time approval",
+  "native_installed": false,
+  "status": "both scoped effect repairs rendered; user review pending",
+  "renderer": {
+    "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/effect-repair-v3-stars-sad-20261106/render.py",
+    "sha256": "04a5be8005712acd7268c34363623dfaf8c41566bed4f696c901db26d8a2e157"
+  },
+  "review_gif": "review/effects.gif",
+  "original_registration": "inherited quantitative anatomy unverified; no native installation"
+}

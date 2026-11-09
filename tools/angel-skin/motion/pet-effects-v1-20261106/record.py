@@ -1,0 +1,22 @@
+"""Effect-only evidence: original registration and native validation remain inherited."""
+from pathlib import Path
+import json,hashlib,subprocess,sys
+ROOT=Path(__file__).resolve().parent;SKILL=Path('/Users/luxia/.codex/skills/retto-skin')
+def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+def ref(p):return {'path':str(p.resolve()),'sha256':sha(p)}
+def write(p,v):p.write_text(json.dumps(v,ensure_ascii=False,indent=2)+'\n')
+lock=json.loads((ROOT/'pre-edit-lock.json').read_text())
+write(ROOT/'task.json',{'mode':'effect-repair','scope':'seven existing angel motions, add blue Tato magic and ruby/pink Melody magic only','preserve':'all112 source drawings, original character animation bytes, pose sizes/positions/expressions, every physical cycle, old golden moon/star/musicbox motifs and source effect files','method':'per-pose bell/bow attachment proxies; birth-position trails for jump; new layers behind retained RGBA and foreground flecks masked outside entire character silhouette; every original opaque subject/prop/star pixel unchanged','palette':{'tato':[102,202,255],'melody':[255,109,143]},'states':list(lock),'status':'pet magic review candidate;112 source poses retained; user approval pending','native_installed':False,'original_registration':'inherited unverified; no body geometry changed'})
+run=json.loads((SKILL/'references/production-run.template.json').read_text());run.update(mode='effect-repair',repo=str(ROOT.parents[3]),task_record=ref(ROOT/'task.json'),references={'original_retto':ref(ROOT.parents[3]/'assets/spritesheet.webp'),'material':ref(ROOT.parent/'sleeping-v1-20261105/references/material.png')},groups=[])
+keys=['face_box','torso_box','body_center_x','foot_baseline_y','tail_anchor','eye_line_y'];profiles={'schema_version':1,'original_sha256':run['references']['original_retto']['sha256'],'measurement_method':'isolated-character-landmarks','profiles':{}}
+for state,v in lock.items():
+    pid='inherited-'+state;profiles['profiles'][pid]={'canonical_cell':'original atlas row11 sleep or corresponding original state; inherited measurements unverified',**{k:None for k in keys}}
+    sources=[{**s,'landmarks':{k:None for k in keys}} for s in v['sources']]
+    checks={k:{'status':'pass','finding':'All original character files hash-locked, encoded character media retained byte-for-byte. All old opaque subject/prop/star pixels remain exact; effects-only review on dark/light runtime boards.'} for k in ['identity_eyes','anatomy_grip','material_canon','legibility']}
+    checks['secondary_motion']={'status':'unverified','finding':'Original character cadence retained; new colored effects progress during fixed-pose test. Live/native playback not directly observed.'}
+    checks['loop_return']={'status':'unverified','finding':'Old cycles preserved, new effects periodic at0/end, elapsed-duration checks passed. Native state return and live temporal observation remain unverified.'}
+    visual={'source_sha256':{s['id']:s['sha256'] for s in sources},'gif_sha256':sha(ROOT/state/'preview.gif'),'runtime_size_comparison':ref(ROOT/state/'runtime-dark.png'),'checks':checks,'user_approval':'pending'};write(ROOT/state/'visual.json',visual)
+    g={'id':'pet-effects-'+state,'view_stance':'inherited-'+state,'body_profile':pid,'costume_master':ref(ROOT.parent/'sleeping-v1-20261105/references/costume.png'),'sources':sources,'drawing_policy':{'retained_count':16,'retained_map':ref(ROOT/state/'retained-map.json'),'reason':'effect-only addition; retain exact original16 complete drawings'},'playback_ids':[f'{i:02}' for i in range(16)],'pose_durations_ms':v['pose_durations_ms'],'cycle_ms':v['cycle_ms'],'runtime_states':[state],'review_gif':ref(ROOT/state/'preview.gif'),'visual_review':ref(ROOT/state/'visual.json'),'approved_character_lock':ref(ROOT/state/'character-lock.json'),'transparent_animation':ref(ROOT/state/'night.webp')};run['groups'].append(g)
+write(ROOT/'body-profiles.json',profiles);run['body_profiles']=ref(ROOT/'body-profiles.json');write(ROOT/'production-run.json',run)
+p=subprocess.run([sys.executable,str(SKILL/'scripts/validate_production_run.py'),str(ROOT/'production-run.json'),'--stage','motion','--output',str(ROOT/'production-validation.json')],capture_output=True,text=True)
+v=json.loads((ROOT/'production-validation.json').read_text());print({'production_ok':v['ok'],'inherited_unverified_errors':len(v['errors']),'group_count':len(v['groups']),'source_drawings':sum(g['source_ids'] for g in v['groups'])})

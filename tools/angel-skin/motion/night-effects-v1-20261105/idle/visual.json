@@ -1,0 +1,57 @@
+{
+  "source_sha256": {
+    "00": "f0fe0ce921749660c5960ae5aedf4e063c391767bab37572758aa4d98ec034c9",
+    "01": "0aad57749a085d163bc4c05130c5c8ffc0dddb6d6b8918e759cfde150a450aa5",
+    "02": "491692db4852131ba44747c562308a9cdca082896722be778eed19ce70bcd5d9",
+    "03": "b2915f3b2aef1c22017f7368eecf79348bcbdaf97aec600c4a76ea1e6620b1c5",
+    "04": "aca3b1309e93a6a3663ac01c6bae14afc293dc196247a5cebdfa77dfd40a8a60",
+    "05": "a4c3b2aa5122aae985cb1cd1cdab712bf7bab78e8b0d424c1a6aa37aab1a5ca6",
+    "06": "eed5ccfa1af74c65c24070685073d3d44abea2da3d4e517d23625ee6024d2a1c",
+    "07": "f93cd4905f9505c5a6369ba1fb05bb84cfd25db0b891337ca136d36bd1c00c3f",
+    "08": "1f67dd28cada23e1151a0f999e4d8d1b3a08928337c9becc56093a3f85307551",
+    "09": "356ac6012163acd37165bd7172ff7fd6d32756cc2d70a17a859090297f2e3267",
+    "10": "ce897a59c7b6dbeb2d97404ee161eac68a2116fe4d80878f27f1f703ce79e654",
+    "11": "e418d3c37860a382e06aab5eaa72836d1d98b6986221ec0d5471bcd495df7500",
+    "12": "f7fbe0c180943d05e8c6c0092a502e5e39fe56bfab1fe11c4a1007b2a90d1095",
+    "13": "f036f8c5b880123e70bcce8138016c37a343a67fb525a5b2c82cf58181bdb817",
+    "14": "1f813cafd5bfcd548fcb8aa2972dd200054a124ce79f5b4770885218db4ad16b",
+    "15": "3db22e794710ef33f4202b3c5d1e52dd279f1465a5530bc3f43a51ab251ce4f1"
+  },
+  "gif_sha256": "3cd0f9f724f5d002e30a0d47868905a8d57fe977bdcefeb96998d53d30c9c724",
+  "transparent_animation_sha256": "bb0d2d9fa78c9ba18533803abf53d28818a1d68d183a4d644cdee871d4ea10aa",
+  "runtime_size_comparison": {
+    "path": "comparison-1x.png",
+    "sha256": "98e1b75bbdfc6f2d31b7b8e9b60087f10747a19d68f1d8217c1a81c4459a2504"
+  },
+  "checks": {
+    "identity_eyes": {
+      "status": "pass",
+      "finding": "Original character files retained. All decoded16 phase samples inspected; original eye styles/colours retained. Running same-pose alpha cleanup changes no previously visible RGB. Click inherits its known scale failures."
+    },
+    "anatomy_grip": {
+      "status": "pass",
+      "finding": "No new character pose, prop grip or head/body assembly. Existing whole-character drawings and cadence retained; click draft still has02/05/06/12 repairs outstanding."
+    },
+    "material_canon": {
+      "status": "pass",
+      "finding": "Original ivory feather/plush appearance and pet designs retained. Added moon/music-note/star symbols are background effects; inspected dark/light/different-window composites."
+    },
+    "secondary_motion": {
+      "status": "unverified",
+      "finding": "Separate50ms effect clock advances while the character pose is held;16 decoded phases inspected. Existing body/wing motion unchanged, live loop approval remains user review."
+    },
+    "legibility": {
+      "status": "unverified",
+      "finding": "Decoded phase boards, window composites and224px-wide comparison samples inspected; actual native app rendering/fit not verified."
+    },
+    "loop_return": {
+      "status": "unverified",
+      "finding": "Existing source clock retained, event envelopes fade before loop return and night ambiance is periodic; live playback/native state transitions unverified."
+    }
+  },
+  "native_fit": "unverified",
+  "alpha_validation": {
+    "path": "validation.json",
+    "sha256": "2e3653d19ce19988073ce09e2ba7eb639ae8107531243be14fcd1aed0dbf3174"
+  }
+}

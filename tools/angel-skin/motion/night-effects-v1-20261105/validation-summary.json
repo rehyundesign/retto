@@ -1,0 +1,71 @@
+{
+  "states": {
+    "idle": {
+      "source_count": 16,
+      "cycle_ms": 3200,
+      "transparent_border_max": 0,
+      "export_frames": 64,
+      "original_sources_unchanged": true,
+      "production_gate_ok": false,
+      "unverified_or_inherited_art_errors": 99,
+      "same_pose_alpha_cleanup": false
+    },
+    "running": {
+      "source_count": 16,
+      "cycle_ms": 2400,
+      "transparent_border_max": 0,
+      "export_frames": 48,
+      "original_sources_unchanged": true,
+      "production_gate_ok": false,
+      "unverified_or_inherited_art_errors": 99,
+      "same_pose_alpha_cleanup": true
+    },
+    "waiting": {
+      "source_count": 16,
+      "cycle_ms": 3200,
+      "transparent_border_max": 0,
+      "export_frames": 64,
+      "original_sources_unchanged": true,
+      "production_gate_ok": false,
+      "unverified_or_inherited_art_errors": 99,
+      "same_pose_alpha_cleanup": false
+    },
+    "failed": {
+      "source_count": 16,
+      "cycle_ms": 3200,
+      "transparent_border_max": 0,
+      "export_frames": 64,
+      "original_sources_unchanged": true,
+      "production_gate_ok": false,
+      "unverified_or_inherited_art_errors": 99,
+      "same_pose_alpha_cleanup": false
+    },
+    "waving": {
+      "source_count": 16,
+      "cycle_ms": 2400,
+      "transparent_border_max": 0,
+      "export_frames": 48,
+      "original_sources_unchanged": true,
+      "production_gate_ok": false,
+      "unverified_or_inherited_art_errors": 99,
+      "same_pose_alpha_cleanup": false
+    },
+    "jumping": {
+      "source_count": 16,
+      "cycle_ms": 2400,
+      "transparent_border_max": 0,
+      "export_frames": 48,
+      "original_sources_unchanged": true,
+      "production_gate_ok": false,
+      "unverified_or_inherited_art_errors": 101,
+      "same_pose_alpha_cleanup": false
+    }
+  },
+  "all_source_count": 96,
+  "all_original_source_hashes_preserved": true,
+  "all_effect_and_full_export_outer_borders_alpha0": true,
+  "full_lossless_visible_pixel_comparison_dark_and_light_passed": true,
+  "app_installed": false,
+  "original_anatomical_registration": "unverified",
+  "live_browser_playback": "not directly inspected; HTML/data/encoded media checked offline"
+}

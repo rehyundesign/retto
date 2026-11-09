@@ -1,0 +1,61 @@
+{
+  "meaning": "Manually inspected neutral-white foreground fur components; retain their original alpha while removing background components. These are background-matte exclusions, not pose masks.",
+  "regions": {
+    "idle/03": [
+      [
+        54,
+        326,
+        75,
+        338
+      ]
+    ],
+    "idle/12": [
+      [
+        61,
+        332,
+        113,
+        364
+      ]
+    ],
+    "idle/13": [
+      [
+        51,
+        313,
+        86,
+        335
+      ]
+    ],
+    "waiting/00": [
+      [
+        75,
+        327,
+        128,
+        361
+      ]
+    ],
+    "waiting/13": [
+      [
+        78,
+        328,
+        128,
+        366
+      ]
+    ],
+    "waiting/14": [
+      [
+        76,
+        327,
+        129,
+        365
+      ]
+    ],
+    "jumping/12": [
+      [
+        58,
+        322,
+        95,
+        346
+      ]
+    ]
+  }
+}

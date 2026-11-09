@@ -1,0 +1,30 @@
+{
+  "state": "waving",
+  "render_code_sha256": "02d9602707f2a6e9226d31802f361669cc719a24e1dc2f5472d2428f15cac07a",
+  "mode": "effect-repair",
+  "character_files_unchanged": true,
+  "character_drawings": 16,
+  "opaque_subject_prop_star_pixels_changed": 0,
+  "new_effect_edge_alpha_max": 0,
+  "old_cycle_ms": 2400,
+  "new_cycle_ms": 2400,
+  "effect_sample_ms": 50,
+  "new_effect_samples": 48,
+  "frozen_pose_effect_progression": true,
+  "effect_loop_periodic": true,
+  "media": {
+    "night.webp": {
+      "frames": 48,
+      "cycle_ms": 2400,
+      "sha256": "16fbd050858994e4cb7319e4dcc4b3a6bf9feda057fc923c4487d27f5d9b5aef"
+    },
+    "preview.gif": {
+      "frames": 48,
+      "cycle_ms": 2400,
+      "sha256": "d7bd24b0df56b876b7de5f7a31969bd5e3988713d28acf4e076165388da8f5e4"
+    }
+  },
+  "native_installed": false,
+  "original_registration": "inherited unverified",
+  "scoped_render_revision_proof": "nonfailed-effects-preserved.json"
+}

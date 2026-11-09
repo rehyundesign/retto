@@ -1,0 +1,26 @@
+{
+  "old_render_sha256": "cefd8265a88018e23af19c5a842d05632d91795c15bae416f9c9b859e08f286d",
+  "new_render_sha256": "02d9602707f2a6e9226d31802f361669cc719a24e1dc2f5472d2428f15cac07a",
+  "diff": [
+    "--- \n",
+    "+++ \n",
+    "@@ -80,6 +80,9 @@\n",
+    "                 px=ox+side*(18+r*.5*math.cos(a));py=oy+24+10*math.sin(a)",
+    "                 stamp(back,kind,(px,py),10,color,.24+.36*calm,12*math.sin(a))",
+    "             arc(back,(ox+side*7,oy+49),20+8*calm,5+2*calm,color,.28+.20*calm,5,175)",
+    "+            if actor=='tato':",
+    "+                stamp(front,'star',(ox-58,oy+5+3*math.sin(phase)),12,color,.42+.23*calm)",
+    "+                arc(front,(x-8,y+65),27,6,color,.28+.20*calm,0,180)",
+    "         elif state=='waving':",
+    "             for j in range(4):",
+    "                 q=(t+j/4)%1;a=envelope(q)"
+  ],
+  "unchanged_nonfailed_samples": {
+    "idle": 64,
+    "running": 64,
+    "waiting": 64,
+    "waving": 48,
+    "jumping": 48,
+    "sleeping": 64
+  }
+}

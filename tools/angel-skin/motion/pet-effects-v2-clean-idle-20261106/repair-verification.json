@@ -1,0 +1,19 @@
+{
+  "tato_visible_blue_pixel_ratio_vs_v1": {
+    "idle": 2.35,
+    "running": 2.45,
+    "waiting": 2.21,
+    "failed": 2.38,
+    "waving": 2.78,
+    "jumping": 2.51,
+    "sleeping": 2.07
+  },
+  "melody_changed_effect_pixels": 0,
+  "melody_preserved_samples": 416,
+  "idle_background_pixels_removed": 969,
+  "idle_changed_alpha_frames": 7,
+  "all_input_RGB_preserved": true,
+  "all_original_files_preserved": true,
+  "poses_and_cadence_changed": false,
+  "native_installed": false
+}

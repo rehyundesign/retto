@@ -1,0 +1,30 @@
+{
+  "mode": "effect-repair",
+  "scope": "seven existing angel motions, add blue Tato magic and ruby/pink Melody magic only",
+  "preserve": "all112 source drawings, original character animation bytes, pose sizes/positions/expressions, every physical cycle, old golden moon/star/musicbox motifs and source effect files",
+  "method": "per-pose bell/bow attachment proxies; birth-position trails for jump; new layers behind retained RGBA and foreground flecks masked outside entire character silhouette; every original opaque subject/prop/star pixel unchanged",
+  "palette": {
+    "tato": [
+      102,
+      202,
+      255
+    ],
+    "melody": [
+      255,
+      109,
+      143
+    ]
+  },
+  "states": [
+    "idle",
+    "running",
+    "waiting",
+    "failed",
+    "waving",
+    "jumping",
+    "sleeping"
+  ],
+  "status": "pet magic review candidate;112 source poses retained; user approval pending",
+  "native_installed": false,
+  "original_registration": "inherited unverified; no body geometry changed"
+}
