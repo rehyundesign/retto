@@ -1,0 +1,52 @@
+{
+  "source_sha256": {
+    "00": "66dab830b8d6440000fc0aa380c80e2776299d3ead9f2f07b78602e6e983d197",
+    "01": "8a34f18918ccd68fde8e2bab9c44d6cabc549c1c9ea74df31413df3fd06b8547",
+    "02": "bcb3e01853ca0a4eb4e267dbf69eafeee67e78eddad5485ec12a00bbacd3aef1",
+    "03": "9c1fa04c1dbee0d971f027b96f2d114aa6cc6cd0d279eb3922f29c150265ce46",
+    "04": "ec89abd66a7bb93bc07e6eeb441f093efcb30262d833b74a0d6d958d02023480",
+    "05": "fb188e5007662a9482c18b86a5c471f1cf92fe7659d4edc6299481056a8ebbd9",
+    "06": "9b904514c29496c44b2633f9a716114a1fa21c27ff52050ec55d54f385201764",
+    "07": "070e92e62b1e336fc65ce5eaeb0a4a9b85892c2b3bf5c3f817a7626aa4f42573",
+    "08": "d3853d11fcf2d62a4491101b02415b648dc391c54de0244bc998bc3488116793",
+    "09": "2b2cf984f16af19ecbf7ab8f981a86ed29b7814e23cbaebca3dc03ea2fea1f1e",
+    "10": "493c1c8a3d1bdb84f79c0fd7024e04d6f5a3d72b9d0ab758b7d01637771301d6",
+    "11": "5ebbda660ea5972ec9b337804ae67238d2a160833874126add8dcb84dae33e7f",
+    "12": "5f1eb18c60a740c2981837d78917b41782ef72ecee4a6d7cd7a374bc903f6f90",
+    "13": "1acb6597fa55e8c6c34e44ce5d072328c967c05f399dbf3873b0366ea390082d",
+    "14": "3ad072e754be1c7c7fbbe589ce2af0afb0b76a71162af543bcfda1eff6bd633f",
+    "15": "f480b9ff044dfc518c727a07ac68c8e951ba745091dd9b45a83625bac8f65028"
+  },
+  "gif_sha256": "d1d657920169e1dafe164ff6faa09151656bf60c045199748032af378d7527bf",
+  "runtime_size_comparison": {
+    "path": "review/comparison-1x.png",
+    "sha256": "6cdf76a7e922da58aeb4649b694acbfe6b366b76d9af4f2bc696ee1058fe6b95"
+  },
+  "checks": {
+    "identity_eyes": {
+      "status": "pass",
+      "finding": "All16 cells inspected. Main blue-grey irises retained; Tato has dots or ^^ only after localized frame02 repair, with zero changed pixels outside eye masks; rabbit burgundy eyes unchanged."
+    },
+    "anatomy_grip": {
+      "status": "pass",
+      "finding": "All16 cells inspected; main cat has4 limbs, lifting only anatomical right forepaw in02..07. Removed unintended raised paws in09,11,12,14. Whole-character poses; no head/body assembly."
+    },
+    "material_canon": {
+      "status": "pass",
+      "finding": "Compared supplied character designs and selected concept. Soft ivory wings/fur, white bell-cat, pink red-bow rabbit; simplified faces retained. This is a texture adaptation, not an official canon approval."
+    },
+    "secondary_motion": {
+      "status": "unverified",
+      "finding": "Ear/wing/ribbon/tail changes present in independent drawings, but continuous live playback mechanics not yet inspected."
+    },
+    "legibility": {
+      "status": "unverified",
+      "finding": "Readable in wider512x544 study and sampled256x272 board. Native224x320 display fit is not validated."
+    },
+    "loop_return": {
+      "status": "unverified",
+      "finding": "15->00->01 sampled poses and3.2s GIF clock inspected; live browser file preview blocked by URL policy (file protocol disallowed). No alternate browser route attempted."
+    }
+  },
+  "original_anatomical_registration": "unverified; missing measured original pose-specific landmarks; do not equate support proxy with registration"
+}

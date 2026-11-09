@@ -1,0 +1,120 @@
+{
+  "sources": [
+    {
+      "id": "00",
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/sleeping-v1-20261105/character/00.png",
+      "sha256": "696f706eb3cb44e54d36b56c96b9591a4598e492537662953a97475025108cc6"
+    },
+    {
+      "id": "01",
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/sleeping-v1-20261105/character/01.png",
+      "sha256": "8910194db5eb3dee6246f0608fc57fdeb02b1aafb01137533a03456c12d42c7a"
+    },
+    {
+      "id": "02",
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/sleeping-v1-20261105/character/02.png",
+      "sha256": "c12183f37f41fbd20d764d6bb72b2dc2dd5bfc5bd25aa1604c787ca2c88902fb"
+    },
+    {
+      "id": "03",
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/sleeping-v1-20261105/character/03.png",
+      "sha256": "7db670a1209a692eb9f51b9a73f624ae18bd6b6f2ea1a84880019c4d6af80e43"
+    },
+    {
+      "id": "04",
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/sleeping-v1-20261105/character/04.png",
+      "sha256": "0cfbe1f460bc55c31ce9c2edd1d2699eb685142f9df71ebaafbf06a82c969333"
+    },
+    {
+      "id": "05",
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/sleeping-v1-20261105/character/05.png",
+      "sha256": "7f7678b4f8fa02a41c507e99fa5644c18a3808015a4296d0f19a31916d4f9f44"
+    },
+    {
+      "id": "06",
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/sleeping-v1-20261105/character/06.png",
+      "sha256": "8a074879f0ff60228c5294f5b109d2ac2ffd2373207fbd2023a93049bb557edb"
+    },
+    {
+      "id": "07",
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/sleeping-v1-20261105/character/07.png",
+      "sha256": "6064fb5c90d4ce22fb18ebf3b8733b9be356b830722c2449d6a9a65bb8f7132f"
+    },
+    {
+      "id": "08",
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/sleeping-v1-20261105/character/08.png",
+      "sha256": "cbcba2647dda9ad7dd50d0319d4bdf947675d0e9abba7fb6c2e19bd32c9518b4"
+    },
+    {
+      "id": "09",
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/sleeping-v1-20261105/character/09.png",
+      "sha256": "7a54688f622ae603adba8ed16094777ee62bef1e730d892c57b2f54d45d9449d"
+    },
+    {
+      "id": "10",
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/sleeping-v1-20261105/character/10.png",
+      "sha256": "bad1c85e1ec8013e20752036b5087fdce4a2351efb2c9c47c8832a38a4e2587b"
+    },
+    {
+      "id": "11",
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/sleeping-v1-20261105/character/11.png",
+      "sha256": "6176b124d00038758ccc06e6fd49adb860a3ca074f4d768ab922f995da154699"
+    },
+    {
+      "id": "12",
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/sleeping-v1-20261105/character/12.png",
+      "sha256": "c3d2a3a5c2dd21a10fda9276a9bde1ef2619d2ccc47a4426c47e82bf647dd4db"
+    },
+    {
+      "id": "13",
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/sleeping-v1-20261105/character/13.png",
+      "sha256": "f8c99f39f7b74a7fde7cbd91f5782395d47b9e1c2e57e0ca9369dd22188d995a"
+    },
+    {
+      "id": "14",
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/sleeping-v1-20261105/character/14.png",
+      "sha256": "3fffb3bb69af6784707a125fb8fd87dd199a28631004118d11a2c0c13da3e254"
+    },
+    {
+      "id": "15",
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/sleeping-v1-20261105/character/15.png",
+      "sha256": "6c6c420621802084ae60f610e4c081366bc09d9b023340b9482c9edd733d449c"
+    }
+  ],
+  "playback_ids": [
+    "00",
+    "01",
+    "02",
+    "03",
+    "04",
+    "05",
+    "06",
+    "07",
+    "08",
+    "09",
+    "10",
+    "11",
+    "12",
+    "13",
+    "14",
+    "15"
+  ],
+  "pose_durations_ms": [
+    400,
+    400,
+    400,
+    400,
+    400,
+    400,
+    400,
+    400,
+    400,
+    400,
+    400,
+    400,
+    400,
+    400,
+    400,
+    400
+  ]
+}

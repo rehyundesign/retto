@@ -1,0 +1,114 @@
+[
+  {
+    "id": "00",
+    "phase": "neutral",
+    "action": "Main frontal, all4 paws grounded. Tato holds star beside chest, Melody hovers right smiling.",
+    "pose_ms": 200,
+    "source": "independent complete character cell, not a crop or head patch"
+  },
+  {
+    "id": "01",
+    "phase": "notice",
+    "action": "Main eyes notice left first, head2degreesleft. Tato turns ears/eyes left and starts lifting star; Melody looks at Retto.",
+    "pose_ms": 200,
+    "source": "independent complete character cell, not a crop or head patch"
+  },
+  {
+    "id": "02",
+    "phase": "follow",
+    "action": "Main head6degreesleft with continuous neck/shoulders. Tato flies3pxleft4pxup showing star. Melody turns eyes toward left.",
+    "pose_ms": 200,
+    "source": "independent complete character cell, not a crop or head patch"
+  },
+  {
+    "id": "03",
+    "phase": "turn",
+    "action": "Main head10degreesleft. Tato7pxleft8pxup extends outer paw. Melody4pxinward3pxup curious.",
+    "pose_ms": 200,
+    "source": "independent complete character cell, not a crop or head patch"
+  },
+  {
+    "id": "04",
+    "phase": "approach",
+    "action": "Main head15degreesleft. Tato11pxleft12pxup points to cursor with free paw; Melody6pxinward5pxup responds.",
+    "pose_ms": 200,
+    "source": "independent complete character cell, not a crop or head patch"
+  },
+  {
+    "id": "05",
+    "phase": "look-left",
+    "action": "Main head20degreesleft. Tato14pxleft17pxup looks toward cursor while presenting star. Melody9pxinward7pxup raises inner paw.",
+    "pose_ms": 200,
+    "source": "independent complete character cell, not a crop or head patch"
+  },
+  {
+    "id": "06",
+    "phase": "show",
+    "action": "Main head25degreesleft attentive kind smile. Tato15pxleft20pxup looks BACK at Retto presenting star/pointing left. Melody10pxinward8pxup looks same direction, raised paw.",
+    "pose_ms": 200,
+    "source": "independent complete character cell, not a crop or head patch"
+  },
+  {
+    "id": "07",
+    "phase": "reply",
+    "action": "Main retains25degreeleft turn, glances warmly at Tato. Tato floats near peak with happy^^eyes, little wrist wave; Melody raises paw a little higher to join response.",
+    "pose_ms": 200,
+    "source": "independent complete character cell, not a crop or head patch"
+  },
+  {
+    "id": "08",
+    "phase": "settle-left",
+    "action": "Main head22degreesleft, eyes farther left. Tato star tilts toward cursor and settles2pxdown. Melody waves raised paw gently toward cursor, winglets upstroke.",
+    "pose_ms": 200,
+    "source": "independent complete character cell, not a crop or head patch"
+  },
+  {
+    "id": "09",
+    "phase": "return-start",
+    "action": "Main head18degreesleft. Tato starts returning3pxright3pxdown, star close to body; Melody lowers paw halfway, moves2pxoutward.",
+    "pose_ms": 200,
+    "source": "independent complete character cell, not a crop or head patch"
+  },
+  {
+    "id": "10",
+    "phase": "return",
+    "action": "Main head14degreesleft. Tato7pxleft12pxup, small nod with dot eyes; Melody6pxinward5pxup lowers paw and looks fondly at Retto.",
+    "pose_ms": 200,
+    "source": "independent complete character cell, not a crop or head patch"
+  },
+  {
+    "id": "11",
+    "phase": "return-mid",
+    "action": "Main head9degreesleft. Tato5pxleft8pxup holds star chest-level, Melody4pxinward3pxup settles from wingbeat.",
+    "pose_ms": 200,
+    "source": "independent complete character cell, not a crop or head patch"
+  },
+  {
+    "id": "12",
+    "phase": "near-front",
+    "action": "Main head5degreesleft and neck/shoulders straighten naturally. Tato3pxleft5pxup and Melody2pxinward2pxup drift back.",
+    "pose_ms": 200,
+    "source": "independent complete character cell, not a crop or head patch"
+  },
+  {
+    "id": "13",
+    "phase": "blink",
+    "action": "Main head3degreesleft with soft natural closed-eye blink, closed-mouth positive expression. Tato begins blinking^^, Melody warm rectangle eyes, both close to original positions.",
+    "pose_ms": 200,
+    "source": "independent complete character cell, not a crop or head patch"
+  },
+  {
+    "id": "14",
+    "phase": "recover",
+    "action": "Main head1degreeleft, both natural canonical eyes reopen. Tato holds star in original place with dot eyes; Melody original right hover with tiny winglet follow-through.",
+    "pose_ms": 200,
+    "source": "independent complete character cell, not a crop or head patch"
+  },
+  {
+    "id": "15",
+    "phase": "neutral-return",
+    "action": "Main near frontal, complete connected neck/body, slight ear and tail settling. Tato/Melody return near original hover, remaining pose differences tiny for loop.",
+    "pose_ms": 200,
+    "source": "independent complete character cell, not a crop or head patch"
+  }
+]

@@ -1,0 +1,562 @@
+[
+  {
+    "id": "00",
+    "path": "character/00.png",
+    "sha256": "82b8bac930e3190945ddc8a3adf3804e2eda2c6f5d496d68d3013ab3e30ee902",
+    "raw_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v5-canonical-20261106/raw/00.png",
+    "raw_sha256": "0dac34f7673da3c14c3fcd7becc394177ef7d2439e741c157590f8654878e3df",
+    "prompt_sha256": "f6d23355f3ae9835f5581ea6a789769847d1c956c39b824bb19a5ba30069414f",
+    "independent_complete_body_drawing": true,
+    "resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      0,
+      -3
+    ],
+    "main_support_proxy_y": 484,
+    "removed_detached_alpha_pixels": 0,
+    "attachment_proxies": {
+      "star": [
+        113.7,
+        309.27
+      ],
+      "tato_eyes_proxy": [
+        115.71,
+        282.51
+      ],
+      "tato_magic_emitter": [
+        77.71,
+        347.51
+      ],
+      "melody_magic_emitter": [
+        491.81,
+        334.31
+      ]
+    },
+    "anatomical_landmarks": "unverified; support/color proxies are display registration/emitters, not original certification"
+  },
+  {
+    "id": "01",
+    "path": "character/01.png",
+    "sha256": "0fdc917e2eae3a965d579020ac8901d9a908bf02ad7c4172096ebb41195ad911",
+    "raw_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v5-canonical-20261106/raw/01.png",
+    "raw_sha256": "68ca8577053452d88e71df9703ef8f3bfe1c4e5517c4612968cf5327acb33390",
+    "prompt_sha256": "4308eddf58af0007373a030fdd5cd411bbc974239adf903e3060aa8020f4aef9",
+    "independent_complete_body_drawing": true,
+    "resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      0,
+      -20
+    ],
+    "main_support_proxy_y": 484,
+    "removed_detached_alpha_pixels": 0,
+    "attachment_proxies": {
+      "star": [
+        122.41,
+        256.64
+      ],
+      "tato_eyes_proxy": [
+        112.21,
+        233.24
+      ],
+      "tato_magic_emitter": [
+        74.21,
+        298.24
+      ],
+      "melody_magic_emitter": [
+        494.42,
+        294.3
+      ]
+    },
+    "anatomical_landmarks": "unverified; support/color proxies are display registration/emitters, not original certification"
+  },
+  {
+    "id": "02",
+    "path": "character/02.png",
+    "sha256": "a8c55ed36a8e04d1acaa361e3b843f9b9209797c44a98e35d2234e937959af89",
+    "raw_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v5-canonical-20261106/raw/02.png",
+    "raw_sha256": "ce4b7c0efb7c5f3f8de97efbdf503ffed539dc929ed7b861ba1ae51be5200d7c",
+    "prompt_sha256": "d18b19a32eddc3761552bddb33ef4309cd200354f122b6ee88d82ce14a83844b",
+    "independent_complete_body_drawing": true,
+    "resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      0,
+      3
+    ],
+    "main_support_proxy_y": 484,
+    "removed_detached_alpha_pixels": 0,
+    "attachment_proxies": {
+      "star": [
+        131.57,
+        237.68
+      ],
+      "tato_eyes_proxy": [
+        95.96,
+        215.82
+      ],
+      "tato_magic_emitter": [
+        57.96,
+        280.82
+      ],
+      "melody_magic_emitter": [
+        496.8,
+        260.17
+      ]
+    },
+    "anatomical_landmarks": "unverified; support/color proxies are display registration/emitters, not original certification"
+  },
+  {
+    "id": "03",
+    "path": "character/03.png",
+    "sha256": "e29f319caff7b69b6746350546cf543e496e7da7cd7334bb684ff1c926751df5",
+    "raw_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v5-canonical-20261106/raw/03.png",
+    "raw_sha256": "d055426bc9b10c28ddd97c94221aa87cabc2445fa7784028c7034ad008a86628",
+    "prompt_sha256": "c1db5069dc3b3b9d69df475bfad7e1ac2f76763908607bd3062505f5fded6dc5",
+    "independent_complete_body_drawing": true,
+    "resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      0,
+      -15
+    ],
+    "main_support_proxy_y": 484,
+    "removed_detached_alpha_pixels": 0,
+    "attachment_proxies": {
+      "star": [
+        154.46,
+        246.16
+      ],
+      "tato_eyes_proxy": [
+        108.5,
+        229.5
+      ],
+      "tato_magic_emitter": [
+        70.5,
+        294.5
+      ],
+      "melody_magic_emitter": [
+        509.82,
+        271.45
+      ]
+    },
+    "anatomical_landmarks": "unverified; support/color proxies are display registration/emitters, not original certification"
+  },
+  {
+    "id": "04",
+    "path": "character/04.png",
+    "sha256": "0730a6b90b14730a2d0a849f8067ce7a9d997c40f470b0fa63bd6f2ab56d0638",
+    "raw_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v5-canonical-20261106/raw/04.png",
+    "raw_sha256": "bc156ab8b96deaf0e3daf15269b6eca08525002181e1117bd7afbea9816ddcc4",
+    "prompt_sha256": "50e9df5e8138054411f7eff85294f9f78b909d96ca8032ccbada2fc02ed1b863",
+    "independent_complete_body_drawing": true,
+    "resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      0,
+      -7
+    ],
+    "main_support_proxy_y": 484,
+    "removed_detached_alpha_pixels": 0,
+    "attachment_proxies": {
+      "star": [
+        222.88,
+        261.98
+      ],
+      "tato_eyes_proxy": [
+        92.42,
+        233.61
+      ],
+      "tato_magic_emitter": [
+        54.42,
+        298.61
+      ],
+      "melody_magic_emitter": [
+        505.88,
+        287.51
+      ]
+    },
+    "anatomical_landmarks": "unverified; support/color proxies are display registration/emitters, not original certification"
+  },
+  {
+    "id": "05",
+    "path": "character/05.png",
+    "sha256": "9653bff71432488b686e2f4d70ac9c6877608fb54199548078538121ff56e0ca",
+    "raw_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v5-canonical-20261106/raw/05.png",
+    "raw_sha256": "b41f59f0de95b44696fbfbdb35b6f443c1fbdbc793afd0b840761a1dcd2e0723",
+    "prompt_sha256": "db47429b87cb6fd81158d43dbaad9f6227ccc8a00f3376dfc769a99f9ca01b3d",
+    "independent_complete_body_drawing": true,
+    "resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      0,
+      0
+    ],
+    "main_support_proxy_y": 484,
+    "removed_detached_alpha_pixels": 0,
+    "attachment_proxies": {
+      "star": [
+        262.55,
+        259.59
+      ],
+      "tato_eyes_proxy": [
+        115.4,
+        289.22
+      ],
+      "tato_magic_emitter": [
+        77.4,
+        354.22
+      ],
+      "melody_magic_emitter": [
+        501.14,
+        333.24
+      ]
+    },
+    "anatomical_landmarks": "unverified; support/color proxies are display registration/emitters, not original certification"
+  },
+  {
+    "id": "06",
+    "path": "character/06.png",
+    "sha256": "fbe31d3c020b9e72c96ed7fa0645b3d3ab902ac62818c783be9e0283142d3c44",
+    "raw_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v5-canonical-20261106/raw/06.png",
+    "raw_sha256": "fba43abcc313e0ad1921769532a1a97a9dce1e3338778823f85e722a0f06bb7d",
+    "prompt_sha256": "1180cb12298bdb70501e750a36a3ffdafff495172f9b49c6b58dd350c667aa78",
+    "independent_complete_body_drawing": true,
+    "resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      0,
+      5
+    ],
+    "main_support_proxy_y": 484,
+    "removed_detached_alpha_pixels": 0,
+    "attachment_proxies": {
+      "star": [
+        296.9,
+        274.62
+      ],
+      "tato_eyes_proxy": [
+        130.83,
+        289.46
+      ],
+      "tato_magic_emitter": [
+        92.83,
+        354.46
+      ],
+      "melody_magic_emitter": [
+        493.66,
+        331.71
+      ]
+    },
+    "anatomical_landmarks": "unverified; support/color proxies are display registration/emitters, not original certification"
+  },
+  {
+    "id": "07",
+    "path": "character/07.png",
+    "sha256": "3752dbc7f91a8269aa3847851a83f67b6f9c14e856075327bf621fa6d98bbe14",
+    "raw_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v5-canonical-20261106/raw/07.png",
+    "raw_sha256": "e951b476771591a847f1fb1ca0e0ad6f2b1f493653d82c33ee3897d86d7ad268",
+    "prompt_sha256": "a3bbca7a21ca39d0992b0a313fb5ed1213fcaff6116882302a5b3fbd9d0bbf8c",
+    "independent_complete_body_drawing": true,
+    "resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      0,
+      4
+    ],
+    "main_support_proxy_y": 484,
+    "removed_detached_alpha_pixels": 0,
+    "attachment_proxies": {
+      "star": [
+        356.17,
+        282.32
+      ],
+      "tato_eyes_proxy": [
+        105.38,
+        300.48
+      ],
+      "tato_magic_emitter": [
+        67.38,
+        365.48
+      ],
+      "melody_magic_emitter": [
+        503.89,
+        334.45
+      ]
+    },
+    "anatomical_landmarks": "unverified; support/color proxies are display registration/emitters, not original certification"
+  },
+  {
+    "id": "08",
+    "path": "character/08.png",
+    "sha256": "4526749ebfe7b8aff7e33ed8daa03888993f339ad211a4b550f118e067389add",
+    "raw_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v5-canonical-20261106/raw/08.png",
+    "raw_sha256": "27a32b91180d6771a90ad5332ec25a9fb222611d6c8776fa5fa270a794605e52",
+    "prompt_sha256": "a7319f8ee7047d29fba5f2a73a04e4c898a30fa4c27a2480607203046dcd7c8e",
+    "independent_complete_body_drawing": true,
+    "resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      0,
+      1
+    ],
+    "main_support_proxy_y": 484,
+    "removed_detached_alpha_pixels": 0,
+    "attachment_proxies": {
+      "star": [
+        387.57,
+        276.68
+      ],
+      "tato_eyes_proxy": [
+        122.62,
+        290.07
+      ],
+      "tato_magic_emitter": [
+        84.62,
+        355.07
+      ],
+      "melody_magic_emitter": [
+        507.92,
+        304.94
+      ]
+    },
+    "anatomical_landmarks": "unverified; support/color proxies are display registration/emitters, not original certification"
+  },
+  {
+    "id": "09",
+    "path": "character/09.png",
+    "sha256": "348ee7614f7c4c9ec0992acee9db431b481b5af85ecb55ee8098dce9489b51aa",
+    "raw_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v5-canonical-20261106/raw/09.png",
+    "raw_sha256": "448639d77119ff4bf0c4a7d9f63ce81cae8b45910e1f29485530bce89896e1b1",
+    "prompt_sha256": "e8ad92a6be2f5bc00ee71a9ea678e1ba7d475c82e37ed15a5e746af0b447d90c",
+    "independent_complete_body_drawing": true,
+    "resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      0,
+      -10
+    ],
+    "main_support_proxy_y": 484,
+    "removed_detached_alpha_pixels": 0,
+    "attachment_proxies": {
+      "star": [
+        392.0,
+        217.41
+      ],
+      "tato_eyes_proxy": [
+        120.62,
+        247.37
+      ],
+      "tato_magic_emitter": [
+        82.62,
+        312.37
+      ],
+      "melody_magic_emitter": [
+        496.7,
+        250.9
+      ]
+    },
+    "anatomical_landmarks": "unverified; support/color proxies are display registration/emitters, not original certification"
+  },
+  {
+    "id": "10",
+    "path": "character/10.png",
+    "sha256": "893b04d694c517933d1253184278c9e277732ea464fd5f1f521d7ac8a37502f9",
+    "raw_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v5-canonical-20261106/raw/10.png",
+    "raw_sha256": "f35c0e219497cc2fb82baa7f055de9efeaa18eb36afd2a5063d211633d8a8aed",
+    "prompt_sha256": "d9f40159f53a020e107021751483d572e4f028f91e7effbc602a49b78ec1ff84",
+    "independent_complete_body_drawing": true,
+    "resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      0,
+      -13
+    ],
+    "main_support_proxy_y": 484,
+    "removed_detached_alpha_pixels": 0,
+    "attachment_proxies": {
+      "star": [
+        382.5,
+        176.1
+      ],
+      "tato_eyes_proxy": [
+        104.08,
+        212.94
+      ],
+      "tato_magic_emitter": [
+        66.08,
+        277.94
+      ],
+      "melody_magic_emitter": [
+        537.81,
+        231.9
+      ]
+    },
+    "anatomical_landmarks": "unverified; support/color proxies are display registration/emitters, not original certification"
+  },
+  {
+    "id": "11",
+    "path": "character/11.png",
+    "sha256": "28f34882e0e60a48d62a8938209ae4e7df734937742a819c5e206c9207a2b884",
+    "raw_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v5-canonical-20261106/raw/11.png",
+    "raw_sha256": "a3bd4323473a91d59367c9d3212d2d687b341ca83e2005801d03183b365e1115",
+    "prompt_sha256": "1e58674e4dd5cde681a1f9f466d34c9c567eb2f0e8c7e51739ab67f52b3a8818",
+    "independent_complete_body_drawing": true,
+    "resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      0,
+      -2
+    ],
+    "main_support_proxy_y": 484,
+    "removed_detached_alpha_pixels": 0,
+    "attachment_proxies": {
+      "star": [
+        379.8,
+        238.43
+      ],
+      "tato_eyes_proxy": [
+        127.58,
+        150.83
+      ],
+      "tato_magic_emitter": [
+        89.58,
+        215.83
+      ],
+      "melody_magic_emitter": [
+        503.46,
+        275.58
+      ]
+    },
+    "anatomical_landmarks": "unverified; support/color proxies are display registration/emitters, not original certification"
+  },
+  {
+    "id": "12",
+    "path": "character/12.png",
+    "sha256": "8d6a3bffd48411aa9a7582a61c751ee36fde846b99c57bb31d1994ad004fd35f",
+    "raw_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v5-canonical-20261106/raw/12.png",
+    "raw_sha256": "09c742bd7301da1f4179184887d8f59070436307363d7310eff88411eb60caa9",
+    "prompt_sha256": "71b65dced470911810b479a7b97f1b86a9d92e9cd00b74870b728c6a7e25e7e5",
+    "independent_complete_body_drawing": true,
+    "resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      0,
+      -3
+    ],
+    "main_support_proxy_y": 484,
+    "removed_detached_alpha_pixels": 0,
+    "attachment_proxies": {
+      "star": [
+        253.73,
+        262.27
+      ],
+      "tato_eyes_proxy": [
+        121.08,
+        279.12
+      ],
+      "tato_magic_emitter": [
+        83.08,
+        344.12
+      ],
+      "melody_magic_emitter": [
+        499.13,
+        333.33
+      ]
+    },
+    "anatomical_landmarks": "unverified; support/color proxies are display registration/emitters, not original certification"
+  },
+  {
+    "id": "13",
+    "path": "character/13.png",
+    "sha256": "6d0b849d5628913688937d99040f74344da4fd698977529be8ede47267a744ad",
+    "raw_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v5-canonical-20261106/raw/13.png",
+    "raw_sha256": "91ad723cb3dfb4b90062ea3ec3523450aadffb15a73a99796af81ddcdab66055",
+    "prompt_sha256": "c1dd081758045c02808513504999a53c5b8c1d332a728934ed8d216d7cea7b76",
+    "independent_complete_body_drawing": true,
+    "resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      0,
+      -7
+    ],
+    "main_support_proxy_y": 484,
+    "removed_detached_alpha_pixels": 0,
+    "attachment_proxies": {
+      "star": [
+        153.67,
+        253.38
+      ],
+      "tato_eyes_proxy": [
+        104.35,
+        235.08
+      ],
+      "tato_magic_emitter": [
+        66.35,
+        300.08
+      ],
+      "melody_magic_emitter": [
+        508.36,
+        354.54
+      ]
+    },
+    "anatomical_landmarks": "unverified; support/color proxies are display registration/emitters, not original certification"
+  },
+  {
+    "id": "14",
+    "path": "character/14.png",
+    "sha256": "d686912755f4aa6e79b9bd5db771faecd938873873fba6032f9de3a92c8a1b58",
+    "raw_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v5-canonical-20261106/raw/14.png",
+    "raw_sha256": "f6e0067476b653c640d25db388b0d2a346fd92e460bd15b71f3e2b211b505a76",
+    "prompt_sha256": "9a08f63eb9f4f18a9b308d075f9479fee4c7777625b1fec9fdeae3a54b25d98d",
+    "independent_complete_body_drawing": true,
+    "resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      0,
+      -5
+    ],
+    "main_support_proxy_y": 484,
+    "removed_detached_alpha_pixels": 0,
+    "attachment_proxies": {
+      "star": [
+        125.08,
+        283.34
+      ],
+      "tato_eyes_proxy": [
+        92.6,
+        263.27
+      ],
+      "tato_magic_emitter": [
+        54.6,
+        328.27
+      ],
+      "melody_magic_emitter": [
+        495.28,
+        318.44
+      ]
+    },
+    "anatomical_landmarks": "unverified; support/color proxies are display registration/emitters, not original certification"
+  },
+  {
+    "id": "15",
+    "path": "character/15.png",
+    "sha256": "27b47d89b57878057ece158225b4faf9ba0c4101859a4eb937fe9a8b6462eec3",
+    "raw_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v5-canonical-20261106/raw/15.png",
+    "raw_sha256": "c47e7e9da44944c71487fa02bce7ad53143ac1b65a74f3789c5920539e42a075",
+    "prompt_sha256": "e7301c1b3b0e81182b4f15a419303972704ca4504321f80c6d4e76eb4a15c6af",
+    "independent_complete_body_drawing": true,
+    "resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      0,
+      -2
+    ],
+    "main_support_proxy_y": 484,
+    "removed_detached_alpha_pixels": 0,
+    "attachment_proxies": {
+      "star": [
+        113.24,
+        303.77
+      ],
+      "tato_eyes_proxy": [
+        97.1,
+        277.9
+      ],
+      "tato_magic_emitter": [
+        59.1,
+        342.9
+      ],
+      "melody_magic_emitter": [
+        493.84,
+        333.66
+      ]
+    },
+    "anatomical_landmarks": "unverified; support/color proxies are display registration/emitters, not original certification"
+  }
+]

@@ -1,0 +1,30 @@
+{
+  "installed": "/Users/luxia/Applications/Retto.app",
+  "executableSha256": "176a99b8b9f836df6fb7b01d4c50183a9c8777c5e849e6584394b6d4d54808cb",
+  "binaryBefore": "d3131ef6efc72ff8e8119ce27c4da7b7aeaacc46fb914886e074200d29f00dba",
+  "preserved_resources": 30614,
+  "added_angel_files": 273,
+  "signatureVerified": true,
+  "sourceArchive": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/native-v2-interactions-20261106/source-snapshot.tar.gz",
+  "sourceArchive_sha256": "dc8ee8318c388d181fee41193b93ca6f9f3d243dde509e72f8c60ad108c7df26",
+  "source_files": 48,
+  "backup": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/native-v2-interactions-20261106/recovery",
+  "installed_checks": {
+    "--angel-self-test": "PASS Angel:7 states,16 retained drawings each,10/20Hz scene/effect samples,exact2.4/3.2/6.4s clocks,body-derived uniform fit and support,overscan at7 scales; review aliases running; legacy drag retained\n",
+    "--angel-state-self-test": "PASS Angel:7 states,16 retained drawings each,10/20Hz scene/effect samples,exact2.4/3.2/6.4s clocks,body-derived uniform fit and support,overscan at7 scales; review aliases running; legacy drag retained\nPASS Angel actual state transitions,review-to-running alias,gaze gate,legacy drag,click returns to sleep\n",
+    "--angel-interactions-self-test": "PASS Angel interactions: stable whole-cycle idle random, left/right16-pose flight1.6s with independent3.2s FX,16 full-body cursor directions; original7states preserved\n",
+    "--angel-interactions-state-test": "PASS Angel interactions: stable whole-cycle idle random, left/right16-pose flight1.6s with independent3.2s FX,16 full-body cursor directions; original7states preserved\nPASS actual Angel cursor16sectors/hold/reset, working-state isolation, both16-pose airborne drag directions and return\n",
+    "--self-test-all-skins": "{\"jeanneOK\":true,\"cells\":160,\"gaze\":16,\"timing\":\"v56\"}\nJeanne v56 independent back/front effects and pose-attached light: true\n{\"completeFrameResources\":true,\"ok\":true,\"skinCount\":15,\"skins\":[{\"available\":true,\"skin\":\"classic\"},{\"available\":true,\"skin\":\"howl\"},{\"available\":true,\"skin\":\"chocolatHeart\"},{\"available\":true,\"skin\":\"angelWings\"},{\"available\":true,\"skin\":\"bee\"},{\"available\":true,\"skin\":\"bunny\"},{\"available\":true,\"skin\":\"rilakkuma\"},{\"available\":true,\"skin\":\"rilakkumaCape\"},{\"available\":true,\"skin\":\"magicalHeart\"},{\"available\":true,\"skin\":\"christmas\"},{\"available\":true,\"skin\":\"hana\"},{\"available\":true,\"skin\":\"amuRan\"},{\"available\":true,\"skin\":\"pichiPitch\"},{\"available\":true,\"skin\":\"jeanne\"},{\"available\":true,\"skin\":\"hachupingping\"}]}\n",
+    "--amu-approved-state-test": "PASS Amu choice: all4 working/all2 completion outcomes, stable repeated refresh/review alias, new episode/session redraws\nPASS Amu approved:8 full16-drawing motions + static school idle; exact80-sample clocks; sleep6.4s; legacy review maps to working; existing drag/gaze retained\nPASS actual Amu state/review alias,16-frame clocks,drag,gaze gates,click return to sleep\n"
+  },
+  "selected_skin_verified": true,
+  "actual_app_appearance_verified": true,
+  "original_anatomical_landmarks_certification": "inherited unverified",
+  "ui_verification": {
+    "date": "2026-11-09",
+    "method": "CUA installed Retto app screenshot and skin menu selection; left/right drag/release exercised",
+    "during_drag_animation_live_capture": false,
+    "all_direction_visual_coverage": "native RettoView fixture16 gaze and16 per flight; not live pointer capture for every sector",
+    "running_installed_instances": 1
+  }
+}

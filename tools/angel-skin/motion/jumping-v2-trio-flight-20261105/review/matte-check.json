@@ -1,0 +1,87 @@
+{
+  "checked_character_frames": 16,
+  "noise_checks": [
+    {
+      "id": "00",
+      "isolated_background_noise_pixels_beyond4px": 0,
+      "raw_input_independent": true
+    },
+    {
+      "id": "01",
+      "isolated_background_noise_pixels_beyond4px": 0,
+      "raw_input_independent": true
+    },
+    {
+      "id": "02",
+      "isolated_background_noise_pixels_beyond4px": 0,
+      "raw_input_independent": true
+    },
+    {
+      "id": "03",
+      "isolated_background_noise_pixels_beyond4px": 0,
+      "raw_input_independent": true
+    },
+    {
+      "id": "04",
+      "isolated_background_noise_pixels_beyond4px": 0,
+      "raw_input_independent": true
+    },
+    {
+      "id": "05",
+      "isolated_background_noise_pixels_beyond4px": 0,
+      "raw_input_independent": true
+    },
+    {
+      "id": "06",
+      "isolated_background_noise_pixels_beyond4px": 0,
+      "raw_input_independent": true
+    },
+    {
+      "id": "07",
+      "isolated_background_noise_pixels_beyond4px": 0,
+      "raw_input_independent": true
+    },
+    {
+      "id": "08",
+      "isolated_background_noise_pixels_beyond4px": 0,
+      "raw_input_independent": true
+    },
+    {
+      "id": "09",
+      "isolated_background_noise_pixels_beyond4px": 0,
+      "raw_input_independent": true
+    },
+    {
+      "id": "10",
+      "isolated_background_noise_pixels_beyond4px": 0,
+      "raw_input_independent": true
+    },
+    {
+      "id": "11",
+      "isolated_background_noise_pixels_beyond4px": 0,
+      "raw_input_independent": true
+    },
+    {
+      "id": "12",
+      "isolated_background_noise_pixels_beyond4px": 0,
+      "raw_input_independent": true
+    },
+    {
+      "id": "13",
+      "isolated_background_noise_pixels_beyond4px": 0,
+      "raw_input_independent": true
+    },
+    {
+      "id": "14",
+      "isolated_background_noise_pixels_beyond4px": 0,
+      "raw_input_independent": true
+    },
+    {
+      "id": "15",
+      "isolated_background_noise_pixels_beyond4px": 0,
+      "raw_input_independent": true
+    }
+  ],
+  "visual_negative_spaces": "all16 inspected on dark/light boards; no opaque white fill between characters/wings/ears/tail loops observed",
+  "method": "new genuine-alpha drawings with same-pose low-alpha haze cleanup; no white-background floodfill"
+}

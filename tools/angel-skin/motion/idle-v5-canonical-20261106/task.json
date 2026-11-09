@@ -1,0 +1,30 @@
+{
+  "scope": "idle complete canonical identity repair; approved action beats and 3200ms preserved",
+  "withdrawn_constraints": [
+    "smaller eyes",
+    "minimize sclera",
+    "v3/v4 eye apertures"
+  ],
+  "identity_authority": "user-approved concept-v5 master; shipped ClassicGrown00 inspected separately and retained as runtime comparison, not proof of latest concept installation",
+  "mode": "new-motion",
+  "other_states": "unchanged",
+  "native_installed": false,
+  "status": "canonical whole-character review candidate; user approval pending",
+  "distinct_drawings": 16,
+  "pose_ms": 200,
+  "effect_ms": 50,
+  "cycle_ms": 3200,
+  "method": "16 independently redrawn complete connected characters; no eye/head/neck patches",
+  "motion_preservation": "same approved star-passing beats, flying pets, timing and effect motifs; newly drawn pixels, not pixel-exact v3 poses",
+  "references": {
+    "approved_design": {
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v5-canonical-20261106/references/canonical-master.png",
+      "sha256": "0d3524d171bb0aaacaf051fdd0d99516cbd8003151a0320c488a2c4ff844aa6c"
+    },
+    "shipped_runtime_comparison": {
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v5-canonical-20261106/references/runtime-base.png",
+      "sha256": "b8a513bbd8578f702fdc35c116e681588853e2da329fe5a080536498edbc008a"
+    }
+  },
+  "original_registration": "unverified quantitative original landmark certification"
+}

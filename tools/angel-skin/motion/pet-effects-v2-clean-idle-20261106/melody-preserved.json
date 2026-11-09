@@ -1,0 +1,13 @@
+{
+  "method": "isolate only Melody actor in both exact render functions; compare both RGBA layers pixel-for-pixel at every original export timestamp",
+  "samples": {
+    "idle": 64,
+    "running": 64,
+    "waiting": 64,
+    "failed": 64,
+    "waving": 48,
+    "jumping": 48,
+    "sleeping": 64
+  },
+  "melody_effect_RGBA_changed_pixels": 0
+}

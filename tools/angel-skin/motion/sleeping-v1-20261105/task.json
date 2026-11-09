@@ -1,0 +1,36 @@
+{
+  "mode": "new-motion",
+  "state": "sleeping",
+  "status": "completed sleeping review candidate; user approval pending",
+  "source_count": 16,
+  "pose_ms": 400,
+  "cycle_ms": 6400,
+  "effects_ms": 100,
+  "canvas": [
+    544,
+    544
+  ],
+  "runtime_target": [
+    224,
+    320
+  ],
+  "native_mapping": "future row11,16 independent drawings; no runtime code or installation changes",
+  "design": "Retto curled on belly with muzzle on two forepaws, brown tail curled at right hip; two folded ivory wings above back. Tato curled at left and Melody tucked at right. All closed gentle sleep eyes; warm crescent lullaby and golden stars, slow feathers, soft night aura fading to alpha0. No musicbox or text.",
+  "loop": "resting sleep -> inhale -> small ear/tail/wing settle -> exhale -> resting sleep, all remain asleep throughout; state entry/return animation is not part of this loop",
+  "original_registration": "unverified; canonical original curled sleep inspected; quantitative anatomical landmarks not certified",
+  "native_installed": false,
+  "anchor_review": "00 viewed on dark background. Main connected curled body, two forepaws under muzzle, folded shoulder feathers, far wing/body occlusion; Tato closed^eyes and bell, Melody pink/closed curves/red bow/winglets; no white empty pockets visible. Original body landmark certification remains unverified.",
+  "near_wing": "folded over back and partly shields tucked rear limbs",
+  "far_wing": "naturally partly occluded behind body and near wing",
+  "sleep_support": "two forepaws under muzzle, belly supported; no standing foot baseline reused",
+  "independent_character_drawings": 16,
+  "review_gif": "review/sleeping.gif",
+  "transparent_animation": "review/night.webp",
+  "character_animation": "review/character.webp",
+  "quality_reference": {
+    "path": "/Users/luxia/.codex/skills/retto-skin/assets/quality-baseline/hana-toto-16-half-speed.webp",
+    "sha256": "18547125baa3581e678a363741727f715392e8251c166cce2f7f964b38d1c6e7"
+  },
+  "quality_reference_review": "Reference full-state frame inspected, including curled sleep with crescent; texture/action vocabulary compared. Direct live/native cadence comparison not observed.",
+  "next_stage": "review this one sleeping motion; no application installation"
+}

@@ -1,0 +1,28 @@
+Production record: scoped static costume concept, 2026-11-04 KST.
+Tool: built-in image_gen; two calls (initial concept, targeted repair).
+Delivery: angel-with-two-companions.png. Concept only; no runtime resources changed or app installation.
+Identity reference: tools/base-retto-growth/concept-v5/default-master.png (working eye-colour candidate, not assumed approved).
+Material reference: tools/hachupingping-skin/motion/six-versions-v9/reference/hana-toto-material.png.
+Companion reference: user-supplied animation still and plush photo. Character names use user's wording; companion designs identified by visible species rather than unverified name assignment.
+Visual review: one central seated Retto with two front and two rear paws; shoulder wings behind body; white bell-cat on left and pink red-bow rabbit on right; face/paws/tail unobscured. Corrected white companion's tongue/open mouth and red collar to closed mouth and dark collar.
+Outstanding: generated soft surrounding alpha/glow persists; clean isolated production layers, original-body landmark registration, actual-size native display fit and animation are unverified. Do not use this concept directly as a runtime atlas.
+Tests: PNG decoding/size/alpha inspection only; build/lint not applicable to this concept-only change.
+
+Selected PNG SHA-256: 333ab247b53fe23e28dfde95ed089f87681c494fae6d262ea29a9947d81e56d9
+Repair prompt:
+Edit image 1 only, preserve its composition, angel wing design, two companion positions, relative sizes and fluffy rendering. Image 2 is authoritative original Retto identity and body proportions. Image 3 is authoritative companion design.
+Corrections:
+1. Match main Retto's original image 2 face and seated body proportions more faithfully: head/body ratio, face shape, blue-gray eyes, cream/brown markings, muzzle, limb lengths and fluffy brown tail. Four legs, same original feline body; no baby-head enlargement.
+2. LEFT white cat companion has a tiny CLOSED w-shaped mouth, no tongue, no open smile. Its neck collar is near-black/dark brown rather than red. Retain golden bell with black T-shaped slit, dot eyes, pink inner ears and thin white tail.
+3. RIGHT rabbit keep burgundy rectangular half-lidded eyes, red bow, long pink ears, feather wings.
+4. Background must be fully transparent OUTSIDE THE ACTUAL CHARACTERS AND FEATHERS. Remove ALL broad soft glow, vignette, cloudy background, background blur and ambient aura. Clean antialiased cutout alpha edges. No drop shadow floating around the entire trio. Do not add any text, halo, garments, objects, scenes, or floor.
+ONE finished transparent costume concept.
+
+Initial generation prompt:
+Use case: identity-preserve / compositing.
+Create ONE transparent-background costume concept master, not an animation sheet.
+Input 1 is the exact main cat Retto identity and body reference. Preserve its seated feline pose, face shape, head-to-torso ratio, limb lengths, cream/brown ragdoll markings, pink nose, blue-grey irises and big fluffy brown tail. Exactly four anatomically plausible legs. Do not make the cat shorter, baby-headed, humanlike or bipedal.
+Input 2 is Hana/Toto MATERIAL quality only: delicate soft realistic short fur, warm plush tactile finish, soft studio lighting. Do not copy its costume or its fairy.
+Inputs 3 and 4 show the two required Full Moon wo Sagashite companions: white cat with tiny black dot eyes, pink inner ears, little w mouth, thin white tail, dark neck band and round gold bell with black T-shaped slit; pale pink/white rabbit with very long upright pink-inner ears, burgundy red half-lidded eyes without giant black pupils, tiny w mouth, red satin bow and small feather wings. Preserve their original simplified character silhouettes and facial features while adapting surfaces to soft fine-pile plush. No keychain hardware, no typography, no humans.
+Main request: improve the existing angel-wings Retto skin. Keep main cat otherwise bare fur, add a beautifully constructed symmetric pair of ivory feather angel wings attached behind shoulders, with layered feathers and soft warm highlights. No hat, halo, dress, necklace or new ornaments on main cat.
+Composition: main Retto front and center at full original proportions; place the two small companion pets flanking it, one on each side, slightly floating beside the lower shoulder/upper torso area with ample negative space, no overlap with face, paws or tail. Main cat remains largest and dominant. Each companion's body excluding long rabbit ears is around 30% of main cat ear-to-foot height. Rabbit ears fully within canvas. Balance wing span with side companions, no clipping or merged anatomy. Full bodies visible, transparent background, no scenery, no floor rectangle, no sparkles, no labels. High-quality polished 3D plush/fur style consistent across all three characters. This is one cohesive concept, not a collage or comparison board.

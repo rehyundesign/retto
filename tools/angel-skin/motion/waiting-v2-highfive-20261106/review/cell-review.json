@@ -1,0 +1,261 @@
+{
+  "method": "manual complete-character visual review; support proxy484 does not certify original landmarks",
+  "cells": [
+    {
+      "id": "00",
+      "four_limb_verdict": "manual pass on final dark/light224px cells",
+      "forelimbs": "both grounded",
+      "hindlimbs": "left and right grounded hip feet, upper attachments partly occluded by belly",
+      "tail": "single attached right-hip taupe tail",
+      "original_landmarks": {
+        "face_box": null,
+        "torso_box": null,
+        "body_center_x": null,
+        "foot_baseline_y": null,
+        "tail_anchor": null
+      },
+      "quantitative_original_registration": "unverified",
+      "edge_alpha_max": 0
+    },
+    {
+      "id": "01",
+      "four_limb_verdict": "manual pass on final dark/light224px cells",
+      "forelimbs": "screen-left forepaw lifted/approaching/tapping/recovering; opposite foreleg grounded, no duplicate",
+      "hindlimbs": "left and right grounded hip feet, upper attachments partly occluded by belly",
+      "tail": "single attached right-hip taupe tail",
+      "original_landmarks": {
+        "face_box": null,
+        "torso_box": null,
+        "body_center_x": null,
+        "foot_baseline_y": null,
+        "tail_anchor": null
+      },
+      "quantitative_original_registration": "unverified",
+      "edge_alpha_max": 0
+    },
+    {
+      "id": "02",
+      "four_limb_verdict": "manual pass on final dark/light224px cells",
+      "forelimbs": "screen-left forepaw lifted/approaching/tapping/recovering; opposite foreleg grounded, no duplicate",
+      "hindlimbs": "left and right grounded hip feet, upper attachments partly occluded by belly",
+      "tail": "single attached right-hip taupe tail",
+      "original_landmarks": {
+        "face_box": null,
+        "torso_box": null,
+        "body_center_x": null,
+        "foot_baseline_y": null,
+        "tail_anchor": null
+      },
+      "quantitative_original_registration": "unverified",
+      "edge_alpha_max": 0
+    },
+    {
+      "id": "03",
+      "four_limb_verdict": "manual pass on final dark/light224px cells",
+      "forelimbs": "screen-left forepaw lifted/approaching/tapping/recovering; opposite foreleg grounded, no duplicate",
+      "hindlimbs": "left and right grounded hip feet, upper attachments partly occluded by belly",
+      "tail": "single attached right-hip taupe tail",
+      "original_landmarks": {
+        "face_box": null,
+        "torso_box": null,
+        "body_center_x": null,
+        "foot_baseline_y": null,
+        "tail_anchor": null
+      },
+      "quantitative_original_registration": "unverified",
+      "edge_alpha_max": 0
+    },
+    {
+      "id": "04",
+      "four_limb_verdict": "manual pass on final dark/light224px cells",
+      "forelimbs": "screen-left forepaw lifted/approaching/tapping/recovering; opposite foreleg grounded, no duplicate",
+      "hindlimbs": "left and right grounded hip feet, upper attachments partly occluded by belly",
+      "tail": "single attached right-hip taupe tail",
+      "original_landmarks": {
+        "face_box": null,
+        "torso_box": null,
+        "body_center_x": null,
+        "foot_baseline_y": null,
+        "tail_anchor": null
+      },
+      "quantitative_original_registration": "unverified",
+      "edge_alpha_max": 0
+    },
+    {
+      "id": "05",
+      "four_limb_verdict": "manual pass on final dark/light224px cells",
+      "forelimbs": "screen-left forepaw lifted/approaching/tapping/recovering; opposite foreleg grounded, no duplicate",
+      "hindlimbs": "left and right grounded hip feet, upper attachments partly occluded by belly",
+      "tail": "single attached right-hip taupe tail",
+      "original_landmarks": {
+        "face_box": null,
+        "torso_box": null,
+        "body_center_x": null,
+        "foot_baseline_y": null,
+        "tail_anchor": null
+      },
+      "quantitative_original_registration": "unverified",
+      "edge_alpha_max": 0
+    },
+    {
+      "id": "06",
+      "four_limb_verdict": "manual pass on final dark/light224px cells",
+      "forelimbs": "screen-left forepaw lifted/approaching/tapping/recovering; opposite foreleg grounded, no duplicate",
+      "hindlimbs": "left and right grounded hip feet, upper attachments partly occluded by belly",
+      "tail": "single attached right-hip taupe tail",
+      "original_landmarks": {
+        "face_box": null,
+        "torso_box": null,
+        "body_center_x": null,
+        "foot_baseline_y": null,
+        "tail_anchor": null
+      },
+      "quantitative_original_registration": "unverified",
+      "edge_alpha_max": 0
+    },
+    {
+      "id": "07",
+      "four_limb_verdict": "manual pass on final dark/light224px cells",
+      "forelimbs": "both grounded",
+      "hindlimbs": "left and right grounded hip feet, upper attachments partly occluded by belly",
+      "tail": "single attached right-hip taupe tail",
+      "original_landmarks": {
+        "face_box": null,
+        "torso_box": null,
+        "body_center_x": null,
+        "foot_baseline_y": null,
+        "tail_anchor": null
+      },
+      "quantitative_original_registration": "unverified",
+      "edge_alpha_max": 0
+    },
+    {
+      "id": "08",
+      "four_limb_verdict": "manual pass on final dark/light224px cells",
+      "forelimbs": "screen-right forepaw lifted/approaching/tapping/recovering; opposite foreleg grounded, no duplicate",
+      "hindlimbs": "left and right grounded hip feet, upper attachments partly occluded by belly",
+      "tail": "single attached right-hip taupe tail",
+      "original_landmarks": {
+        "face_box": null,
+        "torso_box": null,
+        "body_center_x": null,
+        "foot_baseline_y": null,
+        "tail_anchor": null
+      },
+      "quantitative_original_registration": "unverified",
+      "edge_alpha_max": 0
+    },
+    {
+      "id": "09",
+      "four_limb_verdict": "manual pass on final dark/light224px cells",
+      "forelimbs": "screen-right forepaw lifted/approaching/tapping/recovering; opposite foreleg grounded, no duplicate",
+      "hindlimbs": "left and right grounded hip feet, upper attachments partly occluded by belly",
+      "tail": "single attached right-hip taupe tail",
+      "original_landmarks": {
+        "face_box": null,
+        "torso_box": null,
+        "body_center_x": null,
+        "foot_baseline_y": null,
+        "tail_anchor": null
+      },
+      "quantitative_original_registration": "unverified",
+      "edge_alpha_max": 0
+    },
+    {
+      "id": "10",
+      "four_limb_verdict": "manual pass on final dark/light224px cells",
+      "forelimbs": "screen-right forepaw lifted/approaching/tapping/recovering; opposite foreleg grounded, no duplicate",
+      "hindlimbs": "left and right grounded hip feet, upper attachments partly occluded by belly",
+      "tail": "single attached right-hip taupe tail",
+      "original_landmarks": {
+        "face_box": null,
+        "torso_box": null,
+        "body_center_x": null,
+        "foot_baseline_y": null,
+        "tail_anchor": null
+      },
+      "quantitative_original_registration": "unverified",
+      "edge_alpha_max": 0
+    },
+    {
+      "id": "11",
+      "four_limb_verdict": "manual pass on final dark/light224px cells",
+      "forelimbs": "screen-right forepaw lifted/approaching/tapping/recovering; opposite foreleg grounded, no duplicate",
+      "hindlimbs": "left and right grounded hip feet, upper attachments partly occluded by belly",
+      "tail": "single attached right-hip taupe tail",
+      "original_landmarks": {
+        "face_box": null,
+        "torso_box": null,
+        "body_center_x": null,
+        "foot_baseline_y": null,
+        "tail_anchor": null
+      },
+      "quantitative_original_registration": "unverified",
+      "edge_alpha_max": 0
+    },
+    {
+      "id": "12",
+      "four_limb_verdict": "manual pass on final dark/light224px cells",
+      "forelimbs": "screen-right forepaw lifted/approaching/tapping/recovering; opposite foreleg grounded, no duplicate",
+      "hindlimbs": "left and right grounded hip feet, upper attachments partly occluded by belly",
+      "tail": "single attached right-hip taupe tail",
+      "original_landmarks": {
+        "face_box": null,
+        "torso_box": null,
+        "body_center_x": null,
+        "foot_baseline_y": null,
+        "tail_anchor": null
+      },
+      "quantitative_original_registration": "unverified",
+      "edge_alpha_max": 0
+    },
+    {
+      "id": "13",
+      "four_limb_verdict": "manual pass on final dark/light224px cells",
+      "forelimbs": "screen-right forepaw lifted/approaching/tapping/recovering; opposite foreleg grounded, no duplicate",
+      "hindlimbs": "left and right grounded hip feet, upper attachments partly occluded by belly",
+      "tail": "single attached right-hip taupe tail",
+      "original_landmarks": {
+        "face_box": null,
+        "torso_box": null,
+        "body_center_x": null,
+        "foot_baseline_y": null,
+        "tail_anchor": null
+      },
+      "quantitative_original_registration": "unverified",
+      "edge_alpha_max": 0
+    },
+    {
+      "id": "14",
+      "four_limb_verdict": "manual pass on final dark/light224px cells",
+      "forelimbs": "both grounded",
+      "hindlimbs": "left and right grounded hip feet, upper attachments partly occluded by belly",
+      "tail": "single attached right-hip taupe tail",
+      "original_landmarks": {
+        "face_box": null,
+        "torso_box": null,
+        "body_center_x": null,
+        "foot_baseline_y": null,
+        "tail_anchor": null
+      },
+      "quantitative_original_registration": "unverified",
+      "edge_alpha_max": 0
+    },
+    {
+      "id": "15",
+      "four_limb_verdict": "manual pass on final dark/light224px cells",
+      "forelimbs": "both grounded",
+      "hindlimbs": "left and right grounded hip feet, upper attachments partly occluded by belly",
+      "tail": "single attached right-hip taupe tail",
+      "original_landmarks": {
+        "face_box": null,
+        "torso_box": null,
+        "body_center_x": null,
+        "foot_baseline_y": null,
+        "tail_anchor": null
+      },
+      "quantitative_original_registration": "unverified",
+      "edge_alpha_max": 0
+    }
+  ]
+}

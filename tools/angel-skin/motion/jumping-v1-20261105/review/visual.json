@@ -1,0 +1,57 @@
+{
+  "status": "unfinished draft, not visual approval",
+  "source_sha256": {
+    "00": "075b0f0cfab899f734e1b141d2335349472d6e04b76e4f5bd1bca531c247c8b2",
+    "01": "e05e75a728f62f14d0c2e2e24995aa21cef581207c051561e02e37e041cb26e2",
+    "02": "4ba9d3310f62cf42772ce6e4cd67f598331c17cdf828f2c93c52efcdf41bb3b3",
+    "03": "8206094cee0735ade870879f3761bd73be93ff44ac9cae35812b286c013d7f1b",
+    "04": "84e3ec701d4f9e1a9adb108f2226d400f5c68046a7ec42bf34a214cf9dde6787",
+    "05": "5f85107a1740bd4d8e83cc54e271a81077dac6bba54a72b86fe7a305e54ef80b",
+    "06": "67976bdbf2de1319b5f4780b443aab9b5ab34a735711153cd8257a1b07fc4220",
+    "07": "7b6b46834473cd0b7405b554f57ac53574842379431a8e6979373b69ba4577ef",
+    "08": "6154c57ccd34fcdaa6f0197d683145f04da69e0bb323e3c0d8cb4a5eba808287",
+    "09": "5398d5dd2b32fc42de9cdfea38924dcad5688c49aae19ae3368e3be7a71eb417",
+    "10": "baf3ded06f3bd277c90a40d69cbfe5bdd6dc054984cb99c721fca1206aab5eb4",
+    "11": "7a42c724e7535fabbec34de45143d1ccdf5666c1b36984f35f38b28769b0f244",
+    "12": "45dd62dffb474193cc2aba84582cecf5c19a0d53e2c17adab17fc7b6b796e38a",
+    "13": "41fdc62a2ef417afe21da6cbdf10b51151e469989a0b9dec90acac2d9dc5e6d1",
+    "14": "f2d292cd545fde572a2a069f261af280d3a06a15cf33958862833bbb5a51a157",
+    "15": "f53fe97dd4800b5c5e36305b70da46393155fadbf0afd28b5142d3e36179cfe6"
+  },
+  "gif_sha256": "600c16e7e3efabf9764cd55906ed1acb156d1019d9c156ab7c17306a98f48e3f",
+  "runtime_size_comparison": {
+    "path": "review/comparison-1x.png",
+    "sha256": "7b5b7fd06cc2b5d0c3ddaba508366bbbd1ec10a3b866d78316f48652b0c17bea"
+  },
+  "checks": {
+    "identity_eyes": {
+      "status": "repair",
+      "finding": "All16 inspected: dot/^^ Tato and burgundy Melody eyes retained, small main eyes.05 visibly reduces main head/body size and must be redrawn; do not call identity/scale passed."
+    },
+    "anatomy_grip": {
+      "status": "repair",
+      "finding": "Four main legs are present in inspected drawings and both companions grounded.02/12 sole proxies drift above484 floor;05/06 need full-scale partially tucked anatomical inbetweens. No head/body assembly/warps used."
+    },
+    "material_canon": {
+      "status": "pass",
+      "finding": "Fine cream/brown fur, ivory feather wings and inspected companion features/material retained. This does not approve body scale or alpha edges."
+    },
+    "secondary_motion": {
+      "status": "repair",
+      "finding": "Independent wing/joint drawings exist, but05/06 liftoff-to-tuck progression is too abrupt. Required redraw attempts were rejected by usage limit."
+    },
+    "legibility": {
+      "status": "unverified",
+      "finding": "All16 final decoded draft samples inspected; known05 scale change remains visible. Actual native224x320 fit unverified."
+    },
+    "loop_return": {
+      "status": "unverified",
+      "finding": "15->00 source bridge sampled and encoded2.4s clock checked; live loop and native transitions unverified. Draft is not motion approval."
+    },
+    "alpha_edges": {
+      "status": "repair",
+      "finding": "White floor-edge fringe is visible around a few supported silhouettes on dark board. Warm-background GIF preview is not final native transparency approval."
+    }
+  },
+  "registration": "Original anatomical landmarks unmeasured; neutral camera is fixed but draft contains known scale/support failures."
+}

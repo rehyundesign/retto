@@ -1,0 +1,306 @@
+{
+  "schema_version": 1,
+  "mode": "new-motion",
+  "resolution_scale": 2,
+  "repo": "/Users/luxia/Documents/ChatGPT/retto",
+  "task_record": {
+    "path": "task.json",
+    "sha256": "dba53038470f35ce7acf01c11ff4c13840bc9ec5e5fca47a3eaf42fa6a09b628"
+  },
+  "references": {
+    "original_retto": {
+      "path": "references/original-identity.png",
+      "sha256": "d8ddb37a8046165e35ae4a5f0825dcf739f8abfcecc34aa89a3dc2be63d8898a"
+    },
+    "material": {
+      "path": "../running-v1-20261105/references/material.png",
+      "sha256": "ddc6df1afbe77fca269cc12be30e2b2bbb8f20dd87c9138fed4e7e307293dada"
+    }
+  },
+  "body_profiles": {
+    "path": "body-profiles.json",
+    "sha256": "ac00ea1250df2e6e43b0939ee2591d10fd8fa574c991ca5f24a5b6c0bdafaf61"
+  },
+  "atlas_spec": null,
+  "native_review": null,
+  "groups": [
+    {
+      "id": "running-musicbox-airborne",
+      "view_stance": "airborne-front-holding-prop",
+      "body_profile": "original-airborne-hold-front",
+      "costume_master": {
+        "path": "raw/00.png",
+        "sha256": "323a4340de9cb4f40bbdb97b194131ff64f48d2d6fac8d4fe56a2e46dff65197"
+      },
+      "drawing_policy": {
+        "retained_count": null,
+        "retained_map": null,
+        "reason": ""
+      },
+      "sources": [
+        {
+          "id": "00",
+          "path": "character/00.png",
+          "sha256": "55cbe2cbbe9383b0712468799b6d6fa9c7a5c5c7bb89ef77fc14e797ed28f04a",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "01",
+          "path": "character/01.png",
+          "sha256": "eb15ceaff969b55268305ecf3fe8111d13e6ab27e431f4f27c08f01f76bc4e75",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "02",
+          "path": "character/02.png",
+          "sha256": "5dca1d86f64f5e79d397649103898eb1e023ce495abd4619fcb4363a9963ca47",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "03",
+          "path": "character/03.png",
+          "sha256": "792d245a06911118eb00d75c3c6768469e5d7d3eba50c64ffc40a2c460c8a41d",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "04",
+          "path": "character/04.png",
+          "sha256": "7c4f649885783ed43589fc76acc624bd67bd987a40e8c55ea192dfc416a0e452",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "05",
+          "path": "character/05.png",
+          "sha256": "50beca0093a14791d9f92d454f7ba6b203dc6df05d3f3ebbf85e323651daa819",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "06",
+          "path": "character/06.png",
+          "sha256": "19f222ee77fdd3cf2da590f7c7c9ad7017930eeb4e82fb0f21f4173f32d9f247",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "07",
+          "path": "character/07.png",
+          "sha256": "4f38a01a688230aad9daaa56ba67129a220b2fe031e96f8667c37ca2641f4855",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "08",
+          "path": "character/08.png",
+          "sha256": "0bc5c65a868ba6218b035325aebddb6adb4e06f877da00bc8a02afbcfde77481",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "09",
+          "path": "character/09.png",
+          "sha256": "d0509d3d21cdd7ed9b1afed8a55118d7ca49d21ac9810aecff18d22ea8f64547",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "10",
+          "path": "character/10.png",
+          "sha256": "dff71533a41199bd9b71cc1b14af2175495649fef2e80435db94455d7ebbbc2d",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "11",
+          "path": "character/11.png",
+          "sha256": "539cde260a193fadaa2c1792409706e08ef05c95e1e72c6e895ed972555e921c",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "12",
+          "path": "character/12.png",
+          "sha256": "27ef271504240aa3cdc74af3662bc3d338f037a6f5efd8ca4807cda955873bce",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "13",
+          "path": "character/13.png",
+          "sha256": "3672a1b7498c65cd8c9757bcd7307cb2f24d3993b02f035772b1a6ff55d150d1",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "14",
+          "path": "character/14.png",
+          "sha256": "9751c07239f6b3fce274482605d462ac17be46229679f8b4b6d9a83f22ee2359",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "15",
+          "path": "character/15.png",
+          "sha256": "fb2e01d6d7da77e1a68be60a381e0f31632bae7b826e3d9fbf33be04d41e188e",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        }
+      ],
+      "playback_ids": [
+        "00",
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08",
+        "09",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15"
+      ],
+      "pose_durations_ms": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "cycle_ms": 3200,
+      "review_gif": {
+        "path": "review/running.gif",
+        "sha256": "1d6371f5cf0926a4bb33e5a775b0dc5f3b417849455446d2a4e8a020d769de9c"
+      },
+      "visual_review": {
+        "path": "review/visual.json",
+        "sha256": "658322448c01b6d6c4d718b8336cd820b9e251d6976a2b29bf9cdbeff940f3d3"
+      },
+      "approved_character_lock": null,
+      "runtime_states": [
+        "running"
+      ],
+      "destination_cells": [],
+      "transparent_animation": {
+        "path": "review/night.webp",
+        "sha256": "3afcc27f418915ddc0585c4b596a3931565b4f1363639696caa9b69441b34ec2"
+      }
+    }
+  ]
+}

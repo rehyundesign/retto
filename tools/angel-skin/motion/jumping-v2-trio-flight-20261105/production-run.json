@@ -1,0 +1,314 @@
+{
+  "schema_version": 1,
+  "mode": "new-motion",
+  "resolution_scale": 2,
+  "repo": "/Users/luxia/Documents/ChatGPT/retto",
+  "task_record": {
+    "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v2-trio-flight-20261105/task.json",
+    "sha256": "20c8a01fb3b496418fe1f0e8bc7aeeae94ae8266565dd477773853cda8b02ec8"
+  },
+  "references": {
+    "original_retto": {
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v2-trio-flight-20261105/references/original-identity.png",
+      "sha256": "d8ddb37a8046165e35ae4a5f0825dcf739f8abfcecc34aa89a3dc2be63d8898a"
+    },
+    "material": {
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/running-v1-20261105/references/material.png",
+      "sha256": "ddc6df1afbe77fca269cc12be30e2b2bbb8f20dd87c9138fed4e7e307293dada"
+    }
+  },
+  "body_profiles": {
+    "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v2-trio-flight-20261105/body-profiles.json",
+    "sha256": "dbf1fe8b39a1402e33e6da4d39cb51d1d3a927eab0a9c6458663c97677eec76d"
+  },
+  "atlas_spec": null,
+  "native_review": null,
+  "groups": [
+    {
+      "id": "jumping-shared-flight",
+      "view_stance": "frontal-neutral-takeoff-flight-landing",
+      "body_profile": "original-frontal-click",
+      "costume_master": {
+        "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v2-trio-flight-20261105/raw/00.png",
+        "sha256": "881912de61db05119f28dcdc127453682d920f4f7ec99f2a3057ef47db80767e"
+      },
+      "drawing_policy": {
+        "retained_count": null,
+        "retained_map": null,
+        "reason": ""
+      },
+      "sources": [
+        {
+          "id": "00",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v2-trio-flight-20261105/character/00.png",
+          "sha256": "9a4f321b74834214755d5debd9b45d0dbf7fd7fc1764581234772ac537b65542",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "01",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v2-trio-flight-20261105/character/01.png",
+          "sha256": "79747d757c73d642ad8d3c758b0e11c5d57f7524bd61fd2a75b51378ea1b39bc",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "02",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v2-trio-flight-20261105/character/02.png",
+          "sha256": "a4827eaf423a76851979776061816c236f57e5576c71bb534c0bf1d065939265",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "03",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v2-trio-flight-20261105/character/03.png",
+          "sha256": "4f958482fb140926f4e106720c40e4bd1ad4f0c1490e102121dfbe7829b1f986",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "04",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v2-trio-flight-20261105/character/04.png",
+          "sha256": "c236db6080bf76bea9786f02ce4b429793a7041e8a7273fcda72b2053618f6b4",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "05",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v2-trio-flight-20261105/character/05.png",
+          "sha256": "16cd0c212511b3d4ccd2f68826666d908eef79318e6fc61acb081dd3a097aa1b",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "06",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v2-trio-flight-20261105/character/06.png",
+          "sha256": "03af24964dfa540f27722670de17b7594fed5b1158a7e05b0fc1ea4d2b28d7a2",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "07",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v2-trio-flight-20261105/character/07.png",
+          "sha256": "2f5336498a69d7d739bb82478582d1e1913d5a85ce9bfc26556e73e39117939e",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "08",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v2-trio-flight-20261105/character/08.png",
+          "sha256": "12efded150ddcb9127dd962dc497ec76467c3d633b648bd8a3349a27e51ee74d",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "09",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v2-trio-flight-20261105/character/09.png",
+          "sha256": "6c8d117a8c6d80779e4a38dcd34ba4342c594fb7876da0d2237213cc5293f37f",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "10",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v2-trio-flight-20261105/character/10.png",
+          "sha256": "f4d125d6f80592beba41203d60331778ad7b7a292e4d609b17a74a041360a3f0",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "11",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v2-trio-flight-20261105/character/11.png",
+          "sha256": "02c6ab1998c58100ed9a877961c366ea6c14aec23f1f4c77faa7cc51a739cc62",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "12",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v2-trio-flight-20261105/character/12.png",
+          "sha256": "1eb787988adf70b5451815da1a7717257001c723ec294bff5919a82ef0906ffd",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "13",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v2-trio-flight-20261105/character/13.png",
+          "sha256": "ff8eaf662dc6869b14d4800b64c8d9273e4e61d6b3375a985d21acbfef64f45e",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "14",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v2-trio-flight-20261105/character/14.png",
+          "sha256": "82a209015cab324e5077fd423c82d1df7e12ea546ea3bf28d6c5d53a04035c39",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "15",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v2-trio-flight-20261105/character/15.png",
+          "sha256": "748aa7646bbb2b9af03fe0587d234ea6f021a8ed9928ea05aaff0e87496be28d",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        }
+      ],
+      "playback_ids": [
+        "00",
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08",
+        "09",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15"
+      ],
+      "pose_durations_ms": [
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150
+      ],
+      "cycle_ms": 2400,
+      "review_gif": {
+        "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v2-trio-flight-20261105/review/jumping.gif",
+        "sha256": "e7160cfbb348c7f033aef02fa50425c13d97116c3b9e6a9fc906a96786787598"
+      },
+      "visual_review": {
+        "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v2-trio-flight-20261105/review/visual.json",
+        "sha256": "dc32929345cbbf8692beeb1d4fcbe374b6f51dee3812e9f193a4f0e2a50046c6"
+      },
+      "approved_character_lock": null,
+      "runtime_states": [
+        "jumping"
+      ],
+      "destination_cells": [],
+      "transparent_animation": {
+        "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v2-trio-flight-20261105/review/night.webp",
+        "sha256": "0b38b10d4419d60a1dbbbd2bba4104032f82159404f68a489b01f43775837cca"
+      },
+      "source_provenance": {
+        "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v2-trio-flight-20261105/sources.json",
+        "sha256": "08ff18ff9d1e1728360e604f79414e09d07221a2cfca30a830aed44f749ddf1f"
+      },
+      "wingtip_emission_landmarks": {
+        "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v2-trio-flight-20261105/wingtips.json",
+        "sha256": "b145a4e996d5b9d836e8ccacf5512963d24eeaf3e12f0d259a70056195cafeae"
+      }
+    }
+  ]
+}

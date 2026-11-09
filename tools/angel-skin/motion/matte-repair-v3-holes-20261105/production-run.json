@@ -1,0 +1,1468 @@
+{
+  "schema_version": 1,
+  "mode": "effect-repair",
+  "resolution_scale": 2,
+  "repo": "/Users/luxia/Documents/ChatGPT/retto",
+  "task_record": {
+    "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/matte-repair-v3-holes-20261105/task.json",
+    "sha256": "41641316721d64aee8a0b0c98854d3fbcd8be6dd073d1c350110a1ca841bbf93"
+  },
+  "references": {
+    "original_retto": {
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v2-20261105/references/original-identity.png",
+      "sha256": "d8ddb37a8046165e35ae4a5f0825dcf739f8abfcecc34aa89a3dc2be63d8898a"
+    },
+    "material": {
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v2-20261105/references/material.png",
+      "sha256": "ddc6df1afbe77fca269cc12be30e2b2bbb8f20dd87c9138fed4e7e307293dada"
+    }
+  },
+  "body_profiles": {
+    "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v2-20261105/body-profiles.json",
+    "sha256": "06c87bdc3346f5e12fd5fb146bedc9e838331d51685900cd0df3fd1970ea8641"
+  },
+  "atlas_spec": null,
+  "native_review": null,
+  "groups": [
+    {
+      "id": "matte-repair-idle",
+      "view_stance": "seated-front",
+      "body_profile": "original-seated-front",
+      "costume_master": {
+        "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v2-20261105/character/00.png",
+        "sha256": "f0fe0ce921749660c5960ae5aedf4e063c391767bab37572758aa4d98ec034c9"
+      },
+      "drawing_policy": {
+        "retained_count": 16,
+        "retained_map": {
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/night-effects-v1-20261105/idle/retained-map.json",
+          "sha256": "d1458805b9d237ae3bfc0770d4da87a83aa14b5fd6386289056f61ab4f21cce0"
+        },
+        "reason": "effect revision only; keep original independent drawings and cadence"
+      },
+      "sources": [
+        {
+          "id": "00",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v2-20261105/character/00.png",
+          "sha256": "f0fe0ce921749660c5960ae5aedf4e063c391767bab37572758aa4d98ec034c9",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "01",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v2-20261105/character/01.png",
+          "sha256": "0aad57749a085d163bc4c05130c5c8ffc0dddb6d6b8918e759cfde150a450aa5",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "02",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v2-20261105/character/02.png",
+          "sha256": "491692db4852131ba44747c562308a9cdca082896722be778eed19ce70bcd5d9",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "03",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v2-20261105/character/03.png",
+          "sha256": "b2915f3b2aef1c22017f7368eecf79348bcbdaf97aec600c4a76ea1e6620b1c5",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "04",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v2-20261105/character/04.png",
+          "sha256": "aca3b1309e93a6a3663ac01c6bae14afc293dc196247a5cebdfa77dfd40a8a60",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "05",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v2-20261105/character/05.png",
+          "sha256": "a4c3b2aa5122aae985cb1cd1cdab712bf7bab78e8b0d424c1a6aa37aab1a5ca6",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "06",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v2-20261105/character/06.png",
+          "sha256": "eed5ccfa1af74c65c24070685073d3d44abea2da3d4e517d23625ee6024d2a1c",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "07",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v2-20261105/character/07.png",
+          "sha256": "f93cd4905f9505c5a6369ba1fb05bb84cfd25db0b891337ca136d36bd1c00c3f",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "08",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v2-20261105/character/08.png",
+          "sha256": "1f67dd28cada23e1151a0f999e4d8d1b3a08928337c9becc56093a3f85307551",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "09",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v2-20261105/character/09.png",
+          "sha256": "356ac6012163acd37165bd7172ff7fd6d32756cc2d70a17a859090297f2e3267",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "10",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v2-20261105/character/10.png",
+          "sha256": "ce897a59c7b6dbeb2d97404ee161eac68a2116fe4d80878f27f1f703ce79e654",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "11",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v2-20261105/character/11.png",
+          "sha256": "e418d3c37860a382e06aab5eaa72836d1d98b6986221ec0d5471bcd495df7500",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "12",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v2-20261105/character/12.png",
+          "sha256": "f7fbe0c180943d05e8c6c0092a502e5e39fe56bfab1fe11c4a1007b2a90d1095",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "13",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v2-20261105/character/13.png",
+          "sha256": "f036f8c5b880123e70bcce8138016c37a343a67fb525a5b2c82cf58181bdb817",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "14",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v2-20261105/character/14.png",
+          "sha256": "1f813cafd5bfcd548fcb8aa2972dd200054a124ce79f5b4770885218db4ad16b",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "15",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v2-20261105/character/15.png",
+          "sha256": "3db22e794710ef33f4202b3c5d1e52dd279f1465a5530bc3f43a51ab251ce4f1",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        }
+      ],
+      "playback_ids": [
+        "00",
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08",
+        "09",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15"
+      ],
+      "pose_durations_ms": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "cycle_ms": 3200,
+      "review_gif": {
+        "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/matte-repair-v3-holes-20261105/idle/preview.gif",
+        "sha256": "02f2efc1c630a116c9c64f2c10dda5b900b0b7a82085d7d2a6dc5437f1ed049d"
+      },
+      "visual_review": {
+        "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/matte-repair-v3-holes-20261105/idle/visual.json",
+        "sha256": "1ee491377dc5bf5efc1bd9a24a3022e1d6c4af3ad211c693ef966b7edeab3d8b"
+      },
+      "approved_character_lock": {
+        "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/matte-repair-v3-holes-20261105/locks/idle.json",
+        "sha256": "29e349080435cc23e0344dd91595fe12b4387b533743c5462f9b11aa4628bf50"
+      },
+      "runtime_states": [
+        "idle"
+      ],
+      "destination_cells": [],
+      "transparent_animation": {
+        "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/matte-repair-v3-holes-20261105/idle/night.webp",
+        "sha256": "b6b153171300a0e57c1d91b704f956c5c64391dc9ae4d49af35d7324f4ec66f3"
+      },
+      "display_matte_provenance": {
+        "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/matte-repair-v3-holes-20261105/idle/validation.json",
+        "sha256": "dffbb956a3f08d7ce1e6b1f1a2786d826c547cbed2a914894c20c0e98ac4893e"
+      }
+    },
+    {
+      "id": "matte-repair-waiting",
+      "view_stance": "supported-seated-front-with-small-head-tilt",
+      "body_profile": "original-seated-front",
+      "costume_master": {
+        "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waiting-v1-20261105/references/approved-idle.png",
+        "sha256": "f0fe0ce921749660c5960ae5aedf4e063c391767bab37572758aa4d98ec034c9"
+      },
+      "drawing_policy": {
+        "retained_count": 16,
+        "retained_map": {
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/night-effects-v1-20261105/waiting/retained-map.json",
+          "sha256": "8d019bd9ae30a6943dccf9c8ddabbea63e5989d330324882ccaf64f8893bc872"
+        },
+        "reason": "effect revision only; keep original independent drawings and cadence"
+      },
+      "sources": [
+        {
+          "id": "00",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waiting-v1-20261105/character/00.png",
+          "sha256": "42a1f7733ad78dcee214d2e3e5970fd6a3fcb8692ff36f0c6fb2c1d736e4b73f",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "01",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waiting-v1-20261105/character/01.png",
+          "sha256": "a0eee2e1715b8c8d459f567b434d17a36aa71c4bd37ac0323df9580fefd832fc",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "02",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waiting-v1-20261105/character/02.png",
+          "sha256": "51e2d98ab38b57b70626ddf43a7858ae47cafbc972e74da0ba8892f9aa2fc1e9",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "03",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waiting-v1-20261105/character/03.png",
+          "sha256": "df49407ded926dbb1622db63c299c3b1cbe65954e143716cd7a6adb0ebc27524",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "04",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waiting-v1-20261105/character/04.png",
+          "sha256": "a215aae17216dfbf6a60281dbbb802932cdccb230b7f751ad1fe8667f5346459",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "05",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waiting-v1-20261105/character/05.png",
+          "sha256": "e748b4fc11cea955cc730c741b57f17cf13cfb786f28e970de8129582c1df498",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "06",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waiting-v1-20261105/character/06.png",
+          "sha256": "79a56f8a94155894fd07212c2406211aea368a4761bc46334b4724dd2eeac3d7",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "07",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waiting-v1-20261105/character/07.png",
+          "sha256": "60a9907982add6f0ff96ca10ac3e8f9ef340f2a03d208faaa3e45288e1ecdb50",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "08",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waiting-v1-20261105/character/08.png",
+          "sha256": "4f31b9e40453ae2439b0f635c24326181e90950519533f55534853fc52893712",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "09",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waiting-v1-20261105/character/09.png",
+          "sha256": "0c126862403231df1dc25cbdd74f78583da2b2d925cbf21da8a80308f2207ab9",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "10",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waiting-v1-20261105/character/10.png",
+          "sha256": "9bc795459088a06ccb5a8e208efb010caf9a72532c90113875054df9c841c6f6",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "11",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waiting-v1-20261105/character/11.png",
+          "sha256": "8ef8fa37e45f6743c7eb187479a47b0e0d1f99f53bd303755ca19c854a75df82",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "12",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waiting-v1-20261105/character/12.png",
+          "sha256": "92bdebeb940ea3009b520037ead50682733d6ac9fe8be414d84395770d2a4550",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "13",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waiting-v1-20261105/character/13.png",
+          "sha256": "b98ba89a6786c382727d79ab291c75da75229c9355cc482d249e1995538df5f6",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "14",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waiting-v1-20261105/character/14.png",
+          "sha256": "281ebb5bfa32cb6f39533ef91737232241285bb113b5b4ddb1ed297aff96812a",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "15",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waiting-v1-20261105/character/15.png",
+          "sha256": "17240ed50c401fd3fcaa9f5795377a1cab2561996336e54913b732313baa62b6",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        }
+      ],
+      "playback_ids": [
+        "00",
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08",
+        "09",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15"
+      ],
+      "pose_durations_ms": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "cycle_ms": 3200,
+      "review_gif": {
+        "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/matte-repair-v3-holes-20261105/waiting/preview.gif",
+        "sha256": "80b996f977faa2012a542468444e095bd279e0351a0f31e2d52a63d21e5335e4"
+      },
+      "visual_review": {
+        "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/matte-repair-v3-holes-20261105/waiting/visual.json",
+        "sha256": "f9a483e5ca5a52116d3cd2d07423da0d983bccfd66115ee07da3285652e34a1a"
+      },
+      "approved_character_lock": {
+        "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/matte-repair-v3-holes-20261105/locks/waiting.json",
+        "sha256": "49af744adfef05b614ad5a2d1df95bdc26cc230bec72230375e32ca69d592994"
+      },
+      "runtime_states": [
+        "waiting"
+      ],
+      "destination_cells": [],
+      "transparent_animation": {
+        "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/matte-repair-v3-holes-20261105/waiting/night.webp",
+        "sha256": "36526a536ebf686e60dc8e4ff7d78bad0545cea0bfb80c162601bed2ad400ee5"
+      },
+      "display_matte_provenance": {
+        "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/matte-repair-v3-holes-20261105/waiting/validation.json",
+        "sha256": "1b78eccbb070e5084d81b623931d2187396da1b64c1a6fa974302314b7997445"
+      }
+    },
+    {
+      "id": "matte-repair-failed",
+      "view_stance": "supported-seated-with-small-chin-dip-and-upright-recovery",
+      "body_profile": "original-seated-front",
+      "costume_master": {
+        "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v1-20261105/references/approved-idle.png",
+        "sha256": "f0fe0ce921749660c5960ae5aedf4e063c391767bab37572758aa4d98ec034c9"
+      },
+      "drawing_policy": {
+        "retained_count": 16,
+        "retained_map": {
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/night-effects-v1-20261105/failed/retained-map.json",
+          "sha256": "30ea19e3e81c5e8ba1b347bfc09fdbf7b70bfbc5e196b49fb387ff488982b590"
+        },
+        "reason": "effect revision only; keep original independent drawings and cadence"
+      },
+      "sources": [
+        {
+          "id": "00",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v1-20261105/character/00.png",
+          "sha256": "9e1c5854e8d779ae0f7fb0acfc9a1018950b19c8dcae85565dca9ec038dc368a",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "01",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v1-20261105/character/01.png",
+          "sha256": "5654650db6536bb756afa3249db42b2471ebc8b444a41effe3b66fc03d1a3995",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "02",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v1-20261105/character/02.png",
+          "sha256": "768970ea6547b1f645b8076c667b09cf8cdf84872e9022e6ac9002a417114864",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "03",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v1-20261105/character/03.png",
+          "sha256": "bfcc009730846f419157b2627f56cfbd03a74aacb459570ead43f522e10f7605",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "04",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v1-20261105/character/04.png",
+          "sha256": "0a7a91ae2cf842e9e21c5eb545f261eb16e2b8788ad47c9d97b2eb6ba9d5f28b",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "05",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v1-20261105/character/05.png",
+          "sha256": "b96e367ff67475ee1a9eab929907b5734b936d8357fe5c2377dd71e459a5523e",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "06",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v1-20261105/character/06.png",
+          "sha256": "ea9958ffaf51bbca874f5ad68113d6c5cdc2909941890e6c99d620e7c1a6708b",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "07",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v1-20261105/character/07.png",
+          "sha256": "3d9f13b3e9a13b219074559a957c6e602d7c028d2b039d2a5cb4a0d4a4615871",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "08",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v1-20261105/character/08.png",
+          "sha256": "57b847baa8961373ce5e94abc5cdd721ccd1cff85161fefb3b663f4cde90b260",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "09",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v1-20261105/character/09.png",
+          "sha256": "33c34bff758059ebf5e9eee94203dd9734956d5ef913da35554939990f47d00a",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "10",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v1-20261105/character/10.png",
+          "sha256": "7554dbe5f372499a11a0a99f55ce647cde40124974c115491a53ff034e6e947a",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "11",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v1-20261105/character/11.png",
+          "sha256": "1cdb70ae8a437357ba81e922d670aa5db7a41625e87fb8b59173fb0571cd207f",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "12",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v1-20261105/character/12.png",
+          "sha256": "685051dca57db05a0821040bb5deaf4c449c66857d873646ca9b31c90262a175",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "13",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v1-20261105/character/13.png",
+          "sha256": "63e2199771867b0365b89a2bef258e48f4589b1f0a23d6857f8a6b39f12149bb",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "14",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v1-20261105/character/14.png",
+          "sha256": "862227020e2d67ace3a811f9565711a79a4b17a92581646d960921d9786d9f31",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "15",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v1-20261105/character/15.png",
+          "sha256": "34689474379be2821c3bc501a73c4cc903096c8a97e5d27d8ec2c68a1e7ed80c",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        }
+      ],
+      "playback_ids": [
+        "00",
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08",
+        "09",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15"
+      ],
+      "pose_durations_ms": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "cycle_ms": 3200,
+      "review_gif": {
+        "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/matte-repair-v3-holes-20261105/failed/preview.gif",
+        "sha256": "ef1b0316862e15888ea7ab8585e8b26f85b6e3b207e544bb07cae1aee88cc848"
+      },
+      "visual_review": {
+        "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/matte-repair-v3-holes-20261105/failed/visual.json",
+        "sha256": "08570f64ed970407f420431aaf6f2e42569f0122a9fed9ee91b2e60882688f7c"
+      },
+      "approved_character_lock": {
+        "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/matte-repair-v3-holes-20261105/locks/failed.json",
+        "sha256": "0a92b01c81dd54846ad455209d056f6c5f5553a6d4dbbfaa1bf65c977349f8e3"
+      },
+      "runtime_states": [
+        "failed"
+      ],
+      "destination_cells": [],
+      "transparent_animation": {
+        "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/matte-repair-v3-holes-20261105/failed/night.webp",
+        "sha256": "50cdf83c161e5425dbe2225adc3e3035e62a719a743770daa2ba2b7cd5bd751c"
+      },
+      "display_matte_provenance": {
+        "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/matte-repair-v3-holes-20261105/failed/validation.json",
+        "sha256": "16b354b1decffdba8b56c923db5ec3d52e95b8289ccd1691122ec5868c53d207"
+      }
+    },
+    {
+      "id": "matte-repair-waving",
+      "view_stance": "supported-seated-forepaw-greeting",
+      "body_profile": "original-seated-front",
+      "costume_master": {
+        "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waving-v1-20261105/references/approved-idle.png",
+        "sha256": "f0fe0ce921749660c5960ae5aedf4e063c391767bab37572758aa4d98ec034c9"
+      },
+      "drawing_policy": {
+        "retained_count": 16,
+        "retained_map": {
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/night-effects-v1-20261105/waving/retained-map.json",
+          "sha256": "8da6fcf63ff9e6a711b8969cad39ba6ff3bba1297cf6325aaae5bdfeb1444b98"
+        },
+        "reason": "effect revision only; keep original independent drawings and cadence"
+      },
+      "sources": [
+        {
+          "id": "00",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waving-v1-20261105/character/00.png",
+          "sha256": "0fccaf03d8fcd330786e23dac99e15f27b4b02a1f03e64fe6e1276015fe0f463",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "01",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waving-v1-20261105/character/01.png",
+          "sha256": "0e71901cacc00aca63a5d00a3cfdd58c81e884287938e4917fde5097c6ac10da",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "02",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waving-v1-20261105/character/02.png",
+          "sha256": "3fcfd5e5915ebe1a398fe49784b31cb67f8dd24565f784261a3e3c031a9e37e8",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "03",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waving-v1-20261105/character/03.png",
+          "sha256": "096a895d7b7780ca22c6099a760b643af7e4be841479222123686516a3c1f5f2",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "04",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waving-v1-20261105/character/04.png",
+          "sha256": "c7166a6d2bc22de282a19db27744307d3453ff5fd4baa2cd4a7d9100148f546b",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "05",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waving-v1-20261105/character/05.png",
+          "sha256": "e10cd14e49d12d10e94f73832fdd7469a780c801a9f859825fd5a09da858650a",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "06",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waving-v1-20261105/character/06.png",
+          "sha256": "84cfd0be8b6c5a291206069523ca9bd0aa72f50b5f3fdcd0e1f39bb8fa475263",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "07",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waving-v1-20261105/character/07.png",
+          "sha256": "710d056a92f9ccf2a191da8faa3d2a93e98387aace323b8adec0e252863b6a4a",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "08",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waving-v1-20261105/character/08.png",
+          "sha256": "3facc07e2ed74c8238dd2b5c99cd6710f570804d21e9f0790803bc897ec0ab64",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "09",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waving-v1-20261105/character/09.png",
+          "sha256": "605ab967bc24e3e6830b271d799ac3549257e1fafa502b249f059390249a48bd",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "10",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waving-v1-20261105/character/10.png",
+          "sha256": "94c61a6e310de63005eb32a90f1f7df1a2e1586e93df72072906e52c3231d391",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "11",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waving-v1-20261105/character/11.png",
+          "sha256": "11313178b221b6aa72f17d043a5a01d609d4632fd71b47ce011679ffddadf564",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "12",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waving-v1-20261105/character/12.png",
+          "sha256": "8291203006be4d298644df89afad67b7f470a2aa07986ea89fde6ea569bc9d0b",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "13",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waving-v1-20261105/character/13.png",
+          "sha256": "0448e6b0b40f793a5671d4ab930a28aa770804464cf2786d93b83a5d852d09c1",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "14",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waving-v1-20261105/character/14.png",
+          "sha256": "697b72c2b0e365a2c41f49d8d86676f9e13503ff175010e86668bea43f4f2c96",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "15",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waving-v1-20261105/character/15.png",
+          "sha256": "948f297eea4ad423a704618e389e732157e8bd6dadbcefd733f8f85790dddeba",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        }
+      ],
+      "playback_ids": [
+        "00",
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08",
+        "09",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15"
+      ],
+      "pose_durations_ms": [
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150
+      ],
+      "cycle_ms": 2400,
+      "review_gif": {
+        "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/matte-repair-v3-holes-20261105/waving/preview.gif",
+        "sha256": "888a1a0f0fc20c2d0f2b9a605c035bb7d53f066dbca69022575f825d84199903"
+      },
+      "visual_review": {
+        "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/matte-repair-v3-holes-20261105/waving/visual.json",
+        "sha256": "a973a7c3d0d9f9a6e679e5148d9f5812a74cb3282676912407430328483f7aec"
+      },
+      "approved_character_lock": {
+        "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/matte-repair-v3-holes-20261105/locks/waving.json",
+        "sha256": "93f6877d176dc92cda3a708472048c75cca55b19dcc9d8fdac96557d5f1a1c42"
+      },
+      "runtime_states": [
+        "waving"
+      ],
+      "destination_cells": [],
+      "transparent_animation": {
+        "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/matte-repair-v3-holes-20261105/waving/night.webp",
+        "sha256": "8d2d6da3bd3b035f692b7c493d513858e978be44c8f992ac58de39a8b5cc20f0"
+      },
+      "display_matte_provenance": {
+        "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/matte-repair-v3-holes-20261105/waving/validation.json",
+        "sha256": "b53555fd63b4e35caba69a23266b28e57edaba29702d4ea91059aca3f51ac54f"
+      }
+    },
+    {
+      "id": "matte-repair-jumping",
+      "view_stance": "crouch-airborne-four-paw-tuck-and-supported-landing",
+      "body_profile": "original-seated-front",
+      "costume_master": {
+        "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v1-20261105/references/approved-idle.png",
+        "sha256": "f0fe0ce921749660c5960ae5aedf4e063c391767bab37572758aa4d98ec034c9"
+      },
+      "drawing_policy": {
+        "retained_count": 16,
+        "retained_map": {
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/night-effects-v1-20261105/jumping/retained-map.json",
+          "sha256": "f5edbc153f680f03b5ae9b6d4ced56555e4f441d29b4baa29004b2c587c60726"
+        },
+        "reason": "effect revision only; keep original independent drawings and cadence"
+      },
+      "sources": [
+        {
+          "id": "00",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v1-20261105/character/00.png",
+          "sha256": "075b0f0cfab899f734e1b141d2335349472d6e04b76e4f5bd1bca531c247c8b2",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "01",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v1-20261105/character/01.png",
+          "sha256": "e05e75a728f62f14d0c2e2e24995aa21cef581207c051561e02e37e041cb26e2",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "02",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v1-20261105/character/02.png",
+          "sha256": "4ba9d3310f62cf42772ce6e4cd67f598331c17cdf828f2c93c52efcdf41bb3b3",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "03",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v1-20261105/character/03.png",
+          "sha256": "8206094cee0735ade870879f3761bd73be93ff44ac9cae35812b286c013d7f1b",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "04",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v1-20261105/character/04.png",
+          "sha256": "84e3ec701d4f9e1a9adb108f2226d400f5c68046a7ec42bf34a214cf9dde6787",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "05",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v1-20261105/character/05.png",
+          "sha256": "5f85107a1740bd4d8e83cc54e271a81077dac6bba54a72b86fe7a305e54ef80b",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "06",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v1-20261105/character/06.png",
+          "sha256": "67976bdbf2de1319b5f4780b443aab9b5ab34a735711153cd8257a1b07fc4220",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "07",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v1-20261105/character/07.png",
+          "sha256": "7b6b46834473cd0b7405b554f57ac53574842379431a8e6979373b69ba4577ef",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "08",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v1-20261105/character/08.png",
+          "sha256": "6154c57ccd34fcdaa6f0197d683145f04da69e0bb323e3c0d8cb4a5eba808287",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "09",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v1-20261105/character/09.png",
+          "sha256": "5398d5dd2b32fc42de9cdfea38924dcad5688c49aae19ae3368e3be7a71eb417",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "10",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v1-20261105/character/10.png",
+          "sha256": "baf3ded06f3bd277c90a40d69cbfe5bdd6dc054984cb99c721fca1206aab5eb4",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "11",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v1-20261105/character/11.png",
+          "sha256": "7a42c724e7535fabbec34de45143d1ccdf5666c1b36984f35f38b28769b0f244",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "12",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v1-20261105/character/12.png",
+          "sha256": "45dd62dffb474193cc2aba84582cecf5c19a0d53e2c17adab17fc7b6b796e38a",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "13",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v1-20261105/character/13.png",
+          "sha256": "41fdc62a2ef417afe21da6cbdf10b51151e469989a0b9dec90acac2d9dc5e6d1",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "14",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v1-20261105/character/14.png",
+          "sha256": "f2d292cd545fde572a2a069f261af280d3a06a15cf33958862833bbb5a51a157",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "15",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v1-20261105/character/15.png",
+          "sha256": "f53fe97dd4800b5c5e36305b70da46393155fadbf0afd28b5142d3e36179cfe6",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        }
+      ],
+      "playback_ids": [
+        "00",
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08",
+        "09",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15"
+      ],
+      "pose_durations_ms": [
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150
+      ],
+      "cycle_ms": 2400,
+      "review_gif": {
+        "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/matte-repair-v3-holes-20261105/jumping/preview.gif",
+        "sha256": "913ebfcda99713cb776091a19fb76b9fc0355101f33a9482e3757cdbe6c284a3"
+      },
+      "visual_review": {
+        "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/matte-repair-v3-holes-20261105/jumping/visual.json",
+        "sha256": "f8d25876e183312ff30faf958df6e22c0c48649a63af64978b4ea87249a70f21"
+      },
+      "approved_character_lock": {
+        "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/matte-repair-v3-holes-20261105/locks/jumping.json",
+        "sha256": "8ea7b25c693e8633c2d6618029b5acdb36caa8f19a885b50a62dc7a8a2e5eac7"
+      },
+      "runtime_states": [
+        "jumping"
+      ],
+      "destination_cells": [],
+      "transparent_animation": {
+        "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/matte-repair-v3-holes-20261105/jumping/night.webp",
+        "sha256": "c5daa101b4323ffef79ef7a4cb50ffee7dbf80930b7bdda4c9e1552e33297d2f"
+      },
+      "display_matte_provenance": {
+        "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/matte-repair-v3-holes-20261105/jumping/validation.json",
+        "sha256": "56b0a38d912807d3780a4be279e90cc893cafbe5816c034957aca5f7f1c50b45"
+      }
+    }
+  ]
+}

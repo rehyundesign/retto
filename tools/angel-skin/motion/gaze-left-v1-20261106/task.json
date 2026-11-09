@@ -1,0 +1,40 @@
+{
+  "mode": "new-motion",
+  "scope": "one review GIF, cursor-follow LEFT interaction first; right gaze and left/right flight deferred until user approves this GIF",
+  "pose_ms": 200,
+  "cycle_ms": 3200,
+  "distinct_drawings": 16,
+  "construction": "every pose independently drawn as complete continuous Retto+Tato+Melody; no head/body patches/warps/crossfades",
+  "identity": "canonical concept-v5 and approved angel idle-v5; natural canonical eyes; Tato black dots/^, Melody burgundy rectangles",
+  "main_action": "front to gentle20-25degree screen-left head turn, linked neck/shoulders; all4 paws remain grounded; return neutral",
+  "pet_action": "Tato flies slightly toward left cursor with yellow star, looks between cursor and Retto; Melody looks left then floats inward/replies, both act with delay",
+  "registration": "same main body size/native1.06 display calibration; rear support484 at544 review; do not scale from wings/pets/effects",
+  "effects": "blue Tato/red Melody; gold star glints and ivory feathers after character review; zero-edge alpha",
+  "installed7states": "leave unchanged; review only until approved",
+  "references": [
+    {
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v5-canonical-20261106/references/canonical-master.png",
+      "sha256": "0d3524d171bb0aaacaf051fdd0d99516cbd8003151a0320c488a2c4ff844aa6c"
+    },
+    {
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v5-canonical-20261106/character/00.png",
+      "sha256": "82b8bac930e3190945ddc8a3adf3804e2eda2c6f5d496d68d3013ab3e30ee902"
+    }
+  ],
+  "status": "one left-gaze interaction GIF review candidate, not installed",
+  "method": "16 independent complete connected trio drawings; early/return intervals regenerated from frontal whole-body references; no head patches/warps",
+  "sources": {
+    "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/gaze-left-v1-20261106/sources.json",
+    "sha256": "4150f1ca1eaba63902de6128186f47dfe2cf07c0adfc53bc6432f0151caf4ce9"
+  },
+  "validation": {
+    "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/gaze-left-v1-20261106/review/media-validation.json",
+    "sha256": "729b1c997910350e5cf445833f231b860a9fbc7afade0313559b9505d3b12d42"
+  },
+  "reference_original_left_pose": {
+    "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/gaze-left-v1-20261106/references/original-left-gaze12.png",
+    "sha256": "0dd1386dc6238ecf668c7d0855ed33b0c2163c372f36615ad8c7418daee85e94"
+  },
+  "native_installed": false,
+  "original_registration": "unverified full original landmark certification; rigid support proxy only"
+}

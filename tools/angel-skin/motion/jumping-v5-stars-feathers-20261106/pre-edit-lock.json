@@ -1,0 +1,32 @@
+{
+  "source_sha256": {
+    "00": "d039f8bd153f733422b4395cf9d0c6647631c7679d37e261e1bead1ea7606a2b",
+    "01": "3a2746b166a137700c76425870bbc417e4195fad410302c612fe9850aca85ebc",
+    "02": "d5e6707f9021d616bd04689f2d8649ddf46687c9dd15b04ab26f23dca3d0f1e8",
+    "03": "ea6e70f5f9078552f88ad0f14961909823825b9b3ef8340e9bcd5db5b2cbd04e",
+    "04": "ded6663f079543de398eae6a0ae2a155b235f4cd91a0224bd11674d1525cdc40",
+    "05": "94771b551a81652fc7140093771738967a42dc781b826d2abf38933b708ebfb8",
+    "06": "99ba81fba89128506b20ea91b711af07b6e407bd2ad940b32fc2a86f079b9b25",
+    "07": "e3bdfbdb71952c2515e5c0b479ee5c399ebd99ca812583dd88ccb6e66b5e0154",
+    "08": "64116b45c1eaac09408ecdd697b133334d526ffe0bbc4da54d7ec21f1becce04",
+    "09": "db00bac2511eadb1e135ad9803b6edaafb62c74cc9ccb8efe96bbaf866b591d6",
+    "10": "ccf557576fe78f168381881e212d585258a8e084c0882548ba97e4daba888278",
+    "11": "f050fb50920a205d1f0279f2a596332fb217abc65daebbfa47bb158c672013db",
+    "12": "0d822d37e68945f178307295064251a98e8c88e7f2e3d6929a60944012be21e1",
+    "13": "0715164edc4c9a704ac361c1efe997dafbd8a877909a977401375f03280a217f",
+    "14": "b5387cd5a3b4f8dc42d84697b2a6036a7b9691395c6853b22fedeed8fd3ab99d",
+    "15": "0d09e9a49731fbef581802e29069823ace1005ecec1d38cea26c6ae0bd8c3a44"
+  },
+  "character_animation": {
+    "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v3-wink-20261105/review/character.webp",
+    "sha256": "58bb7dcc69c36a34b23428d65d4fa1719750e88f4c75c576b355e166aba95a0a"
+  },
+  "effect_animation": {
+    "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/pet-effects-v2-clean-idle-20261106/jumping/night.webp",
+    "sha256": "e8f49c7ae9972ea572b8490efd07e261d8d0b7428f83016bfae1ee926b96927c"
+  },
+  "replaced_effect_animation": {
+    "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v4-tada-20261106/review/night.webp",
+    "sha256": "b733e0475aa7defeab3532e1a2506947d447bb8989db4250ec2d548b58208840"
+  }
+}

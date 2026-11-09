@@ -1,0 +1,34 @@
+{
+  "independent_character_drawings": 16,
+  "pose_ms": 150,
+  "effect_sample_ms": 50,
+  "cycle_ms": 2400,
+  "changing_effect_samples": 48,
+  "frozen_pose_effect_progression": true,
+  "effect_loop_periodic": true,
+  "effects_border_alpha_max": 0,
+  "original_registration": "unverified",
+  "native_installed": false,
+  "media": {
+    "night.webp": {
+      "frames": 48,
+      "cycle_ms": 2400,
+      "sha256": "0b38b10d4419d60a1dbbbd2bba4104032f82159404f68a489b01f43775837cca"
+    },
+    "character.webp": {
+      "frames": 16,
+      "cycle_ms": 2400,
+      "sha256": "4a087425e1113d3fbeed52f67dc131f7d8347507b13ace51af0e100fd9b44b62"
+    },
+    "jumping.gif": {
+      "frames": 48,
+      "cycle_ms": 2400,
+      "sha256": "e7160cfbb348c7f033aef02fa50425c13d97116c3b9e6a9fc906a96786787598"
+    },
+    "character.gif": {
+      "frames": 16,
+      "cycle_ms": 2400,
+      "sha256": "84ac2ba92516d75a5f5e42d5de6a1494415fecf5016f322d84175044394eceb7"
+    }
+  }
+}

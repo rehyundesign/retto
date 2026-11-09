@@ -1,0 +1,32 @@
+{
+  "group": "drag-right",
+  "independent_complete_trio_drawings": 16,
+  "pose_ms": 100,
+  "pose_cycle_ms": 1600,
+  "effect_cycle_ms": 3200,
+  "effect_samples": 64,
+  "effect_ms": 50,
+  "flight_body_loops_per_effect_cycle": 2,
+  "opaque_character_pixels_unchanged_byFX": true,
+  "effect_margin_px": 12,
+  "edge_alpha_max": 0,
+  "native_body_display_scale": 1.06,
+  "native_installed": true,
+  "media": {
+    "character.webp": {
+      "frames": 16,
+      "duration_ms": 1600,
+      "sha256": "3da0ee707cd7c5b5609cbf5a5d803eceaa207fd533d3f94d4d43b0495bd26908"
+    },
+    "night.webp": {
+      "frames": 64,
+      "duration_ms": 3200,
+      "sha256": "24e6a750b319872d975080e51eff7f3df251299ebc91025ca332509a00b15fd6"
+    },
+    "drag-right.gif": {
+      "frames": 64,
+      "duration_ms": 3200,
+      "sha256": "80e234b94a0e6215f11621a43ff15802a95225af60d86459fea0aaba1126caf1"
+    }
+  }
+}

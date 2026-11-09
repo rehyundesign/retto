@@ -1,0 +1,38 @@
+{
+  "source_sha256": {
+    "00": "64bd2c6c7a6f6f64c627509516d1e21e205c187de4e76619742d368cce4ab91a",
+    "01": "ef7f9abd950b9128dd23526165adc7e2a96ce1fd9e88914a677a37ca684ee25e",
+    "02": "ff40287fb5fafe834ad05e82de730c54dc916d2b34526d015127b821d2a37c50",
+    "03": "1ffd07211764bdbfa4364c3469dbc91ca8a170e47f3dd8f4aa588429f89f9733",
+    "04": "78594b1ee1d3b205509d93c09014056b7b40bec846cd0fbe383960a1a9c98dd6",
+    "05": "477b65119e432782ceca61af1fd2f703eeb02a05635cd416d7f070e9cd49492e",
+    "06": "499b04b3091cc4d498554cc47a1ee785b3651ccba43d5da5a2891c7ed1588480",
+    "07": "c76039bc70657c433131a411ac9927dd34b8a0c1c15e6a13c94aa13984051e5d",
+    "08": "2ece7a3780368ec2c78ec60f9c0f1cb803470bdce1e6b2fbc6d5a0440938d5f6",
+    "09": "979d5d0f438ec314950070f3395b63a6ea132f7414b47ef57b116b0be3d99fd4",
+    "10": "6aec4894d91a8aae381f1f6b4bd4a34b0cbe16c7d7fc1b5a2fd8e67362fe30d2",
+    "11": "79526c7e43659e81266d05aae6eaf26bc7c94bc532079c90f3bfcf24582a40e6",
+    "12": "8b61e857d62864865aa2c68a6add642c208299ad3983a0bc7d01ddd5e1eef3ff",
+    "13": "a5b6d946f4ec6181f0825c3193ac8f787faa830381e0ecb16767f21442a1814a",
+    "14": "450b1a6e62ec282cdbbacbf83279a8dbbf2017ed50c41dea5ccff49b3b2b791c",
+    "15": "7edafaf066c96e6ec5d5446c31e9458e244f362373b055288b04c21b62f335ad"
+  },
+  "scope": "same-pose complete companion size repair only; main poses preserved",
+  "reviewed_boards": [
+    "character-runtime-dark.png",
+    "character-runtime-light.png",
+    "effect-runtime-dark.png",
+    "effect-runtime-light.png"
+  ],
+  "manual_findings": {
+    "all16": "Tato dot eyes, Melody burgundy rectangular eyes, coherent complete pet limbs, crying expressions retained. Melody overall ears/body silhouette reduced; no visible old large-pet fragments or white rectangular matte. Main core/four paws/tail pixel protected.",
+    "03_04": "Tato inner paw on left cheek below eye",
+    "10_11": "Melody inner paw on right cheek below eye",
+    "00_15": "near neutral crying return; rigid companion anatomy intact"
+  },
+  "app_size_review_width_px": 224,
+  "temporal_live_playback": "unverified",
+  "original_landmark_certification": "unverified:96 missing landmark fields, production anchor validator not passed",
+  "native_installed": false,
+  "user_approval": "pending"
+}

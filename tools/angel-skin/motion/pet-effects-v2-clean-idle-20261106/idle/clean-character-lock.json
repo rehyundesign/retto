@@ -1,0 +1,25 @@
+{
+  "source_sha256": {
+    "00": "a3f8455dff127fe43397698e0c6a836b640955bc6c9b4a25a54e740f48f727ee",
+    "01": "ffc68ee9c68d539a298abc9100f1b969711e055d1a12d84d875ea39601465b3f",
+    "02": "8d92eb5ffd9e55c2a3f3486440917f3e98370146c493186926ace7551b2ebd90",
+    "03": "36aaa77d71533b02aa902bc289ef712ccf4e0bdc5b8bef1241fcffc82f7242a2",
+    "04": "c1720368f218b624139d4e65616b4bce3a0af0332dac2931bb6173b0df75bf15",
+    "05": "25d490ffa7ecf6b3a33a632fd94a1013790b1d74258f5ebe77806cce3f1ced41",
+    "06": "4e4956021c89f8617d96e260981fe2ae7e0cc4900807e3d03a86c7e28e0e4e4d",
+    "07": "4333dfc077718866a2220d660702c53936469e66ca8d0cb1aee5b0e5da82dddc",
+    "08": "73aed1ad602ffcb4659575c079608f848056799f5172db58faae7fb1f0477209",
+    "09": "cf3bef47df3aff908b318fe7acceee2879c9f59a4be9f963133d7b5bf57cc4b8",
+    "10": "4fa29f24fd07252933cda77420a1b654d2e0a5eb90c21d95d932c907b26e4810",
+    "11": "55aba1b54e98c594868f2ea4fcdaef45a5a6464fb12dc04a4b7a9800d8448237",
+    "12": "a9ae63da97033caf2941b1f68a5a5b528f9ca40d8f200d20ef22a0049530b318",
+    "13": "dbacc61dbf8c588c277067995a5bb1065cf0a1bd9bc7e33070f3160cf1d690a0",
+    "14": "54ac9afdb2f0b727abb78f1f1d8ddc703274766b8d531d8c11e8e71794c52f91",
+    "15": "cfbd44fbe928cef3b248b3e4a6506cb03c231648288e91c0904fcc694b024535"
+  },
+  "provenance": {
+    "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/pet-effects-v2-clean-idle-20261106/idle/cleanup.json",
+    "sha256": "5bd27c8f4b86bf0be054e0b3d4bf415e201638c0f00d5822c2d5c57f8137cf01",
+    "meaning": "hash projection of cleanup manifest recorded before blue rendering; this wrapper was written after rendering"
+  }
+}

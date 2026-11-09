@@ -1,0 +1,302 @@
+{
+  "schema_version": 1,
+  "mode": "new-motion",
+  "resolution_scale": 2,
+  "repo": "/Users/luxia/Documents/ChatGPT/retto",
+  "task_record": {
+    "path": "task.json",
+    "sha256": "192168ca64d4cea240bb2a7c894fc66fdf50101a2ab2f3f899a5a1aa7d851b27"
+  },
+  "references": {
+    "original_retto": {
+      "path": "references/original-identity.png",
+      "sha256": "d8ddb37a8046165e35ae4a5f0825dcf739f8abfcecc34aa89a3dc2be63d8898a"
+    },
+    "material": {
+      "path": "references/material.png",
+      "sha256": "ddc6df1afbe77fca269cc12be30e2b2bbb8f20dd87c9138fed4e7e307293dada"
+    }
+  },
+  "body_profiles": {
+    "path": "body-profiles.json",
+    "sha256": "06c87bdc3346f5e12fd5fb146bedc9e838331d51685900cd0df3fd1970ea8641"
+  },
+  "atlas_spec": null,
+  "native_review": null,
+  "groups": [
+    {
+      "id": "failed-two-companion-reassurance",
+      "view_stance": "supported-seated-with-small-chin-dip-and-upright-recovery",
+      "body_profile": "original-seated-front",
+      "costume_master": {
+        "path": "references/approved-idle.png",
+        "sha256": "f0fe0ce921749660c5960ae5aedf4e063c391767bab37572758aa4d98ec034c9"
+      },
+      "drawing_policy": {
+        "retained_count": null,
+        "retained_map": null,
+        "reason": ""
+      },
+      "sources": [
+        {
+          "id": "00",
+          "path": "character/00.png",
+          "sha256": "9e1c5854e8d779ae0f7fb0acfc9a1018950b19c8dcae85565dca9ec038dc368a",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "01",
+          "path": "character/01.png",
+          "sha256": "5654650db6536bb756afa3249db42b2471ebc8b444a41effe3b66fc03d1a3995",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "02",
+          "path": "character/02.png",
+          "sha256": "768970ea6547b1f645b8076c667b09cf8cdf84872e9022e6ac9002a417114864",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "03",
+          "path": "character/03.png",
+          "sha256": "bfcc009730846f419157b2627f56cfbd03a74aacb459570ead43f522e10f7605",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "04",
+          "path": "character/04.png",
+          "sha256": "0a7a91ae2cf842e9e21c5eb545f261eb16e2b8788ad47c9d97b2eb6ba9d5f28b",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "05",
+          "path": "character/05.png",
+          "sha256": "b96e367ff67475ee1a9eab929907b5734b936d8357fe5c2377dd71e459a5523e",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "06",
+          "path": "character/06.png",
+          "sha256": "ea9958ffaf51bbca874f5ad68113d6c5cdc2909941890e6c99d620e7c1a6708b",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "07",
+          "path": "character/07.png",
+          "sha256": "3d9f13b3e9a13b219074559a957c6e602d7c028d2b039d2a5cb4a0d4a4615871",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "08",
+          "path": "character/08.png",
+          "sha256": "57b847baa8961373ce5e94abc5cdd721ccd1cff85161fefb3b663f4cde90b260",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "09",
+          "path": "character/09.png",
+          "sha256": "33c34bff758059ebf5e9eee94203dd9734956d5ef913da35554939990f47d00a",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "10",
+          "path": "character/10.png",
+          "sha256": "7554dbe5f372499a11a0a99f55ce647cde40124974c115491a53ff034e6e947a",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "11",
+          "path": "character/11.png",
+          "sha256": "1cdb70ae8a437357ba81e922d670aa5db7a41625e87fb8b59173fb0571cd207f",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "12",
+          "path": "character/12.png",
+          "sha256": "685051dca57db05a0821040bb5deaf4c449c66857d873646ca9b31c90262a175",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "13",
+          "path": "character/13.png",
+          "sha256": "63e2199771867b0365b89a2bef258e48f4589b1f0a23d6857f8a6b39f12149bb",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "14",
+          "path": "character/14.png",
+          "sha256": "862227020e2d67ace3a811f9565711a79a4b17a92581646d960921d9786d9f31",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "15",
+          "path": "character/15.png",
+          "sha256": "34689474379be2821c3bc501a73c4cc903096c8a97e5d27d8ec2c68a1e7ed80c",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        }
+      ],
+      "playback_ids": [
+        "00",
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08",
+        "09",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15"
+      ],
+      "pose_durations_ms": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "cycle_ms": 3200,
+      "review_gif": {
+        "path": "review/failed.gif",
+        "sha256": "192ac2c1d2d967ef6784e4d5cbf1236dcac939a7fea595c588eeeeec6732657c"
+      },
+      "visual_review": {
+        "path": "review/visual.json",
+        "sha256": "568341074f2e8959922579f9bb59122b45dfa927ece553239563c8c4edc5939a"
+      },
+      "approved_character_lock": null,
+      "runtime_states": [
+        "failed"
+      ],
+      "destination_cells": []
+    }
+  ]
+}

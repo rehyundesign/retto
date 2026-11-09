@@ -1,0 +1,74 @@
+{
+  "scope": "failed only; all three sob/weep, airborne Tato and Melody alternately wipe Retto cheeks",
+  "mode": "new-motion",
+  "distinct_drawings": 16,
+  "pose_ms": 200,
+  "cycle_ms": 3200,
+  "identity": "approved concept-v5 and approved idle-v5; retain eye sizes/colours, Tato dot eyes, Melody burgundy rectangles",
+  "intentional_expression_deviation": "sad tearful failed expression replaces general positive/smiling guidance only for this state",
+  "tears": "clear/pale ice-blue for all three, never red; Tato magic blue, Melody magic rose-red",
+  "left_wipe_frames": [
+    3,
+    4
+  ],
+  "right_wipe_frames": [
+    10,
+    11
+  ],
+  "other6_motions": "pre-edit gallery SHA locked",
+  "status": "shared sobbing and tear-wiping failed review candidate; user approval pending",
+  "native_installed": false,
+  "anchor_review": {
+    "status": "manual pass",
+    "ids": [
+      "00",
+      "03",
+      "10"
+    ],
+    "finding": "all3 cry with correct original eye designs; main4 paws grounded; airborne Tato/Melody each have continuous own arm touching corresponding cheek tear below eye, not eyeball; no spare hand",
+    "sha256": {
+      "00": "1a28f092e09de3bc14cc1ff77f44849a12074dae1fb8ec577c29fa70ac74e090",
+      "03": "7402027367eabbde31ad3103387ee75bfcf581351a89b91d6fa00d32058cf960",
+      "10": "a3e5802db6dbfb739028ca939bf55f64ef3af3543085e0593b344bed49b1fab4"
+    }
+  },
+  "next_state_request": {
+    "state": "waving",
+    "user_direction": "all three smile, raise both arms in a cheer and wave both hands; Tato and Melody may float/fly",
+    "production_gate": "finish and show failed GIF first; retain one-GIF-at-a-time user approval workflow",
+    "status": "direction recorded; not started"
+  },
+  "generation_attempts": 16,
+  "related_requested_effect_repair": "running-v4-musicbox-glow-20261106: subtle added dome light; original character motion retained",
+  "tear_endpoint_review": "all16 per-frame endpoint board inspected; visible-glass endpoints and feature-relative fallbacks remain below protected eye glyphs after compositing safety mask",
+  "effect_ms": 50,
+  "method": "16 independently redrawn complete connected characters; no eye/head/neck patches",
+  "motion_preservation": "new user-requested shared crying, left Tato/right Melody cheek wipes; main4 paws grounded, both pets fly; other state art preserved",
+  "references": {
+    "approved_design": {
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v2-tears-20261106/references/canonical-master.png",
+      "sha256": "0d3524d171bb0aaacaf051fdd0d99516cbd8003151a0320c488a2c4ff844aa6c"
+    },
+    "shipped_runtime_comparison": {
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v2-tears-20261106/references/runtime-base.png",
+      "sha256": "b8a513bbd8578f702fdc35c116e681588853e2da329fe5a080536498edbc008a"
+    }
+  },
+  "original_registration": "unverified quantitative original landmark certification",
+  "effect_helper": {
+    "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v3-airborne-20261106/render.py",
+    "sha256": "20f58624477db46376908c55d9372e10d7e4fedf7bccca0e2bf793c8a648b1c0"
+  },
+  "renderer": {
+    "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v2-tears-20261106/render.py",
+    "sha256": "cd3340fa1116d1787d9a68602daf70e903e7251c57c0b0dd78d306b91cc49209"
+  },
+  "cell_review": {
+    "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v2-tears-20261106/review/cell-review.json",
+    "sha256": "4189da79a190922c029c344e7bc25a39abafb611964fd668b5abab80c5a1c8b1"
+  },
+  "tear_endpoint_board": {
+    "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v2-tears-20261106/review/tear-endpoint-board.png",
+    "sha256": "c1b81b177a277e886109b9c6974b396cde8de33fffdcadba6cb3d02dc04d40b3"
+  }
+}

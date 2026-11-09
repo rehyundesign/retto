@@ -1,0 +1,29 @@
+{
+  "drag-left": {
+    "full_character_sources": 16,
+    "unique_decoded_drawings": 16,
+    "border_alpha": 0,
+    "duration_verified": true,
+    "whole_body_independent_sources": true
+  },
+  "drag-right": {
+    "full_character_sources": 16,
+    "unique_decoded_drawings": 16,
+    "border_alpha": 0,
+    "duration_verified": true,
+    "whole_body_independent_sources": true
+  },
+  "gaze": {
+    "full_character_sources": 16,
+    "unique_decoded_drawings": 16,
+    "border_alpha": 0,
+    "duration_verified": true,
+    "whole_body_independent_sources": true
+  },
+  "gaze_fixed_pose_effects": {
+    "independent_background_samples": 64,
+    "different_at_0_and_400ms": true
+  },
+  "html_syntax": true,
+  "original_seven_states_unchanged": true
+}

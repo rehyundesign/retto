@@ -1,0 +1,23 @@
+{
+  "mode": "effect-repair",
+  "character_drawings_retained": 16,
+  "character_PNGs_and_animation_byte_identical": true,
+  "opaque_character_and_physical_star_RGBA_unchanged": true,
+  "original_ambient_and_pet_effects_reconstructed_with_max_RGB_delta": 1,
+  "changes_only_under_new_background_star_footprints": true,
+  "new_stars_layer": "behind character",
+  "edge_alpha_max": 0,
+  "cycle_ms": 3200,
+  "pose_ms": 200,
+  "effect_ms": 50,
+  "distinct_starfield_samples": 64,
+  "periodic_loop": true,
+  "frozen_pose_effect_progression": true,
+  "visible_added_gold_pixels_at224px": [
+    23,
+    53
+  ],
+  "native_installed": false,
+  "night_sha256": "7ade932fab3b19bd6c56cd6e30553d77b9ff9b43f8e5df0ddf7b0798c67a540d",
+  "gif_sha256": "88244b93174f1ea44fc80ceee5c8ca3d3ca2793eaa27d7bb2d9120cab2d1aace"
+}

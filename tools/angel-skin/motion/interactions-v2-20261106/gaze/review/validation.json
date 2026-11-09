@@ -1,0 +1,32 @@
+{
+  "group": "gaze",
+  "independent_complete_trio_drawings": 16,
+  "pose_ms": 200,
+  "pose_cycle_ms": 3200,
+  "effect_cycle_ms": 3200,
+  "effect_samples": 64,
+  "effect_ms": 50,
+  "flight_body_loops_per_effect_cycle": 1,
+  "opaque_character_pixels_unchanged_byFX": true,
+  "effect_margin_px": 12,
+  "edge_alpha_max": 0,
+  "native_body_display_scale": 1.06,
+  "native_installed": true,
+  "media": {
+    "character.webp": {
+      "frames": 16,
+      "duration_ms": 3200,
+      "sha256": "27ebccadd9ccd7aa757df169c9f8f0c933a928380b19a14e563173c9e4f73f65"
+    },
+    "night.webp": {
+      "frames": 64,
+      "duration_ms": 3200,
+      "sha256": "1ce383774915b2b9bb1ef7190d75ccd4d3342ab96bd115d66fb400fcf94a53c6"
+    },
+    "gaze.gif": {
+      "frames": 64,
+      "duration_ms": 3200,
+      "sha256": "3e7393006b530f52eec33e100ed77737f76594ecd3507340557ec0ec9474d6d1"
+    }
+  }
+}

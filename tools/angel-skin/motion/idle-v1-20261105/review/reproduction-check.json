@@ -1,0 +1,5 @@
+{
+  "rebuild_without_untracked_raws": true,
+  "character_gif_matches": true,
+  "idle_gif_matches": true
+}

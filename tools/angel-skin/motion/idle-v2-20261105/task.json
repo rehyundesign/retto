@@ -1,0 +1,68 @@
+{
+  "scope": "revise ONE existing idle GIF; await user approval before next state",
+  "mode": "new-motion",
+  "source_v1": "../idle-v1-20261105",
+  "preserve": [
+    "existing16 pose order and3.2s timing",
+    "main face/head/body proportions and markings except requested eyes and screen-right ear",
+    "exact companion designs, dot/^^ Tato eyes, poses and positions",
+    "four attached main limbs, gaze/neck/body continuity",
+    "main-paw -> Tato -> Melody interaction"
+  ],
+  "changes": [
+    "Retto eye openings approximately20 percent smaller, same blue-grey iris colour and positive expression",
+    "screen-right ear naturally rounded triangular shape, no curled spike or folded rim",
+    "two natural anatomically redrawn wingbeat cycles; shoulder fixed, elbow/wrist fold and primary-feather lag",
+    "replace played-with feather by soft yellow star",
+    "animated warm-yellow rear glow/rays/wisps and drifting ivory feathers, inspired by inspected Jeanne and Hana effects"
+  ],
+  "effect_references": [
+    "tools/jeanne-skin/motion/overnight-v61/review/idle-dark.gif",
+    "macos/Sources/JeanneSkin.swift",
+    "/Users/luxia/.codex/skills/retto-skin/assets/quality-baseline/hana-toto-16-half-speed.webp"
+  ],
+  "next_stage": "await user approval of revised idle GIF; do not start another state",
+  "not_in_scope": [
+    "other states",
+    "app installation",
+    "runtime changes"
+  ],
+  "registration": "original pixel-landmark registration remains unverified; retain review-camera status",
+  "pose_count": 16,
+  "pose_ms": 200,
+  "cycle_ms": 3200,
+  "effect_sample_ms": 50,
+  "selected_gif": "review/idle.gif",
+  "selected_sources": [
+    "character/00.png",
+    "character/01.png",
+    "character/02.png",
+    "character/03.png",
+    "character/04.png",
+    "character/05.png",
+    "character/06.png",
+    "character/07.png",
+    "character/08.png",
+    "character/09.png",
+    "character/10.png",
+    "character/11.png",
+    "character/12.png",
+    "character/13.png",
+    "character/14.png",
+    "character/15.png"
+  ],
+  "method": "16 retained complete-character poses with16 independent image_gen eye/ear/articulated-wing repairs; requested same-pose cosmetic/costume regions composited with original pixels outside masks; no new head/neck pose construction",
+  "status": "revised idle review candidate; app not modified",
+  "preview_canvas": [
+    544,
+    544
+  ],
+  "framing": "fixed16px padding on both sides of original512px scene; no character scaling",
+  "character_source_count": 16,
+  "effects": "yellow played-with star;9 ambient feather paths and independent yellow glow/wind/glint layers at20Hz",
+  "unresolved": [
+    "original anatomical landmark registration",
+    "native app display-fit/state transitions",
+    "user approval of revised art and live playback"
+  ]
+}

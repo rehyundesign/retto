@@ -1,0 +1,578 @@
+[
+  {
+    "id": "00",
+    "path": "character/00.png",
+    "sha256": "9a4f321b74834214755d5debd9b45d0dbf7fd7fc1764581234772ac537b65542",
+    "raw_sha256": "881912de61db05119f28dcdc127453682d920f4f7ec99f2a3057ef47db80767e",
+    "source_size": [
+      1254,
+      1254
+    ],
+    "common_resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      0,
+      3
+    ],
+    "ear_proxy_before_y": 71,
+    "foot_proxy_before": [
+      246.8,
+      481
+    ],
+    "airborne": false,
+    "attachment_proxies": {
+      "main_foot": [
+        246.8,
+        484
+      ],
+      "tato_foot": [
+        83.7,
+        469
+      ],
+      "melody_foot": [
+        446.5,
+        471
+      ]
+    },
+    "original_anatomical_landmarks": "unverified; ear/contact proxies support rigid registration only"
+  },
+  {
+    "id": "01",
+    "path": "character/01.png",
+    "sha256": "79747d757c73d642ad8d3c758b0e11c5d57f7524bd61fd2a75b51378ea1b39bc",
+    "raw_sha256": "340d2e13a81d2a021984edefe1e57370004de66c52e34b1c4abae2c678c02cb6",
+    "source_size": [
+      1254,
+      1254
+    ],
+    "common_resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      0,
+      5
+    ],
+    "ear_proxy_before_y": 65,
+    "foot_proxy_before": [
+      254.3,
+      479
+    ],
+    "airborne": false,
+    "attachment_proxies": {
+      "main_foot": [
+        254.3,
+        484
+      ],
+      "tato_foot": [
+        76.1,
+        475
+      ],
+      "melody_foot": [
+        452.6,
+        474
+      ]
+    },
+    "original_anatomical_landmarks": "unverified; ear/contact proxies support rigid registration only"
+  },
+  {
+    "id": "02",
+    "path": "character/02.png",
+    "sha256": "a4827eaf423a76851979776061816c236f57e5576c71bb534c0bf1d065939265",
+    "raw_sha256": "4b0b5dc32811f48de3a465439050fb477b4d7b7e875583113e979bc1067d0676",
+    "source_size": [
+      1254,
+      1254
+    ],
+    "common_resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      0,
+      2
+    ],
+    "ear_proxy_before_y": 89,
+    "foot_proxy_before": [
+      259.0,
+      482
+    ],
+    "airborne": false,
+    "attachment_proxies": {
+      "main_foot": [
+        259.0,
+        484
+      ],
+      "tato_foot": [
+        74.3,
+        478
+      ],
+      "melody_foot": [
+        447.9,
+        478
+      ]
+    },
+    "original_anatomical_landmarks": "unverified; ear/contact proxies support rigid registration only"
+  },
+  {
+    "id": "03",
+    "path": "character/03.png",
+    "sha256": "4f958482fb140926f4e106720c40e4bd1ad4f0c1490e102121dfbe7829b1f986",
+    "raw_sha256": "2f47cd231bf7db3717951d86cfb164fffd4c119fbd77f39b445d0a170e8d884d",
+    "source_size": [
+      1254,
+      1254
+    ],
+    "common_resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      0,
+      11
+    ],
+    "ear_proxy_before_y": 89,
+    "foot_proxy_before": [
+      259.9,
+      473
+    ],
+    "airborne": false,
+    "attachment_proxies": {
+      "main_foot": [
+        259.9,
+        484
+      ],
+      "tato_foot": [
+        83.9,
+        480
+      ],
+      "melody_foot": [
+        444.5,
+        480
+      ]
+    },
+    "original_anatomical_landmarks": "unverified; ear/contact proxies support rigid registration only"
+  },
+  {
+    "id": "04",
+    "path": "character/04.png",
+    "sha256": "c236db6080bf76bea9786f02ce4b429793a7041e8a7273fcda72b2053618f6b4",
+    "raw_sha256": "912841ffb46439232b50cde9b870bb9ef15f273990b73d9a6dc263e1220e5166",
+    "source_size": [
+      1254,
+      1254
+    ],
+    "common_resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      0,
+      8
+    ],
+    "ear_proxy_before_y": 64,
+    "foot_proxy_before": [
+      244.7,
+      476
+    ],
+    "airborne": false,
+    "attachment_proxies": {
+      "main_foot": [
+        244.7,
+        484
+      ],
+      "tato_foot": [
+        77.5,
+        484
+      ],
+      "melody_foot": [
+        449.7,
+        484
+      ]
+    },
+    "original_anatomical_landmarks": "unverified; ear/contact proxies support rigid registration only"
+  },
+  {
+    "id": "05",
+    "path": "character/05.png",
+    "sha256": "16cd0c212511b3d4ccd2f68826666d908eef79318e6fc61acb081dd3a097aa1b",
+    "raw_sha256": "8867b51508acc01afae5df85fbd77cb148f0f3003aa6a2feec19ab900359ec6d",
+    "source_size": [
+      1254,
+      1254
+    ],
+    "common_resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      0,
+      16
+    ],
+    "ear_proxy_before_y": 40,
+    "foot_proxy_before": [
+      265.5,
+      434
+    ],
+    "airborne": true,
+    "attachment_proxies": {
+      "main_foot": [
+        265.5,
+        450
+      ],
+      "tato_foot": [
+        91.5,
+        457
+      ],
+      "melody_foot": [
+        435.4,
+        456
+      ]
+    },
+    "original_anatomical_landmarks": "unverified; ear/contact proxies support rigid registration only"
+  },
+  {
+    "id": "06",
+    "path": "character/06.png",
+    "sha256": "03af24964dfa540f27722670de17b7594fed5b1158a7e05b0fc1ea4d2b28d7a2",
+    "raw_sha256": "66613cf127481294122ffb1f2abd709247121a11bd34780bef979e61ae0fbe51",
+    "source_size": [
+      1254,
+      1254
+    ],
+    "common_resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      0,
+      9
+    ],
+    "ear_proxy_before_y": 38,
+    "foot_proxy_before": [
+      268.9,
+      415
+    ],
+    "airborne": true,
+    "attachment_proxies": {
+      "main_foot": [
+        268.9,
+        424
+      ],
+      "tato_foot": [
+        86.2,
+        421
+      ],
+      "melody_foot": [
+        439.4,
+        422
+      ]
+    },
+    "original_anatomical_landmarks": "unverified; ear/contact proxies support rigid registration only"
+  },
+  {
+    "id": "07",
+    "path": "character/07.png",
+    "sha256": "2f5336498a69d7d739bb82478582d1e1913d5a85ce9bfc26556e73e39117939e",
+    "raw_sha256": "f5b0880f25a9740fa930e1ec9e346fdc88b33046b5f6d58e2754341aa9b2b6b5",
+    "source_size": [
+      1254,
+      1254
+    ],
+    "common_resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      0,
+      -1
+    ],
+    "ear_proxy_before_y": 45,
+    "foot_proxy_before": [
+      274.1,
+      434
+    ],
+    "airborne": true,
+    "attachment_proxies": {
+      "main_foot": [
+        274.1,
+        433
+      ],
+      "tato_foot": [
+        80.1,
+        403
+      ],
+      "melody_foot": [
+        453.4,
+        403
+      ]
+    },
+    "original_anatomical_landmarks": "unverified; ear/contact proxies support rigid registration only"
+  },
+  {
+    "id": "08",
+    "path": "character/08.png",
+    "sha256": "12efded150ddcb9127dd962dc497ec76467c3d633b648bd8a3349a27e51ee74d",
+    "raw_sha256": "506872241c6d2467238f17c90064a4c54ec76293bd02fe5666d60cc0a9f20c9f",
+    "source_size": [
+      1254,
+      1254
+    ],
+    "common_resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      0,
+      2
+    ],
+    "ear_proxy_before_y": 44,
+    "foot_proxy_before": [
+      273.0,
+      417
+    ],
+    "airborne": true,
+    "attachment_proxies": {
+      "main_foot": [
+        273.0,
+        419
+      ],
+      "tato_foot": [
+        75.4,
+        404
+      ],
+      "melody_foot": [
+        445.9,
+        407
+      ]
+    },
+    "original_anatomical_landmarks": "unverified; ear/contact proxies support rigid registration only"
+  },
+  {
+    "id": "09",
+    "path": "character/09.png",
+    "sha256": "6c8d117a8c6d80779e4a38dcd34ba4342c594fb7876da0d2237213cc5293f37f",
+    "raw_sha256": "2e5a5194c39192b51998a508be678ae99c631879539adede11688f2b25d918d2",
+    "source_size": [
+      1254,
+      1254
+    ],
+    "common_resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      0,
+      18
+    ],
+    "ear_proxy_before_y": 36,
+    "foot_proxy_before": [
+      286.2,
+      432
+    ],
+    "airborne": true,
+    "attachment_proxies": {
+      "main_foot": [
+        286.2,
+        450
+      ],
+      "tato_foot": [
+        84.3,
+        484
+      ],
+      "melody_foot": [
+        460.0,
+        486
+      ]
+    },
+    "original_anatomical_landmarks": "unverified; ear/contact proxies support rigid registration only"
+  },
+  {
+    "id": "10",
+    "path": "character/10.png",
+    "sha256": "f4d125d6f80592beba41203d60331778ad7b7a292e4d609b17a74a041360a3f0",
+    "raw_sha256": "cbfc606b4797b35b798a5d8fa975631186c92e7210e4b3fbda17aba5d0395367",
+    "source_size": [
+      1254,
+      1254
+    ],
+    "common_resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      0,
+      11
+    ],
+    "ear_proxy_before_y": 53,
+    "foot_proxy_before": [
+      295.7,
+      465
+    ],
+    "airborne": true,
+    "attachment_proxies": {
+      "main_foot": [
+        295.7,
+        476
+      ],
+      "tato_foot": [
+        80.8,
+        474
+      ],
+      "melody_foot": [
+        451.8,
+        477
+      ]
+    },
+    "original_anatomical_landmarks": "unverified; ear/contact proxies support rigid registration only"
+  },
+  {
+    "id": "11",
+    "path": "character/11.png",
+    "sha256": "02c6ab1998c58100ed9a877961c366ea6c14aec23f1f4c77faa7cc51a739cc62",
+    "raw_sha256": "9c36e2d7698e92167bc67ffa5f36a71ed4c95b3bbb1d1704cceba5dc3a108e69",
+    "source_size": [
+      1254,
+      1254
+    ],
+    "common_resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      0,
+      -2
+    ],
+    "ear_proxy_before_y": 68,
+    "foot_proxy_before": [
+      250.8,
+      486
+    ],
+    "airborne": false,
+    "attachment_proxies": {
+      "main_foot": [
+        250.8,
+        484
+      ],
+      "tato_foot": [
+        82.9,
+        475
+      ],
+      "melody_foot": [
+        451.7,
+        476
+      ]
+    },
+    "original_anatomical_landmarks": "unverified; ear/contact proxies support rigid registration only"
+  },
+  {
+    "id": "12",
+    "path": "character/12.png",
+    "sha256": "1eb787988adf70b5451815da1a7717257001c723ec294bff5919a82ef0906ffd",
+    "raw_sha256": "73e973c4a74e836a063cade5bf2b2dfcc7db2a60ef8d77d0e5a2ed3e0b630e4a",
+    "source_size": [
+      1254,
+      1254
+    ],
+    "common_resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      0,
+      10
+    ],
+    "ear_proxy_before_y": 79,
+    "foot_proxy_before": [
+      249.3,
+      474
+    ],
+    "airborne": false,
+    "attachment_proxies": {
+      "main_foot": [
+        249.3,
+        484
+      ],
+      "tato_foot": [
+        78.5,
+        480
+      ],
+      "melody_foot": [
+        449.9,
+        480
+      ]
+    },
+    "original_anatomical_landmarks": "unverified; ear/contact proxies support rigid registration only"
+  },
+  {
+    "id": "13",
+    "path": "character/13.png",
+    "sha256": "ff8eaf662dc6869b14d4800b64c8d9273e4e61d6b3375a985d21acbfef64f45e",
+    "raw_sha256": "819c0b959bf1909127e735ace286eb60e6fe5e0b0192f9d0df359888be4bb2bc",
+    "source_size": [
+      1254,
+      1254
+    ],
+    "common_resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      0,
+      11
+    ],
+    "ear_proxy_before_y": 70,
+    "foot_proxy_before": [
+      248.0,
+      473
+    ],
+    "airborne": false,
+    "attachment_proxies": {
+      "main_foot": [
+        248.0,
+        484
+      ],
+      "tato_foot": [
+        84.0,
+        472
+      ],
+      "melody_foot": [
+        446.4,
+        474
+      ]
+    },
+    "original_anatomical_landmarks": "unverified; ear/contact proxies support rigid registration only"
+  },
+  {
+    "id": "14",
+    "path": "character/14.png",
+    "sha256": "82a209015cab324e5077fd423c82d1df7e12ea546ea3bf28d6c5d53a04035c39",
+    "raw_sha256": "c4c10a2a643afb1d03521df717cde70e3ec7bfbf5a6879a91f6d05e37cb390c5",
+    "source_size": [
+      1254,
+      1254
+    ],
+    "common_resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      0,
+      3
+    ],
+    "ear_proxy_before_y": 71,
+    "foot_proxy_before": [
+      247.9,
+      481
+    ],
+    "airborne": false,
+    "attachment_proxies": {
+      "main_foot": [
+        247.9,
+        484
+      ],
+      "tato_foot": [
+        82.5,
+        470
+      ],
+      "melody_foot": [
+        448.2,
+        472
+      ]
+    },
+    "original_anatomical_landmarks": "unverified; ear/contact proxies support rigid registration only"
+  },
+  {
+    "id": "15",
+    "path": "character/15.png",
+    "sha256": "748aa7646bbb2b9af03fe0587d234ea6f021a8ed9928ea05aaff0e87496be28d",
+    "raw_sha256": "658264d4fbff4a2cc20e69078d60e5ed58b9aa17b6c8a32fa142bda05c36bcd4",
+    "source_size": [
+      1254,
+      1254
+    ],
+    "common_resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      0,
+      0
+    ],
+    "ear_proxy_before_y": 66,
+    "foot_proxy_before": [
+      253.8,
+      484
+    ],
+    "airborne": false,
+    "attachment_proxies": {
+      "main_foot": [
+        253.8,
+        484
+      ],
+      "tato_foot": [
+        80.6,
+        472
+      ],
+      "melody_foot": [
+        451.1,
+        472
+      ]
+    },
+    "original_anatomical_landmarks": "unverified; ear/contact proxies support rigid registration only"
+  }
+]

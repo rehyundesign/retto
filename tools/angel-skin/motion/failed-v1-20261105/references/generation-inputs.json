@@ -1,0 +1,83 @@
+{
+  "00": [
+    "references/approved-idle-white.png",
+    "references/original-identity.png"
+  ],
+  "01": [
+    "references/approved-idle-white.png",
+    "references/original-identity.png",
+    "references/failed-key-00.png",
+    "references/failed-key-02.png"
+  ],
+  "02": [
+    "references/approved-idle-white.png",
+    "references/original-identity.png",
+    "references/failed-key-00.png",
+    "references/failed-key-05.png"
+  ],
+  "03": [
+    "references/approved-idle-white.png",
+    "references/original-identity.png",
+    "references/failed-key-05.png"
+  ],
+  "04": [
+    "references/approved-idle-white.png",
+    "references/original-identity.png",
+    "references/failed-key-05.png"
+  ],
+  "05": [
+    "references/approved-idle-white.png",
+    "references/original-identity.png"
+  ],
+  "06": [
+    "references/approved-idle-white.png",
+    "references/original-identity.png",
+    "references/failed-key-05.png",
+    "references/failed-key-07.png"
+  ],
+  "07": [
+    "references/approved-idle-white.png",
+    "references/original-identity.png",
+    "references/failed-key-05.png"
+  ],
+  "08": [
+    "references/approved-idle-white.png",
+    "references/original-identity.png",
+    "references/failed-key-09.png"
+  ],
+  "09": [
+    "references/approved-idle-white.png",
+    "references/original-identity.png"
+  ],
+  "10": [
+    "references/approved-idle-white.png",
+    "references/original-identity.png",
+    "references/failed-key-09.png"
+  ],
+  "11": [
+    "references/approved-idle-white.png",
+    "references/original-identity.png",
+    "references/failed-key-09.png"
+  ],
+  "12": [
+    "references/approved-idle-white.png",
+    "references/original-identity.png",
+    "references/failed-key-09.png"
+  ],
+  "13": [
+    "references/approved-idle-white.png",
+    "references/original-identity.png",
+    "references/failed-key-00.png"
+  ],
+  "14": [
+    "references/approved-idle-white.png",
+    "references/original-identity.png",
+    "references/failed-key-00.png"
+  ],
+  "15": [
+    "references/approved-idle-white.png",
+    "references/original-identity.png",
+    "references/failed-key-14.png",
+    "references/failed-key-00.png"
+  ]
+}

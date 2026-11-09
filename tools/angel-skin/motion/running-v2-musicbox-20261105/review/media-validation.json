@@ -1,0 +1,52 @@
+{
+  "source_count": 16,
+  "unique_source_hashes": 16,
+  "independent_full_character_drawings": true,
+  "shared_camera_transform": [
+    0.4082934609250399,
+    32,
+    16
+  ],
+  "alpha_cleanup": "same-pose alpha-only ramp160..240; original raw RGB and files preserved",
+  "pose_ms": 200,
+  "effect_sample_ms": 50,
+  "cycle_ms": 3200,
+  "character_source_hashes": {
+    "00.png": "323a4340de9cb4f40bbdb97b194131ff64f48d2d6fac8d4fe56a2e46dff65197",
+    "01.png": "ffae1713c010b053c686a270be4a8815cdbbcb9346ecc1832660b21aa0154bdf",
+    "02.png": "3126e24c3f311f60f9e39f8bc625a4e900d9f5d173e454ad492548b37a109b21",
+    "03.png": "5c2c919c38823862319145ca6931f4d2e99784e591e147f9125777ccdcf0574e",
+    "04.png": "85846c752a41cae90e5f5422b92d82ddcd201b801e13f05cd1c4eee6efbd396d",
+    "05.png": "77798977fa42a77ade899ac6f2768fd6c7bffe43a32c50631cd47ee741a3a174",
+    "06.png": "648621a410bfabc947392d3f1d8ec990fb3e09334811bc0ea9603c67f0b4dbd7",
+    "07.png": "eced1399d53fa327b231eaf7e4a126e93956bc68cfcca66a9f376eb3b2a1e106",
+    "08.png": "d5b6200bf030332a99a664dc8aed9d59b38c4cd47e36105bf43f14e055bf2073",
+    "09.png": "1c741f675e3addf8fb27e4ba46ac096ab03de2457f4bcae7cb37dfbdb57f78ce",
+    "10.png": "40b4307e64aa40037842c46042ffc6e07b9bfc949ea8dabf968eaa020c5700a9",
+    "11.png": "38d181cf0c28d6c82c5e6b07155e92f9cf766ca621bead8b9dcaf098be45965b",
+    "12.png": "a06e0fdf2b735a4944d4fa9c74617e47f83c67f899c418360be092f2038378ed",
+    "13.png": "8b60e397a1797931afbbae03145c6479e0b721b2827c64c5aa9612670caa15fc",
+    "14.png": "db881c3a7cb4b9cbcd88a4d4eea8e8bf29a6de108417be5995688b23f9473b5b",
+    "15.png": "7e17ea61b4fac8ef9688c64e8f567f4665f47781cf0744eff76a4c890e2e7a02"
+  },
+  "original_registration": "unverified",
+  "native_installed": false,
+  "night.webp": {
+    "frames": 64,
+    "duration_ms": 3200,
+    "edge_alpha_max": 0,
+    "sha256": "3afcc27f418915ddc0585c4b596a3931565b4f1363639696caa9b69441b34ec2"
+  },
+  "character.webp": {
+    "frames": 16,
+    "duration_ms": 3200,
+    "edge_alpha_max": 0,
+    "sha256": "970e76eff35eddb7cbebbc64877d669867eb5b836d6356b8a757ab1449240f50"
+  },
+  "running.gif": {
+    "frames": 64,
+    "duration_ms": 3200,
+    "edge_alpha_max": null,
+    "sha256": "1d6371f5cf0926a4bb33e5a775b0dc5f3b417849455446d2a4e8a020d769de9c"
+  }
+}

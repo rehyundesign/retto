@@ -1,0 +1,23 @@
+{
+  "state": "waving",
+  "character_sources": 16,
+  "character_pose_ms": 150,
+  "cycle_ms": 2400,
+  "GIF_frames": 48,
+  "GIF_decoded_ms": 2400,
+  "effect_sample_ms": 50,
+  "unique_effect_samples": 48,
+  "character_hashes_unchanged_during_effects": true,
+  "effects_move_with_frozen_character": true,
+  "whole_character_method": "independent complete drawings; no head/body assembly or anatomical warps",
+  "completion_sweep_onset_ms": 450,
+  "illumination_layer": "gold crescent behind trio, not an attached emitter",
+  "played_with_prop": null,
+  "preview_canvas": [
+    576,
+    544
+  ],
+  "original_anatomical_registration": "unverified",
+  "native_registered": false,
+  "installed": false
+}

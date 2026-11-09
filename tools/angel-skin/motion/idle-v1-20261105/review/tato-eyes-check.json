@@ -1,0 +1,22 @@
+{
+  "scope": "same-pose Tato eyes only; no head/neck/body construction",
+  "generated_edit": "exec-0809acf1-90fc-4083-b2e6-ad255de9ba84.png",
+  "eye_regions_source_px": [
+    [
+      123,
+      1023,
+      160,
+      1061
+    ],
+    [
+      181,
+      999,
+      216,
+      1035
+    ]
+  ],
+  "method": "image_gen localized eye edit, original pixels restored outside small feathered eye masks",
+  "changed_outside_eye_masks": 0,
+  "all_other_character_pixels": "preserved exactly",
+  "user_rule": "tiny solid black dot eyes or ^^ happy closed eyes; no anime sclera/iris"
+}

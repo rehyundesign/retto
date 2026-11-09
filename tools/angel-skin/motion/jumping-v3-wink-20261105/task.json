@@ -1,0 +1,25 @@
+{
+  "mode": "still-repair",
+  "scope": "same-pose eye/eyelid/brow expression repair of16 retained independent full-trio drawings; one click GIF",
+  "user_feedback": "all expressions look sly; all3 should jump and wink together",
+  "preserve": [
+    "all16 full-character poses, anatomy, body/face size, registration",
+    "ears/wings/tails/paws/pet positions",
+    "2.4s pose/effect timing and all original effects",
+    "original alpha and every pixel outside small eye/brow regions"
+  ],
+  "wink_direction": "all3 close screen-left eye; screen-right stays naturally open",
+  "wink_beats": "01..03 bright open eyes,04 closure begins,05..08 synchronized one-eye wink,09 reopen,10..15 bright open eyes",
+  "canonical_eye_lock": "Retto small blue-grey eyes, Tato tiny black dots or single^wink, Melody one burgundy rectangle and one curved wink",
+  "method": "image_gen per-pose donor; tightly protected eye/eyelid patches only, no head/neck/face-body assembly or new pose",
+  "status": "completed wink repair; user review pending",
+  "pose_ms": 150,
+  "effect_sample_ms": 50,
+  "cycle_ms": 2400,
+  "native_installed": false,
+  "retained_complete_drawings": 16,
+  "same_pose_eye_repairs": 16,
+  "review_gif": "review/jumping.gif",
+  "transparent_animation": "review/night.webp",
+  "original_registration": "inherited unverified"
+}

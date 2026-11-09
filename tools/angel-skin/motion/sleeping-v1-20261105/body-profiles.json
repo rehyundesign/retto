@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "original_sha256": "4e8aa93c36e47a7544b0b5b72dcd845045cad50c27487686b576f57a0c800fbf",
+  "measurement_method": "isolated-character-landmarks",
+  "profiles": {
+    "original-curled-sleep": {
+      "canonical_cell": "assets/spritesheet.webp row11 column0; genuine curled sleep view, no seated profile reuse",
+      "face_box": null,
+      "torso_box": null,
+      "body_center_x": null,
+      "foot_baseline_y": null,
+      "tail_anchor": null,
+      "eye_line_y": null
+    }
+  }
+}

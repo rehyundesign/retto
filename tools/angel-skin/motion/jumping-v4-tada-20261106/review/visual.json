@@ -1,0 +1,52 @@
+{
+  "source_sha256": {
+    "14": "b5387cd5a3b4f8dc42d84697b2a6036a7b9691395c6853b22fedeed8fd3ab99d",
+    "00": "d039f8bd153f733422b4395cf9d0c6647631c7679d37e261e1bead1ea7606a2b",
+    "01": "3a2746b166a137700c76425870bbc417e4195fad410302c612fe9850aca85ebc",
+    "15": "0d09e9a49731fbef581802e29069823ace1005ecec1d38cea26c6ae0bd8c3a44",
+    "03": "ea6e70f5f9078552f88ad0f14961909823825b9b3ef8340e9bcd5db5b2cbd04e",
+    "02": "d5e6707f9021d616bd04689f2d8649ddf46687c9dd15b04ab26f23dca3d0f1e8",
+    "06": "99ba81fba89128506b20ea91b711af07b6e407bd2ad940b32fc2a86f079b9b25",
+    "12": "0d822d37e68945f178307295064251a98e8c88e7f2e3d6929a60944012be21e1",
+    "13": "0715164edc4c9a704ac361c1efe997dafbd8a877909a977401375f03280a217f",
+    "07": "e3bdfbdb71952c2515e5c0b479ee5c399ebd99ca812583dd88ccb6e66b5e0154",
+    "11": "f050fb50920a205d1f0279f2a596332fb217abc65daebbfa47bb158c672013db",
+    "05": "94771b551a81652fc7140093771738967a42dc781b826d2abf38933b708ebfb8",
+    "04": "ded6663f079543de398eae6a0ae2a155b235f4cd91a0224bd11674d1525cdc40",
+    "10": "ccf557576fe78f168381881e212d585258a8e084c0882548ba97e4daba888278",
+    "09": "db00bac2511eadb1e135ad9803b6edaafb62c74cc9ccb8efe96bbaf866b591d6",
+    "08": "64116b45c1eaac09408ecdd697b133334d526ffe0bbc4da54d7ec21f1becce04"
+  },
+  "gif_sha256": "770300a8ca10a7408000a437402b70608c6a9c8bb127e7b776868b977c709db1",
+  "runtime_size_comparison": {
+    "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v4-tada-20261106/review/runtime-dark.png",
+    "sha256": "89489c1bb14bea8f62934e50704d3f261d1c121f1fa4e3981e75363fe06232ba"
+  },
+  "checks": {
+    "identity_eyes": {
+      "status": "pass",
+      "finding": "16 cells inspected at224px on dark/light; source PNGs/animation unchanged, wink glyphs clear, opaque source RGBA exact."
+    },
+    "anatomy_grip": {
+      "status": "pass",
+      "finding": "Complete source drawings retained; full-body launch, shared wink, flight and landing unchanged."
+    },
+    "material_canon": {
+      "status": "pass",
+      "finding": "Large five-point gold stars, glowing rays, blue/rose side arcs and gold shower; no text, hard rectangular background or new costume."
+    },
+    "legibility": {
+      "status": "pass",
+      "finding": "All16 effect-on cells inspected224px dark/light; foreground stars excluded from expanded subject mask, background light fades to0 at edges."
+    },
+    "secondary_motion": {
+      "status": "unverified",
+      "finding": "Retained2.4s clock,48 distinct50ms samples, effect progression on frozen pose checked; actual live/native temporal playback not observed."
+    },
+    "loop_return": {
+      "status": "unverified",
+      "finding": "Retained2.4s clock,48 distinct50ms samples, effect progression on frozen pose checked; actual live/native temporal playback not observed."
+    }
+  },
+  "native_installed": false
+}

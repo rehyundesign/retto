@@ -1,0 +1,41 @@
+{
+  "mode": "new-motion",
+  "scope": "idle only, regenerate16 independent complete trio drawings, dynamic airborne pets and varied forepaw star handoffs",
+  "user_feedback": "small eyes, little visible sclera, positive expressions, diverse poses. Both Tato and Melody can fly, dynamic airborne actions. Preserve accepted jumping/sleeping/running and leave other states unchanged pending separate review.",
+  "pose_ms": 200,
+  "cycle_ms": 3200,
+  "effect_ms": 50,
+  "canvas": [
+    544,
+    544
+  ],
+  "runtime_target": [
+    224,
+    320
+  ],
+  "eyes": "small relaxed blue-grey iris-filled eye apertures, no exposed white ring, no sly/grumpy brows; Tato dots/^^only; Melody burgundy rectangles or gentle closed curves",
+  "motion": "Tato -> Retto left forepaw -> both forepaws cradle -> Retto right forepaw -> Melody -> Retto -> Tato; two pets follow airborne arcs, real arm/foot/ear/tail/wing articulation",
+  "status": "new flying-pet idle review candidate; user approval pending",
+  "native_installed": false,
+  "selected_anchor": "00.png after small-eye and star correction",
+  "rejected_anchor": "00-rejected-large-eyes.png; eye apertures too large and excessive pale sclera",
+  "prop_method": "yellow star drawn integrally with whole-body character for anatomical grip; glow/trails remain separate",
+  "anchor_review": "dark matte inspected: small iris-filled eyes, positive symmetrical mouth, Tato physically holds5-point star, both pets feet well above grounded Retto. Complete connected main anatomy, four limbs and shoulder-wing attachment; no visible white scraps after alpha preparation.",
+  "selected_independent_complete_drawings": 16,
+  "generation_attempts": 24,
+  "review_gif": "review/idle.gif",
+  "transparent_animation": "review/night.webp",
+  "character_animation": "review/character.webp",
+  "rejected_sources": {
+    "00-rejected-large-eyes": "eye size/sclera; replaced by small-eye anchor",
+    "02-rejected-high-rabbit": "rabbit too high for neighboring flight continuity",
+    "03-rejected-fast-handoff": "missing left-side handoff inbetween",
+    "04-rejected-extra-ground-paw": "extra grounded forepaw",
+    "04-rejected-abrupt-star-pull": "star pulled to center too early",
+    "06-rejected-extra-ground-leg": "extra grounded foreleg",
+    "12-rejected-six-legs": "two grounded forelegs remained while both hands raised",
+    "13-rejected-full-extension": "arm already fully extended; redrawn with bent elbow"
+  },
+  "next_stage": "review this one new idle only; all other6 motions preserved; no native installation",
+  "original_registration": "unverified; original identity inspected, original quantitative anatomical landmarks not certified"
+}

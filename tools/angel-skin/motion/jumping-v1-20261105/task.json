@@ -1,0 +1,64 @@
+{
+  "scope": "one click/jumping GIF only; pause before sleeping state",
+  "mode": "new-motion",
+  "production_states": [
+    "jumping"
+  ],
+  "previous_state": "completion preview provisionally set aside by user; click reaction requested next",
+  "design_lock": "approved idle: small blue-grey eyes, natural triangular ears, articulated ivory wings; Tato dots/^^; Melody burgundy rectangles",
+  "action": "small joint-flexed crouch, wing-assisted low hop, soft four-paw landing; BOTH grounded companions track upward and raise/lower both hands with downwash response",
+  "pose_count": 16,
+  "pose_ms": 150,
+  "cycle_ms": 2400,
+  "effect_sample_ms": 50,
+  "preview_canvas": [
+    576,
+    544
+  ],
+  "native_registered": false,
+  "installed": false,
+  "original_anatomical_registration": "unverified",
+  "generation": "built-in image_gen; one independent complete trio drawing per pose",
+  "next_stage": "regenerate blocked02/05/06/12 after image service availability returns; do not treat draft as approved or installed",
+  "layer_order": [
+    "warm preview background",
+    "continuous gold/ivory feathers plus lift sparkle and landing ring",
+    "whole-character trio"
+  ],
+  "played_with_prop": null,
+  "support_contract": "Retto four paws grounded before and after low flight; all4 visibly airborne during05..10; both companions grounded throughout",
+  "registration_proxy": "single neutral00 camera calibration reused identically for all poses; no per-pose regrounding or silhouette normalization",
+  "pose_groups": [
+    "supported seated neutral",
+    "joint-flexed crouch",
+    "low airborne four-paw tuck",
+    "leg extension and landing compression"
+  ],
+  "selected_apex_note": "07 keeps original head/body width; head rises about5% while rear-leg tuck also lifts soles farther (about20% canvas) above neutral floor. Intermediate leg-extension path adapted to this retained drawing.",
+  "refinements": [
+    "03/11 fully redrawn to restore original grounded floor and paw spread before deriving inbetweens"
+  ],
+  "status": "UNFINISHED DRAFT: four necessary redraws blocked by image_gen usage limit",
+  "selected_gif": "review/jumping.gif",
+  "selected_sources": 16,
+  "unresolved": [
+    "02/12 grounded support drift",
+    "05 smaller main body/face and early leg tuck",
+    "06 partial leg-tuck transition",
+    "minor white floor-edge matte fringe on some cells",
+    "original anatomical pixel-landmark registration",
+    "native fit and state-return transitions",
+    "user/live playback review"
+  ],
+  "blocking_error": {
+    "type": "usage_limit_reached",
+    "reset_at": "2026-11-05T17:05:12+09:00",
+    "pose_ids": [
+      "02",
+      "05",
+      "06",
+      "12"
+    ]
+  },
+  "framing": "fixed544 square plus16px side padding; neutral00 camera correction0,0 identically applied to all sources; no per-pose regrounding or anatomical warps"
+}

@@ -1,0 +1,24 @@
+{
+  "distinct_independent_character_sources": 16,
+  "unique_decoded_character_images": 16,
+  "character_playback_count": 16,
+  "character_pose_ms": 200,
+  "cycle_ms": 3200,
+  "decoded_character_gif_ms": 3200,
+  "effect_sample_ms": 50,
+  "preview_canvas": [
+    512,
+    544
+  ],
+  "native_cell": [
+    448,
+    640
+  ],
+  "native_display_fit": "unverified; wider review camera only",
+  "original_body_landmark_registration": "unverified; no fabricated measurements",
+  "installed": false,
+  "foot_proxy_range_raw": [
+    1272,
+    1290
+  ]
+}

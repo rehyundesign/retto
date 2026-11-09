@@ -1,0 +1,314 @@
+{
+  "schema_version": 1,
+  "mode": "new-motion",
+  "resolution_scale": 2,
+  "repo": "/Users/luxia/Documents/ChatGPT/retto",
+  "task_record": {
+    "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waiting-v2-highfive-20261106/task.json",
+    "sha256": "1f65006d9861b3e94ab25b012e628aa5f5d13874eafdf35fe09a68e48c6a0b43"
+  },
+  "references": {
+    "original_retto": {
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waiting-v2-highfive-20261106/references/runtime-base.png",
+      "sha256": "b8a513bbd8578f702fdc35c116e681588853e2da329fe5a080536498edbc008a"
+    },
+    "approved_design": {
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waiting-v2-highfive-20261106/references/canonical-master.png",
+      "sha256": "0d3524d171bb0aaacaf051fdd0d99516cbd8003151a0320c488a2c4ff844aa6c"
+    },
+    "material": {
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waiting-v2-highfive-20261106/references/material.png",
+      "sha256": "ddc6df1afbe77fca269cc12be30e2b2bbb8f20dd87c9138fed4e7e307293dada"
+    }
+  },
+  "body_profiles": {
+    "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waiting-v2-highfive-20261106/body-profiles.json",
+    "sha256": "421b623fa1c0a7ced5b217725260f8096d097d9d7f9fd1dc370bcaf129a39a8f"
+  },
+  "atlas_spec": null,
+  "native_review": null,
+  "groups": [
+    {
+      "id": "waiting-canonical-highfive",
+      "view_stance": "seated-highfives",
+      "body_profile": "canonical-seated-highfive",
+      "costume_master": {
+        "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waiting-v2-highfive-20261106/character/00.png",
+        "sha256": "735d9daa09c1cc1d71a7cf1fee143e68963ef1e5f52452c79aede95a0b4949ee"
+      },
+      "drawing_policy": {
+        "retained_count": null,
+        "retained_map": null,
+        "reason": ""
+      },
+      "sources": [
+        {
+          "id": "00",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waiting-v2-highfive-20261106/character/00.png",
+          "sha256": "735d9daa09c1cc1d71a7cf1fee143e68963ef1e5f52452c79aede95a0b4949ee",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "01",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waiting-v2-highfive-20261106/character/01.png",
+          "sha256": "69a85481f8ca700c4c548825d386b7de8654f1d4ebd1bf13e48738bb8d01aba0",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "02",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waiting-v2-highfive-20261106/character/02.png",
+          "sha256": "5cce65a745a3c395e65df27694784fa669f28b69f4d851bcb0a061f8b60dd0f1",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "03",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waiting-v2-highfive-20261106/character/03.png",
+          "sha256": "bfaf2e18c728748bcb24a6593e2777df55c57b2abe616084cdd22ad2849edb07",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "04",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waiting-v2-highfive-20261106/character/04.png",
+          "sha256": "c79f3514c23743c7a7b8d90c992da486025e7ba23cc070a8db58ef85f95bf136",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "05",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waiting-v2-highfive-20261106/character/05.png",
+          "sha256": "c83e8b9702c7479bd5d5395ec402b83458064a803e8255490da13573eab99db4",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "06",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waiting-v2-highfive-20261106/character/06.png",
+          "sha256": "abca1a16674936cf9a610d88606984ded85c50e061ac5f81ffc2fda9bbabaa0f",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "07",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waiting-v2-highfive-20261106/character/07.png",
+          "sha256": "33d203695cd9c0ea48f93074f5c36c267c16e857f9c8b244d44815b0b926ca19",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "08",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waiting-v2-highfive-20261106/character/08.png",
+          "sha256": "2f96967451a29c7b0bd5e4301aeef0ccd7aa2f441ca2654eb82beaef0d0540ab",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "09",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waiting-v2-highfive-20261106/character/09.png",
+          "sha256": "feacac3e39175fa7a241a1699cec6d0452c8dc8e3064254f16e0b18b8bb70e3f",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "10",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waiting-v2-highfive-20261106/character/10.png",
+          "sha256": "b2f4048c45595c06d72445422d1b5aa76151002bf82cafe41d0c3aa1b73def9e",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "11",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waiting-v2-highfive-20261106/character/11.png",
+          "sha256": "edfad968cea1520a9171a522dae0af3971f552c1f0df7471464b9b622807606e",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "12",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waiting-v2-highfive-20261106/character/12.png",
+          "sha256": "64a2fb87c1d8bdbeb30d4ff58dfee3cbec6a074ee7df0c681ad5f5e886059377",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "13",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waiting-v2-highfive-20261106/character/13.png",
+          "sha256": "e35495474ca88b72e5af4c5f46b9cebbbd9c5711633ccea05549953a17f8e40f",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "14",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waiting-v2-highfive-20261106/character/14.png",
+          "sha256": "b58dd00ca218dedc1f61997824275e6fe8f409fa1e16098940cf042285c8b79d",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "15",
+          "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waiting-v2-highfive-20261106/character/15.png",
+          "sha256": "eb76d92a0c9d0b08dfed26ebb05613e6fe450b78488482db39029a166b7bfe73",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        }
+      ],
+      "playback_ids": [
+        "00",
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08",
+        "09",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15"
+      ],
+      "pose_durations_ms": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "cycle_ms": 3200,
+      "review_gif": {
+        "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waiting-v2-highfive-20261106/review/waiting.gif",
+        "sha256": "efb30576d8593b8bf3f08f9a542b9a8cb96844bdc4ddbae04838dfc4471ec537"
+      },
+      "visual_review": {
+        "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waiting-v2-highfive-20261106/review/visual.json",
+        "sha256": "a294ab38c008a0da572115e99835ab3aeba52214a9e0adb584babeeae91a5414"
+      },
+      "approved_character_lock": null,
+      "runtime_states": [
+        "waiting"
+      ],
+      "destination_cells": [],
+      "source_provenance": {
+        "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waiting-v2-highfive-20261106/sources.json",
+        "sha256": "3e422af0bdcb12006038404840c465cc446034ef35a54a8d06e7baad7605b07c"
+      },
+      "transparent_animation": {
+        "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waiting-v2-highfive-20261106/review/night.webp",
+        "sha256": "a993e50eec7c182dbf3174bf90b533f27b010125e3a87c780d72a78a1662e4e0"
+      }
+    }
+  ]
+}

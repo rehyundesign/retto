@@ -1,0 +1,48 @@
+{
+  "scope": "one completion/waving GIF only; pause before click state",
+  "mode": "new-motion",
+  "production_states": [
+    "waving"
+  ],
+  "previous_state": "failed preview provisionally set aside by user; continue completion only",
+  "design_lock": "approved idle: smaller blue-grey eyes, natural triangular ears; Tato dots/^^; Melody burgundy rectangles",
+  "action": "main screen-left front paw lifts/waves/lowers while other3 feet stay supported; feather wings softly spread; BOTH pets open both hands then settle",
+  "pose_count": 16,
+  "pose_ms": 150,
+  "cycle_ms": 2400,
+  "effect_sample_ms": 50,
+  "preview_canvas": [
+    576,
+    544
+  ],
+  "native_registered": false,
+  "installed": false,
+  "original_anatomical_registration": "unverified",
+  "generation": "built-in image_gen; one independent complete trio drawing per pose",
+  "next_stage": "await user approval before click/jumping GIF",
+  "layer_order": [
+    "warm preview background",
+    "continuous gold/ivory feathers and completion crescent sweep",
+    "complete character trio"
+  ],
+  "played_with_prop": null,
+  "support_contract": "screen-right front paw stays grounded, screen-left front paw waves; exactly4 main legs, no duplicated floor paw",
+  "registration_proxy": "only grounded screen-right forepaw, not raised-paw silhouette or effects",
+  "pose_groups": [
+    "supported seated neutral",
+    "three-support seated forepaw wave",
+    "seated paw lowering and return"
+  ],
+  "status": "completion/waving GIF review candidate; app not modified",
+  "selected_gif": "review/waving.gif",
+  "selected_sources": 16,
+  "framing": "fixed544 square camera plus16px side padding; rigid character-only alignment from grounded screen-right forepaw, no silhouette fitting or anatomical warps",
+  "refinements": [
+    "15 completely redrawn between14/00 to restore all4 main paws on floor and relaxed companion hands"
+  ],
+  "unresolved": [
+    "original anatomical pixel-landmark registration",
+    "native fit and state-return transitions",
+    "user approval and live playback review"
+  ]
+}

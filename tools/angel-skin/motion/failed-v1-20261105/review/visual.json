@@ -1,0 +1,52 @@
+{
+  "source_sha256": {
+    "00": "9e1c5854e8d779ae0f7fb0acfc9a1018950b19c8dcae85565dca9ec038dc368a",
+    "01": "5654650db6536bb756afa3249db42b2471ebc8b444a41effe3b66fc03d1a3995",
+    "02": "768970ea6547b1f645b8076c667b09cf8cdf84872e9022e6ac9002a417114864",
+    "03": "bfcc009730846f419157b2627f56cfbd03a74aacb459570ead43f522e10f7605",
+    "04": "0a7a91ae2cf842e9e21c5eb545f261eb16e2b8788ad47c9d97b2eb6ba9d5f28b",
+    "05": "b96e367ff67475ee1a9eab929907b5734b936d8357fe5c2377dd71e459a5523e",
+    "06": "ea9958ffaf51bbca874f5ad68113d6c5cdc2909941890e6c99d620e7c1a6708b",
+    "07": "3d9f13b3e9a13b219074559a957c6e602d7c028d2b039d2a5cb4a0d4a4615871",
+    "08": "57b847baa8961373ce5e94abc5cdd721ccd1cff85161fefb3b663f4cde90b260",
+    "09": "33c34bff758059ebf5e9eee94203dd9734956d5ef913da35554939990f47d00a",
+    "10": "7554dbe5f372499a11a0a99f55ce647cde40124974c115491a53ff034e6e947a",
+    "11": "1cdb70ae8a437357ba81e922d670aa5db7a41625e87fb8b59173fb0571cd207f",
+    "12": "685051dca57db05a0821040bb5deaf4c449c66857d873646ca9b31c90262a175",
+    "13": "63e2199771867b0365b89a2bef258e48f4589b1f0a23d6857f8a6b39f12149bb",
+    "14": "862227020e2d67ace3a811f9565711a79a4b17a92581646d960921d9786d9f31",
+    "15": "34689474379be2821c3bc501a73c4cc903096c8a97e5d27d8ec2c68a1e7ed80c"
+  },
+  "gif_sha256": "192ac2c1d2d967ef6784e4d5cbf1236dcac939a7fea595c588eeeeec6732657c",
+  "runtime_size_comparison": {
+    "path": "review/comparison-1x.png",
+    "sha256": "a4e2a5bac41ecec2ceb8360ee6bcbb217b1bdfd859d317432e51653a828946c4"
+  },
+  "checks": {
+    "identity_eyes": {
+      "status": "pass",
+      "finding": "All16 current source drawings inspected on light/dark boards: small blue-grey main eyes, natural ears, Tato dots/^^, Melody burgundy rectangles. Mild puzzled pause followed by warm comfort blink; no tears/angry warning."
+    },
+    "anatomy_grip": {
+      "status": "pass",
+      "finding": "All16 complete-character drawings inspected: four grounded Retto paws, continuous neck/shoulder/chest, both companions reach inward and contact outer forelegs/flanks around03..07, then withdraw. No held prop or head/body assembly."
+    },
+    "material_canon": {
+      "status": "pass",
+      "finding": "Fine cream/brown fur and ivory layered feather wings; both companion features and plush material retained. White-fur contours intact on dark source board."
+    },
+    "secondary_motion": {
+      "status": "unverified",
+      "finding": "Source sequence shows feather folding/unfolding, ear/bow settling and hand approach/contact/recovery. Live playback remains user review."
+    },
+    "legibility": {
+      "status": "unverified",
+      "finding": "All16 final decoded GIF samples inspected at288px width plus selected224px comparison samples. Both companion hands/faces remain readable with gold wash and feathers behind. Native224x320 fit remains unverified."
+    },
+    "loop_return": {
+      "status": "unverified",
+      "finding": "15 was fully redrawn to restore original pet gaps/hands;15->00 source bridge sampled. Encoded timing tested separately; live loop and native state transitions unverified."
+    }
+  },
+  "registration": "Original pose-specific pixel landmarks unmeasured; fixed-camera/support proxies do not certify original size or native registration."
+}

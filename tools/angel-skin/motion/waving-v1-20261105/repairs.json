@@ -1,0 +1,11 @@
+{
+  "15": {
+    "before": "raw/15-before-repair.png",
+    "prompt": "prompts/15-repair.txt",
+    "reason": "restore four grounded paws and lowered companion hands for neutral return",
+    "neighbours": [
+      "14",
+      "00"
+    ]
+  }
+}

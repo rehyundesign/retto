@@ -1,0 +1,614 @@
+{
+  "method": "eye-row facial cross section; overlapping main/pet alpha can inflate width, diagnostic only",
+  "canonical_certification": false,
+  "frames": {
+    "00": {
+      "Tato": {
+        "face_cross_section_width": 99,
+        "eye_centres": [
+          [
+            130.19444444444446,
+            187.63888888888889
+          ],
+          [
+            97.62222222222222,
+            196.75555555555556
+          ]
+        ],
+        "cross_section_y": 192.2,
+        "cross_section_x": [
+          45,
+          143
+        ]
+      },
+      "Melody": {
+        "face_cross_section_width": 87,
+        "eye_centres": [
+          [
+            407.975,
+            209.06666666666666
+          ],
+          [
+            441.0075187969925,
+            216.62406015037595
+          ]
+        ],
+        "cross_section_y": 212.85,
+        "cross_section_x": [
+          388,
+          474
+        ]
+      }
+    },
+    "01": {
+      "Tato": {
+        "face_cross_section_width": 123,
+        "eye_centres": [
+          [
+            150.02272727272728,
+            206.6818181818182
+          ],
+          [
+            121.18867924528301,
+            218.67924528301887
+          ]
+        ],
+        "cross_section_y": 212.68,
+        "cross_section_x": [
+          57,
+          179
+        ]
+      },
+      "Melody": {
+        "face_cross_section_width": 86,
+        "eye_centres": [
+          [
+            394.69642857142856,
+            221.80357142857142
+          ],
+          [
+            429.3857142857143,
+            229.30714285714285
+          ]
+        ],
+        "cross_section_y": 225.56,
+        "cross_section_x": [
+          377,
+          462
+        ]
+      }
+    },
+    "02": {
+      "Tato": {
+        "face_cross_section_width": 97,
+        "eye_centres": [
+          [
+            142.02564102564102,
+            183.28205128205127
+          ],
+          [
+            115.1063829787234,
+            194.3404255319149
+          ]
+        ],
+        "cross_section_y": 188.81,
+        "cross_section_x": [
+          59,
+          155
+        ]
+      },
+      "Melody": {
+        "face_cross_section_width": 78,
+        "eye_centres": [
+          [
+            383.9166666666667,
+            202.53571428571428
+          ],
+          [
+            413.0927835051546,
+            211.84536082474227
+          ]
+        ],
+        "cross_section_y": 207.19,
+        "cross_section_x": [
+          368,
+          445
+        ]
+      }
+    },
+    "03": {
+      "Tato": {
+        "face_cross_section_width": 97,
+        "eye_centres": [
+          [
+            147.72093023255815,
+            184.1860465116279
+          ],
+          [
+            117.34545454545454,
+            194.76363636363635
+          ]
+        ],
+        "cross_section_y": 189.47,
+        "cross_section_x": [
+          66,
+          162
+        ]
+      },
+      "Melody": {
+        "face_cross_section_width": 90,
+        "eye_centres": [
+          [
+            434.26666666666665,
+            192.73333333333332
+          ],
+          [
+            396.8382352941176,
+            195.9558823529412
+          ]
+        ],
+        "cross_section_y": 194.34,
+        "cross_section_x": [
+          377,
+          466
+        ]
+      }
+    },
+    "04": {
+      "Tato": {
+        "face_cross_section_width": 96,
+        "eye_centres": [
+          [
+            145.14634146341464,
+            179.85365853658536
+          ],
+          [
+            117.36170212765957,
+            191.2127659574468
+          ]
+        ],
+        "cross_section_y": 185.53,
+        "cross_section_x": [
+          62,
+          157
+        ]
+      },
+      "Melody": {
+        "face_cross_section_width": 88,
+        "eye_centres": [
+          [
+            397.59166666666664,
+            186.425
+          ],
+          [
+            429.99328859060404,
+            195.40268456375838
+          ]
+        ],
+        "cross_section_y": 190.91,
+        "cross_section_x": [
+          377,
+          464
+        ]
+      }
+    },
+    "05": {
+      "Tato": {
+        "face_cross_section_width": 91,
+        "eye_centres": [
+          [
+            122.68571428571428,
+            183.28571428571428
+          ],
+          [
+            97.525,
+            193.65
+          ]
+        ],
+        "cross_section_y": 188.47,
+        "cross_section_x": [
+          45,
+          135
+        ]
+      },
+      "Melody": {
+        "face_cross_section_width": 81,
+        "eye_centres": [
+          [
+            392.7450980392157,
+            195.40196078431373
+          ],
+          [
+            423.58015267175574,
+            202.34351145038167
+          ]
+        ],
+        "cross_section_y": 198.87,
+        "cross_section_x": [
+          376,
+          456
+        ]
+      }
+    },
+    "06": {
+      "Tato": {
+        "face_cross_section_width": 89,
+        "eye_centres": [
+          [
+            130.02272727272728,
+            183.04545454545453
+          ],
+          [
+            99.73913043478261,
+            191.67391304347825
+          ]
+        ],
+        "cross_section_y": 187.36,
+        "cross_section_x": [
+          55,
+          143
+        ]
+      },
+      "Melody": {
+        "face_cross_section_width": 82,
+        "eye_centres": [
+          [
+            397.55555555555554,
+            197.14444444444445
+          ],
+          [
+            428.65811965811963,
+            203.7948717948718
+          ]
+        ],
+        "cross_section_y": 200.47,
+        "cross_section_x": [
+          382,
+          463
+        ]
+      }
+    },
+    "07": {
+      "Tato": {
+        "face_cross_section_width": 93,
+        "eye_centres": [
+          [
+            131.17142857142858,
+            178.34285714285716
+          ],
+          [
+            102.46341463414635,
+            187.8780487804878
+          ]
+        ],
+        "cross_section_y": 183.11,
+        "cross_section_x": [
+          53,
+          145
+        ]
+      },
+      "Melody": {
+        "face_cross_section_width": 1,
+        "eye_centres": [
+          [
+            448.10714285714283,
+            119.85714285714286
+          ],
+          [
+            483.0,
+            144.83333333333334
+          ]
+        ],
+        "cross_section_y": 132.35,
+        "cross_section_x": [
+          466,
+          466
+        ]
+      }
+    },
+    "08": {
+      "Tato": {
+        "face_cross_section_width": 96,
+        "eye_centres": [
+          [
+            136.51282051282053,
+            176.17948717948718
+          ],
+          [
+            108.56818181818181,
+            187.9090909090909
+          ]
+        ],
+        "cross_section_y": 182.04,
+        "cross_section_x": [
+          55,
+          150
+        ]
+      },
+      "Melody": {
+        "face_cross_section_width": 82,
+        "eye_centres": [
+          [
+            383.3125,
+            186.0625
+          ],
+          [
+            412.515625,
+            195.703125
+          ]
+        ],
+        "cross_section_y": 190.88,
+        "cross_section_x": [
+          368,
+          449
+        ]
+      }
+    },
+    "09": {
+      "Tato": {
+        "face_cross_section_width": 101,
+        "eye_centres": [
+          [
+            147.609756097561,
+            187.02439024390245
+          ],
+          [
+            115.52941176470588,
+            196.0
+          ]
+        ],
+        "cross_section_y": 191.51,
+        "cross_section_x": [
+          61,
+          161
+        ]
+      },
+      "Melody": {
+        "face_cross_section_width": 83,
+        "eye_centres": [
+          [
+            413.25,
+            194.25
+          ],
+          [
+            377.2718446601942,
+            195.85436893203882
+          ]
+        ],
+        "cross_section_y": 195.05,
+        "cross_section_x": [
+          361,
+          443
+        ]
+      }
+    },
+    "10": {
+      "Tato": {
+        "face_cross_section_width": 100,
+        "eye_centres": [
+          [
+            136.90243902439025,
+            179.3658536585366
+          ],
+          [
+            104.9245283018868,
+            188.58490566037736
+          ]
+        ],
+        "cross_section_y": 183.98,
+        "cross_section_x": [
+          52,
+          151
+        ]
+      },
+      "Melody": {
+        "face_cross_section_width": 83,
+        "eye_centres": [
+          [
+            411.0,
+            193.0
+          ],
+          [
+            376.2631578947368,
+            193.87719298245614
+          ]
+        ],
+        "cross_section_y": 193.44,
+        "cross_section_x": [
+          361,
+          443
+        ]
+      }
+    },
+    "11": {
+      "Tato": {
+        "face_cross_section_width": 95,
+        "eye_centres": [
+          [
+            136.16216216216216,
+            183.16216216216216
+          ],
+          [
+            110.10810810810811,
+            192.9189189189189
+          ]
+        ],
+        "cross_section_y": 188.04,
+        "cross_section_x": [
+          55,
+          149
+        ]
+      },
+      "Melody": {
+        "face_cross_section_width": 126,
+        "eye_centres": [
+          [
+            368.28395061728395,
+            192.7037037037037
+          ],
+          [
+            397.1465517241379,
+            203.3448275862069
+          ]
+        ],
+        "cross_section_y": 198.02,
+        "cross_section_x": [
+          311,
+          436
+        ]
+      }
+    },
+    "12": {
+      "Tato": {
+        "face_cross_section_width": 95,
+        "eye_centres": [
+          [
+            124.38461538461539,
+            173.15384615384616
+          ],
+          [
+            96.77777777777777,
+            183.2888888888889
+          ]
+        ],
+        "cross_section_y": 178.22,
+        "cross_section_x": [
+          44,
+          138
+        ]
+      },
+      "Melody": {
+        "face_cross_section_width": 81,
+        "eye_centres": [
+          [
+            405.62,
+            192.04
+          ],
+          [
+            434.3679245283019,
+            200.00943396226415
+          ]
+        ],
+        "cross_section_y": 196.02,
+        "cross_section_x": [
+          390,
+          470
+        ]
+      }
+    },
+    "13": {
+      "Tato": {
+        "face_cross_section_width": 91,
+        "eye_centres": [
+          [
+            126.28947368421052,
+            182.89473684210526
+          ],
+          [
+            99.73333333333333,
+            192.64444444444445
+          ]
+        ],
+        "cross_section_y": 187.77,
+        "cross_section_x": [
+          50,
+          140
+        ]
+      },
+      "Melody": {
+        "face_cross_section_width": 81,
+        "eye_centres": [
+          [
+            405.2162162162162,
+            196.56756756756758
+          ],
+          [
+            436.95535714285717,
+            203.83035714285714
+          ]
+        ],
+        "cross_section_y": 200.2,
+        "cross_section_x": [
+          387,
+          467
+        ]
+      }
+    },
+    "14": {
+      "Tato": {
+        "face_cross_section_width": 97,
+        "eye_centres": [
+          [
+            134.8095238095238,
+            183.33333333333334
+          ],
+          [
+            102.52173913043478,
+            192.54347826086956
+          ]
+        ],
+        "cross_section_y": 187.94,
+        "cross_section_x": [
+          51,
+          147
+        ]
+      },
+      "Melody": {
+        "face_cross_section_width": 77,
+        "eye_centres": [
+          [
+            405.8279569892473,
+            202.01075268817203
+          ],
+          [
+            435.6181818181818,
+            208.74545454545455
+          ]
+        ],
+        "cross_section_y": 205.38,
+        "cross_section_x": [
+          389,
+          465
+        ]
+      }
+    },
+    "15": {
+      "Tato": {
+        "face_cross_section_width": 100,
+        "eye_centres": [
+          [
+            129.67441860465115,
+            188.1860465116279
+          ],
+          [
+            96.87755102040816,
+            197.20408163265307
+          ]
+        ],
+        "cross_section_y": 192.7,
+        "cross_section_x": [
+          45,
+          144
+        ]
+      },
+      "Melody": {
+        "face_cross_section_width": 87,
+        "eye_centres": [
+          [
+            407.1551724137931,
+            208.8793103448276
+          ],
+          [
+            439.13793103448273,
+            216.6689655172414
+          ]
+        ],
+        "cross_section_y": 212.77,
+        "cross_section_x": [
+          387,
+          473
+        ]
+      }
+    }
+  }
+}

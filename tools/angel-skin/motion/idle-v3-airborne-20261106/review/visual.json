@@ -1,0 +1,53 @@
+{
+  "source_sha256": {
+    "00": "f57112337128d68d9de1942840a3268d8623bcf5955bb24d410eca99ff21214b",
+    "01": "3d7d06fcaf6f4cbf777a231c938200e14eb972468aad2be211a5f39f666d90b7",
+    "02": "ecfef4d3ebbcf954d3e2d9bcc0ec61e497a2590227391431a89945181257193b",
+    "03": "ea54f4fe3b8c91b461c70f33f90cb03dcde6828d40d83fba93637ccf7e0fd708",
+    "04": "86ff97551c4f271174d94ebaf6229b8406a46969365df85ce6042e14fba3018b",
+    "05": "28d9110364a845561326549d04fa673289d3aef81b3ec334743b0e67a5fc4252",
+    "06": "4639d5d9c97b3c973afe34d83f9cfbf9d2ddcb74d7fadc1c89d8cb6741ac1839",
+    "07": "8ee783bdf4e7bedf45a34e5f900de31d8cac2ac943eb37808e4649df47b5710c",
+    "08": "cbd415a4be04375d61fec8d1876d84f26416b1eb52edd006098afc6b6d4b3fe8",
+    "09": "6bf28a01a1e359b70968819bfc6e3b600680267200c6ed1bc2b4b9390e95c5d7",
+    "10": "f5cf54c9367b2d29d851434386c202eef94bc274c40564d87eb49ae852479d41",
+    "11": "556f352452c50bee424138e823b51abc56c9c1bcd1ed3ad528546a0d6033a402",
+    "12": "3f9af34c435231ccef7ea78e96ac2e4265be3b55de394475dcccb9b690608be6",
+    "13": "69d915db36cb48627ad1b25ca1ff536c11683f706ac637aae566d787e930362c",
+    "14": "36a3a57298b21204955c9d858e45c2a310715c6d2bffbf31ba3524cca9b43be3",
+    "15": "9468f827d4e8cbf4420a957150acf9ed6f83794cb1c2b03abe4d86b671f9ff31"
+  },
+  "gif_sha256": "e2a7f14ab13bc57f46a41265bd19a7cd40909da89854f1147f48080dce0147a5",
+  "runtime_size_comparison": {
+    "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v3-airborne-20261106/review/effect-runtime-dark.png",
+    "sha256": "13f52bd110c5547cc3136a4b07e9277fc55e3b4c6654ce2dd3a930a9386123b5"
+  },
+  "checks": {
+    "identity_eyes": {
+      "status": "pass",
+      "finding": "All16 final cells inspected. Tiny relaxed blue-grey iris-filled eyes and almost no pale sclera; joyful closed curves05/12. Tato dot/^eyes only; Melody burgundy rectangles or happy closed curves; positive mouths."
+    },
+    "anatomy_grip": {
+      "status": "pass",
+      "finding": "All16 complete poses inspected. Grounded main two hindfeet;0 has both forepaws grounded,one-up poses show3 ground paws, both-up04/05/06/12 showonly2 hindfeet. Rejected extra-limb04/06/12 redrawn entirely. Star is integral to actual gripping paws. Both companions visibly fly with changing arms/feet/body/ears/ribbon/winglets."
+    },
+    "material_canon": {
+      "status": "pass",
+      "finding": "Complete cream/brown Retto, anatomical ivory shoulder wings, one right-hip brown tail, white Tato bell/no wings and pink Melody bow/winglets match inspected master. Camera resolution uniform, rigid support registration only; original anatomical certification remains unverified."
+    },
+    "secondary_motion": {
+      "status": "unverified",
+      "finding": "Static16-cell light/dark/runtime boards show actual full-drawing feather strokes, forepaw/head/shoulder action, flying pet articulation and ear/tail/bow response. Native/live temporal playback not directly observed."
+    },
+    "legibility": {
+      "status": "pass",
+      "finding": "All16 character-only and completed cells reviewed light/dark and224px width. Physical yellow star stays in gripping paws; separate blue/red flight effects and moon/feathers avoid opaque faces/body. Empty gaps and cell edges transparent."
+    },
+    "loop_return": {
+      "status": "unverified",
+      "finding": "15->00 neighboring poses inspected: Tato holds star at nearly identical position, main raised paw lowers back to support. Effect periodic/frozen-pose/3.2s media checks passed. Direct live loop/native transition observation remains unverified."
+    }
+  },
+  "user_approval": "pending",
+  "native_installed": false
+}

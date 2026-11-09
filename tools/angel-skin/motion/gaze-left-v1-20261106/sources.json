@@ -1,0 +1,546 @@
+[
+  {
+    "id": "00",
+    "path": "character/00.png",
+    "sha256": "bce7986bdc5d08aa329544d0e5d0ad2c4362f393aaa30d09ffa8ee619e33fe8c",
+    "raw_sha256": "1dd7046f653d77512c06ac6a04c0d91d8980b85cbe01e7f283cc9820e1f6f29d",
+    "prompt_sha256": "35db523c8ff7a84db5d585ae932aee36d544d9121c1c181ddc8cc340044f9f65",
+    "independent_complete_drawing": true,
+    "no_head_body_assembly": true,
+    "whole_character_translation": [
+      0,
+      0
+    ],
+    "support_proxy_y": 484,
+    "attachment_proxies": {
+      "star": [
+        91.96,
+        310.71
+      ],
+      "tato_eyes_proxy": [
+        56.91,
+        279.95
+      ],
+      "tato_magic_emitter": [
+        18.91,
+        344.95
+      ],
+      "melody_magic_emitter": [
+        494.96,
+        336.42
+      ]
+    },
+    "anatomical_landmarks": "unverified; support proxy is not original-body certification",
+    "removed_detached_dust_pixels": 0
+  },
+  {
+    "id": "01",
+    "path": "character/01.png",
+    "sha256": "e070ed4edb57065662041b1292335cfa1cc1c066387531bf255bed84ef9581a5",
+    "raw_sha256": "19cbd2ce8ad51f9597230a4a099723ea67286d2bdef3d44e9d582168d0a7211d",
+    "prompt_sha256": "e06e7dcbd77f2222ef748a892520c8054a0fb7decd5b3d88d289e24ba78022b5",
+    "independent_complete_drawing": true,
+    "no_head_body_assembly": true,
+    "whole_character_translation": [
+      0,
+      -2
+    ],
+    "support_proxy_y": 484,
+    "attachment_proxies": {
+      "star": [
+        117.62,
+        292.31
+      ],
+      "tato_eyes_proxy": [
+        92.5,
+        274.24
+      ],
+      "tato_magic_emitter": [
+        54.5,
+        339.24
+      ],
+      "melody_magic_emitter": [
+        503.32,
+        336.13
+      ]
+    },
+    "anatomical_landmarks": "unverified; support proxy is not original-body certification",
+    "removed_detached_dust_pixels": 0
+  },
+  {
+    "id": "02",
+    "path": "character/02.png",
+    "sha256": "ea6c6a7d4565d01e211cc064167e3364d2581b7d7af0c0802e023d97a1d4945f",
+    "raw_sha256": "e0192c79f4cc07edd7aa33d7a549a2a46eeb65c3daa015dcb8be1d627d365f35",
+    "prompt_sha256": "8f7867e2eb2d2e2ab4380cea168e400f0d27586afaf12dd9b8666c57571c2168",
+    "independent_complete_drawing": true,
+    "no_head_body_assembly": true,
+    "whole_character_translation": [
+      0,
+      -2
+    ],
+    "support_proxy_y": 484,
+    "attachment_proxies": {
+      "star": [
+        79.22,
+        300.82
+      ],
+      "tato_eyes_proxy": [
+        48.08,
+        270.11
+      ],
+      "tato_magic_emitter": [
+        10.08,
+        335.11
+      ],
+      "melody_magic_emitter": [
+        501.01,
+        335.46
+      ]
+    },
+    "anatomical_landmarks": "unverified; support proxy is not original-body certification",
+    "removed_detached_dust_pixels": 0
+  },
+  {
+    "id": "03",
+    "path": "character/03.png",
+    "sha256": "086bbfc9a69426ec6c96c841222feaf996f17f548db312649118819e252ddf33",
+    "raw_sha256": "f42b2630372ed193c46365c51af05492308aa6c07629d2be4c44702451652eac",
+    "prompt_sha256": "31cbe4e3483f84f9fe06df5f31c7b4073b4b25de7315d3540a77a767e0a119d1",
+    "independent_complete_drawing": true,
+    "no_head_body_assembly": true,
+    "whole_character_translation": [
+      0,
+      -2
+    ],
+    "support_proxy_y": 484,
+    "attachment_proxies": {
+      "star": [
+        104.26,
+        294.45
+      ],
+      "tato_eyes_proxy": [
+        107.2,
+        256.18
+      ],
+      "tato_magic_emitter": [
+        69.2,
+        321.18
+      ],
+      "melody_magic_emitter": [
+        490.41,
+        331.11
+      ]
+    },
+    "anatomical_landmarks": "unverified; support proxy is not original-body certification",
+    "removed_detached_dust_pixels": 0
+  },
+  {
+    "id": "04",
+    "path": "character/04.png",
+    "sha256": "0447fab329a68c8db22ab6c4a9c162f169a7bafae70a9b7573ff5fc59c64f40b",
+    "raw_sha256": "a4a8ce96872b7e90b6b99f9984f71788f4b0970fb2ac3b06f0e22e85fe48ff5e",
+    "prompt_sha256": "7b0a9925a4b9193cfc93b8e568ed555656fc91d43d4ef2ebcd3acfea3de5b6c3",
+    "independent_complete_drawing": true,
+    "no_head_body_assembly": true,
+    "whole_character_translation": [
+      0,
+      -1
+    ],
+    "support_proxy_y": 484,
+    "attachment_proxies": {
+      "star": [
+        86.62,
+        297.74
+      ],
+      "tato_eyes_proxy": [
+        108.4,
+        257.03
+      ],
+      "tato_magic_emitter": [
+        70.4,
+        322.03
+      ],
+      "melody_magic_emitter": [
+        497.24,
+        330.14
+      ]
+    },
+    "anatomical_landmarks": "unverified; support proxy is not original-body certification",
+    "removed_detached_dust_pixels": 0
+  },
+  {
+    "id": "05",
+    "path": "character/05.png",
+    "sha256": "07cb648c5678b9632061f44b1390219bbfc00b2620394c9bfe49d4690f44d135",
+    "raw_sha256": "aaa858707fe33810d4b1710e4e175a360c66e53d049610fd4f14ba170869fc4c",
+    "prompt_sha256": "a5f3ae012024257732c3e12ab2ab2c8a43655a572b2ecf39384066512cfe44a8",
+    "independent_complete_drawing": true,
+    "no_head_body_assembly": true,
+    "whole_character_translation": [
+      0,
+      -1
+    ],
+    "support_proxy_y": 484,
+    "attachment_proxies": {
+      "star": [
+        134.56,
+        278.07
+      ],
+      "tato_eyes_proxy": [
+        107.49,
+        251.73
+      ],
+      "tato_magic_emitter": [
+        69.49,
+        316.73
+      ],
+      "melody_magic_emitter": [
+        481.58,
+        331.65
+      ]
+    },
+    "anatomical_landmarks": "unverified; support proxy is not original-body certification",
+    "removed_detached_dust_pixels": 0
+  },
+  {
+    "id": "06",
+    "path": "character/06.png",
+    "sha256": "aa5954fee6bbbf040b9926b9d918ab50d3566c155cf9c6a36392c0eda57cf267",
+    "raw_sha256": "6d4f6e362338a4253d1d72931b898a0d272e0d8cf9a3fd185185c22f91b21998",
+    "prompt_sha256": "895224878b47563907b3aa94210f8bf171f15ad098279f0ceacb91457086cf7e",
+    "independent_complete_drawing": true,
+    "no_head_body_assembly": true,
+    "whole_character_translation": [
+      0,
+      -1
+    ],
+    "support_proxy_y": 484,
+    "attachment_proxies": {
+      "star": [
+        108.03,
+        303.23
+      ],
+      "tato_eyes_proxy": [
+        98.03,
+        266.07
+      ],
+      "tato_magic_emitter": [
+        60.03,
+        331.07
+      ],
+      "melody_magic_emitter": [
+        481.67,
+        335.85
+      ]
+    },
+    "anatomical_landmarks": "unverified; support proxy is not original-body certification",
+    "removed_detached_dust_pixels": 0
+  },
+  {
+    "id": "07",
+    "path": "character/07.png",
+    "sha256": "0c0f1052dedfc8a5138eb4f124c16923956f064931208344bd9d0a2bdae0beaa",
+    "raw_sha256": "cbbbec0f158739d7ad2b83cc0b09e938e64c2e6c688e9980ce140b39629beb47",
+    "prompt_sha256": "93ef712ba47e6d33551fef0638f5151260242bdbcf7144b19617da7c2c2e721e",
+    "independent_complete_drawing": true,
+    "no_head_body_assembly": true,
+    "whole_character_translation": [
+      0,
+      -1
+    ],
+    "support_proxy_y": 484,
+    "attachment_proxies": {
+      "star": [
+        93.18,
+        293.96
+      ],
+      "tato_eyes_proxy": [
+        102.27,
+        255.9
+      ],
+      "tato_magic_emitter": [
+        64.27,
+        320.9
+      ],
+      "melody_magic_emitter": [
+        487.82,
+        329.12
+      ]
+    },
+    "anatomical_landmarks": "unverified; support proxy is not original-body certification",
+    "removed_detached_dust_pixels": 0
+  },
+  {
+    "id": "08",
+    "path": "character/08.png",
+    "sha256": "c168efb4ebc4608c8476124a694f0cbc5c09063c7992cb4c006064f872f21432",
+    "raw_sha256": "782a293b94573021b0f0d659c158f61ebe8ddf3f9d0fe78348f515cacaac255f",
+    "prompt_sha256": "7b2d3ec8a50ae0659018bf53b6d9ca604c30bc8d1cc5365bcd4ec4a348167570",
+    "independent_complete_drawing": true,
+    "no_head_body_assembly": true,
+    "whole_character_translation": [
+      0,
+      -2
+    ],
+    "support_proxy_y": 484,
+    "attachment_proxies": {
+      "star": [
+        118.87,
+        295.23
+      ],
+      "tato_eyes_proxy": [
+        119.03,
+        254.59
+      ],
+      "tato_magic_emitter": [
+        81.03,
+        319.59
+      ],
+      "melody_magic_emitter": [
+        492.55,
+        323.76
+      ]
+    },
+    "anatomical_landmarks": "unverified; support proxy is not original-body certification",
+    "removed_detached_dust_pixels": 0
+  },
+  {
+    "id": "09",
+    "path": "character/09.png",
+    "sha256": "1e2ec24861c03f43bd194f681d709a813d1f16d73eed76dc23f50d34f4f001db",
+    "raw_sha256": "26e6d144979966169d4d6744d7a1fa409348843aac5d6b84d4df1e0ca098e101",
+    "prompt_sha256": "02f7f6dfac2aa85eea785c4f51950df760f73313b3c022b39717765b1e63d386",
+    "independent_complete_drawing": true,
+    "no_head_body_assembly": true,
+    "whole_character_translation": [
+      0,
+      -2
+    ],
+    "support_proxy_y": 484,
+    "attachment_proxies": {
+      "star": [
+        120.12,
+        306.52
+      ],
+      "tato_eyes_proxy": [
+        110.61,
+        271.55
+      ],
+      "tato_magic_emitter": [
+        72.61,
+        336.55
+      ],
+      "melody_magic_emitter": [
+        489.28,
+        338.71
+      ]
+    },
+    "anatomical_landmarks": "unverified; support proxy is not original-body certification",
+    "removed_detached_dust_pixels": 0
+  },
+  {
+    "id": "10",
+    "path": "character/10.png",
+    "sha256": "bd92f621eeb44f7ae126b943dc53bce740845dd03e5bc30ebcb3a42bd817322c",
+    "raw_sha256": "a91a46cf1bc6492045f370cac97d3d6632251d8d74db9152c1a1c0ec59ec50b9",
+    "prompt_sha256": "1bc08bd24c6e0ab6f9d48c6b52e1444eedc91b5e9d860086806f30b077cd9bfa",
+    "independent_complete_drawing": true,
+    "no_head_body_assembly": true,
+    "whole_character_translation": [
+      0,
+      -2
+    ],
+    "support_proxy_y": 484,
+    "attachment_proxies": {
+      "star": [
+        107.37,
+        283.29
+      ],
+      "tato_eyes_proxy": [
+        110.86,
+        250.1
+      ],
+      "tato_magic_emitter": [
+        72.86,
+        315.1
+      ],
+      "melody_magic_emitter": [
+        474.01,
+        325.38
+      ]
+    },
+    "anatomical_landmarks": "unverified; support proxy is not original-body certification",
+    "removed_detached_dust_pixels": 0
+  },
+  {
+    "id": "11",
+    "path": "character/11.png",
+    "sha256": "7b2590fbc44c163f0f862a6fc03005af0fb374404090ecdd004ff3562cae76bd",
+    "raw_sha256": "0c9d46f75620938c9962c7ae5fd3921c67774a38c3f69bf3a8c517d71e622d90",
+    "prompt_sha256": "d3de91ff98261fafbf6bca3ae79fdd2a0fa765fb33eafae17560bd9daa9fc609",
+    "independent_complete_drawing": true,
+    "no_head_body_assembly": true,
+    "whole_character_translation": [
+      0,
+      -2
+    ],
+    "support_proxy_y": 484,
+    "attachment_proxies": {
+      "star": [
+        90.19,
+        304.23
+      ],
+      "tato_eyes_proxy": [
+        96.88,
+        274.23
+      ],
+      "tato_magic_emitter": [
+        58.88,
+        339.23
+      ],
+      "melody_magic_emitter": [
+        495.12,
+        336.21
+      ]
+    },
+    "anatomical_landmarks": "unverified; support proxy is not original-body certification",
+    "removed_detached_dust_pixels": 0
+  },
+  {
+    "id": "12",
+    "path": "character/12.png",
+    "sha256": "640a5d2d8400606da640e3101b245d82f04ae5b4b6e3b891e8f2c6585dc5d3c4",
+    "raw_sha256": "aba5431ae7bfcc32f1ed80216b43cd04bdeaf21c3d126cb73a52f5b0fbfbb322",
+    "prompt_sha256": "c0aa1e48e460d04623f131187d6c443edbd6bdad581b6fe41b68f196a3fab6b2",
+    "independent_complete_drawing": true,
+    "no_head_body_assembly": true,
+    "whole_character_translation": [
+      0,
+      -2
+    ],
+    "support_proxy_y": 484,
+    "attachment_proxies": {
+      "star": [
+        90.44,
+        302.38
+      ],
+      "tato_eyes_proxy": [
+        55.05,
+        272.82
+      ],
+      "tato_magic_emitter": [
+        17.05,
+        337.82
+      ],
+      "melody_magic_emitter": [
+        491.44,
+        330.95
+      ]
+    },
+    "anatomical_landmarks": "unverified; support proxy is not original-body certification",
+    "removed_detached_dust_pixels": 0
+  },
+  {
+    "id": "13",
+    "path": "character/13.png",
+    "sha256": "d26430291772847ff40f6afca7074c2699095420128b2cc505724efb8932425f",
+    "raw_sha256": "21d959adec157d8600446862dafeda3ab9599a5fdae15f01f3946b2322aa79c0",
+    "prompt_sha256": "afbae78e841239b8976cdb04635639aa3b8867d059cd64d0d0396ee1c42ad6a3",
+    "independent_complete_drawing": true,
+    "no_head_body_assembly": true,
+    "whole_character_translation": [
+      0,
+      -2
+    ],
+    "support_proxy_y": 484,
+    "attachment_proxies": {
+      "star": [
+        91.67,
+        309.23
+      ],
+      "tato_eyes_proxy": [
+        63.49,
+        278.61
+      ],
+      "tato_magic_emitter": [
+        25.49,
+        343.61
+      ],
+      "melody_magic_emitter": [
+        499.8,
+        335.34
+      ]
+    },
+    "anatomical_landmarks": "unverified; support proxy is not original-body certification",
+    "removed_detached_dust_pixels": 0
+  },
+  {
+    "id": "14",
+    "path": "character/14.png",
+    "sha256": "339df144086f40a356e0396a908c025b57333076375dfe4bba76287dfe766895",
+    "raw_sha256": "d5d7b1ce6d51f3598132f4c7de41d9d94ad448e7fa5ed33511c8c558d1a0f163",
+    "prompt_sha256": "4bf5e1ffc8d6dca44fa6d24e2da8de8430a332578a7e243a74d3dca74b267dff",
+    "independent_complete_drawing": true,
+    "no_head_body_assembly": true,
+    "whole_character_translation": [
+      0,
+      -2
+    ],
+    "support_proxy_y": 484,
+    "attachment_proxies": {
+      "star": [
+        92.81,
+        308.68
+      ],
+      "tato_eyes_proxy": [
+        58.41,
+        278.3
+      ],
+      "tato_magic_emitter": [
+        20.41,
+        343.3
+      ],
+      "melody_magic_emitter": [
+        503.7,
+        336.84
+      ]
+    },
+    "anatomical_landmarks": "unverified; support proxy is not original-body certification",
+    "removed_detached_dust_pixels": 0
+  },
+  {
+    "id": "15",
+    "path": "character/15.png",
+    "sha256": "a5bc1c30b0ae0fcb85c894b04c2e776a03b4a183e821ba8b654ab7a8cc85dd93",
+    "raw_sha256": "ab530f7b6bbf7a41ffe94ee4963420801b77b36f0cab66e0b9b0ccbe10a40e00",
+    "prompt_sha256": "bccce09b8ab6c533cec005ad0acdc796fb3249eff70de88015fa9cc1f90101e0",
+    "independent_complete_drawing": true,
+    "no_head_body_assembly": true,
+    "whole_character_translation": [
+      0,
+      -3
+    ],
+    "support_proxy_y": 484,
+    "attachment_proxies": {
+      "star": [
+        105.61,
+        297.47
+      ],
+      "tato_eyes_proxy": [
+        84.05,
+        273.22
+      ],
+      "tato_magic_emitter": [
+        46.05,
+        338.22
+      ],
+      "melody_magic_emitter": [
+        505.08,
+        334.64
+      ]
+    },
+    "anatomical_landmarks": "unverified; support proxy is not original-body certification",
+    "removed_detached_dust_pixels": 0
+  }
+]

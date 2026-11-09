@@ -1,0 +1,179 @@
+{
+  "state": "waiting",
+  "mode": "effect-repair",
+  "method": "two-pixel boundary alpha antialias and limited white decontamination; SAME complete source drawings",
+  "pose_count": 16,
+  "pose_ms": 200,
+  "effect_sample_ms": 50,
+  "original_files_unchanged": true,
+  "protected_interior_RGB_changed_pixels": 0,
+  "pose_geometry_changed": false,
+  "changes": [
+    {
+      "id": "00",
+      "boundary_alpha_changed_pixels": 21448,
+      "RGB_changed_pixels": 188067,
+      "opaque_interior_RGB_changed_pixels": 0,
+      "max_interior_displacement_px": 0,
+      "source_sha256": "42a1f7733ad78dcee214d2e3e5970fd6a3fcb8692ff36f0c6fb2c1d736e4b73f",
+      "repaired_sha256": "11f1ec7349367708884153b9438a32affb0f89abac298543a59c82c83ae668ea"
+    },
+    {
+      "id": "01",
+      "boundary_alpha_changed_pixels": 18361,
+      "RGB_changed_pixels": 190048,
+      "opaque_interior_RGB_changed_pixels": 0,
+      "max_interior_displacement_px": 0,
+      "source_sha256": "a0eee2e1715b8c8d459f567b434d17a36aa71c4bd37ac0323df9580fefd832fc",
+      "repaired_sha256": "d324219445d326c4cfe7a619e50ba8e407a256eef037009d50b290c4c0392256"
+    },
+    {
+      "id": "02",
+      "boundary_alpha_changed_pixels": 18037,
+      "RGB_changed_pixels": 201305,
+      "opaque_interior_RGB_changed_pixels": 0,
+      "max_interior_displacement_px": 0,
+      "source_sha256": "51e2d98ab38b57b70626ddf43a7858ae47cafbc972e74da0ba8892f9aa2fc1e9",
+      "repaired_sha256": "c603b4d9eba361483742859401c323757223ca9a8133736bb2056ea0d4bbf0ff"
+    },
+    {
+      "id": "03",
+      "boundary_alpha_changed_pixels": 17345,
+      "RGB_changed_pixels": 191449,
+      "opaque_interior_RGB_changed_pixels": 0,
+      "max_interior_displacement_px": 0,
+      "source_sha256": "df49407ded926dbb1622db63c299c3b1cbe65954e143716cd7a6adb0ebc27524",
+      "repaired_sha256": "d33df1df297e01dc0b88b5faee8c78286d90c248e97886ba99fac193646c5eb8"
+    },
+    {
+      "id": "04",
+      "boundary_alpha_changed_pixels": 19162,
+      "RGB_changed_pixels": 187978,
+      "opaque_interior_RGB_changed_pixels": 0,
+      "max_interior_displacement_px": 0,
+      "source_sha256": "a215aae17216dfbf6a60281dbbb802932cdccb230b7f751ad1fe8667f5346459",
+      "repaired_sha256": "2be6c3e0265969325d5fd154a3bbc565b01303f79f62c42c0b804b8c25f140d3"
+    },
+    {
+      "id": "05",
+      "boundary_alpha_changed_pixels": 20579,
+      "RGB_changed_pixels": 188857,
+      "opaque_interior_RGB_changed_pixels": 0,
+      "max_interior_displacement_px": 0,
+      "source_sha256": "e748b4fc11cea955cc730c741b57f17cf13cfb786f28e970de8129582c1df498",
+      "repaired_sha256": "090c1de88ade47e2038319b8d247200695a3f1ab2a5bfc905c1e27884219c4ac"
+    },
+    {
+      "id": "06",
+      "boundary_alpha_changed_pixels": 18784,
+      "RGB_changed_pixels": 188326,
+      "opaque_interior_RGB_changed_pixels": 0,
+      "max_interior_displacement_px": 0,
+      "source_sha256": "79a56f8a94155894fd07212c2406211aea368a4761bc46334b4724dd2eeac3d7",
+      "repaired_sha256": "b7b78e71fc793f294d8871323e0fb80860e78ce4bf0338942925ebfc7b039c29"
+    },
+    {
+      "id": "07",
+      "boundary_alpha_changed_pixels": 20501,
+      "RGB_changed_pixels": 187355,
+      "opaque_interior_RGB_changed_pixels": 0,
+      "max_interior_displacement_px": 0,
+      "source_sha256": "60a9907982add6f0ff96ca10ac3e8f9ef340f2a03d208faaa3e45288e1ecdb50",
+      "repaired_sha256": "a9610ed6e3c252d4da320b0ed6aa0b223d136113a556894d219b9927307dd1ee"
+    },
+    {
+      "id": "08",
+      "boundary_alpha_changed_pixels": 17775,
+      "RGB_changed_pixels": 194888,
+      "opaque_interior_RGB_changed_pixels": 0,
+      "max_interior_displacement_px": 0,
+      "source_sha256": "4f31b9e40453ae2439b0f635c24326181e90950519533f55534853fc52893712",
+      "repaired_sha256": "7e41b9be68433f424258d99760d5e787eeb224e12e31c72569791e44589a1d17"
+    },
+    {
+      "id": "09",
+      "boundary_alpha_changed_pixels": 18726,
+      "RGB_changed_pixels": 190277,
+      "opaque_interior_RGB_changed_pixels": 0,
+      "max_interior_displacement_px": 0,
+      "source_sha256": "0c126862403231df1dc25cbdd74f78583da2b2d925cbf21da8a80308f2207ab9",
+      "repaired_sha256": "e43d96dfb20583f7615e8c8f851522c9da54dfa77877458a76144808e03c9666"
+    },
+    {
+      "id": "10",
+      "boundary_alpha_changed_pixels": 23366,
+      "RGB_changed_pixels": 186338,
+      "opaque_interior_RGB_changed_pixels": 0,
+      "max_interior_displacement_px": 0,
+      "source_sha256": "9bc795459088a06ccb5a8e208efb010caf9a72532c90113875054df9c841c6f6",
+      "repaired_sha256": "cb68b6eaa46603c9cff7db2e3a198b6d2811cd83feed7202e00cb7e76df85018"
+    },
+    {
+      "id": "11",
+      "boundary_alpha_changed_pixels": 22477,
+      "RGB_changed_pixels": 190625,
+      "opaque_interior_RGB_changed_pixels": 0,
+      "max_interior_displacement_px": 0,
+      "source_sha256": "8ef8fa37e45f6743c7eb187479a47b0e0d1f99f53bd303755ca19c854a75df82",
+      "repaired_sha256": "18d0702edb4a3771357a1e859ce3941a1276f3acbde02aa3609195174b25c1cf"
+    },
+    {
+      "id": "12",
+      "boundary_alpha_changed_pixels": 20869,
+      "RGB_changed_pixels": 189236,
+      "opaque_interior_RGB_changed_pixels": 0,
+      "max_interior_displacement_px": 0,
+      "source_sha256": "92bdebeb940ea3009b520037ead50682733d6ac9fe8be414d84395770d2a4550",
+      "repaired_sha256": "73bb41d83e873cbdfbff42c5f1e7814b7578732c8de007cbfb5fc8388d9db88b"
+    },
+    {
+      "id": "13",
+      "boundary_alpha_changed_pixels": 19735,
+      "RGB_changed_pixels": 190594,
+      "opaque_interior_RGB_changed_pixels": 0,
+      "max_interior_displacement_px": 0,
+      "source_sha256": "b98ba89a6786c382727d79ab291c75da75229c9355cc482d249e1995538df5f6",
+      "repaired_sha256": "bef4d30e54c504ca76a3aac82b104ab43cb1fb9514511700389fe7fe50d1e696"
+    },
+    {
+      "id": "14",
+      "boundary_alpha_changed_pixels": 21190,
+      "RGB_changed_pixels": 188629,
+      "opaque_interior_RGB_changed_pixels": 0,
+      "max_interior_displacement_px": 0,
+      "source_sha256": "281ebb5bfa32cb6f39533ef91737232241285bb113b5b4ddb1ed297aff96812a",
+      "repaired_sha256": "19d718438e24971fd3edd3ae23d8d81b623176d5e853841c628b13ff8a6bb8a9"
+    },
+    {
+      "id": "15",
+      "boundary_alpha_changed_pixels": 19071,
+      "RGB_changed_pixels": 188817,
+      "opaque_interior_RGB_changed_pixels": 0,
+      "max_interior_displacement_px": 0,
+      "source_sha256": "17240ed50c401fd3fcaa9f5795377a1cab2561996336e54913b732313baa62b6",
+      "repaired_sha256": "a934206844f334c1b45ad1c1c99ad6b29ebdbab2d6f0d517e110062418d0823e"
+    }
+  ],
+  "media": {
+    "night.webp": {
+      "frames": 64,
+      "cycle_ms": 3200,
+      "border_alpha_max": 0,
+      "sha256": "fff426d2e69d37071a3ecb5104815ae1c8384a4fa270be884ced2332fe3e79d7"
+    },
+    "character.webp": {
+      "frames": 16,
+      "cycle_ms": 3200,
+      "border_alpha_max": 0,
+      "sha256": "53d9e7ef924765b8f39aa3723a0eab07d2a4d383ad1711991be74610c6b28291"
+    },
+    "preview.gif": {
+      "frames": 64,
+      "cycle_ms": 3200,
+      "border_alpha_max": null,
+      "sha256": "4cef37f2415e9ef50f9658019c8177678206ab7a802e29b9550813f355620111"
+    }
+  },
+  "native_installed": false,
+  "original_landmark_registration": "unverified"
+}

@@ -1,0 +1,41 @@
+{
+  "independent_character_drawings": 16,
+  "pose_ms": 200,
+  "effect_ms": 50,
+  "cycle_ms": 3200,
+  "distinct_effect_samples": 64,
+  "periodic_loop": true,
+  "frozen_pose_effect_progression": true,
+  "fresh_tears_paused_on_wiped_side": true,
+  "all4_tear_streams_visible_pixel_sum": {
+    "main_left": 2265,
+    "main_right": 2278,
+    "tato": 1945,
+    "melody": 1456
+  },
+  "character_sources_unchanged": true,
+  "edge_alpha_max": 0,
+  "native_installed": false,
+  "media": {
+    "character.webp": {
+      "frames": 16,
+      "cycle_ms": 3200,
+      "sha256": "15236b68d7117770d4a7115d6c54f9862c147c6f14e200aa4f47ad7a3f1e4b2c"
+    },
+    "character.gif": {
+      "frames": 16,
+      "cycle_ms": 3200,
+      "sha256": "f67aef42ede8f9f5694e1b5d2e207d2bb2dfda37ca51e4328f4b47753c4db349"
+    },
+    "night.webp": {
+      "frames": 64,
+      "cycle_ms": 3200,
+      "sha256": "d62979511d4754ee76ae55dd9849ca062bca3ac4c5a6a05a56d2646ab7e87375"
+    },
+    "failed.gif": {
+      "frames": 64,
+      "cycle_ms": 3200,
+      "sha256": "a5e641c52d74e4d471ebf6ec0f1bdd14302e0cffe5ea7ef11a9506808f0ecc7e"
+    }
+  }
+}

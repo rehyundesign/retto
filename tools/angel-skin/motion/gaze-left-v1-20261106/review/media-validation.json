@@ -1,0 +1,36 @@
+{
+  "independent_complete_trio_drawings": 16,
+  "main_head_neck_body_patches": false,
+  "pose_ms": 200,
+  "effect_ms": 50,
+  "cycle_ms": 3200,
+  "effect_samples": 64,
+  "edge_alpha_max": 0,
+  "opaque_character_and_star_pixels_unchanged_by_FX": true,
+  "periodic_fx_loop": true,
+  "frozen_pose_fx_progression": true,
+  "review_only": true,
+  "native_installed": false,
+  "runtime_GIF_bodyScale": 1.06,
+  "runtime_GIF_canvas": [
+    320,
+    360
+  ],
+  "media": {
+    "character.webp": {
+      "frames": 16,
+      "cycle_ms": 3200,
+      "sha256": "9ff0116c98f37993cbc3ccc0c06f24b053792140127a16002b8b2cdd6aa0c449"
+    },
+    "night.webp": {
+      "frames": 64,
+      "cycle_ms": 3200,
+      "sha256": "c516120cf68cb28c701bf2fd935496851ede7cf2d0ffe7a6ec6835974308fbde"
+    },
+    "gaze-left.gif": {
+      "frames": 64,
+      "cycle_ms": 3200,
+      "sha256": "9c59ada496db70717ae28f60ed3b14373f8df283e26d9b9b4632cb06bf9a0528"
+    }
+  }
+}

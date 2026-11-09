@@ -1,0 +1,41 @@
+{
+  "source_sha256": {
+    "00": "e84a634909cc7f26ca5b59de8fad6a47215ca1797473d534a1c803aa49a1f121",
+    "01": "06b30b704319638c61f3a9755db30e7922ffe864959485c5adca3e839e130d7a",
+    "02": "a281f6d926de2211e43c2e773d5698325c1623c0b38dc847d65425ead1ca7102",
+    "03": "61b38692298de43115f8c71fc21441664e5fba134ef230cad65a5c888879ef4a",
+    "04": "97bb80eb71115145e1c4d2604d007fb625ea90ee50faa7d6ac90433095c4d080",
+    "05": "28d9110364a845561326549d04fa673289d3aef81b3ec334743b0e67a5fc4252",
+    "06": "1544707786af2dff72b90818c7d2547e6dd8df886fa3916e812a839782927109",
+    "07": "5d7bb6c56a7fb62e6ebf7349a0d073a7ee158d18e267fca9484dc664a4db2219",
+    "08": "31cf28e4179725859bcfc7bcd10efd844725949350a436ab911cdc3b116bd9cb",
+    "09": "061499d41bb6df15c0fbe0514ff5dc36975f932954da7a9981732a64084a4a4a",
+    "10": "4f3c697505b0fa49fc4e5098b8c5e6c97e755ba7c3db8b640f05c92fde129fc0",
+    "11": "4fb8cf71f9859266f036f554a671f32d1d55081d848f7a037031f1a7bbb21684",
+    "12": "3f9af34c435231ccef7ea78e96ac2e4265be3b55de394475dcccb9b690608be6",
+    "13": "e91f7206cbac31c8e095025c68a3649719db9dd0fd0d9227225670bb51fb06ae",
+    "14": "c18f50e04ed684d6f2e4fc77ebd826684184238f6a498bf8a64d9320ddf431dc",
+    "15": "b5928e4a0e8193fbe9ab432e4767f393809737efae4b17c828269bedb93eb419"
+  },
+  "gif_sha256": "4f649a85acc6f4b99575203585d8e41038627d7517acad420b2b7b9daa1face3",
+  "runtime_size_comparison": {
+    "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v4-base-eyes-20261106/review/effect-runtime-dark.png",
+    "sha256": "5d952da5b17d83e8be413800360ed4f8c9fbfccd9de838045384dc0f979438e9"
+  },
+  "checks": {
+    "identity_eyes": {
+      "status": "pass",
+      "finding": "All16 cells reviewed;14 open-eye frames restore rounded natural blue-grey eyes using original Retto/face proportions, not pin-sized eyes. No new large white eye rings;05/12 approved smiling closed eyes retained."
+    },
+    "motion_preservation": {
+      "status": "pass",
+      "finding": "Every RGBA pixel outside the two protected eye/eyelid masks and every alpha pixel remains exact. Same16 full-body drawings, star grips, pets, paws, ears, wings, tail,3.2s cadence and original effect inputs/composition."
+    },
+    "original_registration": {
+      "status": "unverified",
+      "finding": "Original eye/face ratios compared using manual image landmarks; full original anatomical profiles and native renderer not certified."
+    }
+  },
+  "user_approval": "pending",
+  "native_installed": false
+}

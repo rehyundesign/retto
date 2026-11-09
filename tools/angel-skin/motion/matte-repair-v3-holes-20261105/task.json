@@ -1,0 +1,16 @@
+{
+  "mode": "effect-repair",
+  "scope": "five existing motions; remove enclosed white-background pockets and faint background noise; no new pose or timing",
+  "states": [
+    "idle",
+    "waiting",
+    "failed",
+    "waving",
+    "jumping"
+  ],
+  "protected": "complete original pose files, interior RGB, eyes, paws, companions, effects and cadence",
+  "method": "RGB-locked neutral-white background-component alpha extraction and alpha-noise floor16; protect maroon-eye white borders",
+  "status": "negative-space matte repair candidate;80 changed cells inspected on light/dark boards; original landmark/native/live playback unverified",
+  "known_inherited_failure": "jumping remains old unfinished draft with02/05/06/12 scale/support defects; no replacement click requested here",
+  "native_installed": false
+}
