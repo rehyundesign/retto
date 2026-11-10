@@ -1,5 +1,7 @@
 # Retto
 
+**[Download Retto 0.11.0 for Apple Silicon Mac](https://github.com/rehyundesign/retto/releases/download/v0.11.0/Retto-0.11.0.dmg)** · [설치 안내 / release notes](docs/0.11.0-release.md)
+
 A desk pet for [Claude Code](https://claude.com/claude-code) and Codex — a macOS overlay cat
 that sits above every Space and full-screen app. It turns green while your agents work, blue
 when one needs your answer, orange when a turn finished and you haven't looked yet, red when
@@ -90,7 +92,7 @@ zip 을 풀어 `Retto.exe` 를 실행하면 연동 확인 창이 뜬다. 거기�
 ## Slack 알림
 
 발바닥 메뉴 **Slack 설정…**에서 DM·내 멘션·선택 채널 알림과 내용 미리보기를 설정한다.
-개인용 Slack 앱의 사용자 토큰과 Socket Mode 앱 토큰이 필요하다. [연결 안내](docs/Slack-연결.md)를 참고한다.
+개인용 Slack 앱의 사용자 토큰과 Socket Mode 앱 토큰이 필요하다. 설정 창 오른쪽 위 **처음 연결하시나요? 연결 안내 ↗**에서 크림색 HTML 안내를 열 수 있다. 설정 JSON 복사, 토큰 발급 위치, 오류별 해결 방법을 제공한다. [연결 안내](docs/Slack-연결.md)도 참고한다.
 
 ## 무엇이 어디에
 
