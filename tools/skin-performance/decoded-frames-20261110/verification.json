@@ -1,0 +1,40 @@
+{
+  "binary_sha256": "1528b982ff8ee27135466d43b8f84e4bff2fcece632d3d617c6b3662949f0e9c",
+  "installed_locally": true,
+  "preserved_resources": 31492,
+  "art_size_and_timing_unchanged": true,
+  "pixel_comparison": {
+    "identical": true,
+    "fixture": "8 states, light/dark, time 0.75s; matched random idle variant"
+  },
+  "source_build_checks": 21,
+  "status_python_checks": 3,
+  "installed_checks": {
+    "--frame-cache-self-test": 0,
+    "--self-test-all-skins": 0,
+    "--angel-self-test": 0,
+    "--angel-interactions-state-test": 0
+  },
+  "codesign_verified": true,
+  "shared_decoded_pixel_budget_bytes": 100663296,
+  "live_samples": {
+    "before": {
+      "cpu_percent": [
+        32.2,
+        32.6
+      ],
+      "physical_footprint_mb": 211.1
+    },
+    "after": {
+      "cpu_percent": [
+        18.5,
+        32.5,
+        29.8,
+        22.0
+      ],
+      "physical_footprint_mb": 254.9
+    },
+    "controlled_comparison": false
+  },
+  "scope": "Angel frame decoding only; unrelated skins, timers and integration polling unchanged"
+}

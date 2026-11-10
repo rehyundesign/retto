@@ -64,6 +64,13 @@ func checkSlackReadSyncIntegration(_ check: (Bool, String) -> Void) {
         let integration = SlackIntegration(session: session,
             loadCredentials: { SlackCredentials(userToken: "xoxp-synthetic-fixture", appToken: "xapp-synthetic-fixture") },
             preferences: SlackPreferences())
+        let callbackLock = NSLock()
+        var callbackOffMain = false
+        let inspectCallback = {
+            if !Thread.isMainThread { callbackLock.lock(); callbackOffMain = true; callbackLock.unlock() }
+        }
+        integration.onChange = inspectCallback
+        integration.onDiagnosticsChange = inspectCallback
         integration.restore()
         check(wait(2, until: { if case .failed = integration.connectionState { return true }; return false }), "\(mode): fixture Socket failure reached")
         integration.accept(event)
@@ -85,6 +92,8 @@ func checkSlackReadSyncIntegration(_ check: (Bool, String) -> Void) {
         let metadata = String(data: try! JSONSerialization.data(withJSONObject: integration.diagnosticsSnapshot), encoding: .utf8)!
         check(!metadata.contains("synthetic read fixture") && !metadata.contains("xoxp-") && !metadata.contains("xapp-"), "\(mode): diagnostics exclude messages and credentials")
         integration.stop(); session.invalidateAndCancel()
+        callbackLock.lock(); let callbacksOnMain = !callbackOffMain; callbackLock.unlock()
+        check(callbacksOnMain, "\(mode): async read and metadata callbacks stay on main thread")
         let methods = SlackReadFixtureProtocol.snapshot().0
         check(methods.contains("conversations.info"), "\(mode): actual read request was made")
         check(Set(methods).isSubset(of: ["auth.test", "apps.connections.open", "users.info", "conversations.info"]), "\(mode): no write API was invoked")

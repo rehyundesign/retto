@@ -418,6 +418,10 @@ struct CodexTranscriptStatus: Codable {
 }
 
 func codexTranscriptStatus(in text: String) -> CodexTranscriptStatus {
+    codexTranscriptStatus(records: text.split(separator: "\n").lazy.compactMap { $0.data(using: .utf8) })
+}
+
+private func codexTranscriptStatus<S: Sequence>(records: S) -> CodexTranscriptStatus where S.Element == Data {
     let fractionalFormatter = ISO8601DateFormatter()
     fractionalFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
     let plainFormatter = ISO8601DateFormatter()
@@ -433,68 +437,69 @@ func codexTranscriptStatus(in text: String) -> CodexTranscriptStatus {
     var latestAbort: Double?
     var activeTurn: String?
     var composerTurns: [String: Double] = [:]
-    for line in text.split(separator: "\n") {
-        guard let data = line.data(using: .utf8),
-              let record = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
-              let payload = record["payload"] as? [String: Any],
-              let timestamp = record["timestamp"] as? String,
-              let date = fractionalFormatter.date(from: timestamp) ?? plainFormatter.date(from: timestamp) else { continue }
-        let timestampMs = date.timeIntervalSince1970 * 1000
-        if record["type"] as? String == "event_msg" {
-            if payload["type"] as? String == "task_started" {
-                let attribution = payload["turn_attribution"] as? [String: Any]
-                activeTurn = attribution?["turn_id"] as? String ?? payload["turn_id"] as? String
-                if attribution?["turn_trigger"] as? String == "composer", let turn = activeTurn {
-                    composerTurns[turn] = max(composerTurns[turn] ?? 0, timestampMs)
+    for data in records {
+        autoreleasepool {
+            guard let record = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+                  let payload = record["payload"] as? [String: Any],
+                  let timestamp = record["timestamp"] as? String,
+                  let date = fractionalFormatter.date(from: timestamp) ?? plainFormatter.date(from: timestamp) else { return }
+            let timestampMs = date.timeIntervalSince1970 * 1000
+            if record["type"] as? String == "event_msg" {
+                if payload["type"] as? String == "task_started" {
+                    let attribution = payload["turn_attribution"] as? [String: Any]
+                    activeTurn = attribution?["turn_id"] as? String ?? payload["turn_id"] as? String
+                    if attribution?["turn_trigger"] as? String == "composer", let turn = activeTurn {
+                        composerTurns[turn] = max(composerTurns[turn] ?? 0, timestampMs)
+                    }
+                }
+                if payload["type"] as? String == "turn_aborted" {
+                    latestAbort = max(latestAbort ?? 0, timestampMs)
+                    if let turn = payload["turn_id"] as? String ?? activeTurn { aborted[turn] = timestampMs }
                 }
             }
-            if payload["type"] as? String == "turn_aborted" {
-                latestAbort = max(latestAbort ?? 0, timestampMs)
-                if let turn = payload["turn_id"] as? String ?? activeTurn { aborted[turn] = timestampMs }
+            if record["type"] as? String == "response_item",
+               ["function_call_output", "custom_tool_call_output"].contains(payload["type"] as? String ?? ""),
+               let callId = payload["call_id"] as? String { outputs[callId] = timestampMs }
+            if record["type"] as? String == "event_msg", payload["type"] as? String == "task_complete" {
+                completion = max(completion ?? 0, timestampMs)
             }
-        }
-        if record["type"] as? String == "response_item",
-           ["function_call_output", "custom_tool_call_output"].contains(payload["type"] as? String ?? ""),
-           let callId = payload["call_id"] as? String { outputs[callId] = timestampMs }
-        if record["type"] as? String == "event_msg", payload["type"] as? String == "task_complete" {
-            completion = max(completion ?? 0, timestampMs)
-        }
-        if record["type"] as? String == "response_item",
-           payload["type"] as? String == "function_call",
-           let name = (payload["name"] as? String)?.split(separator: ".").last,
-           ["request_user_input_async", "request_user_input"].contains(String(name)),
-           let callId = payload["call_id"] as? String,
-           let arguments = payload["arguments"] as? String,
-           let argumentData = arguments.data(using: .utf8),
-           let object = try? JSONSerialization.jsonObject(with: argumentData) as? [String: Any],
-           let questions = object["questions"] as? [Any] {
-            let turn = (payload["internal_chat_message_metadata_passthrough"] as? [String: Any])?["turn_id"] as? String
-                ?? (record["metadata"] as? [String: Any])?["turn_id"] as? String ?? activeTurn
-            for index in questions.indices {
-                let id = "\(callId):\(index)"
-                requests[id] = timestampMs
-                requestTurns[id] = turn
+            if record["type"] as? String == "response_item",
+               payload["type"] as? String == "function_call",
+               let name = (payload["name"] as? String)?.split(separator: ".").last,
+               ["request_user_input_async", "request_user_input"].contains(String(name)),
+               let callId = payload["call_id"] as? String,
+               let arguments = payload["arguments"] as? String,
+               let argumentData = arguments.data(using: .utf8),
+               let object = try? JSONSerialization.jsonObject(with: argumentData) as? [String: Any],
+               let questions = object["questions"] as? [Any] {
+                let turn = (payload["internal_chat_message_metadata_passthrough"] as? [String: Any])?["turn_id"] as? String
+                    ?? (record["metadata"] as? [String: Any])?["turn_id"] as? String ?? activeTurn
+                for index in questions.indices {
+                    let id = "\(callId):\(index)"
+                    requests[id] = timestampMs
+                    requestTurns[id] = turn
+                }
+                if name == "request_user_input" { syncRequests[callId] = timestampMs }
             }
-            if name == "request_user_input" { syncRequests[callId] = timestampMs }
-        }
-        if record["type"] as? String == "response_item",
-           payload["type"] as? String == "message",
-           payload["role"] as? String == "user" {
-            latestPrompt = max(latestPrompt ?? 0, timestampMs)
-            for part in payload["content"] as? [[String: Any]] ?? [] {
-                guard let body = part["text"] as? String,
-                      let start = body.range(of: "<send_user_message_question_reply>"),
-                      let end = body.range(of: "</send_user_message_question_reply>", range: start.upperBound..<body.endIndex),
-                      let data = String(body[start.upperBound..<end.lowerBound]).data(using: .utf8),
-                      let answers = try? JSONSerialization.jsonObject(with: data) as? [[String: Any]] else { continue }
-                for answer in answers {
-                    guard let encoded = answer["questionItemId"] as? String,
-                          let idData = encoded.data(using: .utf8),
-                          let id = try? JSONSerialization.jsonObject(with: idData) as? [Any],
-                          id.count == 3, let name = id[0] as? String,
-                          ["request_user_input_async", "request_user_input"].contains(String(name.split(separator: ".").last ?? "")),
-                          let callId = id[1] as? String, let index = id[2] as? Int else { continue }
-                    replies["\(callId):\(index)"] = timestampMs
+            if record["type"] as? String == "response_item",
+               payload["type"] as? String == "message",
+               payload["role"] as? String == "user" {
+                latestPrompt = max(latestPrompt ?? 0, timestampMs)
+                for part in payload["content"] as? [[String: Any]] ?? [] {
+                    guard let body = part["text"] as? String,
+                          let start = body.range(of: "<send_user_message_question_reply>"),
+                          let end = body.range(of: "</send_user_message_question_reply>", range: start.upperBound..<body.endIndex),
+                          let data = String(body[start.upperBound..<end.lowerBound]).data(using: .utf8),
+                          let answers = try? JSONSerialization.jsonObject(with: data) as? [[String: Any]] else { continue }
+                    for answer in answers {
+                        guard let encoded = answer["questionItemId"] as? String,
+                              let idData = encoded.data(using: .utf8),
+                              let id = try? JSONSerialization.jsonObject(with: idData) as? [Any],
+                              id.count == 3, let name = id[0] as? String,
+                              ["request_user_input_async", "request_user_input"].contains(String(name.split(separator: ".").last ?? "")),
+                              let callId = id[1] as? String, let index = id[2] as? Int else { continue }
+                        replies["\(callId):\(index)"] = timestampMs
+                    }
                 }
             }
         }
@@ -788,7 +793,7 @@ final class CodexLifecycleIndex {
     private let storeURL = FileManager.default.homeDirectoryForCurrentUser
         .appendingPathComponent(".claude/retto-pet/codex-lifecycle-input-v4.json")
     private let stateQueue = DispatchQueue(label: "retto.codex-lifecycle.state")
-    private let scanQueue = DispatchQueue(label: "retto.codex-lifecycle.scan")
+    private let scanQueue = DispatchQueue(label: "retto.codex-lifecycle.scan", qos: .utility, autoreleaseFrequency: .workItem)
     private var entries: [String: Entry]
     private var pending: Set<String> = []
 
@@ -840,8 +845,7 @@ final class CodexLifecycleIndex {
         let overlap: UInt64 = 64 * 1024
         let offset = (previousSize ?? 0) > overlap ? (previousSize ?? 0) - overlap : 0
         if offset > 0 { try? handle.seek(toOffset: offset) }
-        guard let data = try? handle.readToEnd() else { return previous }
-        return previous.merged(with: codexTranscriptStatus(in: codexTranscriptText(data, skipPartialFirstLine: offset > 0)))
+        return previous.merged(with: codexTranscriptStatus(from: handle, skippingFirstLine: offset > 0))
     }
 
     private func save() {
@@ -1020,4 +1024,40 @@ func codexTranscriptText(_ data: Data, skipPartialFirstLine: Bool) -> String {
         return String(decoding: data[data.index(after: newline)...], as: UTF8.self)
     }
     return String(decoding: data, as: UTF8.self)
+}
+
+/// Preserve parser state across records while reading large rollouts one JSONL record at a time.
+func codexTranscriptStatus(from handle: FileHandle, skippingFirstLine: Bool = false) -> CodexTranscriptStatus {
+    let records = CodexTranscriptRecords(handle: handle)
+    if skippingFirstLine { _ = records.next() }
+    let status = codexTranscriptStatus(records: records)
+    return records.readFailed ? CodexTranscriptStatus(completedAtMs: nil, latestPromptAtMs: nil) : status
+}
+
+private final class CodexTranscriptRecords: Sequence, IteratorProtocol {
+    private let handle: FileHandle
+    private var chunk = Data()
+    private var position = 0
+    private var eof = false
+    private(set) var readFailed = false
+    init(handle: FileHandle) { self.handle = handle }
+    func next() -> Data? {
+        var record = Data()
+        while true {
+            if position < chunk.count {
+                if let newline = chunk[position...].firstIndex(of: 10) {
+                    record.append(chunk[position..<newline]); position = newline + 1
+                    return record
+                }
+                record.append(chunk[position...]); position = chunk.count
+            }
+            if eof { return record.isEmpty ? nil : record }
+            do {
+                chunk = try autoreleasepool { try handle.read(upToCount: 64 * 1024) ?? Data() }
+            } catch {
+                readFailed = true; eof = true; return nil
+            }
+            position = 0; eof = chunk.isEmpty
+        }
+    }
 }

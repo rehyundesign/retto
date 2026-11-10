@@ -13,7 +13,7 @@ import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
 VERSION = '0.11.1'
-CHECKS = ['--self-test', '--self-test-all-skins', '--self-test-slack', '--self-test-codex-input',
+CHECKS = ['--transcript-stream-self-test', '--frame-cache-self-test', '--self-test', '--self-test-all-skins', '--self-test-slack', '--self-test-codex-input',
           '--self-test-status-rendering', '--amu-approved-self-test', '--amu-approved-state-test',
           '--amu-random-state-test', '--hachuping-self-test', '--hachuping-state-self-test',
           '--hana-self-test', '--hana-ground-self-test', '--hana-gaze-self-test',
