@@ -229,6 +229,17 @@ final class TaskStatusDiagnostics {
         records = Array(records.suffix(256))
         persist()
     }
+    /// Bounded metadata only: no Slack text, credentials, headers or API bodies.
+    func recordSlack(_ snapshot: [String: Any]) {
+        guard !stopped,
+              let data = try? JSONSerialization.data(withJSONObject: snapshot, options: [.sortedKeys]) else { return }
+        let target = url.deletingLastPathComponent().appendingPathComponent("slack-current.json")
+        queue.async {
+            try? FileManager.default.createDirectory(at: target.deletingLastPathComponent(), withIntermediateDirectories: true)
+            try? data.write(to: target, options: .atomic)
+            try? FileManager.default.setAttributes([.posixPermissions: 0o600], ofItemAtPath: target.path)
+        }
+    }
     private func persist() {
         let snapshots = [(url, records), (currentURL, Array(currentRecords.values))]
         queue.async {
