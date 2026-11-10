@@ -17738,196 +17738,196 @@
       "sha256": "ffc6f6cb2df69699a9397a631062b8cb881397f54bfe88d279566e3efcce22c1"
     },
     "AngelFrames/jumping/000.png": {
-      "source": "assets/runtime/AngelFrames/jumping/000.png",
-      "sha256": "f97193d5aab49afe02ceefabceb2938e891209742a468bc509d34485b1de68bd"
+      "source": "assets/runtime-release-20261110/AngelFrames/jumping/000.png",
+      "sha256": "4be179d9ecb7efb6d4671335191786e7060728c14f1532576ad4044c56679dd7"
     },
     "AngelFrames/jumping/001.png": {
-      "source": "assets/runtime/AngelFrames/jumping/001.png",
-      "sha256": "f7a6cac30b4c5bbca9f4fc7171d281b17d06d852fd0fc3d62b57c3728a1532e5"
+      "source": "assets/runtime-release-20261110/AngelFrames/jumping/001.png",
+      "sha256": "b26912d73754474c350e3bb2c2610259daec1f7cec48b7f61c347ba16ee0b805"
     },
     "AngelFrames/jumping/002.png": {
-      "source": "assets/runtime/AngelFrames/jumping/002.png",
-      "sha256": "deb33e3c14fc7f92848a52d4b27932119cc37d0f6bd01c99c1187e5abb8e0c65"
+      "source": "assets/runtime-release-20261110/AngelFrames/jumping/002.png",
+      "sha256": "416071c34caa1800d4b6725e6eb3d48fe0ce59ba8c763d7f1b29d892bc1bc5c7"
     },
     "AngelFrames/jumping/003.png": {
-      "source": "assets/runtime/AngelFrames/jumping/003.png",
-      "sha256": "e8000236cf6b377bf3ac9b67377287c75e76ab06c970c247f535c8a99c6babf0"
+      "source": "assets/runtime-release-20261110/AngelFrames/jumping/003.png",
+      "sha256": "01a5aac62c8b2f2265b104fef10ccbbd027c3787d4a904bd0aab6142d59aebba"
     },
     "AngelFrames/jumping/004.png": {
-      "source": "assets/runtime/AngelFrames/jumping/004.png",
-      "sha256": "7075b33072930944acfd7f8551adb3d35cd3185cdca14cea8097e09acb1da6ba"
+      "source": "assets/runtime-release-20261110/AngelFrames/jumping/004.png",
+      "sha256": "504c619ad2f37e6259fbc3ef150150fdf4f47e1c2464f98744dfceb76df429d8"
     },
     "AngelFrames/jumping/005.png": {
-      "source": "assets/runtime/AngelFrames/jumping/005.png",
-      "sha256": "894dc5936b2e0fe630dfc1e9ff5414b75462f5012ad4f1cb51aed08cb68b8d63"
+      "source": "assets/runtime-release-20261110/AngelFrames/jumping/005.png",
+      "sha256": "fa230400559e3bd50db49d3f12b4cfe50e47c6c8164fafea6250079abedac2a0"
     },
     "AngelFrames/jumping/006.png": {
-      "source": "assets/runtime/AngelFrames/jumping/006.png",
-      "sha256": "654efe1b0c5e63e89e8b22fa13035a44b7165ccd7f0e5335ca67e019bbb97516"
+      "source": "assets/runtime-release-20261110/AngelFrames/jumping/006.png",
+      "sha256": "65225aac7e148e22120230ff71f25b826a802fe31569b670c2c89e5a4fe79c40"
     },
     "AngelFrames/jumping/007.png": {
-      "source": "assets/runtime/AngelFrames/jumping/007.png",
-      "sha256": "1a149218f6afe04b66c4e96e4fdfbbc3d6bdc4cd06dd5a5a766d9485ecc1604f"
+      "source": "assets/runtime-release-20261110/AngelFrames/jumping/007.png",
+      "sha256": "b06a174c07bb454d41597eb8a6520b8956eed1be00330de7fd913219fe6b7e70"
     },
     "AngelFrames/jumping/008.png": {
-      "source": "assets/runtime/AngelFrames/jumping/008.png",
-      "sha256": "8ddde00828211c53ac298e2664aba325ace5bf6698f3fefa82f2402130dcf3a3"
+      "source": "assets/runtime-release-20261110/AngelFrames/jumping/008.png",
+      "sha256": "90ac41524624641f1fd08a731b279974e249de46aac0cb46627f2ce336e3f19c"
     },
     "AngelFrames/jumping/009.png": {
-      "source": "assets/runtime/AngelFrames/jumping/009.png",
-      "sha256": "ecd894fed963ba066af03aa21e71be182ad9e4793d64fd257de0801111b1111a"
+      "source": "assets/runtime-release-20261110/AngelFrames/jumping/009.png",
+      "sha256": "108788bdd37d3dfce960ca1fff2d49c9716fb1f758da38e9f89c5f4fa6d02470"
     },
     "AngelFrames/jumping/010.png": {
-      "source": "assets/runtime/AngelFrames/jumping/010.png",
-      "sha256": "1d776b70d1712b8062b6a68298f84ca2409079ed3365981dd58c498936780560"
+      "source": "assets/runtime-release-20261110/AngelFrames/jumping/010.png",
+      "sha256": "c9cf6e0e7109485a55d27268457d4e6c0ccb62939ed504df50ceff66deb80151"
     },
     "AngelFrames/jumping/011.png": {
-      "source": "assets/runtime/AngelFrames/jumping/011.png",
-      "sha256": "09bf500c9502ad339aa4c130aa5e14bdeaab24074602801e7a172aab1e821015"
+      "source": "assets/runtime-release-20261110/AngelFrames/jumping/011.png",
+      "sha256": "49afb0645e27ede86f9d417c13e00d361b5a00fb3edb3ba791c6e97c578c1207"
     },
     "AngelFrames/jumping/012.png": {
-      "source": "assets/runtime/AngelFrames/jumping/012.png",
-      "sha256": "32110facea1450c3a7f7d9dd32edadc9ebee96a4016a92b08a7e18377bbcaab3"
+      "source": "assets/runtime-release-20261110/AngelFrames/jumping/012.png",
+      "sha256": "efcaa3d4fdd5ea49fbd158e220196b80fb97f37f7c3811d889c23dc2cdf443e1"
     },
     "AngelFrames/jumping/013.png": {
-      "source": "assets/runtime/AngelFrames/jumping/013.png",
-      "sha256": "151dc811ef84cbfb6c461963d38c23e6c005e13d74cf9c961a25fb223e365dce"
+      "source": "assets/runtime-release-20261110/AngelFrames/jumping/013.png",
+      "sha256": "7534b050848c0fbcc7d2313ae206ead7571e9203aa6837f595e5128ad5aa1908"
     },
     "AngelFrames/jumping/014.png": {
-      "source": "assets/runtime/AngelFrames/jumping/014.png",
-      "sha256": "9dd83fd02f986620b75af5bf789414014356029103c56a02edc2cb390e48ef55"
+      "source": "assets/runtime-release-20261110/AngelFrames/jumping/014.png",
+      "sha256": "fc1e4dc65955dbeded2fd0dc5389167f7e93f3b41494931f24882886e9067b18"
     },
     "AngelFrames/jumping/015.png": {
-      "source": "assets/runtime/AngelFrames/jumping/015.png",
-      "sha256": "8d5a0ff960c3e3ccf7ddb40ccbd11ced27bca7e92f13a2513fceb7ba9c92e211"
+      "source": "assets/runtime-release-20261110/AngelFrames/jumping/015.png",
+      "sha256": "b1b9715e2d9e5ceac5475e8250fb0f60a2617426c9f45dd0fc5315d9ef486563"
     },
     "AngelFrames/jumping/016.png": {
-      "source": "assets/runtime/AngelFrames/jumping/016.png",
-      "sha256": "ab3536fd79d2eafb99ab479da8f9117eb95ea76ea5227e14186c81af5a0d6972"
+      "source": "assets/runtime-release-20261110/AngelFrames/jumping/016.png",
+      "sha256": "0ffb3ffca44df05b10a602208881ab432d01082ff1d454dd7d6a145d175192b7"
     },
     "AngelFrames/jumping/017.png": {
-      "source": "assets/runtime/AngelFrames/jumping/017.png",
-      "sha256": "2b725db7b95bbb2f9607ccaddd577b6ba27f813f3a3c75255d4bc5138e90e04f"
+      "source": "assets/runtime-release-20261110/AngelFrames/jumping/017.png",
+      "sha256": "37212d67c24dd9cf3917f0c093b923f838e344b00a3762b01c5b4f62d1d299f8"
     },
     "AngelFrames/jumping/018.png": {
-      "source": "assets/runtime/AngelFrames/jumping/018.png",
-      "sha256": "6d22aeaa34c390d7e1c5d612767bf500304cb0ce959add629ba954cf7019936d"
+      "source": "assets/runtime-release-20261110/AngelFrames/jumping/018.png",
+      "sha256": "bcea39d4556c692d8e37f9c2664a2fc863325eab8e93cf19945159b32a3c4644"
     },
     "AngelFrames/jumping/019.png": {
-      "source": "assets/runtime/AngelFrames/jumping/019.png",
-      "sha256": "c37fc5f047a4335a7a824586e67206d27d492978dd0ee1444d093c3e90cc8816"
+      "source": "assets/runtime-release-20261110/AngelFrames/jumping/019.png",
+      "sha256": "6e23e10892361b6c72690003ba7337c5096b5e12e8379eaded69bc7befa1f9bc"
     },
     "AngelFrames/jumping/020.png": {
-      "source": "assets/runtime/AngelFrames/jumping/020.png",
-      "sha256": "b87877e3aa0a28aec5196abb7a1430cb0f83c1c00b8ec83f05da791c108544fc"
+      "source": "assets/runtime-release-20261110/AngelFrames/jumping/020.png",
+      "sha256": "e4cee4210cf8d0e122339d2bb216af213da0c4be3b8cb1053b0b7fec9c97f424"
     },
     "AngelFrames/jumping/021.png": {
-      "source": "assets/runtime/AngelFrames/jumping/021.png",
-      "sha256": "787bdcb97be70ff1a2e0656922eb77c3109f0988c434f266b1ce92d599769e28"
+      "source": "assets/runtime-release-20261110/AngelFrames/jumping/021.png",
+      "sha256": "ab68c4392c3fc4d1d82cd9ed7347db7781cec8b892135292b3f812e777a3851f"
     },
     "AngelFrames/jumping/022.png": {
-      "source": "assets/runtime/AngelFrames/jumping/022.png",
-      "sha256": "5785b2e559b8f9bbdd4db946230682cfd7ce10fc883f7c3ab6b1dba542c36d83"
+      "source": "assets/runtime-release-20261110/AngelFrames/jumping/022.png",
+      "sha256": "2fd8ce0461987e4dafb1279843a4c54abfb94b551798303f979863457e0fbac6"
     },
     "AngelFrames/jumping/023.png": {
-      "source": "assets/runtime/AngelFrames/jumping/023.png",
-      "sha256": "ad1f3be47a00527331ba5e897767ec5c62d544359a387a8573835998c1569510"
+      "source": "assets/runtime-release-20261110/AngelFrames/jumping/023.png",
+      "sha256": "5cd774cf2304129fe46185390ce2e5e2d9c1bf13ba1a233e0578c1b126eaf726"
     },
     "AngelFrames/jumping/024.png": {
-      "source": "assets/runtime/AngelFrames/jumping/024.png",
-      "sha256": "3b90ea02eb3da992fe2e8cc078a4f416baea94e0bd60799b9607916199a36c09"
+      "source": "assets/runtime-release-20261110/AngelFrames/jumping/024.png",
+      "sha256": "dc473e354b747fd7f9bfd13702e0b75ed74bc7ce95877135390590783ad19ce0"
     },
     "AngelFrames/jumping/025.png": {
-      "source": "assets/runtime/AngelFrames/jumping/025.png",
-      "sha256": "3d00677c6dc069d20c7c8c7d97cef87b5c1883ab9a6c485347576838cf712805"
+      "source": "assets/runtime-release-20261110/AngelFrames/jumping/025.png",
+      "sha256": "cb1bb36a8676b48dbc636ad11f89a62015eaf8bba5a5de34561d3781a78b6a79"
     },
     "AngelFrames/jumping/026.png": {
-      "source": "assets/runtime/AngelFrames/jumping/026.png",
-      "sha256": "ef35bf5d23e7946f68b2d4fd110b172ae8d11dae2b2e71a61c779638c907c292"
+      "source": "assets/runtime-release-20261110/AngelFrames/jumping/026.png",
+      "sha256": "8576b4452e56ea451120188eec4b616b97a9542cf8cc6426bdc8b2b0cb3f7c08"
     },
     "AngelFrames/jumping/027.png": {
-      "source": "assets/runtime/AngelFrames/jumping/027.png",
-      "sha256": "886f74e3f18662a0d91339b3b6fdbaa8be454f157050bb1eb444c1341edfae10"
+      "source": "assets/runtime-release-20261110/AngelFrames/jumping/027.png",
+      "sha256": "69a533b591277acf31c3e07302e3e7467b4b6c15bfb3c2bf59eaefb51b5f506d"
     },
     "AngelFrames/jumping/028.png": {
-      "source": "assets/runtime/AngelFrames/jumping/028.png",
-      "sha256": "c385e28f049c17e346b77c176869bed6fa023d66ba9c227d95f26297dcc3c718"
+      "source": "assets/runtime-release-20261110/AngelFrames/jumping/028.png",
+      "sha256": "c374cc166846bd3f919f95c6e1006821a929c05e80dadeb598b79f58199fcf95"
     },
     "AngelFrames/jumping/029.png": {
-      "source": "assets/runtime/AngelFrames/jumping/029.png",
-      "sha256": "0a903bdb3a7c5757936c964c88925ae1806c68c5801ab4bfdd648c3e0e47b4f4"
+      "source": "assets/runtime-release-20261110/AngelFrames/jumping/029.png",
+      "sha256": "2124e461be88cfb4b5a0a0683d20f2d3e4e802b6f722c870b4ea918b794ae1ce"
     },
     "AngelFrames/jumping/030.png": {
-      "source": "assets/runtime/AngelFrames/jumping/030.png",
-      "sha256": "0a8881c226360a89487266952f534c3c860d0a3ea3dbde0fc875d8b5e0ea2b0b"
+      "source": "assets/runtime-release-20261110/AngelFrames/jumping/030.png",
+      "sha256": "8bc0048c19af92751d7293476682bb6435dabad97cf85bcaf87b7a2a1f2fe5c6"
     },
     "AngelFrames/jumping/031.png": {
-      "source": "assets/runtime/AngelFrames/jumping/031.png",
-      "sha256": "8377adb5f419888f62d4d353a47158f823886b26f5b4ab21be24bcd1b5980c45"
+      "source": "assets/runtime-release-20261110/AngelFrames/jumping/031.png",
+      "sha256": "c65a4427b3fbe9c0e62de4af23829841ec88a763a8837e70b19302a2246fe6bb"
     },
     "AngelFrames/jumping/032.png": {
-      "source": "assets/runtime/AngelFrames/jumping/032.png",
-      "sha256": "9c5e776873eb83682ae6665818a754d6c9bf18fd1f8bd3bb7b096e1cd21baab7"
+      "source": "assets/runtime-release-20261110/AngelFrames/jumping/032.png",
+      "sha256": "9c14313d413916087bfd0785bb9c2d469d71ede237384c0b8b8eac8baf080923"
     },
     "AngelFrames/jumping/033.png": {
-      "source": "assets/runtime/AngelFrames/jumping/033.png",
-      "sha256": "dcc68d9846c75cf0cafbf77bdba9d962689939c5842b3090008ced8d88833e90"
+      "source": "assets/runtime-release-20261110/AngelFrames/jumping/033.png",
+      "sha256": "cc799ba9633600e611e4e292f2ab0e10ac914368ed235f9dbae3ca4a3c871ee7"
     },
     "AngelFrames/jumping/034.png": {
-      "source": "assets/runtime/AngelFrames/jumping/034.png",
-      "sha256": "135969adff2768030364fbe28361c26dfd9953288e877d3d7084461154df1ba5"
+      "source": "assets/runtime-release-20261110/AngelFrames/jumping/034.png",
+      "sha256": "6625ad9ace607af1fe6f2963af2abfaeb54dbd1311c49ee5849f7427412fdb4e"
     },
     "AngelFrames/jumping/035.png": {
-      "source": "assets/runtime/AngelFrames/jumping/035.png",
-      "sha256": "7c41ad6e5f0f4bcd74311634897f5b78c136ce2fae2bef64559292f73b3ab9aa"
+      "source": "assets/runtime-release-20261110/AngelFrames/jumping/035.png",
+      "sha256": "2c5a716680543b0aabb77272e2d012848b6a8a7956e73645948973e46ae18d28"
     },
     "AngelFrames/jumping/036.png": {
-      "source": "assets/runtime/AngelFrames/jumping/036.png",
-      "sha256": "ed6d0cb7eb2f9725259f9841142cbfc27d413a518bf75e1c699dd666f03044c4"
+      "source": "assets/runtime-release-20261110/AngelFrames/jumping/036.png",
+      "sha256": "352407f3d1987aa1fc8684de497ddd07b6cd81624a34aebcd984598114ef23d6"
     },
     "AngelFrames/jumping/037.png": {
-      "source": "assets/runtime/AngelFrames/jumping/037.png",
-      "sha256": "25858a5e20c7faf813e80047e5e2603221f73ce938f0f48370d438a2871c1f56"
+      "source": "assets/runtime-release-20261110/AngelFrames/jumping/037.png",
+      "sha256": "6140b0ef8c7cafc0df8c35924d028df36bba84d0d81510ffffd70c17e15d9cab"
     },
     "AngelFrames/jumping/038.png": {
-      "source": "assets/runtime/AngelFrames/jumping/038.png",
-      "sha256": "9a431cff5fd76a75a2541fd8ebe9d710702f236aece14d0654425c2f93ca9f54"
+      "source": "assets/runtime-release-20261110/AngelFrames/jumping/038.png",
+      "sha256": "af5aeb96d5f83096f0d7eab72fee86a638539d16d78fa04af97cf4852453db84"
     },
     "AngelFrames/jumping/039.png": {
-      "source": "assets/runtime/AngelFrames/jumping/039.png",
-      "sha256": "01b91fd81f7a7cbac0b8ca53aef0d6e0c77877dc54fc9cae697a2cd5eb2f7bf0"
+      "source": "assets/runtime-release-20261110/AngelFrames/jumping/039.png",
+      "sha256": "351106919587cef14bc3badba3f4a31cb6bc4f105c86efd414cf14795cfee1af"
     },
     "AngelFrames/jumping/040.png": {
-      "source": "assets/runtime/AngelFrames/jumping/040.png",
-      "sha256": "35c34bbc5da1d6f44b103ed4be08fdccbdd9525287de5ef50676cf5713e18c36"
+      "source": "assets/runtime-release-20261110/AngelFrames/jumping/040.png",
+      "sha256": "29ff95a516f279f98bc92da9b1d76ceeb9acc3dfd7eb66ea0de316643f3add1e"
     },
     "AngelFrames/jumping/041.png": {
-      "source": "assets/runtime/AngelFrames/jumping/041.png",
-      "sha256": "9dbeaae120d17e776fac02cb31a4f82bc855e456a95c55005ea605b8ca8d88b5"
+      "source": "assets/runtime-release-20261110/AngelFrames/jumping/041.png",
+      "sha256": "6cdbacb43bee99144d45e3ed2285a182233789be6b9346ee9f317cd56014c4da"
     },
     "AngelFrames/jumping/042.png": {
-      "source": "assets/runtime/AngelFrames/jumping/042.png",
-      "sha256": "1bccd599cbe30b3d3f334f56c803a152e911325255fa637bb4845a4a047738a4"
+      "source": "assets/runtime-release-20261110/AngelFrames/jumping/042.png",
+      "sha256": "bb2bdccd89994069a816de5c4fbb59d2c0976fa16320aa75aa3b8ede357c72f9"
     },
     "AngelFrames/jumping/043.png": {
-      "source": "assets/runtime/AngelFrames/jumping/043.png",
-      "sha256": "3e9d5ad31a47c5643b0214673abf4c97e26dd3479bfb3bcbbb1ae646b0be3dee"
+      "source": "assets/runtime-release-20261110/AngelFrames/jumping/043.png",
+      "sha256": "7c409ed30e1818ebfdd8044c4c00ad3f4fbe24bf39aae7018f27932947a6abd0"
     },
     "AngelFrames/jumping/044.png": {
-      "source": "assets/runtime/AngelFrames/jumping/044.png",
-      "sha256": "483b4fa27c3e61f0d6e381f9b479c53e0f59b4812dfd69be741ec38ac028cade"
+      "source": "assets/runtime-release-20261110/AngelFrames/jumping/044.png",
+      "sha256": "6a38b76b31e382b3104173e7e1b8b54ac84560234a55c6e1cbd2779e0af8a169"
     },
     "AngelFrames/jumping/045.png": {
-      "source": "assets/runtime/AngelFrames/jumping/045.png",
-      "sha256": "48151f00aa6dfe39912f27e9bf58a0c9032ab32da9c9eab0775d3a21a41d30a5"
+      "source": "assets/runtime-release-20261110/AngelFrames/jumping/045.png",
+      "sha256": "53d98f7d40ccb8452223750a6a6220bba945cb83fa1619f65eced99bde40d976"
     },
     "AngelFrames/jumping/046.png": {
-      "source": "assets/runtime/AngelFrames/jumping/046.png",
-      "sha256": "941c945341aaf1cf2fb8e3f6090b56c04c91f2679d1b67342c916b6a189e8fb2"
+      "source": "assets/runtime-release-20261110/AngelFrames/jumping/046.png",
+      "sha256": "6dcdd2842c4c844caa79b829551518bfd15e07e38ce37c2617ac9e271b351edd"
     },
     "AngelFrames/jumping/047.png": {
-      "source": "assets/runtime/AngelFrames/jumping/047.png",
-      "sha256": "4f33492d72fb4316a0313c7d64ec1d79ab091e62388ac1d04d4374624001ec33"
+      "source": "assets/runtime-release-20261110/AngelFrames/jumping/047.png",
+      "sha256": "ed447880d8b3a0c713c1ca254b0c8ec5786418fc9f564a165fa57088fd454a90"
     },
     "AngelFrames/manifest.json": {
       "source": "tools/angel-skin/native-v1-20261106/manifest.json",
