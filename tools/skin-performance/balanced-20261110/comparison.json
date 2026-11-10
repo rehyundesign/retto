@@ -1,0 +1,144 @@
+{
+  "frames": {
+    "runs": {
+      "before": [
+        {
+          "result": {
+            "frames": 512,
+            "seconds": 0.9735676666605286,
+            "cpuSeconds": 0.859809
+          },
+          "maximum resident set size": 102514688,
+          "peak memory footprint": 80200376
+        },
+        {
+          "result": {
+            "frames": 512,
+            "seconds": 0.8764315000153147,
+            "cpuSeconds": 0.85581
+          },
+          "maximum resident set size": 117374976,
+          "peak memory footprint": 80446136
+        },
+        {
+          "result": {
+            "frames": 512,
+            "seconds": 0.9039204166620038,
+            "cpuSeconds": 0.878054
+          },
+          "maximum resident set size": 102514688,
+          "peak memory footprint": 80446136
+        }
+      ],
+      "after": [
+        {
+          "result": {
+            "frames": 512,
+            "seconds": 1.1281110833515413,
+            "cpuSeconds": 1.03255
+          },
+          "maximum resident set size": 89686016,
+          "peak memory footprint": 48054944
+        },
+        {
+          "result": {
+            "frames": 512,
+            "seconds": 1.0339130416687112,
+            "cpuSeconds": 1.010528
+          },
+          "maximum resident set size": 105398272,
+          "peak memory footprint": 48120480
+        },
+        {
+          "result": {
+            "frames": 512,
+            "seconds": 1.0645113333303016,
+            "cpuSeconds": 1.024495
+          },
+          "maximum resident set size": 104316928,
+          "peak memory footprint": 48104096
+        }
+      ]
+    },
+    "medians": {
+      "before": {
+        "cpu_seconds": 0.859809,
+        "max_rss_bytes": 102514688,
+        "peak_footprint_bytes": 80446136
+      },
+      "after": {
+        "cpu_seconds": 1.024495,
+        "max_rss_bytes": 104316928,
+        "peak_footprint_bytes": 48104096
+      }
+    }
+  },
+  "transcript": {
+    "runs": {
+      "before": [
+        {
+          "result": {
+            "cpuSeconds": 1.425443,
+            "completed": true
+          },
+          "maximum resident set size": 216612864,
+          "peak memory footprint": 207864456
+        },
+        {
+          "result": {
+            "cpuSeconds": 1.433328,
+            "completed": true
+          },
+          "maximum resident set size": 216662016,
+          "peak memory footprint": 207897200
+        },
+        {
+          "result": {
+            "cpuSeconds": 1.404494,
+            "completed": true
+          },
+          "maximum resident set size": 216678400,
+          "peak memory footprint": 207929992
+        }
+      ],
+      "after": [
+        {
+          "result": {
+            "cpuSeconds": 0.875926,
+            "completed": true
+          },
+          "maximum resident set size": 13172736,
+          "peak memory footprint": 4276728
+        },
+        {
+          "result": {
+            "cpuSeconds": 0.836686,
+            "completed": true
+          },
+          "maximum resident set size": 12877824,
+          "peak memory footprint": 3981816
+        },
+        {
+          "result": {
+            "cpuSeconds": 0.86111,
+            "completed": true
+          },
+          "maximum resident set size": 13172736,
+          "peak memory footprint": 4276728
+        }
+      ]
+    },
+    "medians": {
+      "before": {
+        "cpu_seconds": 1.425443,
+        "max_rss_bytes": 216662016,
+        "peak_footprint_bytes": 207897200
+      },
+      "after": {
+        "cpu_seconds": 0.86111,
+        "max_rss_bytes": 13172736,
+        "peak_footprint_bytes": 4276728
+      }
+    }
+  }
+}
