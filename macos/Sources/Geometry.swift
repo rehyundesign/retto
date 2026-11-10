@@ -56,33 +56,46 @@ enum DragRun {
 /// 스킨마다 칸 규격(224x320, 8x12)은 같아야 한다 — 그리는 자리 계산이 공용이다.
 enum PetSkin: String, CaseIterable {
     case classic
+    case howl
     case chocolatHeart
     case angelWings
     case bee
     case bunny
     case rilakkuma
     case rilakkumaCape
-    case magicalHeart
     case christmas
     case hana
     case amuRan
     case pichiPitch
     case jeanne
+    case hachupingping
+
+    static let selectableCases: [PetSkin] = [
+        .classic, .rilakkuma, .bee, .bunny, .rilakkumaCape,
+        .christmas, .jeanne, .amuRan, .chocolatHeart, .hana, .pichiPitch,
+        .howl, .angelWings, .hachupingping,
+    ]
+
+    static func selection(rawValue: String?) -> PetSkin {
+        guard let value = rawValue.flatMap(PetSkin.init(rawValue:)), selectableCases.contains(value) else { return .classic }
+        return value
+    }
 
     var label: String {
         switch self {
         case .chocolatHeart: return "쇼콜라 하트"
+        case .howl: return "하울 · 캐스퍼"
         case .classic: return "기본"
         case .angelWings: return "천사 날개"
         case .bee: return "꿀벌"
         case .bunny: return "딸기 토끼"
         case .rilakkuma: return "리락쿠마"
         case .rilakkumaCape: return "리락쿠마 망토"
-        case .magicalHeart: return "매지컬 하트"
         case .christmas: return "크리스마스"
         case .amuRan: return "아무 · 란"
         case .hana: return "하나 · 토토"
         case .pichiPitch: return "피치핏치"
+        case .hachupingping: return "하츄핑핑"
         case .jeanne: return "잔느 · 핀"
         }
     }
@@ -91,24 +104,29 @@ enum PetSkin: String, CaseIterable {
     var resourceName: String {
         switch self {
         case .chocolatHeart: return "spritesheet-chocolat-heart"
+        case .howl: return "howl-character"
         case .classic: return "spritesheet"
         case .angelWings: return "spritesheet-angel"
         case .bee: return "spritesheet-bee"
         case .bunny: return "spritesheet-bunny"
         case .rilakkuma: return "spritesheet-rilakkuma"
         case .rilakkumaCape: return "spritesheet-rilakkuma-cape"
-        case .magicalHeart: return "spritesheet-magical-heart"
         case .christmas: return "spritesheet-christmas-16-character"
         case .amuRan: return "spritesheet-amu-ran"
         case .hana: return "spritesheet-hana-16-character"
         case .pichiPitch: return "pichi-character"
+        case .hachupingping: return "hachuping-character"
         case .jeanne: return "jeanne-character"
         }
     }
 
+    var isPersonal: Bool { self == .rilakkuma || self == .rilakkumaCape }
+
     /// 이 기기의 앱 번들에 아틀라스가 실제로 들어 있는지.
     var isAvailable: Bool {
         if self == .amuRan { return Bundle.main.url(forResource: resourceName, withExtension: "webp") != nil && AmuRanFrames.hasAllFrames }
+        if self == .hachupingping { return HachupingSkin.available }
+        if self == .howl { return HowlSkin.available }
         if self == .jeanne { return JeanneSkin.available }
         if self == .pichiPitch { return PichiSkin.available }
         if self == .chocolatHeart { return ChocolatHeart.available }
@@ -374,3 +392,5 @@ func cornerOrigin(corner: PetCorner, size: NSSize, visible: NSRect) -> NSPoint? 
     }
     return NSPoint(x: x, y: y)
 }
+
+func allowsGazeForTask(displayed: PetState, reported: PetState?) -> Bool { gazeStates.contains(displayed) }

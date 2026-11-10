@@ -2,8 +2,68 @@
 // 실행 진입점. 진단 플래그를 먼저 처리한다.
 
 import AppKit
+if let i = CommandLine.arguments.firstIndex(of: "--render-classic-gaze-preview"), i + 1 < CommandLine.arguments.count { exit(renderClassicGazePreview(to: CommandLine.arguments[i+1])) }
+if CommandLine.arguments.contains("--classic-gaze-self-test") { let ok = ClassicGrown.gazeSelfTest(); print("Classic16 directional gaze: \(ok)"); exit(ok ? 0 : 1) }
+if let i = CommandLine.arguments.firstIndex(of: "--render-classic-grown-preview"), i + 1 < CommandLine.arguments.count { exit(renderClassicGrownPreview(to: CommandLine.arguments[i+1])) }
+if CommandLine.arguments.contains("--classic-grown-self-test") { let ok = ClassicGrown.selfTest(); print("Classic grown: \(ok)"); exit(ok ? 0 : 1) }
 import CoreText
 import Foundation
+if CommandLine.arguments.contains("--angel-interactions-state-test") {
+ let v=RettoView(frame:NSRect(x:0,y:0,width:400,height:500),spriteSheet:NSImage(size:NSSize(width:1792,height:3840)),skin:.angelWings,onOpenClaude:{_,_ in},onOpenAttention:{_ in})
+ exit(v.validateAngelInteractions() ? 0:1)
+}
+if let i=CommandLine.arguments.firstIndex(of:"--render-angel-interactions"),i+1<CommandLine.arguments.count {exit(renderAngelInteractions(to:CommandLine.arguments[i+1]))}
+if CommandLine.arguments.contains("--angel-interactions-self-test"){exit(AngelInteractions.validate() ? 0:1)}
+if CommandLine.arguments.contains("--angel-state-self-test") {
+ let v=RettoView(frame:NSRect(x:0,y:0,width:400,height:500),spriteSheet:NSImage(size:NSSize(width:1792,height:3840)),skin:.angelWings,onOpenClaude:{_,_ in},onOpenAttention:{_ in})
+ exit(v.validateAngelTransitions() ? 0:1)
+}
+
+if CommandLine.arguments.contains("--angel-self-test"){exit(AngelSkin.validate() ? 0:1)}
+if let i=CommandLine.arguments.firstIndex(of:"--render-angel-preview"),i+1<CommandLine.arguments.count {
+ let time=i+2<CommandLine.arguments.count ? Double(CommandLine.arguments[i+2]) ?? 0.9:0.9
+ exit(renderAngelPreview(to:CommandLine.arguments[i+1],time:time))
+}
+
+if CommandLine.arguments.contains("--amu-random-state-test") {
+    let v=RettoView(frame:NSRect(x:0,y:0,width:306,height:460),spriteSheet:NSImage(size:NSSize(width:7168,height:7680)),skin:.amuRan,onOpenClaude:{_,_ in},onOpenAttention:{_ in})
+    exit(v.validateAmuRandomStates() ? 0:1)
+}
+
+if CommandLine.arguments.contains("--amu-approved-state-test") {
+    let v=RettoView(frame:NSRect(x:0,y:0,width:306,height:460),spriteSheet:NSImage(size:NSSize(width:7168,height:7680)),skin:.amuRan,onOpenClaude:{_,_ in},onOpenAttention:{_ in})
+    exit(v.validateAmuApprovedTransitions() ? 0:1)
+}
+
+if CommandLine.arguments.contains("--amu-approved-self-test") { exit(AmuApproved.validate() ? 0:1) }
+
+if let i=CommandLine.arguments.firstIndex(of:"--render-hachuping-drag-fit"),i+1<CommandLine.arguments.count {
+ let t=i+2<CommandLine.arguments.count ? Double(CommandLine.arguments[i+2]) ?? 0.4:0.4
+ exit(renderHachupingDragFit(to:CommandLine.arguments[i+1],time:t))
+}
+if let i=CommandLine.arguments.firstIndex(of:"--render-hachuping-current"),i+1<CommandLine.arguments.count {
+ let t=i+2<CommandLine.arguments.count ? Double(CommandLine.arguments[i+2]) ?? 0.8:0.8
+ exit(renderHachupingCurrent(to:CommandLine.arguments[i+1],time:t,held:CommandLine.arguments.contains("--hold-hachuping-pose"),dark:CommandLine.arguments.contains("--dark")))
+}
+if CommandLine.arguments.contains("--hachuping-self-test") {exit(HachupingSkin.validate() ? 0:1)}
+if CommandLine.arguments.contains("--hachuping-state-self-test") {
+ let v=RettoView(frame:NSRect(x:0,y:0,width:306,height:460),spriteSheet:HachupingSkin.placeholder,skin:.hachupingping,onOpenClaude:{_,_ in},onOpenAttention:{_ in})
+ exit(v.validateHachupingTransitions() ? 0:1)
+}
+if let i=CommandLine.arguments.firstIndex(of:"--render-hachuping-preview"),i+1<CommandLine.arguments.count {
+ let t=i+2<CommandLine.arguments.count ? Double(CommandLine.arguments[i+2]) ?? 0.8:0.8
+ exit(renderHachupingPreview(to:CommandLine.arguments[i+1],time:t,held:CommandLine.arguments.contains("--hold-hachuping-pose")))
+}
+if CommandLine.arguments.contains("--howl-self-test") { exit(HowlSkin.validate() ? 0 : 1) }
+if CommandLine.arguments.contains("--howl-state-self-test") {
+    let v = RettoView(frame:NSRect(x:0,y:0,width:306,height:460),spriteSheet:HowlSkin.placeholder,skin:.howl,onOpenClaude:{_,_ in},onOpenAttention:{_ in})
+    exit(v.validateHowlTransitions() ? 0 : 1)
+}
+if let i = CommandLine.arguments.firstIndex(of:"--render-howl-preview"), i+1 < CommandLine.arguments.count {
+    let t = i+2 < CommandLine.arguments.count ? Double(CommandLine.arguments[i+2]) ?? 0.8 : 0.8
+    let pose = CommandLine.arguments.contains("--howl-pose-index") ? Int(t) : nil
+    exit(renderHowlPreview(to:CommandLine.arguments[i+1],sample:t,pose:pose,held:CommandLine.arguments.contains("--hold-howl-pose")))
+}
 if CommandLine.arguments.contains("--self-test-all-skins") { exit(runAllSkinsSelfTest()) }
 if CommandLine.arguments.contains("--self-test-amu-ran-clock") { exit(runAmuRanClockSelfTest()) }
 if let i = CommandLine.arguments.firstIndex(of: "--render-amu-ran-motion-preview"), i + 1 < CommandLine.arguments.count { exit(renderAmuRanMotionPreview(to: CommandLine.arguments[i+1])) }
@@ -23,11 +83,7 @@ if CommandLine.arguments.contains("--jeanne-state-self-test") {
     exit(ok ? 0 : 1)
 }
 
-if CommandLine.arguments.contains("--discovery-cache-self-test") {
-    let ok = CodexRolloutDiscovery.validateTaskCache()
-    print("Task cache invalidation: \(ok)")
-    exit(ok ? 0 : 1)
-}
+
 
 if CommandLine.arguments.contains("--jeanne-fit-self-test") {
     let v = RettoView(frame:NSRect(x:0,y:0,width:224,height:320),spriteSheet:JeanneSkin.placeholder,skin:.jeanne,onOpenClaude:{ _,_ in },onOpenAttention:{ _ in })
@@ -43,6 +99,8 @@ if let i = CommandLine.arguments.firstIndex(of: "--render-jeanne-preview"), i + 
 if CommandLine.arguments.contains("--pichi-self-test") { let ok = PichiSkin.validate(); print("{\"pichiOK\":\(ok)}"); exit(ok ? 0 : 1) }
 if let i = CommandLine.arguments.firstIndex(of: "--render-pichi-preview"), i + 1 < CommandLine.arguments.count { exit(renderPichiPreview(to: CommandLine.arguments[i + 1])) }
 
+if CommandLine.arguments.contains("--hana-ground-self-test"){exit(HanaGrounding.validate() ? 0:1)}
+if let i=CommandLine.arguments.firstIndex(of:"--render-hana-grounding"),i+1<CommandLine.arguments.count {exit(renderHanaGrounding(to:CommandLine.arguments[i+1]))}
 if CommandLine.arguments.contains("--hana-gaze-self-test") { exit(HanaGaze.selfTest() ? 0 : 1) }
 if let i = CommandLine.arguments.firstIndex(of: "--render-hana-gaze-preview"), i + 1 < CommandLine.arguments.count { exit(HanaGaze.renderPreview(to: CommandLine.arguments[i+1])) }
 if CommandLine.arguments.contains("--hana-self-test") {
@@ -179,13 +237,7 @@ if let index = CommandLine.arguments.firstIndex(of: "--render-skin-preview"),
     exit(renderPreview(to: CommandLine.arguments[index + 2], skin: skin))
 }
 
-if let index = CommandLine.arguments.firstIndex(of: "--render-magical-heart-transformation-preview"), index + 1 < CommandLine.arguments.count {
-    exit(renderMagicalHeartTransformationPreview(to: CommandLine.arguments[index + 1]))
-}
 
-if let index = CommandLine.arguments.firstIndex(of: "--render-magical-heart-gaze-preview"), index + 1 < CommandLine.arguments.count {
-    exit(renderMagicalHeartGazePreview(to: CommandLine.arguments[index + 1]))
-}
 
 let app = NSApplication.shared
 let delegate = AppDelegate()

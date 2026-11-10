@@ -2,12 +2,12 @@ import AppKit
 import Foundation
 
 enum AmuRanMotion {
-    static let cycles: [Int: Double] = [0:3.2, 1:1.6, 2:1.6, 3:2.4, 4:2.4, 5:3.2, 6:3.2, 7:2.4, 8:3.2, 11:6.4]
+    static let cycles: [Int: Double] = [0:3.2, 1:1.6, 2:1.6, 3:3.2, 4:3.2, 5:3.2, 6:3.2, 7:3.2, 8:3.2, 11:6.4]
     static let cycleSeconds = cycles
     static let jumpPaws: [Double] = [629,629,629,625,600,575,550,540,540,550,570,600,629,629,629,629]
     static func animation(_ value: Animation) -> Animation {
         guard let cycle = cycles[value.row] else { return value }
-        return Animation(row: value.row, frames: 16, interval: cycle / 16, cycleLimit: value.cycleLimit,
+        return Animation(row: value.row == 8 ? 7:value.row, frames: 16, interval: cycle / 16, cycleLimit: value.row == 3 ? nil:value.cycleLimit,
                          kicker: value.kicker, title: value.title, tone: value.tone)
     }
     static func row(state: PetState, drag: DragRun?) -> Int {
@@ -34,6 +34,7 @@ enum AmuRanFrames {
         Bundle.main.url(forResource: key, withExtension: "png", subdirectory: "AmuRanFrames")
     }
     static let hasAllFrames: Bool = {
+        guard AmuApproved.available else { return false }
         for row in AmuRanMotion.cycles.keys {
             for frame in 0..<16 { if resource("character-\(row)-\(frame)") == nil { return false } }
             for sample in 0..<80 {
@@ -64,12 +65,22 @@ enum AmuRanFrames {
                    fraction: 1, respectFlipped: false, hints: [.interpolation: NSImageInterpolation.high])
         return true
     }
-    static func drawCharacter(row: Int, frame: Int, in rect: NSRect) -> Bool {
+    static func drawCharacter(row: Int, frame: Int, in rect: NSRect, poseTime: Double? = nil, workingKey: String = "spade", completionKey: String = "sera1") -> Bool {
+        if row != 9 && row != 10, AmuApproved.key(row:row) != nil {
+            let cycle = AmuRanMotion.cycles[row] ?? 3.2
+            if AmuApproved.draw(row:row,layer:"scene",time:poseTime ?? Double(frame)*cycle/16,in:rect,workingKey:workingKey,completionKey:completionKey) { return true }
+        }
         let key = row == 9 || row == 10 ? "gaze-\(row == 9 ? "school" : "heart")-\(frame)" : "character-\(row)-\(frame)"
         return draw(key, in: rect)
     }
-    static func drawEffects(state: PetState, drag: DragRun?, time: Double, poseTime: Double, gazeDirection: Int?, in rect: NSRect, front: Bool) {
+    static func drawEffects(state: PetState, drag: DragRun?, time: Double, poseTime: Double, gazeDirection: Int?, in rect: NSRect, front: Bool, workingKey: String = "spade", completionKey: String = "sera1") {
         guard time.isFinite else { return }
+        if AmuApproved.available, AmuApproved.key(row:AmuRanMotion.row(state:state,drag:drag)) != nil {
+            // Keep action emitters on the state clock; the80 samples progress during each cat hold.
+            // Idle gaze retains its original full-body drawings, with the selected Lock/key.
+            _ = AmuApproved.draw(row:AmuRanMotion.row(state:state,drag:drag),layer:front ? "front":"back",time:poseTime,in:rect,workingKey:workingKey,completionKey:completionKey)
+            return
+        }
         let t = max(0,time), row = AmuRanMotion.row(state: state, drag: drag)
         let sample = Int(floor(t.truncatingRemainder(dividingBy: 8) * 10 + 1e-7)) % 80
         if front, let companion = AmuRanInteraction.sample(row: row, poseTime: poseTime, effectTime: t, gazeDirection: gazeDirection) {
