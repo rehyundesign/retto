@@ -22,7 +22,7 @@ enum AngelSkin {
         }
         return true
     }()
-    static let cache:NSCache<NSString,NSImage> = {let c=NSCache<NSString,NSImage>();c.countLimit=96;c.totalCostLimit=112*1024*1024;return c}()
+    static let cache = DecodedFrameCache.angel
     static func key(row:Int)->String? {
         switch row {case 0:return "idle";case 3:return "waving";case 4:return "jumping";case 5:return "failed";case 6:return "waiting";case 7,8:return "running";case 11:return "sleeping";default:return nil}
     }
@@ -51,9 +51,8 @@ enum AngelSkin {
     }
     @discardableResult static func draw(row:Int,time:Double,in canvas:NSRect)->Bool {
         guard available,let key=key(row:row) else{return false}
-        let name=String(format:"%@/%03d.png",key,sample(row:row,time:time));let image:NSImage
-        if let v=cache.object(forKey:name as NSString){image=v}
-        else {guard let v=NSImage(contentsOf:root.appendingPathComponent(name))else{return false};image=v;cache.setObject(v,forKey:name as NSString,cost:544*544*4)}
+        let name=String(format:"%@/%03d.png",key,sample(row:row,time:time))
+        guard let image=cache.image(at:root.appendingPathComponent(name)) else{return false}
         image.draw(in:rect(row:row,in:canvas),from:NSRect(origin:.zero,size:image.size),operation:.sourceOver,fraction:1,respectFlipped:false,hints:[.interpolation:NSImageInterpolation.high]);return true
     }
     static func validate()->Bool {

@@ -16,7 +16,7 @@ enum AngelInteractions {
     static let hasIdle:Bool={guard let m=manifest?.idle else{return false};return files("idle-look",m)}()
     static let hasFlight:Bool={guard let f=manifest?.flight,let l=f["drag-left"],let r=f["drag-right"] else{return false};return files("drag-left",l)&&files("drag-right",r)}()
     static let hasGaze:Bool={guard let g=manifest?.gaze,g.count==16,g.anchors.count==16,g.samples==64 else{return false};return (0..<16).allSatisfy{FileManager.default.fileExists(atPath:root.appendingPathComponent(String(format:"gaze/%02d.png",$0)).path)} && (0..<g.samples).allSatisfy{FileManager.default.fileExists(atPath:root.appendingPathComponent(String(format:"gaze-back/%03d.png",$0)).path)}}()
-    static let cache:NSCache<NSString,NSImage>={let c=NSCache<NSString,NSImage>();c.countLimit=96;c.totalCostLimit=96*1024*1024;return c}()
+    static let cache = DecodedFrameCache.angel
     struct IdleChoice {
         private(set) var cycle:Int?;private(set) var variant=0
         mutating func choose(cycle next:Int,picker:()->Int={Int.random(in:0...1)}) {
@@ -37,8 +37,7 @@ enum AngelInteractions {
     }
     static func sample(_ c:Clip,time:Double)->Int{Int(floor(max(0,time).truncatingRemainder(dividingBy:c.cycle)/(c.sampleMs/1000)+1e-7))%c.samples}
     static func image(_ name:String)->NSImage? {
-        if let v=cache.object(forKey:name as NSString){return v}
-        guard let v=NSImage(contentsOf:root.appendingPathComponent(name))else{return nil};cache.setObject(v,forKey:name as NSString,cost:544*544*4);return v
+        cache.image(at:root.appendingPathComponent(name))
     }
     @discardableResult static func draw(key:String,time:Double,in canvas:NSRect)->Bool {
         let c:Clip?
