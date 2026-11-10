@@ -3,6 +3,10 @@
 
 import AppKit
 if let i = CommandLine.arguments.firstIndex(of: "--render-classic-gaze-preview"), i + 1 < CommandLine.arguments.count { exit(renderClassicGazePreview(to: CommandLine.arguments[i+1])) }
+if CommandLine.arguments.contains("--transcript-stream-self-test") { exit(runTranscriptStreamSelfTest()) }
+if let i = CommandLine.arguments.firstIndex(of: "--benchmark-transcript-scan"), i + 1 < CommandLine.arguments.count {
+    exit(benchmarkTranscriptScan(path: CommandLine.arguments[i+1], wholeFile: CommandLine.arguments.contains("--whole-file")))
+}
 if CommandLine.arguments.contains("--frame-cache-self-test") { exit(runFrameCacheSelfTest()) }
 if CommandLine.arguments.contains("--benchmark-angel-frames") { exit(benchmarkAngelFrames()) }
 if CommandLine.arguments.contains("--classic-gaze-self-test") { let ok = ClassicGrown.gazeSelfTest(); print("Classic16 directional gaze: \(ok)"); exit(ok ? 0 : 1) }
