@@ -48,6 +48,7 @@ final class RettoView: NSView {
     private var angelPreviewTime:Double?
     private var angelIdleChoice=AngelInteractions.IdleChoice()
     private var angelLastMouseLocation:NSPoint?
+    private var angelLastDisplaySample: String?
     func setAngelIdleVariantForPreview(_ value:Int,time:Double){angelPreviewTime=time;angelIdleChoice.force(value,cycle:Int(floor(time/3.2)));needsDisplay=true}
     func setAngelTimeForPreview(_ time:Double){angelPreviewTime=time;needsDisplay=true}
     private var amuRanPoseEpoch = ProcessInfo.processInfo.systemUptime
@@ -408,7 +409,7 @@ final class RettoView: NSView {
     }
 
     private func restartAnimation() {
-        if skin == .angelWings{angelEpoch=ProcessInfo.processInfo.systemUptime;angelIdleChoice.reset();angelLastMouseLocation=nil}
+        if skin == .angelWings{angelLastDisplaySample=nil;angelEpoch=ProcessInfo.processInfo.systemUptime;angelIdleChoice.reset();angelLastMouseLocation=nil}
         if skin == .classic, let selected = currentAnimation {
             classicGrownEpoch = ProcessInfo.processInfo.systemUptime
                 - ClassicGrown.elapsed(row: selected.row, frame: frameIndex, cycles: completedCycles)
@@ -540,7 +541,15 @@ final class RettoView: NSView {
                 hanaLastMouseLocation = cursor
             }
         }
-        if skin == .angelWings || skin == .hachupingping || skin == .howl || skin == .amuRan || skin == .jeanne { needsDisplay = true }
+        if skin == .angelWings, let animation = currentAnimation {
+            let time = ProcessInfo.processInfo.systemUptime - angelEpoch
+            let sample = AngelSkin.displaySample(row: animation.row, time: time,
+                alternateIdle: visibleState == .idle && angelIdleChoice.variant == 1,
+                flight: dragRun != nil)
+            if hasActiveGaze || sample == nil || sample != angelLastDisplaySample { needsDisplay = true }
+            angelLastDisplaySample = sample
+        }
+        if skin == .hachupingping || skin == .howl || skin == .amuRan || skin == .jeanne { needsDisplay = true }
         guard dragRun != nil || !hasActiveGaze, let animation = currentAnimation else { return }
         if skin == .angelWings,AngelSkin.available,dragRun == nil || AngelInteractions.hasFlight {
             let elapsed=ProcessInfo.processInfo.systemUptime-angelEpoch
@@ -595,7 +604,7 @@ final class RettoView: NSView {
             restartAnimation()
             return
         }
-        needsDisplay = true
+        if skin != .angelWings { needsDisplay = true }
     }
 
     /// 몸통을 눌렀을 때의 반응. 코덱스 펫이 마우스를 올릴 때 쓰는 jumping 을 클릭 반응으로 쓴다.

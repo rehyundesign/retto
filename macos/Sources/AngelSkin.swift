@@ -34,6 +34,17 @@ enum AngelSkin {
         guard let k=key(row:row),let m=manifest?.states[k],time.isFinite else{return 0}
         return Int(floor(max(0,time).truncatingRemainder(dividingBy:m.cycle)/(m.sampleMs/1000)+1e-7))%m.samples
     }
+    /// Fully baked scene samples may hold for 100ms; gaze glyphs still redraw at 50ms.
+    static func displaySample(row: Int, time: Double, alternateIdle: Bool, flight: Bool) -> String? {
+        if flight, let key = AngelInteractions.flightKey(row), let clip = AngelInteractions.manifest?.flight?[key] {
+            return key + ":" + String(AngelInteractions.sample(clip, time: time))
+        }
+        if row == 0, alternateIdle, let clip = AngelInteractions.manifest?.idle {
+            return "idle-look:" + String(AngelInteractions.sample(clip, time: time))
+        }
+        guard let key = key(row: row) else { return nil }
+        return key + ":" + String(sample(row: row, time: time))
+    }
     static func position(row:Int,time:Double)->(frame:Int,cycles:Int) {
         guard let k=key(row:row),let m=manifest?.states[k] else{return (0,0)}
         let t=max(0,time);return (Int(floor(t/(m.cycle/16)+1e-7))%16,Int(floor(t/m.cycle)))
