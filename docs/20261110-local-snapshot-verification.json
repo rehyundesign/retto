@@ -1,0 +1,95 @@
+{
+  "archive": "Retto-local-14skins-20261110.zip",
+  "archive_sha256": "d6ea5b19726bbe63f0da74ad97d9cba21611a783978d772593b67171e0e3bc8f",
+  "archive_bytes": 1508812168,
+  "binary_sha256": "754598d30ca3864c80015f489761504ca2747ce016bdeabd1d35bc6ba07f5635",
+  "all_bundle_files_identical": true,
+  "file_count": 31495,
+  "skin_count": 14,
+  "version_in_unchanged_bundle": "0.10.0",
+  "resource_manifest_entries": 31487,
+  "codesign_verified": true,
+  "checks": [
+    {
+      "flag": "--self-test",
+      "exit": 0
+    },
+    {
+      "flag": "--self-test-all-skins",
+      "exit": 0
+    },
+    {
+      "flag": "--self-test-slack",
+      "exit": 0
+    },
+    {
+      "flag": "--self-test-codex-input",
+      "exit": 0
+    },
+    {
+      "flag": "--self-test-status-rendering",
+      "exit": 0
+    },
+    {
+      "flag": "--amu-approved-self-test",
+      "exit": 0
+    },
+    {
+      "flag": "--amu-approved-state-test",
+      "exit": 0
+    },
+    {
+      "flag": "--amu-random-state-test",
+      "exit": 0
+    },
+    {
+      "flag": "--hachuping-self-test",
+      "exit": 0
+    },
+    {
+      "flag": "--hachuping-state-self-test",
+      "exit": 0
+    },
+    {
+      "flag": "--hana-self-test",
+      "exit": 0
+    },
+    {
+      "flag": "--hana-ground-self-test",
+      "exit": 0
+    },
+    {
+      "flag": "--hana-gaze-self-test",
+      "exit": 0
+    },
+    {
+      "flag": "--angel-self-test",
+      "exit": 0
+    },
+    {
+      "flag": "--angel-interactions-state-test",
+      "exit": 0
+    },
+    {
+      "flag": "--howl-state-self-test",
+      "exit": 0
+    },
+    {
+      "flag": "--jeanne-state-self-test",
+      "exit": 0
+    },
+    {
+      "flag": "--pichi-self-test",
+      "exit": 0
+    },
+    {
+      "flag": "--chocolat-self-test",
+      "exit": 0
+    },
+    {
+      "flag": "--classic-gaze-self-test",
+      "exit": 0
+    }
+  ],
+  "contains_user_preferences_tokens_or_message_history": false
+}
