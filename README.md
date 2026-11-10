@@ -1,5 +1,7 @@
 # Retto
 
+**[2026-11-10 로컬 동일본 · 14종 스킨 ZIP 다운로드](https://github.com/rehyundesign/retto/releases/download/v0.11.1-local.20261110/Retto-local-14skins-20261110.zip)** · [검증 및 설치 안내](docs/20261110-local-snapshot.md)
+
 **[Download Retto 0.11.0 for Apple Silicon Mac](https://github.com/rehyundesign/retto/releases/download/v0.11.0/Retto-0.11.0.dmg)** · [설치 안내 / release notes](docs/0.11.0-release.md)
 
 A desk pet for [Claude Code](https://claude.com/claude-code) and Codex — a macOS overlay cat
