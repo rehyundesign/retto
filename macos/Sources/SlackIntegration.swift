@@ -632,6 +632,7 @@ final class SlackIntegration {
             }
         }
     }
+    @MainActor
     private func refreshReadState() async {
         guard let credentials, !userID.isEmpty else { return }
         let current = generation
@@ -673,6 +674,7 @@ final class SlackIntegration {
         onDiagnosticsChange?()
         if changed || previousIssue != readSyncIssue { onChange?() }
     }
+    @MainActor
     private func resolveMetadata(for notice: SlackNotice) async {
         guard let credentials else { return }
         let current = generation
@@ -718,6 +720,7 @@ final class SlackIntegration {
             }
         }
     }
+    @MainActor
     func refreshChannels() async {
         guard let credentials, !userID.isEmpty else { return }
         let current = generation
