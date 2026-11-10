@@ -120,8 +120,6 @@ enum PetSkin: String, CaseIterable {
         }
     }
 
-    var isPersonal: Bool { self == .rilakkuma || self == .rilakkumaCape }
-
     /// 이 기기의 앱 번들에 아틀라스가 실제로 들어 있는지.
     var isAvailable: Bool {
         if self == .amuRan { return Bundle.main.url(forResource: resourceName, withExtension: "webp") != nil && AmuRanFrames.hasAllFrames }

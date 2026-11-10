@@ -140,7 +140,7 @@ func runSelfTest() -> Int32 {
         && PetSkin.selection(rawValue: "unknown") == .classic
         && PetSkin.selectableCases.allSatisfy { PetSkin.selection(rawValue: $0.rawValue) == $0 }
         && PetSkin.selectableCases.allSatisfy { skin in
-        skin.isPersonal || skin.isAvailable
+        skin.isAvailable
     }
     let christmasTimingOK = (Array(animationCatalog.values) + Array(dragRunAnimations.values)).allSatisfy { original in
         let extended = skinAnimation(original, skin: .christmas, columns: 16)

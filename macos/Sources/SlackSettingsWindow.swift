@@ -42,31 +42,18 @@ final class SlackSettingsWindow: NSObject {
             root.addArrangedSubview(view)
             view.widthAnchor.constraint(equalTo: root.widthAnchor).isActive = true
         }
-        let heading = label("Slack 연결", bold: true)
-        let guide = NSButton(title: "처음 연결하시나요? 연결 안내 ↗", target: self, action: #selector(showGuide))
-        guide.bezelStyle = .rounded
-        guide.image = NSImage(systemSymbolName: "questionmark.circle", accessibilityDescription: nil)
-        guide.imagePosition = .imageLeading
-        guide.contentTintColor = .linkColor
-        guide.toolTip = "브라우저에서 단계별 연결 안내를 엽니다. 설정 JSON 복사와 토큰 발급 위치를 확인할 수 있습니다."
-        guide.setAccessibilityLabel("Slack 연결 안내 열기")
-        let spacer = NSView()
-        spacer.setContentHuggingPriority(.defaultLow, for: .horizontal)
-        let headingRow = NSStackView(views: [heading, spacer, guide])
-        headingRow.spacing = 8
-        add(headingRow)
+        add(label("Slack 연결", bold: true))
         add(status)
         add(label("처음 연결할 때는 두 토큰을 입력해 주세요. 연결 후 비워 둔 토큰은 기존 값을 유지합니다. 토큰은 키체인에서 관리합니다."))
         userToken.placeholderString = "사용자 OAuth 토큰 · xoxp-"
         appToken.placeholderString = "앱 수준 토큰 · xapp-"
         userToken.setAccessibilityLabel("Slack 사용자 OAuth 토큰")
         appToken.setAccessibilityLabel("Slack 앱 수준 토큰")
-        userToken.toolTip = "OAuth & Permissions → User OAuth Token에서 복사합니다. xoxp-로 시작하는 값입니다."
-        appToken.toolTip = "Basic Information → App-Level Tokens에서 발급합니다. xapp-로 시작하며 connections:write 권한이 필요합니다."
         add(userToken); add(appToken)
         let connect = NSButton(title: "저장하고 연결", target: self, action: #selector(connectSlack))
         let disconnect = NSButton(title: "연결 해제", target: self, action: #selector(disconnectSlack))
-        let actions = NSStackView(views: [connect, disconnect]); actions.spacing = 8
+        let guide = NSButton(title: "연결 안내", target: self, action: #selector(showGuide))
+        let actions = NSStackView(views: [connect, disconnect, guide]); actions.spacing = 8
         root.addArrangedSubview(actions)
         add(label("알림 받을 메시지", bold: true))
         for button in [dm, mentions, preview] {
@@ -169,18 +156,19 @@ final class SlackSettingsWindow: NSObject {
         Task { @MainActor [weak self] in await self?.integration.refreshChannels() }
     }
     @objc private func showGuide() {
-        do {
-            let url = try SlackConnectionGuide.writeDocument()
-            guard NSWorkspace.shared.open(url) else {
-                throw NSError(domain: "RettoSlackGuide", code: 1,
-                              userInfo: [NSLocalizedDescriptionKey: "기본 브라우저에서 안내를 열지 못했습니다."])
-            }
-        } catch {
-            let alert = NSAlert()
-            alert.messageText = "연결 안내를 열지 못했습니다"
-            alert.informativeText = error.localizedDescription
-            alert.addButton(withTitle: "확인")
-            alert.beginSheetModal(for: window)
-        }
+        let alert = NSAlert()
+        alert.messageText = "Slack 연결 준비"
+        alert.informativeText = """
+        1. api.slack.com/apps에서 개인용 Slack 앱을 만드세요. 워크스페이스에 따라 관리자 승인이 필요합니다.
+        2. OAuth & Permissions → User Token Scopes에 channels:read, groups:read, im:read, mpim:read, users:read, channels:history, groups:history, im:history, mpim:history를 추가하고 워크스페이스에 설치하세요. 사용자 토큰(xoxp-)을 복사하세요.
+        3. Event Subscriptions → Subscribe to events on behalf of users에 message.channels, message.groups, message.im, message.mpim을 추가하세요. 봇의 app_mention은 내 멘션과 다릅니다.
+        4. Socket Mode를 켜고 Basic Information → App-Level Tokens에서 connections:write 권한의 토큰(xapp-)을 만드세요.
+        5. 같은 앱의 두 토큰을 이 창에 입력하고 연결하세요. 권한을 변경했다면 앱을 다시 설치하세요.
+
+        토큰은 이 채팅에 보내지 마세요. 한 Slack 앱에 여러 사용자가 설치한 경우 이벤트가 공유될 수 있으므로 본인만 설치하는 전용 앱을 사용하세요. 앱의 다른 Socket Mode 연결을 함께 실행하지 마세요.
+        """
+        alert.addButton(withTitle: "확인")
+        alert.addButton(withTitle: "Slack 앱 관리 열기")
+        if alert.runModal() == .alertSecondButtonReturn { NSWorkspace.shared.open(URL(string: "https://api.slack.com/apps")!) }
     }
 }
