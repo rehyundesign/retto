@@ -1,0 +1,43 @@
+{
+  "runs": {
+    "before": [
+      {
+        "frames": 512,
+        "seconds": 2.3293154166603927,
+        "cpuSeconds": 2.079166
+      },
+      {
+        "frames": 512,
+        "seconds": 2.118547749996651,
+        "cpuSeconds": 2.054798
+      },
+      {
+        "frames": 512,
+        "seconds": 2.114659250015393,
+        "cpuSeconds": 2.056572
+      }
+    ],
+    "after": [
+      {
+        "frames": 512,
+        "seconds": 1.0781588749960065,
+        "cpuSeconds": 0.8984
+      },
+      {
+        "frames": 512,
+        "seconds": 0.9169067916809581,
+        "cpuSeconds": 0.877617
+      },
+      {
+        "frames": 512,
+        "seconds": 0.9652174166694749,
+        "cpuSeconds": 0.911884
+      }
+    ]
+  },
+  "median_cpu_seconds": {
+    "before": 2.056572,
+    "after": 0.8984
+  },
+  "cpu_reduction_percent": 56.31565537214356
+}
