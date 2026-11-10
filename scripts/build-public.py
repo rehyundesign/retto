@@ -12,7 +12,7 @@ import subprocess
 import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = '0.11.0'
+VERSION = '0.11.1'
 CHECKS = ['--self-test', '--self-test-all-skins', '--self-test-slack', '--self-test-codex-input',
           '--self-test-status-rendering', '--amu-approved-self-test', '--amu-approved-state-test',
           '--amu-random-state-test', '--hachuping-self-test', '--hachuping-state-self-test',
@@ -51,8 +51,8 @@ def main():
             raise ValueError(f'Resource mismatch: {relative}')
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(source, target)
-    for private in ['spritesheet-rilakkuma.webp', 'spritesheet-rilakkuma-cape.webp']:
-        assert not (resources / private).exists(), 'Personal artwork must not be distributed'
+    for name in ['spritesheet-rilakkuma.webp', 'spritesheet-rilakkuma-cape.webp']:
+        assert (resources / name).is_file(), 'All fourteen approved skins must be included'
     hook = resources / 'hook'
     hook.mkdir()
     for name in ['hook.cjs', 'hook.sh', 'install.cjs']:
@@ -85,9 +85,9 @@ def main():
         (work / (name + '.log')).write_text(output)
         print(name + ' PASS', flush=True)
     report = {'version': VERSION, 'revision': revision, 'app': str(app),
-              'publicResources': len(manifest), 'checks': CHECKS, 'personalSkinsExcluded': True}
+              'publicResources': len(manifest), 'checks': CHECKS, 'personalSkinsExcluded': False}
     if not args.app_only:
-        stage = work / 'Retto 0.11.0'
+        stage = work / f'Retto {VERSION}'
         stage.mkdir()
         shutil.copytree(app, stage / 'Retto.app')
         (stage / 'Applications').symlink_to('/Applications')
