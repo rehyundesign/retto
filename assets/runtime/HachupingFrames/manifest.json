@@ -1,0 +1,3666 @@
+{
+  "version": 2,
+  "cell": [
+    448,
+    640
+  ],
+  "states": [
+    {
+      "key": "mirror",
+      "files": [
+        "mirror/character-00.png",
+        "mirror/character-01.png",
+        "mirror/character-02.png",
+        "mirror/character-03.png",
+        "mirror/character-04.png",
+        "mirror/character-05.png",
+        "mirror/character-06.png",
+        "mirror/character-07.png",
+        "mirror/character-08.png",
+        "mirror/character-09.png",
+        "mirror/character-10.png",
+        "mirror/character-11.png",
+        "mirror/character-12.png",
+        "mirror/character-13.png",
+        "mirror/character-14.png",
+        "mirror/character-15.png"
+      ],
+      "interval": 0.2,
+      "effects": [
+        {
+          "back": "mirror/back-000.png",
+          "front": "mirror/front-000.png"
+        },
+        {
+          "back": "mirror/back-001.png",
+          "front": "mirror/front-001.png"
+        },
+        {
+          "back": "mirror/back-002.png",
+          "front": "mirror/front-002.png"
+        },
+        {
+          "back": "mirror/back-003.png",
+          "front": "mirror/front-003.png"
+        },
+        {
+          "back": "mirror/back-004.png",
+          "front": "mirror/front-004.png"
+        },
+        {
+          "back": "mirror/back-005.png",
+          "front": "mirror/front-005.png"
+        },
+        {
+          "back": "mirror/back-006.png",
+          "front": "mirror/front-006.png"
+        },
+        {
+          "back": "mirror/back-007.png",
+          "front": "mirror/front-007.png"
+        },
+        {
+          "back": "mirror/back-008.png",
+          "front": "mirror/front-008.png"
+        },
+        {
+          "back": "mirror/back-009.png",
+          "front": "mirror/front-009.png"
+        },
+        {
+          "back": "mirror/back-010.png",
+          "front": "mirror/front-010.png"
+        },
+        {
+          "back": "mirror/back-011.png",
+          "front": "mirror/front-011.png"
+        },
+        {
+          "back": "mirror/back-012.png",
+          "front": "mirror/front-012.png"
+        },
+        {
+          "back": "mirror/back-013.png",
+          "front": "mirror/front-013.png"
+        },
+        {
+          "back": "mirror/back-014.png",
+          "front": "mirror/front-014.png"
+        },
+        {
+          "back": "mirror/back-015.png",
+          "front": "mirror/front-015.png"
+        },
+        {
+          "back": "mirror/back-016.png",
+          "front": "mirror/front-016.png"
+        },
+        {
+          "back": "mirror/back-017.png",
+          "front": "mirror/front-017.png"
+        },
+        {
+          "back": "mirror/back-018.png",
+          "front": "mirror/front-018.png"
+        },
+        {
+          "back": "mirror/back-019.png",
+          "front": "mirror/front-019.png"
+        },
+        {
+          "back": "mirror/back-020.png",
+          "front": "mirror/front-020.png"
+        },
+        {
+          "back": "mirror/back-021.png",
+          "front": "mirror/front-021.png"
+        },
+        {
+          "back": "mirror/back-022.png",
+          "front": "mirror/front-022.png"
+        },
+        {
+          "back": "mirror/back-023.png",
+          "front": "mirror/front-023.png"
+        },
+        {
+          "back": "mirror/back-024.png",
+          "front": "mirror/front-024.png"
+        },
+        {
+          "back": "mirror/back-025.png",
+          "front": "mirror/front-025.png"
+        },
+        {
+          "back": "mirror/back-026.png",
+          "front": "mirror/front-026.png"
+        },
+        {
+          "back": "mirror/back-027.png",
+          "front": "mirror/front-027.png"
+        },
+        {
+          "back": "mirror/back-028.png",
+          "front": "mirror/front-028.png"
+        },
+        {
+          "back": "mirror/back-029.png",
+          "front": "mirror/front-029.png"
+        },
+        {
+          "back": "mirror/back-030.png",
+          "front": "mirror/front-030.png"
+        },
+        {
+          "back": "mirror/back-031.png",
+          "front": "mirror/front-031.png"
+        },
+        {
+          "back": "mirror/back-032.png",
+          "front": "mirror/front-032.png"
+        },
+        {
+          "back": "mirror/back-033.png",
+          "front": "mirror/front-033.png"
+        },
+        {
+          "back": "mirror/back-034.png",
+          "front": "mirror/front-034.png"
+        },
+        {
+          "back": "mirror/back-035.png",
+          "front": "mirror/front-035.png"
+        },
+        {
+          "back": "mirror/back-036.png",
+          "front": "mirror/front-036.png"
+        },
+        {
+          "back": "mirror/back-037.png",
+          "front": "mirror/front-037.png"
+        },
+        {
+          "back": "mirror/back-038.png",
+          "front": "mirror/front-038.png"
+        },
+        {
+          "back": "mirror/back-039.png",
+          "front": "mirror/front-039.png"
+        },
+        {
+          "back": "mirror/back-040.png",
+          "front": "mirror/front-040.png"
+        },
+        {
+          "back": "mirror/back-041.png",
+          "front": "mirror/front-041.png"
+        },
+        {
+          "back": "mirror/back-042.png",
+          "front": "mirror/front-042.png"
+        },
+        {
+          "back": "mirror/back-043.png",
+          "front": "mirror/front-043.png"
+        },
+        {
+          "back": "mirror/back-044.png",
+          "front": "mirror/front-044.png"
+        },
+        {
+          "back": "mirror/back-045.png",
+          "front": "mirror/front-045.png"
+        },
+        {
+          "back": "mirror/back-046.png",
+          "front": "mirror/front-046.png"
+        },
+        {
+          "back": "mirror/back-047.png",
+          "front": "mirror/front-047.png"
+        },
+        {
+          "back": "mirror/back-048.png",
+          "front": "mirror/front-048.png"
+        },
+        {
+          "back": "mirror/back-049.png",
+          "front": "mirror/front-049.png"
+        },
+        {
+          "back": "mirror/back-050.png",
+          "front": "mirror/front-050.png"
+        },
+        {
+          "back": "mirror/back-051.png",
+          "front": "mirror/front-051.png"
+        },
+        {
+          "back": "mirror/back-052.png",
+          "front": "mirror/front-052.png"
+        },
+        {
+          "back": "mirror/back-053.png",
+          "front": "mirror/front-053.png"
+        },
+        {
+          "back": "mirror/back-054.png",
+          "front": "mirror/front-054.png"
+        },
+        {
+          "back": "mirror/back-055.png",
+          "front": "mirror/front-055.png"
+        },
+        {
+          "back": "mirror/back-056.png",
+          "front": "mirror/front-056.png"
+        },
+        {
+          "back": "mirror/back-057.png",
+          "front": "mirror/front-057.png"
+        },
+        {
+          "back": "mirror/back-058.png",
+          "front": "mirror/front-058.png"
+        },
+        {
+          "back": "mirror/back-059.png",
+          "front": "mirror/front-059.png"
+        },
+        {
+          "back": "mirror/back-060.png",
+          "front": "mirror/front-060.png"
+        },
+        {
+          "back": "mirror/back-061.png",
+          "front": "mirror/front-061.png"
+        },
+        {
+          "back": "mirror/back-062.png",
+          "front": "mirror/front-062.png"
+        },
+        {
+          "back": "mirror/back-063.png",
+          "front": "mirror/front-063.png"
+        }
+      ],
+      "effectInterval": 0.05
+    },
+    {
+      "key": "harp",
+      "files": [
+        "harp/character-00.png",
+        "harp/character-01.png",
+        "harp/character-02.png",
+        "harp/character-03.png",
+        "harp/character-04.png",
+        "harp/character-05.png",
+        "harp/character-06.png",
+        "harp/character-07.png",
+        "harp/character-08.png",
+        "harp/character-09.png",
+        "harp/character-10.png",
+        "harp/character-11.png",
+        "harp/character-12.png",
+        "harp/character-13.png",
+        "harp/character-14.png",
+        "harp/character-15.png"
+      ],
+      "interval": 0.2,
+      "effects": [
+        {
+          "back": "harp/back-000.png",
+          "front": "harp/front-000.png"
+        },
+        {
+          "back": "harp/back-001.png",
+          "front": "harp/front-001.png"
+        },
+        {
+          "back": "harp/back-002.png",
+          "front": "harp/front-002.png"
+        },
+        {
+          "back": "harp/back-003.png",
+          "front": "harp/front-003.png"
+        },
+        {
+          "back": "harp/back-004.png",
+          "front": "harp/front-004.png"
+        },
+        {
+          "back": "harp/back-005.png",
+          "front": "harp/front-005.png"
+        },
+        {
+          "back": "harp/back-006.png",
+          "front": "harp/front-006.png"
+        },
+        {
+          "back": "harp/back-007.png",
+          "front": "harp/front-007.png"
+        },
+        {
+          "back": "harp/back-008.png",
+          "front": "harp/front-008.png"
+        },
+        {
+          "back": "harp/back-009.png",
+          "front": "harp/front-009.png"
+        },
+        {
+          "back": "harp/back-010.png",
+          "front": "harp/front-010.png"
+        },
+        {
+          "back": "harp/back-011.png",
+          "front": "harp/front-011.png"
+        },
+        {
+          "back": "harp/back-012.png",
+          "front": "harp/front-012.png"
+        },
+        {
+          "back": "harp/back-013.png",
+          "front": "harp/front-013.png"
+        },
+        {
+          "back": "harp/back-014.png",
+          "front": "harp/front-014.png"
+        },
+        {
+          "back": "harp/back-015.png",
+          "front": "harp/front-015.png"
+        },
+        {
+          "back": "harp/back-016.png",
+          "front": "harp/front-016.png"
+        },
+        {
+          "back": "harp/back-017.png",
+          "front": "harp/front-017.png"
+        },
+        {
+          "back": "harp/back-018.png",
+          "front": "harp/front-018.png"
+        },
+        {
+          "back": "harp/back-019.png",
+          "front": "harp/front-019.png"
+        },
+        {
+          "back": "harp/back-020.png",
+          "front": "harp/front-020.png"
+        },
+        {
+          "back": "harp/back-021.png",
+          "front": "harp/front-021.png"
+        },
+        {
+          "back": "harp/back-022.png",
+          "front": "harp/front-022.png"
+        },
+        {
+          "back": "harp/back-023.png",
+          "front": "harp/front-023.png"
+        },
+        {
+          "back": "harp/back-024.png",
+          "front": "harp/front-024.png"
+        },
+        {
+          "back": "harp/back-025.png",
+          "front": "harp/front-025.png"
+        },
+        {
+          "back": "harp/back-026.png",
+          "front": "harp/front-026.png"
+        },
+        {
+          "back": "harp/back-027.png",
+          "front": "harp/front-027.png"
+        },
+        {
+          "back": "harp/back-028.png",
+          "front": "harp/front-028.png"
+        },
+        {
+          "back": "harp/back-029.png",
+          "front": "harp/front-029.png"
+        },
+        {
+          "back": "harp/back-030.png",
+          "front": "harp/front-030.png"
+        },
+        {
+          "back": "harp/back-031.png",
+          "front": "harp/front-031.png"
+        },
+        {
+          "back": "harp/back-032.png",
+          "front": "harp/front-032.png"
+        },
+        {
+          "back": "harp/back-033.png",
+          "front": "harp/front-033.png"
+        },
+        {
+          "back": "harp/back-034.png",
+          "front": "harp/front-034.png"
+        },
+        {
+          "back": "harp/back-035.png",
+          "front": "harp/front-035.png"
+        },
+        {
+          "back": "harp/back-036.png",
+          "front": "harp/front-036.png"
+        },
+        {
+          "back": "harp/back-037.png",
+          "front": "harp/front-037.png"
+        },
+        {
+          "back": "harp/back-038.png",
+          "front": "harp/front-038.png"
+        },
+        {
+          "back": "harp/back-039.png",
+          "front": "harp/front-039.png"
+        },
+        {
+          "back": "harp/back-040.png",
+          "front": "harp/front-040.png"
+        },
+        {
+          "back": "harp/back-041.png",
+          "front": "harp/front-041.png"
+        },
+        {
+          "back": "harp/back-042.png",
+          "front": "harp/front-042.png"
+        },
+        {
+          "back": "harp/back-043.png",
+          "front": "harp/front-043.png"
+        },
+        {
+          "back": "harp/back-044.png",
+          "front": "harp/front-044.png"
+        },
+        {
+          "back": "harp/back-045.png",
+          "front": "harp/front-045.png"
+        },
+        {
+          "back": "harp/back-046.png",
+          "front": "harp/front-046.png"
+        },
+        {
+          "back": "harp/back-047.png",
+          "front": "harp/front-047.png"
+        },
+        {
+          "back": "harp/back-048.png",
+          "front": "harp/front-048.png"
+        },
+        {
+          "back": "harp/back-049.png",
+          "front": "harp/front-049.png"
+        },
+        {
+          "back": "harp/back-050.png",
+          "front": "harp/front-050.png"
+        },
+        {
+          "back": "harp/back-051.png",
+          "front": "harp/front-051.png"
+        },
+        {
+          "back": "harp/back-052.png",
+          "front": "harp/front-052.png"
+        },
+        {
+          "back": "harp/back-053.png",
+          "front": "harp/front-053.png"
+        },
+        {
+          "back": "harp/back-054.png",
+          "front": "harp/front-054.png"
+        },
+        {
+          "back": "harp/back-055.png",
+          "front": "harp/front-055.png"
+        },
+        {
+          "back": "harp/back-056.png",
+          "front": "harp/front-056.png"
+        },
+        {
+          "back": "harp/back-057.png",
+          "front": "harp/front-057.png"
+        },
+        {
+          "back": "harp/back-058.png",
+          "front": "harp/front-058.png"
+        },
+        {
+          "back": "harp/back-059.png",
+          "front": "harp/front-059.png"
+        },
+        {
+          "back": "harp/back-060.png",
+          "front": "harp/front-060.png"
+        },
+        {
+          "back": "harp/back-061.png",
+          "front": "harp/front-061.png"
+        },
+        {
+          "back": "harp/back-062.png",
+          "front": "harp/front-062.png"
+        },
+        {
+          "back": "harp/back-063.png",
+          "front": "harp/front-063.png"
+        }
+      ],
+      "effectInterval": 0.05
+    },
+    {
+      "key": "perfume",
+      "files": [
+        "perfume/character-00.png",
+        "perfume/character-01.png",
+        "perfume/character-02.png",
+        "perfume/character-03.png",
+        "perfume/character-04.png",
+        "perfume/character-05.png",
+        "perfume/character-06.png",
+        "perfume/character-07.png",
+        "perfume/character-08.png",
+        "perfume/character-09.png",
+        "perfume/character-10.png",
+        "perfume/character-11.png",
+        "perfume/character-12.png",
+        "perfume/character-13.png",
+        "perfume/character-14.png",
+        "perfume/character-15.png"
+      ],
+      "interval": 0.2,
+      "effects": [
+        {
+          "back": "perfume/back-000.png",
+          "front": "perfume/front-000.png"
+        },
+        {
+          "back": "perfume/back-001.png",
+          "front": "perfume/front-001.png"
+        },
+        {
+          "back": "perfume/back-002.png",
+          "front": "perfume/front-002.png"
+        },
+        {
+          "back": "perfume/back-003.png",
+          "front": "perfume/front-003.png"
+        },
+        {
+          "back": "perfume/back-004.png",
+          "front": "perfume/front-004.png"
+        },
+        {
+          "back": "perfume/back-005.png",
+          "front": "perfume/front-005.png"
+        },
+        {
+          "back": "perfume/back-006.png",
+          "front": "perfume/front-006.png"
+        },
+        {
+          "back": "perfume/back-007.png",
+          "front": "perfume/front-007.png"
+        },
+        {
+          "back": "perfume/back-008.png",
+          "front": "perfume/front-008.png"
+        },
+        {
+          "back": "perfume/back-009.png",
+          "front": "perfume/front-009.png"
+        },
+        {
+          "back": "perfume/back-010.png",
+          "front": "perfume/front-010.png"
+        },
+        {
+          "back": "perfume/back-011.png",
+          "front": "perfume/front-011.png"
+        },
+        {
+          "back": "perfume/back-012.png",
+          "front": "perfume/front-012.png"
+        },
+        {
+          "back": "perfume/back-013.png",
+          "front": "perfume/front-013.png"
+        },
+        {
+          "back": "perfume/back-014.png",
+          "front": "perfume/front-014.png"
+        },
+        {
+          "back": "perfume/back-015.png",
+          "front": "perfume/front-015.png"
+        },
+        {
+          "back": "perfume/back-016.png",
+          "front": "perfume/front-016.png"
+        },
+        {
+          "back": "perfume/back-017.png",
+          "front": "perfume/front-017.png"
+        },
+        {
+          "back": "perfume/back-018.png",
+          "front": "perfume/front-018.png"
+        },
+        {
+          "back": "perfume/back-019.png",
+          "front": "perfume/front-019.png"
+        },
+        {
+          "back": "perfume/back-020.png",
+          "front": "perfume/front-020.png"
+        },
+        {
+          "back": "perfume/back-021.png",
+          "front": "perfume/front-021.png"
+        },
+        {
+          "back": "perfume/back-022.png",
+          "front": "perfume/front-022.png"
+        },
+        {
+          "back": "perfume/back-023.png",
+          "front": "perfume/front-023.png"
+        },
+        {
+          "back": "perfume/back-024.png",
+          "front": "perfume/front-024.png"
+        },
+        {
+          "back": "perfume/back-025.png",
+          "front": "perfume/front-025.png"
+        },
+        {
+          "back": "perfume/back-026.png",
+          "front": "perfume/front-026.png"
+        },
+        {
+          "back": "perfume/back-027.png",
+          "front": "perfume/front-027.png"
+        },
+        {
+          "back": "perfume/back-028.png",
+          "front": "perfume/front-028.png"
+        },
+        {
+          "back": "perfume/back-029.png",
+          "front": "perfume/front-029.png"
+        },
+        {
+          "back": "perfume/back-030.png",
+          "front": "perfume/front-030.png"
+        },
+        {
+          "back": "perfume/back-031.png",
+          "front": "perfume/front-031.png"
+        },
+        {
+          "back": "perfume/back-032.png",
+          "front": "perfume/front-032.png"
+        },
+        {
+          "back": "perfume/back-033.png",
+          "front": "perfume/front-033.png"
+        },
+        {
+          "back": "perfume/back-034.png",
+          "front": "perfume/front-034.png"
+        },
+        {
+          "back": "perfume/back-035.png",
+          "front": "perfume/front-035.png"
+        },
+        {
+          "back": "perfume/back-036.png",
+          "front": "perfume/front-036.png"
+        },
+        {
+          "back": "perfume/back-037.png",
+          "front": "perfume/front-037.png"
+        },
+        {
+          "back": "perfume/back-038.png",
+          "front": "perfume/front-038.png"
+        },
+        {
+          "back": "perfume/back-039.png",
+          "front": "perfume/front-039.png"
+        },
+        {
+          "back": "perfume/back-040.png",
+          "front": "perfume/front-040.png"
+        },
+        {
+          "back": "perfume/back-041.png",
+          "front": "perfume/front-041.png"
+        },
+        {
+          "back": "perfume/back-042.png",
+          "front": "perfume/front-042.png"
+        },
+        {
+          "back": "perfume/back-043.png",
+          "front": "perfume/front-043.png"
+        },
+        {
+          "back": "perfume/back-044.png",
+          "front": "perfume/front-044.png"
+        },
+        {
+          "back": "perfume/back-045.png",
+          "front": "perfume/front-045.png"
+        },
+        {
+          "back": "perfume/back-046.png",
+          "front": "perfume/front-046.png"
+        },
+        {
+          "back": "perfume/back-047.png",
+          "front": "perfume/front-047.png"
+        },
+        {
+          "back": "perfume/back-048.png",
+          "front": "perfume/front-048.png"
+        },
+        {
+          "back": "perfume/back-049.png",
+          "front": "perfume/front-049.png"
+        },
+        {
+          "back": "perfume/back-050.png",
+          "front": "perfume/front-050.png"
+        },
+        {
+          "back": "perfume/back-051.png",
+          "front": "perfume/front-051.png"
+        },
+        {
+          "back": "perfume/back-052.png",
+          "front": "perfume/front-052.png"
+        },
+        {
+          "back": "perfume/back-053.png",
+          "front": "perfume/front-053.png"
+        },
+        {
+          "back": "perfume/back-054.png",
+          "front": "perfume/front-054.png"
+        },
+        {
+          "back": "perfume/back-055.png",
+          "front": "perfume/front-055.png"
+        },
+        {
+          "back": "perfume/back-056.png",
+          "front": "perfume/front-056.png"
+        },
+        {
+          "back": "perfume/back-057.png",
+          "front": "perfume/front-057.png"
+        },
+        {
+          "back": "perfume/back-058.png",
+          "front": "perfume/front-058.png"
+        },
+        {
+          "back": "perfume/back-059.png",
+          "front": "perfume/front-059.png"
+        },
+        {
+          "back": "perfume/back-060.png",
+          "front": "perfume/front-060.png"
+        },
+        {
+          "back": "perfume/back-061.png",
+          "front": "perfume/front-061.png"
+        },
+        {
+          "back": "perfume/back-062.png",
+          "front": "perfume/front-062.png"
+        },
+        {
+          "back": "perfume/back-063.png",
+          "front": "perfume/front-063.png"
+        }
+      ],
+      "effectInterval": 0.05
+    },
+    {
+      "key": "bell",
+      "files": [
+        "bell/character-00.png",
+        "bell/character-01.png",
+        "bell/character-02.png",
+        "bell/character-03.png",
+        "bell/character-04.png",
+        "bell/character-05.png",
+        "bell/character-06.png",
+        "bell/character-07.png",
+        "bell/character-08.png",
+        "bell/character-09.png",
+        "bell/character-10.png",
+        "bell/character-11.png",
+        "bell/character-12.png",
+        "bell/character-13.png",
+        "bell/character-14.png",
+        "bell/character-15.png"
+      ],
+      "interval": 0.2,
+      "effects": [
+        {
+          "back": "bell/back-000.png",
+          "front": "bell/front-000.png"
+        },
+        {
+          "back": "bell/back-001.png",
+          "front": "bell/front-001.png"
+        },
+        {
+          "back": "bell/back-002.png",
+          "front": "bell/front-002.png"
+        },
+        {
+          "back": "bell/back-003.png",
+          "front": "bell/front-003.png"
+        },
+        {
+          "back": "bell/back-004.png",
+          "front": "bell/front-004.png"
+        },
+        {
+          "back": "bell/back-005.png",
+          "front": "bell/front-005.png"
+        },
+        {
+          "back": "bell/back-006.png",
+          "front": "bell/front-006.png"
+        },
+        {
+          "back": "bell/back-007.png",
+          "front": "bell/front-007.png"
+        },
+        {
+          "back": "bell/back-008.png",
+          "front": "bell/front-008.png"
+        },
+        {
+          "back": "bell/back-009.png",
+          "front": "bell/front-009.png"
+        },
+        {
+          "back": "bell/back-010.png",
+          "front": "bell/front-010.png"
+        },
+        {
+          "back": "bell/back-011.png",
+          "front": "bell/front-011.png"
+        },
+        {
+          "back": "bell/back-012.png",
+          "front": "bell/front-012.png"
+        },
+        {
+          "back": "bell/back-013.png",
+          "front": "bell/front-013.png"
+        },
+        {
+          "back": "bell/back-014.png",
+          "front": "bell/front-014.png"
+        },
+        {
+          "back": "bell/back-015.png",
+          "front": "bell/front-015.png"
+        },
+        {
+          "back": "bell/back-016.png",
+          "front": "bell/front-016.png"
+        },
+        {
+          "back": "bell/back-017.png",
+          "front": "bell/front-017.png"
+        },
+        {
+          "back": "bell/back-018.png",
+          "front": "bell/front-018.png"
+        },
+        {
+          "back": "bell/back-019.png",
+          "front": "bell/front-019.png"
+        },
+        {
+          "back": "bell/back-020.png",
+          "front": "bell/front-020.png"
+        },
+        {
+          "back": "bell/back-021.png",
+          "front": "bell/front-021.png"
+        },
+        {
+          "back": "bell/back-022.png",
+          "front": "bell/front-022.png"
+        },
+        {
+          "back": "bell/back-023.png",
+          "front": "bell/front-023.png"
+        },
+        {
+          "back": "bell/back-024.png",
+          "front": "bell/front-024.png"
+        },
+        {
+          "back": "bell/back-025.png",
+          "front": "bell/front-025.png"
+        },
+        {
+          "back": "bell/back-026.png",
+          "front": "bell/front-026.png"
+        },
+        {
+          "back": "bell/back-027.png",
+          "front": "bell/front-027.png"
+        },
+        {
+          "back": "bell/back-028.png",
+          "front": "bell/front-028.png"
+        },
+        {
+          "back": "bell/back-029.png",
+          "front": "bell/front-029.png"
+        },
+        {
+          "back": "bell/back-030.png",
+          "front": "bell/front-030.png"
+        },
+        {
+          "back": "bell/back-031.png",
+          "front": "bell/front-031.png"
+        },
+        {
+          "back": "bell/back-032.png",
+          "front": "bell/front-032.png"
+        },
+        {
+          "back": "bell/back-033.png",
+          "front": "bell/front-033.png"
+        },
+        {
+          "back": "bell/back-034.png",
+          "front": "bell/front-034.png"
+        },
+        {
+          "back": "bell/back-035.png",
+          "front": "bell/front-035.png"
+        },
+        {
+          "back": "bell/back-036.png",
+          "front": "bell/front-036.png"
+        },
+        {
+          "back": "bell/back-037.png",
+          "front": "bell/front-037.png"
+        },
+        {
+          "back": "bell/back-038.png",
+          "front": "bell/front-038.png"
+        },
+        {
+          "back": "bell/back-039.png",
+          "front": "bell/front-039.png"
+        },
+        {
+          "back": "bell/back-040.png",
+          "front": "bell/front-040.png"
+        },
+        {
+          "back": "bell/back-041.png",
+          "front": "bell/front-041.png"
+        },
+        {
+          "back": "bell/back-042.png",
+          "front": "bell/front-042.png"
+        },
+        {
+          "back": "bell/back-043.png",
+          "front": "bell/front-043.png"
+        },
+        {
+          "back": "bell/back-044.png",
+          "front": "bell/front-044.png"
+        },
+        {
+          "back": "bell/back-045.png",
+          "front": "bell/front-045.png"
+        },
+        {
+          "back": "bell/back-046.png",
+          "front": "bell/front-046.png"
+        },
+        {
+          "back": "bell/back-047.png",
+          "front": "bell/front-047.png"
+        },
+        {
+          "back": "bell/back-048.png",
+          "front": "bell/front-048.png"
+        },
+        {
+          "back": "bell/back-049.png",
+          "front": "bell/front-049.png"
+        },
+        {
+          "back": "bell/back-050.png",
+          "front": "bell/front-050.png"
+        },
+        {
+          "back": "bell/back-051.png",
+          "front": "bell/front-051.png"
+        },
+        {
+          "back": "bell/back-052.png",
+          "front": "bell/front-052.png"
+        },
+        {
+          "back": "bell/back-053.png",
+          "front": "bell/front-053.png"
+        },
+        {
+          "back": "bell/back-054.png",
+          "front": "bell/front-054.png"
+        },
+        {
+          "back": "bell/back-055.png",
+          "front": "bell/front-055.png"
+        },
+        {
+          "back": "bell/back-056.png",
+          "front": "bell/front-056.png"
+        },
+        {
+          "back": "bell/back-057.png",
+          "front": "bell/front-057.png"
+        },
+        {
+          "back": "bell/back-058.png",
+          "front": "bell/front-058.png"
+        },
+        {
+          "back": "bell/back-059.png",
+          "front": "bell/front-059.png"
+        },
+        {
+          "back": "bell/back-060.png",
+          "front": "bell/front-060.png"
+        },
+        {
+          "back": "bell/back-061.png",
+          "front": "bell/front-061.png"
+        },
+        {
+          "back": "bell/back-062.png",
+          "front": "bell/front-062.png"
+        },
+        {
+          "back": "bell/back-063.png",
+          "front": "bell/front-063.png"
+        }
+      ],
+      "effectInterval": 0.05
+    },
+    {
+      "key": "puff",
+      "files": [
+        "puff/character-00.png",
+        "puff/character-01.png",
+        "puff/character-02.png",
+        "puff/character-03.png",
+        "puff/character-04.png",
+        "puff/character-05.png",
+        "puff/character-06.png",
+        "puff/character-07.png",
+        "puff/character-08.png",
+        "puff/character-09.png",
+        "puff/character-10.png",
+        "puff/character-11.png",
+        "puff/character-12.png",
+        "puff/character-13.png",
+        "puff/character-14.png",
+        "puff/character-15.png"
+      ],
+      "interval": 0.2,
+      "effects": [
+        {
+          "back": "puff/back-000.png",
+          "front": "puff/front-000.png"
+        },
+        {
+          "back": "puff/back-001.png",
+          "front": "puff/front-001.png"
+        },
+        {
+          "back": "puff/back-002.png",
+          "front": "puff/front-002.png"
+        },
+        {
+          "back": "puff/back-003.png",
+          "front": "puff/front-003.png"
+        },
+        {
+          "back": "puff/back-004.png",
+          "front": "puff/front-004.png"
+        },
+        {
+          "back": "puff/back-005.png",
+          "front": "puff/front-005.png"
+        },
+        {
+          "back": "puff/back-006.png",
+          "front": "puff/front-006.png"
+        },
+        {
+          "back": "puff/back-007.png",
+          "front": "puff/front-007.png"
+        },
+        {
+          "back": "puff/back-008.png",
+          "front": "puff/front-008.png"
+        },
+        {
+          "back": "puff/back-009.png",
+          "front": "puff/front-009.png"
+        },
+        {
+          "back": "puff/back-010.png",
+          "front": "puff/front-010.png"
+        },
+        {
+          "back": "puff/back-011.png",
+          "front": "puff/front-011.png"
+        },
+        {
+          "back": "puff/back-012.png",
+          "front": "puff/front-012.png"
+        },
+        {
+          "back": "puff/back-013.png",
+          "front": "puff/front-013.png"
+        },
+        {
+          "back": "puff/back-014.png",
+          "front": "puff/front-014.png"
+        },
+        {
+          "back": "puff/back-015.png",
+          "front": "puff/front-015.png"
+        },
+        {
+          "back": "puff/back-016.png",
+          "front": "puff/front-016.png"
+        },
+        {
+          "back": "puff/back-017.png",
+          "front": "puff/front-017.png"
+        },
+        {
+          "back": "puff/back-018.png",
+          "front": "puff/front-018.png"
+        },
+        {
+          "back": "puff/back-019.png",
+          "front": "puff/front-019.png"
+        },
+        {
+          "back": "puff/back-020.png",
+          "front": "puff/front-020.png"
+        },
+        {
+          "back": "puff/back-021.png",
+          "front": "puff/front-021.png"
+        },
+        {
+          "back": "puff/back-022.png",
+          "front": "puff/front-022.png"
+        },
+        {
+          "back": "puff/back-023.png",
+          "front": "puff/front-023.png"
+        },
+        {
+          "back": "puff/back-024.png",
+          "front": "puff/front-024.png"
+        },
+        {
+          "back": "puff/back-025.png",
+          "front": "puff/front-025.png"
+        },
+        {
+          "back": "puff/back-026.png",
+          "front": "puff/front-026.png"
+        },
+        {
+          "back": "puff/back-027.png",
+          "front": "puff/front-027.png"
+        },
+        {
+          "back": "puff/back-028.png",
+          "front": "puff/front-028.png"
+        },
+        {
+          "back": "puff/back-029.png",
+          "front": "puff/front-029.png"
+        },
+        {
+          "back": "puff/back-030.png",
+          "front": "puff/front-030.png"
+        },
+        {
+          "back": "puff/back-031.png",
+          "front": "puff/front-031.png"
+        },
+        {
+          "back": "puff/back-032.png",
+          "front": "puff/front-032.png"
+        },
+        {
+          "back": "puff/back-033.png",
+          "front": "puff/front-033.png"
+        },
+        {
+          "back": "puff/back-034.png",
+          "front": "puff/front-034.png"
+        },
+        {
+          "back": "puff/back-035.png",
+          "front": "puff/front-035.png"
+        },
+        {
+          "back": "puff/back-036.png",
+          "front": "puff/front-036.png"
+        },
+        {
+          "back": "puff/back-037.png",
+          "front": "puff/front-037.png"
+        },
+        {
+          "back": "puff/back-038.png",
+          "front": "puff/front-038.png"
+        },
+        {
+          "back": "puff/back-039.png",
+          "front": "puff/front-039.png"
+        },
+        {
+          "back": "puff/back-040.png",
+          "front": "puff/front-040.png"
+        },
+        {
+          "back": "puff/back-041.png",
+          "front": "puff/front-041.png"
+        },
+        {
+          "back": "puff/back-042.png",
+          "front": "puff/front-042.png"
+        },
+        {
+          "back": "puff/back-043.png",
+          "front": "puff/front-043.png"
+        },
+        {
+          "back": "puff/back-044.png",
+          "front": "puff/front-044.png"
+        },
+        {
+          "back": "puff/back-045.png",
+          "front": "puff/front-045.png"
+        },
+        {
+          "back": "puff/back-046.png",
+          "front": "puff/front-046.png"
+        },
+        {
+          "back": "puff/back-047.png",
+          "front": "puff/front-047.png"
+        },
+        {
+          "back": "puff/back-048.png",
+          "front": "puff/front-048.png"
+        },
+        {
+          "back": "puff/back-049.png",
+          "front": "puff/front-049.png"
+        },
+        {
+          "back": "puff/back-050.png",
+          "front": "puff/front-050.png"
+        },
+        {
+          "back": "puff/back-051.png",
+          "front": "puff/front-051.png"
+        },
+        {
+          "back": "puff/back-052.png",
+          "front": "puff/front-052.png"
+        },
+        {
+          "back": "puff/back-053.png",
+          "front": "puff/front-053.png"
+        },
+        {
+          "back": "puff/back-054.png",
+          "front": "puff/front-054.png"
+        },
+        {
+          "back": "puff/back-055.png",
+          "front": "puff/front-055.png"
+        },
+        {
+          "back": "puff/back-056.png",
+          "front": "puff/front-056.png"
+        },
+        {
+          "back": "puff/back-057.png",
+          "front": "puff/front-057.png"
+        },
+        {
+          "back": "puff/back-058.png",
+          "front": "puff/front-058.png"
+        },
+        {
+          "back": "puff/back-059.png",
+          "front": "puff/front-059.png"
+        },
+        {
+          "back": "puff/back-060.png",
+          "front": "puff/front-060.png"
+        },
+        {
+          "back": "puff/back-061.png",
+          "front": "puff/front-061.png"
+        },
+        {
+          "back": "puff/back-062.png",
+          "front": "puff/front-062.png"
+        },
+        {
+          "back": "puff/back-063.png",
+          "front": "puff/front-063.png"
+        }
+      ],
+      "effectInterval": 0.05
+    },
+    {
+      "key": "princess",
+      "files": [
+        "princess/character-00.png",
+        "princess/character-01.png",
+        "princess/character-02.png",
+        "princess/character-03.png",
+        "princess/character-04.png",
+        "princess/character-05.png",
+        "princess/character-06.png",
+        "princess/character-07.png",
+        "princess/character-08.png",
+        "princess/character-09.png",
+        "princess/character-10.png",
+        "princess/character-11.png",
+        "princess/character-12.png",
+        "princess/character-13.png",
+        "princess/character-14.png",
+        "princess/character-15.png"
+      ],
+      "interval": 0.2,
+      "effects": [
+        {
+          "back": "princess/back-000.png",
+          "front": "princess/front-000.png"
+        },
+        {
+          "back": "princess/back-001.png",
+          "front": "princess/front-001.png"
+        },
+        {
+          "back": "princess/back-002.png",
+          "front": "princess/front-002.png"
+        },
+        {
+          "back": "princess/back-003.png",
+          "front": "princess/front-003.png"
+        },
+        {
+          "back": "princess/back-004.png",
+          "front": "princess/front-004.png"
+        },
+        {
+          "back": "princess/back-005.png",
+          "front": "princess/front-005.png"
+        },
+        {
+          "back": "princess/back-006.png",
+          "front": "princess/front-006.png"
+        },
+        {
+          "back": "princess/back-007.png",
+          "front": "princess/front-007.png"
+        },
+        {
+          "back": "princess/back-008.png",
+          "front": "princess/front-008.png"
+        },
+        {
+          "back": "princess/back-009.png",
+          "front": "princess/front-009.png"
+        },
+        {
+          "back": "princess/back-010.png",
+          "front": "princess/front-010.png"
+        },
+        {
+          "back": "princess/back-011.png",
+          "front": "princess/front-011.png"
+        },
+        {
+          "back": "princess/back-012.png",
+          "front": "princess/front-012.png"
+        },
+        {
+          "back": "princess/back-013.png",
+          "front": "princess/front-013.png"
+        },
+        {
+          "back": "princess/back-014.png",
+          "front": "princess/front-014.png"
+        },
+        {
+          "back": "princess/back-015.png",
+          "front": "princess/front-015.png"
+        },
+        {
+          "back": "princess/back-016.png",
+          "front": "princess/front-016.png"
+        },
+        {
+          "back": "princess/back-017.png",
+          "front": "princess/front-017.png"
+        },
+        {
+          "back": "princess/back-018.png",
+          "front": "princess/front-018.png"
+        },
+        {
+          "back": "princess/back-019.png",
+          "front": "princess/front-019.png"
+        },
+        {
+          "back": "princess/back-020.png",
+          "front": "princess/front-020.png"
+        },
+        {
+          "back": "princess/back-021.png",
+          "front": "princess/front-021.png"
+        },
+        {
+          "back": "princess/back-022.png",
+          "front": "princess/front-022.png"
+        },
+        {
+          "back": "princess/back-023.png",
+          "front": "princess/front-023.png"
+        },
+        {
+          "back": "princess/back-024.png",
+          "front": "princess/front-024.png"
+        },
+        {
+          "back": "princess/back-025.png",
+          "front": "princess/front-025.png"
+        },
+        {
+          "back": "princess/back-026.png",
+          "front": "princess/front-026.png"
+        },
+        {
+          "back": "princess/back-027.png",
+          "front": "princess/front-027.png"
+        },
+        {
+          "back": "princess/back-028.png",
+          "front": "princess/front-028.png"
+        },
+        {
+          "back": "princess/back-029.png",
+          "front": "princess/front-029.png"
+        },
+        {
+          "back": "princess/back-030.png",
+          "front": "princess/front-030.png"
+        },
+        {
+          "back": "princess/back-031.png",
+          "front": "princess/front-031.png"
+        },
+        {
+          "back": "princess/back-032.png",
+          "front": "princess/front-032.png"
+        },
+        {
+          "back": "princess/back-033.png",
+          "front": "princess/front-033.png"
+        },
+        {
+          "back": "princess/back-034.png",
+          "front": "princess/front-034.png"
+        },
+        {
+          "back": "princess/back-035.png",
+          "front": "princess/front-035.png"
+        },
+        {
+          "back": "princess/back-036.png",
+          "front": "princess/front-036.png"
+        },
+        {
+          "back": "princess/back-037.png",
+          "front": "princess/front-037.png"
+        },
+        {
+          "back": "princess/back-038.png",
+          "front": "princess/front-038.png"
+        },
+        {
+          "back": "princess/back-039.png",
+          "front": "princess/front-039.png"
+        },
+        {
+          "back": "princess/back-040.png",
+          "front": "princess/front-040.png"
+        },
+        {
+          "back": "princess/back-041.png",
+          "front": "princess/front-041.png"
+        },
+        {
+          "back": "princess/back-042.png",
+          "front": "princess/front-042.png"
+        },
+        {
+          "back": "princess/back-043.png",
+          "front": "princess/front-043.png"
+        },
+        {
+          "back": "princess/back-044.png",
+          "front": "princess/front-044.png"
+        },
+        {
+          "back": "princess/back-045.png",
+          "front": "princess/front-045.png"
+        },
+        {
+          "back": "princess/back-046.png",
+          "front": "princess/front-046.png"
+        },
+        {
+          "back": "princess/back-047.png",
+          "front": "princess/front-047.png"
+        },
+        {
+          "back": "princess/back-048.png",
+          "front": "princess/front-048.png"
+        },
+        {
+          "back": "princess/back-049.png",
+          "front": "princess/front-049.png"
+        },
+        {
+          "back": "princess/back-050.png",
+          "front": "princess/front-050.png"
+        },
+        {
+          "back": "princess/back-051.png",
+          "front": "princess/front-051.png"
+        },
+        {
+          "back": "princess/back-052.png",
+          "front": "princess/front-052.png"
+        },
+        {
+          "back": "princess/back-053.png",
+          "front": "princess/front-053.png"
+        },
+        {
+          "back": "princess/back-054.png",
+          "front": "princess/front-054.png"
+        },
+        {
+          "back": "princess/back-055.png",
+          "front": "princess/front-055.png"
+        },
+        {
+          "back": "princess/back-056.png",
+          "front": "princess/front-056.png"
+        },
+        {
+          "back": "princess/back-057.png",
+          "front": "princess/front-057.png"
+        },
+        {
+          "back": "princess/back-058.png",
+          "front": "princess/front-058.png"
+        },
+        {
+          "back": "princess/back-059.png",
+          "front": "princess/front-059.png"
+        },
+        {
+          "back": "princess/back-060.png",
+          "front": "princess/front-060.png"
+        },
+        {
+          "back": "princess/back-061.png",
+          "front": "princess/front-061.png"
+        },
+        {
+          "back": "princess/back-062.png",
+          "front": "princess/front-062.png"
+        },
+        {
+          "back": "princess/back-063.png",
+          "front": "princess/front-063.png"
+        }
+      ],
+      "effectInterval": 0.05
+    },
+    {
+      "key": "jump",
+      "files": [
+        "jump/character-00.png",
+        "jump/character-01.png",
+        "jump/character-02.png",
+        "jump/character-03.png",
+        "jump/character-04.png",
+        "jump/character-05.png",
+        "jump/character-06.png",
+        "jump/character-07.png",
+        "jump/character-08.png",
+        "jump/character-09.png",
+        "jump/character-10.png",
+        "jump/character-11.png",
+        "jump/character-12.png",
+        "jump/character-13.png",
+        "jump/character-14.png",
+        "jump/character-15.png"
+      ],
+      "interval": 0.2,
+      "effects": [
+        {
+          "back": "jump/back-000.png",
+          "front": "jump/front-000.png"
+        },
+        {
+          "back": "jump/back-001.png",
+          "front": "jump/front-001.png"
+        },
+        {
+          "back": "jump/back-002.png",
+          "front": "jump/front-002.png"
+        },
+        {
+          "back": "jump/back-003.png",
+          "front": "jump/front-003.png"
+        },
+        {
+          "back": "jump/back-004.png",
+          "front": "jump/front-004.png"
+        },
+        {
+          "back": "jump/back-005.png",
+          "front": "jump/front-005.png"
+        },
+        {
+          "back": "jump/back-006.png",
+          "front": "jump/front-006.png"
+        },
+        {
+          "back": "jump/back-007.png",
+          "front": "jump/front-007.png"
+        },
+        {
+          "back": "jump/back-008.png",
+          "front": "jump/front-008.png"
+        },
+        {
+          "back": "jump/back-009.png",
+          "front": "jump/front-009.png"
+        },
+        {
+          "back": "jump/back-010.png",
+          "front": "jump/front-010.png"
+        },
+        {
+          "back": "jump/back-011.png",
+          "front": "jump/front-011.png"
+        },
+        {
+          "back": "jump/back-012.png",
+          "front": "jump/front-012.png"
+        },
+        {
+          "back": "jump/back-013.png",
+          "front": "jump/front-013.png"
+        },
+        {
+          "back": "jump/back-014.png",
+          "front": "jump/front-014.png"
+        },
+        {
+          "back": "jump/back-015.png",
+          "front": "jump/front-015.png"
+        },
+        {
+          "back": "jump/back-016.png",
+          "front": "jump/front-016.png"
+        },
+        {
+          "back": "jump/back-017.png",
+          "front": "jump/front-017.png"
+        },
+        {
+          "back": "jump/back-018.png",
+          "front": "jump/front-018.png"
+        },
+        {
+          "back": "jump/back-019.png",
+          "front": "jump/front-019.png"
+        },
+        {
+          "back": "jump/back-020.png",
+          "front": "jump/front-020.png"
+        },
+        {
+          "back": "jump/back-021.png",
+          "front": "jump/front-021.png"
+        },
+        {
+          "back": "jump/back-022.png",
+          "front": "jump/front-022.png"
+        },
+        {
+          "back": "jump/back-023.png",
+          "front": "jump/front-023.png"
+        },
+        {
+          "back": "jump/back-024.png",
+          "front": "jump/front-024.png"
+        },
+        {
+          "back": "jump/back-025.png",
+          "front": "jump/front-025.png"
+        },
+        {
+          "back": "jump/back-026.png",
+          "front": "jump/front-026.png"
+        },
+        {
+          "back": "jump/back-027.png",
+          "front": "jump/front-027.png"
+        },
+        {
+          "back": "jump/back-028.png",
+          "front": "jump/front-028.png"
+        },
+        {
+          "back": "jump/back-029.png",
+          "front": "jump/front-029.png"
+        },
+        {
+          "back": "jump/back-030.png",
+          "front": "jump/front-030.png"
+        },
+        {
+          "back": "jump/back-031.png",
+          "front": "jump/front-031.png"
+        },
+        {
+          "back": "jump/back-032.png",
+          "front": "jump/front-032.png"
+        },
+        {
+          "back": "jump/back-033.png",
+          "front": "jump/front-033.png"
+        },
+        {
+          "back": "jump/back-034.png",
+          "front": "jump/front-034.png"
+        },
+        {
+          "back": "jump/back-035.png",
+          "front": "jump/front-035.png"
+        },
+        {
+          "back": "jump/back-036.png",
+          "front": "jump/front-036.png"
+        },
+        {
+          "back": "jump/back-037.png",
+          "front": "jump/front-037.png"
+        },
+        {
+          "back": "jump/back-038.png",
+          "front": "jump/front-038.png"
+        },
+        {
+          "back": "jump/back-039.png",
+          "front": "jump/front-039.png"
+        },
+        {
+          "back": "jump/back-040.png",
+          "front": "jump/front-040.png"
+        },
+        {
+          "back": "jump/back-041.png",
+          "front": "jump/front-041.png"
+        },
+        {
+          "back": "jump/back-042.png",
+          "front": "jump/front-042.png"
+        },
+        {
+          "back": "jump/back-043.png",
+          "front": "jump/front-043.png"
+        },
+        {
+          "back": "jump/back-044.png",
+          "front": "jump/front-044.png"
+        },
+        {
+          "back": "jump/back-045.png",
+          "front": "jump/front-045.png"
+        },
+        {
+          "back": "jump/back-046.png",
+          "front": "jump/front-046.png"
+        },
+        {
+          "back": "jump/back-047.png",
+          "front": "jump/front-047.png"
+        },
+        {
+          "back": "jump/back-048.png",
+          "front": "jump/front-048.png"
+        },
+        {
+          "back": "jump/back-049.png",
+          "front": "jump/front-049.png"
+        },
+        {
+          "back": "jump/back-050.png",
+          "front": "jump/front-050.png"
+        },
+        {
+          "back": "jump/back-051.png",
+          "front": "jump/front-051.png"
+        },
+        {
+          "back": "jump/back-052.png",
+          "front": "jump/front-052.png"
+        },
+        {
+          "back": "jump/back-053.png",
+          "front": "jump/front-053.png"
+        },
+        {
+          "back": "jump/back-054.png",
+          "front": "jump/front-054.png"
+        },
+        {
+          "back": "jump/back-055.png",
+          "front": "jump/front-055.png"
+        },
+        {
+          "back": "jump/back-056.png",
+          "front": "jump/front-056.png"
+        },
+        {
+          "back": "jump/back-057.png",
+          "front": "jump/front-057.png"
+        },
+        {
+          "back": "jump/back-058.png",
+          "front": "jump/front-058.png"
+        },
+        {
+          "back": "jump/back-059.png",
+          "front": "jump/front-059.png"
+        },
+        {
+          "back": "jump/back-060.png",
+          "front": "jump/front-060.png"
+        },
+        {
+          "back": "jump/back-061.png",
+          "front": "jump/front-061.png"
+        },
+        {
+          "back": "jump/back-062.png",
+          "front": "jump/front-062.png"
+        },
+        {
+          "back": "jump/back-063.png",
+          "front": "jump/front-063.png"
+        }
+      ],
+      "effectInterval": 0.05
+    },
+    {
+      "key": "gaze",
+      "files": [
+        "gaze/character-00.png",
+        "gaze/character-01.png",
+        "gaze/character-02.png",
+        "gaze/character-03.png",
+        "gaze/character-04.png",
+        "gaze/character-05.png",
+        "gaze/character-06.png",
+        "gaze/character-07.png",
+        "gaze/character-08.png",
+        "gaze/character-09.png",
+        "gaze/character-10.png",
+        "gaze/character-11.png",
+        "gaze/character-12.png",
+        "gaze/character-13.png",
+        "gaze/character-14.png",
+        "gaze/character-15.png"
+      ],
+      "interval": 0.2,
+      "effects": [
+        {
+          "back": "gaze/back-000.png",
+          "front": "gaze/front-000.png"
+        },
+        {
+          "back": "gaze/back-001.png",
+          "front": "gaze/front-001.png"
+        },
+        {
+          "back": "gaze/back-002.png",
+          "front": "gaze/front-002.png"
+        },
+        {
+          "back": "gaze/back-003.png",
+          "front": "gaze/front-003.png"
+        },
+        {
+          "back": "gaze/back-004.png",
+          "front": "gaze/front-004.png"
+        },
+        {
+          "back": "gaze/back-005.png",
+          "front": "gaze/front-005.png"
+        },
+        {
+          "back": "gaze/back-006.png",
+          "front": "gaze/front-006.png"
+        },
+        {
+          "back": "gaze/back-007.png",
+          "front": "gaze/front-007.png"
+        },
+        {
+          "back": "gaze/back-008.png",
+          "front": "gaze/front-008.png"
+        },
+        {
+          "back": "gaze/back-009.png",
+          "front": "gaze/front-009.png"
+        },
+        {
+          "back": "gaze/back-010.png",
+          "front": "gaze/front-010.png"
+        },
+        {
+          "back": "gaze/back-011.png",
+          "front": "gaze/front-011.png"
+        },
+        {
+          "back": "gaze/back-012.png",
+          "front": "gaze/front-012.png"
+        },
+        {
+          "back": "gaze/back-013.png",
+          "front": "gaze/front-013.png"
+        },
+        {
+          "back": "gaze/back-014.png",
+          "front": "gaze/front-014.png"
+        },
+        {
+          "back": "gaze/back-015.png",
+          "front": "gaze/front-015.png"
+        },
+        {
+          "back": "gaze/back-016.png",
+          "front": "gaze/front-016.png"
+        },
+        {
+          "back": "gaze/back-017.png",
+          "front": "gaze/front-017.png"
+        },
+        {
+          "back": "gaze/back-018.png",
+          "front": "gaze/front-018.png"
+        },
+        {
+          "back": "gaze/back-019.png",
+          "front": "gaze/front-019.png"
+        },
+        {
+          "back": "gaze/back-020.png",
+          "front": "gaze/front-020.png"
+        },
+        {
+          "back": "gaze/back-021.png",
+          "front": "gaze/front-021.png"
+        },
+        {
+          "back": "gaze/back-022.png",
+          "front": "gaze/front-022.png"
+        },
+        {
+          "back": "gaze/back-023.png",
+          "front": "gaze/front-023.png"
+        },
+        {
+          "back": "gaze/back-024.png",
+          "front": "gaze/front-024.png"
+        },
+        {
+          "back": "gaze/back-025.png",
+          "front": "gaze/front-025.png"
+        },
+        {
+          "back": "gaze/back-026.png",
+          "front": "gaze/front-026.png"
+        },
+        {
+          "back": "gaze/back-027.png",
+          "front": "gaze/front-027.png"
+        },
+        {
+          "back": "gaze/back-028.png",
+          "front": "gaze/front-028.png"
+        },
+        {
+          "back": "gaze/back-029.png",
+          "front": "gaze/front-029.png"
+        },
+        {
+          "back": "gaze/back-030.png",
+          "front": "gaze/front-030.png"
+        },
+        {
+          "back": "gaze/back-031.png",
+          "front": "gaze/front-031.png"
+        },
+        {
+          "back": "gaze/back-032.png",
+          "front": "gaze/front-032.png"
+        },
+        {
+          "back": "gaze/back-033.png",
+          "front": "gaze/front-033.png"
+        },
+        {
+          "back": "gaze/back-034.png",
+          "front": "gaze/front-034.png"
+        },
+        {
+          "back": "gaze/back-035.png",
+          "front": "gaze/front-035.png"
+        },
+        {
+          "back": "gaze/back-036.png",
+          "front": "gaze/front-036.png"
+        },
+        {
+          "back": "gaze/back-037.png",
+          "front": "gaze/front-037.png"
+        },
+        {
+          "back": "gaze/back-038.png",
+          "front": "gaze/front-038.png"
+        },
+        {
+          "back": "gaze/back-039.png",
+          "front": "gaze/front-039.png"
+        },
+        {
+          "back": "gaze/back-040.png",
+          "front": "gaze/front-040.png"
+        },
+        {
+          "back": "gaze/back-041.png",
+          "front": "gaze/front-041.png"
+        },
+        {
+          "back": "gaze/back-042.png",
+          "front": "gaze/front-042.png"
+        },
+        {
+          "back": "gaze/back-043.png",
+          "front": "gaze/front-043.png"
+        },
+        {
+          "back": "gaze/back-044.png",
+          "front": "gaze/front-044.png"
+        },
+        {
+          "back": "gaze/back-045.png",
+          "front": "gaze/front-045.png"
+        },
+        {
+          "back": "gaze/back-046.png",
+          "front": "gaze/front-046.png"
+        },
+        {
+          "back": "gaze/back-047.png",
+          "front": "gaze/front-047.png"
+        },
+        {
+          "back": "gaze/back-048.png",
+          "front": "gaze/front-048.png"
+        },
+        {
+          "back": "gaze/back-049.png",
+          "front": "gaze/front-049.png"
+        },
+        {
+          "back": "gaze/back-050.png",
+          "front": "gaze/front-050.png"
+        },
+        {
+          "back": "gaze/back-051.png",
+          "front": "gaze/front-051.png"
+        },
+        {
+          "back": "gaze/back-052.png",
+          "front": "gaze/front-052.png"
+        },
+        {
+          "back": "gaze/back-053.png",
+          "front": "gaze/front-053.png"
+        },
+        {
+          "back": "gaze/back-054.png",
+          "front": "gaze/front-054.png"
+        },
+        {
+          "back": "gaze/back-055.png",
+          "front": "gaze/front-055.png"
+        },
+        {
+          "back": "gaze/back-056.png",
+          "front": "gaze/front-056.png"
+        },
+        {
+          "back": "gaze/back-057.png",
+          "front": "gaze/front-057.png"
+        },
+        {
+          "back": "gaze/back-058.png",
+          "front": "gaze/front-058.png"
+        },
+        {
+          "back": "gaze/back-059.png",
+          "front": "gaze/front-059.png"
+        },
+        {
+          "back": "gaze/back-060.png",
+          "front": "gaze/front-060.png"
+        },
+        {
+          "back": "gaze/back-061.png",
+          "front": "gaze/front-061.png"
+        },
+        {
+          "back": "gaze/back-062.png",
+          "front": "gaze/front-062.png"
+        },
+        {
+          "back": "gaze/back-063.png",
+          "front": "gaze/front-063.png"
+        }
+      ],
+      "effectInterval": 0.05
+    },
+    {
+      "key": "drag-right",
+      "files": [
+        "drag-right/character-00.png",
+        "drag-right/character-01.png",
+        "drag-right/character-02.png",
+        "drag-right/character-03.png",
+        "drag-right/character-04.png",
+        "drag-right/character-05.png",
+        "drag-right/character-06.png",
+        "drag-right/character-07.png",
+        "drag-right/character-08.png",
+        "drag-right/character-09.png",
+        "drag-right/character-10.png",
+        "drag-right/character-11.png",
+        "drag-right/character-12.png",
+        "drag-right/character-13.png",
+        "drag-right/character-14.png",
+        "drag-right/character-15.png"
+      ],
+      "interval": 0.1,
+      "effects": [
+        {
+          "back": "drag-right/back-000.png",
+          "front": "drag-right/front-000.png"
+        },
+        {
+          "back": "drag-right/back-001.png",
+          "front": "drag-right/front-001.png"
+        },
+        {
+          "back": "drag-right/back-002.png",
+          "front": "drag-right/front-002.png"
+        },
+        {
+          "back": "drag-right/back-003.png",
+          "front": "drag-right/front-003.png"
+        },
+        {
+          "back": "drag-right/back-004.png",
+          "front": "drag-right/front-004.png"
+        },
+        {
+          "back": "drag-right/back-005.png",
+          "front": "drag-right/front-005.png"
+        },
+        {
+          "back": "drag-right/back-006.png",
+          "front": "drag-right/front-006.png"
+        },
+        {
+          "back": "drag-right/back-007.png",
+          "front": "drag-right/front-007.png"
+        },
+        {
+          "back": "drag-right/back-008.png",
+          "front": "drag-right/front-008.png"
+        },
+        {
+          "back": "drag-right/back-009.png",
+          "front": "drag-right/front-009.png"
+        },
+        {
+          "back": "drag-right/back-010.png",
+          "front": "drag-right/front-010.png"
+        },
+        {
+          "back": "drag-right/back-011.png",
+          "front": "drag-right/front-011.png"
+        },
+        {
+          "back": "drag-right/back-012.png",
+          "front": "drag-right/front-012.png"
+        },
+        {
+          "back": "drag-right/back-013.png",
+          "front": "drag-right/front-013.png"
+        },
+        {
+          "back": "drag-right/back-014.png",
+          "front": "drag-right/front-014.png"
+        },
+        {
+          "back": "drag-right/back-015.png",
+          "front": "drag-right/front-015.png"
+        },
+        {
+          "back": "drag-right/back-016.png",
+          "front": "drag-right/front-016.png"
+        },
+        {
+          "back": "drag-right/back-017.png",
+          "front": "drag-right/front-017.png"
+        },
+        {
+          "back": "drag-right/back-018.png",
+          "front": "drag-right/front-018.png"
+        },
+        {
+          "back": "drag-right/back-019.png",
+          "front": "drag-right/front-019.png"
+        },
+        {
+          "back": "drag-right/back-020.png",
+          "front": "drag-right/front-020.png"
+        },
+        {
+          "back": "drag-right/back-021.png",
+          "front": "drag-right/front-021.png"
+        },
+        {
+          "back": "drag-right/back-022.png",
+          "front": "drag-right/front-022.png"
+        },
+        {
+          "back": "drag-right/back-023.png",
+          "front": "drag-right/front-023.png"
+        },
+        {
+          "back": "drag-right/back-024.png",
+          "front": "drag-right/front-024.png"
+        },
+        {
+          "back": "drag-right/back-025.png",
+          "front": "drag-right/front-025.png"
+        },
+        {
+          "back": "drag-right/back-026.png",
+          "front": "drag-right/front-026.png"
+        },
+        {
+          "back": "drag-right/back-027.png",
+          "front": "drag-right/front-027.png"
+        },
+        {
+          "back": "drag-right/back-028.png",
+          "front": "drag-right/front-028.png"
+        },
+        {
+          "back": "drag-right/back-029.png",
+          "front": "drag-right/front-029.png"
+        },
+        {
+          "back": "drag-right/back-030.png",
+          "front": "drag-right/front-030.png"
+        },
+        {
+          "back": "drag-right/back-031.png",
+          "front": "drag-right/front-031.png"
+        }
+      ],
+      "effectInterval": 0.05
+    },
+    {
+      "key": "drag-left",
+      "files": [
+        "drag-left/character-00.png",
+        "drag-left/character-01.png",
+        "drag-left/character-02.png",
+        "drag-left/character-03.png",
+        "drag-left/character-04.png",
+        "drag-left/character-05.png",
+        "drag-left/character-06.png",
+        "drag-left/character-07.png",
+        "drag-left/character-08.png",
+        "drag-left/character-09.png",
+        "drag-left/character-10.png",
+        "drag-left/character-11.png",
+        "drag-left/character-12.png",
+        "drag-left/character-13.png",
+        "drag-left/character-14.png",
+        "drag-left/character-15.png"
+      ],
+      "interval": 0.1,
+      "effects": [
+        {
+          "back": "drag-left/back-000.png",
+          "front": "drag-left/front-000.png"
+        },
+        {
+          "back": "drag-left/back-001.png",
+          "front": "drag-left/front-001.png"
+        },
+        {
+          "back": "drag-left/back-002.png",
+          "front": "drag-left/front-002.png"
+        },
+        {
+          "back": "drag-left/back-003.png",
+          "front": "drag-left/front-003.png"
+        },
+        {
+          "back": "drag-left/back-004.png",
+          "front": "drag-left/front-004.png"
+        },
+        {
+          "back": "drag-left/back-005.png",
+          "front": "drag-left/front-005.png"
+        },
+        {
+          "back": "drag-left/back-006.png",
+          "front": "drag-left/front-006.png"
+        },
+        {
+          "back": "drag-left/back-007.png",
+          "front": "drag-left/front-007.png"
+        },
+        {
+          "back": "drag-left/back-008.png",
+          "front": "drag-left/front-008.png"
+        },
+        {
+          "back": "drag-left/back-009.png",
+          "front": "drag-left/front-009.png"
+        },
+        {
+          "back": "drag-left/back-010.png",
+          "front": "drag-left/front-010.png"
+        },
+        {
+          "back": "drag-left/back-011.png",
+          "front": "drag-left/front-011.png"
+        },
+        {
+          "back": "drag-left/back-012.png",
+          "front": "drag-left/front-012.png"
+        },
+        {
+          "back": "drag-left/back-013.png",
+          "front": "drag-left/front-013.png"
+        },
+        {
+          "back": "drag-left/back-014.png",
+          "front": "drag-left/front-014.png"
+        },
+        {
+          "back": "drag-left/back-015.png",
+          "front": "drag-left/front-015.png"
+        },
+        {
+          "back": "drag-left/back-016.png",
+          "front": "drag-left/front-016.png"
+        },
+        {
+          "back": "drag-left/back-017.png",
+          "front": "drag-left/front-017.png"
+        },
+        {
+          "back": "drag-left/back-018.png",
+          "front": "drag-left/front-018.png"
+        },
+        {
+          "back": "drag-left/back-019.png",
+          "front": "drag-left/front-019.png"
+        },
+        {
+          "back": "drag-left/back-020.png",
+          "front": "drag-left/front-020.png"
+        },
+        {
+          "back": "drag-left/back-021.png",
+          "front": "drag-left/front-021.png"
+        },
+        {
+          "back": "drag-left/back-022.png",
+          "front": "drag-left/front-022.png"
+        },
+        {
+          "back": "drag-left/back-023.png",
+          "front": "drag-left/front-023.png"
+        },
+        {
+          "back": "drag-left/back-024.png",
+          "front": "drag-left/front-024.png"
+        },
+        {
+          "back": "drag-left/back-025.png",
+          "front": "drag-left/front-025.png"
+        },
+        {
+          "back": "drag-left/back-026.png",
+          "front": "drag-left/front-026.png"
+        },
+        {
+          "back": "drag-left/back-027.png",
+          "front": "drag-left/front-027.png"
+        },
+        {
+          "back": "drag-left/back-028.png",
+          "front": "drag-left/front-028.png"
+        },
+        {
+          "back": "drag-left/back-029.png",
+          "front": "drag-left/front-029.png"
+        },
+        {
+          "back": "drag-left/back-030.png",
+          "front": "drag-left/front-030.png"
+        },
+        {
+          "back": "drag-left/back-031.png",
+          "front": "drag-left/front-031.png"
+        }
+      ],
+      "effectInterval": 0.05
+    },
+    {
+      "key": "sleeping",
+      "files": [
+        "sleeping/character-00.png",
+        "sleeping/character-01.png",
+        "sleeping/character-02.png",
+        "sleeping/character-03.png",
+        "sleeping/character-04.png",
+        "sleeping/character-05.png",
+        "sleeping/character-06.png",
+        "sleeping/character-07.png",
+        "sleeping/character-08.png",
+        "sleeping/character-09.png",
+        "sleeping/character-10.png",
+        "sleeping/character-11.png",
+        "sleeping/character-12.png",
+        "sleeping/character-13.png",
+        "sleeping/character-14.png",
+        "sleeping/character-15.png"
+      ],
+      "interval": 0.4,
+      "effects": [
+        {
+          "back": "sleeping/back-000.png",
+          "front": "sleeping/front-000.png"
+        },
+        {
+          "back": "sleeping/back-001.png",
+          "front": "sleeping/front-001.png"
+        },
+        {
+          "back": "sleeping/back-002.png",
+          "front": "sleeping/front-002.png"
+        },
+        {
+          "back": "sleeping/back-003.png",
+          "front": "sleeping/front-003.png"
+        },
+        {
+          "back": "sleeping/back-004.png",
+          "front": "sleeping/front-004.png"
+        },
+        {
+          "back": "sleeping/back-005.png",
+          "front": "sleeping/front-005.png"
+        },
+        {
+          "back": "sleeping/back-006.png",
+          "front": "sleeping/front-006.png"
+        },
+        {
+          "back": "sleeping/back-007.png",
+          "front": "sleeping/front-007.png"
+        },
+        {
+          "back": "sleeping/back-008.png",
+          "front": "sleeping/front-008.png"
+        },
+        {
+          "back": "sleeping/back-009.png",
+          "front": "sleeping/front-009.png"
+        },
+        {
+          "back": "sleeping/back-010.png",
+          "front": "sleeping/front-010.png"
+        },
+        {
+          "back": "sleeping/back-011.png",
+          "front": "sleeping/front-011.png"
+        },
+        {
+          "back": "sleeping/back-012.png",
+          "front": "sleeping/front-012.png"
+        },
+        {
+          "back": "sleeping/back-013.png",
+          "front": "sleeping/front-013.png"
+        },
+        {
+          "back": "sleeping/back-014.png",
+          "front": "sleeping/front-014.png"
+        },
+        {
+          "back": "sleeping/back-015.png",
+          "front": "sleeping/front-015.png"
+        },
+        {
+          "back": "sleeping/back-016.png",
+          "front": "sleeping/front-016.png"
+        },
+        {
+          "back": "sleeping/back-017.png",
+          "front": "sleeping/front-017.png"
+        },
+        {
+          "back": "sleeping/back-018.png",
+          "front": "sleeping/front-018.png"
+        },
+        {
+          "back": "sleeping/back-019.png",
+          "front": "sleeping/front-019.png"
+        },
+        {
+          "back": "sleeping/back-020.png",
+          "front": "sleeping/front-020.png"
+        },
+        {
+          "back": "sleeping/back-021.png",
+          "front": "sleeping/front-021.png"
+        },
+        {
+          "back": "sleeping/back-022.png",
+          "front": "sleeping/front-022.png"
+        },
+        {
+          "back": "sleeping/back-023.png",
+          "front": "sleeping/front-023.png"
+        },
+        {
+          "back": "sleeping/back-024.png",
+          "front": "sleeping/front-024.png"
+        },
+        {
+          "back": "sleeping/back-025.png",
+          "front": "sleeping/front-025.png"
+        },
+        {
+          "back": "sleeping/back-026.png",
+          "front": "sleeping/front-026.png"
+        },
+        {
+          "back": "sleeping/back-027.png",
+          "front": "sleeping/front-027.png"
+        },
+        {
+          "back": "sleeping/back-028.png",
+          "front": "sleeping/front-028.png"
+        },
+        {
+          "back": "sleeping/back-029.png",
+          "front": "sleeping/front-029.png"
+        },
+        {
+          "back": "sleeping/back-030.png",
+          "front": "sleeping/front-030.png"
+        },
+        {
+          "back": "sleeping/back-031.png",
+          "front": "sleeping/front-031.png"
+        },
+        {
+          "back": "sleeping/back-032.png",
+          "front": "sleeping/front-032.png"
+        },
+        {
+          "back": "sleeping/back-033.png",
+          "front": "sleeping/front-033.png"
+        },
+        {
+          "back": "sleeping/back-034.png",
+          "front": "sleeping/front-034.png"
+        },
+        {
+          "back": "sleeping/back-035.png",
+          "front": "sleeping/front-035.png"
+        },
+        {
+          "back": "sleeping/back-036.png",
+          "front": "sleeping/front-036.png"
+        },
+        {
+          "back": "sleeping/back-037.png",
+          "front": "sleeping/front-037.png"
+        },
+        {
+          "back": "sleeping/back-038.png",
+          "front": "sleeping/front-038.png"
+        },
+        {
+          "back": "sleeping/back-039.png",
+          "front": "sleeping/front-039.png"
+        },
+        {
+          "back": "sleeping/back-040.png",
+          "front": "sleeping/front-040.png"
+        },
+        {
+          "back": "sleeping/back-041.png",
+          "front": "sleeping/front-041.png"
+        },
+        {
+          "back": "sleeping/back-042.png",
+          "front": "sleeping/front-042.png"
+        },
+        {
+          "back": "sleeping/back-043.png",
+          "front": "sleeping/front-043.png"
+        },
+        {
+          "back": "sleeping/back-044.png",
+          "front": "sleeping/front-044.png"
+        },
+        {
+          "back": "sleeping/back-045.png",
+          "front": "sleeping/front-045.png"
+        },
+        {
+          "back": "sleeping/back-046.png",
+          "front": "sleeping/front-046.png"
+        },
+        {
+          "back": "sleeping/back-047.png",
+          "front": "sleeping/front-047.png"
+        },
+        {
+          "back": "sleeping/back-048.png",
+          "front": "sleeping/front-048.png"
+        },
+        {
+          "back": "sleeping/back-049.png",
+          "front": "sleeping/front-049.png"
+        },
+        {
+          "back": "sleeping/back-050.png",
+          "front": "sleeping/front-050.png"
+        },
+        {
+          "back": "sleeping/back-051.png",
+          "front": "sleeping/front-051.png"
+        },
+        {
+          "back": "sleeping/back-052.png",
+          "front": "sleeping/front-052.png"
+        },
+        {
+          "back": "sleeping/back-053.png",
+          "front": "sleeping/front-053.png"
+        },
+        {
+          "back": "sleeping/back-054.png",
+          "front": "sleeping/front-054.png"
+        },
+        {
+          "back": "sleeping/back-055.png",
+          "front": "sleeping/front-055.png"
+        },
+        {
+          "back": "sleeping/back-056.png",
+          "front": "sleeping/front-056.png"
+        },
+        {
+          "back": "sleeping/back-057.png",
+          "front": "sleeping/front-057.png"
+        },
+        {
+          "back": "sleeping/back-058.png",
+          "front": "sleeping/front-058.png"
+        },
+        {
+          "back": "sleeping/back-059.png",
+          "front": "sleeping/front-059.png"
+        },
+        {
+          "back": "sleeping/back-060.png",
+          "front": "sleeping/front-060.png"
+        },
+        {
+          "back": "sleeping/back-061.png",
+          "front": "sleeping/front-061.png"
+        },
+        {
+          "back": "sleeping/back-062.png",
+          "front": "sleeping/front-062.png"
+        },
+        {
+          "back": "sleeping/back-063.png",
+          "front": "sleeping/front-063.png"
+        },
+        {
+          "back": "sleeping/back-064.png",
+          "front": "sleeping/front-064.png"
+        },
+        {
+          "back": "sleeping/back-065.png",
+          "front": "sleeping/front-065.png"
+        },
+        {
+          "back": "sleeping/back-066.png",
+          "front": "sleeping/front-066.png"
+        },
+        {
+          "back": "sleeping/back-067.png",
+          "front": "sleeping/front-067.png"
+        },
+        {
+          "back": "sleeping/back-068.png",
+          "front": "sleeping/front-068.png"
+        },
+        {
+          "back": "sleeping/back-069.png",
+          "front": "sleeping/front-069.png"
+        },
+        {
+          "back": "sleeping/back-070.png",
+          "front": "sleeping/front-070.png"
+        },
+        {
+          "back": "sleeping/back-071.png",
+          "front": "sleeping/front-071.png"
+        },
+        {
+          "back": "sleeping/back-072.png",
+          "front": "sleeping/front-072.png"
+        },
+        {
+          "back": "sleeping/back-073.png",
+          "front": "sleeping/front-073.png"
+        },
+        {
+          "back": "sleeping/back-074.png",
+          "front": "sleeping/front-074.png"
+        },
+        {
+          "back": "sleeping/back-075.png",
+          "front": "sleeping/front-075.png"
+        },
+        {
+          "back": "sleeping/back-076.png",
+          "front": "sleeping/front-076.png"
+        },
+        {
+          "back": "sleeping/back-077.png",
+          "front": "sleeping/front-077.png"
+        },
+        {
+          "back": "sleeping/back-078.png",
+          "front": "sleeping/front-078.png"
+        },
+        {
+          "back": "sleeping/back-079.png",
+          "front": "sleeping/front-079.png"
+        },
+        {
+          "back": "sleeping/back-080.png",
+          "front": "sleeping/front-080.png"
+        },
+        {
+          "back": "sleeping/back-081.png",
+          "front": "sleeping/front-081.png"
+        },
+        {
+          "back": "sleeping/back-082.png",
+          "front": "sleeping/front-082.png"
+        },
+        {
+          "back": "sleeping/back-083.png",
+          "front": "sleeping/front-083.png"
+        },
+        {
+          "back": "sleeping/back-084.png",
+          "front": "sleeping/front-084.png"
+        },
+        {
+          "back": "sleeping/back-085.png",
+          "front": "sleeping/front-085.png"
+        },
+        {
+          "back": "sleeping/back-086.png",
+          "front": "sleeping/front-086.png"
+        },
+        {
+          "back": "sleeping/back-087.png",
+          "front": "sleeping/front-087.png"
+        },
+        {
+          "back": "sleeping/back-088.png",
+          "front": "sleeping/front-088.png"
+        },
+        {
+          "back": "sleeping/back-089.png",
+          "front": "sleeping/front-089.png"
+        },
+        {
+          "back": "sleeping/back-090.png",
+          "front": "sleeping/front-090.png"
+        },
+        {
+          "back": "sleeping/back-091.png",
+          "front": "sleeping/front-091.png"
+        },
+        {
+          "back": "sleeping/back-092.png",
+          "front": "sleeping/front-092.png"
+        },
+        {
+          "back": "sleeping/back-093.png",
+          "front": "sleeping/front-093.png"
+        },
+        {
+          "back": "sleeping/back-094.png",
+          "front": "sleeping/front-094.png"
+        },
+        {
+          "back": "sleeping/back-095.png",
+          "front": "sleeping/front-095.png"
+        },
+        {
+          "back": "sleeping/back-096.png",
+          "front": "sleeping/front-096.png"
+        },
+        {
+          "back": "sleeping/back-097.png",
+          "front": "sleeping/front-097.png"
+        },
+        {
+          "back": "sleeping/back-098.png",
+          "front": "sleeping/front-098.png"
+        },
+        {
+          "back": "sleeping/back-099.png",
+          "front": "sleeping/front-099.png"
+        },
+        {
+          "back": "sleeping/back-100.png",
+          "front": "sleeping/front-100.png"
+        },
+        {
+          "back": "sleeping/back-101.png",
+          "front": "sleeping/front-101.png"
+        },
+        {
+          "back": "sleeping/back-102.png",
+          "front": "sleeping/front-102.png"
+        },
+        {
+          "back": "sleeping/back-103.png",
+          "front": "sleeping/front-103.png"
+        },
+        {
+          "back": "sleeping/back-104.png",
+          "front": "sleeping/front-104.png"
+        },
+        {
+          "back": "sleeping/back-105.png",
+          "front": "sleeping/front-105.png"
+        },
+        {
+          "back": "sleeping/back-106.png",
+          "front": "sleeping/front-106.png"
+        },
+        {
+          "back": "sleeping/back-107.png",
+          "front": "sleeping/front-107.png"
+        },
+        {
+          "back": "sleeping/back-108.png",
+          "front": "sleeping/front-108.png"
+        },
+        {
+          "back": "sleeping/back-109.png",
+          "front": "sleeping/front-109.png"
+        },
+        {
+          "back": "sleeping/back-110.png",
+          "front": "sleeping/front-110.png"
+        },
+        {
+          "back": "sleeping/back-111.png",
+          "front": "sleeping/front-111.png"
+        },
+        {
+          "back": "sleeping/back-112.png",
+          "front": "sleeping/front-112.png"
+        },
+        {
+          "back": "sleeping/back-113.png",
+          "front": "sleeping/front-113.png"
+        },
+        {
+          "back": "sleeping/back-114.png",
+          "front": "sleeping/front-114.png"
+        },
+        {
+          "back": "sleeping/back-115.png",
+          "front": "sleeping/front-115.png"
+        },
+        {
+          "back": "sleeping/back-116.png",
+          "front": "sleeping/front-116.png"
+        },
+        {
+          "back": "sleeping/back-117.png",
+          "front": "sleeping/front-117.png"
+        },
+        {
+          "back": "sleeping/back-118.png",
+          "front": "sleeping/front-118.png"
+        },
+        {
+          "back": "sleeping/back-119.png",
+          "front": "sleeping/front-119.png"
+        },
+        {
+          "back": "sleeping/back-120.png",
+          "front": "sleeping/front-120.png"
+        },
+        {
+          "back": "sleeping/back-121.png",
+          "front": "sleeping/front-121.png"
+        },
+        {
+          "back": "sleeping/back-122.png",
+          "front": "sleeping/front-122.png"
+        },
+        {
+          "back": "sleeping/back-123.png",
+          "front": "sleeping/front-123.png"
+        },
+        {
+          "back": "sleeping/back-124.png",
+          "front": "sleeping/front-124.png"
+        },
+        {
+          "back": "sleeping/back-125.png",
+          "front": "sleeping/front-125.png"
+        },
+        {
+          "back": "sleeping/back-126.png",
+          "front": "sleeping/front-126.png"
+        },
+        {
+          "back": "sleeping/back-127.png",
+          "front": "sleeping/front-127.png"
+        }
+      ],
+      "effectInterval": 0.05
+    },
+    {
+      "key": "idle",
+      "files": [
+        "idle/character-00.png",
+        "idle/character-01.png",
+        "idle/character-02.png",
+        "idle/character-03.png",
+        "idle/character-04.png",
+        "idle/character-05.png",
+        "idle/character-06.png",
+        "idle/character-07.png",
+        "idle/character-08.png",
+        "idle/character-09.png",
+        "idle/character-10.png",
+        "idle/character-11.png",
+        "idle/character-12.png",
+        "idle/character-13.png",
+        "idle/character-14.png",
+        "idle/character-15.png"
+      ],
+      "interval": 0.2,
+      "effects": [
+        {
+          "back": "idle/back-000.png",
+          "front": "idle/front-000.png"
+        },
+        {
+          "back": "idle/back-001.png",
+          "front": "idle/front-001.png"
+        },
+        {
+          "back": "idle/back-002.png",
+          "front": "idle/front-002.png"
+        },
+        {
+          "back": "idle/back-003.png",
+          "front": "idle/front-003.png"
+        },
+        {
+          "back": "idle/back-004.png",
+          "front": "idle/front-004.png"
+        },
+        {
+          "back": "idle/back-005.png",
+          "front": "idle/front-005.png"
+        },
+        {
+          "back": "idle/back-006.png",
+          "front": "idle/front-006.png"
+        },
+        {
+          "back": "idle/back-007.png",
+          "front": "idle/front-007.png"
+        },
+        {
+          "back": "idle/back-008.png",
+          "front": "idle/front-008.png"
+        },
+        {
+          "back": "idle/back-009.png",
+          "front": "idle/front-009.png"
+        },
+        {
+          "back": "idle/back-010.png",
+          "front": "idle/front-010.png"
+        },
+        {
+          "back": "idle/back-011.png",
+          "front": "idle/front-011.png"
+        },
+        {
+          "back": "idle/back-012.png",
+          "front": "idle/front-012.png"
+        },
+        {
+          "back": "idle/back-013.png",
+          "front": "idle/front-013.png"
+        },
+        {
+          "back": "idle/back-014.png",
+          "front": "idle/front-014.png"
+        },
+        {
+          "back": "idle/back-015.png",
+          "front": "idle/front-015.png"
+        },
+        {
+          "back": "idle/back-016.png",
+          "front": "idle/front-016.png"
+        },
+        {
+          "back": "idle/back-017.png",
+          "front": "idle/front-017.png"
+        },
+        {
+          "back": "idle/back-018.png",
+          "front": "idle/front-018.png"
+        },
+        {
+          "back": "idle/back-019.png",
+          "front": "idle/front-019.png"
+        },
+        {
+          "back": "idle/back-020.png",
+          "front": "idle/front-020.png"
+        },
+        {
+          "back": "idle/back-021.png",
+          "front": "idle/front-021.png"
+        },
+        {
+          "back": "idle/back-022.png",
+          "front": "idle/front-022.png"
+        },
+        {
+          "back": "idle/back-023.png",
+          "front": "idle/front-023.png"
+        },
+        {
+          "back": "idle/back-024.png",
+          "front": "idle/front-024.png"
+        },
+        {
+          "back": "idle/back-025.png",
+          "front": "idle/front-025.png"
+        },
+        {
+          "back": "idle/back-026.png",
+          "front": "idle/front-026.png"
+        },
+        {
+          "back": "idle/back-027.png",
+          "front": "idle/front-027.png"
+        },
+        {
+          "back": "idle/back-028.png",
+          "front": "idle/front-028.png"
+        },
+        {
+          "back": "idle/back-029.png",
+          "front": "idle/front-029.png"
+        },
+        {
+          "back": "idle/back-030.png",
+          "front": "idle/front-030.png"
+        },
+        {
+          "back": "idle/back-031.png",
+          "front": "idle/front-031.png"
+        },
+        {
+          "back": "idle/back-032.png",
+          "front": "idle/front-032.png"
+        },
+        {
+          "back": "idle/back-033.png",
+          "front": "idle/front-033.png"
+        },
+        {
+          "back": "idle/back-034.png",
+          "front": "idle/front-034.png"
+        },
+        {
+          "back": "idle/back-035.png",
+          "front": "idle/front-035.png"
+        },
+        {
+          "back": "idle/back-036.png",
+          "front": "idle/front-036.png"
+        },
+        {
+          "back": "idle/back-037.png",
+          "front": "idle/front-037.png"
+        },
+        {
+          "back": "idle/back-038.png",
+          "front": "idle/front-038.png"
+        },
+        {
+          "back": "idle/back-039.png",
+          "front": "idle/front-039.png"
+        },
+        {
+          "back": "idle/back-040.png",
+          "front": "idle/front-040.png"
+        },
+        {
+          "back": "idle/back-041.png",
+          "front": "idle/front-041.png"
+        },
+        {
+          "back": "idle/back-042.png",
+          "front": "idle/front-042.png"
+        },
+        {
+          "back": "idle/back-043.png",
+          "front": "idle/front-043.png"
+        },
+        {
+          "back": "idle/back-044.png",
+          "front": "idle/front-044.png"
+        },
+        {
+          "back": "idle/back-045.png",
+          "front": "idle/front-045.png"
+        },
+        {
+          "back": "idle/back-046.png",
+          "front": "idle/front-046.png"
+        },
+        {
+          "back": "idle/back-047.png",
+          "front": "idle/front-047.png"
+        },
+        {
+          "back": "idle/back-048.png",
+          "front": "idle/front-048.png"
+        },
+        {
+          "back": "idle/back-049.png",
+          "front": "idle/front-049.png"
+        },
+        {
+          "back": "idle/back-050.png",
+          "front": "idle/front-050.png"
+        },
+        {
+          "back": "idle/back-051.png",
+          "front": "idle/front-051.png"
+        },
+        {
+          "back": "idle/back-052.png",
+          "front": "idle/front-052.png"
+        },
+        {
+          "back": "idle/back-053.png",
+          "front": "idle/front-053.png"
+        },
+        {
+          "back": "idle/back-054.png",
+          "front": "idle/front-054.png"
+        },
+        {
+          "back": "idle/back-055.png",
+          "front": "idle/front-055.png"
+        },
+        {
+          "back": "idle/back-056.png",
+          "front": "idle/front-056.png"
+        },
+        {
+          "back": "idle/back-057.png",
+          "front": "idle/front-057.png"
+        },
+        {
+          "back": "idle/back-058.png",
+          "front": "idle/front-058.png"
+        },
+        {
+          "back": "idle/back-059.png",
+          "front": "idle/front-059.png"
+        },
+        {
+          "back": "idle/back-060.png",
+          "front": "idle/front-060.png"
+        },
+        {
+          "back": "idle/back-061.png",
+          "front": "idle/front-061.png"
+        },
+        {
+          "back": "idle/back-062.png",
+          "front": "idle/front-062.png"
+        },
+        {
+          "back": "idle/back-063.png",
+          "front": "idle/front-063.png"
+        }
+      ],
+      "effectInterval": 0.05
+    },
+    {
+      "key": "failed",
+      "files": [
+        "failed/character-00.png",
+        "failed/character-01.png",
+        "failed/character-02.png",
+        "failed/character-03.png",
+        "failed/character-04.png",
+        "failed/character-05.png",
+        "failed/character-06.png",
+        "failed/character-07.png",
+        "failed/character-08.png",
+        "failed/character-09.png",
+        "failed/character-10.png",
+        "failed/character-11.png",
+        "failed/character-12.png",
+        "failed/character-13.png",
+        "failed/character-14.png",
+        "failed/character-15.png"
+      ],
+      "interval": 0.2,
+      "effects": [
+        {
+          "back": "failed/back-000.png",
+          "front": "failed/front-000.png"
+        },
+        {
+          "back": "failed/back-001.png",
+          "front": "failed/front-001.png"
+        },
+        {
+          "back": "failed/back-002.png",
+          "front": "failed/front-002.png"
+        },
+        {
+          "back": "failed/back-003.png",
+          "front": "failed/front-003.png"
+        },
+        {
+          "back": "failed/back-004.png",
+          "front": "failed/front-004.png"
+        },
+        {
+          "back": "failed/back-005.png",
+          "front": "failed/front-005.png"
+        },
+        {
+          "back": "failed/back-006.png",
+          "front": "failed/front-006.png"
+        },
+        {
+          "back": "failed/back-007.png",
+          "front": "failed/front-007.png"
+        },
+        {
+          "back": "failed/back-008.png",
+          "front": "failed/front-008.png"
+        },
+        {
+          "back": "failed/back-009.png",
+          "front": "failed/front-009.png"
+        },
+        {
+          "back": "failed/back-010.png",
+          "front": "failed/front-010.png"
+        },
+        {
+          "back": "failed/back-011.png",
+          "front": "failed/front-011.png"
+        },
+        {
+          "back": "failed/back-012.png",
+          "front": "failed/front-012.png"
+        },
+        {
+          "back": "failed/back-013.png",
+          "front": "failed/front-013.png"
+        },
+        {
+          "back": "failed/back-014.png",
+          "front": "failed/front-014.png"
+        },
+        {
+          "back": "failed/back-015.png",
+          "front": "failed/front-015.png"
+        },
+        {
+          "back": "failed/back-016.png",
+          "front": "failed/front-016.png"
+        },
+        {
+          "back": "failed/back-017.png",
+          "front": "failed/front-017.png"
+        },
+        {
+          "back": "failed/back-018.png",
+          "front": "failed/front-018.png"
+        },
+        {
+          "back": "failed/back-019.png",
+          "front": "failed/front-019.png"
+        },
+        {
+          "back": "failed/back-020.png",
+          "front": "failed/front-020.png"
+        },
+        {
+          "back": "failed/back-021.png",
+          "front": "failed/front-021.png"
+        },
+        {
+          "back": "failed/back-022.png",
+          "front": "failed/front-022.png"
+        },
+        {
+          "back": "failed/back-023.png",
+          "front": "failed/front-023.png"
+        },
+        {
+          "back": "failed/back-024.png",
+          "front": "failed/front-024.png"
+        },
+        {
+          "back": "failed/back-025.png",
+          "front": "failed/front-025.png"
+        },
+        {
+          "back": "failed/back-026.png",
+          "front": "failed/front-026.png"
+        },
+        {
+          "back": "failed/back-027.png",
+          "front": "failed/front-027.png"
+        },
+        {
+          "back": "failed/back-028.png",
+          "front": "failed/front-028.png"
+        },
+        {
+          "back": "failed/back-029.png",
+          "front": "failed/front-029.png"
+        },
+        {
+          "back": "failed/back-030.png",
+          "front": "failed/front-030.png"
+        },
+        {
+          "back": "failed/back-031.png",
+          "front": "failed/front-031.png"
+        },
+        {
+          "back": "failed/back-032.png",
+          "front": "failed/front-032.png"
+        },
+        {
+          "back": "failed/back-033.png",
+          "front": "failed/front-033.png"
+        },
+        {
+          "back": "failed/back-034.png",
+          "front": "failed/front-034.png"
+        },
+        {
+          "back": "failed/back-035.png",
+          "front": "failed/front-035.png"
+        },
+        {
+          "back": "failed/back-036.png",
+          "front": "failed/front-036.png"
+        },
+        {
+          "back": "failed/back-037.png",
+          "front": "failed/front-037.png"
+        },
+        {
+          "back": "failed/back-038.png",
+          "front": "failed/front-038.png"
+        },
+        {
+          "back": "failed/back-039.png",
+          "front": "failed/front-039.png"
+        },
+        {
+          "back": "failed/back-040.png",
+          "front": "failed/front-040.png"
+        },
+        {
+          "back": "failed/back-041.png",
+          "front": "failed/front-041.png"
+        },
+        {
+          "back": "failed/back-042.png",
+          "front": "failed/front-042.png"
+        },
+        {
+          "back": "failed/back-043.png",
+          "front": "failed/front-043.png"
+        },
+        {
+          "back": "failed/back-044.png",
+          "front": "failed/front-044.png"
+        },
+        {
+          "back": "failed/back-045.png",
+          "front": "failed/front-045.png"
+        },
+        {
+          "back": "failed/back-046.png",
+          "front": "failed/front-046.png"
+        },
+        {
+          "back": "failed/back-047.png",
+          "front": "failed/front-047.png"
+        },
+        {
+          "back": "failed/back-048.png",
+          "front": "failed/front-048.png"
+        },
+        {
+          "back": "failed/back-049.png",
+          "front": "failed/front-049.png"
+        },
+        {
+          "back": "failed/back-050.png",
+          "front": "failed/front-050.png"
+        },
+        {
+          "back": "failed/back-051.png",
+          "front": "failed/front-051.png"
+        },
+        {
+          "back": "failed/back-052.png",
+          "front": "failed/front-052.png"
+        },
+        {
+          "back": "failed/back-053.png",
+          "front": "failed/front-053.png"
+        },
+        {
+          "back": "failed/back-054.png",
+          "front": "failed/front-054.png"
+        },
+        {
+          "back": "failed/back-055.png",
+          "front": "failed/front-055.png"
+        },
+        {
+          "back": "failed/back-056.png",
+          "front": "failed/front-056.png"
+        },
+        {
+          "back": "failed/back-057.png",
+          "front": "failed/front-057.png"
+        },
+        {
+          "back": "failed/back-058.png",
+          "front": "failed/front-058.png"
+        },
+        {
+          "back": "failed/back-059.png",
+          "front": "failed/front-059.png"
+        },
+        {
+          "back": "failed/back-060.png",
+          "front": "failed/front-060.png"
+        },
+        {
+          "back": "failed/back-061.png",
+          "front": "failed/front-061.png"
+        },
+        {
+          "back": "failed/back-062.png",
+          "front": "failed/front-062.png"
+        },
+        {
+          "back": "failed/back-063.png",
+          "front": "failed/front-063.png"
+        }
+      ],
+      "effectInterval": 0.05
+    }
+  ],
+  "neutral": "neutral.png",
+  "userApproved": true,
+  "canonicalLandmarksCertified": false,
+  "delivery": "current-v63"
+}
