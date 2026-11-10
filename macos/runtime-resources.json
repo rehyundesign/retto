@@ -17930,8 +17930,8 @@
       "sha256": "ed447880d8b3a0c713c1ca254b0c8ec5786418fc9f564a165fa57088fd454a90"
     },
     "AngelFrames/manifest.json": {
-      "source": "tools/angel-skin/native-v1-20261106/manifest.json",
-      "sha256": "511a2ee3d39013cfdc0e25ab24876c8ba771b95e671eb598b350976103e3cb87"
+      "source": "assets/runtime-release-20261110/AngelFrames/manifest.json",
+      "sha256": "09e695c4408e2e8211e23a04e7f650e4e845f30f895b5deef19049f8063949cd"
     },
     "AngelFrames/running/000.png": {
       "source": "assets/runtime-release-20261110/AngelFrames/running/000.png",
@@ -125940,6 +125940,14 @@
     "spritesheet.webp": {
       "source": "assets/spritesheet.webp",
       "sha256": "3a7d6c1cf341a5ffbe3e8903348698c99d2302bff352d37d735d2aa6da8801c9"
+    },
+    "spritesheet-rilakkuma.webp": {
+      "source": "assets/runtime-release-20261110/spritesheet-rilakkuma.webp",
+      "sha256": "3b58784a8af70c427bbae20331dc1711d403bc95443ff841236cf293f2911699"
+    },
+    "spritesheet-rilakkuma-cape.webp": {
+      "source": "assets/runtime-release-20261110/spritesheet-rilakkuma-cape.webp",
+      "sha256": "55727f3f0dd159d975471b07836130e210cb347c424adb49ebe5a196645e4994"
     }
   }
 }
