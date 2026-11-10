@@ -17934,260 +17934,260 @@
       "sha256": "511a2ee3d39013cfdc0e25ab24876c8ba771b95e671eb598b350976103e3cb87"
     },
     "AngelFrames/running/000.png": {
-      "source": "assets/runtime/AngelFrames/running/000.png",
-      "sha256": "3d090364317204fec445e9503ea4633c7f9e8df87590820d3a98a5806bccdb64"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/000.png",
+      "sha256": "f85d48347c09e2e6d7f156955e37381957bec260c3505cc630b5f8a888678e93"
     },
     "AngelFrames/running/001.png": {
-      "source": "assets/runtime/AngelFrames/running/001.png",
-      "sha256": "21f4508482e68e271541c8bbb0ec9e3c41ca42ef79d1fb3956d95dd5af4aabd7"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/001.png",
+      "sha256": "aa439e4cfdd68bc1df93c2c3b3a1767ca1c41380e7810977a49a853a082efc27"
     },
     "AngelFrames/running/002.png": {
-      "source": "assets/runtime/AngelFrames/running/002.png",
-      "sha256": "d525f9107eefc795bb8d0147127deac5a54b19cfa6b8a44353b9cb917ad5481b"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/002.png",
+      "sha256": "719703115e03b15749381d9e87077a4a27d99d14fca63564c42e4d0388c01bd5"
     },
     "AngelFrames/running/003.png": {
-      "source": "assets/runtime/AngelFrames/running/003.png",
-      "sha256": "51d07a060a6194466b7325f0ce04c4d691672c3bf52d08b46f78054e74fbca91"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/003.png",
+      "sha256": "39d362ca0ebd9021dab28d7a5efb25d504060f09b0bbfcfacf18584ee8f4da03"
     },
     "AngelFrames/running/004.png": {
-      "source": "assets/runtime/AngelFrames/running/004.png",
-      "sha256": "204a6e8fe2b7908117193e401659963f25808614b2b627d9ced9ef5337bbb622"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/004.png",
+      "sha256": "a322b515d4e3a41ee0cb070fa7337bc8db38eeeff2db7b52e7e8e54be4856ebf"
     },
     "AngelFrames/running/005.png": {
-      "source": "assets/runtime/AngelFrames/running/005.png",
-      "sha256": "3e1a740de4323c48797fac4010bf9d7dbf1c5c63bf53a4c852495c9c8555c113"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/005.png",
+      "sha256": "4a8933af4663ecccfebfdfb32dab97538b9f72e176a198efca2b330a9f1c4116"
     },
     "AngelFrames/running/006.png": {
-      "source": "assets/runtime/AngelFrames/running/006.png",
-      "sha256": "91e7907173383de4ebdf8d77c4d35bad93f78c6503c9cb7015df757d07220a49"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/006.png",
+      "sha256": "9fddbd35b3d139d88499ac1991ee5e73af7ea59f1505ad94b692f4c9b49b5203"
     },
     "AngelFrames/running/007.png": {
-      "source": "assets/runtime/AngelFrames/running/007.png",
-      "sha256": "275693eacbd8eeaf1a228a3a78477c63789111a342b4958591d989674171e23e"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/007.png",
+      "sha256": "4d0cb6c7f952afbb95c9c19475761e4d466e266b5b5e40b3d07896d399c376df"
     },
     "AngelFrames/running/008.png": {
-      "source": "assets/runtime/AngelFrames/running/008.png",
-      "sha256": "5996ab6989beb147a5b48dc5bc428ad00cbb3cb829817b0f56b24b643a32559a"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/008.png",
+      "sha256": "22525f91e824e2d1d4e78e21adf758e36a2a1aee4facec46f89ae85d68d79880"
     },
     "AngelFrames/running/009.png": {
-      "source": "assets/runtime/AngelFrames/running/009.png",
-      "sha256": "c31012dcf45286ffaffb76e6bb2cd9954deebf6a762b30c03c27f3fd4903b453"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/009.png",
+      "sha256": "40946232251b13ae8b87fb76726baf084c031769152f1a13d52c518deed68c36"
     },
     "AngelFrames/running/010.png": {
-      "source": "assets/runtime/AngelFrames/running/010.png",
-      "sha256": "585fe09c04c6462e28fca48db0f8053242cf15fb63e6b360086da5e9a9a77566"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/010.png",
+      "sha256": "98dd8a4697a70a0b0c4d8c8808ade4e319c9c0bfb4624e5ea7aa3c70b2e41c2c"
     },
     "AngelFrames/running/011.png": {
-      "source": "assets/runtime/AngelFrames/running/011.png",
-      "sha256": "f91e138cd967236cc0a71488697045a91f63ffe7512d3444e0c281edb84266c0"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/011.png",
+      "sha256": "9993b58ebe33b445021b66955c29da953045af8cd02f41db71aff308278a1712"
     },
     "AngelFrames/running/012.png": {
-      "source": "assets/runtime/AngelFrames/running/012.png",
-      "sha256": "4cf2924b680fea3bd62a0c8165ebde5f8ac301be232d4c5ce668987893641814"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/012.png",
+      "sha256": "ccad6f825117d8f51a8d4e2c187f467cffc0652136b50c148e594d1d7fc291c3"
     },
     "AngelFrames/running/013.png": {
-      "source": "assets/runtime/AngelFrames/running/013.png",
-      "sha256": "e0b44242b1a0657ca9c076b7455097bd8f802f3bf8be529d641f141788785ed7"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/013.png",
+      "sha256": "0066b499d63f5be497d9e5864b01a4d2bef0fb328ca7de4db596dcad3a9a5c99"
     },
     "AngelFrames/running/014.png": {
-      "source": "assets/runtime/AngelFrames/running/014.png",
-      "sha256": "04bd953384978b2b44b751003d54f955bd2e0ca0514ee0dcf5f40ec10b6e9e7e"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/014.png",
+      "sha256": "70621077d41a611c0d48f20121b70b74ec64ed293b5bded1018df879c3489a27"
     },
     "AngelFrames/running/015.png": {
-      "source": "assets/runtime/AngelFrames/running/015.png",
-      "sha256": "6c833a4b15bbba6998286ec1b8f918a7601d22aaf12a901fd218f0fa40a23ac3"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/015.png",
+      "sha256": "21f2305af2034075c049cda96e35203915191bd31a71315da1d714958a21ca79"
     },
     "AngelFrames/running/016.png": {
-      "source": "assets/runtime/AngelFrames/running/016.png",
-      "sha256": "02a57118cf20951eeabe9d73a33828e18952a9b587e7949be8de13338dac2bf3"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/016.png",
+      "sha256": "bdca9658409b46e307219a0fe84a7ce1b03a4cdab9deccf0997ed62b4e10a6e5"
     },
     "AngelFrames/running/017.png": {
-      "source": "assets/runtime/AngelFrames/running/017.png",
-      "sha256": "87ceb2c74e78425e4ceee78e93e95956f1b15af94185eb05059cfca21802a068"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/017.png",
+      "sha256": "c9adc43f1a400e4865379d25635d670a3f137fc36f09f12d75c4a99e798a92f5"
     },
     "AngelFrames/running/018.png": {
-      "source": "assets/runtime/AngelFrames/running/018.png",
-      "sha256": "acda73232cb435793d0f4fc0391e5d22571eb38b1f568c0962714903c0341148"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/018.png",
+      "sha256": "55997812178d670318cf17b08e5eb002b1ec95c37a98356346e7a9b432a1fb08"
     },
     "AngelFrames/running/019.png": {
-      "source": "assets/runtime/AngelFrames/running/019.png",
-      "sha256": "5670a32bf9f62879dc9788ad78c4c2cc7f8d810c7e2bbe514478e2a8b453feef"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/019.png",
+      "sha256": "224e25702b465453ef07d2080a87ab953cc27fed6fcecf512d06a262c0726c57"
     },
     "AngelFrames/running/020.png": {
-      "source": "assets/runtime/AngelFrames/running/020.png",
-      "sha256": "c649cd866ff1784bfa3e16d0cd0f37fcd8521cfbec4cc69fe41edd83302e4164"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/020.png",
+      "sha256": "5323d14e09e04dca5fb1a8a5b1d0492cb37fa8a442ea3b6d06e6533bbb59e307"
     },
     "AngelFrames/running/021.png": {
-      "source": "assets/runtime/AngelFrames/running/021.png",
-      "sha256": "f58afe10cf44dcbe28fee16137e69d3f3b2fed0f9c68a6fcb518c61054a87526"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/021.png",
+      "sha256": "a9fc32d1919fd40da39ac4402d0bbbcc3fcd440c7894599d14d9910cabc94113"
     },
     "AngelFrames/running/022.png": {
-      "source": "assets/runtime/AngelFrames/running/022.png",
-      "sha256": "57801e1147f573d385a3a1f7da3148500b567c42ad2c7dda90bcbf101ce0f27c"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/022.png",
+      "sha256": "d8dae82c4474668452143f03a1af7385a3f23dfc3e8400e05c3c2371a58a1311"
     },
     "AngelFrames/running/023.png": {
-      "source": "assets/runtime/AngelFrames/running/023.png",
-      "sha256": "fba8e694d9598408f8389f0c320148555db3ce466fd96399f607d6c2a656039c"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/023.png",
+      "sha256": "49c4da812c88bfbcde4e673d720f1f197938822cdc4d6d837b5ec27c4b49c40c"
     },
     "AngelFrames/running/024.png": {
-      "source": "assets/runtime/AngelFrames/running/024.png",
-      "sha256": "4c834c8e895cf3e1dd57562a6a2c234cbb6b356465d951e355fdc18a3c7fb6d2"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/024.png",
+      "sha256": "efe3e56ba75cea269a0a2f09cfe7c18f7817241840bff75a417c72d7e70b356b"
     },
     "AngelFrames/running/025.png": {
-      "source": "assets/runtime/AngelFrames/running/025.png",
-      "sha256": "8f7dc9e8608eeb01b8e67e342360e00b656db1ed690289fbba01f27fe3a2c837"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/025.png",
+      "sha256": "aceffc014a02429849683c2bfbcc2948e8b6147f2d25dcceddc2020f858fb82a"
     },
     "AngelFrames/running/026.png": {
-      "source": "assets/runtime/AngelFrames/running/026.png",
-      "sha256": "c822d31de6682cfdd12c7e5b5296463a535818ffa9fa4b5f9b88a8c7f8d92def"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/026.png",
+      "sha256": "44cccabdb741fe98fea84218bb97c1348d40eb6cb0c4b5bc2d3556b8c2bdea16"
     },
     "AngelFrames/running/027.png": {
-      "source": "assets/runtime/AngelFrames/running/027.png",
-      "sha256": "89bee7062695fc647d7673e2ff78b6685a41eb4f3808dcd1856e1fd8f6563de8"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/027.png",
+      "sha256": "6da6c53ea348c9ed2b5af9b2e1d7c17d06c40329eaa155cf4199553f254317fc"
     },
     "AngelFrames/running/028.png": {
-      "source": "assets/runtime/AngelFrames/running/028.png",
-      "sha256": "4d7213b09e3724bc72473e6125a278ba07fc198855a43be5ddc0c44d355a4299"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/028.png",
+      "sha256": "8f8a2b6b91d02021ef841f8418be4613bb3fa3026e769a85c583f8f12fa30443"
     },
     "AngelFrames/running/029.png": {
-      "source": "assets/runtime/AngelFrames/running/029.png",
-      "sha256": "aa632f0d9b31bc1f9142f2af51a1d7a6e269ccf9dfb33bb44c91112b4fec1f52"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/029.png",
+      "sha256": "b9d6d26c80d2b91ad8a744d5ff82a8dbdc3b3039842b3445919e36fedf2e7655"
     },
     "AngelFrames/running/030.png": {
-      "source": "assets/runtime/AngelFrames/running/030.png",
-      "sha256": "6d949c1a4faaaa1a1f4d092ccbee1d0e0e47be2cb09255f294a4e85e197494ba"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/030.png",
+      "sha256": "545f27f03c3a9925bf6ed55b9d93057aceb73d80054b409381ed859cbd12b8c6"
     },
     "AngelFrames/running/031.png": {
-      "source": "assets/runtime/AngelFrames/running/031.png",
-      "sha256": "44d346a5e0690f74de4f5dc80021025216e8e5375f3f5118e7ccaadf9203e15c"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/031.png",
+      "sha256": "a5daab4af7c9b437725c07f50df152127c664f98386677ab6e38ef21d151587b"
     },
     "AngelFrames/running/032.png": {
-      "source": "assets/runtime/AngelFrames/running/032.png",
-      "sha256": "af2b61617a5f0a1e51f4419103773f896f5a4d270b5ca2590f72354e079cb99d"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/032.png",
+      "sha256": "8def2f4962603a06a99b0a00495eba1200a77119befddb43750bb52600485bc7"
     },
     "AngelFrames/running/033.png": {
-      "source": "assets/runtime/AngelFrames/running/033.png",
-      "sha256": "d37770fe3ef54e67204b3bfd0424dd0b4202565ba96270bdc1a1f67f7f278d66"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/033.png",
+      "sha256": "a09681f285e7a85e7df03a37f43b83eb47c26fe950ece9dc42a2117b2edaeae5"
     },
     "AngelFrames/running/034.png": {
-      "source": "assets/runtime/AngelFrames/running/034.png",
-      "sha256": "83a096f4b5ca7eaa59765f95efd5141468dacfb6d7c616f4b8992a5a6183dcdc"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/034.png",
+      "sha256": "86f42910d1702a02fa3839c24027fc3691953f2cfe1e02853a2e864802d121e7"
     },
     "AngelFrames/running/035.png": {
-      "source": "assets/runtime/AngelFrames/running/035.png",
-      "sha256": "18c97f5537585722069666c6f0129fa1612d627743ae742d698713a1a1e43d8c"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/035.png",
+      "sha256": "fee57818ceda8e5bf086398addf15f3e8f07f834d36d531a18d13c097f66eab2"
     },
     "AngelFrames/running/036.png": {
-      "source": "assets/runtime/AngelFrames/running/036.png",
-      "sha256": "a21acaafb3c85428e0e125d6df6bf7566c04256de7184fd061620b198a5acb73"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/036.png",
+      "sha256": "a642806966cfd6b76ab03abd9744b7b921eeb6c66604d34c66cda1b3df69d769"
     },
     "AngelFrames/running/037.png": {
-      "source": "assets/runtime/AngelFrames/running/037.png",
-      "sha256": "69d3017b80869ad92019d8f29057df52f7cc4824266ec51df37c3506c70ae8a0"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/037.png",
+      "sha256": "992d953f9f572eee0a3dc456eb6e970adcdc3ccb9ef33d702dfcd51617b4354f"
     },
     "AngelFrames/running/038.png": {
-      "source": "assets/runtime/AngelFrames/running/038.png",
-      "sha256": "dfebf00fb687cb1495d333fd86bedb035cc8cfdbf7bed09f5d961ef4b371b751"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/038.png",
+      "sha256": "3ad149ccbd01cf50fcabca2cb95fdfb563c3484649820ec8a17353e0574eef8f"
     },
     "AngelFrames/running/039.png": {
-      "source": "assets/runtime/AngelFrames/running/039.png",
-      "sha256": "e7eebe83ce14e55bfd59d8d0cedd1b5aa04796f5361e811fb270ec43a6a00365"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/039.png",
+      "sha256": "47270a9bd15342c150a705175311a6cc3de5da079a60d773a9878f41f22bd904"
     },
     "AngelFrames/running/040.png": {
-      "source": "assets/runtime/AngelFrames/running/040.png",
-      "sha256": "4353022dc7ae67ee809b6c8564c646696a9ed7f15eda64b497d0db7e99b20100"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/040.png",
+      "sha256": "c47cd22d492982a5aa14ca48f04352c24fca1ba49f97c25c1db00baf04c41648"
     },
     "AngelFrames/running/041.png": {
-      "source": "assets/runtime/AngelFrames/running/041.png",
-      "sha256": "a85196c68659e3143d37d99553a7858a7cb1a6021eb79ce9ed7405c864361889"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/041.png",
+      "sha256": "98f06d270ec787dfb720f17f42f29f639e07e9b4f66e05f362708b435077734b"
     },
     "AngelFrames/running/042.png": {
-      "source": "assets/runtime/AngelFrames/running/042.png",
-      "sha256": "8274fe0565d9a51d382e99a952263876fb539334efff8d1fabc1a8fe92f3c552"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/042.png",
+      "sha256": "0d0f478d1e46d89a372254ee5235c6ecbc1e6e56ace907891a5775d1807ac6a7"
     },
     "AngelFrames/running/043.png": {
-      "source": "assets/runtime/AngelFrames/running/043.png",
-      "sha256": "0f54f55accf00245f5e621f138e15bfc380c845d1c747fedd2aded7dd1c03b73"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/043.png",
+      "sha256": "dd1ea5a28285f080333f993c7b8eaac165cbe4dc0ef2eb8eb66b522bc8def20f"
     },
     "AngelFrames/running/044.png": {
-      "source": "assets/runtime/AngelFrames/running/044.png",
-      "sha256": "b2bed2dc535644ef18415bbca381ad5129ed30a0cc2400904b1110605ad1bb5f"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/044.png",
+      "sha256": "690e53cc73b2889f8e7d84b64fa9168f084f6cc11deace4fabe93f6af960b26a"
     },
     "AngelFrames/running/045.png": {
-      "source": "assets/runtime/AngelFrames/running/045.png",
-      "sha256": "5650dbf279e518e621c30a0eff7049d509bb81f43de285ca3ce95cd60d7bc91f"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/045.png",
+      "sha256": "f8bdc310f70c369c78631ae6cc2d62326d885e847cd9f18baa96181051400d59"
     },
     "AngelFrames/running/046.png": {
-      "source": "assets/runtime/AngelFrames/running/046.png",
-      "sha256": "280828a46903bbecc9eb8436249b94d364280974f27fad09221ae845c4c8438b"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/046.png",
+      "sha256": "46c7552999f9d8ad0c644a2257890f3f78f7633df5774d9634b080c6a464bff0"
     },
     "AngelFrames/running/047.png": {
-      "source": "assets/runtime/AngelFrames/running/047.png",
-      "sha256": "91a0be16d61bd8fdde7dfc0bcaf3970438bfad80049c34200b5e41a8697990c4"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/047.png",
+      "sha256": "33a2413fb717208ae5c74a6c86837d6cad8670ccbfce00bc613b2cd5001e7a39"
     },
     "AngelFrames/running/048.png": {
-      "source": "assets/runtime/AngelFrames/running/048.png",
-      "sha256": "1bfee49c90f8cdfca17d06491e8d23498847936c83f923fc28b66d06c541c475"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/048.png",
+      "sha256": "7136d42aa2f2648a0de3c8229c3e444cf962a73fd8fe645947da58b0019449d4"
     },
     "AngelFrames/running/049.png": {
-      "source": "assets/runtime/AngelFrames/running/049.png",
-      "sha256": "bcac622061b34f21b912f6390725575dd68e84cb9b95fac6f7dfbb1727811486"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/049.png",
+      "sha256": "d1bd5ad958a60f59481af5d23110749f1cafcb63a3816533ce5086edadf71d13"
     },
     "AngelFrames/running/050.png": {
-      "source": "assets/runtime/AngelFrames/running/050.png",
-      "sha256": "0af6fec7a06195e0365b7adbd56413f140dd6fe2006c8e46bf91b4e1f3bcd6d8"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/050.png",
+      "sha256": "54a310e55164603bcffc62ec7a3f56e2823327901ce06d5cfd72cbd1859b6a1e"
     },
     "AngelFrames/running/051.png": {
-      "source": "assets/runtime/AngelFrames/running/051.png",
-      "sha256": "5d9dbe43c29ac6288d7801cdc87be441c64a653777b0bf8a92a54c1ea2914225"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/051.png",
+      "sha256": "a63b3456df0335d0488b699b1e3a7cd2edf10c94d245ee4c29fd4b0c5c0b12b7"
     },
     "AngelFrames/running/052.png": {
-      "source": "assets/runtime/AngelFrames/running/052.png",
-      "sha256": "c70facd5280dadc4b006bc7d56d716684268f081543d2ef551fed7e78ffe673c"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/052.png",
+      "sha256": "b992a36df427c34ba362f272e6859d03b77dfeb6403c5693070e2791a4031a5a"
     },
     "AngelFrames/running/053.png": {
-      "source": "assets/runtime/AngelFrames/running/053.png",
-      "sha256": "4cb906044e5cd12486e3cd594b84d7bc9495818f1629ba85c56872e1fcfbfddf"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/053.png",
+      "sha256": "1f11d128d5c5af3501d24b276d081f8a585391562224f3783fdea7bb559a660c"
     },
     "AngelFrames/running/054.png": {
-      "source": "assets/runtime/AngelFrames/running/054.png",
-      "sha256": "a6873b1834eb3f1e8e29a53fd7f5f3ad9b127182951f10a04c82bafc82247996"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/054.png",
+      "sha256": "291ffb1d87b641817629c4fd5f77ec97853ff5e7aacaab1b36c412a7671f7729"
     },
     "AngelFrames/running/055.png": {
-      "source": "assets/runtime/AngelFrames/running/055.png",
-      "sha256": "8424d1034c330e98026a6aeeadee306ac4bc9b2f539a5b9e1e5fabed369e25e7"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/055.png",
+      "sha256": "137c69c5a58ab3f74cfcd548a3c3c2c2cb9dbb5e60712348fe976af70f09475e"
     },
     "AngelFrames/running/056.png": {
-      "source": "assets/runtime/AngelFrames/running/056.png",
-      "sha256": "c44e6e946a603302c91579af1dcb9dafadb4b678518be0d36d30267bfa2291a4"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/056.png",
+      "sha256": "baeea67c00faa71dcb3c013e6377be92c0331ecb58cca1415a99cea161cba0c4"
     },
     "AngelFrames/running/057.png": {
-      "source": "assets/runtime/AngelFrames/running/057.png",
-      "sha256": "bc8ed5d1e25213e2a1a0950e6c178328fec3da73a0dcf66cc2d409a6060190a2"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/057.png",
+      "sha256": "980b9b1e9ec3b2b38ac9749a5acc32f9e4b3b25e73858276a06c9d6ccd786a5a"
     },
     "AngelFrames/running/058.png": {
-      "source": "assets/runtime/AngelFrames/running/058.png",
-      "sha256": "700e9f3360879ac3ec40923905a21925b4cbab6fb0724cf3219494a24ae140fa"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/058.png",
+      "sha256": "df06fa4a4e8e55369d63506dc9d151463e261b866505f30507b52aa39b51c2ad"
     },
     "AngelFrames/running/059.png": {
-      "source": "assets/runtime/AngelFrames/running/059.png",
-      "sha256": "cfcd3ca33903e40670e418282c3576e9f7827e9b0accba3c1484479364f756cc"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/059.png",
+      "sha256": "ed760718994a795b725a4a088d018682dfb66dc1d124eef5a1ff0665c31ece9e"
     },
     "AngelFrames/running/060.png": {
-      "source": "assets/runtime/AngelFrames/running/060.png",
-      "sha256": "cddf1160d990c01b15b3457db250ee2be440d3cf067f26032e77b6f166df5e1f"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/060.png",
+      "sha256": "5cc3738143c63dc593b1af2f9a933378e2f8d0da9781c2fcd2c7fd51eee63900"
     },
     "AngelFrames/running/061.png": {
-      "source": "assets/runtime/AngelFrames/running/061.png",
-      "sha256": "3dc9d0d69d036cfa55e3f04a12d294f063a27101251e837d92f6e24eaf0985c9"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/061.png",
+      "sha256": "c4e4666d8bb751482ee1cac90e29250c18dfba8101cd0263847a13dc266efa8f"
     },
     "AngelFrames/running/062.png": {
-      "source": "assets/runtime/AngelFrames/running/062.png",
-      "sha256": "71fbd77fb3c7a4044760c4c128f085d5b218988b1c55bb2fcc9b0e9b92c64119"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/062.png",
+      "sha256": "90564a3cf53989757b4d4e372b05a16ca9332b8c9f1cc3e3c7caca01444485df"
     },
     "AngelFrames/running/063.png": {
-      "source": "assets/runtime/AngelFrames/running/063.png",
-      "sha256": "ccc8bba8905ca1148ed82995cb8acc0cc80fd9a2003093285de16a172072d9c3"
+      "source": "assets/runtime-release-20261110/AngelFrames/running/063.png",
+      "sha256": "e4d741a9fdae5da8155c238f96a18dd457310e09ab33d01bebb88fc29c11def7"
     },
     "AngelFrames/sleeping/000.png": {
       "source": "assets/runtime/AngelFrames/sleeping/000.png",
