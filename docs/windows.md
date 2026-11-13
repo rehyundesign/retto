@@ -76,12 +76,25 @@
 시선은 쉬는 중에만 쓴다(맥은 스킨에 따라 작업 중 · 완료에도 쓴다). 한 클립은 최대 6초를 이어 돌린다.
 증거: [테스트] 맥 — `electron . --render-preview` 로 기본 · 천사 · 하츄핑핑 · 잔느 · 아무란이 맥과 같은 그림 · 효과로 그려졌다.
 
+## Slack — 맥과 같은 규칙, 저장만 다르다 (3단계, 2026-11-13)
+
+`windows/src/slack.js` 가 맥 `SlackIntegration.swift` 를 옮겼다. 트레이 「Slack 설정…」에서 연결한다(`slack.html`).
+
+- 같은 것: Socket Mode 수신(사용자 토큰 xoxp- · 앱 토큰 xapp-), DM · 내 멘션 · 고른 채널, 자기 메시지 · 시스템 이벤트 제외,
+  같은 사람 · 대화 · 스레드 묶음과 `+N`, 수정 · 삭제 반영, Slack 에서 읽은 위치까지 해제(대상 15초 · 메서드 2초 · 429 는
+  Retry-After), 미리보기 끄기, `slack://channel` 로 Slack 데스크톱 앱 열기, 인증 오류면 재연결을 멈춤
+- 다른 것: 토큰은 키체인 대신 Electron `safeStorage`(Windows DPAPI)로 암호화해 `%APPDATA%\Retto\slack-credentials.bin` 에 둔다.
+  메시지는 메모리에만 둔다. Slack 창 제목으로 읽음을 앞당기는 기능과 본인 DM 읽음 시험(`--slack-read-probe`)은 없다
+- 고르는 순서를 맥과 맞췄다 — 입력 대기 80 · 실패 75 · Slack 새 메시지 70 · 완료 55(예전 Windows 는 실패가 완료보다 아래였다)
+- 증거: [테스트] 맥 — `windows/test/slack.test.js` 9건(맥 `SlackSelfTest.swift` 와 같은 사례, 가짜 Slack 서버로 연결 · ack ·
+  이름 조회 · 읽음 해제까지). 실제 Slack 계정 · Windows Slack 앱 열기는 미검증
+
 ## 맥과 아직 다른 것
 
 | 다른 것 | 다음 단계 |
 | --- | --- |
 | 스킨의 무작위 변형 · 작업 중 시선 | 위 「스킨」. 내보낸 한 가지만 재생한다 |
-| Slack 연동 | 3단계. 맥은 토큰을 키체인에 둔다. Windows 자격 증명으로 다시 짜야 한다 |
+| Slack 창 제목으로 읽음 앞당기기 · 본인 DM 읽음 시험 | 위 「Slack」. API 읽음 조회로만 해제한다 |
 | Claude 앱 사이드바로 바로 가기 · Claude 앱 · 터미널 세션을 그 앱으로 | 4단계. 맥은 접근성 API 로 행을 누른다. Windows 는 UI Automation 으로 다시 짜야 한다. 지금은 VS Code 로 보낸다 |
 | Codex 앱 실시간 상태 스트림 · 밖에서 읽음 판정 · 창 제목으로 읽음 · 트랜스크립트에서 말풍선 문장 | 4단계. 없으면 롤아웃만으로 본 질문 대기는 맥처럼 확인 안 된 것으로 보고 표시하지 않는다 |
 | 설치 프로그램 · 서명 · 자동 업데이트 | zip 을 풀어 `Retto.exe` 를 실행한다. 서명이 없어 SmartScreen 이 「추가 정보 → 실행」을 한 번 묻는다 |

@@ -24,7 +24,9 @@ const TONES = {
   needsYou: { background: '#0174E3', text: '#FFFFFF' },
   done: { background: '#F06200', text: '#441C00' },
   failed: { background: '#DC0714', text: '#FFF499' },
-  quiet: { background: '#757575', text: '#FFFFFF' }
+  quiet: { background: '#757575', text: '#FFFFFF' },
+  // Slack 새 메시지는 보라색(Tones.swift toneSlack).
+  slack: { background: '#7C3AED', text: '#FFFFFF' }
 };
 
 /// 아틀라스 한 칸은 224×240, 행 12 개다(Geometry.swift SpriteSheetLayout.retto).
@@ -65,9 +67,11 @@ function displayState(state, updatedAtMs, seenAtMs, transcriptModifiedAtMs, nowM
   return state;
 }
 
-function selectionPriority(state, isClosed) {
+/// 맥 앱 Sessions.swift selectionPriority 와 같은 값. 입력 대기 → 실패 → Slack 새 메시지 → 완료 → 작업 중.
+function selectionPriority(state, isClosed, source) {
   if (isClosed) return -100;
-  return { waiting: 60, waving: 55, failed: 50, running: 40, review: 35, jumping: 20, idle: 10, sleeping: 0 }[state] ?? 0;
+  if (source === 'slack' && state === 'waving') return 70;
+  return { waiting: 80, failed: 75, waving: 55, running: 40, review: 35, jumping: 20, idle: 10, sleeping: 0 }[state] ?? 0;
 }
 
 function shouldSleep(newestUpdatedAtMs, nowMs, hasBusySession) {
@@ -128,6 +132,7 @@ function sessionTitle(session) {
 }
 
 function menuLabel(session) {
+  if (session.source === 'slack') return `● 새 메시지  ${sessionTitle(session).slice(0, 42)} · Slack`;
   const mark = {
     waiting: '● 기다림',
     failed: '● 실패',
@@ -169,7 +174,7 @@ function chooseView({ sessions, seen, pinnedId, nowMs, trackingStartedAtMs, tran
   const sorted = sessions
     .map((session) => ({ ...session, visibleState: effective(session) }))
     .sort((left, right) => {
-      const diff = selectionPriority(right.visibleState, right.isClosed) - selectionPriority(left.visibleState, left.isClosed);
+      const diff = selectionPriority(right.visibleState, right.isClosed, right.source) - selectionPriority(left.visibleState, left.isClosed, left.source);
       return diff !== 0 ? diff : (right.updatedAtMs || 0) - (left.updatedAtMs || 0);
     });
   const open = sorted.filter((session) => !session.isClosed);

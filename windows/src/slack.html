@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'self'">
+<title>Retto Slack 설정</title>
+<style>
+  body { margin: 0; padding: 24px; font: 14px/1.5 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif; color: #2B2420; background: #FFFDF6; }
+  h1 { font-size: 18px; margin: 0 0 4px; }
+  .lead { margin: 0 0 14px; color: #6B5E52; }
+  label.field { display: block; margin: 10px 0 2px; font-weight: 700; }
+  input[type=password] { width: 100%; box-sizing: border-box; font: inherit; padding: 6px 8px; border: 1px solid #C9B9A3; border-radius: 8px; background: #FFF; }
+  .hint { font-size: 12px; color: #8A7C6E; }
+  .status { margin: 14px 0; padding: 10px 12px; border-radius: 10px; background: #F4ECDF; white-space: pre-line; }
+  .status.connected { background: #E6F6E0; } .status.failed { background: #FDE7E8; }
+  fieldset { border: 1px solid #EDE4D6; border-radius: 10px; margin: 14px 0; padding: 8px 12px; }
+  legend { font-weight: 700; padding: 0 4px; }
+  .check { display: block; margin: 4px 0; }
+  #channels { max-height: 160px; overflow: auto; border-top: 1px solid #EDE4D6; margin-top: 6px; padding-top: 6px; }
+  button { font: inherit; padding: 6px 14px; border-radius: 8px; border: 1px solid #C9B9A3; background: #FFF; cursor: pointer; margin: 4px 6px 0 0; }
+  button.primary { background: #7C3AED; border-color: #7C3AED; color: #FFF; }
+  #result { margin-top: 8px; font-size: 13px; color: #B00010; white-space: pre-line; }
+</style>
+</head>
+<body>
+  <h1>Slack 알림</h1>
+  <p class="lead">DM · 내 멘션 · 고른 채널의 새 메시지를 레토가 알려 준다. 별도 서버 없이 Slack Socket Mode 로 받는다.
+    <a href="#" id="guide">처음 연결하시나요? 연결 안내 ↗</a></p>
+  <div id="status" class="status">확인 중…</div>
+  <label class="field" for="user">사용자 토큰 (xoxp-)</label>
+  <input type="password" id="user" autocomplete="off" placeholder="연결 후에는 바꿀 토큰만 입력">
+  <div class="hint">Slack 앱 관리 → OAuth & Permissions → User OAuth Token</div>
+  <label class="field" for="app">앱 토큰 (xapp-)</label>
+  <input type="password" id="app" autocomplete="off" placeholder="연결 후에는 바꿀 토큰만 입력">
+  <div class="hint">Basic Information → App-Level Tokens (connections:write)</div>
+  <div>
+    <button class="primary" id="connect">저장하고 연결</button>
+    <button id="disconnect">연결 해제</button>
+  </div>
+  <div id="result"></div>
+  <fieldset>
+    <legend>알릴 것</legend>
+    <label class="check"><input type="checkbox" id="dm"> 개인 DM · 그룹 DM</label>
+    <label class="check"><input type="checkbox" id="mention"> 내 멘션</label>
+    <label class="check"><input type="checkbox" id="preview"> 말풍선에 메시지 내용 미리보기</label>
+    <div class="hint">추가로 모든 새 메시지를 알릴 채널 <button id="refresh">목록 새로고침</button></div>
+    <div id="channels"></div>
+  </fieldset>
+  <p class="hint">토큰은 Windows 에 로그인한 사용자만 풀 수 있게 암호화해 이 PC 에만 둔다. 메시지는 디스크에 쓰지 않는다.
+    「연결 해제」는 이 PC 의 토큰과 받은 목록을 지운다. Slack 앱 설치·권한 취소는 Slack 앱 관리에서 한다.</p>
+  <script src="slack-ui.js"></script>
+</body>
+</html>
