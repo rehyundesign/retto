@@ -298,6 +298,8 @@ struct OrcaChatStatus: Equatable {
     let sinceMs: Double
     /// 마지막 턴이 실패로 끝났나(`done` + `outcome: failure`). 롤아웃에는 실패 표시가 없다.
     var failed: Bool = false
+    /// 마지막 턴을 사용자가 멈췄나(`done` + `outcome: cancellation`). 롤아웃만으로는 끝난 줄 모른다.
+    var cancelled: Bool = false
 }
 
 let orcaChatStatusScript = #"""
@@ -373,7 +375,8 @@ func orcaChatStatuses(fromOutput output: String) -> [String: OrcaChatStatus]? {
         let status = OrcaChatStatus(orcaSessionId: sessionId, threadId: threadId,
                                     needsInput: state == "blocked" || state == "waiting",
                                     sinceMs: (chat["since"] as? Double) ?? 0,
-                                    failed: state == "done" && chat["outcome"] as? String == "failure")
+                                    failed: state == "done" && chat["outcome"] as? String == "failure",
+                                    cancelled: state == "done" && chat["outcome"] as? String == "cancellation")
         // 한 스레드를 두 탭이 가리키면(포크 직후 등) 어느 쪽인지 모른다. 둘 다 버린다.
         if result[threadId] != nil {
             result[threadId] = OrcaChatStatus(orcaSessionId: "", threadId: threadId, needsInput: false, sinceMs: 0)
@@ -384,15 +387,27 @@ func orcaChatStatuses(fromOutput output: String) -> [String: OrcaChatStatus]? {
     return result.filter { !$0.value.orcaSessionId.isEmpty }
 }
 
-/// Orca 가 알려 준 채팅 상태를 화면 상태에 겹친다. 대기가 아니면 롤아웃이 정한 상태를 그대로 둔다.
-func applyOrcaChatStatus(_ chat: OrcaChatStatus?, to payload: StatePayload) -> StatePayload {
+/// Orca 가 알려 준 채팅 상태를 화면 상태에 겹친다. 대기·실패·취소가 아니면 롤아웃이 정한 상태를 그대로 둔다.
+///
+/// `turnStartedAtMs` 는 롤아웃의 마지막 사용자 요청 시각이다. 실패·취소 뒤 새 턴이 시작됐는지 이것으로 본다 —
+/// 롤아웃 파일 시각은 실패·취소 기록을 쓰는 순간에도 바뀌어 새 턴의 근거가 되지 못한다.
+func applyOrcaChatStatus(_ chat: OrcaChatStatus?, to payload: StatePayload, turnStartedAtMs: Double? = nil) -> StatePayload {
     guard let chat else { return payload }
     var result = payload
     if (result.orcaSessionId ?? "").isEmpty { result.orcaSessionId = chat.orcaSessionId }
+    let newTurn = (turnStartedAtMs ?? 0) > chat.sinceMs
+    if chat.cancelled {
+        // 멈춘 턴은 롤아웃에 완료가 남지 않아 작업 중으로 보인다. 쉬는 중으로 내린다.
+        guard !newTurn, [.running, .review, .waiting].contains(result.petState) else { return result }
+        result.state = PetState.idle.rawValue
+        result.attention = false
+        if chat.sinceMs > 0 { result.updatedAtMs = chat.sinceMs }
+        result.stateSource = "orca"
+        return result
+    }
     if chat.failed {
-        // 실패 뒤 새 턴을 롤아웃이 먼저 알렸으면 지난 실패를 다시 띄우지 않는다.
-        let inTurn = result.petState == .running || result.petState == .review || result.petState == .waiting
-        if inTurn, (result.updatedAtMs ?? 0) > chat.sinceMs { return result }
+        // 실패 뒤 새 턴이 시작됐으면 지난 실패를 다시 띄우지 않는다.
+        if newTurn { return result }
         result.state = PetState.failed.rawValue
         result.attention = true
         if chat.sinceMs > 0 { result.updatedAtMs = chat.sinceMs }
@@ -429,7 +444,7 @@ final class OrcaChatStatusReader {
     static let interval: TimeInterval = 3
     /// Codex 스레드 ID → 상태. 메인 스레드에서만 읽고 쓴다.
     private(set) var statuses: [String: OrcaChatStatus] = [:]
-    /// 실패로 끝난 스레드. 실패한 채팅은 더 묻지 않으므로(추적 밖) 따로 기억해 두고,
+    /// 실패·취소로 끝난 스레드. 끝난 채팅은 더 묻지 않으므로(추적 밖) 따로 기억해 두고,
     /// Orca 가 그 스레드를 실패 아닌 상태로 다시 알려 주면 지운다. 조회가 실패해도 지우지 않는다 — 지난 사실이다.
     private(set) var failures: [String: OrcaChatStatus] = [:]
 
@@ -485,7 +500,7 @@ final class OrcaChatStatusReader {
     private func remember(_ result: [String: OrcaChatStatus]) {
         var next = failures
         for (thread, status) in result {
-            if status.failed { next[thread] = status } else { next[thread] = nil }
+            if status.failed || status.cancelled { next[thread] = status } else { next[thread] = nil }
         }
         if next.count > 256 {
             next = Dictionary(uniqueKeysWithValues: next.sorted { $0.value.sinceMs > $1.value.sinceMs }.prefix(256).map { ($0.key, $0.value) })

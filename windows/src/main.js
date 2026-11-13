@@ -3,8 +3,8 @@
 // 상태를 아는 길은 맥 앱과 같다. 훅이 ~/.claude/retto-pet/sessions.json 에 적고, 여기서 0.25초마다 본다.
 // 무엇을 보여 줄지는 core.js 가 정한다(맥 앱 Sessions.swift 를 옮긴 것).
 //
-// 1차 범위에서 뺀 것 — Claude 앱 사이드바로 바로 가기(맥은 접근성 API), Codex 롤아웃만으로 task 찾기,
-// 스킨, 끌 때 달리는 그림. docs/windows.md 「1차에서 뺀 것」.
+// Codex 는 훅에 더해 롤아웃(~/.codex/sessions)으로도 task 를 찾고, Orca 에서 띄운 세션은 Orca 의 그 탭으로 데려간다
+// (status.js · codex.js · orca.js). 아직 맥과 다른 것은 docs/windows.md 「맥과 다른 것」.
 
 const fs = require('node:fs');
 const os = require('node:os');
@@ -13,6 +13,8 @@ const { pathToFileURL } = require('node:url');
 const { app, BrowserWindow, Menu, Tray, ipcMain, nativeImage, screen, shell } = require('electron');
 const core = require('./core');
 const setupCheck = require('./setup-check');
+const orca = require('./orca');
+const { StatusAssembler } = require('./status');
 
 const POLL_MS = 250;
 const RETHINK_MS = 1000;
@@ -29,6 +31,8 @@ let petWindow;
 let setupWindow;
 let tray;
 let sessions = [];
+let hookSessions = [];
+let assembler;
 let view;
 let registryMtime = 0;
 const trackingStartedAtMs = Date.now();
@@ -97,14 +101,14 @@ function expectedHookCounts() {
 
 function readSessions() {
   let stat;
-  try { stat = fs.statSync(registryPath); } catch { sessions = []; registryMtime = 0; return false; }
+  try { stat = fs.statSync(registryPath); } catch { hookSessions = []; registryMtime = 0; return false; }
   if (stat.mtimeMs === registryMtime) return false;
   let text;
   try { text = fs.readFileSync(registryPath, 'utf8'); } catch { return false; }
   const parsed = core.readRegistry(text);
   // 훅이 쓰는 도중에 읽으면 깨진 JSON 이 올 수 있다. 그때는 지난 값을 그대로 두고 다음에 다시 읽는다.
   if (!parsed) return false;
-  sessions = parsed;
+  hookSessions = parsed;
   registryMtime = stat.mtimeMs;
   return true;
 }
@@ -115,6 +119,8 @@ function transcriptModifiedAt(session) {
 }
 
 function rethink() {
+  const nowMs = Date.now();
+  try { sessions = assembler ? assembler.sessions(hookSessions, nowMs) : hookSessions; } catch { sessions = hookSessions; }
   view = core.chooseView({
     sessions,
     seen: local.seen,
@@ -131,6 +137,7 @@ function rethink() {
     local.pinnedId = null;
     saveLocal();
   }
+  assembler?.track(sessions, transcriptModifiedAt, nowMs);
   sendView();
   rebuildTrayMenu();
 }
@@ -177,6 +184,9 @@ async function openSession(session) {
   if (!session) return;
   const rawId = session.rawSessionId || session.sessionId || session.id;
   markSeen(session);
+  // Orca 에서 띄운 세션은 Orca 의 그 탭으로 간다. Orca 를 못 찾으면 아래 원래 길로 간다.
+  const orcaRequest = orca.openRequest(session);
+  if (orcaRequest && (await orca.reveal(orcaRequest)) !== 'unavailable') return;
   if (session.source === 'codex' || session.client === 'codex') {
     if (rawId) await shell.openExternal(`codex://threads/${encodeURIComponent(rawId)}`).catch(() => {});
     return;
@@ -425,6 +435,9 @@ if (!gotLock) {
     tray = new Tray(nativeImage.createFromPath(path.join(assetsDir, 'icon.png')).resize({ width: 16, height: 16 }));
     tray.on('click', () => openSession(view?.selected));
     createPetWindow();
+    // 상태가 바뀌면(Orca 응답 등) 다음 차례에 다시 그린다. 고르는 도중에 다시 부르지 않게 미룬다.
+    assembler = new StatusAssembler({ codexHome, onChange: () => setImmediate(rethink) });
+    app.on('before-quit', () => assembler?.stop());
     readSessions();
     rethink();
     setInterval(() => { if (readSessions()) rethink(); }, POLL_MS);

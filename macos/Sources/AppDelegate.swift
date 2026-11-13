@@ -612,7 +612,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         taskStatusDiagnostics.retain(Set(monitored.filter { $0.source != "slack" }
             .sorted { ($0.updatedAtMs ?? 0) > ($1.updatedAtMs ?? 0) }.prefix(1024).map(\.id)))
         codexTranscriptStatusReader.retainTrackedPaths(Set(monitored.compactMap(\.transcriptPath)))
-        let codexTasks = monitored.filter { $0.source == "codex" || $0.client == "codex" }
+        // Codex 앱의 상태 스트림은 Codex 앱이 띄운 스레드만 안다. Orca 의 Codex 를 물으면 「확인 불가」가 되어
+        // 일하는 중인 채팅이 회색으로 보였다(2026-11-13). Orca 것은 롤아웃과 Orca 상태로만 본다.
+        let codexTasks = monitored.filter {
+            ($0.source == "codex" || $0.client == "codex") && !$0.isOrca
+                && !orcaCodexOriginReader.isFromOrca(transcriptPath: $0.transcriptPath)
+        }
         let waitingHooks = Dictionary(codexTasks.compactMap { payload -> (String, Double)? in
             let questionAt = codexTranscriptStatusReader.status(at: payload.transcriptPath).pendingInputAtMs
             guard payload.petState == .waiting || questionAt != nil
@@ -640,7 +645,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
                 claudeNativeStatusReader.status(for: payload), to: payload))
             // 훅이 도는 Orca 터미널의 Codex 는 훅이 대기를 알려 준다. 훅 없는 채팅만 Orca 상태를 겹친다.
             if payload.orcaHosted == true {
-                output = applyOrcaChatStatus(orcaChatStatusReader.status(for: payload.navigationSessionId), to: output)
+                let transcript = codexTranscriptStatusReader.status(at: payload.transcriptPath)
+                output = applyOrcaChatStatus(orcaChatStatusReader.status(for: payload.navigationSessionId), to: output,
+                    turnStartedAtMs: max(transcript.latestPromptAtMs ?? 0, transcript.latestComposerStartAtMs ?? 0))
             }
             if payload.source != "slack" {
                 taskStatusDiagnostics.record(input: payload, output: output,
@@ -758,7 +765,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         )
         let unavailable = codexLiveStatusReader.oversizedThreadIDs.contains(payload.navigationSessionId)
             || codexLiveStatusReader.unavailableThreadIDs.contains(payload.navigationSessionId)
-        let task = unavailable ? unavailableCodexTask(reconciled)
+        // Orca 의 Codex 는 Codex 앱 스트림에 없다. 스트림 없이 롤아웃만으로 본 것과 같게 다룬다.
+        let task = payload.isOrca ? unconfirmedInputTask(reconciled)
+            : unavailable ? unavailableCodexTask(reconciled)
             : applyCodexLiveStatus(codexLiveStatusReader.statuses[payload.navigationSessionId],
                 to: reconciled, transcriptStatus: transcriptStatus)
         refreshed.state = task.state.rawValue

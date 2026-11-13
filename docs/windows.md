@@ -37,15 +37,33 @@
 | VS Code 로 세션 열기 | [소스] | 폴더 창 → 1.2초 뒤 세션 딥링크. 맥은 그 창이 앞에 온 것을 확인한 뒤 보내지만 Windows 는 시간만 기다린다. 작업 폴더를 모르면 딥링크를 보내지 않는다. 같은 탭이 살아나는지는 [실기] 필요 |
 | 독립 검토 | 2026-11-03 | 코드를 쓰지 않은 세션이 검토해 HIGH 2 · MEDIUM 5 · LOW 5. 맥 사용자 settings.json 을 깨는 경로는 없었다. 고친 것과 남긴 것은 이 문서에 반영했다 |
 
-## 1차에서 뺀 것
+## 0.12.1-beta.1 에서 맥과 맞춘 것 (2026-11-13)
 
-| 뺀 것 | 이유 |
+맥 0.12.1 과 기능을 맞추는 1단계다. 규칙은 맥 코드를 옮겼고, 값이 갈리면 두 앱이 같은 세션을 다르게 보여 주므로 함께 고친다.
+
+| 기능 | 파일 | 맥 쪽 원본 | 증거 |
+| --- | --- | --- | --- |
+| Codex 롤아웃으로 task 찾기(최근 하루, 제목 색인, worker 제외) | `windows/src/codex.js` `RolloutDiscovery` | `Sessions.swift` `CodexRolloutDiscovery` | [테스트] 맥 · 이 맥의 실제 `~/.codex` 552개 파일로 맥 레토와 같은 task 를 찾았다 |
+| 훅 상태를 롤아웃으로 바로잡기(완료·질문·중단·새 턴) | `codex.js` `reconcileTask` · `transcriptStatus` | `reconcileCodexTask` · `codexTranscriptStatus` | [테스트] 맥 |
+| Orca 세션 알아보기 · 메뉴 「· Orca」 | `orca.js` `isOrcaSession` · `core.js` `menuLabel` | `OrcaSessions.swift` · `sessionMenuLabel` | [테스트] 맥 |
+| Orca 의 Codex 채팅 제목 · 탭 ID (Orca 세션 기록, `node:sqlite` 읽기 전용) | `orca.js` `ThreadIndex` | `OrcaCodexThreadIndex` | [테스트] 맥 · 실제 Orca 기록 8개 |
+| Orca 의 Codex 채팅 입력 대기 · 실패 · 취소 | `orca.js` `ChatStatusReader` · `applyChatStatus` | `OrcaChatStatusReader` · `applyOrcaChatStatus` | [테스트] 맥 · 이 맥의 Orca 1.4.257 에서 Electron 안 실행으로 상태를 읽었다 |
+| 누르면 Orca 의 그 탭으로(채팅 · 터미널 · 워크스페이스) | `orca.js` `reveal` | `OrcaNavigator` · `orcaRevealScript` | [소스] |
+| 합치기(훅 → 롤아웃 → Orca) | `windows/src/status.js` | `AppDelegate.swift` `applySessions` | [테스트] 맥 · `--render-preview` 로 앱이 실제 세션을 그렸다 |
+
+**맥과 다른 점.** 맥은 Orca 의 Electron 을 node 로 따로 띄운다. Windows 판은 그 자체가 Electron 이라 Orca 의
+`runtime-client.js` 를 직접 불러 쓴다. Orca 를 찾는 길 — 떠 있는 `Orca.exe` 의 경로(PowerShell `Get-Process`),
+없으면 `%LOCALAPPDATA%\Programs\Orca`. **Windows 에서 Orca 가 실제로 그 자리에 깔리는지는 확인하지 못했다.**
+못 찾으면 Orca 기능은 아무것도 하지 않고, 누르면 예전처럼 Codex 앱 · VS Code 로 간다.
+
+## 맥과 아직 다른 것
+
+| 다른 것 | 다음 단계 |
 | --- | --- |
-| Claude 앱 사이드바로 바로 가기 | 맥은 접근성 API 로 행을 누른다. Windows 는 UI Automation 으로 다시 짜야 한다. 지금은 VS Code 로 보낸다 |
-| Codex 롤아웃만으로 task 찾기 | 훅을 승인하지 않은 Codex 도 보여 주는 맥 기능. Windows 의 Codex 기록 위치를 확인한 뒤 옮긴다 |
-| Claude 앱 · 터미널 세션을 그 앱으로 보내기 | 맥은 세션이 시작된 곳 → 설치된 앱 순서로 보낸다. 지금은 전부 VS Code 로 간다 |
-| Codex 완료 보정 · 밖에서 읽음 판정 · 창 제목으로 읽음 · 트랜스크립트에서 말풍선 문장 읽기 | 맥에 있는 정밀 기능이다. 없으면 Codex 세션이 Stop 을 놓쳤을 때 완료 대신 10분 뒤 회색이 되고, 레토를 안 거치고 읽은 세션도 배지에 남는다. 「모두 읽음」으로 지운다 |
-| 스킨 · 끌 때 달리는 그림 · 자는 그림 교체 | 상태를 알리는 일과 무관하다 |
+| 스킨 14종 · 스킨별 동작(시선 · 효과 · 끌 때 달리는 그림 · 자는 그림) | 2단계. 맥은 스킨마다 Swift 코드가 따로 있다 |
+| Slack 연동 | 3단계. 맥은 토큰을 키체인에 둔다. Windows 자격 증명으로 다시 짜야 한다 |
+| Claude 앱 사이드바로 바로 가기 · Claude 앱 · 터미널 세션을 그 앱으로 | 4단계. 맥은 접근성 API 로 행을 누른다. Windows 는 UI Automation 으로 다시 짜야 한다. 지금은 VS Code 로 보낸다 |
+| Codex 앱 실시간 상태 스트림 · 밖에서 읽음 판정 · 창 제목으로 읽음 · 트랜스크립트에서 말풍선 문장 | 4단계. 없으면 롤아웃만으로 본 질문 대기는 맥처럼 확인 안 된 것으로 보고 표시하지 않는다 |
 | 설치 프로그램 · 서명 · 자동 업데이트 | zip 을 풀어 `Retto.exe` 를 실행한다. 서명이 없어 SmartScreen 이 「추가 정보 → 실행」을 한 번 묻는다 |
 
 ## 왜 Electron 인가

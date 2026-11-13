@@ -135,7 +135,8 @@ function menuLabel(session) {
     review: '● 작업 중',
     waving: '● 완료'
   }[session.state] || '○ 쉬는 중';
-  const origin = {
+  const isOrca = session.client === 'orca' || session.orcaHosted === true || Boolean(session.orcaSessionId) || Boolean(session.orcaTerminalHandle);
+  const origin = isOrca ? ' · Orca' : {
     vscode: ' · VS Code',
     claude: ' · Claude 앱',
     cli: ' · Claude Code CLI',
