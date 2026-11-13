@@ -619,10 +619,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
                 return ($0.payload.updatedAtMs ?? 0) > ($1.payload.updatedAtMs ?? 0)
             }
             .map(\.payload)
-        // 턴 도중이거나 대기 중인 Orca 의 Codex 채팅만 Orca 에 묻는다. 끝났거나 오래 소식 없는 채팅까지
-        // 물으면 몇 초마다 Orca 의 Electron 을 헛되이 띄운다.
+        // 턴 도중·대기 중이거나 막 끝난 Orca 의 Codex 채팅만 Orca 에 묻는다(orcaChatNeedsWatching).
+        let watchNowMs = Date().timeIntervalSince1970 * 1000
         orcaChatStatusReader.track(Set(sessions.filter {
-            !$0.isClosed && $0.orcaHosted == true && [.running, .review, .waiting].contains(effectiveState($0))
+            !$0.isClosed && $0.orcaHosted == true && orcaChatNeedsWatching(state: $0.petState,
+                lastActivityMs: max($0.updatedAtMs ?? 0, transcriptModifiedAtMs(path: $0.transcriptPath) ?? 0), nowMs: watchNowMs)
         }.map(\.navigationSessionId)))
         let openSessions = sessions.filter { !$0.isClosed }
         let attentionSessions = openSessions.filter { self.needsAttention($0) }

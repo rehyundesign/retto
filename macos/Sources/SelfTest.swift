@@ -318,8 +318,15 @@ func runSelfTest() -> Int32 {
         // 대기가 아니면 롤아웃 상태를 그대로 두고, 탭 ID 만 채운다.
         && applyOrcaChatStatus(orcaStatuses?["thread-b"], to: orcaRunning).petState == .running
         && applyOrcaChatStatus(orcaStatuses?["thread-b"], to: orcaRunning).orcaSessionId == "codex_b"
-        // 승인 뒤 턴이 끝난 것을 롤아웃이 먼저 알렸으면 지난 대기를 다시 띄우지 않는다.
-        && applyOrcaChatStatus(blockedChat, to: orcaFinished).petState == .waving
+        // 내 답을 기다리며 끝난 턴도 `blocked` 다. 롤아웃 완료가 더 새로워도 대기로 둔다.
+        && applyOrcaChatStatus(blockedChat, to: orcaFinished).petState == .waiting
+        // 조회가 실패해 회색으로 내려가도 묻기를 멈추지 않도록 원래 상태와 마지막 활동으로 고른다.
+        && orcaChatNeedsWatching(state: .running, lastActivityMs: 0.5, nowMs: 0.5 + 30 * 60 * 1000)
+        && !orcaChatNeedsWatching(state: .running, lastActivityMs: 1, nowMs: 1 + 3 * 60 * 60 * 1000)
+        && orcaChatNeedsWatching(state: .waving, lastActivityMs: 1, nowMs: 1 + 5 * 60 * 1000)
+        && !orcaChatNeedsWatching(state: .waving, lastActivityMs: 1, nowMs: 1 + 20 * 60 * 1000)
+        && !orcaChatNeedsWatching(state: .idle, lastActivityMs: 1, nowMs: 2)
+        && !orcaChatNeedsWatching(state: .running, lastActivityMs: nil, nowMs: 2)
         && applyOrcaChatStatus(nil, to: orcaRunning) == orcaRunning
     let runningCodexPayload = try! JSONDecoder().decode(StatePayload.self, from: "{\"state\":\"running\",\"sessionId\":\"thread-one\",\"source\":\"codex\",\"sessionTitle\":\"예전 제목\",\"updatedAtMs\":1000}".data(using: .utf8)!)
     let completedCodexTask = reconcileCodexTask(

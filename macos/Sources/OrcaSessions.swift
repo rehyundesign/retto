@@ -252,7 +252,8 @@ func orcaRevealOutcome(_ output: String) -> OrcaOpenOutcome? {
 //
 // 탭에는 Codex 스레드 ID 가 없어서, Orca 세션 기록(`agent-session-journal.db` 의 `providerHandleChain`)을
 // 읽기 전용으로 열어 Orca 세션 ID 와 잇는다. 이을 수 없는 채팅은 추측하지 않고 버린다 — 다른 스레드를
-// 파랗게 칠하는 것보다 대기를 놓치는 편이 낫다. 기록을 쓰거나 응답을 보내지 않는다.
+// 파랗게 칠하는 것보다 대기를 놓치는 편이 낫다. 탭 상태를 읽기 전후의 스레드가 다르면 그 조회는 버린다.
+// 기록을 쓰거나 응답을 보내지 않는다.
 
 /// Orca 채팅 탭 하나의 상태. `threadId` 는 Codex 스레드(= 롤아웃 파일 이름의 UUID)다.
 struct OrcaChatStatus: Equatable {
@@ -270,6 +271,28 @@ const print = (value) => process.stdout.write(JSON.stringify(value) + '\n');
 (async () => {
   const runtime = require(request.clientPath);
   const client = new runtime.RuntimeClient(undefined, undefined, null, null);
+  const home = (runtime.getDefaultUserDataPath && runtime.getDefaultUserDataPath()) || request.userDataPath;
+  // Orca 세션 ID → 마지막 Codex 스레드 ID. 기록 하나가 깨져도 나머지는 읽는다.
+  const readThreads = () => {
+    const { DatabaseSync } = require('node:sqlite');
+    const db = new DatabaseSync(require('path').join(home, 'agent-session-journal.db'), { readOnly: true });
+    const threads = {};
+    try {
+      for (const row of db.prepare("SELECT session_id, record_json FROM agent_session_records WHERE session_id LIKE 'codex%'").all()) {
+        try {
+          const chain = (JSON.parse(row.record_json) || {}).providerHandleChain || [];
+          const handle = [...chain].reverse().map((link) => link && link.handle)
+            .find((value) => value && value.provider === 'codex' && value.threadId);
+          if (handle) threads[row.session_id] = handle.threadId;
+        } catch {}
+      }
+    } finally {
+      db.close();
+    }
+    return threads;
+  };
+  // 탭 상태를 읽는 사이에 채팅이 다른 스레드로 넘어가면 상태와 스레드가 어긋난다. 앞뒤로 읽어 같을 때만 쓴다.
+  const before = readThreads();
   const response = await client.call('session.tabs.listAll', {});
   if (!response || response.ok === false) throw new Error('session.tabs.listAll');
   const chats = [];
@@ -280,30 +303,12 @@ const print = (value) => process.stdout.write(JSON.stringify(value) + '\n');
       }
     }
   }
-  const threads = {};
-  if (chats.length > 0) {
-    const { DatabaseSync } = require('node:sqlite');
-    const home = (runtime.getDefaultUserDataPath && runtime.getDefaultUserDataPath()) || request.userDataPath;
-    const db = new DatabaseSync(require('path').join(home, 'agent-session-journal.db'), { readOnly: true });
-    try {
-      const query = db.prepare('SELECT record_json FROM agent_session_records WHERE session_id = ?');
-      for (const chat of chats) {
-        const row = query.get(chat.sessionId);
-        if (!row) continue;
-        const chain = (JSON.parse(row.record_json) || {}).providerHandleChain || [];
-        const handle = [...chain].reverse().map((link) => link && link.handle)
-          .find((value) => value && value.provider === 'codex' && value.threadId);
-        if (handle) threads[chat.sessionId] = handle.threadId;
-      }
-    } finally {
-      db.close();
-    }
-  }
+  const after = readThreads();
   print({ chats: chats.map(({ sessionId, status }) => {
     const main = status.mainAgent || {};
     return {
       sessionId,
-      threadId: threads[sessionId] || null,
+      threadId: before[sessionId] && before[sessionId] === after[sessionId] ? before[sessionId] : null,
       state: status.state,
       since: main.state === status.state && main.stateStartedAt ? main.stateStartedAt : status.updatedAt,
     };
@@ -347,15 +352,28 @@ func applyOrcaChatStatus(_ chat: OrcaChatStatus?, to payload: StatePayload) -> S
     guard let chat else { return payload }
     var result = payload
     if (result.orcaSessionId ?? "").isEmpty { result.orcaSessionId = chat.orcaSessionId }
+    // 롤아웃 완료가 더 새로워도 대기를 버리지 않는다. Orca 는 내 답을 기다리며 끝난 턴도 `blocked` 로 낸다.
+    // 승인이 끝난 뒤의 지난 대기는 다음 조회(3초 안)에서 풀린다.
     guard chat.needsInput else { return result }
-    // 다음 조회 전에 롤아웃이 턴이 끝났다고 먼저 알려 왔으면 지난 대기를 다시 띄우지 않는다.
-    let inTurn = result.petState == .running || result.petState == .review || result.petState == .waiting
-    if !inTurn, (result.updatedAtMs ?? 0) > chat.sinceMs { return result }
     result.state = PetState.waiting.rawValue
     result.attention = true
     if chat.sinceMs > 0 { result.updatedAtMs = chat.sinceMs }
     result.stateSource = "orca"
     return result
+}
+
+/// Orca 에 상태를 물어볼 채팅인가. 화면 상태(오래 소식 없으면 회색)로 고르면, 조회가 한 번 실패한 사이
+/// 승인 대기 중인 채팅이 회색으로 내려가 다시 묻지 않게 된다. 그래서 원래 상태와 마지막 활동 시각으로 고른다.
+/// - 작업 중·대기 중: 마지막 활동 뒤 2시간까지. 끝나지 않은 채 버려진 롤아웃을 끝없이 묻지 않는다
+/// - 완료: 끝난 뒤 10분까지. Orca 는 내 답을 기다리며 끝난 턴을 `blocked` 로 낸다
+func orcaChatNeedsWatching(state: PetState, lastActivityMs: Double?, nowMs: Double) -> Bool {
+    guard let lastActivityMs, lastActivityMs > 0 else { return false }
+    let age = nowMs - lastActivityMs
+    switch state {
+    case .running, .review, .waiting, .jumping: return age <= 2 * 60 * 60 * 1000
+    case .waving: return age <= 10 * 60 * 1000
+    default: return false
+    }
 }
 
 /// 일하는 중인 Orca 의 Codex 채팅만 몇 초마다 Orca 에 물어본다. 묻는 동안 Orca 를 켜지 않는다.
