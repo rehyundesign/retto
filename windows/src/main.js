@@ -532,11 +532,29 @@ for (const [flag, action] of [['--install-hooks', installHooks], ['--uninstall-h
   app.exit(result.ok ? 0 : 1);
 }
 
+// 자체 점검 — Windows 에서만 다르게 도는 부분(토큰 암호화 · 소켓 · sqlite · 경로 · Orca · 스킨)을 돌려 보고 끝낸다.
+// Windows PC 가 없어 GitHub Actions 의 Windows 에서 돌린다(self-check.js). safeStorage 는 앱이 뜬 뒤에 쓸 수 있다.
+const selfCheckAt = process.argv.indexOf('--self-check');
+if (selfCheckAt !== -1) {
+  diagnosticRan = true;
+  const out = process.argv[selfCheckAt + 1];
+  app.whenReady().then(async () => {
+    let report;
+    try {
+      report = await require('./self-check').runSelfCheck({ safeStorage, skinsDir, orcaRequired: process.argv.includes('--require-orca') });
+    } catch (error) {
+      report = { ok: false, error: String(error?.stack || error) };
+    }
+    try { fs.writeFileSync(out, JSON.stringify(report, null, 2)); } catch {}
+    app.exit(report.ok ? 0 : 1);
+  });
+}
+
 // app.exit 는 이 아래 코드를 멈추지 않는다. 진단을 돌렸으면 창도 잠금도 만들지 않는다.
 const gotLock = !diagnosticRan && app.requestSingleInstanceLock();
 previewLog(`single-instance lock=${gotLock} userData=${app.getPath('userData')} exists=${fs.existsSync(app.getPath('userData'))}`);
 if (!gotLock) {
-  app.quit();
+  if (selfCheckAt === -1) app.quit();
 } else {
   app.on('second-instance', openSetupWindow);
   app.whenReady().then(() => {
