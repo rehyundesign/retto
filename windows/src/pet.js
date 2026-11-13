@@ -54,13 +54,15 @@ function layoutForSkin(skin) {
   if (!skin) {
     canvas.width = 224; canvas.height = 240;
     root.setProperty('--pet-w', '112px'); root.setProperty('--pet-h', '120px');
-    root.setProperty('--pet-top', '-26px'); root.setProperty('--pet-right', '52px');
+    root.setProperty('--pet-top', '-4px'); root.setProperty('--pet-right', '52px');
     return;
   }
   canvas.width = skin.frameWidth; canvas.height = skin.frameHeight;
   root.setProperty('--pet-w', `${skin.frameWidth * DISPLAY}px`);
   root.setProperty('--pet-h', `${skin.frameHeight * DISPLAY}px`);
-  root.setProperty('--pet-top', `${skin.petRect.y * DISPLAY}px`);
+  // 말풍선은 그림 윗선 바로 위에 둔다. 스킨마다 그림 크기가 달라(리락쿠마는 칸을 꽉 채운다) 칸 위치로 두면 겹친다.
+  const top = Number.isFinite(skin.contentTop) ? skin.contentTop : skin.petRect.y + 44;
+  root.setProperty('--pet-top', `${top * DISPLAY}px`);
   root.setProperty('--pet-right', `${(skin.petRect.x + skin.petRect.width - skin.frameWidth / 2) * DISPLAY}px`);
 }
 

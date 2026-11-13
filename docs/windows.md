@@ -111,6 +111,18 @@
   (PID 재사용 방지). Windows 에서 이 값이 어떤 모양인지 확인하지 못했다. 잘못 옮기면 죽은 세션의 대기가 남거나 진짜 대기를 지운다
 - Codex 앱 실시간 상태 스트림 · 창 제목으로 읽음 판정: Windows 에서 Codex 앱의 연결 자리와 창 제목 모양을 확인하지 못했다
 
+## 실제 Windows 에서 확인하는 자리 — Actions 러너 (2026-11-13)
+
+Windows PC 가 없다. 대신 `.github/workflows/windows.yml` 이 GitHub Actions 의 실제 Windows 에서 아래를 돌린다.
+
+| 확인 | 방법 | 2026-11-13 결과 |
+| --- | --- | --- |
+| 토큰 암호화(DPAPI) · ping 되는 소켓 · node:sqlite · 한글 폴더 경로의 Codex 기록 · 트랜스크립트 | `Retto.exe --self-check` (`windows/src/self-check.js`) | 통과 |
+| Windows 의 Orca 설치 위치와 런타임 연결 | Orca Windows 판(`stablyai/orca` 릴리스)을 설치 · 실행한 뒤 `--self-check --require-orca` | `%LOCALAPPDATA%\Programs\Orca\Orca.exe` — 추측한 자리와 같았다. PowerShell 로 0.25초에 찾고 `session.tabs.listAll` 성공 |
+| 스킨 14종 | 최근 Windows 릴리스의 스킨을 이 빌드에 넣고 하나씩 `--render-preview` | 14종 모두 손글씨 글꼴과 함께 그려졌다. 큰 스킨(리락쿠마)이 말풍선에 겹치던 것을 찾아 고쳤다 — 스킨마다 그림 윗선(`contentTop`)을 내보내 말풍선을 그 위에 두고 창 높이를 맞춘다 |
+
+여전히 못 하는 것 — Claude Code · Codex 로그인이 필요한 실제 세션, 실제 Slack 계정, 사람이 보는 화면 배율 · 전체화면.
+
 ## 맥과 아직 다른 것
 
 | 다른 것 | 다음 단계 |

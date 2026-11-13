@@ -65,6 +65,92 @@ jobs:
         shell: pwsh
         run: node windows/test-e2e/flow.mjs (Resolve-Path dist\windows\win-unpacked\Retto.exe) (Join-Path $env:RUNNER_TEMP 'e2e')
 
+      # Windows PC 가 없어서, Windows 에서만 다르게 도는 부분을 여기서 돌린다(windows/src/self-check.js) —
+      # 토큰 암호화(DPAPI) · ping 되는 소켓 · node:sqlite · Windows 경로의 Codex 기록 · Orca 찾기 · 스킨 파일.
+      - name: 자체 점검 (Orca 없이)
+        shell: pwsh
+        run: |
+          $exe = (Resolve-Path dist\windows\win-unpacked\Retto.exe).Path
+          $out = Join-Path $env:RUNNER_TEMP 'self-check.json'
+          $p = Start-Process -FilePath $exe -ArgumentList '--self-check', "`"$out`"" -PassThru -Wait
+          Get-Content $out | Write-Host
+          if ($p.ExitCode -ne 0) { throw "자체 점검 실패 ($($p.ExitCode))" }
+
+      # Windows 의 Orca 가 실제로 어디 깔리고, 레토가 그 런타임에 붙는지 본다. 맥에서는 확인할 수 없던 자리다.
+      # Orca 설치가 러너 사정으로 안 되면 결과만 남기고 다른 확인은 계속한다.
+      - name: Orca 설치 → 띄우기 → 자체 점검
+        continue-on-error: true
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $dir = Join-Path $env:RUNNER_TEMP 'orca'
+          New-Item -ItemType Directory -Force -Path $dir | Out-Null
+          gh release download -R stablyai/orca --pattern 'orca-windows-setup.exe' --dir $dir
+          $setup = Join-Path $dir 'orca-windows-setup.exe'
+          Start-Process -FilePath $setup -ArgumentList '/S' -Wait
+          $candidates = @(
+            (Join-Path $env:LOCALAPPDATA 'Programs\Orca\Orca.exe'),
+            (Join-Path $env:LOCALAPPDATA 'Programs\orca\Orca.exe'),
+            (Join-Path $env:ProgramFiles 'Orca\Orca.exe')
+          )
+          $orca = $candidates | Where-Object { Test-Path $_ } | Select-Object -First 1
+          if (-not $orca) {
+            $orca = Get-ChildItem -Path $env:LOCALAPPDATA, $env:ProgramFiles -Filter 'Orca.exe' -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1 -ExpandProperty FullName
+          }
+          Write-Host "Orca 설치 위치: $orca"
+          $orca | Out-File (Join-Path $env:RUNNER_TEMP 'orca-path.txt')
+          if (-not $orca) { throw 'Orca.exe 를 찾지 못했다' }
+          Start-Process -FilePath $orca
+          $exe = (Resolve-Path dist\windows\win-unpacked\Retto.exe).Path
+          $out = Join-Path $env:RUNNER_TEMP 'self-check-orca.json'
+          for ($i = 0; $i -lt 12; $i++) {
+            Start-Sleep -Seconds 10
+            $p = Start-Process -FilePath $exe -ArgumentList '--self-check', "`"$out`"", '--require-orca' -PassThru -Wait
+            if ($p.ExitCode -eq 0) { break }
+          }
+          Get-Content $out | Write-Host
+          if ($p.ExitCode -ne 0) { throw 'Orca 에 붙지 못했다' }
+
+      # 스킨 프레임은 맥 앱이 그린 생성물이라 저장소에 없다. 가장 최근 Windows 릴리스 zip 의 스킨을 이 빌드에 넣어
+      # 14종을 실제 Windows 에서 하나씩 그려 본다(화면은 산출물로 남는다).
+      - name: 스킨 14종을 Windows 에서 그려 보기
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $tag = gh release list -R $env:GITHUB_REPOSITORY --limit 30 --json tagName --jq '[.[] | select(.tagName | endswith("-windows")) | .tagName][0]'
+          Write-Host "스킨 출처: $tag"
+          $dir = Join-Path $env:RUNNER_TEMP 'skins-release'
+          gh release download $tag -R $env:GITHUB_REPOSITORY --pattern '*-windows-x64.zip' --dir $dir
+          $zip = Get-ChildItem $dir -Filter '*.zip' | Select-Object -First 1
+          Expand-Archive -Path $zip.FullName -DestinationPath (Join-Path $dir 'x') -Force
+          $skins = Join-Path $dir 'x\resources\skins'
+          if (-not (Test-Path (Join-Path $skins 'manifest.json'))) { Write-Host '이 릴리스에는 스킨이 없다'; exit 0 }
+          Copy-Item -Recurse -Force $skins dist\windows\win-unpacked\resources\skins
+          $exe = (Resolve-Path dist\windows\win-unpacked\Retto.exe).Path
+          $check = Join-Path $env:RUNNER_TEMP 'self-check-skins.json'
+          $p = Start-Process -FilePath $exe -ArgumentList '--self-check', "`"$check`"" -PassThru -Wait
+          if ($p.ExitCode -ne 0) { Get-Content $check | Write-Host; throw '스킨 파일 점검 실패' }
+          $home2 = Join-Path $env:RUNNER_TEMP 'retto-home-skins'
+          New-Item -ItemType Directory -Force -Path (Join-Path $home2 '.claude\retto-pet') | Out-Null
+          $now = (Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ssZ')
+          $json = '{"version":1,"sessions":{"s1":{"sessionId":"s1","state":"running","updatedAt":"' + $now + '","cwd":"C:\\work\\landing","sessionTitle":"스킨 확인","client":"vscode"}}}'
+          [IO.File]::WriteAllText((Join-Path $home2 '.claude\retto-pet\sessions.json'), $json, (New-Object Text.UTF8Encoding $false))
+          $env:RETTO_HOME = $home2
+          $shots = Join-Path $env:RUNNER_TEMP 'skins'
+          New-Item -ItemType Directory -Force -Path $shots | Out-Null
+          $ids = (Get-Content (Join-Path $skins 'manifest.json') -Raw | ConvertFrom-Json).skins.id
+          $failed = @()
+          foreach ($id in $ids) {
+            $env:RETTO_PREVIEW_SKIN = $id
+            $out = Join-Path $shots "$id.png"
+            $p = Start-Process -FilePath $exe -ArgumentList '--render-preview', "`"$out`"" -PassThru -Wait
+            if (-not (Test-Path $out)) { $failed += $id }
+            Write-Host "$id · exit $($p.ExitCode) · png $(Test-Path $out)"
+          }
+          if ($failed.Count) { throw "그리지 못한 스킨: $($failed -join ', ')" }
+
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -73,5 +159,8 @@ jobs:
             ${{ runner.temp }}/retto-windows-preview.png
             ${{ runner.temp }}/retto-windows-preview.png.*
             ${{ runner.temp }}/e2e/
+            ${{ runner.temp }}/self-check*.json
+            ${{ runner.temp }}/orca-path.txt
+            ${{ runner.temp }}/skins/
             dist/windows/*.zip
           retention-days: 14
