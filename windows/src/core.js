@@ -155,7 +155,7 @@ function menuLabel(session) {
 /// - 우선순위: 입력 대기 → 완료 → 실패 → 작업 중 → 도구 → 시작 → 쉬는 중
 /// - 고정한 세션이 있어도 손이 필요한 세션이 생기면 그쪽을 먼저 보여 준다
 /// - 배지는 「답변이 끝났는데 아직 안 본」 세션만 센다. 대기·실패는 이름표 색이 이미 말한다
-function chooseView({ sessions, seen, pinnedId, nowMs, trackingStartedAtMs, transcriptModifiedAt = () => undefined }) {
+function chooseView({ sessions, seen, pinnedId, previousId = null, nowMs, trackingStartedAtMs, transcriptModifiedAt = () => undefined }) {
   const newlySeen = {};
   const seenAt = (id) => newlySeen[id] ?? seen[id];
   const effective = (session) => displayState(session.state, session.updatedAtMs, seenAt(session.id), transcriptModifiedAt(session), nowMs);
@@ -183,9 +183,23 @@ function chooseView({ sessions, seen, pinnedId, nowMs, trackingStartedAtMs, tran
   let selected;
   let keepPin = false;
   const pinned = pinnedId ? open.find((session) => session.id === pinnedId) : undefined;
+  const priority = (session) => selectionPriority(session.visibleState, session.isClosed, session.source);
+  const previousWaiting = previousId ? open.find((session) => session.id === previousId && session.state === 'waiting') : undefined;
   if (pinned) {
+    // 맥 앱 preferredPinnedSession — 고정은 지키되, 손이 필요한 세션이 더 급하면 그쪽을 먼저 보여 준다.
+    // 읽은(쉬는) 고정 세션은 실행 중인 작업을 가리지 않는다.
     keepPin = true;
-    selected = needsAttention(pinned) ? pinned : (attention[0] || pinned);
+    const active = open.filter((session) => session.visibleState === 'running' || session.visibleState === 'review');
+    if (priority(pinned) <= selectionPriority('idle', false) && active[0]) {
+      selected = attention[0] && priority(attention[0]) > priority(active[0]) ? attention[0] : active[0];
+    } else if (!attention[0]) {
+      selected = pinned;
+    } else {
+      selected = !needsAttention(pinned) || priority(attention[0]) > priority(pinned) ? attention[0] : pinned;
+    }
+  } else if (previousWaiting) {
+    // 다른 알림이나 새 입력 대기가 와도 지금 보고 있는 입력 대기는 답할 때까지 유지한다.
+    selected = previousWaiting;
   } else {
     selected = open[0] || sorted[0];
   }

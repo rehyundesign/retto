@@ -89,14 +89,29 @@
 - 증거: [테스트] 맥 — `windows/test/slack.test.js` 9건(맥 `SlackSelfTest.swift` 와 같은 사례, 가짜 Slack 서버로 연결 · ack ·
   이름 조회 · 읽음 해제까지). 실제 Slack 계정 · Windows Slack 앱 열기는 미검증
 
+## 정밀 기능 (4단계, 2026-11-13)
+
+| 옮긴 것 | 파일 | 맥 원본 |
+| --- | --- | --- |
+| 말풍선 문장과 이름을 트랜스크립트에서 직접 읽기(끝 512KB, 읽은 뒤 접근 시각 되돌림) | `windows/src/transcript.js` | `TranscriptReader` |
+| 말풍선 정리(마크다운 기호 빼기 · 날것 링크는 도메인) · 이름표 옆 도구 이름 · 오류 | `transcript.js` `bodyText` · `detailText` | `PetView.bodyText` · `detailText` |
+| 고정 세션 규칙 — 쉬는 고정 세션은 실행 중 작업을 가리지 않음, 더 급한 알림이 먼저 | `core.js` `chooseView` | `preferredPinnedSession` |
+| 지금 보고 있는 입력 대기는 답할 때까지 유지 | `core.js` `chooseView` | `applySessions` |
+| Claude 앱 세션을 누르면 Claude 앱(`claude://`)으로. 예전에는 VS Code 로 갔다 | `main.js` `openSession` | `OpenTarget.swift` |
+
+**일부러 옮기지 않은 것** — 확인할 수 없는 것을 추측해 넣으면 틀린 상태를 만든다.
+- Claude 자체 상태 기록(`~/.claude/sessions`): 맥은 기록의 프로세스 시작 시각(`procStart`)을 실제 프로세스와 맞춰 본 뒤에만 믿는다
+  (PID 재사용 방지). Windows 에서 이 값이 어떤 모양인지 확인하지 못했다. 잘못 옮기면 죽은 세션의 대기가 남거나 진짜 대기를 지운다
+- Codex 앱 실시간 상태 스트림 · 창 제목으로 읽음 판정: Windows 에서 Codex 앱의 연결 자리와 창 제목 모양을 확인하지 못했다
+
 ## 맥과 아직 다른 것
 
 | 다른 것 | 다음 단계 |
 | --- | --- |
 | 스킨의 무작위 변형 · 작업 중 시선 | 위 「스킨」. 내보낸 한 가지만 재생한다 |
 | Slack 창 제목으로 읽음 앞당기기 · 본인 DM 읽음 시험 | 위 「Slack」. API 읽음 조회로만 해제한다 |
-| Claude 앱 사이드바로 바로 가기 · Claude 앱 · 터미널 세션을 그 앱으로 | 4단계. 맥은 접근성 API 로 행을 누른다. Windows 는 UI Automation 으로 다시 짜야 한다. 지금은 VS Code 로 보낸다 |
-| Codex 앱 실시간 상태 스트림 · 밖에서 읽음 판정 · 창 제목으로 읽음 · 트랜스크립트에서 말풍선 문장 | 4단계. 없으면 롤아웃만으로 본 질문 대기는 맥처럼 확인 안 된 것으로 보고 표시하지 않는다 |
+| Claude 앱의 그 대화로 바로 가기(맥은 접근성 API 로 사이드바 행을 누른다) · 터미널 세션을 그 터미널로 | Claude 앱을 앞으로 가져오는 데까지. UI Automation 은 실기 PC 에서 확인한 뒤 |
+| Claude 자체 상태 기록 · Codex 앱 실시간 상태 · 창 제목으로 읽음 | 위 「일부러 옮기지 않은 것」. Windows 실기 확인이 먼저다 |
 | 설치 프로그램 · 서명 · 자동 업데이트 | zip 을 풀어 `Retto.exe` 를 실행한다. 서명이 없어 SmartScreen 이 「추가 정보 → 실행」을 한 번 묻는다 |
 
 ## 왜 Electron 인가

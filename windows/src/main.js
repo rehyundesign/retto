@@ -16,6 +16,8 @@ const setupCheck = require('./setup-check');
 const orca = require('./orca');
 const { StatusAssembler } = require('./status');
 const slackModule = require('./slack');
+const transcript = require('./transcript');
+const transcriptReader = new transcript.TranscriptReader();
 
 const POLL_MS = 250;
 const RETHINK_MS = 1000;
@@ -141,6 +143,7 @@ function rethink() {
     sessions,
     seen: local.seen,
     pinnedId: local.pinnedId,
+    previousId: view?.selected?.id || null,
     nowMs: Date.now(),
     trackingStartedAtMs,
     transcriptModifiedAt
@@ -170,12 +173,13 @@ function sendView() {
   } else {
     const animation = core.ANIMATIONS[selected.visibleState];
     const slackNotice = selected.source === 'slack' && selected.visibleState === 'waving';
+    // 맥 앱처럼 트랜스크립트에서 방금 쓴 문장과 이름을 직접 읽는다. 훅은 도구를 부를 때만 돌기 때문이다.
+    const live = selected.source === 'slack' ? { message: '', title: '' } : transcriptReader.read(selected.transcriptPath);
+    const body = transcript.bodyText(live.message, selected.lastAssistantMessage);
     bubble = {
-      kicker: slackNotice ? 'SLACK' : animation.kicker,
-      title: core.sessionTitle(selected),
-      message: selected.lastAssistantMessage && selected.visibleState === 'waving'
-        ? String(selected.lastAssistantMessage).slice(0, 80)
-        : animation.title,
+      kicker: transcript.detailText(selected, selected.visibleState, slackNotice ? 'SLACK' : animation.kicker),
+      title: live.title || core.sessionTitle(selected),
+      message: body || animation.title,
       project: core.projectName(selected),
       tone: slackNotice ? 'slack' : animation.tone
     };
@@ -231,7 +235,11 @@ async function openSession(session) {
     if (rawId) await shell.openExternal(`codex://threads/${encodeURIComponent(rawId)}`).catch(() => {});
     return;
   }
-  // Claude 앱 세션은 세션 딥링크가 없다(맥에서 확인한 사실). 1차에서는 VS Code 로 보낸다 — 맥의 fallback 순서와 다르다.
+  // Claude 앱 세션은 Claude 앱으로 보낸다. 세션을 집어 띄우는 링크는 없어 앱을 앞으로 가져오는 데까지다
+  // (맥 OpenTarget.swift sessionDeepLink — 맥은 거기서 접근성 API 로 사이드바 행을 누른다).
+  if (session.client === 'claude') {
+    if (await shell.openExternal('claude://').then(() => true, () => false)) return;
+  }
   // 작업 폴더를 모르면 폴더 창만 열고 세션 딥링크는 보내지 않는다. 딥링크가 엉뚱한 창으로 가서
   // 같은 대화가 새 패널로 하나 더 열리는 것보다 창만 앞으로 오는 편이 낫다(docs/세션-열기.md).
   //
