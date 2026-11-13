@@ -22,6 +22,27 @@ const transcriptReader = new transcript.TranscriptReader();
 const POLL_MS = 250;
 const RETHINK_MS = 1000;
 const PET_SIZE = { width: 280, height: 270 };
+/// 말풍선(두 줄 · 이름표 포함)이 차지하는 높이. 레토 그림 위에 이만큼을 둔다.
+const BUBBLE_ROOM = 132;
+
+/// 창 크기는 스킨 그림 높이에 맞춘다. 칸을 꽉 채우는 스킨(리락쿠마)은 말풍선이 창 밖으로 잘리지 않게 크게,
+/// 작은 스킨은 투명한 빈 자리가 다른 앱의 클릭을 막지 않게 작게.
+function petSize() {
+  const skin = currentSkin();
+  if (!skin || !skinManifest) return PET_SIZE;
+  const top = Number.isFinite(skin.contentTop) ? skin.contentTop : skinManifest.petRect.y + 44;
+  return { width: PET_SIZE.width, height: Math.ceil((skinManifest.frameHeight - top) * 0.5 + 4 + BUBBLE_ROOM) };
+}
+
+/// 스킨을 바꾸면 아래 변을 그대로 두고 높이만 바꾼다.
+function resizeForSkin() {
+  if (!petWindow || petWindow.isDestroyed()) return;
+  const bounds = petWindow.getBounds();
+  const size = petSize();
+  if (bounds.height === size.height) return;
+  petWindow.setBounds({ x: bounds.x, y: bounds.y + bounds.height - size.height, width: size.width, height: size.height });
+  rememberPosition();
+}
 
 const resourcesDir = app.isPackaged ? process.resourcesPath : path.join(__dirname, '..', '..');
 const assetsDir = path.join(resourcesDir, 'assets');
@@ -206,7 +227,8 @@ function skinPayload() {
     clips: skin.clips,
     frameWidth: skinManifest.frameWidth,
     frameHeight: skinManifest.frameHeight,
-    petRect: skinManifest.petRect
+    petRect: skinManifest.petRect,
+    contentTop: skin.contentTop
   };
 }
 
@@ -278,21 +300,22 @@ function clearAttention() {
 
 function defaultPosition() {
   const area = screen.getPrimaryDisplay().workArea;
-  return { x: area.x + area.width - PET_SIZE.width - 24, y: area.y + area.height - PET_SIZE.height - 8 };
+  const size = petSize();
+  return { x: area.x + area.width - size.width - 24, y: area.y + area.height - size.height - 8 };
 }
 
 /// 저장한 자리가 지금 연결된 화면 밖이면(모니터를 뺐다) 기본 자리로 돌린다.
 function onScreen(position) {
   if (!position) return false;
   return screen.getAllDisplays().some(({ workArea: a }) =>
-    position.x + PET_SIZE.width / 2 >= a.x && position.x + PET_SIZE.width / 2 <= a.x + a.width
-    && position.y + PET_SIZE.height / 2 >= a.y && position.y + PET_SIZE.height / 2 <= a.y + a.height);
+    position.x + petSize().width / 2 >= a.x && position.x + petSize().width / 2 <= a.x + a.width
+    && position.y + petSize().height / 2 >= a.y && position.y + petSize().height / 2 <= a.y + a.height);
 }
 
 function createPetWindow() {
   const position = onScreen(local.position) ? local.position : defaultPosition();
   petWindow = new BrowserWindow({
-    ...PET_SIZE,
+    ...petSize(),
     ...position,
     frame: false,
     transparent: true,
@@ -413,7 +436,7 @@ function rebuildTrayMenu() {
         label: skin.label,
         type: 'radio',
         checked: currentSkin()?.id === skin.id,
-        click: () => { local.skin = skin.id; saveLocal(); lastMenuKey = ''; sendView(); rebuildTrayMenu(); }
+        click: () => { local.skin = skin.id; saveLocal(); lastMenuKey = ''; resizeForSkin(); sendView(); rebuildTrayMenu(); }
       }))
     }] : []),
     { label: '클릭 통과', type: 'checkbox', checked: local.clickThrough, click: (item) => setClickThrough(item.checked) },

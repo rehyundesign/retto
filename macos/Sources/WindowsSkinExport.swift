@@ -53,6 +53,20 @@ private struct ExportCanvas {
     }
 }
 
+/// 그림이 시작되는 맨 위 줄(불투명 픽셀이 처음 나오는 줄). 말풍선을 그 위에 두려고 쓴다. 다 비었으면 nil.
+private func topOpaqueRow(_ image: CGImage) -> Int? {
+    let width = image.width, height = image.height
+    guard let context = CGContext(data: nil, width: width, height: height, bitsPerComponent: 8, bytesPerRow: width * 4,
+            space: CGColorSpace(name: CGColorSpace.sRGB)!, bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue),
+          let data = { context.draw(image, in: CGRect(x: 0, y: 0, width: width, height: height)); return context.data }() else { return nil }
+    let bytes = data.bindMemory(to: UInt8.self, capacity: width * height * 4)
+    // 비트맵 메모리는 맨 위 줄부터 들어 있다. 알파 24 이하(옅은 빛·그림자)는 그림으로 보지 않는다.
+    for row in 0..<height {
+        for column in stride(from: 0, to: width, by: 2) where bytes[(row * width + column) * 4 + 3] > 24 { return row }
+    }
+    return nil
+}
+
 /// 프레임들을 cols 칸씩 줄지어 붙인 PNG 한 장으로 쓴다.
 private func writeSheet(_ frames: [CGImage], to url: URL, width: Int, height: Int) -> Bool {
     let columns = min(exportColumns, max(1, frames.count))
@@ -96,6 +110,7 @@ func exportWindowsSkins(to path: String) -> Int32 {
         let folder = root.appendingPathComponent(skin.rawValue)
         try? FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
         var clips: [String: Any] = [:]
+        var contentTop = frameHeight
         let started = Date()
 
         func freshView() -> RettoView {
@@ -131,6 +146,8 @@ func exportWindowsSkins(to path: String) -> Int32 {
                 view.exportAdvance(to: 1000 + Double(i) / fps)
                 if drag == nil, view.exportVisibleState != startVisible { then = view.exportVisibleState.rawValue; break }
                 guard let image = canvas.render(view) else { continue }
+                // 상태 클립만 센다. 끌기·시선은 짧게 지나가는 자세라 말풍선 자리를 정하지 않는다.
+                if drag == nil, i % 3 == 0, let top = topOpaqueRow(image) { contentTop = min(contentTop, top) }
                 frames.append(image)
             }
             guard !frames.isEmpty, writeSheet(frames, to: folder.appendingPathComponent("\(name).png"), width: frameWidth, height: frameHeight) else { return }
@@ -162,7 +179,8 @@ func exportWindowsSkins(to path: String) -> Int32 {
                 clips["gaze"] = ["file": "gaze.png", "frames": 16, "fps": 0, "columns": min(exportColumns, 16), "loop": false]
             }
         }
-        skins.append(["id": skin.rawValue, "label": skin.label, "clips": clips])
+        // 그림 윗선(프레임 안 픽셀). Windows 판은 말풍선을 레토 위에 두므로 큰 스킨(리락쿠마 등)이 말풍선에 겹치지 않게 쓴다.
+        skins.append(["id": skin.rawValue, "label": skin.label, "clips": clips, "contentTop": contentTop])
         print("\(skin.rawValue): \(clips.count) clips · \(String(format: "%.1f", Date().timeIntervalSince(started)))s")
     }
 
