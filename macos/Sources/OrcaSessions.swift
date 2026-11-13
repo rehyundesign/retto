@@ -21,6 +21,9 @@ import AppKit
 import Foundation
 
 let orcaBundleIdentifier = "com.stablyai.orca"
+/// Orca 의 기본 사용자 데이터 폴더. 세션 기록(`agent-session-journal.db`)이 여기 있다.
+let orcaUserDataURL = FileManager.default.homeDirectoryForCurrentUser
+    .appendingPathComponent("Library/Application Support/orca")
 
 /// Codex 롤아웃 첫 줄이 Orca 채팅이 띄운 스레드의 것인가.
 func codexSessionMetaIsFromOrca(_ firstLine: String) -> Bool {
@@ -59,6 +62,8 @@ struct OrcaOpenRequest: Equatable {
     var workspacePath: String?
     /// `claude` · `codex`. 한 워크스페이스에 두 종류 채팅이 있으면 맞는 쪽만 고른다.
     var agent: String
+    /// 훅 없는 Orca Codex 채팅의 스레드 ID. 채팅 ID 를 모를 때 Orca 세션 기록으로 그 탭을 찾는다.
+    var codexThreadId: String? = nil
 }
 
 func orcaOpenRequest(for payload: StatePayload) -> OrcaOpenRequest? {
@@ -71,7 +76,8 @@ func orcaOpenRequest(for payload: StatePayload) -> OrcaOpenRequest? {
         sessionId: nonEmpty(payload.orcaSessionId),
         terminalHandle: nonEmpty(payload.orcaTerminalHandle),
         workspacePath: nonEmpty(payload.cwd),
-        agent: payload.source == "codex" || payload.client == "codex" ? "codex" : "claude"
+        agent: payload.source == "codex" || payload.client == "codex" ? "codex" : "claude",
+        codexThreadId: payload.orcaHosted == true ? nonEmpty(payload.navigationSessionId) : nil
     )
 }
 
@@ -108,6 +114,28 @@ const pathOf = (worktree) => String(worktree || '').split('::').slice(1).join(':
     }
   }
   let chat = request.sessionId ? chats.find((item) => item.sessionId === request.sessionId) : undefined;
+  if (!chat && !request.sessionId && request.codexThreadId && request.journalPath) {
+    // 훅 없는 Codex 채팅. Orca 세션 기록에서 그 스레드를 마지막으로 연 채팅을 찾는다. 못 찾으면 아래 방법으로 간다.
+    try {
+      const { DatabaseSync } = require('node:sqlite');
+      const db = new DatabaseSync(request.journalPath, { readOnly: true });
+      try {
+        const query = db.prepare('SELECT record_json FROM agent_session_records WHERE session_id = ?');
+        const owners = chats.filter((item) => item.agent === 'codex').filter((item) => {
+          try {
+            const row = query.get(item.sessionId);
+            const chain = (row && JSON.parse(row.record_json) || {}).providerHandleChain || [];
+            const handle = [...chain].reverse().map((link) => link && link.handle)
+              .find((value) => value && value.provider === 'codex' && value.threadId);
+            return handle && handle.threadId === request.codexThreadId;
+          } catch { return false; }
+        });
+        if (owners.length === 1) chat = owners[0];
+      } finally {
+        db.close();
+      }
+    } catch {}
+  }
   if (!chat && !request.sessionId && request.workspacePath) {
     const candidates = chats.filter((item) => pathOf(item.worktree) === request.workspacePath
       && (!request.agent || item.agent === request.agent));
@@ -170,10 +198,14 @@ final class OrcaNavigator {
             return .terminal
         }
         let clientPath = resources.appendingPathComponent("app.asar.unpacked/out/cli/runtime-client.js").path
-        if request.sessionId != nil || request.workspacePath != nil,
+        if request.sessionId != nil || request.workspacePath != nil || request.codexThreadId != nil,
            FileManager.default.fileExists(atPath: clientPath) {
             var body: [String: String] = ["clientPath": clientPath, "agent": request.agent]
             if let sessionId = request.sessionId { body["sessionId"] = sessionId }
+            if let thread = request.codexThreadId {
+                body["codexThreadId"] = thread
+                body["journalPath"] = orcaUserDataURL.appendingPathComponent("agent-session-journal.db").path
+            }
             if let path = request.workspacePath { body["workspacePath"] = path }
             if let json = try? JSONSerialization.data(withJSONObject: body),
                let encoded = String(data: json, encoding: .utf8),
@@ -263,6 +295,8 @@ struct OrcaChatStatus: Equatable {
     let needsInput: Bool
     /// 지금 상태가 시작된 시각(ms).
     let sinceMs: Double
+    /// 마지막 턴이 실패로 끝났나(`done` + `outcome: failure`). 롤아웃에는 실패 표시가 없다.
+    var failed: Bool = false
 }
 
 let orcaChatStatusScript = #"""
@@ -310,6 +344,7 @@ const print = (value) => process.stdout.write(JSON.stringify(value) + '\n');
       sessionId,
       threadId: before[sessionId] && before[sessionId] === after[sessionId] ? before[sessionId] : null,
       state: status.state,
+      outcome: status.state === 'done' && main.state === 'done' ? (main.outcome || null) : null,
       since: main.state === status.state && main.stateStartedAt ? main.stateStartedAt : status.updatedAt,
     };
   }) });
@@ -336,7 +371,8 @@ func orcaChatStatuses(fromOutput output: String) -> [String: OrcaChatStatus]? {
               let state = chat["state"] as? String else { continue }
         let status = OrcaChatStatus(orcaSessionId: sessionId, threadId: threadId,
                                     needsInput: state == "blocked" || state == "waiting",
-                                    sinceMs: (chat["since"] as? Double) ?? 0)
+                                    sinceMs: (chat["since"] as? Double) ?? 0,
+                                    failed: state == "done" && chat["outcome"] as? String == "failure")
         // 한 스레드를 두 탭이 가리키면(포크 직후 등) 어느 쪽인지 모른다. 둘 다 버린다.
         if result[threadId] != nil {
             result[threadId] = OrcaChatStatus(orcaSessionId: "", threadId: threadId, needsInput: false, sinceMs: 0)
@@ -352,6 +388,16 @@ func applyOrcaChatStatus(_ chat: OrcaChatStatus?, to payload: StatePayload) -> S
     guard let chat else { return payload }
     var result = payload
     if (result.orcaSessionId ?? "").isEmpty { result.orcaSessionId = chat.orcaSessionId }
+    if chat.failed {
+        // 실패 뒤 새 턴을 롤아웃이 먼저 알렸으면 지난 실패를 다시 띄우지 않는다.
+        let inTurn = result.petState == .running || result.petState == .review || result.petState == .waiting
+        if inTurn, (result.updatedAtMs ?? 0) > chat.sinceMs { return result }
+        result.state = PetState.failed.rawValue
+        result.attention = true
+        if chat.sinceMs > 0 { result.updatedAtMs = chat.sinceMs }
+        result.stateSource = "orca"
+        return result
+    }
     // 롤아웃 완료가 더 새로워도 대기를 버리지 않는다. Orca 는 내 답을 기다리며 끝난 턴도 `blocked` 로 낸다.
     // 승인이 끝난 뒤의 지난 대기는 다음 조회(3초 안)에서 풀린다.
     guard chat.needsInput else { return result }
@@ -382,6 +428,12 @@ final class OrcaChatStatusReader {
     static let interval: TimeInterval = 3
     /// Codex 스레드 ID → 상태. 메인 스레드에서만 읽고 쓴다.
     private(set) var statuses: [String: OrcaChatStatus] = [:]
+    /// 실패로 끝난 스레드. 실패한 채팅은 더 묻지 않으므로(추적 밖) 따로 기억해 두고,
+    /// Orca 가 그 스레드를 실패 아닌 상태로 다시 알려 주면 지운다. 조회가 실패해도 지우지 않는다 — 지난 사실이다.
+    private(set) var failures: [String: OrcaChatStatus] = [:]
+
+    /// 화면에 겹칠 상태. 지금 묻고 있는 값이 먼저다.
+    func status(for threadId: String) -> OrcaChatStatus? { statuses[threadId] ?? failures[threadId] }
     var onChange: (() -> Void)?
     private let queue = DispatchQueue(label: "retto.orca-chat-status", qos: .utility)
     private var timer: Timer?
@@ -422,10 +474,24 @@ final class OrcaChatStatusReader {
             DispatchQueue.main.async {
                 guard let self else { return }
                 self.inFlight = false
+                if let result { self.remember(result) }
                 // 못 읽었으면 지난 값을 들고 있지 않는다. 승인이 끝났는데 파란색이 남는 것보다 롤아웃 상태로 돌아가는 편이 낫다.
                 self.publish((result ?? [:]).filter { self.tracked.contains($0.key) })
             }
         }
+    }
+
+    private func remember(_ result: [String: OrcaChatStatus]) {
+        var next = failures
+        for (thread, status) in result {
+            if status.failed { next[thread] = status } else { next[thread] = nil }
+        }
+        if next.count > 256 {
+            next = Dictionary(uniqueKeysWithValues: next.sorted { $0.value.sinceMs > $1.value.sinceMs }.prefix(256).map { ($0.key, $0.value) })
+        }
+        guard next != failures else { return }
+        failures = next
+        onChange?()
     }
 
     private func publish(_ next: [String: OrcaChatStatus]) {
@@ -437,9 +503,7 @@ final class OrcaChatStatusReader {
     private static func fetch(appURL: URL) -> [String: OrcaChatStatus]? {
         let clientPath = appURL.appendingPathComponent("Contents/Resources/app.asar.unpacked/out/cli/runtime-client.js").path
         guard FileManager.default.fileExists(atPath: clientPath) else { return nil }
-        let userDataPath = FileManager.default.homeDirectoryForCurrentUser
-            .appendingPathComponent("Library/Application Support/orca").path
-        guard let json = try? JSONSerialization.data(withJSONObject: ["clientPath": clientPath, "userDataPath": userDataPath]),
+        guard let json = try? JSONSerialization.data(withJSONObject: ["clientPath": clientPath, "userDataPath": orcaUserDataURL.path]),
               let encoded = String(data: json, encoding: .utf8),
               let output = runOrcaProcess(appURL.appendingPathComponent("Contents/MacOS/Orca"), ["-e", orcaChatStatusScript],
                                           extraEnvironment: ["ELECTRON_RUN_AS_NODE": "1", "RETTO_ORCA_REQUEST": encoded],

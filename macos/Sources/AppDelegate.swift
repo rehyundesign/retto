@@ -604,7 +604,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
                 claudeNativeStatusReader.status(for: payload), to: payload))
             // 훅이 도는 Orca 터미널의 Codex 는 훅이 대기를 알려 준다. 훅 없는 채팅만 Orca 상태를 겹친다.
             if payload.orcaHosted == true {
-                output = applyOrcaChatStatus(orcaChatStatusReader.statuses[payload.navigationSessionId], to: output)
+                output = applyOrcaChatStatus(orcaChatStatusReader.status(for: payload.navigationSessionId), to: output)
             }
             if payload.source != "slack" {
                 taskStatusDiagnostics.record(input: payload, output: output,

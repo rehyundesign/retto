@@ -282,7 +282,7 @@ func runSelfTest() -> Int32 {
         && sessionMenuLabel(for: plainCode) == "● 작업 중  코드 작업 · ws · VS Code"
         && orcaOpenRequest(for: orcaChat) == OrcaOpenRequest(sessionId: "claude_abc", terminalHandle: nil, workspacePath: "/tmp/ws", agent: "claude")
         && orcaOpenRequest(for: orcaTerminal) == OrcaOpenRequest(sessionId: nil, terminalHandle: "term_abc", workspacePath: "/tmp/ws", agent: "claude")
-        && orcaOpenRequest(for: orcaCodex) == OrcaOpenRequest(sessionId: nil, terminalHandle: nil, workspacePath: "/tmp/project", agent: "codex")
+        && orcaOpenRequest(for: orcaCodex) == OrcaOpenRequest(sessionId: nil, terminalHandle: nil, workspacePath: "/tmp/project", agent: "codex", codexThreadId: "thread-one")
         && orcaOpenRequest(for: plainCode) == nil
         && NewsChannel.of(client: "orca", source: nil) == .orca
         && orcaRevealOutcome("{\"opened\":\"chat\"}\n") == .chat
@@ -306,6 +306,9 @@ func runSelfTest() -> Int32 {
     orcaFinished.state = "waving"
     orcaFinished.updatedAtMs = 6000
     let blockedChat = orcaStatuses?["thread-a"]
+    let orcaFailedChat = orcaChatStatuses(fromOutput: "{\"chats\":[{\"sessionId\":\"codex_f\",\"threadId\":\"thread-f\",\"state\":\"done\",\"outcome\":\"failure\",\"since\":5500}]}")?["thread-f"]
+    var orcaRunningAfterFailure = orcaRunning
+    orcaRunningAfterFailure.updatedAtMs = 7000
     let orcaWaiting = applyOrcaChatStatus(blockedChat, to: orcaRunning)
     let orcaChatStatusOK = orcaStatuses?.keys.sorted() == ["thread-a", "thread-b"]
         && blockedChat == OrcaChatStatus(orcaSessionId: "codex_a", threadId: "thread-a", needsInput: true, sinceMs: 5000)
@@ -328,6 +331,13 @@ func runSelfTest() -> Int32 {
         && !orcaChatNeedsWatching(state: .idle, lastActivityMs: 1, nowMs: 2)
         && !orcaChatNeedsWatching(state: .running, lastActivityMs: nil, nowMs: 2)
         && applyOrcaChatStatus(nil, to: orcaRunning) == orcaRunning
+        // 실패는 `done` + `outcome: failure`. 롤아웃에는 실패 표시가 없어 완료로 보이던 것을 실패로 바꾼다.
+        && orcaFailedChat?.failed == true && orcaFailedChat?.needsInput == false
+        && orcaChatStatuses(fromOutput: "{\"chats\":[{\"sessionId\":\"codex_g\",\"threadId\":\"thread-g\",\"state\":\"done\",\"outcome\":\"cancellation\",\"since\":1}]}")?["thread-g"]?.failed == false
+        && applyOrcaChatStatus(orcaFailedChat, to: orcaFinished).petState == .failed
+        && applyOrcaChatStatus(orcaFailedChat, to: orcaFinished).needsAttention
+        // 실패 뒤 새 턴이 시작됐으면 지난 실패를 띄우지 않는다.
+        && applyOrcaChatStatus(orcaFailedChat, to: orcaRunningAfterFailure).petState == .running
     let runningCodexPayload = try! JSONDecoder().decode(StatePayload.self, from: "{\"state\":\"running\",\"sessionId\":\"thread-one\",\"source\":\"codex\",\"sessionTitle\":\"예전 제목\",\"updatedAtMs\":1000}".data(using: .utf8)!)
     let completedCodexTask = reconcileCodexTask(
         payload: runningCodexPayload,
