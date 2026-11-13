@@ -330,6 +330,7 @@ func runSelfTest() -> Int32 {
     let orcaIndexThreads = orcaIndex.threads
     try? FileManager.default.removeItem(at: orcaIndexURL)
     let orcaFailedChat = orcaChatStatuses(fromOutput: "{\"chats\":[{\"sessionId\":\"codex_f\",\"threadId\":\"thread-f\",\"state\":\"done\",\"outcome\":\"failure\",\"since\":5500}]}")?["thread-f"]
+    let orcaCancelledChat = orcaChatStatuses(fromOutput: "{\"chats\":[{\"sessionId\":\"codex_c\",\"threadId\":\"thread-c\",\"state\":\"done\",\"outcome\":\"cancellation\",\"since\":6500}]}")?["thread-c"]
     var orcaRunningAfterFailure = orcaRunning
     orcaRunningAfterFailure.updatedAtMs = 7000
     let orcaWaiting = applyOrcaChatStatus(blockedChat, to: orcaRunning)
@@ -360,7 +361,15 @@ func runSelfTest() -> Int32 {
         && applyOrcaChatStatus(orcaFailedChat, to: orcaFinished).petState == .failed
         && applyOrcaChatStatus(orcaFailedChat, to: orcaFinished).needsAttention
         // 실패 뒤 새 턴이 시작됐으면 지난 실패를 띄우지 않는다.
-        && applyOrcaChatStatus(orcaFailedChat, to: orcaRunningAfterFailure).petState == .running
+        && applyOrcaChatStatus(orcaFailedChat, to: orcaRunningAfterFailure, turnStartedAtMs: 7000).petState == .running
+        // 롤아웃 파일 시각이 실패 뒤라도 새 요청이 없으면 실패다(실패 기록을 쓰는 순간 파일 시각이 바뀐다).
+        && applyOrcaChatStatus(orcaFailedChat, to: orcaRunningAfterFailure, turnStartedAtMs: 5000).petState == .failed
+        // 멈춘 턴은 롤아웃에 완료가 없어 작업 중으로 보인다. Orca 의 cancellation 으로 쉬는 중이 된다.
+        && orcaCancelledChat?.cancelled == true && orcaCancelledChat?.failed == false
+        && applyOrcaChatStatus(orcaCancelledChat, to: orcaRunningAfterFailure, turnStartedAtMs: 5000).petState == .idle
+        && !applyOrcaChatStatus(orcaCancelledChat, to: orcaRunningAfterFailure, turnStartedAtMs: 5000).needsAttention
+        && applyOrcaChatStatus(orcaCancelledChat, to: orcaRunningAfterFailure, turnStartedAtMs: 7000).petState == .running
+        && applyOrcaChatStatus(orcaCancelledChat, to: orcaFinished).petState == .waving
         // Orca 의 Codex 채팅은 Codex 쪽 제목이 없어 숨겨졌다. Orca 기록의 제목과 탭 ID 를 붙여 보인다.
         && orcaCodexThread(fromRecord: orcaRecord, sessionId: "codex_t")?.threadId == "thread-t"
         && orcaCodexThread(fromRecord: orcaRecord, sessionId: "codex_t")?.thread == OrcaCodexThread(orcaSessionId: "codex_t", title: "Orca 제목")
