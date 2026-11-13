@@ -1,0 +1,29 @@
+{
+  "mode": "effect-repair",
+  "retained_drawings": 16,
+  "pose_ms": 200,
+  "cycle_ms": 3200,
+  "effect_ms": 50,
+  "distinct_light_samples": 64,
+  "character_files_and_animation_unchanged": true,
+  "opaque_pixels_outside_dome_unchanged": true,
+  "changes_only_in_dome_and_added_background_glints": true,
+  "edge_alpha_max": 0,
+  "frozen_pose_light_progression": true,
+  "background_glint_pixels_alpha_over40": [
+    780,
+    951
+  ],
+  "native_installed": false,
+  "live_browser_verified": false,
+  "night.webp": {
+    "frames": 64,
+    "cycle_ms": 3200,
+    "sha256": "6540c8fb6658f939d92df953dc3be4846fc068dbb12b643389879ce02b731650"
+  },
+  "running.gif": {
+    "frames": 64,
+    "cycle_ms": 3200,
+    "sha256": "57896a341117e15a5c4ef1cadc946449180c97ac958e459687595524658582a6"
+  }
+}

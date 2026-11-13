@@ -1,0 +1,52 @@
+{
+  "source_sha256": {
+    "00": "bce7986bdc5d08aa329544d0e5d0ad2c4362f393aaa30d09ffa8ee619e33fe8c",
+    "01": "e070ed4edb57065662041b1292335cfa1cc1c066387531bf255bed84ef9581a5",
+    "02": "ea6c6a7d4565d01e211cc064167e3364d2581b7d7af0c0802e023d97a1d4945f",
+    "03": "086bbfc9a69426ec6c96c841222feaf996f17f548db312649118819e252ddf33",
+    "04": "0447fab329a68c8db22ab6c4a9c162f169a7bafae70a9b7573ff5fc59c64f40b",
+    "05": "07cb648c5678b9632061f44b1390219bbfc00b2620394c9bfe49d4690f44d135",
+    "06": "aa5954fee6bbbf040b9926b9d918ab50d3566c155cf9c6a36392c0eda57cf267",
+    "07": "0c0f1052dedfc8a5138eb4f124c16923956f064931208344bd9d0a2bdae0beaa",
+    "08": "c168efb4ebc4608c8476124a694f0cbc5c09063c7992cb4c006064f872f21432",
+    "09": "1e2ec24861c03f43bd194f681d709a813d1f16d73eed76dc23f50d34f4f001db",
+    "10": "bd92f621eeb44f7ae126b943dc53bce740845dd03e5bc30ebcb3a42bd817322c",
+    "11": "7b2590fbc44c163f0f862a6fc03005af0fb374404090ecdd004ff3562cae76bd",
+    "12": "640a5d2d8400606da640e3101b245d82f04ae5b4b6e3b891e8f2c6585dc5d3c4",
+    "13": "d26430291772847ff40f6afca7074c2699095420128b2cc505724efb8932425f",
+    "14": "339df144086f40a356e0396a908c025b57333076375dfe4bba76287dfe766895",
+    "15": "a5bc1c30b0ae0fcb85c894b04c2e776a03b4a183e821ba8b654ab7a8cc85dd93"
+  },
+  "gif_sha256": "9c59ada496db70717ae28f60ed3b14373f8df283e26d9b9b4632cb06bf9a0528",
+  "runtime_size_comparison": {
+    "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/gaze-left-v1-20261106/review/effect-dark.png",
+    "sha256": "72c424d88843b209fadae1a0cd36d0cb4396bb36a28054efaf1f87ff69845299"
+  },
+  "checks": {
+    "identity_eyes": {
+      "status": "pass",
+      "finding": "All16 changed cells reviewed dark/light at runtime size; canonical main mask/blaze/muzzle/blue-grey eyes, Tato black dots/^, Melody burgundy rectangles retained."
+    },
+    "anatomy_grip": {
+      "status": "pass",
+      "finding": "All16 independently drawn complete trios inspected; continuous main jaw/neck/shoulder/chest,4 grounded paws/right-hip tail; Tato holds physical yellow star and points, Melody joins with head/paw/winglet response; no head/body composite."
+    },
+    "material_canon": {
+      "status": "pass",
+      "finding": "Approved fur/plush ivory wings and small original companion designs; original canonical master and base left-gaze12 compared."
+    },
+    "legibility": {
+      "status": "pass",
+      "finding": "Character-only and effects-on full sequence inspected; sourceopaque RGBA unaffected by FX, blue/red emitters and physical star glints follow measured source proxies; edge alpha0. Main-body1.06 display camera reused for320x360 GIF."
+    },
+    "secondary_motion": {
+      "status": "unverified",
+      "finding": "Ordered new16-pose sequence and last-to-first inspected;3.2s clocks/periodicFX/frozen-pose progression checked; actual native temporal playback remains unverified, this interaction is review-only."
+    },
+    "loop_return": {
+      "status": "unverified",
+      "finding": "Ordered new16-pose sequence and last-to-first inspected;3.2s clocks/periodicFX/frozen-pose progression checked; actual native temporal playback remains unverified, this interaction is review-only."
+    }
+  },
+  "native_installed": false
+}

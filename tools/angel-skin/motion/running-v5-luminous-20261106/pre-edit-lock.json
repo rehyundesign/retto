@@ -1,0 +1,28 @@
+{
+  "source_sha256": {
+    "14": "1e19b3e867a7060ee276d6f782889fcb542cc30429d7984360017cdcb6904e12",
+    "00": "6f31f96261220691cf0750dbade5414d6cbcfb6cf928057968b6f84fc496ff6d",
+    "01": "ca8e93807f60d28bd865f6b1e16168f792e392e311200615f675c07312732c8b",
+    "15": "840f4fbcfa7f715dd4850ee35efe09d1d72b299954061adea1c77de614d020ee",
+    "03": "88356b5043a1b92309385fd2a2383176c6680626d02e82411e244817a3108a5a",
+    "02": "93ab5b7cc35a0186b75b92f7c3e313cd5dc5cc80c9babc1872f41432653363d5",
+    "06": "c66d59455ba9b0bc2e18648f1fca9d33d58552edb7e512588855879d5aca15ad",
+    "12": "03e6511ba8a1f1c3bdd2f4944162a0b474fbfe16ace45c64e3941ff9c2e9102f",
+    "13": "029c6f53a4f5fa7f14dbc6c4d0e541de5689e9c89824d29884b7b37805a20e2c",
+    "07": "18cce9d6d01ec7bfd1d1c3775e57b86e13976d0c71338c385e220451df333de5",
+    "11": "ab741ada9fb23722b7dac18c2dce4b936596c021d5b844b2f47a10670d6a9c14",
+    "05": "9c8d7dfd91e2f96974c640f8fd0f4344495fa2cc87466ef90b646472986a8313",
+    "04": "9d253147587414ab850e1bad08e6b789113b4690b49486b3dde6dc5f870a0a26",
+    "10": "b90c4dec752c5d2b11e478ab078d60cc4c7fe62f32237952f329216bd523e13f",
+    "09": "2a2b920156580c4d9ca2282bf83a5a4d5defbe8770dda80275442e2a45930a4f",
+    "08": "09729cc6ac3e0f14e893a5c435c0399e393185c4396abe969021c425e2433cc8"
+  },
+  "character_animation": {
+    "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/running-v3-proportion-20261105/review/character.webp",
+    "sha256": "46190d567f1e213253b1698a0dd2410e7acf0800e9b01c482d24ada2bbd8b7bf"
+  },
+  "effect_animation": {
+    "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/running-v4-musicbox-glow-20261106/review/night.webp",
+    "sha256": "ecba260d7290b47f65bffa4ec2b13faf6d008c9ff6cec7c4f0bfca278a292a36"
+  }
+}

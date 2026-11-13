@@ -1,0 +1,30 @@
+{
+  "state": "waiting",
+  "render_code_sha256": "02d9602707f2a6e9226d31802f361669cc719a24e1dc2f5472d2428f15cac07a",
+  "mode": "effect-repair",
+  "character_files_unchanged": true,
+  "character_drawings": 16,
+  "opaque_subject_prop_star_pixels_changed": 0,
+  "new_effect_edge_alpha_max": 0,
+  "old_cycle_ms": 3200,
+  "new_cycle_ms": 3200,
+  "effect_sample_ms": 50,
+  "new_effect_samples": 64,
+  "frozen_pose_effect_progression": true,
+  "effect_loop_periodic": true,
+  "media": {
+    "night.webp": {
+      "frames": 64,
+      "cycle_ms": 3200,
+      "sha256": "dc8cd6cb5b532a908b034ca61e1301f9d1c67a38f9bfeb7f020ac744dde936bf"
+    },
+    "preview.gif": {
+      "frames": 64,
+      "cycle_ms": 3200,
+      "sha256": "1e211ea972052a4719d48b4a3678023a61c28c337dd1728b40cd959d358e9c52"
+    }
+  },
+  "native_installed": false,
+  "original_registration": "inherited unverified",
+  "scoped_render_revision_proof": "nonfailed-effects-preserved.json"
+}

@@ -1,0 +1,55 @@
+{
+  "scope": "one idle GIF; wait for user approval before next state",
+  "mode": "new-motion",
+  "method": "16 independently generated complete-character poses; no head/body assembly, warps, or crossfades",
+  "production_states": [
+    "idle"
+  ],
+  "not_in_scope": [
+    "other states",
+    "installation",
+    "runtime modifications"
+  ],
+  "expression": "positive, warm, relaxed curious eyes and subtly upturned closed mouth; preserve feline muzzle",
+  "identity": "current original grown Retto idle/00.png",
+  "costume": "ivory feather shoulder wings; no halo or other new outfit",
+  "companions": {
+    "left": "white bell cat",
+    "right": "pink red-bow rabbit"
+  },
+  "action": "Retto tracks and taps feather with screen-left front paw; left pet catches/releases; right pet reaches; all recover",
+  "pose_count": 16,
+  "cycle_ms": 3200,
+  "cadence_reason": "Use Hana idle baseline: 16 independent poses at200ms. Separate feather flight samples at50ms; playback reviewed before delivery.",
+  "effects": "core feather prop only for pose/interaction review; full moonlight/feather storm deferred as user requested earlier; not a finished effects pass",
+  "next_stage": "await user approval of this idle GIF before any next state",
+  "unresolved": [
+    "exact original anatomical landmark registration",
+    "native cell display-fit and native state transitions",
+    "full moonlight/wind/feather effects deferred"
+  ],
+  "latest_feedback": "Tato has tiny solid black dot eyes; ^^ happy closed eyes allowed; no large anime eyes or irises. Repair pose02 eyes only; preserve approved other drawings.",
+  "status": "idle motion-study candidate; app not changed",
+  "selected_gif": "review/idle.gif",
+  "selected_character_sources": [
+    "character/00.png",
+    "character/01.png",
+    "character/02.png",
+    "character/03.png",
+    "character/04.png",
+    "character/05.png",
+    "character/06.png",
+    "character/07.png",
+    "character/08.png",
+    "character/09.png",
+    "character/10.png",
+    "character/11.png",
+    "character/12.png",
+    "character/13.png",
+    "character/14.png",
+    "character/15.png"
+  ],
+  "character_source_count": 16,
+  "character_pose_ms": 200,
+  "effect_sample_ms": 50
+}

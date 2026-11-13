@@ -1,0 +1,30 @@
+{
+  "mode": "effect-repair",
+  "scope": "seven-state Tato visibility repair plus seven idle alpha-only fragment repairs; preserve Melody effects",
+  "preserve": "all112 source RGB, all non-idle character media and105 PNG files exact; only969 reviewed background alpha pixels removed from7 idle drawings. All poses, timing and original source files preserved.",
+  "method": "Tato symbol diameter1.65x, opacity1.6x, chime width1.75x; exact same paths and timing. Melody layer RGBA exact all416 samples. Idle RGB unchanged, alpha-only reviewed masks; underlying original effects reconstructed and unchanged outside repair masks.",
+  "palette": {
+    "tato": [
+      102,
+      202,
+      255
+    ],
+    "melody": [
+      255,
+      109,
+      143
+    ]
+  },
+  "states": [
+    "idle",
+    "running",
+    "waiting",
+    "failed",
+    "waving",
+    "jumping",
+    "sleeping"
+  ],
+  "status": "Tato visibility and idle cleanup review candidate; user approval pending",
+  "native_installed": false,
+  "original_registration": "inherited unverified; no body geometry changed"
+}

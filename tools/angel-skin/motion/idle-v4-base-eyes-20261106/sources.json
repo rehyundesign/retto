@@ -1,0 +1,1192 @@
+[
+  {
+    "id": "00",
+    "path": "character/00.png",
+    "input_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v3-airborne-20261106/character/00.png",
+    "input_sha256": "f57112337128d68d9de1942840a3268d8623bcf5955bb24d410eca99ff21214b",
+    "changed_outside_eye_mask_pixels": 0,
+    "alpha_changed_pixels": 0,
+    "body_pose_changed": false,
+    "donor_sha256": "3ed4a2da2f6044eee598e8f365413217a313ffe68cbfa0d4092d796e6b6bfafa",
+    "eye_boxes": [
+      [
+        209,
+        185,
+        246,
+        216
+      ],
+      [
+        270,
+        184,
+        306,
+        216
+      ]
+    ],
+    "source_iris_detection": [
+      {
+        "bbox": [
+          223,
+          198,
+          236,
+          208
+        ],
+        "center": [
+          228.46753246753246,
+          202.46753246753246
+        ],
+        "pixels": 77
+      },
+      {
+        "bbox": [
+          278,
+          197,
+          291,
+          206
+        ],
+        "center": [
+          284.3943661971831,
+          201.1549295774648
+        ],
+        "pixels": 71
+      }
+    ],
+    "donor_iris_detection": [
+      {
+        "bbox": [
+          217,
+          192,
+          238,
+          209
+        ],
+        "center": [
+          226.90225563909775,
+          199.85714285714286
+        ],
+        "pixels": 133
+      },
+      {
+        "bbox": [
+          283,
+          191,
+          298,
+          209
+        ],
+        "center": [
+          290.1709401709402,
+          198.991452991453
+        ],
+        "pixels": 117
+      }
+    ],
+    "sha256": "e84a634909cc7f26ca5b59de8fad6a47215ca1797473d534a1c803aa49a1f121",
+    "mask_path": "masks/00.png",
+    "mask_sha256": "e8d9ad1b460e25d0ff3e1d447348feeee96d0e32e045ffecb345c60cd1fa2a0b"
+  },
+  {
+    "id": "01",
+    "path": "character/01.png",
+    "input_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v3-airborne-20261106/character/01.png",
+    "input_sha256": "3d7d06fcaf6f4cbf777a231c938200e14eb972468aad2be211a5f39f666d90b7",
+    "changed_outside_eye_mask_pixels": 0,
+    "alpha_changed_pixels": 0,
+    "body_pose_changed": false,
+    "donor_sha256": "50a61a51cf0a345d53f68af7ab8207c02d9f802945757ad61e8ea3a9ac2bec45",
+    "eye_boxes": [
+      [
+        198,
+        189,
+        230,
+        217
+      ],
+      [
+        251,
+        198,
+        286,
+        228
+      ]
+    ],
+    "source_iris_detection": [
+      {
+        "bbox": [
+          210,
+          201,
+          221,
+          210
+        ],
+        "center": [
+          214.45833333333334,
+          205.70833333333334
+        ],
+        "pixels": 48
+      },
+      {
+        "bbox": [
+          259,
+          211,
+          273,
+          219
+        ],
+        "center": [
+          265.91803278688525,
+          214.7377049180328
+        ],
+        "pixels": 61
+      }
+    ],
+    "donor_iris_detection": [
+      {
+        "bbox": [
+          206,
+          196,
+          222,
+          210
+        ],
+        "center": [
+          213.25,
+          202.7685185185185
+        ],
+        "pixels": 108
+      },
+      {
+        "bbox": [
+          263,
+          205,
+          278,
+          221
+        ],
+        "center": [
+          269.45,
+          210.6
+        ],
+        "pixels": 100
+      }
+    ],
+    "sha256": "06b30b704319638c61f3a9755db30e7922ffe864959485c5adca3e839e130d7a",
+    "mask_path": "masks/01.png",
+    "mask_sha256": "c66734a6908d94ef0401ba6cb534348d5af81abc72281c084767c0bb1981e3cd"
+  },
+  {
+    "id": "02",
+    "path": "character/02.png",
+    "input_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v3-airborne-20261106/character/02.png",
+    "input_sha256": "ecfef4d3ebbcf954d3e2d9bcc0ec61e497a2590227391431a89945181257193b",
+    "changed_outside_eye_mask_pixels": 0,
+    "alpha_changed_pixels": 0,
+    "body_pose_changed": false,
+    "donor_sha256": "6f458b0e858a35d8f3c20e7677d0307ea9687cd821623ff7afe5a13460ee8c49",
+    "eye_boxes": [
+      [
+        209,
+        193,
+        237,
+        220
+      ],
+      [
+        257,
+        203,
+        288,
+        231
+      ]
+    ],
+    "source_iris_detection": [
+      {
+        "bbox": [
+          217,
+          204,
+          227,
+          212
+        ],
+        "center": [
+          221.08333333333334,
+          207.51666666666668
+        ],
+        "pixels": 60
+      },
+      {
+        "bbox": [
+          265,
+          214,
+          276,
+          221
+        ],
+        "center": [
+          270.0882352941176,
+          217.05882352941177
+        ],
+        "pixels": 68
+      }
+    ],
+    "donor_iris_detection": [
+      {
+        "bbox": [
+          218,
+          200,
+          229,
+          213
+        ],
+        "center": [
+          225.48888888888888,
+          207.2
+        ],
+        "pixels": 45
+      },
+      {
+        "bbox": [
+          270,
+          210,
+          280,
+          224
+        ],
+        "center": [
+          274.8474576271187,
+          216.15254237288136
+        ],
+        "pixels": 59
+      }
+    ],
+    "sha256": "a281f6d926de2211e43c2e773d5698325c1623c0b38dc847d65425ead1ca7102",
+    "mask_path": "masks/02.png",
+    "mask_sha256": "91b4482a0315b444b207e7f2d5704ff6ed82cf0fa370c68b65fc1c3f55b4cd6f"
+  },
+  {
+    "id": "03",
+    "path": "character/03.png",
+    "input_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v3-airborne-20261106/character/03.png",
+    "input_sha256": "ea54f4fe3b8c91b461c70f33f90cb03dcde6828d40d83fba93637ccf7e0fd708",
+    "changed_outside_eye_mask_pixels": 0,
+    "alpha_changed_pixels": 0,
+    "body_pose_changed": false,
+    "donor_sha256": "60fc2b3651bcc56ade887a0bdc4754de5c8cf97a6f27106b76eb0628d3a902b4",
+    "eye_boxes": [
+      [
+        204,
+        208,
+        238,
+        236
+      ],
+      [
+        258,
+        195,
+        291,
+        226
+      ]
+    ],
+    "source_iris_detection": [
+      {
+        "bbox": [
+          218,
+          219,
+          230,
+          229
+        ],
+        "center": [
+          223.421875,
+          223.671875
+        ],
+        "pixels": 64
+      },
+      {
+        "bbox": [
+          269,
+          208,
+          280,
+          218
+        ],
+        "center": [
+          274.48214285714283,
+          212.92857142857142
+        ],
+        "pixels": 56
+      }
+    ],
+    "donor_iris_detection": [
+      {
+        "bbox": [
+          212,
+          215,
+          227,
+          229
+        ],
+        "center": [
+          219.97196261682242,
+          221.85981308411215
+        ],
+        "pixels": 107
+      },
+      {
+        "bbox": [
+          266,
+          202,
+          283,
+          219
+        ],
+        "center": [
+          275.3649635036496,
+          210.65693430656935
+        ],
+        "pixels": 137
+      }
+    ],
+    "sha256": "61b38692298de43115f8c71fc21441664e5fba134ef230cad65a5c888879ef4a",
+    "mask_path": "masks/03.png",
+    "mask_sha256": "d44f04874eda974e5d02e4064ada42ffd656723e933432458d381b0f40706cc7"
+  },
+  {
+    "id": "04",
+    "path": "character/04.png",
+    "input_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v3-airborne-20261106/character/04.png",
+    "input_sha256": "86ff97551c4f271174d94ebaf6229b8406a46969365df85ce6042e14fba3018b",
+    "changed_outside_eye_mask_pixels": 0,
+    "alpha_changed_pixels": 0,
+    "body_pose_changed": false,
+    "donor_sha256": "6115fb368aff0b0c80cea3f4d0af92491fc1f397afad46433a6a7224953b772e",
+    "eye_boxes": [
+      [
+        197,
+        213,
+        231,
+        242
+      ],
+      [
+        252,
+        195,
+        284,
+        225
+      ]
+    ],
+    "source_iris_detection": [
+      {
+        "bbox": [
+          209,
+          224,
+          223,
+          234
+        ],
+        "center": [
+          216.08219178082192,
+          228.6164383561644
+        ],
+        "pixels": 73
+      },
+      {
+        "bbox": [
+          260,
+          206,
+          272,
+          217
+        ],
+        "center": [
+          266.44444444444446,
+          211.47619047619048
+        ],
+        "pixels": 63
+      }
+    ],
+    "donor_iris_detection": [
+      {
+        "bbox": [
+          205,
+          220,
+          221,
+          235
+        ],
+        "center": [
+          214.59047619047618,
+          227.75238095238095
+        ],
+        "pixels": 105
+      },
+      {
+        "bbox": [
+          260,
+          202,
+          276,
+          218
+        ],
+        "center": [
+          268.4047619047619,
+          209.5873015873016
+        ],
+        "pixels": 126
+      }
+    ],
+    "sha256": "97bb80eb71115145e1c4d2604d007fb625ea90ee50faa7d6ac90433095c4d080",
+    "mask_path": "masks/04.png",
+    "mask_sha256": "8568c4fc6b9886602639a14915e9419a89c4d7f6c98ab896f3f9707796868807"
+  },
+  {
+    "id": "05",
+    "path": "character/05.png",
+    "input_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v3-airborne-20261106/character/05.png",
+    "input_sha256": "28d9110364a845561326549d04fa673289d3aef81b3ec334743b0e67a5fc4252",
+    "changed_outside_eye_mask_pixels": 0,
+    "alpha_changed_pixels": 0,
+    "body_pose_changed": false,
+    "reason": "approved closed smiling eyelids retained byte-for-byte",
+    "eye_boxes": [],
+    "sha256": "28d9110364a845561326549d04fa673289d3aef81b3ec334743b0e67a5fc4252",
+    "mask_path": "masks/05.png",
+    "mask_sha256": "fded51d967ef2e15cc04d1c696777f83575c659b6fc2effbace6216ba7dd29fa"
+  },
+  {
+    "id": "06",
+    "path": "character/06.png",
+    "input_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v3-airborne-20261106/character/06.png",
+    "input_sha256": "4639d5d9c97b3c973afe34d83f9cfbf9d2ddcb74d7fadc1c89d8cb6741ac1839",
+    "changed_outside_eye_mask_pixels": 0,
+    "alpha_changed_pixels": 0,
+    "body_pose_changed": false,
+    "donor_sha256": "6a41298d7f9686bb1d4059d82dd6cf887014377e51dcf1dad331a396785b9857",
+    "eye_boxes": [
+      [
+        235,
+        226,
+        266,
+        253
+      ],
+      [
+        286,
+        219,
+        315,
+        245
+      ]
+    ],
+    "source_iris_detection": [
+      {
+        "bbox": [
+          243,
+          238,
+          256,
+          246
+        ],
+        "center": [
+          248.7608695652174,
+          241.7391304347826
+        ],
+        "pixels": 46
+      },
+      {
+        "bbox": [
+          296,
+          229,
+          307,
+          238
+        ],
+        "center": [
+          301.2448979591837,
+          233.6530612244898
+        ],
+        "pixels": 49
+      }
+    ],
+    "donor_iris_detection": [
+      {
+        "bbox": [
+          243,
+          233,
+          258,
+          246
+        ],
+        "center": [
+          252.71929824561403,
+          240.57894736842104
+        ],
+        "pixels": 57
+      },
+      {
+        "bbox": [
+          294,
+          226,
+          307,
+          238
+        ],
+        "center": [
+          298.54901960784315,
+          233.58823529411765
+        ],
+        "pixels": 51
+      }
+    ],
+    "sha256": "1544707786af2dff72b90818c7d2547e6dd8df886fa3916e812a839782927109",
+    "mask_path": "masks/06.png",
+    "mask_sha256": "4ddea8d3d9f019cf003d230fbd11573d5fd5c24bdbdd0ca6f057c2308d926524"
+  },
+  {
+    "id": "07",
+    "path": "character/07.png",
+    "input_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v3-airborne-20261106/character/07.png",
+    "input_sha256": "8ee783bdf4e7bedf45a34e5f900de31d8cac2ac943eb37808e4649df47b5710c",
+    "changed_outside_eye_mask_pixels": 0,
+    "alpha_changed_pixels": 0,
+    "body_pose_changed": false,
+    "donor_sha256": "4cab853039b9eb13d3d48ade022f1662700b54eb013822d54cf1e4c0fdad7490",
+    "eye_boxes": [
+      [
+        230,
+        191,
+        265,
+        220
+      ],
+      [
+        288,
+        182,
+        322,
+        212
+      ]
+    ],
+    "source_iris_detection": [
+      {
+        "bbox": [
+          241,
+          203,
+          253,
+          210
+        ],
+        "center": [
+          246.61111111111111,
+          206.5185185185185
+        ],
+        "pixels": 54
+      },
+      {
+        "bbox": [
+          296,
+          197,
+          306,
+          205
+        ],
+        "center": [
+          300.81632653061223,
+          200.51020408163265
+        ],
+        "pixels": 49
+      }
+    ],
+    "donor_iris_detection": [
+      {
+        "bbox": [
+          238,
+          198,
+          257,
+          213
+        ],
+        "center": [
+          245.27272727272728,
+          206.00757575757575
+        ],
+        "pixels": 132
+      },
+      {
+        "bbox": [
+          305,
+          189,
+          314,
+          204
+        ],
+        "center": [
+          309.63793103448273,
+          196.55172413793105
+        ],
+        "pixels": 58
+      }
+    ],
+    "sha256": "5d7bb6c56a7fb62e6ebf7349a0d073a7ee158d18e267fca9484dc664a4db2219",
+    "mask_path": "masks/07.png",
+    "mask_sha256": "0b0ce1b9fe11e711381f9535922e3e353a1d42679a655a6d1fce042913a59325"
+  },
+  {
+    "id": "08",
+    "path": "character/08.png",
+    "input_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v3-airborne-20261106/character/08.png",
+    "input_sha256": "cbd415a4be04375d61fec8d1876d84f26416b1eb52edd006098afc6b6d4b3fe8",
+    "changed_outside_eye_mask_pixels": 0,
+    "alpha_changed_pixels": 0,
+    "body_pose_changed": false,
+    "donor_sha256": "103d18c694c663778c70f82bbfa97c0c31ea1968af9c0d3c1659218ed9a2c919",
+    "eye_boxes": [
+      [
+        232,
+        193,
+        265,
+        221
+      ],
+      [
+        286,
+        183,
+        317,
+        211
+      ]
+    ],
+    "source_iris_detection": [
+      {
+        "bbox": [
+          240,
+          204,
+          255,
+          213
+        ],
+        "center": [
+          245.625,
+          208.25
+        ],
+        "pixels": 80
+      },
+      {
+        "bbox": [
+          294,
+          195,
+          306,
+          204
+        ],
+        "center": [
+          299.43333333333334,
+          199.26666666666668
+        ],
+        "pixels": 60
+      }
+    ],
+    "donor_iris_detection": [
+      {
+        "bbox": [
+          240,
+          200,
+          257,
+          214
+        ],
+        "center": [
+          246.91743119266056,
+          207.6605504587156
+        ],
+        "pixels": 109
+      },
+      {
+        "bbox": [
+          294,
+          190,
+          309,
+          204
+        ],
+        "center": [
+          301.59722222222223,
+          197.23611111111111
+        ],
+        "pixels": 72
+      }
+    ],
+    "sha256": "31cf28e4179725859bcfc7bcd10efd844725949350a436ab911cdc3b116bd9cb",
+    "mask_path": "masks/08.png",
+    "mask_sha256": "372661e06f75a93b6870ec80c260782877a2f3a201d4c3a33f534e5a06214590"
+  },
+  {
+    "id": "09",
+    "path": "character/09.png",
+    "input_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v3-airborne-20261106/character/09.png",
+    "input_sha256": "6bf28a01a1e359b70968819bfc6e3b600680267200c6ed1bc2b4b9390e95c5d7",
+    "changed_outside_eye_mask_pixels": 0,
+    "alpha_changed_pixels": 0,
+    "body_pose_changed": false,
+    "donor_sha256": "df8f44ab7caa3fc4b7f16bc6bbd276e6a3341dcd4a34560f1639830940034e6d",
+    "eye_boxes": [
+      [
+        232,
+        189,
+        267,
+        218
+      ],
+      [
+        289,
+        177,
+        322,
+        204
+      ]
+    ],
+    "source_iris_detection": [
+      {
+        "bbox": [
+          244,
+          201,
+          256,
+          209
+        ],
+        "center": [
+          248.96610169491527,
+          204.91525423728814
+        ],
+        "pixels": 59
+      },
+      {
+        "bbox": [
+          298,
+          188,
+          307,
+          196
+        ],
+        "center": [
+          301.8723404255319,
+          191.80851063829786
+        ],
+        "pixels": 47
+      }
+    ],
+    "donor_iris_detection": [
+      {
+        "bbox": [
+          240,
+          196,
+          259,
+          211
+        ],
+        "center": [
+          248.6595744680851,
+          204.2659574468085
+        ],
+        "pixels": 94
+      },
+      {
+        "bbox": [
+          297,
+          184,
+          314,
+          197
+        ],
+        "center": [
+          304.29906542056074,
+          189.78504672897196
+        ],
+        "pixels": 107
+      }
+    ],
+    "sha256": "061499d41bb6df15c0fbe0514ff5dc36975f932954da7a9981732a64084a4a4a",
+    "mask_path": "masks/09.png",
+    "mask_sha256": "c268a158908e6e947af03a8c7a0ba76400127fd489d1538d4f3e0f519e080aa3"
+  },
+  {
+    "id": "10",
+    "path": "character/10.png",
+    "input_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v3-airborne-20261106/character/10.png",
+    "input_sha256": "f5cf54c9367b2d29d851434386c202eef94bc274c40564d87eb49ae852479d41",
+    "changed_outside_eye_mask_pixels": 0,
+    "alpha_changed_pixels": 0,
+    "body_pose_changed": false,
+    "donor_sha256": "3d73d581bfe08f28e6e5a85001cdf2594d0a5219493f1c8b841b2a325b2242ae",
+    "eye_boxes": [
+      [
+        235,
+        179,
+        272,
+        207
+      ],
+      [
+        290,
+        165,
+        321,
+        194
+      ]
+    ],
+    "source_iris_detection": [
+      {
+        "bbox": [
+          249,
+          191,
+          261,
+          200
+        ],
+        "center": [
+          253.87692307692308,
+          195.52307692307693
+        ],
+        "pixels": 65
+      },
+      {
+        "bbox": [
+          299,
+          179,
+          309,
+          187
+        ],
+        "center": [
+          303.2916666666667,
+          183.20833333333334
+        ],
+        "pixels": 48
+      }
+    ],
+    "donor_iris_detection": [
+      {
+        "bbox": [
+          243,
+          186,
+          264,
+          200
+        ],
+        "center": [
+          253.176,
+          193.112
+        ],
+        "pixels": 125
+      },
+      {
+        "bbox": [
+          298,
+          172,
+          313,
+          187
+        ],
+        "center": [
+          304.4390243902439,
+          178.890243902439
+        ],
+        "pixels": 82
+      }
+    ],
+    "sha256": "4f3c697505b0fa49fc4e5098b8c5e6c97e755ba7c3db8b640f05c92fde129fc0",
+    "mask_path": "masks/10.png",
+    "mask_sha256": "dca7b854ff20ec0dd96f572325d5efff408dd06cad9af0c48dcd5de06aea66d0"
+  },
+  {
+    "id": "11",
+    "path": "character/11.png",
+    "input_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v3-airborne-20261106/character/11.png",
+    "input_sha256": "556f352452c50bee424138e823b51abc56c9c1bcd1ed3ad528546a0d6033a402",
+    "changed_outside_eye_mask_pixels": 0,
+    "alpha_changed_pixels": 0,
+    "body_pose_changed": false,
+    "donor_sha256": "7e26f260d36c09468e066bd89848d29d1533596bbe253e4924cb6aba496b8693",
+    "eye_boxes": [
+      [
+        234,
+        191,
+        268,
+        218
+      ],
+      [
+        292,
+        182,
+        326,
+        210
+      ]
+    ],
+    "source_iris_detection": [
+      {
+        "bbox": [
+          247,
+          204,
+          260,
+          211
+        ],
+        "center": [
+          252.12765957446808,
+          207.3404255319149
+        ],
+        "pixels": 47
+      },
+      {
+        "bbox": [
+          300,
+          195,
+          311,
+          203
+        ],
+        "center": [
+          305.5,
+          198.85714285714286
+        ],
+        "pixels": 42
+      }
+    ],
+    "donor_iris_detection": [
+      {
+        "bbox": [
+          242,
+          198,
+          251,
+          209
+        ],
+        "center": [
+          245.2941176470588,
+          202.37254901960785
+        ],
+        "pixels": 51
+      },
+      {
+        "bbox": [
+          307,
+          189,
+          318,
+          202
+        ],
+        "center": [
+          313.1489361702128,
+          193.91489361702128
+        ],
+        "pixels": 47
+      }
+    ],
+    "sha256": "4fb8cf71f9859266f036f554a671f32d1d55081d848f7a037031f1a7bbb21684",
+    "mask_path": "masks/11.png",
+    "mask_sha256": "9565426bad4c9891cad6c1571bfb7e76e2823d65b6e2f272246c8a3f3858eb78"
+  },
+  {
+    "id": "12",
+    "path": "character/12.png",
+    "input_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v3-airborne-20261106/character/12.png",
+    "input_sha256": "3f9af34c435231ccef7ea78e96ac2e4265be3b55de394475dcccb9b690608be6",
+    "changed_outside_eye_mask_pixels": 0,
+    "alpha_changed_pixels": 0,
+    "body_pose_changed": false,
+    "reason": "approved closed smiling eyelids retained byte-for-byte",
+    "eye_boxes": [],
+    "sha256": "3f9af34c435231ccef7ea78e96ac2e4265be3b55de394475dcccb9b690608be6",
+    "mask_path": "masks/12.png",
+    "mask_sha256": "fded51d967ef2e15cc04d1c696777f83575c659b6fc2effbace6216ba7dd29fa"
+  },
+  {
+    "id": "13",
+    "path": "character/13.png",
+    "input_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v3-airborne-20261106/character/13.png",
+    "input_sha256": "69d915db36cb48627ad1b25ca1ff536c11683f706ac637aae566d787e930362c",
+    "changed_outside_eye_mask_pixels": 0,
+    "alpha_changed_pixels": 0,
+    "body_pose_changed": false,
+    "donor_sha256": "5254a6eb2b237ab9743279d3ee0c076cb2f95ffbec5b774b764281d904d9ef3f",
+    "eye_boxes": [
+      [
+        206,
+        189,
+        235,
+        218
+      ],
+      [
+        252,
+        203,
+        286,
+        232
+      ]
+    ],
+    "source_iris_detection": [
+      {
+        "bbox": [
+          218,
+          202,
+          226,
+          210
+        ],
+        "center": [
+          221.0,
+          206.24242424242425
+        ],
+        "pixels": 33
+      },
+      {
+        "bbox": [
+          260,
+          215,
+          272,
+          223
+        ],
+        "center": [
+          265.45762711864404,
+          218.98305084745763
+        ],
+        "pixels": 59
+      }
+    ],
+    "donor_iris_detection": [
+      {
+        "bbox": [
+          214,
+          196,
+          227,
+          211
+        ],
+        "center": [
+          220.04950495049505,
+          203.12871287128712
+        ],
+        "pixels": 101
+      },
+      {
+        "bbox": [
+          264,
+          210,
+          278,
+          225
+        ],
+        "center": [
+          271.50485436893206,
+          216.76699029126215
+        ],
+        "pixels": 103
+      }
+    ],
+    "sha256": "e91f7206cbac31c8e095025c68a3649719db9dd0fd0d9227225670bb51fb06ae",
+    "mask_path": "masks/13.png",
+    "mask_sha256": "ad3a9fd00e0073fd51a554a4f50e49e806c153d36e11a1f4db96b75cefac9288"
+  },
+  {
+    "id": "14",
+    "path": "character/14.png",
+    "input_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v3-airborne-20261106/character/14.png",
+    "input_sha256": "36a3a57298b21204955c9d858e45c2a310715c6d2bffbf31ba3524cca9b43be3",
+    "changed_outside_eye_mask_pixels": 0,
+    "alpha_changed_pixels": 0,
+    "body_pose_changed": false,
+    "donor_sha256": "4f913c16625c3924ac716f47205187f94b5dcd10ae01a1c59b1f450420af7af2",
+    "eye_boxes": [
+      [
+        214,
+        185,
+        245,
+        212
+      ],
+      [
+        271,
+        182,
+        302,
+        211
+      ]
+    ],
+    "source_iris_detection": [
+      {
+        "bbox": [
+          223,
+          197,
+          237,
+          205
+        ],
+        "center": [
+          229.0,
+          200.61111111111111
+        ],
+        "pixels": 72
+      },
+      {
+        "bbox": [
+          279,
+          196,
+          292,
+          204
+        ],
+        "center": [
+          284.8783783783784,
+          199.6891891891892
+        ],
+        "pixels": 74
+      }
+    ],
+    "donor_iris_detection": [
+      {
+        "bbox": [
+          222,
+          192,
+          237,
+          205
+        ],
+        "center": [
+          231.3,
+          198.6
+        ],
+        "pixels": 70
+      },
+      {
+        "bbox": [
+          281,
+          189,
+          294,
+          203
+        ],
+        "center": [
+          289.038961038961,
+          194.15584415584416
+        ],
+        "pixels": 77
+      }
+    ],
+    "sha256": "c18f50e04ed684d6f2e4fc77ebd826684184238f6a498bf8a64d9320ddf431dc",
+    "mask_path": "masks/14.png",
+    "mask_sha256": "97f3121d9a9a103d1d774d762c11c9fa3c9009ce61aaeb238310357e6b437fdd"
+  },
+  {
+    "id": "15",
+    "path": "character/15.png",
+    "input_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v3-airborne-20261106/character/15.png",
+    "input_sha256": "9468f827d4e8cbf4420a957150acf9ed6f83794cb1c2b03abe4d86b671f9ff31",
+    "changed_outside_eye_mask_pixels": 0,
+    "alpha_changed_pixels": 0,
+    "body_pose_changed": false,
+    "donor_sha256": "a0e31c3e134600e881cd9439c88f1c72f245feee7c49f92164ca8ec8bd1aed99",
+    "eye_boxes": [
+      [
+        210,
+        185,
+        246,
+        214
+      ],
+      [
+        271,
+        185,
+        305,
+        213
+      ]
+    ],
+    "source_iris_detection": [
+      {
+        "bbox": [
+          222,
+          197,
+          236,
+          207
+        ],
+        "center": [
+          228.13924050632912,
+          201.9367088607595
+        ],
+        "pixels": 79
+      },
+      {
+        "bbox": [
+          279,
+          197,
+          291,
+          206
+        ],
+        "center": [
+          284.94594594594594,
+          201.09459459459458
+        ],
+        "pixels": 74
+      }
+    ],
+    "donor_iris_detection": [
+      {
+        "bbox": [
+          218,
+          192,
+          238,
+          207
+        ],
+        "center": [
+          228.28947368421052,
+          199.49122807017545
+        ],
+        "pixels": 114
+      },
+      {
+        "bbox": [
+          282,
+          192,
+          297,
+          203
+        ],
+        "center": [
+          289.64864864864865,
+          196.16216216216216
+        ],
+        "pixels": 74
+      }
+    ],
+    "sha256": "b5928e4a0e8193fbe9ab432e4767f393809737efae4b17c828269bedb93eb419",
+    "mask_path": "masks/15.png",
+    "mask_sha256": "75018471de36a821fd8cd7b52bf8c39ddfad8f213346c9e16daab613e11580fe"
+  }
+]

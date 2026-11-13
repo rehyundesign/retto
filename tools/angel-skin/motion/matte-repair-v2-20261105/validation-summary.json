@@ -1,0 +1,27 @@
+{
+  "idle": {
+    "poses": 16,
+    "cycle_ms": 3200,
+    "edge_alpha": 0
+  },
+  "waiting": {
+    "poses": 16,
+    "cycle_ms": 3200,
+    "edge_alpha": 0
+  },
+  "failed": {
+    "poses": 16,
+    "cycle_ms": 3200,
+    "edge_alpha": 0
+  },
+  "waving": {
+    "poses": 16,
+    "cycle_ms": 2400,
+    "edge_alpha": 0
+  },
+  "jumping": {
+    "poses": 16,
+    "cycle_ms": 2400,
+    "edge_alpha": 0
+  }
+}

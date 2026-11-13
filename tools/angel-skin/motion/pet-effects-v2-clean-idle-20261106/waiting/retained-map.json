@@ -1,0 +1,120 @@
+{
+  "sources": [
+    {
+      "id": "00",
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/matte-repair-v3-holes-20261105/waiting/character/00.png",
+      "sha256": "9d32035e7fc8951e6785c82ad33872147861cbcc747cf45022e617e78572c41f"
+    },
+    {
+      "id": "01",
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/matte-repair-v3-holes-20261105/waiting/character/01.png",
+      "sha256": "7d03727e0c66b4759008733c6cbfb339f3f7063132b9cdf65cd195719e36ee47"
+    },
+    {
+      "id": "02",
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/matte-repair-v3-holes-20261105/waiting/character/02.png",
+      "sha256": "b9503b8dfff71df16304c2a0f04f797976577d23a18a4e31b5d1059b53ab4801"
+    },
+    {
+      "id": "03",
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/matte-repair-v3-holes-20261105/waiting/character/03.png",
+      "sha256": "e83dd3f6edc87f153c2b25c564ac1f41bedfeb4e8ef1670d62828cc93c8133d6"
+    },
+    {
+      "id": "04",
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/matte-repair-v3-holes-20261105/waiting/character/04.png",
+      "sha256": "9eca71b18d87a3ffaf79b674d2ac70fb9d91cbdf11f943265037881050d206c8"
+    },
+    {
+      "id": "05",
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/matte-repair-v3-holes-20261105/waiting/character/05.png",
+      "sha256": "9d2ebd78e9135f83be28452ff4c1e65b5d13e26349766b7d7b4430aa669e29bf"
+    },
+    {
+      "id": "06",
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/matte-repair-v3-holes-20261105/waiting/character/06.png",
+      "sha256": "024003a49e32480dfb13c72ac89b9589e45b11d5f5ce11f02f0ab182b2c853dd"
+    },
+    {
+      "id": "07",
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/matte-repair-v3-holes-20261105/waiting/character/07.png",
+      "sha256": "dd91214dc8aee201fe9660c835a4c0c6fc91ae69bcd90da278d90fe3f0c32770"
+    },
+    {
+      "id": "08",
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/matte-repair-v3-holes-20261105/waiting/character/08.png",
+      "sha256": "9e6e3aca9c1db05af3b2466bc80cb925d5ceb6b6168aad22ac26d67f33f53f73"
+    },
+    {
+      "id": "09",
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/matte-repair-v3-holes-20261105/waiting/character/09.png",
+      "sha256": "d8b67e1d9f931300ed93eedce86f169ad8bef3b9fa1d5c3fb25a958c6cfb5945"
+    },
+    {
+      "id": "10",
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/matte-repair-v3-holes-20261105/waiting/character/10.png",
+      "sha256": "c598e00b7dab7051f8b336708f4d8ef2ca01f7808f854d417004da29cfbd9279"
+    },
+    {
+      "id": "11",
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/matte-repair-v3-holes-20261105/waiting/character/11.png",
+      "sha256": "17362065613979eaf6cb283475ca7aeb34dc8dbaf6eb6b390ba81419c1e903b1"
+    },
+    {
+      "id": "12",
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/matte-repair-v3-holes-20261105/waiting/character/12.png",
+      "sha256": "11f17fa38b1a5889dc849c5a6a7649d78d156b1bb3dfa8c021947bef85b06f29"
+    },
+    {
+      "id": "13",
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/matte-repair-v3-holes-20261105/waiting/character/13.png",
+      "sha256": "2d4f8c0d192e2c82c783e7d57d376156e2ee9e680f57666fb6bf4779a11e785b"
+    },
+    {
+      "id": "14",
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/matte-repair-v3-holes-20261105/waiting/character/14.png",
+      "sha256": "cbc3144f68023c2ff3e098a851c775040ec30afb171540d2fdf1b9cd76be6023"
+    },
+    {
+      "id": "15",
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/matte-repair-v3-holes-20261105/waiting/character/15.png",
+      "sha256": "a47c266a94734927cd1cf948a4c4d93496f29c4eff785eae2a903cedf429959a"
+    }
+  ],
+  "playback_ids": [
+    "00",
+    "01",
+    "02",
+    "03",
+    "04",
+    "05",
+    "06",
+    "07",
+    "08",
+    "09",
+    "10",
+    "11",
+    "12",
+    "13",
+    "14",
+    "15"
+  ],
+  "pose_durations_ms": [
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200
+  ]
+}

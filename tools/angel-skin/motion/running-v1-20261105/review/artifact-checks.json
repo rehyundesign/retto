@@ -1,0 +1,11 @@
+{
+  "independent_sources": 16,
+  "unique_visible_decoded_cells": 16,
+  "gif_frames": 48,
+  "gif_ms": 2400,
+  "all_character_margins_at_least12px": true,
+  "square_source_camera": true,
+  "original_anatomical_registration": "unverified; support proxies are not certification",
+  "native_registered": false,
+  "installed": false
+}

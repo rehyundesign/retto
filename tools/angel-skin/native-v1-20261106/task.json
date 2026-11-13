@@ -1,0 +1,29 @@
+{
+  "scope": "install current approved7 angel motions using main-body display calibration",
+  "method": "same-size full-scene PNG export; no character regeneration or shape normalization",
+  "pose_counts": {
+    "idle": 16,
+    "running": 16,
+    "waiting": 16,
+    "failed": 16,
+    "waving": 16,
+    "jumping": 16,
+    "sleeping": 16
+  },
+  "review_alias": "running",
+  "gaze": "no unapproved direction art; approved scene continues",
+  "drag": "existing angel atlas unchanged",
+  "window_fit": "angel-only horizontal overscan; body remains default-size, other skins unaffected",
+  "native_checks": "5 candidate self-tests passed, installed4 self-tests passed",
+  "actual_app_selection": "verified:angelWings context-menu choice, real installed app body-size comparison against classic",
+  "original_landmarks_certification": "inherited unverified",
+  "fit_evidence": "fit-evidence.json",
+  "manifest": "manifest.json",
+  "installed": "installation.json",
+  "deferred_next_art": {
+    "timing": "when image generation is available, future task only",
+    "drag": "independent full-body left/right walking poses, same main Retto size; wings/pets/effects follow gait",
+    "gaze": "independent complete head/neck/shoulders/body drawings for cursor directions; no pasted head; canonical Retto ratios",
+    "current7states": "preserve installed approved motions"
+  }
+}

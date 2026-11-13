@@ -1,0 +1,338 @@
+[
+  {
+    "id": "00",
+    "path": "character/00.png",
+    "sha256": "696f706eb3cb44e54d36b56c96b9591a4598e492537662953a97475025108cc6",
+    "raw_sha256": "945449f04a30aca4e09f67e58a78f3e50a9a74b8c631dbd0414fd9271ca7db5b",
+    "independent_complete_drawing": true,
+    "source_resolution": [
+      1254,
+      1254
+    ],
+    "common_resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      0,
+      0
+    ],
+    "nose_camera_proxy_x": 317.85271317829455,
+    "support_proxy_y": 468,
+    "removed_small_alpha_island_pixels": 0,
+    "anatomy": "front_left and front_right support muzzle; rear_left and rear_right tucked under torso and occluded by belly/near wing. Far wing partially behind body/near wing. Tail remains continuous at hip.",
+    "original_landmarks": "unverified; support proxy is not original registration"
+  },
+  {
+    "id": "01",
+    "path": "character/01.png",
+    "sha256": "8910194db5eb3dee6246f0608fc57fdeb02b1aafb01137533a03456c12d42c7a",
+    "raw_sha256": "035e0f987a3a8d6e696be16937674b19603fbd303b3de760fa272712639fcc56",
+    "independent_complete_drawing": true,
+    "source_resolution": [
+      1254,
+      1254
+    ],
+    "common_resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      4,
+      36
+    ],
+    "nose_camera_proxy_x": 317.24649859943975,
+    "support_proxy_y": 468,
+    "removed_small_alpha_island_pixels": 0,
+    "anatomy": "front_left and front_right support muzzle; rear_left and rear_right tucked under torso and occluded by belly/near wing. Far wing partially behind body/near wing. Tail remains continuous at hip.",
+    "original_landmarks": "unverified; support proxy is not original registration"
+  },
+  {
+    "id": "02",
+    "path": "character/02.png",
+    "sha256": "c12183f37f41fbd20d764d6bb72b2dc2dd5bfc5bd25aa1604c787ca2c88902fb",
+    "raw_sha256": "14be1c0b8c0175937f33c26a4b5a5d1584a35862c4f0504210fe943ccfaf2888",
+    "independent_complete_drawing": true,
+    "source_resolution": [
+      1254,
+      1254
+    ],
+    "common_resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      0,
+      37
+    ],
+    "nose_camera_proxy_x": 318.0257352941176,
+    "support_proxy_y": 468,
+    "removed_small_alpha_island_pixels": 0,
+    "anatomy": "front_left and front_right support muzzle; rear_left and rear_right tucked under torso and occluded by belly/near wing. Far wing partially behind body/near wing. Tail remains continuous at hip.",
+    "original_landmarks": "unverified; support proxy is not original registration"
+  },
+  {
+    "id": "03",
+    "path": "character/03.png",
+    "sha256": "7db670a1209a692eb9f51b9a73f624ae18bd6b6f2ea1a84880019c4d6af80e43",
+    "raw_sha256": "7a06aa8014b3a327d4edaff36236a9ea0b2b65618e2f892416a03728b5806bc6",
+    "independent_complete_drawing": true,
+    "source_resolution": [
+      1254,
+      1254
+    ],
+    "common_resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      2,
+      29
+    ],
+    "nose_camera_proxy_x": 318.34117647058827,
+    "support_proxy_y": 468,
+    "removed_small_alpha_island_pixels": 0,
+    "anatomy": "front_left and front_right support muzzle; rear_left and rear_right tucked under torso and occluded by belly/near wing. Far wing partially behind body/near wing. Tail remains continuous at hip.",
+    "original_landmarks": "unverified; support proxy is not original registration"
+  },
+  {
+    "id": "04",
+    "path": "character/04.png",
+    "sha256": "0cfbe1f460bc55c31ce9c2edd1d2699eb685142f9df71ebaafbf06a82c969333",
+    "raw_sha256": "007cb10402a6cbe1551bfe915e6b16dedec8fe67839d78d1a7d40fda6e3e01eb",
+    "independent_complete_drawing": true,
+    "source_resolution": [
+      1254,
+      1254
+    ],
+    "common_resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      1,
+      29
+    ],
+    "nose_camera_proxy_x": 317.9421768707483,
+    "support_proxy_y": 468,
+    "removed_small_alpha_island_pixels": 0,
+    "anatomy": "front_left and front_right support muzzle; rear_left and rear_right tucked under torso and occluded by belly/near wing. Far wing partially behind body/near wing. Tail remains continuous at hip.",
+    "original_landmarks": "unverified; support proxy is not original registration"
+  },
+  {
+    "id": "05",
+    "path": "character/05.png",
+    "sha256": "7f7678b4f8fa02a41c507e99fa5644c18a3808015a4296d0f19a31916d4f9f44",
+    "raw_sha256": "1132bdcf2fc48af88decfca7449732903d98b2713dac1295cc9097947a4c04df",
+    "independent_complete_drawing": true,
+    "source_resolution": [
+      1254,
+      1254
+    ],
+    "common_resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      -2,
+      28
+    ],
+    "nose_camera_proxy_x": 318.0168918918919,
+    "support_proxy_y": 468,
+    "removed_small_alpha_island_pixels": 0,
+    "anatomy": "front_left and front_right support muzzle; rear_left and rear_right tucked under torso and occluded by belly/near wing. Far wing partially behind body/near wing. Tail remains continuous at hip.",
+    "original_landmarks": "unverified; support proxy is not original registration"
+  },
+  {
+    "id": "06",
+    "path": "character/06.png",
+    "sha256": "8a074879f0ff60228c5294f5b109d2ac2ffd2373207fbd2023a93049bb557edb",
+    "raw_sha256": "d95ae51018b24a2e77e815377041d5d6d188478a64abd1ae25b246d6546fb500",
+    "independent_complete_drawing": true,
+    "source_resolution": [
+      1254,
+      1254
+    ],
+    "common_resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      5,
+      39
+    ],
+    "nose_camera_proxy_x": 317.86092715231786,
+    "support_proxy_y": 468,
+    "removed_small_alpha_island_pixels": 0,
+    "anatomy": "front_left and front_right support muzzle; rear_left and rear_right tucked under torso and occluded by belly/near wing. Far wing partially behind body/near wing. Tail remains continuous at hip.",
+    "original_landmarks": "unverified; support proxy is not original registration"
+  },
+  {
+    "id": "07",
+    "path": "character/07.png",
+    "sha256": "6064fb5c90d4ce22fb18ebf3b8733b9be356b830722c2449d6a9a65bb8f7132f",
+    "raw_sha256": "95c889db351532a2147d84e7a19a05b1b7cc3d6443b083c829fad75d0cebfe24",
+    "independent_complete_drawing": true,
+    "source_resolution": [
+      1254,
+      1254
+    ],
+    "common_resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      0,
+      35
+    ],
+    "nose_camera_proxy_x": 318.19496855345915,
+    "support_proxy_y": 468,
+    "removed_small_alpha_island_pixels": 0,
+    "anatomy": "front_left and front_right support muzzle; rear_left and rear_right tucked under torso and occluded by belly/near wing. Far wing partially behind body/near wing. Tail remains continuous at hip.",
+    "original_landmarks": "unverified; support proxy is not original registration"
+  },
+  {
+    "id": "08",
+    "path": "character/08.png",
+    "sha256": "cbcba2647dda9ad7dd50d0319d4bdf947675d0e9abba7fb6c2e19bd32c9518b4",
+    "raw_sha256": "94e15c91cb223ddafc1c0cffc2382e534164739c1e2f2604ffc31a91b281ee71",
+    "independent_complete_drawing": true,
+    "source_resolution": [
+      1254,
+      1254
+    ],
+    "common_resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      2,
+      39
+    ],
+    "nose_camera_proxy_x": 317.72592592592594,
+    "support_proxy_y": 468,
+    "removed_small_alpha_island_pixels": 0,
+    "anatomy": "front_left and front_right support muzzle; rear_left and rear_right tucked under torso and occluded by belly/near wing. Far wing partially behind body/near wing. Tail remains continuous at hip.",
+    "original_landmarks": "unverified; support proxy is not original registration"
+  },
+  {
+    "id": "09",
+    "path": "character/09.png",
+    "sha256": "7a54688f622ae603adba8ed16094777ee62bef1e730d892c57b2f54d45d9449d",
+    "raw_sha256": "86e5c62ca8160f68c2bd796bfb92b4f7d597dfc5df21162513dca4f463d7e13f",
+    "independent_complete_drawing": true,
+    "source_resolution": [
+      1254,
+      1254
+    ],
+    "common_resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      2,
+      34
+    ],
+    "nose_camera_proxy_x": 317.73026315789474,
+    "support_proxy_y": 468,
+    "removed_small_alpha_island_pixels": 0,
+    "anatomy": "front_left and front_right support muzzle; rear_left and rear_right tucked under torso and occluded by belly/near wing. Far wing partially behind body/near wing. Tail remains continuous at hip.",
+    "original_landmarks": "unverified; support proxy is not original registration"
+  },
+  {
+    "id": "10",
+    "path": "character/10.png",
+    "sha256": "bad1c85e1ec8013e20752036b5087fdce4a2351efb2c9c47c8832a38a4e2587b",
+    "raw_sha256": "3774adce4387e806481cba29538325f8d8da4836955cc8abcfda26bf0dc417f1",
+    "independent_complete_drawing": true,
+    "source_resolution": [
+      1254,
+      1254
+    ],
+    "common_resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      3,
+      36
+    ],
+    "nose_camera_proxy_x": 318.1501501501501,
+    "support_proxy_y": 468,
+    "removed_small_alpha_island_pixels": 0,
+    "anatomy": "front_left and front_right support muzzle; rear_left and rear_right tucked under torso and occluded by belly/near wing. Far wing partially behind body/near wing. Tail remains continuous at hip.",
+    "original_landmarks": "unverified; support proxy is not original registration"
+  },
+  {
+    "id": "11",
+    "path": "character/11.png",
+    "sha256": "6176b124d00038758ccc06e6fd49adb860a3ca074f4d768ab922f995da154699",
+    "raw_sha256": "db6d6de3ab14730c2d46a7f581c8fcbe4efae511267558fabd83765aefb1589a",
+    "independent_complete_drawing": true,
+    "source_resolution": [
+      1254,
+      1254
+    ],
+    "common_resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      5,
+      37
+    ],
+    "nose_camera_proxy_x": 317.55405405405406,
+    "support_proxy_y": 468,
+    "removed_small_alpha_island_pixels": 0,
+    "anatomy": "front_left and front_right support muzzle; rear_left and rear_right tucked under torso and occluded by belly/near wing. Far wing partially behind body/near wing. Tail remains continuous at hip.",
+    "original_landmarks": "unverified; support proxy is not original registration"
+  },
+  {
+    "id": "12",
+    "path": "character/12.png",
+    "sha256": "c3d2a3a5c2dd21a10fda9276a9bde1ef2619d2ccc47a4426c47e82bf647dd4db",
+    "raw_sha256": "c5344f03fcab8dcceb08a4ef15d86972d050489c9b144ce785fa1e1737a2fe6d",
+    "independent_complete_drawing": true,
+    "source_resolution": [
+      1254,
+      1254
+    ],
+    "common_resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      2,
+      27
+    ],
+    "nose_camera_proxy_x": 317.453125,
+    "support_proxy_y": 468,
+    "removed_small_alpha_island_pixels": 0,
+    "anatomy": "front_left and front_right support muzzle; rear_left and rear_right tucked under torso and occluded by belly/near wing. Far wing partially behind body/near wing. Tail remains continuous at hip.",
+    "original_landmarks": "unverified; support proxy is not original registration"
+  },
+  {
+    "id": "13",
+    "path": "character/13.png",
+    "sha256": "f8c99f39f7b74a7fde7cbd91f5782395d47b9e1c2e57e0ca9369dd22188d995a",
+    "raw_sha256": "d77deda97d7b3a9d7e6e569f6e5108444583b41d5bc8b867310897c23ea344d6",
+    "independent_complete_drawing": true,
+    "source_resolution": [
+      1254,
+      1254
+    ],
+    "common_resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      2,
+      28
+    ],
+    "nose_camera_proxy_x": 317.2634730538922,
+    "support_proxy_y": 468,
+    "removed_small_alpha_island_pixels": 0,
+    "anatomy": "front_left and front_right support muzzle; rear_left and rear_right tucked under torso and occluded by belly/near wing. Far wing partially behind body/near wing. Tail remains continuous at hip.",
+    "original_landmarks": "unverified; support proxy is not original registration"
+  },
+  {
+    "id": "14",
+    "path": "character/14.png",
+    "sha256": "3fffb3bb69af6784707a125fb8fd87dd199a28631004118d11a2c0c13da3e254",
+    "raw_sha256": "4e05c440c3a2fd96a47fffaa4bee58cf0621ba062c3853f1f151be8978a8030a",
+    "independent_complete_drawing": true,
+    "source_resolution": [
+      1254,
+      1254
+    ],
+    "common_resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      0,
+      34
+    ],
+    "nose_camera_proxy_x": 317.5546875,
+    "support_proxy_y": 468,
+    "removed_small_alpha_island_pixels": 0,
+    "anatomy": "front_left and front_right support muzzle; rear_left and rear_right tucked under torso and occluded by belly/near wing. Far wing partially behind body/near wing. Tail remains continuous at hip.",
+    "original_landmarks": "unverified; support proxy is not original registration"
+  },
+  {
+    "id": "15",
+    "path": "character/15.png",
+    "sha256": "6c6c420621802084ae60f610e4c081366bc09d9b023340b9482c9edd733d449c",
+    "raw_sha256": "33ca8abe42ca43feb9615f7926d0afef1292f29defa368024996830a26b5f1b1",
+    "independent_complete_drawing": true,
+    "source_resolution": [
+      1254,
+      1254
+    ],
+    "common_resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      6,
+      37
+    ],
+    "nose_camera_proxy_x": 317.55555555555554,
+    "support_proxy_y": 468,
+    "removed_small_alpha_island_pixels": 0,
+    "anatomy": "front_left and front_right support muzzle; rear_left and rear_right tucked under torso and occluded by belly/near wing. Far wing partially behind body/near wing. Tail remains continuous at hip.",
+    "original_landmarks": "unverified; support proxy is not original registration"
+  }
+]

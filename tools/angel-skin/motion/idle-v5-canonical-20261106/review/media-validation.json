@@ -1,0 +1,35 @@
+{
+  "new_complete_independent_drawings": 16,
+  "pose_ms": 200,
+  "cycle_ms": 3200,
+  "effect_sample_ms": 50,
+  "unique_effect_samples": 64,
+  "effect_loop_periodic": true,
+  "frozen_pose_effect_progression": true,
+  "outer_edge_alpha_max": 0,
+  "opaque_character_prop_RGBA_changed_pixels": 0,
+  "original_registration": "unverified",
+  "native_installed": false,
+  "media": {
+    "character.webp": {
+      "frames": 16,
+      "cycle_ms": 3200,
+      "sha256": "d43dcee3894c2ca2dd441a3074278f03dbbed3954d07e8293471b74f45a8642e"
+    },
+    "character.gif": {
+      "frames": 16,
+      "cycle_ms": 3200,
+      "sha256": "f3d43174b581f7089380f69a5ff997fc7fef26b4be032a523a12e0cb2c33570c"
+    },
+    "night.webp": {
+      "frames": 64,
+      "cycle_ms": 3200,
+      "sha256": "c80bbe715d60ca5a15ca591573adbf627018074e3db48261abb8d1d7adfd2a03"
+    },
+    "idle.gif": {
+      "frames": 64,
+      "cycle_ms": 3200,
+      "sha256": "a6b0f89609f7558411541450230efc182deaa6df5374e9d0e8fcc7c5d988fbf1"
+    }
+  }
+}

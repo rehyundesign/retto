@@ -1,0 +1,120 @@
+{
+  "sources": [
+    {
+      "id": "00",
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v3-wink-20261105/character/00.png",
+      "sha256": "d039f8bd153f733422b4395cf9d0c6647631c7679d37e261e1bead1ea7606a2b"
+    },
+    {
+      "id": "01",
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v3-wink-20261105/character/01.png",
+      "sha256": "3a2746b166a137700c76425870bbc417e4195fad410302c612fe9850aca85ebc"
+    },
+    {
+      "id": "02",
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v3-wink-20261105/character/02.png",
+      "sha256": "d5e6707f9021d616bd04689f2d8649ddf46687c9dd15b04ab26f23dca3d0f1e8"
+    },
+    {
+      "id": "03",
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v3-wink-20261105/character/03.png",
+      "sha256": "ea6e70f5f9078552f88ad0f14961909823825b9b3ef8340e9bcd5db5b2cbd04e"
+    },
+    {
+      "id": "04",
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v3-wink-20261105/character/04.png",
+      "sha256": "ded6663f079543de398eae6a0ae2a155b235f4cd91a0224bd11674d1525cdc40"
+    },
+    {
+      "id": "05",
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v3-wink-20261105/character/05.png",
+      "sha256": "94771b551a81652fc7140093771738967a42dc781b826d2abf38933b708ebfb8"
+    },
+    {
+      "id": "06",
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v3-wink-20261105/character/06.png",
+      "sha256": "99ba81fba89128506b20ea91b711af07b6e407bd2ad940b32fc2a86f079b9b25"
+    },
+    {
+      "id": "07",
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v3-wink-20261105/character/07.png",
+      "sha256": "e3bdfbdb71952c2515e5c0b479ee5c399ebd99ca812583dd88ccb6e66b5e0154"
+    },
+    {
+      "id": "08",
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v3-wink-20261105/character/08.png",
+      "sha256": "64116b45c1eaac09408ecdd697b133334d526ffe0bbc4da54d7ec21f1becce04"
+    },
+    {
+      "id": "09",
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v3-wink-20261105/character/09.png",
+      "sha256": "db00bac2511eadb1e135ad9803b6edaafb62c74cc9ccb8efe96bbaf866b591d6"
+    },
+    {
+      "id": "10",
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v3-wink-20261105/character/10.png",
+      "sha256": "ccf557576fe78f168381881e212d585258a8e084c0882548ba97e4daba888278"
+    },
+    {
+      "id": "11",
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v3-wink-20261105/character/11.png",
+      "sha256": "f050fb50920a205d1f0279f2a596332fb217abc65daebbfa47bb158c672013db"
+    },
+    {
+      "id": "12",
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v3-wink-20261105/character/12.png",
+      "sha256": "0d822d37e68945f178307295064251a98e8c88e7f2e3d6929a60944012be21e1"
+    },
+    {
+      "id": "13",
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v3-wink-20261105/character/13.png",
+      "sha256": "0715164edc4c9a704ac361c1efe997dafbd8a877909a977401375f03280a217f"
+    },
+    {
+      "id": "14",
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v3-wink-20261105/character/14.png",
+      "sha256": "b5387cd5a3b4f8dc42d84697b2a6036a7b9691395c6853b22fedeed8fd3ab99d"
+    },
+    {
+      "id": "15",
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v3-wink-20261105/character/15.png",
+      "sha256": "0d09e9a49731fbef581802e29069823ace1005ecec1d38cea26c6ae0bd8c3a44"
+    }
+  ],
+  "playback_ids": [
+    "00",
+    "01",
+    "02",
+    "03",
+    "04",
+    "05",
+    "06",
+    "07",
+    "08",
+    "09",
+    "10",
+    "11",
+    "12",
+    "13",
+    "14",
+    "15"
+  ],
+  "pose_durations_ms": [
+    150,
+    150,
+    150,
+    150,
+    150,
+    150,
+    150,
+    150,
+    150,
+    150,
+    150,
+    150,
+    150,
+    150,
+    150,
+    150
+  ]
+}

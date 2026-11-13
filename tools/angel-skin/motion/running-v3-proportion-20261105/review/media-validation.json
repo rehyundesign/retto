@@ -1,0 +1,150 @@
+{
+  "source_count": 16,
+  "unique_source_hashes": 16,
+  "independent_full_character_drawings": true,
+  "shared_camera_transform": [
+    0.4082934609250399,
+    16,
+    16
+  ],
+  "alpha_cleanup": "same-pose alpha-only ramp160..240; original raw RGB and files preserved",
+  "whole_character_registration": [
+    {
+      "id": "00",
+      "measured_ear_tip_raw_y": 121,
+      "whole_character_y_px": 0,
+      "no_pose_or_scale_warp": true
+    },
+    {
+      "id": "01",
+      "measured_ear_tip_raw_y": 114,
+      "whole_character_y_px": 2,
+      "no_pose_or_scale_warp": true
+    },
+    {
+      "id": "02",
+      "measured_ear_tip_raw_y": 116,
+      "whole_character_y_px": -1,
+      "no_pose_or_scale_warp": true
+    },
+    {
+      "id": "03",
+      "measured_ear_tip_raw_y": 124,
+      "whole_character_y_px": -5,
+      "no_pose_or_scale_warp": true
+    },
+    {
+      "id": "04",
+      "measured_ear_tip_raw_y": 98,
+      "whole_character_y_px": 4,
+      "no_pose_or_scale_warp": true
+    },
+    {
+      "id": "05",
+      "measured_ear_tip_raw_y": 124,
+      "whole_character_y_px": -5,
+      "no_pose_or_scale_warp": true
+    },
+    {
+      "id": "06",
+      "measured_ear_tip_raw_y": 118,
+      "whole_character_y_px": -1,
+      "no_pose_or_scale_warp": true
+    },
+    {
+      "id": "07",
+      "measured_ear_tip_raw_y": 105,
+      "whole_character_y_px": 7,
+      "no_pose_or_scale_warp": true
+    },
+    {
+      "id": "08",
+      "measured_ear_tip_raw_y": 123,
+      "whole_character_y_px": 1,
+      "no_pose_or_scale_warp": true
+    },
+    {
+      "id": "09",
+      "measured_ear_tip_raw_y": 121,
+      "whole_character_y_px": 4,
+      "no_pose_or_scale_warp": true
+    },
+    {
+      "id": "10",
+      "measured_ear_tip_raw_y": 121,
+      "whole_character_y_px": 5,
+      "no_pose_or_scale_warp": true
+    },
+    {
+      "id": "11",
+      "measured_ear_tip_raw_y": 100,
+      "whole_character_y_px": 13,
+      "no_pose_or_scale_warp": true
+    },
+    {
+      "id": "12",
+      "measured_ear_tip_raw_y": 119,
+      "whole_character_y_px": 4,
+      "no_pose_or_scale_warp": true
+    },
+    {
+      "id": "13",
+      "measured_ear_tip_raw_y": 134,
+      "whole_character_y_px": -4,
+      "no_pose_or_scale_warp": true
+    },
+    {
+      "id": "14",
+      "measured_ear_tip_raw_y": 117,
+      "whole_character_y_px": 2,
+      "no_pose_or_scale_warp": true
+    },
+    {
+      "id": "15",
+      "measured_ear_tip_raw_y": 129,
+      "whole_character_y_px": -3,
+      "no_pose_or_scale_warp": true
+    }
+  ],
+  "pose_ms": 200,
+  "effect_sample_ms": 50,
+  "cycle_ms": 3200,
+  "character_source_hashes": {
+    "00.png": "26663e0d26794a3522fb4adf313fc934429a1425cec77a4c9da702ead89c65b2",
+    "01.png": "4a56143e0073a6c02e27111852b463e920679a621e2b1e9365886211c9b8af13",
+    "02.png": "2b262a1e3e390abf81719f664d6c897fe91058dd8a17e7fb4e8f26e2061b4bc0",
+    "03.png": "36b67fd7f3448d49e9d9cf4f317964e9517289b0680d5c6e066d2d4525243391",
+    "04.png": "7c110c2bfd989f424f240f36887fc5241102c56ef5bea95751fc3057c0a3347f",
+    "05.png": "5c89242e11322374b0a208a435e20a75f1794e5eb9682b10ea3c4bae723a58c6",
+    "06.png": "27da78f2204de09c955739a9cfd03bc658ff3878de47ce9a7d070b62014296c8",
+    "07.png": "d63f070d92c4f01a4adba18a7cdda9853e6b26142f855af69f89759fee572d2a",
+    "08.png": "cf513ed8508f4d56636cc38f5adf6c02ca6d588480071174dcb57bf789b4fe39",
+    "09.png": "b120c5080987bfb624b387483b09e186d8a9147e7c8e02a3633ab59e2935e032",
+    "10.png": "2ce2574946bbddf33e2d24ba8e0f30e52e8bc8a54bbb5a848757347e2d1b37a6",
+    "11.png": "6a1ae1e6cc78602904da2773ec0286c34e18a9bfd80217060a37fd4459c28274",
+    "12.png": "199a96fb0b92ff0c26aa0944c0bcf3091d2ddf1d95ce800c27257a06b9d2d6e3",
+    "13.png": "4a0dd71b93c180f123f6514c719238ae49aca5cf355d82413ffe6c2ef203a2bd",
+    "14.png": "d7ee9838ad9be9c09f197141f01da300d5b834a884cf3d1e725077130e80f52c",
+    "15.png": "91b7dc37b7afe1c1b3e13b8527f7dac59a9f264476b45f59acd51d64233e7a31"
+  },
+  "original_registration": "unverified",
+  "native_installed": false,
+  "night.webp": {
+    "frames": 64,
+    "duration_ms": 3200,
+    "edge_alpha_max": 0,
+    "sha256": "e2454936ca0276d4380efb72621832410bf5070a8b3c1598763421fd29dee9f7"
+  },
+  "character.webp": {
+    "frames": 16,
+    "duration_ms": 3200,
+    "edge_alpha_max": 0,
+    "sha256": "46190d567f1e213253b1698a0dd2410e7acf0800e9b01c482d24ada2bbd8b7bf"
+  },
+  "running.gif": {
+    "frames": 64,
+    "duration_ms": 3200,
+    "edge_alpha_max": null,
+    "sha256": "06e1170d9608caf13feb4bc1324ab71ce5a879403b5e1e9d80841038767916b6"
+  }
+}

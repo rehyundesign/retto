@@ -1,0 +1,22 @@
+{
+  "scope": "running music-box effect-only repair, subtle extra glass-interior sparkles and moonlit/prismatic glow; preserve current rotating plate/art/characters/pets/timing",
+  "mode": "effect-repair",
+  "sources": "running-v3 approved16 independent drawings unchanged",
+  "cycle_ms": 3200,
+  "effect_ms": 50,
+  "native_installed": false,
+  "status": "effect-only review candidate; user approval pending",
+  "renderer": {
+    "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/running-v4-musicbox-glow-20261106/render.py",
+    "sha256": "0794127e9114e0e9840430ac016f005d648fee69d4bcb98109b34fb074ed1416"
+  },
+  "approved_character_lock": {
+    "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/running-v4-musicbox-glow-20261106/pre-edit-lock.json",
+    "sha256": "b4985192fe49fb8f5a2b1f434e8a0eb257113b2b51779ca506987540e133e2f1"
+  },
+  "repair_checks": {
+    "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/running-v4-musicbox-glow-20261106/review/repair-validation.json",
+    "sha256": "11a8e654e951ff2e425b3076960986846d7f1868175ee620520fc800add9e867"
+  },
+  "original_registration": "inherited unverified; no anatomical redraw or native installation"
+}

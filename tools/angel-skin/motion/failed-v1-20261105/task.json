@@ -1,0 +1,50 @@
+{
+  "scope": "one failed/reassurance GIF; pause before next state",
+  "mode": "new-motion",
+  "production_states": [
+    "failed"
+  ],
+  "previous_state": "waiting preview provisionally set aside by user; continue failed only",
+  "design_lock": "approved idle appearance: small blue-grey Retto eyes, natural triangular ears; Tato dots/^^; Melody burgundy rectangles",
+  "action": "small puzzled chin dip; BOTH companions step inward and comfort with inner-hand contact, then withdraw while Retto recovers hopefully",
+  "pose_count": 16,
+  "pose_ms": 200,
+  "cycle_ms": 3200,
+  "effect_sample_ms": 50,
+  "preview_canvas": [
+    576,
+    544
+  ],
+  "native_registered": false,
+  "installed": false,
+  "original_anatomical_registration": "unverified",
+  "generation": "built-in image_gen; one independent whole-trio drawing per pose",
+  "next_stage": "await user approval before completion/waving GIF",
+  "layer_order": [
+    "warm preview background",
+    "continuous gold and ivory feathers plus recovery illumination",
+    "whole-character trio"
+  ],
+  "played_with_prop": null,
+  "pose_groups": [
+    "supported neutral sitting",
+    "small joint-flexed chin/shoulder dip",
+    "supported upright recovery/blink"
+  ],
+  "contact_contract": "Tato RIGHT inner hand to Retto left lower foreleg; Melody LEFT inner hand to Retto right lower foreleg/flank; no extra main paws",
+  "refinements": [
+    "01 and02 redrawn for gentler anticipation and delayed hand contact",
+    "06 redrawn as full-body recovery inbetween05/07 without extra crouch",
+    "15 redrawn between14/00 to restore both companion gaps and withdrawn hands"
+  ],
+  "status": "failed/reassurance GIF review candidate; app not modified",
+  "selected_gif": "review/failed.gif",
+  "selected_sources": 16,
+  "framing": "fixed544 square camera plus16px side padding; character-only rigid support alignment, no silhouette scaling or anatomical warps",
+  "observed_contact_onset_pose": 3,
+  "unresolved": [
+    "original anatomical pixel-landmark registration",
+    "native fit and state-return transitions",
+    "user approval and live playback review"
+  ]
+}

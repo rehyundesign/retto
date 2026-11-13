@@ -1,0 +1,1106 @@
+[
+  {
+    "id": "00",
+    "path": "character/00.png",
+    "sha256": "4de790f98feeb0903ebb2accfe5618ffa3ffa18f82709b2bd77dabfa0f5324e6",
+    "raw_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v2-tears-20261106/raw/00.png",
+    "raw_sha256": "1a28f092e09de3bc14cc1ff77f44849a12074dae1fb8ec577c29fa70ac74e090",
+    "prompt_sha256": "c61506ffa150b52e6ec3034edd8e56ac46741b2b9a392d2589f039429b69bb98",
+    "independent_complete_body_drawing": true,
+    "resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      0,
+      -6
+    ],
+    "main_support_proxy_y": 484,
+    "removed_detached_alpha_pixels": 0,
+    "attachment_proxies": {
+      "tato_bell": [
+        102.22,
+        234.08
+      ],
+      "tato_magic_emitter": [
+        68.22,
+        246.08
+      ],
+      "melody_bow_ribbon_proxy": [
+        474.55,
+        234.63
+      ],
+      "melody_magic_emitter": [
+        502.55,
+        242.63
+      ],
+      "main_nose": [
+        260.45,
+        228.96
+      ],
+      "tear_roots": {
+        "main_left": {
+          "xy": [
+            213.45,
+            240.96
+          ],
+          "method": "feature-relative fallback; inspect endpoint board"
+        },
+        "main_right": {
+          "xy": [
+            294.67,
+            220.0
+          ],
+          "method": "visible pale-blue tear component endpoint"
+        },
+        "tato": {
+          "xy": [
+            90.5,
+            193.0
+          ],
+          "method": "visible pale-blue tear component endpoint"
+        },
+        "melody": {
+          "xy": [
+            452.9,
+            201.0
+          ],
+          "method": "visible pale-blue tear component endpoint"
+        }
+      }
+    },
+    "anatomical_landmarks": "unverified; support/color proxies are display registration/emitters, not original certification"
+  },
+  {
+    "id": "01",
+    "path": "character/01.png",
+    "sha256": "cc858546a8a8c959c3864b4cea22629e7e3a28c7f34d2c9b16787322879efc61",
+    "raw_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v2-tears-20261106/raw/01.png",
+    "raw_sha256": "a0c90ea913697d34a8fc8d4b9f428f37de5b1f9dea12d772c26800fb2c24a31f",
+    "prompt_sha256": "ca488a5ebc4280c7d93bb0371e4f9183870f9b4120ba0ebf37db07631cb3db25",
+    "independent_complete_body_drawing": true,
+    "resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      0,
+      -8
+    ],
+    "main_support_proxy_y": 484,
+    "removed_detached_alpha_pixels": 0,
+    "attachment_proxies": {
+      "tato_bell": [
+        109.14,
+        255.21
+      ],
+      "tato_magic_emitter": [
+        75.14,
+        267.21000000000004
+      ],
+      "melody_bow_ribbon_proxy": [
+        488.89,
+        265.97
+      ],
+      "melody_magic_emitter": [
+        516.89,
+        273.97
+      ],
+      "main_nose": [
+        247.3,
+        258.99
+      ],
+      "tear_roots": {
+        "main_left": {
+          "xy": [
+            204.83,
+            282.0
+          ],
+          "method": "visible pale-blue tear component endpoint"
+        },
+        "main_right": {
+          "xy": [
+            285.24,
+            251.0
+          ],
+          "method": "visible pale-blue tear component endpoint"
+        },
+        "tato": {
+          "xy": [
+            105.5,
+            225.0
+          ],
+          "method": "visible pale-blue tear component endpoint"
+        },
+        "melody": {
+          "xy": [
+            463.89,
+            245.97000000000003
+          ],
+          "method": "feature-relative fallback; inspect endpoint board"
+        }
+      }
+    },
+    "anatomical_landmarks": "unverified; support/color proxies are display registration/emitters, not original certification"
+  },
+  {
+    "id": "02",
+    "path": "character/02.png",
+    "sha256": "797600e3017064585c0c8316c3aa114847178dbd3ad4deb6adb5c4dfe7224336",
+    "raw_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v2-tears-20261106/raw/02.png",
+    "raw_sha256": "09e8c17c7010ee7f7f0eec81261c6b9d044489d41479976f4f1dbc7a878b969b",
+    "prompt_sha256": "ebf6450b2062ce2622182f8504d1a1e0a950c8654c1346a5df3fc1a2aafdda07",
+    "independent_complete_body_drawing": true,
+    "resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      0,
+      -13
+    ],
+    "main_support_proxy_y": 484,
+    "removed_detached_alpha_pixels": 0,
+    "attachment_proxies": {
+      "tato_bell": [
+        125.71,
+        247.5
+      ],
+      "tato_magic_emitter": [
+        91.71,
+        259.5
+      ],
+      "melody_bow_ribbon_proxy": [
+        480.43,
+        252.8
+      ],
+      "melody_magic_emitter": [
+        508.43,
+        260.8
+      ],
+      "main_nose": [
+        222.52,
+        212.87
+      ],
+      "tear_roots": {
+        "main_left": {
+          "xy": [
+            175.52,
+            224.87
+          ],
+          "method": "feature-relative fallback; inspect endpoint board"
+        },
+        "main_right": {
+          "xy": [
+            271.07,
+            217.0
+          ],
+          "method": "visible pale-blue tear component endpoint"
+        },
+        "tato": {
+          "xy": [
+            116.75,
+            207.0
+          ],
+          "method": "visible pale-blue tear component endpoint"
+        },
+        "melody": {
+          "xy": [
+            455.43,
+            232.8
+          ],
+          "method": "feature-relative fallback; inspect endpoint board"
+        }
+      }
+    },
+    "anatomical_landmarks": "unverified; support/color proxies are display registration/emitters, not original certification"
+  },
+  {
+    "id": "03",
+    "path": "character/03.png",
+    "sha256": "a2eac072def614f761c0df4425feaf8223976f1d4853cf739221a34138ba342c",
+    "raw_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v2-tears-20261106/raw/03.png",
+    "raw_sha256": "7402027367eabbde31ad3103387ee75bfcf581351a89b91d6fa00d32058cf960",
+    "prompt_sha256": "433ab8acb7452cfe52d7bf4b73b2bfb05648b1ac049ef5fb18ef32e2d3311476",
+    "independent_complete_body_drawing": true,
+    "resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      0,
+      -13
+    ],
+    "main_support_proxy_y": 484,
+    "removed_detached_alpha_pixels": 0,
+    "attachment_proxies": {
+      "tato_bell": [
+        126.59,
+        245.3
+      ],
+      "tato_magic_emitter": [
+        92.59,
+        257.3
+      ],
+      "melody_bow_ribbon_proxy": [
+        478.01,
+        252.64
+      ],
+      "melody_magic_emitter": [
+        506.01,
+        260.64
+      ],
+      "main_nose": [
+        224.55,
+        214.74
+      ],
+      "tear_roots": {
+        "main_left": {
+          "xy": [
+            177.55,
+            226.74
+          ],
+          "method": "feature-relative fallback; inspect endpoint board"
+        },
+        "main_right": {
+          "xy": [
+            271.79,
+            217.0
+          ],
+          "method": "visible pale-blue tear component endpoint"
+        },
+        "tato": {
+          "xy": [
+            120.6,
+            216.0
+          ],
+          "method": "visible pale-blue tear component endpoint"
+        },
+        "melody": {
+          "xy": [
+            382.9,
+            194.0
+          ],
+          "method": "visible pale-blue tear component endpoint"
+        }
+      }
+    },
+    "anatomical_landmarks": "unverified; support/color proxies are display registration/emitters, not original certification"
+  },
+  {
+    "id": "04",
+    "path": "character/04.png",
+    "sha256": "4555435e10fec9dd412156c6b7d1b4c7111f6964aadc79e76e0e5aff5949cb3b",
+    "raw_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v2-tears-20261106/raw/04.png",
+    "raw_sha256": "975b07070b49728f59ac6fe69a6a276b3b8c9f3b06c0b46be83862db9def23d1",
+    "prompt_sha256": "684911c22cff2d425f9fec4bf4178c56c1c55dd4c8ba295947995c27ed72efba",
+    "independent_complete_body_drawing": true,
+    "resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      0,
+      -16
+    ],
+    "main_support_proxy_y": 484,
+    "removed_detached_alpha_pixels": 0,
+    "attachment_proxies": {
+      "tato_bell": [
+        127.78,
+        244.34
+      ],
+      "tato_magic_emitter": [
+        93.78,
+        256.34000000000003
+      ],
+      "melody_bow_ribbon_proxy": [
+        477.09,
+        244.79
+      ],
+      "melody_magic_emitter": [
+        505.09,
+        252.79
+      ],
+      "main_nose": [
+        230.73,
+        213.5
+      ],
+      "tear_roots": {
+        "main_left": {
+          "xy": [
+            183.73,
+            225.5
+          ],
+          "method": "feature-relative fallback; inspect endpoint board"
+        },
+        "main_right": {
+          "xy": [
+            274.73,
+            231.5
+          ],
+          "method": "feature-relative fallback; inspect endpoint board"
+        },
+        "tato": {
+          "xy": [
+            118.6,
+            206.0
+          ],
+          "method": "visible pale-blue tear component endpoint"
+        },
+        "melody": {
+          "xy": [
+            435.54,
+            206.0
+          ],
+          "method": "visible pale-blue tear component endpoint"
+        }
+      }
+    },
+    "anatomical_landmarks": "unverified; support/color proxies are display registration/emitters, not original certification"
+  },
+  {
+    "id": "05",
+    "path": "character/05.png",
+    "sha256": "552a6cc52d114df9d83af534e83e3feb62af2514e90e7dde0e5aeaa31b2beb69",
+    "raw_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v2-tears-20261106/raw/05.png",
+    "raw_sha256": "29aaebe3bbcf2242e6977210c2887d16fb61e7e89328194952354274719295f2",
+    "prompt_sha256": "dd643437d2e3632e6ce1c75651b6d634d256aa639b177441e6e9d0357d434a67",
+    "independent_complete_body_drawing": true,
+    "resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      0,
+      -14
+    ],
+    "main_support_proxy_y": 484,
+    "removed_detached_alpha_pixels": 0,
+    "attachment_proxies": {
+      "tato_bell": [
+        98.81,
+        244.34
+      ],
+      "tato_magic_emitter": [
+        64.81,
+        256.34000000000003
+      ],
+      "melody_bow_ribbon_proxy": [
+        467.56,
+        242.36
+      ],
+      "melody_magic_emitter": [
+        495.56,
+        250.36
+      ],
+      "main_nose": [
+        225.92,
+        211.98
+      ],
+      "tear_roots": {
+        "main_left": {
+          "xy": [
+            178.92,
+            223.98
+          ],
+          "method": "feature-relative fallback; inspect endpoint board"
+        },
+        "main_right": {
+          "xy": [
+            266.9,
+            213.0
+          ],
+          "method": "visible pale-blue tear component endpoint"
+        },
+        "tato": {
+          "xy": [
+            90.7,
+            216.0
+          ],
+          "method": "visible pale-blue tear component endpoint"
+        },
+        "melody": {
+          "xy": [
+            433.33,
+            209.0
+          ],
+          "method": "visible pale-blue tear component endpoint"
+        }
+      }
+    },
+    "anatomical_landmarks": "unverified; support/color proxies are display registration/emitters, not original certification"
+  },
+  {
+    "id": "06",
+    "path": "character/06.png",
+    "sha256": "d37f29e8ef3d944d51c434f9ed09f645e9ff3863fb60c2160de5917e4ee3a105",
+    "raw_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v2-tears-20261106/raw/06.png",
+    "raw_sha256": "08446b5e8794930a24642656bff29b761b7ee3b9e4750c02bcd0103d74de3d91",
+    "prompt_sha256": "f6fef9d60247f757691a20e18635344f8dec911fb71db6e4160b66ac99032424",
+    "independent_complete_body_drawing": true,
+    "resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      0,
+      -10
+    ],
+    "main_support_proxy_y": 484,
+    "removed_detached_alpha_pixels": 0,
+    "attachment_proxies": {
+      "tato_bell": [
+        96.51,
+        245.45
+      ],
+      "tato_magic_emitter": [
+        62.510000000000005,
+        257.45
+      ],
+      "melody_bow_ribbon_proxy": [
+        471.29,
+        252.41
+      ],
+      "melody_magic_emitter": [
+        499.29,
+        260.40999999999997
+      ],
+      "main_nose": [
+        267.23,
+        217.89
+      ],
+      "tear_roots": {
+        "main_left": {
+          "xy": [
+            220.23000000000002,
+            229.89
+          ],
+          "method": "feature-relative fallback; inspect endpoint board"
+        },
+        "main_right": {
+          "xy": [
+            301.83,
+            215.0
+          ],
+          "method": "visible pale-blue tear component endpoint"
+        },
+        "tato": {
+          "xy": [
+            90.57,
+            198.0
+          ],
+          "method": "visible pale-blue tear component endpoint"
+        },
+        "melody": {
+          "xy": [
+            378.4,
+            209.0
+          ],
+          "method": "visible pale-blue tear component endpoint"
+        }
+      }
+    },
+    "anatomical_landmarks": "unverified; support/color proxies are display registration/emitters, not original certification"
+  },
+  {
+    "id": "07",
+    "path": "character/07.png",
+    "sha256": "8f56bb12f7e9da6a418c9d5527e4750648bb004ee220fa35a29c5942e7bfe3cf",
+    "raw_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v2-tears-20261106/raw/07.png",
+    "raw_sha256": "1daafb1f7d16fd4421cba96211a154cc9f376d4fee355bf6bcf7ad37aecafd9b",
+    "prompt_sha256": "40040129377189b99fab7d92fdae92ac2db7040b000560aad2a3c10007d14969",
+    "independent_complete_body_drawing": true,
+    "resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      0,
+      -16
+    ],
+    "main_support_proxy_y": 484,
+    "removed_detached_alpha_pixels": 0,
+    "attachment_proxies": {
+      "tato_bell": [
+        106.78,
+        239.04
+      ],
+      "tato_magic_emitter": [
+        72.78,
+        251.04
+      ],
+      "melody_bow_ribbon_proxy": [
+        468.56,
+        242.53
+      ],
+      "melody_magic_emitter": [
+        496.56,
+        250.53
+      ],
+      "main_nose": [
+        258.75,
+        211.02
+      ],
+      "tear_roots": {
+        "main_left": {
+          "xy": [
+            221.93,
+            202.0
+          ],
+          "method": "visible pale-blue tear component endpoint"
+        },
+        "main_right": {
+          "xy": [
+            292.61,
+            202.0
+          ],
+          "method": "visible pale-blue tear component endpoint"
+        },
+        "tato": {
+          "xy": [
+            95.08,
+            194.0
+          ],
+          "method": "visible pale-blue tear component endpoint"
+        },
+        "melody": {
+          "xy": [
+            429.5,
+            210.0
+          ],
+          "method": "visible pale-blue tear component endpoint"
+        }
+      }
+    },
+    "anatomical_landmarks": "unverified; support/color proxies are display registration/emitters, not original certification"
+  },
+  {
+    "id": "08",
+    "path": "character/08.png",
+    "sha256": "f73dc2183cb4162114d6f256838398abe7fbfc99fc1acc1e6b352313fbe156e9",
+    "raw_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v2-tears-20261106/raw/08.png",
+    "raw_sha256": "03b2626e181ecc7b52802e84512abbceded67d929c8c3c8d782b7a63d239ab11",
+    "prompt_sha256": "bf0e475b2e2db7df6fda8da09cf946ac2456782ced1c797223083354de92abc2",
+    "independent_complete_body_drawing": true,
+    "resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      0,
+      -18
+    ],
+    "main_support_proxy_y": 484,
+    "removed_detached_alpha_pixels": 0,
+    "attachment_proxies": {
+      "tato_bell": [
+        113.18,
+        239.86
+      ],
+      "tato_magic_emitter": [
+        79.18,
+        251.86
+      ],
+      "melody_bow_ribbon_proxy": [
+        461.44,
+        237.91
+      ],
+      "melody_magic_emitter": [
+        489.44,
+        245.91
+      ],
+      "main_nose": [
+        310.24,
+        202.82
+      ],
+      "tear_roots": {
+        "main_left": {
+          "xy": [
+            259.97,
+            206.0
+          ],
+          "method": "visible pale-blue tear component endpoint"
+        },
+        "main_right": {
+          "xy": [
+            372.67,
+            194.0
+          ],
+          "method": "visible pale-blue tear component endpoint"
+        },
+        "tato": {
+          "xy": [
+            108.79,
+            196.0
+          ],
+          "method": "visible pale-blue tear component endpoint"
+        },
+        "melody": {
+          "xy": [
+            417.0,
+            207.0
+          ],
+          "method": "visible pale-blue tear component endpoint"
+        }
+      }
+    },
+    "anatomical_landmarks": "unverified; support/color proxies are display registration/emitters, not original certification"
+  },
+  {
+    "id": "09",
+    "path": "character/09.png",
+    "sha256": "61796cc2fd91655dc18f84937e240064c20e1a1cfd2d20a705b93a8f58e83747",
+    "raw_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v2-tears-20261106/raw/09.png",
+    "raw_sha256": "87aa579c304acd6e9b0827f6a91086a99445bc816787b86c6b098c5089356138",
+    "prompt_sha256": "b8658ed1aed5469ea3c0c5419085357894c320f50666c8ee19e666b86f239c70",
+    "independent_complete_body_drawing": true,
+    "resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      0,
+      -15
+    ],
+    "main_support_proxy_y": 484,
+    "removed_detached_alpha_pixels": 0,
+    "attachment_proxies": {
+      "tato_bell": [
+        116.97,
+        241.42
+      ],
+      "tato_magic_emitter": [
+        82.97,
+        253.42
+      ],
+      "melody_bow_ribbon_proxy": [
+        460.03,
+        242.53
+      ],
+      "melody_magic_emitter": [
+        488.03,
+        250.53
+      ],
+      "main_nose": [
+        306.46,
+        207.68
+      ],
+      "tear_roots": {
+        "main_left": {
+          "xy": [
+            253.72,
+            207.0
+          ],
+          "method": "visible pale-blue tear component endpoint"
+        },
+        "main_right": {
+          "xy": [
+            350.46,
+            225.68
+          ],
+          "method": "feature-relative fallback; inspect endpoint board"
+        },
+        "tato": {
+          "xy": [
+            108.62,
+            197.0
+          ],
+          "method": "visible pale-blue tear component endpoint"
+        },
+        "melody": {
+          "xy": [
+            413.33,
+            206.0
+          ],
+          "method": "visible pale-blue tear component endpoint"
+        }
+      }
+    },
+    "anatomical_landmarks": "unverified; support/color proxies are display registration/emitters, not original certification"
+  },
+  {
+    "id": "10",
+    "path": "character/10.png",
+    "sha256": "82ec474c4650bd1b8dce1a83fb30e92f8f3ee2fcbf28c5b965b6a217e0e163fd",
+    "raw_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v2-tears-20261106/raw/10.png",
+    "raw_sha256": "a3e5802db6dbfb739028ca939bf55f64ef3af3543085e0593b344bed49b1fab4",
+    "prompt_sha256": "d849bd9f73b00c33fd0dca01765e6353d7d65adf4d9112dca05cac5c91f398b0",
+    "independent_complete_body_drawing": true,
+    "resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      0,
+      -17
+    ],
+    "main_support_proxy_y": 484,
+    "removed_detached_alpha_pixels": 0,
+    "attachment_proxies": {
+      "tato_bell": [
+        115.2,
+        237.17
+      ],
+      "tato_magic_emitter": [
+        81.2,
+        249.17
+      ],
+      "melody_bow_ribbon_proxy": [
+        454.7,
+        239.86
+      ],
+      "melody_magic_emitter": [
+        482.7,
+        247.86
+      ],
+      "main_nose": [
+        302.22,
+        208.42
+      ],
+      "tear_roots": {
+        "main_left": {
+          "xy": [
+            255.08,
+            208.0
+          ],
+          "method": "visible pale-blue tear component endpoint"
+        },
+        "main_right": {
+          "xy": [
+            346.22,
+            226.42
+          ],
+          "method": "feature-relative fallback; inspect endpoint board"
+        },
+        "tato": {
+          "xy": [
+            109.5,
+            195.0
+          ],
+          "method": "visible pale-blue tear component endpoint"
+        },
+        "melody": {
+          "xy": [
+            412.62,
+            207.0
+          ],
+          "method": "visible pale-blue tear component endpoint"
+        }
+      }
+    },
+    "anatomical_landmarks": "unverified; support/color proxies are display registration/emitters, not original certification"
+  },
+  {
+    "id": "11",
+    "path": "character/11.png",
+    "sha256": "dd117620a31ee2a0d8f7f043c30806f2888cb8500bcb7635982127ef3808fb4a",
+    "raw_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v2-tears-20261106/raw/11.png",
+    "raw_sha256": "1cb76a684326aed533ba3ed8327e37e0b9e384a9d51d1145338567836d0f76c4",
+    "prompt_sha256": "40461901481f7507bf6b786dae7a4eb4bf98e6dd898db3b7e144adf7c4045b3c",
+    "independent_complete_body_drawing": true,
+    "resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      0,
+      -16
+    ],
+    "main_support_proxy_y": 484,
+    "removed_detached_alpha_pixels": 0,
+    "attachment_proxies": {
+      "tato_bell": [
+        112.14,
+        244.32
+      ],
+      "tato_magic_emitter": [
+        78.14,
+        256.32
+      ],
+      "melody_bow_ribbon_proxy": [
+        455.07,
+        243.64
+      ],
+      "melody_magic_emitter": [
+        483.07,
+        251.64
+      ],
+      "main_nose": [
+        292.49,
+        209.92
+      ],
+      "tear_roots": {
+        "main_left": {
+          "xy": [
+            245.49,
+            221.92
+          ],
+          "method": "feature-relative fallback; inspect endpoint board"
+        },
+        "main_right": {
+          "xy": [
+            336.49,
+            227.92
+          ],
+          "method": "feature-relative fallback; inspect endpoint board"
+        },
+        "tato": {
+          "xy": [
+            105.2,
+            200.0
+          ],
+          "method": "visible pale-blue tear component endpoint"
+        },
+        "melody": {
+          "xy": [
+            410.2,
+            208.0
+          ],
+          "method": "visible pale-blue tear component endpoint"
+        }
+      }
+    },
+    "anatomical_landmarks": "unverified; support/color proxies are display registration/emitters, not original certification"
+  },
+  {
+    "id": "12",
+    "path": "character/12.png",
+    "sha256": "4b14c9b0963268972a315cbb9e9460da22e1b01c788c3ebbc886c8923d41ec35",
+    "raw_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v2-tears-20261106/raw/12.png",
+    "raw_sha256": "b5f87f45e350af02fb877ad793b7567d7c0adbbfc4a52c4b128339ed7d01e9fb",
+    "prompt_sha256": "21e2cc8b1915fa90557e0c9fe1a7f088cd8ed22aa7747620d88447c7b04a285d",
+    "independent_complete_body_drawing": true,
+    "resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      0,
+      -15
+    ],
+    "main_support_proxy_y": 484,
+    "removed_detached_alpha_pixels": 0,
+    "attachment_proxies": {
+      "tato_bell": [
+        110.51,
+        242.76
+      ],
+      "tato_magic_emitter": [
+        76.51,
+        254.76
+      ],
+      "melody_bow_ribbon_proxy": [
+        484.97,
+        245.49
+      ],
+      "melody_magic_emitter": [
+        512.97,
+        253.49
+      ],
+      "main_nose": [
+        304.77,
+        204.75
+      ],
+      "tear_roots": {
+        "main_left": {
+          "xy": [
+            255.19,
+            205.0
+          ],
+          "method": "visible pale-blue tear component endpoint"
+        },
+        "main_right": {
+          "xy": [
+            348.77,
+            222.75
+          ],
+          "method": "feature-relative fallback; inspect endpoint board"
+        },
+        "tato": {
+          "xy": [
+            102.0,
+            193.0
+          ],
+          "method": "visible pale-blue tear component endpoint"
+        },
+        "melody": {
+          "xy": [
+            387.0,
+            200.0
+          ],
+          "method": "visible pale-blue tear component endpoint"
+        }
+      }
+    },
+    "anatomical_landmarks": "unverified; support/color proxies are display registration/emitters, not original certification"
+  },
+  {
+    "id": "13",
+    "path": "character/13.png",
+    "sha256": "90157fdd43d29def0be2f16245bdad8786d4784fd138d554e2fdedc799dd8dc6",
+    "raw_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v2-tears-20261106/raw/13.png",
+    "raw_sha256": "b43541e7242f6616f358cdfa46ecc45e973c315be5cb02374bbadb115cf7bdd0",
+    "prompt_sha256": "65e46c6783806e63c58857474fbda0ffc0bb9f6e8fe0f95e286cb5c4aec0667d",
+    "independent_complete_body_drawing": true,
+    "resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      0,
+      -9
+    ],
+    "main_support_proxy_y": 484,
+    "removed_detached_alpha_pixels": 0,
+    "attachment_proxies": {
+      "tato_bell": [
+        110.95,
+        239.45
+      ],
+      "tato_magic_emitter": [
+        76.95,
+        251.45
+      ],
+      "melody_bow_ribbon_proxy": [
+        469.74,
+        248.96
+      ],
+      "melody_magic_emitter": [
+        497.74,
+        256.96000000000004
+      ],
+      "main_nose": [
+        262.19,
+        217.21
+      ],
+      "tear_roots": {
+        "main_left": {
+          "xy": [
+            226.64,
+            209.0
+          ],
+          "method": "visible pale-blue tear component endpoint"
+        },
+        "main_right": {
+          "xy": [
+            296.79,
+            208.0
+          ],
+          "method": "visible pale-blue tear component endpoint"
+        },
+        "tato": {
+          "xy": [
+            101.5,
+            202.0
+          ],
+          "method": "visible pale-blue tear component endpoint"
+        },
+        "melody": {
+          "xy": [
+            399.33,
+            206.0
+          ],
+          "method": "visible pale-blue tear component endpoint"
+        }
+      }
+    },
+    "anatomical_landmarks": "unverified; support/color proxies are display registration/emitters, not original certification"
+  },
+  {
+    "id": "14",
+    "path": "character/14.png",
+    "sha256": "d1f96be70f65d088e7caf0db180980d3e7589bc66b70dbe7b6a035eea20b4362",
+    "raw_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v2-tears-20261106/raw/14.png",
+    "raw_sha256": "d77787235df5246bff00a55eb87b0bd79f0f545496ed91f3f4c2ec48cda85e70",
+    "prompt_sha256": "a4fcbec8182f04a41a775423f1d08e008d470f8c09097c16c0f3663ff83ecd24",
+    "independent_complete_body_drawing": true,
+    "resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      0,
+      -13
+    ],
+    "main_support_proxy_y": 484,
+    "removed_detached_alpha_pixels": 0,
+    "attachment_proxies": {
+      "tato_bell": [
+        106.75,
+        232.08
+      ],
+      "tato_magic_emitter": [
+        72.75,
+        244.08
+      ],
+      "melody_bow_ribbon_proxy": [
+        471.66,
+        233.64
+      ],
+      "melody_magic_emitter": [
+        499.66,
+        241.64
+      ],
+      "main_nose": [
+        263.48,
+        226.12
+      ],
+      "tear_roots": {
+        "main_left": {
+          "xy": [
+            212.75,
+            250.0
+          ],
+          "method": "visible pale-blue tear component endpoint"
+        },
+        "main_right": {
+          "xy": [
+            312.33,
+            253.0
+          ],
+          "method": "visible pale-blue tear component endpoint"
+        },
+        "tato": {
+          "xy": [
+            94.5,
+            185.0
+          ],
+          "method": "visible pale-blue tear component endpoint"
+        },
+        "melody": {
+          "xy": [
+            442.57,
+            199.0
+          ],
+          "method": "visible pale-blue tear component endpoint"
+        }
+      }
+    },
+    "anatomical_landmarks": "unverified; support/color proxies are display registration/emitters, not original certification"
+  },
+  {
+    "id": "15",
+    "path": "character/15.png",
+    "sha256": "8283dead2c06d76cda58ebc65273ecad57e68ce8bc359987364c4d6447d81b54",
+    "raw_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v2-tears-20261106/raw/15.png",
+    "raw_sha256": "8a08f80000fd1798309426d9e6d553e274a8d2a6dad20c89adfcda8bcce62d63",
+    "prompt_sha256": "5f33580fe311672adca67c3fff70f65b28d9533e5430a0e7f46208decb4c7781",
+    "independent_complete_body_drawing": true,
+    "resolution_scale": 0.43381180223285487,
+    "whole_character_translation_px": [
+      0,
+      -8
+    ],
+    "main_support_proxy_y": 484,
+    "removed_detached_alpha_pixels": 0,
+    "attachment_proxies": {
+      "tato_bell": [
+        103.75,
+        238.06
+      ],
+      "tato_magic_emitter": [
+        69.75,
+        250.06
+      ],
+      "melody_bow_ribbon_proxy": [
+        471.23,
+        241.53
+      ],
+      "melody_magic_emitter": [
+        499.23,
+        249.53
+      ],
+      "main_nose": [
+        261.16,
+        219.55
+      ],
+      "tear_roots": {
+        "main_left": {
+          "xy": [
+            224.42,
+            210.0
+          ],
+          "method": "visible pale-blue tear component endpoint"
+        },
+        "main_right": {
+          "xy": [
+            297.18,
+            210.0
+          ],
+          "method": "visible pale-blue tear component endpoint"
+        },
+        "tato": {
+          "xy": [
+            93.0,
+            199.0
+          ],
+          "method": "visible pale-blue tear component endpoint"
+        },
+        "melody": {
+          "xy": [
+            444.25,
+            209.0
+          ],
+          "method": "visible pale-blue tear component endpoint"
+        }
+      }
+    },
+    "anatomical_landmarks": "unverified; support/color proxies are display registration/emitters, not original certification"
+  }
+]

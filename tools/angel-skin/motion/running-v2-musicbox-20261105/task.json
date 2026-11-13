@@ -1,0 +1,33 @@
+{
+  "mode": "new-motion",
+  "scope": "only new running/music-box listening motion; user review before another state",
+  "status": "new music-box motion candidate; user visual review pending",
+  "production_states": [
+    "running"
+  ],
+  "replaces_current_running": true,
+  "previous_versions": [
+    "../running-v1-20261105/review/running.gif",
+    "../night-effects-v1-20261105/running/night.webp"
+  ],
+  "user_selected_stance": "all3 airborne, happily watching/listening to box",
+  "character_sources_required": 16,
+  "character_sources_generated": 16,
+  "pose_ms": 200,
+  "cycle_ms": 3200,
+  "effect_sample_ms": 50,
+  "external_prop_lock": "pink polygonal base/gold rail/silver mirrored rim/front heart lock/glass dome remain upright/frontal; both front paws support underside, only2rear feet below hips",
+  "rotation": "inner circular mirrored platter plus exactly2 fixed-height faceted crystals rotate0..360 over loop, exterior never spins",
+  "dome_effect": "sparse pastel ice-blue/pink/lilac/warm-white sparkle and prism glints only inside actual glass boundaries; no eye/fur recolouring",
+  "design_lock": "approved small blue-grey Retto eyes, natural triangular ears/ivory feather wings; leftTato dots/^^ and NO added wings; rightMelody burgundy rectangles/red bow/white winglets",
+  "layer_order": [
+    "transparent night aura/waves/feathers with soft alpha edges",
+    "complete independently drawn hovering trio and held musicbox",
+    "localized dome glints/music light following held-box location"
+  ],
+  "selected_gif": "review/running.gif",
+  "selected_animation": "review/night.webp",
+  "original_registration": "unverified",
+  "native_installed": false,
+  "next_stage": "user review of this working motion only; original registration/native verification remain unverified"
+}

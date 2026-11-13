@@ -29,12 +29,15 @@ struct CodexLiveStatus: Equatable {
     var waitingFlags: [String] = []
     var turnStartMessageID: String? = nil
     var revision: Int? = nil
+    var hasUnreadTurn: Bool? = nil
+    var readConfirmedAtMs: Double? = nil
 
     // revision은 진단용이다. 본문 패치마다 오버레이 전체를 다시 갱신하지 않는다.
     static func == (lhs: Self, rhs: Self) -> Bool {
         lhs.state == rhs.state && lhs.observedAtMs == rhs.observedAtMs
             && lhs.confirmedAtMs == rhs.confirmedAtMs && lhs.snapshotConfirmedAtMs == rhs.snapshotConfirmedAtMs
             && lhs.requestIDs == rhs.requestIDs && lhs.requestMethods == rhs.requestMethods
+            && lhs.hasUnreadTurn == rhs.hasUnreadTurn && lhs.readConfirmedAtMs == rhs.readConfirmedAtMs
             && lhs.waitingFlags == rhs.waitingFlags && lhs.turnStartMessageID == rhs.turnStartMessageID
     }
 }
@@ -46,7 +49,7 @@ func needsCodexHookConfirmation(_ status: CodexLiveStatus, since: Double, reques
 
 /// snapshot 의 conversationState 는 대화 전체라 한 건에 16~30MB 다. 입력 대기 확인으로 몇 초마다 다시 받으므로,
 /// 전부 객체로 만들지 않고 statusProjection 이 읽는 필드만 남긴다. 나머지 모양과 값의 타입은 JSONSerialization 과 같다.
-private let liveStateKeys: Set<String> = ["id", "threadRuntimeStatus", "requests", "latestTurnStartMessageId", "resumeState"]
+private let liveStateKeys: Set<String> = ["id", "threadRuntimeStatus", "requests", "latestTurnStartMessageId", "resumeState", "hasUnreadTurn"]
 
 private struct LiveStatusJSON: Decodable {
     let value: Any?
@@ -90,10 +93,14 @@ private func statusProjection(_ state: [String: Any]) -> [String: Any] {
     }
     if let turn = state["latestTurnStartMessageId"] { result["latestTurnStartMessageId"] = turn }
     if let resume = state["resumeState"] { result["resumeState"] = resume }
+    if let unread = state["hasUnreadTurn"] { result["hasUnreadTurn"] = unread }
     return result
 }
 
 private func validStatusShape(_ fields: [String: Any]) -> Bool {
+    if let unread = fields["hasUnreadTurn"] {
+        guard let value = unread as? NSNumber, CFGetTypeID(value) == CFBooleanGetTypeID() else { return false }
+    }
     if let value = fields["threadRuntimeStatus"], !(value is NSNull) {
         guard let runtime = value as? [String: Any] else { return false }
         if let type = runtime["type"], !(type is String) { return false }
@@ -357,7 +364,9 @@ struct CodexLiveStatusStore {
                 codexWaitingMethods.contains($0["method"] as? String ?? "") && $0["completed"] as? Bool != true
             }.compactMap { $0["method"] as? String }.sorted(),
             waitingFlags: flags.filter { ["waitingOnApproval", "waitingOnUserInput"].contains($0) },
-            turnStartMessageID: fields["latestTurnStartMessageId"] as? String, revision: revision) }
+            turnStartMessageID: fields["latestTurnStartMessageId"] as? String, revision: revision, hasUnreadTurn: fields["hasUnreadTurn"] as? Bool,
+            readConfirmedAtMs: fields["hasUnreadTurn"] == nil ? nil
+                : (snapshot || oldStatus?.hasUnreadTurn != fields["hasUnreadTurn"] as? Bool ? nowMs : oldStatus?.readConfirmedAtMs)) }
         entries[id] = Entry(fields: fields, owner: owner, revision: revision, status: status)
         if snapshot { acceptedSnapshotID = id }
         return nil
@@ -511,6 +520,12 @@ final class CodexLiveStatusReader {
     private var lastValidation: [String: TimeInterval] = [:]
     private var validationJobs: [String: DispatchWorkItem] = [:]
     private var scheduledResync: [String: DispatchWorkItem] = [:]
+    private var readAfter: [String: Double] = [:]
+    private var lastReadCheck: [String: TimeInterval] = [:]
+    private var lastReadRequest: TimeInterval = -.greatestFiniteMagnitude
+    private var readRecheck: DispatchWorkItem?
+    private let readConfirmationInterval: TimeInterval
+    private let readRequestInterval: TimeInterval
     private var pendingRecheck: DispatchWorkItem?
     private var retry: DispatchWorkItem?
     private var initializationTimeout: DispatchWorkItem?
@@ -520,7 +535,10 @@ final class CodexLiveStatusReader {
          resyncInterval: TimeInterval = 2, validationOnly: Bool = false,
          maximumPendingValidations: Int = 2, maximumDedicatedReaders: Int = 16,
          maximumRecoveryAttempts: Int = 3, dedicatedReaderLease: TimeInterval = 30,
-         maximumObserverHistory: Int = 4096) {
+         maximumObserverHistory: Int = 4096, readConfirmationInterval: TimeInterval = 5,
+         readRequestInterval: TimeInterval = 2) {
+        self.readConfirmationInterval = max(0.1, readConfirmationInterval)
+        self.readRequestInterval = max(0.05, readRequestInterval)
         self.pendingConfirmationInterval = max(0.05, pendingConfirmationInterval)
         self.maximumFrameBytes = max(1024, maximumFrameBytes)
         self.confirmationTimeout = max(0.1, confirmationTimeout)
@@ -539,13 +557,15 @@ final class CodexLiveStatusReader {
         publicationLock.lock(); publicationEpoch = generation; publicationLock.unlock()
         return generation
     }
-    func track(_ ids: Set<String>, refreshAfter: [String: Double] = [:], activityAfter: [String: Double] = [:]) {
+    func track(_ ids: Set<String>, refreshAfter: [String: Double] = [:], activityAfter: [String: Double] = [:], readAfter: [String: Double] = [:]) {
         queue.async { [weak self] in
             guard let self else { return }
             let removed = self.tracked.subtracting(ids), added = ids.subtracting(self.tracked)
             for id in removed { self.removeValidation(id) }
             let retracked = Set(added.filter { self.validateEveryAddition || self.seenSubscriptions.contains($0) })
             self.tracked = ids; self.store.retain(ids)
+            self.readAfter = readAfter.filter { ids.contains($0.key) }
+            self.lastReadCheck = self.lastReadCheck.filter { ids.contains($0.key) }
             self.initialValidatedSnapshots.formIntersection(ids)
             self.oversizedThreads.formIntersection(ids); self.unavailableThreads.formIntersection(ids)
             self.confirmations = self.confirmations.filter { ids.contains($0.key) }
@@ -604,6 +624,7 @@ final class CodexLiveStatusReader {
         slotRotation?.cancel(); slotRotation = nil; slotRotationAt = nil; confirmedUnknownThreads.removeAll()
         parkedThreads.removeAll(); recoveryAttempts.removeAll(); lastSeenHookHint.removeAll(); lastSeenActivityHint.removeAll()
         pendingRecheck?.cancel(); pendingRecheck = nil
+        readRecheck?.cancel(); readRecheck = nil; lastReadCheck.removeAll(); lastReadRequest = -.greatestFiniteMagnitude
         buffer = Data(); discardedBytesRemaining = 0; discardedMetadata = CodexFrameMetadata()
         lastResync.removeAll(); snapshotConfirmedAt.removeAll(); confirmations.removeAll()
         requestedHookConfirmation.removeAll(); initialValidatedSnapshots.removeAll(); initializationRequestID = nil
@@ -738,6 +759,49 @@ final class CodexLiveStatusReader {
         pendingRecheck = work
         queue.asyncAfter(deadline: .now() + min(pendingConfirmationInterval, confirmationTimeout / 3), execute: work)
     }
+    // Read changes are not always broadcast by Codex. Refresh only unread completed alerts,
+    // one request at a time across the reader and its dedicated observers.
+    private func scheduleReadRecheck() {
+        guard running, clientID != nil, !readAfter.isEmpty else {
+            readRecheck?.cancel(); readRecheck = nil; return
+        }
+        guard readRecheck == nil else { return }
+        let current = generation
+        let work = DispatchWorkItem { [weak self] in
+            guard let self, current == self.generation else { return }
+            self.readRecheck = nil
+            let now = self.uptime
+            if now - self.lastReadRequest >= self.readRequestInterval {
+                let statuses = self.store.statuses.merging(self.validatedStatuses) { _, child in child }
+                let candidates = self.readAfter.keys.filter { id in
+                    guard self.tracked.contains(id), !self.unavailableThreads.contains(id),
+                          !self.oversizedThreads.contains(id), !self.parkedThreads.contains(id),
+                          !self.activeValidations.contains(id), self.confirmations[id] == nil,
+                          let status = statuses[id], status.state == .idle else { return false }
+                    let covered = status.hasUnreadTurn == false && (status.readConfirmedAtMs ?? 0) >= self.readAfter[id]!
+                    let last = self.lastReadCheck[id] ?? self.snapshotConfirmedAt[id] ?? self.lastValidation[id] ?? now
+                    return !covered && now - last >= self.readConfirmationInterval
+                }.sorted {
+                    let a = self.lastReadCheck[$0] ?? self.snapshotConfirmedAt[$0] ?? self.lastValidation[$0] ?? 0
+                    let b = self.lastReadCheck[$1] ?? self.snapshotConfirmedAt[$1] ?? self.lastValidation[$1] ?? 0
+                    return a == b ? $0 < $1 : a < b
+                }
+                if let id = candidates.first {
+                    self.lastReadCheck[id] = now; self.lastReadRequest = now
+                    if let child = self.validations[id]?.reader {
+                        child.queue.async { [weak child] in
+                            guard let child, child.running, child.tracked.contains(id), child.confirmations[id] == nil else { return }
+                            child.resync(id)
+                        }
+                    } else { self.resync(id) }
+                }
+            }
+            self.scheduleReadRecheck()
+        }
+        readRecheck = work
+        queue.asyncAfter(deadline: .now() + min(readRequestInterval, readConfirmationInterval), execute: work)
+    }
+
     private func removeValidation(_ id: String) {
         validations.removeValue(forKey: id)?.reader.stop()
         validationJobs.removeValue(forKey: id)?.cancel()
@@ -1035,6 +1099,7 @@ final class CodexLiveStatusReader {
     }
     private func publish() {
         schedulePendingRecheck()
+        scheduleReadRecheck()
         var next = store.statuses.filter { !validationThreads.contains($0.key) && !unavailableThreads.contains($0.key) }
         for (id, status) in validatedStatuses where !unavailableThreads.contains(id) { next[id] = status }
         let excluded = oversizedThreads.union(validatedOversized), unavailable = unavailableThreads.union(excluded)

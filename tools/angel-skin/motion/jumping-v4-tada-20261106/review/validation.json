@@ -1,0 +1,24 @@
+{
+  "retained_character_drawings": 16,
+  "pose_ms": 150,
+  "effect_ms": 50,
+  "cycle_ms": 2400,
+  "effect_frames": 48,
+  "opaque_base_pixels_exact": true,
+  "source_PNGs_and_character_animation_unchanged": true,
+  "edge_alpha_max": 0,
+  "frozen_pose_effect_progression": true,
+  "new_effect_changed_pixels_max": 127741,
+  "native_installed": false,
+  "live_browser_verified": false,
+  "night.webp": {
+    "frames": 48,
+    "cycle_ms": 2400,
+    "sha256": "b733e0475aa7defeab3532e1a2506947d447bb8989db4250ec2d548b58208840"
+  },
+  "jumping.gif": {
+    "frames": 48,
+    "cycle_ms": 2400,
+    "sha256": "770300a8ca10a7408000a437402b70608c6a9c8bb127e7b776868b977c709db1"
+  }
+}

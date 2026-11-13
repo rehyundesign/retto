@@ -1,0 +1,12 @@
+{
+  "independent_sources": 16,
+  "unique_visible_decoded_cells": 16,
+  "gif_frames": 64,
+  "gif_ms": 3200,
+  "all_character_margins_at_least_12px": true,
+  "clean_render_reproduction_identical": true,
+  "character_hashes_unchanged": true,
+  "original_anatomical_registration": "unverified",
+  "native_registered": false,
+  "installed": false
+}

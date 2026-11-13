@@ -1,0 +1,834 @@
+[
+  {
+    "id": "00",
+    "path": "character/00.png",
+    "sha256": "d039f8bd153f733422b4395cf9d0c6647631c7679d37e261e1bead1ea7606a2b",
+    "original_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v2-trio-flight-20261105/character/00.png",
+    "original_sha256": "9a4f321b74834214755d5debd9b45d0dbf7fd7fc1764581234772ac537b65542",
+    "donor_sha256": "a9d963e0391663e1e4d17dced323f6bc9d480a4856d1bcdc190c2b7113341132",
+    "mask_path": "masks/00.png",
+    "mask_sha256": "aefe9416eb5eb08753826648c04f1ad3b46cecc9525c38f85f03bdba44a59383",
+    "eye_boxes": {
+      "retto_0": [
+        179,
+        172,
+        247,
+        217
+      ],
+      "retto_1": [
+        266,
+        172,
+        329,
+        217
+      ],
+      "tato_0": [
+        65,
+        360,
+        81,
+        378
+      ],
+      "tato_1": [
+        105,
+        353,
+        120,
+        370
+      ],
+      "melody_0": [
+        407,
+        348,
+        440,
+        381
+      ],
+      "melody_1": [
+        444,
+        352,
+        477,
+        386
+      ]
+    },
+    "changed_outside_eye_mask_pixels": 0,
+    "alpha_changed_pixels": 0,
+    "anatomical_pose_changed": false,
+    "original_anatomical_landmarks": "inherited unverified"
+  },
+  {
+    "id": "01",
+    "path": "character/01.png",
+    "sha256": "3a2746b166a137700c76425870bbc417e4195fad410302c612fe9850aca85ebc",
+    "original_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v2-trio-flight-20261105/character/01.png",
+    "original_sha256": "79747d757c73d642ad8d3c758b0e11c5d57f7524bd61fd2a75b51378ea1b39bc",
+    "donor_sha256": "2cde92bf3f7ac06b103ba10a2fa4e524f8043e79ef6cdafb2cf08ae0b38d8b7b",
+    "mask_path": "masks/01.png",
+    "mask_sha256": "9a6436fcae4594c35efe1628dc292bd290e6a16b699dfdd313335332b2671d6c",
+    "eye_boxes": {
+      "retto_0": [
+        184,
+        173,
+        252,
+        218
+      ],
+      "retto_1": [
+        273,
+        173,
+        336,
+        218
+      ],
+      "tato_0": [
+        67,
+        361,
+        83,
+        379
+      ],
+      "tato_1": [
+        107,
+        353,
+        122,
+        370
+      ],
+      "melody_0": [
+        411,
+        348,
+        444,
+        381
+      ],
+      "melody_1": [
+        449,
+        352,
+        483,
+        385
+      ]
+    },
+    "changed_outside_eye_mask_pixels": 0,
+    "alpha_changed_pixels": 0,
+    "anatomical_pose_changed": false,
+    "original_anatomical_landmarks": "inherited unverified"
+  },
+  {
+    "id": "02",
+    "path": "character/02.png",
+    "sha256": "d5e6707f9021d616bd04689f2d8649ddf46687c9dd15b04ab26f23dca3d0f1e8",
+    "original_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v2-trio-flight-20261105/character/02.png",
+    "original_sha256": "a4827eaf423a76851979776061816c236f57e5576c71bb534c0bf1d065939265",
+    "donor_sha256": "c68d223d8d10ae8288ca5b99b1719e10eda0ee24c4fc9f1f3e1057f93224664f",
+    "mask_path": "masks/02.png",
+    "mask_sha256": "4bd3a15ce9034132e21c2fa32ee45d353d034a1b46d5f30dbbcb6415b0c1008b",
+    "eye_boxes": {
+      "retto_0": [
+        188,
+        191,
+        255,
+        235
+      ],
+      "retto_1": [
+        274,
+        190,
+        337,
+        236
+      ],
+      "tato_0": [
+        71,
+        367,
+        88,
+        386
+      ],
+      "tato_1": [
+        113,
+        358,
+        129,
+        376
+      ],
+      "melody_0": [
+        406,
+        358,
+        439,
+        393
+      ],
+      "melody_1": [
+        445,
+        361,
+        478,
+        396
+      ]
+    },
+    "changed_outside_eye_mask_pixels": 0,
+    "alpha_changed_pixels": 0,
+    "anatomical_pose_changed": false,
+    "original_anatomical_landmarks": "inherited unverified"
+  },
+  {
+    "id": "03",
+    "path": "character/03.png",
+    "sha256": "ea6e70f5f9078552f88ad0f14961909823825b9b3ef8340e9bcd5db5b2cbd04e",
+    "original_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v2-trio-flight-20261105/character/03.png",
+    "original_sha256": "4f958482fb140926f4e106720c40e4bd1ad4f0c1490e102121dfbe7829b1f986",
+    "donor_sha256": "21006151e32ad7929c023811793558ab4273d51862da98dfcb600ad9c26f2206",
+    "mask_path": "masks/03.png",
+    "mask_sha256": "2226f48d68067cf12089d79d2e9086ea47ba549d4438f4063df605559a7c5a88",
+    "eye_boxes": {
+      "retto_0": [
+        188,
+        202,
+        255,
+        250
+      ],
+      "retto_1": [
+        276,
+        202,
+        341,
+        250
+      ],
+      "tato_0": [
+        71,
+        380,
+        88,
+        400
+      ],
+      "tato_1": [
+        115,
+        373,
+        132,
+        392
+      ],
+      "melody_0": [
+        403,
+        369,
+        436,
+        402
+      ],
+      "melody_1": [
+        443,
+        370,
+        476,
+        402
+      ]
+    },
+    "changed_outside_eye_mask_pixels": 0,
+    "alpha_changed_pixels": 0,
+    "anatomical_pose_changed": false,
+    "original_anatomical_landmarks": "inherited unverified"
+  },
+  {
+    "id": "04",
+    "path": "character/04.png",
+    "sha256": "ded6663f079543de398eae6a0ae2a155b235f4cd91a0224bd11674d1525cdc40",
+    "original_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v2-trio-flight-20261105/character/04.png",
+    "original_sha256": "c236db6080bf76bea9786f02ce4b429793a7041e8a7273fcda72b2053618f6b4",
+    "donor_sha256": "4989138e9178ec3f2a9110a7575723b407e28539935af8a6d43025086844795a",
+    "mask_path": "masks/04.png",
+    "mask_sha256": "7336e2f2f490f75daf3f266050e7f086d6fa62ddec9e20620a0ae985dc21f8ec",
+    "eye_boxes": {
+      "retto_0": [
+        186,
+        165,
+        249,
+        203
+      ],
+      "retto_1": [
+        268,
+        163,
+        330,
+        204
+      ],
+      "tato_0": [
+        62,
+        359,
+        88,
+        378
+      ],
+      "tato_1": [
+        103,
+        351,
+        124,
+        368
+      ],
+      "melody_0": [
+        411,
+        347,
+        445,
+        376
+      ],
+      "melody_1": [
+        448,
+        351,
+        481,
+        381
+      ]
+    },
+    "changed_outside_eye_mask_pixels": 0,
+    "alpha_changed_pixels": 0,
+    "anatomical_pose_changed": false,
+    "original_anatomical_landmarks": "inherited unverified"
+  },
+  {
+    "id": "05",
+    "path": "character/05.png",
+    "sha256": "94771b551a81652fc7140093771738967a42dc781b826d2abf38933b708ebfb8",
+    "original_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v2-trio-flight-20261105/character/05.png",
+    "original_sha256": "16cd0c212511b3d4ccd2f68826666d908eef79318e6fc61acb081dd3a097aa1b",
+    "donor_sha256": "29ef599155f7a8de6b891a501857e068d827c77b9212aeb218e13356d17cacac",
+    "mask_path": "masks/05.png",
+    "mask_sha256": "0d19081a1426ee976c45a90b809d4dd9fae1414c23ab2f6271e3c5ec89558df9",
+    "eye_boxes": {
+      "retto_0": [
+        186,
+        154,
+        253,
+        194
+      ],
+      "retto_1": [
+        271,
+        152,
+        333,
+        194
+      ],
+      "tato_0": [
+        70,
+        344,
+        93,
+        362
+      ],
+      "tato_1": [
+        110,
+        335,
+        130,
+        353
+      ],
+      "melody_0": [
+        396,
+        334,
+        429,
+        365
+      ],
+      "melody_1": [
+        443,
+        343,
+        465,
+        372
+      ]
+    },
+    "changed_outside_eye_mask_pixels": 0,
+    "alpha_changed_pixels": 0,
+    "anatomical_pose_changed": false,
+    "original_anatomical_landmarks": "inherited unverified"
+  },
+  {
+    "id": "06",
+    "path": "character/06.png",
+    "sha256": "99ba81fba89128506b20ea91b711af07b6e407bd2ad940b32fc2a86f079b9b25",
+    "original_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v2-trio-flight-20261105/character/06.png",
+    "original_sha256": "03af24964dfa540f27722670de17b7594fed5b1158a7e05b0fc1ea4d2b28d7a2",
+    "donor_sha256": "62683868df673de6f580dcf80a8e05bfd17997f7167a6079939a4b025cc0f89b",
+    "mask_path": "masks/06.png",
+    "mask_sha256": "0675c4fdc120c34d122a0d08b18e9506f713fc0abf6efd4b8260ac7350851831",
+    "eye_boxes": {
+      "retto_0": [
+        182,
+        142,
+        248,
+        180
+      ],
+      "retto_1": [
+        266,
+        140,
+        330,
+        181
+      ],
+      "tato_0": [
+        61,
+        306,
+        86,
+        326
+      ],
+      "tato_1": [
+        102,
+        296,
+        122,
+        315
+      ],
+      "melody_0": [
+        399,
+        298,
+        434,
+        329
+      ],
+      "melody_1": [
+        443,
+        305,
+        472,
+        339
+      ]
+    },
+    "changed_outside_eye_mask_pixels": 0,
+    "alpha_changed_pixels": 0,
+    "anatomical_pose_changed": false,
+    "original_anatomical_landmarks": "inherited unverified"
+  },
+  {
+    "id": "07",
+    "path": "character/07.png",
+    "sha256": "e3bdfbdb71952c2515e5c0b479ee5c399ebd99ca812583dd88ccb6e66b5e0154",
+    "original_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v2-trio-flight-20261105/character/07.png",
+    "original_sha256": "2f5336498a69d7d739bb82478582d1e1913d5a85ce9bfc26556e73e39117939e",
+    "donor_sha256": "9c30534587cce89a60dff5f90f5cc8bcd88d85289114229bd2edd7ecd78b7815",
+    "mask_path": "masks/07.png",
+    "mask_sha256": "8e4b8cf0a0511eb304db7ecc3a2ca803a7e1e8a4af7a5fa48508c71e14b8daab",
+    "eye_boxes": {
+      "retto_0": [
+        185,
+        145,
+        253,
+        182
+      ],
+      "retto_1": [
+        272,
+        140,
+        338,
+        182
+      ],
+      "tato_0": [
+        57,
+        293,
+        83,
+        312
+      ],
+      "tato_1": [
+        99,
+        283,
+        120,
+        303
+      ],
+      "melody_0": [
+        413,
+        278,
+        446,
+        309
+      ],
+      "melody_1": [
+        450,
+        284,
+        483,
+        317
+      ]
+    },
+    "changed_outside_eye_mask_pixels": 0,
+    "alpha_changed_pixels": 0,
+    "anatomical_pose_changed": false,
+    "original_anatomical_landmarks": "inherited unverified"
+  },
+  {
+    "id": "08",
+    "path": "character/08.png",
+    "sha256": "64116b45c1eaac09408ecdd697b133334d526ffe0bbc4da54d7ec21f1becce04",
+    "original_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v2-trio-flight-20261105/character/08.png",
+    "original_sha256": "12efded150ddcb9127dd962dc497ec76467c3d633b648bd8a3349a27e51ee74d",
+    "donor_sha256": "e01538dd50ee2c5fbe28b612f249616f990f2ee7ba5aa01f5e46135928824327",
+    "mask_path": "masks/08.png",
+    "mask_sha256": "f9b59954afdd3f27663e75a80c835456f8832c33e33d0b158b99e819dbec8979",
+    "eye_boxes": {
+      "retto_0": [
+        183,
+        145,
+        252,
+        183
+      ],
+      "retto_1": [
+        272,
+        140,
+        337,
+        183
+      ],
+      "tato_0": [
+        53,
+        292,
+        80,
+        311
+      ],
+      "tato_1": [
+        96,
+        281,
+        116,
+        300
+      ],
+      "melody_0": [
+        409,
+        279,
+        444,
+        310
+      ],
+      "melody_1": [
+        448,
+        285,
+        482,
+        317
+      ]
+    },
+    "changed_outside_eye_mask_pixels": 0,
+    "alpha_changed_pixels": 0,
+    "anatomical_pose_changed": false,
+    "original_anatomical_landmarks": "inherited unverified"
+  },
+  {
+    "id": "09",
+    "path": "character/09.png",
+    "sha256": "db00bac2511eadb1e135ad9803b6edaafb62c74cc9ccb8efe96bbaf866b591d6",
+    "original_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v2-trio-flight-20261105/character/09.png",
+    "original_sha256": "6c8d117a8c6d80779e4a38dcd34ba4342c594fb7876da0d2237213cc5293f37f",
+    "donor_sha256": "db93b33578a5e2f98f712559f836d9790d92768a5d92ca4943e00a6e39509683",
+    "mask_path": "masks/09.png",
+    "mask_sha256": "e09494992537382b8c4d767c4e92ddb518eff58dd2ed7a2132f33f7411e4e56e",
+    "eye_boxes": {
+      "retto_0": [
+        192,
+        152,
+        257,
+        192
+      ],
+      "retto_1": [
+        276,
+        151,
+        339,
+        192
+      ],
+      "tato_0": [
+        64,
+        364,
+        87,
+        382
+      ],
+      "tato_1": [
+        109,
+        356,
+        124,
+        374
+      ],
+      "melody_0": [
+        409,
+        362,
+        442,
+        393
+      ],
+      "melody_1": [
+        446,
+        366,
+        479,
+        397
+      ]
+    },
+    "changed_outside_eye_mask_pixels": 0,
+    "alpha_changed_pixels": 0,
+    "anatomical_pose_changed": false,
+    "original_anatomical_landmarks": "inherited unverified"
+  },
+  {
+    "id": "10",
+    "path": "character/10.png",
+    "sha256": "ccf557576fe78f168381881e212d585258a8e084c0882548ba97e4daba888278",
+    "original_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v2-trio-flight-20261105/character/10.png",
+    "original_sha256": "f4d125d6f80592beba41203d60331778ad7b7a292e4d609b17a74a041360a3f0",
+    "donor_sha256": "c0a782edf096e8bb68eed0d2d86d62ec076c77e57a68d5e1434cd9c0b08ac3b4",
+    "mask_path": "masks/10.png",
+    "mask_sha256": "6703def315671a20d7306163516c8c8604f583b27cbaa5b7ae840920e4597c7b",
+    "eye_boxes": {
+      "retto_0": [
+        182,
+        161,
+        249,
+        207
+      ],
+      "retto_1": [
+        269,
+        162,
+        335,
+        207
+      ],
+      "tato_0": [
+        65,
+        360,
+        81,
+        378
+      ],
+      "tato_1": [
+        105,
+        351,
+        121,
+        369
+      ],
+      "melody_0": [
+        409,
+        352,
+        442,
+        384
+      ],
+      "melody_1": [
+        446,
+        357,
+        479,
+        390
+      ]
+    },
+    "changed_outside_eye_mask_pixels": 0,
+    "alpha_changed_pixels": 0,
+    "anatomical_pose_changed": false,
+    "original_anatomical_landmarks": "inherited unverified"
+  },
+  {
+    "id": "11",
+    "path": "character/11.png",
+    "sha256": "f050fb50920a205d1f0279f2a596332fb217abc65daebbfa47bb158c672013db",
+    "original_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v2-trio-flight-20261105/character/11.png",
+    "original_sha256": "02c6ab1998c58100ed9a877961c366ea6c14aec23f1f4c77faa7cc51a739cc62",
+    "donor_sha256": "ca623be00158986ee3a29e996640d77c6b2ba750480fb5683ff8e313c7932ef7",
+    "mask_path": "masks/11.png",
+    "mask_sha256": "dccc42a977484f7b99caada751a9cee099402a74277de7ed032c923aab9194ba",
+    "eye_boxes": {
+      "retto_0": [
+        180,
+        166,
+        247,
+        212
+      ],
+      "retto_1": [
+        266,
+        167,
+        331,
+        213
+      ],
+      "tato_0": [
+        66,
+        361,
+        82,
+        380
+      ],
+      "tato_1": [
+        106,
+        353,
+        121,
+        371
+      ],
+      "melody_0": [
+        406,
+        350,
+        438,
+        382
+      ],
+      "melody_1": [
+        444,
+        353,
+        477,
+        385
+      ]
+    },
+    "changed_outside_eye_mask_pixels": 0,
+    "alpha_changed_pixels": 0,
+    "anatomical_pose_changed": false,
+    "original_anatomical_landmarks": "inherited unverified"
+  },
+  {
+    "id": "12",
+    "path": "character/12.png",
+    "sha256": "0d822d37e68945f178307295064251a98e8c88e7f2e3d6929a60944012be21e1",
+    "original_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v2-trio-flight-20261105/character/12.png",
+    "original_sha256": "1eb787988adf70b5451815da1a7717257001c723ec294bff5919a82ef0906ffd",
+    "donor_sha256": "3f0174998c882c91c1c5fa0e9b58b2ac8eb6c88284f7156030ee54b08dab21f8",
+    "mask_path": "masks/12.png",
+    "mask_sha256": "70c268aa1e68bd90710038b01b17a89de1474ef824fc8b932d11e7aacd7df156",
+    "eye_boxes": {
+      "retto_0": [
+        181,
+        188,
+        247,
+        232
+      ],
+      "retto_1": [
+        267,
+        188,
+        330,
+        232
+      ],
+      "tato_0": [
+        67,
+        380,
+        83,
+        399
+      ],
+      "tato_1": [
+        108,
+        373,
+        124,
+        391
+      ],
+      "melody_0": [
+        407,
+        374,
+        439,
+        402
+      ],
+      "melody_1": [
+        445,
+        377,
+        479,
+        402
+      ]
+    },
+    "changed_outside_eye_mask_pixels": 0,
+    "alpha_changed_pixels": 0,
+    "anatomical_pose_changed": false,
+    "original_anatomical_landmarks": "inherited unverified"
+  },
+  {
+    "id": "13",
+    "path": "character/13.png",
+    "sha256": "0715164edc4c9a704ac361c1efe997dafbd8a877909a977401375f03280a217f",
+    "original_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v2-trio-flight-20261105/character/13.png",
+    "original_sha256": "ff8eaf662dc6869b14d4800b64c8d9273e4e61d6b3375a985d21acbfef64f45e",
+    "donor_sha256": "7d860b2e96f8440b6ebb4870c7903efead925ed98fa5aa134169b58b190a7051",
+    "mask_path": "masks/13.png",
+    "mask_sha256": "07261aa64d8da028bb127233495532be8013fb73baa7ea349bb7666a82dac10e",
+    "eye_boxes": {
+      "retto_0": [
+        182,
+        178,
+        249,
+        225
+      ],
+      "retto_1": [
+        269,
+        177,
+        333,
+        225
+      ],
+      "tato_0": [
+        66,
+        360,
+        82,
+        378
+      ],
+      "tato_1": [
+        106,
+        353,
+        122,
+        371
+      ],
+      "melody_0": [
+        410,
+        353,
+        442,
+        384
+      ],
+      "melody_1": [
+        447,
+        355,
+        479,
+        387
+      ]
+    },
+    "changed_outside_eye_mask_pixels": 0,
+    "alpha_changed_pixels": 0,
+    "anatomical_pose_changed": false,
+    "original_anatomical_landmarks": "inherited unverified"
+  },
+  {
+    "id": "14",
+    "path": "character/14.png",
+    "sha256": "b5387cd5a3b4f8dc42d84697b2a6036a7b9691395c6853b22fedeed8fd3ab99d",
+    "original_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v2-trio-flight-20261105/character/14.png",
+    "original_sha256": "82a209015cab324e5077fd423c82d1df7e12ea546ea3bf28d6c5d53a04035c39",
+    "donor_sha256": "c2a3ff71898770a882860ed30c1eb3717c36914a9eaa5437d4521a4a9fd38189",
+    "mask_path": "masks/14.png",
+    "mask_sha256": "6367bc4de340544272f72478367e73412e985bfbf575c3e2934e6d4ed61f99b6",
+    "eye_boxes": {
+      "retto_0": [
+        180,
+        173,
+        247,
+        217
+      ],
+      "retto_1": [
+        267,
+        174,
+        330,
+        217
+      ],
+      "tato_0": [
+        65,
+        359,
+        81,
+        378
+      ],
+      "tato_1": [
+        105,
+        353,
+        121,
+        371
+      ],
+      "melody_0": [
+        408,
+        348,
+        440,
+        381
+      ],
+      "melody_1": [
+        445,
+        352,
+        477,
+        386
+      ]
+    },
+    "changed_outside_eye_mask_pixels": 0,
+    "alpha_changed_pixels": 0,
+    "anatomical_pose_changed": false,
+    "original_anatomical_landmarks": "inherited unverified"
+  },
+  {
+    "id": "15",
+    "path": "character/15.png",
+    "sha256": "0d09e9a49731fbef581802e29069823ace1005ecec1d38cea26c6ae0bd8c3a44",
+    "original_path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v2-trio-flight-20261105/character/15.png",
+    "original_sha256": "748aa7646bbb2b9af03fe0587d234ea6f021a8ed9928ea05aaff0e87496be28d",
+    "donor_sha256": "52b84fbff21cf4d8457b722d29ce7c19266e11886e57c4ae9c835ac03382809e",
+    "mask_path": "masks/15.png",
+    "mask_sha256": "c1b462aa7f80d63f75cf426250402ad06f897d5f3fec54b71078d1f12089d2a0",
+    "eye_boxes": {
+      "retto_0": [
+        181,
+        164,
+        249,
+        213
+      ],
+      "retto_1": [
+        269,
+        165,
+        334,
+        213
+      ],
+      "tato_0": [
+        63,
+        360,
+        79,
+        378
+      ],
+      "tato_1": [
+        105,
+        353,
+        120,
+        370
+      ],
+      "melody_0": [
+        414,
+        348,
+        447,
+        380
+      ],
+      "melody_1": [
+        452,
+        352,
+        485,
+        385
+      ]
+    },
+    "changed_outside_eye_mask_pixels": 0,
+    "alpha_changed_pixels": 0,
+    "anatomical_pose_changed": false,
+    "original_anatomical_landmarks": "inherited unverified"
+  }
+]

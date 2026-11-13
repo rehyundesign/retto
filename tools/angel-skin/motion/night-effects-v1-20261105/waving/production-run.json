@@ -1,0 +1,312 @@
+{
+  "schema_version": 1,
+  "mode": "effect-repair",
+  "resolution_scale": 2,
+  "repo": "/Users/luxia/Documents/ChatGPT/retto",
+  "task_record": {
+    "path": "../task.json",
+    "sha256": "327240887bb1a317b797b44b84cc07c481ce29caddf22beb97474c4c416c6234"
+  },
+  "references": {
+    "original_retto": {
+      "path": "../../waving-v1-20261105/references/original-identity.png",
+      "sha256": "d8ddb37a8046165e35ae4a5f0825dcf739f8abfcecc34aa89a3dc2be63d8898a"
+    },
+    "material": {
+      "path": "../../waving-v1-20261105/references/material.png",
+      "sha256": "ddc6df1afbe77fca269cc12be30e2b2bbb8f20dd87c9138fed4e7e307293dada"
+    }
+  },
+  "body_profiles": {
+    "path": "../../waving-v1-20261105/body-profiles.json",
+    "sha256": "06c87bdc3346f5e12fd5fb146bedc9e838331d51685900cd0df3fd1970ea8641"
+  },
+  "atlas_spec": null,
+  "native_review": null,
+  "groups": [
+    {
+      "id": "night-effects-waving",
+      "view_stance": "supported-seated-forepaw-greeting",
+      "body_profile": "original-seated-front",
+      "costume_master": {
+        "path": "../../waving-v1-20261105/references/approved-idle.png",
+        "sha256": "f0fe0ce921749660c5960ae5aedf4e063c391767bab37572758aa4d98ec034c9"
+      },
+      "drawing_policy": {
+        "retained_count": 16,
+        "retained_map": {
+          "path": "retained-map.json",
+          "sha256": "8da6fcf63ff9e6a711b8969cad39ba6ff3bba1297cf6325aaae5bdfeb1444b98"
+        },
+        "reason": "effect revision only; keep original independent drawings and cadence"
+      },
+      "sources": [
+        {
+          "id": "00",
+          "path": "../../waving-v1-20261105/character/00.png",
+          "sha256": "0fccaf03d8fcd330786e23dac99e15f27b4b02a1f03e64fe6e1276015fe0f463",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "01",
+          "path": "../../waving-v1-20261105/character/01.png",
+          "sha256": "0e71901cacc00aca63a5d00a3cfdd58c81e884287938e4917fde5097c6ac10da",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "02",
+          "path": "../../waving-v1-20261105/character/02.png",
+          "sha256": "3fcfd5e5915ebe1a398fe49784b31cb67f8dd24565f784261a3e3c031a9e37e8",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "03",
+          "path": "../../waving-v1-20261105/character/03.png",
+          "sha256": "096a895d7b7780ca22c6099a760b643af7e4be841479222123686516a3c1f5f2",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "04",
+          "path": "../../waving-v1-20261105/character/04.png",
+          "sha256": "c7166a6d2bc22de282a19db27744307d3453ff5fd4baa2cd4a7d9100148f546b",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "05",
+          "path": "../../waving-v1-20261105/character/05.png",
+          "sha256": "e10cd14e49d12d10e94f73832fdd7469a780c801a9f859825fd5a09da858650a",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "06",
+          "path": "../../waving-v1-20261105/character/06.png",
+          "sha256": "84cfd0be8b6c5a291206069523ca9bd0aa72f50b5f3fdcd0e1f39bb8fa475263",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "07",
+          "path": "../../waving-v1-20261105/character/07.png",
+          "sha256": "710d056a92f9ccf2a191da8faa3d2a93e98387aace323b8adec0e252863b6a4a",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "08",
+          "path": "../../waving-v1-20261105/character/08.png",
+          "sha256": "3facc07e2ed74c8238dd2b5c99cd6710f570804d21e9f0790803bc897ec0ab64",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "09",
+          "path": "../../waving-v1-20261105/character/09.png",
+          "sha256": "605ab967bc24e3e6830b271d799ac3549257e1fafa502b249f059390249a48bd",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "10",
+          "path": "../../waving-v1-20261105/character/10.png",
+          "sha256": "94c61a6e310de63005eb32a90f1f7df1a2e1586e93df72072906e52c3231d391",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "11",
+          "path": "../../waving-v1-20261105/character/11.png",
+          "sha256": "11313178b221b6aa72f17d043a5a01d609d4632fd71b47ce011679ffddadf564",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "12",
+          "path": "../../waving-v1-20261105/character/12.png",
+          "sha256": "8291203006be4d298644df89afad67b7f470a2aa07986ea89fde6ea569bc9d0b",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "13",
+          "path": "../../waving-v1-20261105/character/13.png",
+          "sha256": "0448e6b0b40f793a5671d4ab930a28aa770804464cf2786d93b83a5d852d09c1",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "14",
+          "path": "../../waving-v1-20261105/character/14.png",
+          "sha256": "697b72c2b0e365a2c41f49d8d86676f9e13503ff175010e86668bea43f4f2c96",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        },
+        {
+          "id": "15",
+          "path": "../../waving-v1-20261105/character/15.png",
+          "sha256": "948f297eea4ad423a704618e389e732157e8bd6dadbcefd733f8f85790dddeba",
+          "landmarks": {
+            "face_box": null,
+            "torso_box": null,
+            "body_center_x": null,
+            "foot_baseline_y": null,
+            "tail_anchor": null,
+            "eye_line_y": null
+          }
+        }
+      ],
+      "playback_ids": [
+        "00",
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08",
+        "09",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15"
+      ],
+      "pose_durations_ms": [
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150
+      ],
+      "cycle_ms": 2400,
+      "review_gif": {
+        "path": "preview.gif",
+        "sha256": "75c35f78bbc8fc7de55d1aca973f54b8c25c80a52a6421bf9d3509d5861d18ec"
+      },
+      "visual_review": {
+        "path": "visual.json",
+        "sha256": "109b5eb10f79d3dfd5532fd708624dc94747757c4bb3729444060a029cff5fa6"
+      },
+      "approved_character_lock": {
+        "path": "../locks/waving.json",
+        "sha256": "58e35494c89764019fb4ed063b3e3f0a4117c385103efe428c23b2af7bffee49"
+      },
+      "runtime_states": [
+        "waving"
+      ],
+      "destination_cells": [],
+      "transparent_animation": {
+        "path": "night.webp",
+        "sha256": "34b5de66222ffababb067b3843b11a49962064a9c4d1e9bc64b15ccfdd75cab6"
+      }
+    }
+  ]
+}

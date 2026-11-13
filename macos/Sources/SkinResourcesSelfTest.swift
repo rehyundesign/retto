@@ -1,7 +1,7 @@
 import AppKit
 import Foundation
 
-/// A clean checkout must build all thirteen skins, including their individual frame layers.
+/// A clean checkout must build all remaining skins, including their individual frame layers.
 func runAllSkinsSelfTest() -> Int32 {
     let app = NSApplication.shared
     app.setActivationPolicy(.accessory)
@@ -13,7 +13,7 @@ func runAllSkinsSelfTest() -> Int32 {
     let resourcesOK = available && JeanneSkin.validate() && JeanneSkin.validateEffects()
         && PichiSkin.validate() && ChocolatHeart.validate() && hanaSkinSelfTest()
         && AmuRanFrames.hasAllFrames
-    let ok = PetSkin.allCases.count == 13 && available && resourcesOK
+    let ok = PetSkin.allCases.count == 14 && available && resourcesOK
     let report: [String: Any] = ["ok": ok, "skinCount": PetSkin.allCases.count, "skins": results,
                                "completeFrameResources": resourcesOK]
     guard let data = try? JSONSerialization.data(withJSONObject: report, options: [.sortedKeys]),

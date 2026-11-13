@@ -54,14 +54,20 @@ func renderAmuRanMotionPreview(to directory: String) -> Int32 {
     let output = URL(fileURLWithPath: directory, isDirectory: true)
     do { try FileManager.default.createDirectory(at: output, withIntermediateDirectories: true) }
     catch { return 1 }
-    let entries: [(PetState, DragRun?, Int?)] = [
+    let exportAll = CommandLine.arguments.contains("--amu-all-motions")
+    let entries: [(PetState, DragRun?, Int?)] = exportAll ? [
+        (.idle,nil,nil),(.waiting,nil,nil),(.jumping,nil,nil),(.running,nil,nil),
+        (.running,nil,nil),(.running,nil,nil),(.failed,nil,nil),(.waving,nil,nil),
+        (.waving,nil,nil),(.sleeping,nil,nil)
+    ] : [
         (.idle, nil, nil), (.running, nil, nil), (.review, nil, nil), (.waiting, nil, nil),
         (.failed, nil, nil), (.waving, nil, nil), (.jumping, nil, nil), (.sleeping, nil, nil),
         (.idle, .right, nil), (.idle, .left, nil), (.idle, nil, 0), (.waving, nil, 12)
     ]
     var views: [RettoView] = []
     let columns = SpriteSheetLayout.forImage(size: atlas.size)?.columns ?? 8
-    for (state, drag, gaze) in entries {
+    for (entryIndex, entry) in entries.enumerated() {
+        let (state,drag,gaze)=entry
         let view = RettoView(frame: NSRect(origin: .zero, size: petLayout(scale: 224 / 294).windowSize),
                              spriteSheet: atlas, skin: .amuRan,
                              onOpenClaude: { _, _ in }, onOpenAttention: { _ in })
@@ -70,6 +76,9 @@ func renderAmuRanMotionPreview(to directory: String) -> Int32 {
         let fixture = "{\"state\":\"idle\",\"sessionId\":\"preview\",\"projectName\":\"Retto\"}".data(using: .utf8)!
         guard let payload = try? JSONDecoder().decode(StatePayload.self, from: fixture) else { return 1 }
         view.apply(payload, state: state, sessionCount: 1, attentionCount: 0, isPinned: false)
+        func argument(_ name:String)->String? { guard let i=CommandLine.arguments.firstIndex(of:name),i+1<CommandLine.arguments.count else{return nil};return CommandLine.arguments[i+1] }
+        view.setAmuChoiceForPreview(working:argument("--amu-work-key"),completion:argument("--amu-complete-key"))
+        if exportAll { view.setAmuChoiceForPreview(working:[3:"heart",4:"diamond",5:"spade"][entryIndex],completion:entryIndex==8 ? "sera2":"sera1") }
         view.settleAnimations()
         view.setDragRunForPreview(drag)
         if let gaze { view.setGazeDirectionForPreview(gaze) }
@@ -90,9 +99,10 @@ func renderAmuRanMotionPreview(to directory: String) -> Int32 {
                 let view = views[index]
                 let original = entry.1.flatMap { dragRunAnimations[$0] } ?? animationCatalog[entry.0]!
                 let animation = skinAnimation(original, skin: .amuRan, columns: columns)
-                let position = AmuRanMotion.position(elapsed: time, frames: animation.frames, interval: animation.interval)
+                let sampleTime = exportAll ? Double(tick) * (entry.0 == .sleeping ? 0.08:0.04):time
+                let position = AmuRanMotion.position(elapsed: sampleTime, frames: animation.frames, interval: animation.interval)
                 view.setFrameForPreview(position.frame)
-                view.setAmuRanTimeForPreview(time)
+                view.setAmuRanTimeForPreview(sampleTime)
                 let layout = petLayout(scale: view.petScale)
                 let cell = NSRect(x: CGFloat(index % 4) * 224, y: CGFloat(2 - index / 4) * 320, width: 224, height: 320)
                 NSGraphicsContext.saveGraphicsState()

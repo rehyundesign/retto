@@ -1,0 +1,37 @@
+{
+  "retained_independent_main_poses": 16,
+  "complete_companion_repairs": 16,
+  "pose_ms": 200,
+  "fx_ms": 50,
+  "cycle_ms": 3200,
+  "edge_alpha_max": 0,
+  "periodic_loop": true,
+  "frozen_pose_fx_progression": true,
+  "tear_stream_pixels": {
+    "main_left": 5616,
+    "main_right": 5616,
+    "tato": 5071,
+    "melody": 4999
+  },
+  "protected_main_core_paws_tail_changed_pixels": 0,
+  "changed_outside_permitted_masks": 0,
+  "media": {
+    "night.webp": {
+      "frames": 64,
+      "cycle_ms": 3200,
+      "sha256": "04ca87f29d17c1ca3ae8270e95aff5fc006604ab26ff3e38df7d84954f6939e0"
+    },
+    "failed.gif": {
+      "frames": 64,
+      "cycle_ms": 3200,
+      "sha256": "22afbf1ba87b649c0ee2fb6124c6308eee08ea91a829dacc588dc73bdc6c68a6"
+    },
+    "character.webp": {
+      "frames": 16,
+      "cycle_ms": 3200,
+      "sha256": "314ff9feef5b7887828c14cc608f42b25f31f10e5308861b40698eae0656d434"
+    }
+  },
+  "native_installed": false,
+  "live_browser_verified": false
+}

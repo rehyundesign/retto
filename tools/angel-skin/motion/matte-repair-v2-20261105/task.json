@@ -1,0 +1,16 @@
+{
+  "mode": "effect-repair",
+  "scope": "five existing motions; boundary matte only; no new pose or timing",
+  "states": [
+    "idle",
+    "waiting",
+    "failed",
+    "waving",
+    "jumping"
+  ],
+  "protected": "complete original pose files, interior RGB, eyes, paws, companions, effects and cadence",
+  "method": "two-pixel edge alpha antialias plus limited white-background edge colour decontamination",
+  "status": "matte repair candidate;80 changed cells inspected on light/dark boards; original landmark/native/live playback unverified",
+  "known_inherited_failure": "jumping remains old unfinished draft with02/05/06/12 scale/support defects; no replacement click requested here",
+  "native_installed": false
+}

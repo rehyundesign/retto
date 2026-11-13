@@ -1,0 +1,14 @@
+[
+  {
+    "path": "tools/jeanne-skin/motion/overnight-v61/review/idle-dark.gif",
+    "sha256": "29bb3fead1fe2ebcc58f7bb5f6b916b9435b6811524cc1b4385e0a82565c751e"
+  },
+  {
+    "path": "macos/Sources/JeanneSkin.swift",
+    "sha256": "343420b4685653f3dcea6ac5ef635e1293f4c22b66a33137fa56585b92b7b1bc"
+  },
+  {
+    "path": "/Users/luxia/.codex/skills/retto-skin/assets/quality-baseline/hana-toto-16-half-speed.webp",
+    "sha256": "18547125baa3581e678a363741727f715392e8251c166cce2f7f964b38d1c6e7"
+  }
+]

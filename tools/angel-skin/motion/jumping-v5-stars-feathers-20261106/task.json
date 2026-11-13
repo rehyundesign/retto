@@ -1,0 +1,19 @@
+{
+  "mode": "effect-repair",
+  "scope": "click only: mix ivory feathers into approved gold tada stars",
+  "preserve": "all16 drawings,2.4s clock, wink/flight/landing, blue/red pet effects, other6 states",
+  "particle_mix": "replace4of13 radial stars and3of6 corner stars with ivory feather glyphs;5of14 settling particles become feathers; remaining stars retained",
+  "motion": "feathers fan outward at wink, then sway/rotate and descend during landing",
+  "edge_fade": true,
+  "original_registration": "inherited unverified",
+  "native_installed": false,
+  "status": "review candidate, no native installation",
+  "renderer": {
+    "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v5-stars-feathers-20261106/render.py",
+    "sha256": "3e7e908100d16bde6aea134a37601986333b707be2b7165a8717f0248da91870"
+  },
+  "validation": {
+    "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v5-stars-feathers-20261106/review/validation.json",
+    "sha256": "3a17e1875187e5cac2cd11892cec90616c435c1414892800e534411bf4fab6d7"
+  }
+}

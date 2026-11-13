@@ -1,0 +1,30 @@
+{
+  "authorization": "user waived intermediate confirmations and asked autonomous completion before leaving",
+  "scope": [
+    "retain approved gaze-left-v1 as random idle variation",
+    "16 independent complete-trio left drag flight drawings",
+    "16 independent complete-trio right drag flight drawings",
+    "16 full-body gaze directions around360degree cursor target",
+    "native installation and regression checks preserving other skins"
+  ],
+  "references": {
+    "canonical": "../idle-v5-canonical-20261106/references/canonical-master.png",
+    "neutral": "../gaze-left-v1-20261106/character/00.png",
+    "flight_quality": "../jumping-v3-wink-20261105/character/06.png"
+  },
+  "main_body_size": "native body1.06 vs448 reference; never fit by wings/pets/cell alpha extent",
+  "gaze_body": "four paws grounded; separate whole head/neck/shoulders per direction, no head/body patch",
+  "flight_body": "seated-to-airborne forward flight stance; same skull/torso volume, legs bend rather than shrinking whole body;4 limbs explicitly accounted",
+  "pets": "Tato small white cat black dots/^eyes,goldTbell,darkcollar,white tail,NO wings; Melody slightly smaller pink rabbit burgundy rectangular eyes/redbow/long ears/ivory winglets. Both actively interact, sides retained",
+  "fx": "Tato blue/cyan,Melody rose/red,ivory feathers/gold stars with fade0 at edges, tied to actual positions",
+  "idle_random": "choose only on idle episode/cycle boundary and complete whole chosen clip; never re-randomize on every redraw",
+  "native_safety": "source snapshot matching current installed executable, hash-preserve all unrelated resources, one installed running app only",
+  "stage": "anchor generation",
+  "flight_pose_ms": 100,
+  "flight_cycle_ms": 1600,
+  "gaze_directions": "16 clockwise22.5degree cursor sectors fromup; each whole character includes anatomically continuous head/neck and pet response",
+  "status": "installed",
+  "installed_app": "/Users/luxia/Applications/Retto.app",
+  "browser_preview_verified": false,
+  "native_fixture_verified": true
+}

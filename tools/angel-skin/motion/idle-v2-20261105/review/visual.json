@@ -1,0 +1,52 @@
+{
+  "source_sha256": {
+    "00": "f0fe0ce921749660c5960ae5aedf4e063c391767bab37572758aa4d98ec034c9",
+    "01": "0aad57749a085d163bc4c05130c5c8ffc0dddb6d6b8918e759cfde150a450aa5",
+    "02": "491692db4852131ba44747c562308a9cdca082896722be778eed19ce70bcd5d9",
+    "03": "b2915f3b2aef1c22017f7368eecf79348bcbdaf97aec600c4a76ea1e6620b1c5",
+    "04": "aca3b1309e93a6a3663ac01c6bae14afc293dc196247a5cebdfa77dfd40a8a60",
+    "05": "a4c3b2aa5122aae985cb1cd1cdab712bf7bab78e8b0d424c1a6aa37aab1a5ca6",
+    "06": "eed5ccfa1af74c65c24070685073d3d44abea2da3d4e517d23625ee6024d2a1c",
+    "07": "f93cd4905f9505c5a6369ba1fb05bb84cfd25db0b891337ca136d36bd1c00c3f",
+    "08": "1f67dd28cada23e1151a0f999e4d8d1b3a08928337c9becc56093a3f85307551",
+    "09": "356ac6012163acd37165bd7172ff7fd6d32756cc2d70a17a859090297f2e3267",
+    "10": "ce897a59c7b6dbeb2d97404ee161eac68a2116fe4d80878f27f1f703ce79e654",
+    "11": "e418d3c37860a382e06aab5eaa72836d1d98b6986221ec0d5471bcd495df7500",
+    "12": "f7fbe0c180943d05e8c6c0092a502e5e39fe56bfab1fe11c4a1007b2a90d1095",
+    "13": "f036f8c5b880123e70bcce8138016c37a343a67fb525a5b2c82cf58181bdb817",
+    "14": "1f813cafd5bfcd548fcb8aa2972dd200054a124ce79f5b4770885218db4ad16b",
+    "15": "3db22e794710ef33f4202b3c5d1e52dd279f1465a5530bc3f43a51ab251ce4f1"
+  },
+  "gif_sha256": "97e73bde273e42fda6ffd00f39111d0df15a1adf3e70aabc5b75d37167043731",
+  "runtime_size_comparison": {
+    "path": "review/comparison-1x.png",
+    "sha256": "ef47f89d207ba0273d6166caeae5fc0c0b2e0f88b5be22439fddfd58efb626f3"
+  },
+  "checks": {
+    "identity_eyes": {
+      "status": "pass",
+      "finding": "All16 revised source poses and decoded GIF samples inspected: smaller main eyes, original blue-grey palette; right-ear curl removed; Tato dots/^^ and Melody burgundy rectangles preserved."
+    },
+    "anatomy_grip": {
+      "status": "pass",
+      "finding": "Original complete-body poses retained outside requested same-pose eye/ear/wing regions; four main limbs. Star follows the original paw/hand contact sequence, never counted as a limb."
+    },
+    "material_canon": {
+      "status": "pass",
+      "finding": "Independent articulated feather-wing drawings; soft ivory/plush materials and original companion designs retained. Jeanne rotating feather and Hana layered gold-light references inspected; no claim of official-canon approval."
+    },
+    "secondary_motion": {
+      "status": "unverified",
+      "finding": "Two8-phase wingbeats authored with shoulder/elbow/wrist folding and feather fan changes. Sequential sources inspected; live playback approval remains with user."
+    },
+    "legibility": {
+      "status": "unverified",
+      "finding": "Decoded272x272 study samples inspected. Fixed side padding preserves character size and gives >=12px wing margin; native224x320 display fit not verified."
+    },
+    "loop_return": {
+      "status": "unverified",
+      "finding": "3.2s encoded clock and phase15->00 bridge sampled. Local browser file preview policy prohibits live playback inspection; no workaround attempted."
+    }
+  },
+  "registration": "Original anatomical pixel-landmark registration remains unverified; this is a revised GIF study only."
+}

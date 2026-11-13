@@ -1,0 +1,523 @@
+{
+  "state": "waving",
+  "mode": "effect-repair",
+  "method": "remove opaque neutral-white negative-space pockets and alpha<=16 background noise; preserve EVERY input RGB pixel and pose",
+  "pose_count": 16,
+  "pose_ms": 150,
+  "effect_sample_ms": 50,
+  "original_files_unchanged": true,
+  "protected_interior_RGB_changed_pixels": 0,
+  "pose_geometry_changed": false,
+  "changes": [
+    {
+      "id": "00",
+      "background_hole_pixels": 886,
+      "background_components": [
+        {
+          "area": 886,
+          "seeds": 791,
+          "box": [
+            380,
+            310,
+            442,
+            349
+          ]
+        }
+      ],
+      "alpha_noise_pixels": 2454,
+      "RGB_changed_pixels": 0,
+      "opaque_interior_RGB_changed_pixels": 0,
+      "max_interior_displacement_px": 0,
+      "source_sha256": "0fccaf03d8fcd330786e23dac99e15f27b4b02a1f03e64fe6e1276015fe0f463",
+      "input_sha256": "80f6000788781ae1e7c788afcd442378bea07f64382fc89dbd79a2f117d90f07",
+      "repaired_sha256": "03fbe21f2df7116172dcb71f0c35576a719d20a6446a1fd671dbfdab2ed344a0"
+    },
+    {
+      "id": "01",
+      "background_hole_pixels": 761,
+      "background_components": [
+        {
+          "area": 733,
+          "seeds": 650,
+          "box": [
+            378,
+            308,
+            435,
+            344
+          ]
+        },
+        {
+          "area": 28,
+          "seeds": 16,
+          "box": [
+            458,
+            315,
+            468,
+            327
+          ]
+        }
+      ],
+      "alpha_noise_pixels": 2424,
+      "RGB_changed_pixels": 0,
+      "opaque_interior_RGB_changed_pixels": 0,
+      "max_interior_displacement_px": 0,
+      "source_sha256": "0e71901cacc00aca63a5d00a3cfdd58c81e884287938e4917fde5097c6ac10da",
+      "input_sha256": "3ee819f94904c9a7fb2deebcfb0edc85e782b7f4fb2399c30b6281bc2f07cdcf",
+      "repaired_sha256": "9d0ad394a9b875358b82b6f4feae2526386e976d78bd4247bdd4a7a5b0c2c4f4"
+    },
+    {
+      "id": "02",
+      "background_hole_pixels": 1441,
+      "background_components": [
+        {
+          "area": 1154,
+          "seeds": 1018,
+          "box": [
+            360,
+            298,
+            445,
+            347
+          ]
+        },
+        {
+          "area": 22,
+          "seeds": 11,
+          "box": [
+            461,
+            322,
+            468,
+            329
+          ]
+        },
+        {
+          "area": 265,
+          "seeds": 238,
+          "box": [
+            70,
+            413,
+            88,
+            438
+          ]
+        }
+      ],
+      "alpha_noise_pixels": 2486,
+      "RGB_changed_pixels": 0,
+      "opaque_interior_RGB_changed_pixels": 0,
+      "max_interior_displacement_px": 0,
+      "source_sha256": "3fcfd5e5915ebe1a398fe49784b31cb67f8dd24565f784261a3e3c031a9e37e8",
+      "input_sha256": "e99d19207f8060dfd5288f17ea01881851a1f3cf94d49b2b5816c50004cbd188",
+      "repaired_sha256": "a80cbb8de234dedaea81a48c824b67b6b5d2caf4a7f0820cec6bf8a99a2910db"
+    },
+    {
+      "id": "03",
+      "background_hole_pixels": 76,
+      "background_components": [
+        {
+          "area": 76,
+          "seeds": 66,
+          "box": [
+            464,
+            294,
+            484,
+            314
+          ]
+        }
+      ],
+      "alpha_noise_pixels": 3007,
+      "RGB_changed_pixels": 0,
+      "opaque_interior_RGB_changed_pixels": 0,
+      "max_interior_displacement_px": 0,
+      "source_sha256": "096a895d7b7780ca22c6099a760b643af7e4be841479222123686516a3c1f5f2",
+      "input_sha256": "d48d1677f60f5e033fc0cfaeeccc2a7128cb9d4570cc05f30ce60f1dfa671cce",
+      "repaired_sha256": "e868da67b057b1925950dd2cb51f70cfc06eaab64b5f3769baa06bec0616899e"
+    },
+    {
+      "id": "04",
+      "background_hole_pixels": 76,
+      "background_components": [
+        {
+          "area": 76,
+          "seeds": 58,
+          "box": [
+            464,
+            297,
+            485,
+            314
+          ]
+        }
+      ],
+      "alpha_noise_pixels": 3024,
+      "RGB_changed_pixels": 0,
+      "opaque_interior_RGB_changed_pixels": 0,
+      "max_interior_displacement_px": 0,
+      "source_sha256": "c7166a6d2bc22de282a19db27744307d3453ff5fd4baa2cd4a7d9100148f546b",
+      "input_sha256": "407c5fd93cea099ca592f235d0164d57268dfa290c31b3090cb3a59eb553a7b9",
+      "repaired_sha256": "d6a76f3b70e6054d7e65b14bec3df05ff9a1d3b497c921ee24176b446075b703"
+    },
+    {
+      "id": "05",
+      "background_hole_pixels": 2644,
+      "background_components": [
+        {
+          "area": 2570,
+          "seeds": 2399,
+          "box": [
+            350,
+            259,
+            466,
+            342
+          ]
+        },
+        {
+          "area": 74,
+          "seeds": 59,
+          "box": [
+            464,
+            298,
+            480,
+            315
+          ]
+        }
+      ],
+      "alpha_noise_pixels": 2822,
+      "RGB_changed_pixels": 0,
+      "opaque_interior_RGB_changed_pixels": 0,
+      "max_interior_displacement_px": 0,
+      "source_sha256": "e10cd14e49d12d10e94f73832fdd7469a780c801a9f859825fd5a09da858650a",
+      "input_sha256": "a64e1369f4887fca2d7755f4d51fd38a7abac2f315afe7c014257e1cb8ca98a6",
+      "repaired_sha256": "a5e36ed54f940775408621c48c0b4e234e869af8ed28d23a7ccc9bf4df312a16"
+    },
+    {
+      "id": "06",
+      "background_hole_pixels": 31,
+      "background_components": [
+        {
+          "area": 31,
+          "seeds": 15,
+          "box": [
+            344,
+            236,
+            351,
+            244
+          ]
+        }
+      ],
+      "alpha_noise_pixels": 3077,
+      "RGB_changed_pixels": 0,
+      "opaque_interior_RGB_changed_pixels": 0,
+      "max_interior_displacement_px": 0,
+      "source_sha256": "84cfd0be8b6c5a291206069523ca9bd0aa72f50b5f3fdcd0e1f39bb8fa475263",
+      "input_sha256": "5b4dd02971f1411597bc05891f474a60db1d2999abadeb039c6296247c1f9269",
+      "repaired_sha256": "20e3e75be18134fa5ee588269538ba8bd1bcaee1bd86e0cbb0089e6ec61b120d"
+    },
+    {
+      "id": "07",
+      "background_hole_pixels": 69,
+      "background_components": [
+        {
+          "area": 69,
+          "seeds": 55,
+          "box": [
+            463,
+            294,
+            479,
+            315
+          ]
+        }
+      ],
+      "alpha_noise_pixels": 2908,
+      "RGB_changed_pixels": 0,
+      "opaque_interior_RGB_changed_pixels": 0,
+      "max_interior_displacement_px": 0,
+      "source_sha256": "710d056a92f9ccf2a191da8faa3d2a93e98387aace323b8adec0e252863b6a4a",
+      "input_sha256": "41380a1ccd718f0702a5e2eca20b1471032db555435153277486d116a01e1d03",
+      "repaired_sha256": "d02a65253725286efa4702b5955b0ce53939ddabc5796060f08f013761bedcc4"
+    },
+    {
+      "id": "08",
+      "background_hole_pixels": 2352,
+      "background_components": [
+        {
+          "area": 39,
+          "seeds": 29,
+          "box": [
+            472,
+            249,
+            484,
+            259
+          ]
+        },
+        {
+          "area": 21,
+          "seeds": 14,
+          "box": [
+            455,
+            263,
+            461,
+            270
+          ]
+        },
+        {
+          "area": 2292,
+          "seeds": 2117,
+          "box": [
+            353,
+            275,
+            448,
+            343
+          ]
+        }
+      ],
+      "alpha_noise_pixels": 2550,
+      "RGB_changed_pixels": 0,
+      "opaque_interior_RGB_changed_pixels": 0,
+      "max_interior_displacement_px": 0,
+      "source_sha256": "3facc07e2ed74c8238dd2b5c99cd6710f570804d21e9f0790803bc897ec0ab64",
+      "input_sha256": "17dadf089ae39e577b2a5ad2d71b1c141aab2f790199d71cd5737b1efb932f7b",
+      "repaired_sha256": "84eb43b819f2344b6f72ae1d3da7b5c5148f195d5ba3dd4cbe9b0a1cbec43127"
+    },
+    {
+      "id": "09",
+      "background_hole_pixels": 1745,
+      "background_components": [
+        {
+          "area": 1745,
+          "seeds": 1609,
+          "box": [
+            354,
+            290,
+            442,
+            341
+          ]
+        }
+      ],
+      "alpha_noise_pixels": 2583,
+      "RGB_changed_pixels": 0,
+      "opaque_interior_RGB_changed_pixels": 0,
+      "max_interior_displacement_px": 0,
+      "source_sha256": "605ab967bc24e3e6830b271d799ac3549257e1fafa502b249f059390249a48bd",
+      "input_sha256": "f06dde28b5d1dbd9eb878bf3bce859d0d0ed4d2162316a44c9ae81f2ad557bfd",
+      "repaired_sha256": "4b21f510e01b47c3f6521d261b405a8444b32d91b9190dea4a87b868aba4f0d3"
+    },
+    {
+      "id": "10",
+      "background_hole_pixels": 1264,
+      "background_components": [
+        {
+          "area": 27,
+          "seeds": 13,
+          "box": [
+            456,
+            270,
+            467,
+            278
+          ]
+        },
+        {
+          "area": 1170,
+          "seeds": 1054,
+          "box": [
+            357,
+            297,
+            441,
+            344
+          ]
+        },
+        {
+          "area": 67,
+          "seeds": 52,
+          "box": [
+            458,
+            311,
+            475,
+            327
+          ]
+        }
+      ],
+      "alpha_noise_pixels": 2441,
+      "RGB_changed_pixels": 0,
+      "opaque_interior_RGB_changed_pixels": 0,
+      "max_interior_displacement_px": 0,
+      "source_sha256": "94c61a6e310de63005eb32a90f1f7df1a2e1586e93df72072906e52c3231d391",
+      "input_sha256": "aa2959e43e9d95bd3efa0e864347043dabc8e3e2364c20367386b526f2ba3f8b",
+      "repaired_sha256": "1e515e374c7b3bfbb564dc15f1c75a98a8366fe3c2838e8a2a8f411959671442"
+    },
+    {
+      "id": "11",
+      "background_hole_pixels": 1035,
+      "background_components": [
+        {
+          "area": 990,
+          "seeds": 875,
+          "box": [
+            358,
+            302,
+            441,
+            344
+          ]
+        },
+        {
+          "area": 45,
+          "seeds": 32,
+          "box": [
+            460,
+            313,
+            476,
+            328
+          ]
+        }
+      ],
+      "alpha_noise_pixels": 2364,
+      "RGB_changed_pixels": 0,
+      "opaque_interior_RGB_changed_pixels": 0,
+      "max_interior_displacement_px": 0,
+      "source_sha256": "11313178b221b6aa72f17d043a5a01d609d4632fd71b47ce011679ffddadf564",
+      "input_sha256": "40efe8469500040707d89bd46e019bf93eb8b59501ede233be28504173ee7189",
+      "repaired_sha256": "55a955cf714bdd3373f3eaa1fcbeb437e5e76b4b9593e5b99deef8ea6ad0bf61"
+    },
+    {
+      "id": "12",
+      "background_hole_pixels": 975,
+      "background_components": [
+        {
+          "area": 842,
+          "seeds": 741,
+          "box": [
+            372,
+            304,
+            439,
+            344
+          ]
+        },
+        {
+          "area": 53,
+          "seeds": 45,
+          "box": [
+            460,
+            311,
+            477,
+            327
+          ]
+        },
+        {
+          "area": 80,
+          "seeds": 53,
+          "box": [
+            355,
+            320,
+            371,
+            330
+          ]
+        }
+      ],
+      "alpha_noise_pixels": 2279,
+      "RGB_changed_pixels": 0,
+      "opaque_interior_RGB_changed_pixels": 0,
+      "max_interior_displacement_px": 0,
+      "source_sha256": "8291203006be4d298644df89afad67b7f470a2aa07986ea89fde6ea569bc9d0b",
+      "input_sha256": "f04a968804a385d83351ce58e17d1c925f9655d9d15b48aadbf3e340dc13110e",
+      "repaired_sha256": "afd4853c72c61446091412469970fc40da495030dd6410ddaa380407b9250487"
+    },
+    {
+      "id": "13",
+      "background_hole_pixels": 624,
+      "background_components": [
+        {
+          "area": 116,
+          "seeds": 65,
+          "box": [
+            174,
+            223,
+            192,
+            244
+          ]
+        },
+        {
+          "area": 508,
+          "seeds": 425,
+          "box": [
+            391,
+            312,
+            442,
+            348
+          ]
+        }
+      ],
+      "alpha_noise_pixels": 2167,
+      "RGB_changed_pixels": 0,
+      "opaque_interior_RGB_changed_pixels": 0,
+      "max_interior_displacement_px": 0,
+      "source_sha256": "0448e6b0b40f793a5671d4ab930a28aa770804464cf2786d93b83a5d852d09c1",
+      "input_sha256": "293455b93d0d90d2c9f218ccf98e98a6b82beb2ea19d3fc2b8a9a6032bc66acd",
+      "repaired_sha256": "b9e36be06fe75871b5d218255eb2080e887b38c8f6a66d6463bd395dd4c9c590"
+    },
+    {
+      "id": "14",
+      "background_hole_pixels": 951,
+      "background_components": [
+        {
+          "area": 951,
+          "seeds": 843,
+          "box": [
+            359,
+            309,
+            442,
+            347
+          ]
+        }
+      ],
+      "alpha_noise_pixels": 2458,
+      "RGB_changed_pixels": 0,
+      "opaque_interior_RGB_changed_pixels": 0,
+      "max_interior_displacement_px": 0,
+      "source_sha256": "697b72c2b0e365a2c41f49d8d86676f9e13503ff175010e86668bea43f4f2c96",
+      "input_sha256": "a5cd6b7bef330635d73f976b6907f0efeaaaa8a80cac40ea854236d54761ff91",
+      "repaired_sha256": "6f6b4ea2d5934ba5cbe8b8e9ffe44fc5719ca0c8acf12ce4ca56d295ff4158a8"
+    },
+    {
+      "id": "15",
+      "background_hole_pixels": 897,
+      "background_components": [
+        {
+          "area": 897,
+          "seeds": 815,
+          "box": [
+            379,
+            311,
+            442,
+            349
+          ]
+        }
+      ],
+      "alpha_noise_pixels": 2385,
+      "RGB_changed_pixels": 0,
+      "opaque_interior_RGB_changed_pixels": 0,
+      "max_interior_displacement_px": 0,
+      "source_sha256": "948f297eea4ad423a704618e389e732157e8bd6dadbcefd733f8f85790dddeba",
+      "input_sha256": "4fdcceb1611e65b99c2fad02cb4eaeab22d748bb29adc6522c899b3de3d0906b",
+      "repaired_sha256": "f61d74cd5eb2d89c7facd25fe9f77508a5522a5357bb9ec4c68c3e7c2f49aa9a"
+    }
+  ],
+  "media": {
+    "night.webp": {
+      "frames": 48,
+      "cycle_ms": 2400,
+      "border_alpha_max": 0,
+      "sha256": "8d2d6da3bd3b035f692b7c493d513858e978be44c8f992ac58de39a8b5cc20f0"
+    },
+    "character.webp": {
+      "frames": 16,
+      "cycle_ms": 2400,
+      "border_alpha_max": 0,
+      "sha256": "5c7320fd386ef76da05b83c30b720d4badba639037fb472c8b0af51e22651205"
+    },
+    "preview.gif": {
+      "frames": 48,
+      "cycle_ms": 2400,
+      "border_alpha_max": null,
+      "sha256": "888a1a0f0fc20c2d0f2b9a605c035bb7d53f066dbca69022575f825d84199903"
+    }
+  },
+  "native_installed": false,
+  "original_landmark_registration": "unverified"
+}

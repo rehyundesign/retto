@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "original_sha256": "3a7d6c1cf341a5ffbe3e8903348698c99d2302bff352d37d735d2aa6da8801c9",
+  "measurement_method": "isolated-character-landmarks",
+  "profiles": {
+    "inherited-idle": {
+      "canonical_cell": "original atlas row11 sleep or corresponding original state; inherited measurements unverified",
+      "face_box": null,
+      "torso_box": null,
+      "body_center_x": null,
+      "foot_baseline_y": null,
+      "tail_anchor": null,
+      "eye_line_y": null
+    },
+    "inherited-running": {
+      "canonical_cell": "original atlas row11 sleep or corresponding original state; inherited measurements unverified",
+      "face_box": null,
+      "torso_box": null,
+      "body_center_x": null,
+      "foot_baseline_y": null,
+      "tail_anchor": null,
+      "eye_line_y": null
+    },
+    "inherited-waiting": {
+      "canonical_cell": "original atlas row11 sleep or corresponding original state; inherited measurements unverified",
+      "face_box": null,
+      "torso_box": null,
+      "body_center_x": null,
+      "foot_baseline_y": null,
+      "tail_anchor": null,
+      "eye_line_y": null
+    },
+    "inherited-failed": {
+      "canonical_cell": "original atlas row11 sleep or corresponding original state; inherited measurements unverified",
+      "face_box": null,
+      "torso_box": null,
+      "body_center_x": null,
+      "foot_baseline_y": null,
+      "tail_anchor": null,
+      "eye_line_y": null
+    },
+    "inherited-waving": {
+      "canonical_cell": "original atlas row11 sleep or corresponding original state; inherited measurements unverified",
+      "face_box": null,
+      "torso_box": null,
+      "body_center_x": null,
+      "foot_baseline_y": null,
+      "tail_anchor": null,
+      "eye_line_y": null
+    },
+    "inherited-jumping": {
+      "canonical_cell": "original atlas row11 sleep or corresponding original state; inherited measurements unverified",
+      "face_box": null,
+      "torso_box": null,
+      "body_center_x": null,
+      "foot_baseline_y": null,
+      "tail_anchor": null,
+      "eye_line_y": null
+    },
+    "inherited-sleeping": {
+      "canonical_cell": "original atlas row11 sleep or corresponding original state; inherited measurements unverified",
+      "face_box": null,
+      "torso_box": null,
+      "body_center_x": null,
+      "foot_baseline_y": null,
+      "tail_anchor": null,
+      "eye_line_y": null
+    }
+  }
+}

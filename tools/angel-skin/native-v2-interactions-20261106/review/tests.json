@@ -1,0 +1,32 @@
+[
+  {
+    "flag": "--angel-self-test",
+    "exit": 0,
+    "output": "PASS Angel:7 states,16 retained drawings each,10/20Hz scene/effect samples,exact2.4/3.2/6.4s clocks,body-derived uniform fit and support,overscan at7 scales; review aliases running; legacy drag retained\n"
+  },
+  {
+    "flag": "--angel-state-self-test",
+    "exit": 0,
+    "output": "PASS Angel:7 states,16 retained drawings each,10/20Hz scene/effect samples,exact2.4/3.2/6.4s clocks,body-derived uniform fit and support,overscan at7 scales; review aliases running; legacy drag retained\nPASS Angel actual state transitions,review-to-running alias,gaze gate,legacy drag,click returns to sleep\n"
+  },
+  {
+    "flag": "--angel-interactions-self-test",
+    "exit": 0,
+    "output": "PASS Angel interactions: stable whole-cycle idle random, left/right16-pose flight1.6s with independent3.2s FX,16 full-body cursor directions; original7states preserved\n"
+  },
+  {
+    "flag": "--angel-interactions-state-test",
+    "exit": 0,
+    "output": "PASS Angel interactions: stable whole-cycle idle random, left/right16-pose flight1.6s with independent3.2s FX,16 full-body cursor directions; original7states preserved\nPASS actual Angel cursor16sectors/hold/reset, working-state isolation, both16-pose airborne drag directions and return\n"
+  },
+  {
+    "flag": "--self-test-all-skins",
+    "exit": 0,
+    "output": "{\"jeanneOK\":true,\"cells\":160,\"gaze\":16,\"timing\":\"v56\"}\nJeanne v56 independent back/front effects and pose-attached light: true\n{\"completeFrameResources\":true,\"ok\":true,\"skinCount\":15,\"skins\":[{\"available\":true,\"skin\":\"classic\"},{\"available\":true,\"skin\":\"howl\"},{\"available\":true,\"skin\":\"chocolatHeart\"},{\"available\":true,\"skin\":\"angelWings\"},{\"available\":true,\"skin\":\"bee\"},{\"available\":true,\"skin\":\"bunny\"},{\"available\":true,\"skin\":\"rilakkuma\"},{\"available\":true,\"skin\":\"rilakkumaCape\"},{\"available\":true,\"skin\":\"magicalHeart\"},{\"available\":true,\"skin\":\"christmas\"},{\"available\":true,\"skin\":\"hana\"},{\"available\":true,\"skin\":\"amuRan\"},{\"available\":true,\"skin\":\"pichiPitch\"},{\"available\":true,\"skin\":\"jeanne\"},{\"available\":true,\"skin\":\"hachupingping\"}]}\n"
+  },
+  {
+    "flag": "--amu-approved-state-test",
+    "exit": 0,
+    "output": "PASS Amu choice: all4 working/all2 completion outcomes, stable repeated refresh/review alias, new episode/session redraws\nPASS Amu approved:8 full16-drawing motions + static school idle; exact80-sample clocks; sleep6.4s; legacy review maps to working; existing drag/gaze retained\nPASS actual Amu state/review alias,16-frame clocks,drag,gaze gates,click return to sleep\n"
+  }
+]

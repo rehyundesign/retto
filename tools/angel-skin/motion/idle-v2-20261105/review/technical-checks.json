@@ -1,0 +1,21 @@
+{
+  "independent_character_sources": 16,
+  "character_pose_ms": 200,
+  "cycle_ms": 3200,
+  "GIF_decoded_ms": 3200,
+  "GIF_frames": 64,
+  "effect_sample_ms": 50,
+  "unique_effect_samples": 64,
+  "character_hashes_unchanged_during_effects": true,
+  "effects_move_with_frozen_character": true,
+  "played_with_object": "yellow five-point star, no played-with feather",
+  "background_effects": "warm yellow glow/wind wisps/glints and9 drifting ivory feathers",
+  "wingbeat_cycles_per_loop": 2,
+  "wing_method": "independent image_gen costume redraws; no rigid fan rotation/warping",
+  "preview_canvas": [
+    544,
+    544
+  ],
+  "native_registered": false,
+  "installed": false
+}

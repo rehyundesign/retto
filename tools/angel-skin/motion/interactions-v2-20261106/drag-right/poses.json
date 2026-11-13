@@ -1,0 +1,130 @@
+[
+  {
+    "id": "00",
+    "direction": "RIGHT",
+    "wing": "broad mid-downstroke, same main wing pose as accepted anchor",
+    "limbs": "one front paw leads travel and other bent beside chest, rear paws folded",
+    "partners": "Melody leads and points RIGHT, Tato follows/reaches toward Retto.",
+    "pose_ms": 100
+  },
+  {
+    "id": "01",
+    "direction": "RIGHT",
+    "wing": "continue powerdown, both tips15pxlower, feathers flex backward",
+    "limbs": "leading front paw reaches4pxfarther, other begins soft bend, two rear paws folded",
+    "partners": "Melody leads and points RIGHT, Tato follows/reaches toward Retto.",
+    "pose_ms": 100
+  },
+  {
+    "id": "02",
+    "direction": "RIGHT",
+    "wing": "low downstroke, broad feathers swept down/back,20pxlower",
+    "limbs": "front paws bend a little toward chest, two rear ankles flex",
+    "partners": "Melody leads and points RIGHT, Tato follows/reaches toward Retto.",
+    "pose_ms": 100
+  },
+  {
+    "id": "03",
+    "direction": "RIGHT",
+    "wing": "bottom of stroke, feathers scoop with bent natural joints",
+    "limbs": "leading front paw curls softly, other counterbalances, hind feet tuck closer",
+    "partners": "Melody glances BACK toward Retto and gives a small friendly nod; Tato raises inner paw in reply, maintaining original sides/size.",
+    "pose_ms": 100
+  },
+  {
+    "id": "04",
+    "direction": "RIGHT",
+    "wing": "start recovery upstroke, feathers partially folded back",
+    "limbs": "front paws slightly open again toward travel; rear legs stay distinct",
+    "partners": "Melody glances BACK toward Retto and gives a small friendly nod; Tato raises inner paw in reply, maintaining original sides/size.",
+    "pose_ms": 100
+  },
+  {
+    "id": "05",
+    "direction": "RIGHT",
+    "wing": "mid recovery, wings raising and partly folding,15pxhigher",
+    "limbs": "one forepaw gives tiny friendly lift toward leadingpet; no fifth paw",
+    "partners": "Tato briefly catches up about4px and gives a little inner-paw wave toward Retto; Melody still guides RIGHT. Retto warmly watches leadingpet/direction.",
+    "pose_ms": 100
+  },
+  {
+    "id": "06",
+    "direction": "RIGHT",
+    "wing": "strong upward recovery, wing tips35pxhigher",
+    "limbs": "forepaws reset forward, slight shoulder extension and rear knee release",
+    "partners": "Melody leads and points RIGHT, Tato follows/reaches toward Retto.",
+    "pose_ms": 100
+  },
+  {
+    "id": "07",
+    "direction": "RIGHT",
+    "wing": "nearing upper crest, wings raised with gathered primary feathers",
+    "limbs": "leading front paw forward, other bent, hind paws visibly separate",
+    "partners": "Melody leads and points RIGHT, Tato follows/reaches toward Retto.",
+    "pose_ms": 100
+  },
+  {
+    "id": "08",
+    "direction": "RIGHT",
+    "wing": "upper crest, both wings tall/arched and feather tips nearly vertical",
+    "limbs": "both front paws curl slightly close in midair, rear toes relax",
+    "partners": "Melody glances BACK toward Retto and gives a small friendly nod; Tato raises inner paw in reply, maintaining original sides/size.",
+    "pose_ms": 100
+  },
+  {
+    "id": "09",
+    "direction": "RIGHT",
+    "wing": "open feather fan at top before powerstroke",
+    "limbs": "front paws reach a little forward after wing crest, hind feet flex",
+    "partners": "Melody leads and points RIGHT, Tato follows/reaches toward Retto.",
+    "pose_ms": 100
+  },
+  {
+    "id": "10",
+    "direction": "RIGHT",
+    "wing": "early downstroke, feathers fan broadly open",
+    "limbs": "leading paw extends, other bends under chest, rear legs flex not walk",
+    "partners": "Tato briefly catches up about4px and gives a little inner-paw wave toward Retto; Melody still guides RIGHT. Retto warmly watches leadingpet/direction.",
+    "pose_ms": 100
+  },
+  {
+    "id": "11",
+    "direction": "RIGHT",
+    "wing": "mid powerstroke, wings spread outward/down, chest subtly rises",
+    "limbs": "one front paw points toward leadingpet and cursor, other relaxed",
+    "partners": "Tato briefly catches up about4px and gives a little inner-paw wave toward Retto; Melody still guides RIGHT. Retto warmly watches leadingpet/direction.",
+    "pose_ms": 100
+  },
+  {
+    "id": "12",
+    "direction": "RIGHT",
+    "wing": "continue powerdown, broad wings low behind frontlimbs",
+    "limbs": "front legs recover inward, rear paws relax in air",
+    "partners": "Melody glances BACK toward Retto and gives a small friendly nod; Tato raises inner paw in reply, maintaining original sides/size.",
+    "pose_ms": 100
+  },
+  {
+    "id": "13",
+    "direction": "RIGHT",
+    "wing": "stroke trough, wings soften/scoop, natural secondary feathers trail",
+    "limbs": "all four limbs maintain flight bend; main gives soft natural both-eye blink",
+    "partners": "Tato gives a happy^^blink, Melody smiles with original rectangle eyes, both stay airborne; leadingpet continues toward RIGHT.",
+    "pose_ms": 100
+  },
+  {
+    "id": "14",
+    "direction": "RIGHT",
+    "wing": "begin gentle recovery, wings rise back toward anchor shape",
+    "limbs": "main eyes reopen canonically, front paws gently extend, hind feet tuck",
+    "partners": "Melody leads and points RIGHT, Tato follows/reaches toward Retto.",
+    "pose_ms": 100
+  },
+  {
+    "id": "15",
+    "direction": "RIGHT",
+    "wing": "almost same mid-downstroke as anchor, slight feather lag for seamless return",
+    "limbs": "forepaws near initial anchor, two rear paws folded, gentle tail/ear settling",
+    "partners": "Melody leads and points RIGHT, Tato follows/reaches toward Retto.",
+    "pose_ms": 100
+  }
+]

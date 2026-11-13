@@ -1,0 +1,46 @@
+{
+  "scope": "failed only, same-pose complete companion proportion repair across16 retained cells",
+  "mode": "still-repair",
+  "target_head_face_width_at544": {
+    "Tato": [
+      94,
+      99
+    ],
+    "Melody": [
+      85,
+      89
+    ]
+  },
+  "compare_to": [
+    "approved idle-v5",
+    "waiting-v2"
+  ],
+  "cause": "approach/wipe cells grow the pets instead of preserving fixed orthographic scene scale",
+  "preserve": "Retto central face/body/four paws/tail and accepted crying/cheek wipe order,3.2s timing, latest stronger sad FX",
+  "permitted_edit": "entire companions and their occlusion/revealed background-wing regions; narrow cheek-paw contact patches, same pose only",
+  "prohibited": "new main head/neck pose or body assembly; changing source files or other states",
+  "native_installed": false,
+  "pending_completion": "all3 smile, cheer and wave both arms, companions may fly; retain one-GIF-at-a-time review",
+  "anchor00_measured_cross_section": {
+    "Tato": 99,
+    "Melody": 87,
+    "method": "eye-row cross section excluding ears/arms, reviewed at544px"
+  },
+  "rejected_sources": {
+    "00-rejected-too-small": "first edit over-shrank companions, replaced before motion expansion"
+  },
+  "status": "same-pose pet-size repair review candidate; user approval pending",
+  "retained_main_drawings": 16,
+  "pose_ms": 200,
+  "effect_ms": 50,
+  "cycle_ms": 3200,
+  "original_registration": "unverified original landmark certification",
+  "renderer": {
+    "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v3-pet-proportions-20261106/render.py",
+    "sha256": "5a3d27e77d8842d59b6ebb990ebbc2b34265db8c179eec73af52f22b8ec26e1f"
+  },
+  "sources": {
+    "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v3-pet-proportions-20261106/sources.json",
+    "sha256": "61f71f3b2f753dcd0fc4d762a174206e4e54e55a8ddaa23f1fddce137128709d"
+  }
+}

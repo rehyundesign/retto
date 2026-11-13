@@ -1,0 +1,16 @@
+from pathlib import Path
+import json,hashlib,sys,subprocess
+ROOT=Path(__file__).resolve().parent;OLD=ROOT.parent/'jumping-v3-wink-20261105';SKILL=Path('/Users/luxia/.codex/skills/retto-skin')
+def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+def ref(p):return {'path':str(p.resolve()),'sha256':sha(p)}
+def write(p,x):p.write_text(json.dumps(x,ensure_ascii=False,indent=2)+'\n')
+lock=json.loads((ROOT/'pre-edit-lock.json').read_text());task=json.loads((ROOT/'task.json').read_text());task.update(status='review candidate, no native installation',renderer=ref(ROOT/'render.py'),validation=ref(ROOT/'review/validation.json'));write(ROOT/'task.json',task)
+write(ROOT/'retained-map.json',{'playback_ids':list(lock['source_sha256']),'source_sha256':lock['source_sha256'],'pose_ms':150,'cycle_ms':2400})
+checks={k:{'status':'pass','finding':v} for k,v in {'identity_eyes':'16 cells inspected at224px on dark/light; source PNGs/animation unchanged, wink glyphs clear, opaque source RGBA exact.','anatomy_grip':'Complete source drawings retained; full-body launch, shared wink, flight and landing unchanged.','material_canon':'Five-point gold stars mixed with ivory feathers, glowing rays, blue/rose side arcs and a slower star/feather shower; no text, hard rectangular background or new costume.','legibility':'All16 effect-on cells inspected224px dark/light; foreground stars and feathers excluded from expanded subject mask, background light fades to0 at edges.'}.items()}
+for k in ['secondary_motion','loop_return']:checks[k]={'status':'unverified','finding':'Retained2.4s clock,48 distinct50ms samples, effect progression on frozen pose checked; actual live/native temporal playback not observed.'}
+write(ROOT/'review/visual.json',{'source_sha256':lock['source_sha256'],'gif_sha256':sha(ROOT/'review/jumping.gif'),'runtime_size_comparison':ref(ROOT/'review/runtime-dark.png'),'checks':checks,'native_installed':False})
+run=json.loads((SKILL/'references/production-run.template.json').read_text());prior=json.loads((OLD/'production-run.json').read_text());run.update(mode='effect-repair',repo=str(ROOT.parents[3]),task_record=ref(ROOT/'task.json'),references=prior['references'],body_profiles=prior['body_profiles']);g=run['groups'][0]
+g.update(id='jumping-stars-feathers',view_stance='retained-frontal-click',body_profile='original-frontal-click',costume_master=ref(OLD/'character/00.png'),drawing_policy={'retained_count':16,'retained_map':ref(ROOT/'retained-map.json'),'reason':'effect-only user request; retain approved complete motion and timing'},pose_durations_ms=[150]*16,cycle_ms=2400,runtime_states=['jumping'],review_gif=ref(ROOT/'review/jumping.gif'),transparent_animation=ref(ROOT/'review/night.webp'),visual_review=ref(ROOT/'review/visual.json'),source_provenance=ref(OLD/'sources.json'),approved_character_lock=ref(ROOT/'pre-edit-lock.json'))
+for s in g['sources']:s.update(ref(OLD/'character'/f"{s['id']}.png"))
+write(ROOT/'production-run.json',run);subprocess.run([sys.executable,str(SKILL/'scripts/validate_production_run.py'),str(ROOT/'production-run.json'),'--stage','motion','--output',str(ROOT/'review/production-validation.json')],capture_output=True,text=True)
+v=json.loads((ROOT/'review/production-validation.json').read_text());print({'production_ok':v['ok'],'inherited_unverified_errors':len(v['errors'])})

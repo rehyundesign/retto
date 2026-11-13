@@ -59,6 +59,43 @@ func checkCodexLiveStatus(_ check: (Bool, String) -> Void) {
     _ = store.consume(snapshot(), nowMs: 1600)
     let malformed = store.consume(patch([["op": "remove", "path": ["requests", 99]]], base: 1, revision: 2), nowMs: 1700)
     check(malformed == "fixture" && store.statuses.isEmpty, "invalid array patch requests a fresh snapshot")
+    var unreadStore = CodexLiveStatusStore()
+    var unreadFrame = snapshot("idle")
+    var unreadParams = unreadFrame["params"] as! [String: Any]
+    var unreadChange = unreadParams["change"] as! [String: Any]
+    var unreadState = unreadChange["conversationState"] as! [String: Any]
+    unreadState["hasUnreadTurn"] = true
+    unreadChange["conversationState"] = unreadState; unreadParams["change"] = unreadChange; unreadFrame["params"] = unreadParams
+    _ = unreadStore.consume(unreadFrame, nowMs: 2000)
+    let beforeRead = unreadStore.statuses["fixture"]
+    _ = unreadStore.consume(patch([["op": "replace", "path": ["hasUnreadTurn"], "value": false]], base: 1, revision: 2), nowMs: 2000)
+    check(beforeRead != unreadStore.statuses["fixture"], "native read transition reaches Retto even without runtime change")
+    check(unreadStore.statuses["fixture"]?.hasUnreadTurn == false, "native read boolean retained")
+    let readPayload = try! JSONDecoder().decode(StatePayload.self, from: Data(#"{"state":"waving","sessionId":"fixture","updatedAtMs":1900}"#.utf8))
+    check(codexConfirmsRead(unreadStore.statuses["fixture"], payload: readPayload), "app read confirms completed alert")
+    check(!codexConfirmsRead(beforeRead, payload: readPayload), "native unread remains an alert")
+    check(!codexConfirmsRead(CodexLiveStatus(state: .idle, observedAtMs: 1800, hasUnreadTurn: false), payload: readPayload), "old read cannot clear newer completion")
+    check(!codexConfirmsRead(CodexLiveStatus(state: .idle, observedAtMs: 2100), payload: readPayload), "missing unread flag is unknown")
+    check(!codexConfirmsRead(CodexLiveStatus(state: .running, observedAtMs: 2100, hasUnreadTurn: false), payload: readPayload), "running default read flag cannot dismiss completion")
+    let inputPayload = try! JSONDecoder().decode(StatePayload.self, from: Data(#"{"state":"waiting","sessionId":"fixture","updatedAtMs":1900}"#.utf8))
+    check(!codexConfirmsRead(unreadStore.statuses["fixture"], payload: inputPayload), "reading cannot clear required input")
+    _ = unreadStore.consume(patch([["op": "replace", "path": ["hasUnreadTurn"], "value": true]], base: 1, revision: 1), nowMs: 2100)
+    check(unreadStore.statuses["fixture"]?.hasUnreadTurn == false, "stale unread replay ignored")
+    _ = unreadStore.consume(patch([["op": "replace", "path": ["hasUnreadTurn"], "value": 0]], base: 2, revision: 3), nowMs: 2200)
+    check(unreadStore.statuses.isEmpty, "numeric unread value is not boolean read proof")
+    unreadState["hasUnreadTurn"] = false; unreadState["body"] = String(repeating: "x", count: 1_100_000)
+    unreadChange["conversationState"] = unreadState; unreadParams["change"] = unreadChange; unreadFrame["params"] = unreadParams
+    let decodedRead = decodeLiveStatusMessage(try! JSONSerialization.data(withJSONObject: unreadFrame))!
+    var largeUnreadStore = CodexLiveStatusStore()
+    _ = largeUnreadStore.consume(decodedRead, nowMs: 2300)
+    check(largeUnreadStore.statuses["fixture"]?.hasUnreadTurn == false, "large snapshot projection keeps read flag")
+    var readFreshness = CodexLiveStatusStore()
+    _ = readFreshness.consume(decodedRead, nowMs: 2000)
+    _ = readFreshness.consume(patch([["op": "add", "path": ["requests", 0], "value": request("item/tool/call", completed: true)]], base: 1, revision: 2), nowMs: 3000)
+    let newUnreadCompletion = try! JSONDecoder().decode(StatePayload.self, from: Data(#"{"state":"waving","sessionId":"fixture","updatedAtMs":2500}"#.utf8))
+    check(readFreshness.statuses["fixture"]?.lastConfirmedAtMs == 3000, "tool updates confirm runtime")
+    check(readFreshness.statuses["fixture"]?.readConfirmedAtMs == 2000, "tool updates do not refresh old read evidence")
+    check(!codexConfirmsRead(readFreshness.statuses["fixture"], payload: newUnreadCompletion), "unrelated patch cannot clear newer unread completion")
     let empty = CodexTranscriptStatus(completedAtMs: nil, latestPromptAtMs: nil)
     let waiting = ReconciledCodexTask(state: .waiting, observedAtMs: 1, needsAttention: true, title: nil, source: .hook)
     let running = ReconciledCodexTask(state: .running, observedAtMs: 1, needsAttention: false, title: nil, source: .hook)

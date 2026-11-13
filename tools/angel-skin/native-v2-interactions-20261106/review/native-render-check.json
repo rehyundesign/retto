@@ -1,0 +1,22 @@
+{
+  "gaze": {
+    "rendered_poses": 16,
+    "nonblank": true,
+    "different_time_samples_pixels_min": 12259
+  },
+  "drag-left": {
+    "rendered_poses": 16,
+    "nonblank": true,
+    "different_time_samples_pixels_min": 49666
+  },
+  "drag-right": {
+    "rendered_poses": 16,
+    "nonblank": true,
+    "different_time_samples_pixels_min": 50035
+  },
+  "idle": {
+    "rendered_poses": 2,
+    "nonblank": true,
+    "different_time_samples_pixels_min": 54237
+  }
+}

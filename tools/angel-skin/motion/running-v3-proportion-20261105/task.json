@@ -1,0 +1,25 @@
+{
+  "mode": "new-motion",
+  "scope": "repair rejected working motion proportions against accepted idle; preserve listening scene",
+  "status": "new music-box motion candidate; user visual review pending",
+  "required_sources": 16,
+  "pose_ms": 200,
+  "cycle_ms": 3200,
+  "effect_sample_ms": 50,
+  "approved_reference": "../running-v1-20261105/references/approved-idle-white.png",
+  "rejected_version": "../running-v2-musicbox-20261105",
+  "protected": "same prop design, all3airborne, two-paw support, inner platter rotation, dots/^^ Tato eyes",
+  "corrected_framing": "544square, fixed512square character drawing at16/16, same actual-size canvas as approved idle",
+  "body_correction": "short rounded feline pelvis and tucked short hindfeet, no tall biped torso/thighs; no independent x/y stretching or head patch",
+  "relative_fit": "ear height and main head width visually compared to approved idle; both companion sizes restored by full-source redraw",
+  "production_states": [
+    "running"
+  ],
+  "user_selected_stance": "all3 airborne, happily watching/listening to box",
+  "original_registration": "unverified",
+  "native_installed": false,
+  "character_sources_generated": 16,
+  "selected_gif": "review/running.gif",
+  "selected_animation": "review/night.webp",
+  "next_stage": "user review of this working motion only; original registration/native verification remain unverified"
+}

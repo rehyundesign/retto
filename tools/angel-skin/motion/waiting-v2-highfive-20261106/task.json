@@ -1,0 +1,75 @@
+{
+  "scope": "waiting only: slightly smiling canonical Retto alternately high-fives airborne Tato then Melody",
+  "mode": "new-motion",
+  "distinct_drawings": 16,
+  "pose_ms": 200,
+  "cycle_ms": 3200,
+  "pets": {
+    "Tato": "left, magic flight, dot eyes, no wings, blue/cyan contact effects",
+    "Melody": "right, winglet flight, burgundy rectangular eyes, red/rose contact effects"
+  },
+  "identity": "approved concept-v5 and approved idle-v5 costume; no eye-size/sclera modifiers",
+  "trigger_beats": {
+    "left_contact": [
+      3,
+      4
+    ],
+    "right_contact": [
+      10,
+      11
+    ]
+  },
+  "other6_motions": "pre-edit SHA locked",
+  "native_installed": false,
+  "status": "alternating high-five waiting review candidate; user approval pending",
+  "anchor_review": {
+    "status": "pass after direct inspection",
+    "frames": [
+      "00",
+      "03",
+      "10"
+    ],
+    "findings": "canonical whole-cat identity, four limbs, two airborne pets, empty paws/no prop, left and right pad-to-pad high-five contact, subtle smile",
+    "sha256": {
+      "00": "fa2ae0077b0b7b1839128250b9d2ca0c7b89a00cf0ad9be1b3955e0cacefd062",
+      "03": "472d91482956ead3d9bc1b0878ed85af451c5b4600ebe0175c7638e52e4033ea",
+      "10": "a888bce74f038082231085126228c1601992490486a6cf50585728a4ef4bda80"
+    }
+  },
+  "approved_idle": "idle-v5-canonical-20261106 user OK; its SHA is locked in gallery-lock.json",
+  "generation_attempts": 17,
+  "rejected_sources": {
+    "06-rejected-paw-side-swap": "wrong forepaw on recovery; replaced by complete left-forepaw-lowering redraw"
+  },
+  "contact_lighting": "small local pad-contact glints within24px scene disks, main face and pet eye glyphs clear; independent character PNGs unchanged during composition",
+  "effect_ms": 50,
+  "method": "16 independently redrawn complete connected characters; no eye/head/neck patches",
+  "motion_preservation": "new user-requested left/right high-five beats; canonical idle approved and preserved; no held star; both pets fly",
+  "references": {
+    "approved_design": {
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waiting-v2-highfive-20261106/references/canonical-master.png",
+      "sha256": "0d3524d171bb0aaacaf051fdd0d99516cbd8003151a0320c488a2c4ff844aa6c"
+    },
+    "shipped_runtime_comparison": {
+      "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waiting-v2-highfive-20261106/references/runtime-base.png",
+      "sha256": "b8a513bbd8578f702fdc35c116e681588853e2da329fe5a080536498edbc008a"
+    }
+  },
+  "original_registration": "unverified quantitative original landmark certification",
+  "contact_events": {
+    "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waiting-v2-highfive-20261106/contacts.json",
+    "sha256": "bd8b37d8b2a3c3cecec5fa5baa15d16cf34b59f7108c2341b382f636add50e30"
+  },
+  "effect_helper": {
+    "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v3-airborne-20261106/render.py",
+    "sha256": "20f58624477db46376908c55d9372e10d7e4fedf7bccca0e2bf793c8a648b1c0"
+  },
+  "renderer": {
+    "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waiting-v2-highfive-20261106/render.py",
+    "sha256": "ccee0935adf31d72689176b39d72adad5c5e74b227e78421563687db2c2acfda"
+  },
+  "cell_review": {
+    "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waiting-v2-highfive-20261106/review/cell-review.json",
+    "sha256": "92bace57cf2f1968bdcb83559fe2a0377082a205eb4e82e30e7505ddbff166e7"
+  }
+}

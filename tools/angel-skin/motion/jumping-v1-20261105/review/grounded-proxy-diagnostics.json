@@ -1,0 +1,60 @@
+{
+  "method": "forepaw floor proxy for grounded source images, NOT original anatomical registration",
+  "reference_floor_y": 484,
+  "sources": {
+    "00": {
+      "x": 245.5,
+      "y": 484,
+      "width": 124
+    },
+    "01": {
+      "x": 246.5,
+      "y": 481,
+      "width": 124
+    },
+    "02": {
+      "x": 244.5,
+      "y": 474,
+      "width": 122
+    },
+    "03": {
+      "x": 245.0,
+      "y": 484,
+      "width": 125
+    },
+    "04": {
+      "x": 251.0,
+      "y": 480,
+      "width": 121
+    },
+    "11": {
+      "x": 246.0,
+      "y": 484,
+      "width": 125
+    },
+    "12": {
+      "x": 245.0,
+      "y": 476,
+      "width": 125
+    },
+    "13": {
+      "x": 245.0,
+      "y": 484,
+      "width": 125
+    },
+    "14": {
+      "x": 246.0,
+      "y": 484,
+      "width": 125
+    },
+    "15": {
+      "x": 246.0,
+      "y": 484,
+      "width": 125
+    }
+  },
+  "pending_floor_redraws": [
+    "02",
+    "12"
+  ]
+}

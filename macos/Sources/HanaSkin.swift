@@ -56,7 +56,7 @@ enum HanaFrameCache {
     static var placeholder: NSImage { NSImage(size: NSSize(width: 7168, height: 7680)) }
     static func drawCharacter(row: Int, frame: Int, in rect: NSRect) -> Bool {
         guard let image = image("character-\(row)-\(frame)", character: true) else { return false }
-        image.draw(in: rect, from: NSRect(origin: .zero, size: image.size), operation: .sourceOver,
+        image.draw(in: HanaGrounding.rect(row:row,in:rect), from: NSRect(origin: .zero, size: image.size), operation: .sourceOver,
                    fraction: 1, respectFlipped: false, hints: [.interpolation: NSImageInterpolation.high])
         return true
     }
@@ -69,7 +69,7 @@ final class HanaEffectLayers {
         let frame = HanaMotion.effectFrame(time: time)
         let layer = isFront ? "front" : "back"
         guard let image = HanaFrameCache.image("\(id)-\(layer)-\(frame)") else { return }
-        image.draw(in: rect, from: NSRect(origin: .zero, size: image.size), operation: .sourceOver,
+        image.draw(in: HanaGrounding.rect(row:HanaGrounding.effectRow(state:state,drag:drag),in:rect), from: NSRect(origin: .zero, size: image.size), operation: .sourceOver,
                    fraction: 1, respectFlipped: false, hints: [.interpolation: NSImageInterpolation.high])
     }
 }

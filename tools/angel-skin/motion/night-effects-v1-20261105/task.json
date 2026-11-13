@@ -1,0 +1,39 @@
+{
+  "mode": "effect-repair",
+  "status": "new effect review candidates; no app installation",
+  "production_states": [
+    "idle",
+    "running",
+    "waiting",
+    "failed",
+    "waving",
+    "jumping"
+  ],
+  "point_effect_states": [
+    "running",
+    "waiting",
+    "failed",
+    "waving"
+  ],
+  "protected": [
+    "original96 character source PNGs and source clocks",
+    "all original GIF files",
+    "idle yellow-star prop pixels/path/timing",
+    "click three-flying revision remains a separate ungenerated task"
+  ],
+  "requested_style": "dreamlike night sky; moon, music notes, angel wings, Tato and Melody; preserve existing golden waves/feathers, add situation-specific point effects",
+  "edge_policy": "all ambient waves, particles, loose feathers and glows use a smooth spatial alpha fade to0 on all4 cell borders; no opaque scenery rectangle",
+  "transparent_output": "lossless animated RGBA WebP; GIFs are opaque dark-background review copies only",
+  "same_pose_alpha_cleanup": "running exports re-extract alpha from exact same original whole-frame RGB to restore missing white fur; all previously visible RGB pixels verified identical, original source files untouched",
+  "motifs": {
+    "idle": "existing yellow-star handoff; night ambiance and edge fade only",
+    "running": "crescent with progressing orbiting star and music notes, responding to the wing stroke",
+    "waiting": "paired star-and-note signals brighten with BOTH companions offering hands",
+    "failed": "scattered light and notes gather into a star after the comforting contact",
+    "waving": "crescent arc and star-note finale unfold with the forepaw greeting",
+    "jumping": "existing unfinished click draft; night ambiance and edge fade only, no new motion or point motif"
+  },
+  "original_registration": "unverified",
+  "native_installed": false,
+  "next_stage": "user review in updated HTML with dark/light/checker window backgrounds"
+}

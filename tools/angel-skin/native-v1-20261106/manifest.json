@@ -1,0 +1,103 @@
+{
+  "version": 1,
+  "sourceSize": [
+    544,
+    544
+  ],
+  "sampleMs": 50,
+  "states": {
+    "idle": {
+      "samples": 64,
+      "cycle": 3.2,
+      "poseMs": 200.0,
+      "drawings": 16,
+      "bodyScale": 1.06,
+      "ground": 484,
+      "characterSource": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v5-canonical-20261106/review/character.webp",
+      "characterSha256": "d43dcee3894c2ca2dd441a3074278f03dbbed3954d07e8293471b74f45a8642e",
+      "effectSource": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/idle-v6-background-stars-20261106/review/night.webp",
+      "effectSha256": "7ade932fab3b19bd6c56cd6e30553d77b9ff9b43f8e5df0ddf7b0798c67a540d",
+      "sampleMs": 50.0
+    },
+    "running": {
+      "samples": 64,
+      "cycle": 3.2,
+      "poseMs": 200.0,
+      "drawings": 16,
+      "bodyScale": 1.06,
+      "ground": 484,
+      "characterSource": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/running-v3-proportion-20261105/review/character.webp",
+      "characterSha256": "46190d567f1e213253b1698a0dd2410e7acf0800e9b01c482d24ada2bbd8b7bf",
+      "effectSource": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/running-v5-luminous-20261106/review/night.webp",
+      "effectSha256": "6540c8fb6658f939d92df953dc3be4846fc068dbb12b643389879ce02b731650",
+      "sampleMs": 50.0
+    },
+    "waiting": {
+      "samples": 64,
+      "cycle": 3.2,
+      "poseMs": 200.0,
+      "drawings": 16,
+      "bodyScale": 1.06,
+      "ground": 484,
+      "characterSource": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/waiting-v2-highfive-20261106/review/character.webp",
+      "characterSha256": "37bae85c79ae3e7d2fb10484dddd6df7badd06763414b0612c95d3654d5d2c6b",
+      "effectSource": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/effect-repair-v3-stars-sad-20261106/waiting/night.webp",
+      "effectSha256": "5093600e7164e891c1450b40d20022f57aca6d2263c5e2df733c7e28ee3a2276",
+      "sampleMs": 50.0
+    },
+    "failed": {
+      "samples": 64,
+      "cycle": 3.2,
+      "poseMs": 200.0,
+      "drawings": 16,
+      "bodyScale": 1.06,
+      "ground": 484,
+      "characterSource": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v3-pet-proportions-20261106/review/character.webp",
+      "characterSha256": "314ff9feef5b7887828c14cc608f42b25f31f10e5308861b40698eae0656d434",
+      "effectSource": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/failed-v3-pet-proportions-20261106/review/night.webp",
+      "effectSha256": "04ca87f29d17c1ca3ae8270e95aff5fc006604ab26ff3e38df7d84954f6939e0",
+      "sampleMs": 50.0
+    },
+    "waving": {
+      "samples": 48,
+      "cycle": 2.4,
+      "poseMs": 150.0,
+      "drawings": 16,
+      "bodyScale": 1.06,
+      "ground": 484,
+      "characterSource": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/matte-repair-v3-holes-20261105/waving/character.webp",
+      "characterSha256": "5c7320fd386ef76da05b83c30b720d4badba639037fb472c8b0af51e22651205",
+      "effectSource": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/pet-effects-v2-clean-idle-20261106/waving/night.webp",
+      "effectSha256": "10f2bf08b471e9e1d1146f148df75b0d10030883bbe75b170f0e979b2d7ace26",
+      "sampleMs": 50.0
+    },
+    "jumping": {
+      "samples": 48,
+      "cycle": 2.4,
+      "poseMs": 150.0,
+      "drawings": 16,
+      "bodyScale": 1.06,
+      "ground": 484,
+      "characterSource": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v3-wink-20261105/review/character.webp",
+      "characterSha256": "58bb7dcc69c36a34b23428d65d4fa1719750e88f4c75c576b355e166aba95a0a",
+      "effectSource": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/jumping-v5-stars-feathers-20261106/review/night.webp",
+      "effectSha256": "e8a866aaa454ef807874cd87266b52f2969ce84800628a36a9c4d2a475592e03",
+      "sampleMs": 50.0
+    },
+    "sleeping": {
+      "samples": 64,
+      "cycle": 6.4,
+      "poseMs": 400.0,
+      "drawings": 16,
+      "bodyScale": 1.06,
+      "ground": 468,
+      "characterSource": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/sleeping-v1-20261105/review/character.webp",
+      "characterSha256": "696eb8af24351d96855db38d3db3f2b9bd7dfa607c830184314a8e83eb48c75e",
+      "effectSource": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/pet-effects-v2-clean-idle-20261106/sleeping/night.webp",
+      "effectSha256": "4624eb7a20524b9e4ae58918c81d86d3b78f9ce026c7d8fd91f63963994a9740",
+      "sampleMs": 100.0
+    }
+  },
+  "fitBasis": "main Retto facial-fur/torso/ear-to-paw landmarks; exclude wings/pets/FX; fixed per-state transforms",
+  "reference": "installed ClassicGrownFrames idle00,448x640, ground593 mapped to native628"
+}

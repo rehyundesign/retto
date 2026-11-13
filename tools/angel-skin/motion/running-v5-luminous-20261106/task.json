@@ -1,0 +1,21 @@
+{
+  "mode": "effect-repair",
+  "scope": "running only: more luminous musicbox and drifting background sparkle",
+  "preserve": "all16 full drawings, original3.2s clock, rotating plate, prop scale/grip, faces/eyes, blue/red pet magic, all other states",
+  "new_layers": "registered glass glow and opal cross glints; floating gold/cyan/lilac/rose glints outside protected subject silhouette; edge fade0",
+  "original_registration": "inherited unverified; no anatomical redraw or native installation",
+  "native_installed": false,
+  "status": "effect-only review candidate; user approval pending",
+  "renderer": {
+    "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/running-v5-luminous-20261106/render.py",
+    "sha256": "09d9dcc73afa09c2910e14b0e78f0217dbe5676a737d3abb34a6bf46681d8565"
+  },
+  "approved_character_lock": {
+    "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/running-v5-luminous-20261106/pre-edit-lock.json",
+    "sha256": "d5baf875e8e003bf2b87082a4d63c6789feba7402ed4ffcd3027979ca8200fab"
+  },
+  "repair_checks": {
+    "path": "/Users/luxia/Documents/ChatGPT/retto/tools/angel-skin/motion/running-v5-luminous-20261106/review/validation.json",
+    "sha256": "72c61b326334a22272333073634fb14f4b3ac379bf680bc0f374b634f90b1908"
+  }
+}

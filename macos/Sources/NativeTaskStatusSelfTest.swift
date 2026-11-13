@@ -42,8 +42,23 @@ func checkNativeTaskStatus(_ check: (Bool, String) -> Void) {
         return try! JSONDecoder().decode(StatePayload.self, from: JSONSerialization.data(withJSONObject: object))
     }
     let busy = ClaudeNativeStatus(state: .running, changedAtMs: 100)
+    check(displayState(state: .running, updatedAtMs: 100, seenAtMs: nil, transcriptModifiedAtMs: nil,
+                       nowMs: 99_000_000, stateSource: "live") == .running,
+          "confirmed native busy remains visible after ten minutes")
+    check(displayState(state: .running, updatedAtMs: 100, seenAtMs: nil, transcriptModifiedAtMs: nil,
+                       nowMs: 99_000_000) == .idle,
+          "unconfirmed stale hooks still expire")
     check(applyClaudeNativeStatus(busy, to: payload("waiting")).petState == .running,
           "late Claude permission hook cannot override current native busy")
+    let readPinned = payload("idle")
+    let runningTask = payload("running", source: "codex")
+    let taskPriority: (StatePayload) -> Int = { selectionPriority(state: $0.petState, isClosed: $0.isClosed, source: $0.source) }
+    check(preferredPinnedSession(readPinned, attention: [], active: [runningTask], priority: taskPriority,
+          needsAttention: { $0.needsAttention }).source == "codex", "read pinned notice yields to active task")
+    check(preferredPinnedSession(readPinned, attention: [], priority: taskPriority,
+          needsAttention: { $0.needsAttention }) == readPinned, "pin remains when no active task exists")
+    check(preferredPinnedSession(readPinned, attention: [payload("waiting")], active: [runningTask], priority: taskPriority,
+          needsAttention: { $0.needsAttention }).petState == .waiting, "input request still overrides active work")
     let idle = ClaudeNativeStatus(state: .idle, changedAtMs: 100)
     check(applyClaudeNativeStatus(idle, to: payload("waiting")).petState == .idle,
           "native idle clears stale Claude waiting")
