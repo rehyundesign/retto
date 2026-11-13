@@ -256,6 +256,39 @@ func runSelfTest() -> Int32 {
     // 훅이 답을 이름으로 쓰지 않게 고쳐서 대타가 이제 믿을 만하고, 이름 없는 세션이
     // 여럿이면 목록에서 구분이 안 되기 때문이다. 되돌리려면 Sessions.swift 의 title 을 줄인다.
     let unnamedTitleOK = unnamedPayload.title == "진행 중 작업"
+    // Orca 에서 띄운 세션. 누르면 Orca 의 그 탭으로 가야 하고, 다른 앱으로 떨어지면 안 된다.
+    // Claude 채팅은 훅이 Orca 세션 ID 를 적고, Codex 채팅은 훅이 꺼져 있어 롤아웃 originator 로 알아본다.
+    let orcaChat = try! JSONDecoder().decode(StatePayload.self, from: """
+        {"state":"waving","sessionId":"s-orca","source":"claude","client":"orca","orcaSessionId":"claude_abc","cwd":"/tmp/ws","sessionTitle":"Orca 작업"}
+        """.data(using: .utf8)!)
+    let orcaTerminal = try! JSONDecoder().decode(StatePayload.self, from: """
+        {"state":"running","sessionId":"s-term","source":"claude","client":"cli","orcaTerminalHandle":"term_abc","cwd":"/tmp/ws","sessionTitle":"터미널 작업"}
+        """.data(using: .utf8)!)
+    let plainCode = try! JSONDecoder().decode(StatePayload.self, from: """
+        {"state":"running","sessionId":"s-code","source":"claude","client":"vscode","cwd":"/tmp/ws","sessionTitle":"코드 작업"}
+        """.data(using: .utf8)!)
+    var orcaCodex = discoveredCodexTask
+    orcaCodex.orcaHosted = true
+    let orcaOK = openApp(forClient: "orca") == .orca
+        && sessionDeepLink(sessionId: "claude_abc", app: .orca) == nil
+        && !OpenApp.orca.hasSessionDeepLink && !OpenApp.orca.needsWindowFocusFirst
+        && installedOpenApp(preferred: .orca) { $0 != .orca } == .orca
+        && codexSessionMetaIsFromOrca("{\"type\":\"session_meta\",\"payload\":{\"id\":\"t\",\"originator\":\"orca_desktop\"}}")
+        && !codexSessionMetaIsFromOrca("{\"type\":\"session_meta\",\"payload\":{\"id\":\"t\",\"originator\":\"Codex Desktop\"}}")
+        && !codexSessionMetaIsFromOrca("{\"type\":\"session_meta\",\"payload\":")
+        && orcaChat.isOrca && orcaTerminal.isOrca && orcaCodex.isOrca && !plainCode.isOrca && !discoveredCodexTask.isOrca
+        && sessionMenuLabel(for: orcaChat) == "● 완료  Orca 작업 · ws · Orca"
+        && sessionMenuLabel(for: orcaCodex) == "● 완료  훅 없이 찾은 task · project · Orca"
+        && sessionMenuLabel(for: plainCode) == "● 작업 중  코드 작업 · ws · VS Code"
+        && orcaOpenRequest(for: orcaChat) == OrcaOpenRequest(sessionId: "claude_abc", terminalHandle: nil, workspacePath: "/tmp/ws", agent: "claude")
+        && orcaOpenRequest(for: orcaTerminal) == OrcaOpenRequest(sessionId: nil, terminalHandle: "term_abc", workspacePath: "/tmp/ws", agent: "claude")
+        && orcaOpenRequest(for: orcaCodex) == OrcaOpenRequest(sessionId: nil, terminalHandle: nil, workspacePath: "/tmp/project", agent: "codex")
+        && orcaOpenRequest(for: plainCode) == nil
+        && NewsChannel.of(client: "orca", source: nil) == .orca
+        && orcaRevealOutcome("{\"opened\":\"chat\"}\n") == .chat
+        && orcaRevealOutcome("{\"opened\":\"workspace\"}") == .workspace
+        && orcaRevealOutcome("{\"opened\":\"none\"}") == nil
+        && orcaRevealOutcome("") == nil
     let runningCodexPayload = try! JSONDecoder().decode(StatePayload.self, from: "{\"state\":\"running\",\"sessionId\":\"thread-one\",\"source\":\"codex\",\"sessionTitle\":\"예전 제목\",\"updatedAtMs\":1000}".data(using: .utf8)!)
     let completedCodexTask = reconcileCodexTask(
         payload: runningCodexPayload,
@@ -708,8 +741,8 @@ func runSelfTest() -> Int32 {
     // ⚠️ ok 에 넣은 항목은 아래 print 에도 반드시 넣는다. 안 그러면 그 항목이 실패해도
     // ok:false 만 뜨고 무엇이 깨졌는지 알 수 없다 — 실제로 두 번 헤맸다.
     // scripts/check.sh 가 두 줄을 대조해서 빠진 게 있으면 막는다.
-    let ok = rilakkumaTimingOK && christmasOK && claudeRowOK && fallbackOK && cornerOK && lookingOK && sleepRowOK && displayOK && dozeOK && sleepOK && ancientOK && viewedOK && haloOK && assetOK && skinsOK && dragRunOK && behaviorsOK && statesOK && deepLinkOK && clientRoutingOK && codexMenuOK && integrationOK && setupOK && legacyOK && transcriptShapesOK && scalesOK && baselineOK && decoupledOK && fontOK && priorityOK && registryOK && titleOK && badgeLayoutOK && clickRoutingOK && gazeStatesOK && expandOK && lineBudgetOK && typefaceOK && textDeltaOK && independentChatOK && tonesOK && folderFoldOK && labelOK && doneStaysOK && bubbleShapeOK && seenOK && staleOK && personalV2LayoutOK && codexTitleRefreshOK && codexCompletionRefreshOK && codexStateReconciliationOK && rolloutDiscoveryPayloadOK && unnamedTitleOK
-    print("{\"ok\":\(ok),\"asset\":\"\(Int(image.size.width))x\(Int(image.size.height))\",\"skins\":\(PetSkin.allCases.count),\"skinsOK\":\(skinsOK),\"christmasEffects\":\(christmasOK),\"dragRun\":\(dragRunOK),\"canJoinAllSpaces\":\(behaviorsOK),\"states\":\(animationCatalog.count),\"deepLink\":\(deepLinkOK),\"clientRouting\":\(clientRoutingOK),\"codexMenu\":\(codexMenuOK),\"integration\":\(integrationOK),\"setup\":\(setupOK),\"legacy\":\(legacyOK),\"transcriptShapes\":\(transcriptShapesOK),\"sizePresets\":\(supportedScales.count),\"baselineLayout\":\(baselineOK),\"scaleDecoupled\":\(decoupledOK),\"badgePlacement\":\(badgeLayoutOK),\"ribbonExpand\":\(expandOK),\"lineBudget\":\(lineBudgetOK),\"typefaces\":\(PetTypeface.allCases.count),\"typefaceOK\":\(typefaceOK),\"textDelta\":\(textDeltaOK),\"independentChat\":\(independentChatOK),\"tones\":\(tonesOK),\"folderFold\":\(folderFoldOK),\"doneStays\":\(doneStaysOK),\"bubbleShape\":\(bubbleShapeOK),\"seenRule\":\(seenOK),\"staleWorking\":\(staleOK),\"headroomClean\":\(haloOK),\"viewedElsewhere\":\(viewedOK),\"ancientNews\":\(ancientOK),\"sleeps\":\(sleepOK),\"sleepRow\":\(sleepRow),\"dozes\":\(dozeOK),\"displayState\":\(displayOK),\"seenByLooking\":\(lookingOK),\"corners\":\(cornerOK),\"appFallback\":\(fallbackOK),\"haloRows\":\(halo.rows),\"haloDeepest\":\(halo.deepest),\"haloFaint\":\(haloFaintPixels),\"claudeRow\":\(claudeRowOK),\"font\":\"\(rettoHandwritingFontName)\",\"fontLoaded\":\(fontOK),\"multiSession\":\(registryOK),\"sessionTitleFallback\":\(titleOK),\"prioritySelection\":\(priorityOK),\"badgeLayout\":\(badgeLayoutOK),\"clickRouting\":\(clickRoutingOK),\"sleepRowOK\":\(sleepRowOK),\"assetOK\":\(assetOK),\"statesOK\":\(statesOK),\"scales\":\(scalesOK),\"gazeStates\":\(gazeStatesOK),\"label\":\(labelOK),\"personalV2Layout\":\(personalV2LayoutOK),\"codexTitleRefresh\":\(codexTitleRefreshOK),\"codexCompletionRefresh\":\(codexCompletionRefreshOK),\"codexStateReconciliation\":\(codexStateReconciliationOK),\"rolloutDiscoveryPayload\":\(rolloutDiscoveryPayloadOK),\"rilakkumaTiming\":\(rilakkumaTimingOK),\"unnamedTitle\":\(unnamedTitleOK)}")
+    let ok = rilakkumaTimingOK && christmasOK && claudeRowOK && fallbackOK && cornerOK && lookingOK && sleepRowOK && displayOK && dozeOK && sleepOK && ancientOK && viewedOK && haloOK && assetOK && skinsOK && dragRunOK && behaviorsOK && statesOK && deepLinkOK && clientRoutingOK && codexMenuOK && integrationOK && setupOK && legacyOK && transcriptShapesOK && scalesOK && baselineOK && decoupledOK && fontOK && priorityOK && registryOK && titleOK && badgeLayoutOK && clickRoutingOK && gazeStatesOK && expandOK && lineBudgetOK && typefaceOK && textDeltaOK && independentChatOK && tonesOK && folderFoldOK && labelOK && doneStaysOK && bubbleShapeOK && seenOK && staleOK && personalV2LayoutOK && codexTitleRefreshOK && codexCompletionRefreshOK && codexStateReconciliationOK && rolloutDiscoveryPayloadOK && unnamedTitleOK && orcaOK
+    print("{\"ok\":\(ok),\"asset\":\"\(Int(image.size.width))x\(Int(image.size.height))\",\"skins\":\(PetSkin.allCases.count),\"skinsOK\":\(skinsOK),\"christmasEffects\":\(christmasOK),\"dragRun\":\(dragRunOK),\"canJoinAllSpaces\":\(behaviorsOK),\"states\":\(animationCatalog.count),\"deepLink\":\(deepLinkOK),\"clientRouting\":\(clientRoutingOK),\"codexMenu\":\(codexMenuOK),\"integration\":\(integrationOK),\"setup\":\(setupOK),\"legacy\":\(legacyOK),\"transcriptShapes\":\(transcriptShapesOK),\"sizePresets\":\(supportedScales.count),\"baselineLayout\":\(baselineOK),\"scaleDecoupled\":\(decoupledOK),\"badgePlacement\":\(badgeLayoutOK),\"ribbonExpand\":\(expandOK),\"lineBudget\":\(lineBudgetOK),\"typefaces\":\(PetTypeface.allCases.count),\"typefaceOK\":\(typefaceOK),\"textDelta\":\(textDeltaOK),\"independentChat\":\(independentChatOK),\"tones\":\(tonesOK),\"folderFold\":\(folderFoldOK),\"doneStays\":\(doneStaysOK),\"bubbleShape\":\(bubbleShapeOK),\"seenRule\":\(seenOK),\"staleWorking\":\(staleOK),\"headroomClean\":\(haloOK),\"viewedElsewhere\":\(viewedOK),\"ancientNews\":\(ancientOK),\"sleeps\":\(sleepOK),\"sleepRow\":\(sleepRow),\"dozes\":\(dozeOK),\"displayState\":\(displayOK),\"seenByLooking\":\(lookingOK),\"corners\":\(cornerOK),\"appFallback\":\(fallbackOK),\"haloRows\":\(halo.rows),\"haloDeepest\":\(halo.deepest),\"haloFaint\":\(haloFaintPixels),\"claudeRow\":\(claudeRowOK),\"font\":\"\(rettoHandwritingFontName)\",\"fontLoaded\":\(fontOK),\"multiSession\":\(registryOK),\"sessionTitleFallback\":\(titleOK),\"prioritySelection\":\(priorityOK),\"badgeLayout\":\(badgeLayoutOK),\"clickRouting\":\(clickRoutingOK),\"sleepRowOK\":\(sleepRowOK),\"assetOK\":\(assetOK),\"statesOK\":\(statesOK),\"scales\":\(scalesOK),\"gazeStates\":\(gazeStatesOK),\"label\":\(labelOK),\"personalV2Layout\":\(personalV2LayoutOK),\"codexTitleRefresh\":\(codexTitleRefreshOK),\"codexCompletionRefresh\":\(codexCompletionRefreshOK),\"codexStateReconciliation\":\(codexStateReconciliationOK),\"rolloutDiscoveryPayload\":\(rolloutDiscoveryPayloadOK),\"rilakkumaTiming\":\(rilakkumaTimingOK),\"unnamedTitle\":\(unnamedTitleOK),\"orca\":\(orcaOK)}")
     return ok ? 0 : 1
 }
 

@@ -139,10 +139,22 @@ struct StatePayload: Decodable, Equatable {
     var updatedAtMs: Double?
     /// 훅 레지스트리 값인지, Codex 롤아웃에서 보정한 값인지. 파일에는 쓰지 않고 화면 상태에서만 쓴다.
     var stateSource: String?
-    /// 훅이 환경변수에서 읽은 클라이언트 — `vscode` · `claude` · `cli`. 클릭했을 때 어느 앱을 띄울지 정한다.
+    /// 훅이 환경변수에서 읽은 클라이언트 — `vscode` · `claude` · `cli` · `orca`. 클릭했을 때 어느 앱을 띄울지 정한다.
     let client: String?
+    /// Orca 가 띄운 세션이면 훅이 적는 Orca 쪽 식별자. 채팅은 `claude_…`·`codex_…` 세션 ID,
+    /// Orca 터미널에서 띄운 에이전트는 터미널 핸들이다. 클릭했을 때 그 탭을 고르는 데 쓴다.
+    var orcaSessionId: String? = nil
+    var orcaTerminalHandle: String? = nil
+    /// 훅 없이 찾은 Orca 의 Codex 스레드. Orca 는 자기가 띄운 Codex 의 훅을 끄므로 롤아웃 첫 줄의
+    /// originator 로 판정한다. 파일에는 쓰지 않고 화면 상태에서만 쓴다.
+    var orcaHosted: Bool? = nil
 
     var petState: PetState { PetState(rawValue: state) ?? .idle }
+    /// Orca 에서 띄운 세션인가. 누르면 Orca 의 그 탭으로 간다.
+    var isOrca: Bool {
+        client == "orca" || orcaHosted == true
+            || !(orcaSessionId ?? "").isEmpty || !(orcaTerminalHandle ?? "").isEmpty
+    }
     var id: String { sessionId ?? "" }
     /// 레지스트리에서는 제품별 접두어를 붙이지만 딥링크에는 원래 세션 id가 들어간다.
     var navigationSessionId: String { rawSessionId ?? sessionId ?? "" }
@@ -224,6 +236,11 @@ func sessionMenuLabel(for payload: StatePayload) -> String {
     case .waving: stateMark = "● 완료"
     default: stateMark = "○ 쉬는 중"
     }
+    let origin = payload.isOrca ? " · Orca" : clientOriginLabel(payload)
+    return "\(stateMark)  \(String(payload.title.prefix(42))) · \(payload.project)\(origin)"
+}
+
+private func clientOriginLabel(_ payload: StatePayload) -> String {
     let origin: String
     switch payload.client {
     case "vscode": origin = " · VS Code"
@@ -232,7 +249,7 @@ func sessionMenuLabel(for payload: StatePayload) -> String {
     case "codex": origin = " · Codex"
     default: origin = payload.sourceLabel == "Codex" ? " · Codex" : ""
     }
-    return "\(stateMark)  \(String(payload.title.prefix(42))) · \(payload.project)\(origin)"
+    return origin
 }
 
 enum TaskStateSource: String {

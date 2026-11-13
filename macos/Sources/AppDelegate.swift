@@ -66,6 +66,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     private var isUninstalling = false
     private var liveStatusApplyScheduled = false
     private let claudeNativeStatusReader = ClaudeNativeStatusReader()
+    private let orcaCodexOriginReader = OrcaCodexOriginReader()
+    private let orcaNavigator = OrcaNavigator()
     private let taskStatusDiagnostics = TaskStatusDiagnostics()
     /// 세션이 없을 때 쓰는 빈 껍데기. 상태·이름·멘트는 넘겨 주는 값으로 덮는다.
     private static let placeholderPayload: StatePayload? = {
@@ -286,6 +288,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     }
 
     private func resolveOpenApp(for payload: StatePayload?) -> OpenApp {
+        // Orca 에서 띄운 세션은 Orca 의 그 탭으로만 열 수 있다. VS Code·Claude 앱·Codex 앱으로 보내면
+        // 같은 대화를 한 번 더 열거나 엉뚱한 창이 앞으로 온다. 열기 대상을 고정했어도 Orca 로 보낸다.
+        if payload?.isOrca == true, isOpenAppInstalled(.orca) {
+            return .orca
+        }
         // Codex task id 는 Claude Code session id 와 호환되지 않는다. 사용자가 Claude 쪽 열기
         // 대상을 고정했더라도 Codex 세션은 반드시 Codex 로 돌려보낸다.
         if payload?.source == "codex" || payload?.client == "codex" {
@@ -577,7 +584,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             refreshAfter: waitingHooks, activityAfter: activityHints)
         // 우선순위는 파일 시각까지 읽으므로 비교마다 다시 구하지 않고 세션마다 한 번만 구한다.
         claudeNativeStatusReader.refresh()
-        sessions = merged.values.map { payload in
+        sessions = merged.values.map { incoming in
+            var payload = incoming
+            // Orca 는 자기가 띄운 Codex 의 훅을 끈다. 훅이 Orca 식별자를 적지 못하므로 롤아웃으로 알아본다.
+            if (payload.source == "codex" || payload.client == "codex"), !payload.isOrca,
+               orcaCodexOriginReader.isFromOrca(transcriptPath: payload.transcriptPath) {
+                payload.orcaHosted = true
+            }
             let output = reconciledCodexPayload(applyClaudeNativeStatus(
                 claudeNativeStatusReader.status(for: payload), to: payload))
             if payload.source != "slack" {
@@ -785,7 +798,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             menu.addItem(open)
             return menu
         }
-        let apps: [OpenApp] = payload.sourceLabel == "Codex" ? [.codex] : [.vscode, .claude]
+        let apps: [OpenApp]
+        if payload.isOrca {
+            // Codex 스레드는 Codex 앱에서도 열린다. Orca 의 Claude 채팅은 다른 앱에서 고를 길이 없다.
+            apps = payload.sourceLabel == "Codex" ? [.orca, .codex] : [.orca]
+        } else {
+            apps = payload.sourceLabel == "Codex" ? [.codex] : [.vscode, .claude]
+        }
         for app in apps where isOpenAppInstalled(app) {
             let choice = NSMenuItem(title: openTaskMenuTitle(app), action: #selector(openTask(_:)), keyEquivalent: "")
             choice.target = self
@@ -810,6 +829,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         case .vscode: return "VS Code에서 열기"
         case .claude: return "Claude 앱에서 열기"
         case .codex: return "Codex 앱에서 열기"
+        case .orca: return "Orca에서 열기"
         }
     }
 
@@ -1022,6 +1042,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             return
         }
         let app = preferredApp ?? resolveOpenApp(for: target)
+        if app == .orca, let target {
+            openInOrca(target, windowOnly: windowOnly)
+            return
+        }
         focusHostApp(for: target, app: app) { [weak self] matchedWindow in
             guard let self, !windowOnly, matchedWindow else { return }
             // 세션을 집어 띄울 길이 없는 앱(Claude 데스크탑)은 앞으로 보낸 것으로 끝낸다.
@@ -1037,6 +1061,23 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             // 눌렀다는 것 자체를 다녀온 것으로 센다. 그 앱 안에서 어느 세션을 보는지까지는
             // 알 수 없지만, 배지가 안 지워지는 쪽이 더 성가시다. 손으로 지울 길도 따로 있다.
             self.markSeen(target)
+        }
+    }
+
+    /// Orca 를 앞으로 가져오고 그 세션의 채팅 탭(또는 터미널 탭)을 고른다.
+    /// ⌥ 를 누른 채면 Orca 만 앞으로 가져온다. 다른 앱과 같이, 눌러서 다녀오면 읽음으로 본다.
+    private func openInOrca(_ payload: StatePayload, windowOnly: Bool) {
+        let request = windowOnly
+            ? OrcaOpenRequest(sessionId: nil, terminalHandle: nil, workspacePath: nil, agent: "claude")
+            : orcaOpenRequest(for: payload)
+                ?? OrcaOpenRequest(sessionId: nil, terminalHandle: nil, workspacePath: payload.cwd, agent: "claude")
+        orcaNavigator.open(request) { [weak self] outcome in
+            guard let self else { return }
+            if outcome == .unavailable {
+                NSSound.beep()
+                return
+            }
+            if !windowOnly { self.markSeen(payload) }
         }
     }
 

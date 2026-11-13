@@ -25,6 +25,17 @@ func checkNativeTaskStatus(_ check: (Bool, String) -> Void) {
     check(reader.statuses.count == 3, "native reader rejects dead/reused PIDs, workers, future and unsupported records")
     check(reader.statuses["desktop"]?.state == .waiting, "Claude Desktop uses native waiting")
     check(reader.statuses["vscode"]?.state == .running, "VS Code uses native busy")
+    // Orca 채팅은 entrypoint `orca` 로 남는다. 예전에는 모르는 값으로 건너뛰어 입력 대기를 놓쳤다.
+    let orcaDirectory = directory.appendingPathComponent("orca")
+    try! FileManager.default.createDirectory(at: orcaDirectory, withIntermediateDirectories: true)
+    let orcaRecord: [String: Any] = ["pid": 1, "sessionId": "orca-chat", "status": "waiting", "statusUpdatedAt": 100,
+        "kind": "interactive", "entrypoint": "orca", "pidDomain": "darwin", "procStart": "fixture"]
+    try! JSONSerialization.data(withJSONObject: orcaRecord).write(to: orcaDirectory.appendingPathComponent("orca-chat.json"))
+    let orcaReader = ClaudeNativeStatusReader(directory: orcaDirectory, processMatches: { $0 == 1 && $1 == "fixture" })
+    orcaReader.refresh(now: Date(timeIntervalSince1970: 1))
+    let orcaChat = try! JSONDecoder().decode(StatePayload.self,
+        from: "{\"sessionId\":\"orca-chat\",\"state\":\"running\",\"source\":\"claude\",\"client\":\"orca\"}".data(using: .utf8)!)
+    check(orcaReader.status(for: orcaChat)?.state == .waiting, "Orca chat uses native waiting")
     func payload(_ state: String, source: String = "claude", event: String = "PermissionRequest") -> StatePayload {
         let object: [String: Any] = ["sessionId": "desktop", "state": state, "source": source,
             "client": source == "codex" ? "codex" : "claude", "event": event, "updatedAtMs": 500, "attention": true]

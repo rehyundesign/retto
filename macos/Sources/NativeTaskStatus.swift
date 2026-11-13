@@ -31,11 +31,14 @@ private func normalizedClaudeClient(_ value: String?) -> String? {
     case "claude", "claude-desktop", "claude-desktop-3p", "local-agent": return "claude"
     case "vscode", "claude-vscode": return "vscode"
     case "cli": return "cli"
+    // Orca 채팅도 `~/.claude/sessions` 에 busy·waiting·idle 을 남긴다. 예전에는 모르는 값으로 건너뛰어
+    // Orca 세션의 입력 대기를 표시하지 못했다.
+    case "orca": return "orca"
     default: return nil
     }
 }
 
-/// Claude Code가 Desktop·VS Code·터미널에서 직접 쓰는 세션 메타데이터만 읽는다.
+/// Claude Code가 Desktop·VS Code·터미널·Orca에서 직접 쓰는 세션 메타데이터만 읽는다.
 /// 대화 본문이나 메시징 소켓에 접근하지 않는다.
 final class ClaudeNativeStatusReader {
     private struct Record: Decodable {

@@ -1,4 +1,4 @@
-// 세션을 어디서 열지(VS Code · Claude 앱 · Codex)와 그 딥링크.
+// 세션을 어디서 열지(VS Code · Claude 앱 · Codex · Orca)와 그 딥링크.
 
 import AppKit
 import CoreText
@@ -8,12 +8,15 @@ enum OpenApp {
     case vscode
     case claude
     case codex
+    /// Orca 는 채팅을 고르는 딥링크가 없다. Orca 런타임에 탭을 고르라고 요청한다(`OrcaSessions.swift`).
+    case orca
 
     var bundleIdentifier: String {
         switch self {
         case .vscode: return "com.microsoft.VSCode"
         case .claude: return "com.anthropic.claudefordesktop"
         case .codex: return "com.openai.codex"
+        case .orca: return orcaBundleIdentifier
         }
     }
 
@@ -22,6 +25,7 @@ enum OpenApp {
         case .vscode: return "/Applications/Visual Studio Code.app"
         case .claude: return "/Applications/Claude.app"
         case .codex: return "/Applications/ChatGPT.app"
+        case .orca: return "/Applications/Orca.app"
         }
     }
 
@@ -40,7 +44,7 @@ enum OpenApp {
     ///                                      우리가 가진 것은 Claude Code 세션 UUID 라 걸리지 않는다.
     ///
     /// 앱을 앞으로 보내는 것까지만 한다. 세션 목록은 앱이 스스로 보여 준다.
-    var hasSessionDeepLink: Bool { self != .claude }
+    var hasSessionDeepLink: Bool { self != .claude && self != .orca }
 }
 
 let aiSessionOpenMenuTitle = "기본 열기 방식"
@@ -64,6 +68,8 @@ func installedOpenApp(preferred: OpenApp, isInstalled: (OpenApp) -> Bool) -> Ope
     case .vscode: fallbacks = [.claude, .codex]
     case .claude: fallbacks = [.vscode, .codex]
     case .codex: fallbacks = [.claude, .vscode]
+    // Orca 가 없으면 그 세션을 열 곳이 없다. 다른 앱으로 보내면 엉뚱한 대화가 열린다.
+    case .orca: fallbacks = []
     }
     return fallbacks.first(where: isInstalled) ?? preferred
 }
@@ -72,6 +78,7 @@ func openApp(forClient client: String?) -> OpenApp {
     switch client {
     case "claude": return .claude
     case "codex": return .codex
+    case "orca": return .orca
     default: return .vscode
     }
 }
@@ -85,6 +92,8 @@ func sessionDeepLink(sessionId: String?, app: OpenApp) -> URL? {
         components.path = "/open"
     case .claude:
         // 세션을 집어 띄우는 길이 없다 — `hasSessionDeepLink` 에 이유를 적어 두었다.
+        return nil
+    case .orca:
         return nil
     case .codex:
         guard let sessionId, !sessionId.isEmpty else { return nil }

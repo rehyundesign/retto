@@ -298,6 +298,7 @@ function text_(value) { return text(value, 400); }
 ///   `claude-desktop` → Claude 데스크탑 앱. 실측값이다 — 앱 번들 코드만 읽으면 SDK 기본값 `sdk-ts` 로
 ///                      떨어질 것 같지만, 실제로 돌려 보면 이 값을 박는다
 ///   `cli`            → 터미널. 돌아가는 세션을 되살릴 방법이 없어서 VS Code 로 보낸다
+///   `orca`           → Orca 채팅. Orca 런타임에 그 채팅 탭을 고르라고 요청한다
 /// 처음에는 `CLAUDE_CODE_EXECPATH` 에 `.vscode` 가 있는지도 봤는데, 그건 Cursor 같은 포크를 가려내려던
 /// 것이었다. 포크를 빼기로 하면서 쓸모가 없어졌고, 실제 데스크탑 세션을 VS Code 로 오분류하기까지 했다.
 /// 이름을 모르는 새 호스트는 VS Code 가 아닌 쪽으로 본다 — VS Code 만이 이름으로 확실히 가려진다.
@@ -305,7 +306,30 @@ function detectClient() {
   const entrypoint = String(process.env.CLAUDE_CODE_ENTRYPOINT || '');
   if (!entrypoint) return '';
   if (entrypoint === 'cli') return 'cli';
+  // Orca 채팅은 `orca` 를 준다. 이전에는 Claude 앱으로 분류되어 클릭하면 Claude 앱이 앞으로 왔다.
+  if (entrypoint === 'orca') return 'orca';
   return entrypoint.includes('vscode') ? 'vscode' : 'claude';
+}
+
+/// 세션 ID·터미널 핸들처럼 그대로 다시 써야 하는 값. 잘라 쓰면 다른 세션을 가리키게 되므로
+/// 모양이 다르면 아예 버린다.
+function identifier(value) {
+  const raw = String(value || '');
+  return /^[A-Za-z0-9_:.-]{1,128}$/.test(raw) ? raw : '';
+}
+
+/// 이 세션을 띄운 Orca 쪽 식별자. 클릭했을 때 Orca 의 그 채팅 탭·터미널 탭을 고르는 데 쓴다.
+///
+/// Orca 는 자기가 띄운 에이전트에 `ORCA_AGENT_SESSION_ID`(채팅), `ORCA_TERMINAL_HANDLE`(터미널)를 넘긴다.
+/// 이 변수는 Orca 터미널에서 띄운 다른 앱(VS Code 등)에도 물려 갈 수 있다. 그래서 Claude 는
+/// entrypoint 가 Orca 채팅(`orca`)·터미널(`cli`)일 때만 받는다. Codex 는 entrypoint 가 없으므로 변수만 본다.
+function detectOrca() {
+  const entrypoint = String(process.env.CLAUDE_CODE_ENTRYPOINT || '');
+  if (eventSource === 'claude' && entrypoint !== 'orca' && entrypoint !== 'cli') return {};
+  const sessionId = identifier(process.env.ORCA_AGENT_SESSION_ID);
+  const terminalHandle = identifier(process.env.ORCA_TERMINAL_HANDLE);
+  if (!sessionId && !terminalHandle) return {};
+  return { sessionId, terminalHandle };
 }
 
 /// SessionStart 는 "이 세션에 프로세스가 붙었다" 는 뜻이지 "상태가 바뀌었다" 가 아니다.
@@ -440,6 +464,7 @@ function updateRegistry(input, fallbackState) {
   // 새 명령을 받은 순간에는 아직 할 말이 없다. 비워 두면 펫이 "생각중" 을 띄운다.
   const liveMessage = event === 'UserPromptSubmit' ? '' : lastAssistantTextFrom(transcriptPath);
 
+  const orca = detectOrca();
   const record = {
     sessionId,
     rawSessionId,
@@ -478,6 +503,9 @@ function updateRegistry(input, fallbackState) {
     closed: isClosed,
     client: eventSource === 'codex' ? 'codex' : (detectClient() || previous.client || ''),
     entrypoint: text(process.env.CLAUDE_CODE_ENTRYPOINT, 40) || previous.entrypoint || '',
+    // 빈 값은 이전 값을 덮지 않는다. client 와 같은 이유다.
+    orcaSessionId: orca.sessionId || previous.orcaSessionId || '',
+    orcaTerminalHandle: orca.terminalHandle || previous.orcaTerminalHandle || '',
     // 사람이 이 세션에 말을 건 적이 있나. 유령 세션을 가려내는 유일한 표식이다.
     promptedAt: event === 'UserPromptSubmit' ? now.toISOString() : (previous.promptedAt || ''),
     startedAt: previous.startedAt || now.toISOString()
