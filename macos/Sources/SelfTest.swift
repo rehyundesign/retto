@@ -3,6 +3,7 @@
 import AppKit
 import CoreText
 import Foundation
+import SQLite3
 
 /// 흰 배경에서 머리 위에 회색 안개가 없는지 잰다.
 ///
@@ -310,6 +311,24 @@ func runSelfTest() -> Int32 {
     orcaFinished.state = "waving"
     orcaFinished.updatedAtMs = 6000
     let blockedChat = orcaStatuses?["thread-a"]
+    let orcaRecord = "{\"conversationName\":\" Orca 제목 \",\"providerHandleChain\":[{\"handle\":{\"provider\":\"codex\",\"threadId\":\"thread-old\"}},{\"handle\":{\"provider\":\"codex\",\"threadId\":\"thread-t\"}}]}"
+    var untitledOrcaRollout = discoveredCodexTask
+    untitledOrcaRollout.sessionTitle = nil
+    // 실제 SQLite 파일로 읽는다. 한 스레드를 두 채팅이 가리키면 탭 ID 는 비운다.
+    let orcaIndexURL = FileManager.default.temporaryDirectory.appendingPathComponent("retto-orca-index-\(UUID().uuidString).db")
+    do {
+        var db: OpaquePointer?
+        sqlite3_open(orcaIndexURL.path, &db)
+        let dup = "{\"conversationName\":\"둘\",\"providerHandleChain\":[{\"handle\":{\"provider\":\"codex\",\"threadId\":\"thread-dup\"}}]}"
+        sqlite3_exec(db, "CREATE TABLE agent_session_records (session_id TEXT PRIMARY KEY, record_json TEXT NOT NULL);"
+            + "INSERT INTO agent_session_records VALUES ('codex_t', '\(orcaRecord)'), ('codex_d1', '\(dup)'), ('codex_d2', '\(dup)'),"
+            + "('claude_x', '\(orcaRecord)'), ('codex_bad', '{');", nil, nil, nil)
+        sqlite3_close(db)
+    }
+    let orcaIndex = OrcaCodexThreadIndex(url: orcaIndexURL)
+    orcaIndex.refresh(now: 100)
+    let orcaIndexThreads = orcaIndex.threads
+    try? FileManager.default.removeItem(at: orcaIndexURL)
     let orcaFailedChat = orcaChatStatuses(fromOutput: "{\"chats\":[{\"sessionId\":\"codex_f\",\"threadId\":\"thread-f\",\"state\":\"done\",\"outcome\":\"failure\",\"since\":5500}]}")?["thread-f"]
     var orcaRunningAfterFailure = orcaRunning
     orcaRunningAfterFailure.updatedAtMs = 7000
@@ -342,6 +361,21 @@ func runSelfTest() -> Int32 {
         && applyOrcaChatStatus(orcaFailedChat, to: orcaFinished).needsAttention
         // 실패 뒤 새 턴이 시작됐으면 지난 실패를 띄우지 않는다.
         && applyOrcaChatStatus(orcaFailedChat, to: orcaRunningAfterFailure).petState == .running
+        // Orca 의 Codex 채팅은 Codex 쪽 제목이 없어 숨겨졌다. Orca 기록의 제목과 탭 ID 를 붙여 보인다.
+        && orcaCodexThread(fromRecord: orcaRecord, sessionId: "codex_t")?.threadId == "thread-t"
+        && orcaCodexThread(fromRecord: orcaRecord, sessionId: "codex_t")?.thread == OrcaCodexThread(orcaSessionId: "codex_t", title: "Orca 제목")
+        && orcaCodexThread(fromRecord: "{\"providerHandleChain\":[]}", sessionId: "codex_u") == nil
+        && orcaCodexThread(fromRecord: "{", sessionId: "codex_u") == nil
+        // 제목은 Codex 색인이 먼저고, 비었을 때만 Orca 제목을 쓴다.
+        && codexDiscoveryTitles(index: ["a": "색인", "b": ""], extra: ["a": "Orca", "b": "Orca 비", "c": "Orca 만"])
+            == ["a": "색인", "b": "Orca 비", "c": "Orca 만"]
+        && linkOrcaCodexTask(untitledOrcaRollout, thread: OrcaCodexThread(orcaSessionId: "codex_t", title: "Orca 제목")).orcaHosted == true
+        && orcaOpenRequest(for: linkOrcaCodexTask(untitledOrcaRollout, thread: OrcaCodexThread(orcaSessionId: "codex_t", title: "Orca 제목")))?.sessionId == "codex_t"
+        && linkOrcaCodexTask(untitledOrcaRollout, thread: OrcaCodexThread(orcaSessionId: "", title: "둘")).orcaSessionId == nil
+        && linkOrcaCodexTask(untitledOrcaRollout, thread: nil) == untitledOrcaRollout
+        && orcaIndexThreads["thread-t"] == OrcaCodexThread(orcaSessionId: "codex_t", title: "Orca 제목")
+        && orcaIndexThreads["thread-dup"] == OrcaCodexThread(orcaSessionId: "", title: "둘")
+        && orcaIndexThreads.count == 2
     let runningCodexPayload = try! JSONDecoder().decode(StatePayload.self, from: "{\"state\":\"running\",\"sessionId\":\"thread-one\",\"source\":\"codex\",\"sessionTitle\":\"예전 제목\",\"updatedAtMs\":1000}".data(using: .utf8)!)
     let completedCodexTask = reconcileCodexTask(
         payload: runningCodexPayload,

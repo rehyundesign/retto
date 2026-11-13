@@ -894,8 +894,9 @@ final class CodexRolloutDiscovery {
     }
     private var parsed: [String: ParsedRollout] = [:]
 
-    func recentTasks(now: Date = Date()) -> [StatePayload] {
-        let knownTitles = titles.allTitles()
+    /// `extraTitles` 는 Codex 색인에 제목이 없는 스레드의 제목이다(Orca 채팅). 색인 제목이 있으면 그쪽이 먼저다.
+    func recentTasks(now: Date = Date(), extraTitles: [String: String] = [:]) -> [StatePayload] {
+        let knownTitles = codexDiscoveryTitles(index: titles.allTitles(), extra: extraTitles)
         var tasks: [String: StatePayload] = [:]
         let paths: [String]
         do { paths = try FileManager.default.subpathsOfDirectory(atPath: sessionsURL.path) }
@@ -1077,4 +1078,10 @@ private final class CodexTranscriptRecords: Sequence, IteratorProtocol {
             position = 0; eof = chunk.isEmpty
         }
     }
+}
+
+/// 롤아웃 탐색에 쓸 제목. Codex 색인의 제목이 먼저고, 비어 있을 때만 다른 출처(Orca 채팅 제목)를 쓴다.
+func codexDiscoveryTitles(index: [String: String], extra: [String: String]) -> [String: String] {
+    guard !extra.isEmpty else { return index }
+    return extra.merging(index.filter { !$0.value.isEmpty }) { _, indexTitle in indexTitle }
 }

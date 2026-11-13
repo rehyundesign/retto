@@ -70,6 +70,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     private let claudeNativeStatusReader = ClaudeNativeStatusReader()
     private let orcaCodexOriginReader = OrcaCodexOriginReader()
     private let orcaChatStatusReader = OrcaChatStatusReader()
+    private let orcaCodexThreadIndex = OrcaCodexThreadIndex()
     private let orcaNavigator = OrcaNavigator()
     private let taskStatusDiagnostics = TaskStatusDiagnostics()
     /// 세션이 없을 때 쓰는 빈 껍데기. 상태·이름·멘트는 넘겨 주는 값으로 덮는다.
@@ -594,8 +595,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             .map { ($0.id, $0) })
         // 이미 훅으로 받은 task는 더 정밀한 상태가 있으므로 유지한다. 훅에 없는 task만
         // 롤아웃에서 넣어, 연결을 꺼도 기본 표시가 사라지지 않게 한다.
-        for task in codexRolloutDiscovery.recentTasks() where task.isRettoVisibleTask && merged[task.id] == nil {
-            merged[task.id] = task
+        // Orca 의 Codex 채팅은 Codex 색인에 제목이 없어 숨겨졌다. Orca 기록의 제목으로 찾고 탭 ID 를 붙인다.
+        orcaCodexThreadIndex.refresh()
+        let orcaThreads = orcaCodexThreadIndex.threads
+        for task in codexRolloutDiscovery.recentTasks(extraTitles: orcaThreads.compactMapValues(\.title))
+            where task.isRettoVisibleTask && merged[task.id] == nil {
+            let thread = orcaThreads[task.navigationSessionId]
+            merged[task.id] = thread != nil && orcaCodexOriginReader.isFromOrca(transcriptPath: task.transcriptPath)
+                ? linkOrcaCodexTask(task, thread: thread) : task
         }
         for notice in slack.payloads { merged[notice.id] = notice }
         let monitoringSince = Date().timeIntervalSince1970 * 1000 - 24 * 60 * 60 * 1000

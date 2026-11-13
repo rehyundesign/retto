@@ -19,6 +19,7 @@
 
 import AppKit
 import Foundation
+import SQLite3
 
 let orcaBundleIdentifier = "com.stablyai.orca"
 /// Orca 의 기본 사용자 데이터 폴더. 세션 기록(`agent-session-journal.db`)이 여기 있다.
@@ -510,4 +511,98 @@ final class OrcaChatStatusReader {
                                           timeout: 5) else { return nil }
         return orcaChatStatuses(fromOutput: output)
     }
+}
+
+// MARK: - Orca 의 Codex 채팅 제목
+//
+// 레토는 제목 없는 Codex task 를 내부 세션으로 보고 숨긴다(`isRettoVisibleTask`). 그런데 Orca 가 띄운
+// Codex 스레드는 `~/.codex/session_index.jsonl` 에 제목이 남지 않는다(2026-11-13 확인: 최근 Orca 스레드 8개 모두).
+// 제목은 Orca 세션 기록(`agent_session_records.record_json` 의 `conversationName`)에만 있다.
+// 그래서 Orca 의 Codex 채팅은 레토에 아예 뜨지 않았다. 이 기록을 읽기 전용으로 열어 제목과 Orca 세션 ID 를 얻는다.
+
+struct OrcaCodexThread: Equatable {
+    let orcaSessionId: String
+    let title: String?
+}
+
+/// `record_json` 하나에서 마지막 Codex 스레드 ID 와 제목을 꺼낸다.
+func orcaCodexThread(fromRecord json: String, sessionId: String) -> (threadId: String, thread: OrcaCodexThread)? {
+    guard let data = json.data(using: .utf8),
+          let record = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+          let chain = record["providerHandleChain"] as? [[String: Any]] else { return nil }
+    let threadId = chain.reversed().compactMap { link -> String? in
+        guard let handle = link["handle"] as? [String: Any], handle["provider"] as? String == "codex" else { return nil }
+        return handle["threadId"] as? String
+    }.first
+    guard let threadId, threadId.range(of: "^[A-Za-z0-9_:.-]{1,128}$", options: .regularExpression) != nil else { return nil }
+    let name = (record["conversationName"] as? String)?.trimmingCharacters(in: .whitespacesAndNewlines)
+    let title = name.flatMap { $0.isEmpty ? nil : String($0.prefix(200)) }
+    return (threadId, OrcaCodexThread(orcaSessionId: sessionId, title: title))
+}
+
+/// Codex 스레드 ID → Orca 채팅. 기록 파일이 바뀌었을 때만, 2초에 한 번까지 다시 읽는다.
+final class OrcaCodexThreadIndex {
+    private(set) var threads: [String: OrcaCodexThread] = [:]
+    private let url: URL
+    private var stamp: [Double] = []
+    private var checkedAt: TimeInterval = 0
+
+    init(url: URL = orcaUserDataURL.appendingPathComponent("agent-session-journal.db")) { self.url = url }
+
+    func refresh(now: TimeInterval = Date().timeIntervalSince1970) {
+        guard now - checkedAt >= 2 else { return }
+        checkedAt = now
+        let paths = [url.path, url.path + "-wal"]
+        let next = paths.map { path -> Double in
+            var info = stat()
+            guard stat(path, &info) == 0 else { return 0 }
+            return Double(info.st_mtimespec.tv_sec) + Double(info.st_mtimespec.tv_nsec) / 1e9 + Double(info.st_size)
+        }
+        guard next != stamp else { return }
+        // 못 읽으면 다음 변경 때 다시 읽는다. 지난 목록은 그대로 둔다 — 제목은 잠깐 못 읽어도 바뀌지 않는다.
+        guard let read = Self.read(url) else { return }
+        stamp = next
+        threads = read
+    }
+
+    private static func read(_ url: URL) -> [String: OrcaCodexThread]? {
+        var db: OpaquePointer?
+        guard sqlite3_open_v2(url.path, &db, SQLITE_OPEN_READONLY, nil) == SQLITE_OK, let db else {
+            sqlite3_close(db)
+            return nil
+        }
+        defer { sqlite3_close(db) }
+        sqlite3_busy_timeout(db, 200)
+        var statement: OpaquePointer?
+        let sql = "SELECT session_id, record_json FROM agent_session_records WHERE session_id LIKE 'codex%'"
+        guard sqlite3_prepare_v2(db, sql, -1, &statement, nil) == SQLITE_OK else { return nil }
+        defer { sqlite3_finalize(statement) }
+        var result: [String: OrcaCodexThread] = [:]
+        var owners: [String: Int] = [:]
+        while true {
+            let step = sqlite3_step(statement)
+            if step == SQLITE_DONE { break }
+            guard step == SQLITE_ROW else { return nil }
+            guard let idText = sqlite3_column_text(statement, 0), let jsonText = sqlite3_column_text(statement, 1) else { continue }
+            let sessionId = String(cString: idText)
+            guard let found = orcaCodexThread(fromRecord: String(cString: jsonText), sessionId: sessionId) else { continue }
+            owners[found.threadId, default: 0] += 1
+            result[found.threadId] = found.thread
+        }
+        // 한 스레드를 두 채팅이 가리키면 어느 탭인지 모른다. 제목은 남기고 탭 ID 만 비운다.
+        for (thread, count) in owners where count > 1 {
+            result[thread] = OrcaCodexThread(orcaSessionId: "", title: result[thread]?.title)
+        }
+        return result
+    }
+}
+
+/// Orca 기록에 있는 Codex 롤아웃 task 를 Orca 채팅으로 표시하고 탭 ID 를 붙인다.
+/// 롤아웃이 Orca 가 띄운 것(`originator: orca_desktop`)일 때만 부른다.
+func linkOrcaCodexTask(_ task: StatePayload, thread: OrcaCodexThread?) -> StatePayload {
+    guard let thread, task.source == "codex" || task.client == "codex" else { return task }
+    var result = task
+    result.orcaHosted = true
+    if !thread.orcaSessionId.isEmpty, (result.orcaSessionId ?? "").isEmpty { result.orcaSessionId = thread.orcaSessionId }
+    return result
 }
