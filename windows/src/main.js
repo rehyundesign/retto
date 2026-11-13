@@ -18,11 +18,22 @@ const { StatusAssembler } = require('./status');
 
 const POLL_MS = 250;
 const RETHINK_MS = 1000;
-const PET_SIZE = { width: 280, height: 230 };
+const PET_SIZE = { width: 280, height: 270 };
 
 const resourcesDir = app.isPackaged ? process.resourcesPath : path.join(__dirname, '..', '..');
 const assetsDir = path.join(resourcesDir, 'assets');
 const hookDir = path.join(resourcesDir, 'hook');
+// 스킨 프레임. 맥 앱이 실제로 그린 그림을 내보낸 것이다(macos/Sources/WindowsSkinExport.swift · windows/scripts/export-skins.mjs).
+// 없으면 예전처럼 기본 아틀라스 한 장으로 그린다.
+const skinsDir = app.isPackaged ? path.join(process.resourcesPath, 'skins') : path.join(__dirname, '..', 'skins');
+let skinManifest = null;
+function loadSkins() {
+  try { skinManifest = JSON.parse(fs.readFileSync(path.join(skinsDir, 'manifest.json'), 'utf8')); } catch { skinManifest = null; }
+}
+function currentSkin() {
+  const skins = skinManifest?.skins || [];
+  return skins.find((skin) => skin.id === local.skin) || skins.find((skin) => skin.id === 'classic') || skins[0] || null;
+}
 const { petDir, settingsPath, codexHooksPath, codexHome } = setupCheck.homePaths();
 const registryPath = path.join(petDir, 'sessions.json');
 const statePath = () => path.join(app.getPath('userData'), 'retto-state.json');
@@ -36,7 +47,7 @@ let assembler;
 let view;
 let registryMtime = 0;
 const trackingStartedAtMs = Date.now();
-let local = { seen: {}, pinnedId: null, clickThrough: false, position: null, setupShown: false };
+let local = { seen: {}, pinnedId: null, clickThrough: false, position: null, setupShown: false, skin: 'classic' };
 
 function loadLocal() {
   try { local = { ...local, ...JSON.parse(fs.readFileSync(statePath(), 'utf8')) }; } catch {}
@@ -170,9 +181,23 @@ function sendView() {
     sprite: core.SPRITE,
     bubble: { ...bubble, colors: core.TONES[bubble.tone] },
     badge: view?.badgeCount || 0,
+    skin: skinPayload(),
     pinned: Boolean(local.pinnedId),
     clickThrough: local.clickThrough
   });
+}
+
+function skinPayload() {
+  const skin = currentSkin();
+  if (!skin) return null;
+  return {
+    id: skin.id,
+    base: pathToFileURL(path.join(skinsDir, skin.id) + path.sep).href,
+    clips: skin.clips,
+    frameWidth: skinManifest.frameWidth,
+    frameHeight: skinManifest.frameHeight,
+    petRect: skinManifest.petRect
+  };
 }
 
 // ── 세션 열기 ──────────────────────────────────────────────────────────────
@@ -306,7 +331,7 @@ let lastMenuKey = '';
 function rebuildTrayMenu() {
   if (!tray) return;
   const listed = (view?.sessions || []).filter((session) => !session.isClosed).slice(0, 12);
-  const key = JSON.stringify([listed.map((session) => [session.id, session.visibleState, core.sessionTitle(session)]), local.pinnedId, local.clickThrough, view?.badgeCount]);
+  const key = JSON.stringify([listed.map((session) => [session.id, session.visibleState, core.sessionTitle(session)]), local.pinnedId, local.clickThrough, view?.badgeCount, local.skin]);
   if (key === lastMenuKey) return;
   lastMenuKey = key;
   const sessionItems = listed.length
@@ -324,6 +349,15 @@ function rebuildTrayMenu() {
     { label: '자동으로 급한 세션 따라가기', type: 'radio', checked: !local.pinnedId, click: () => { local.pinnedId = null; saveLocal(); rethink(); } },
     { type: 'separator' },
     { label: `완료 알림 모두 읽음${view?.badgeCount ? ` (${view.badgeCount})` : ''}`, enabled: Boolean(view?.badgeCount), click: clearAttention },
+    ...(skinManifest?.skins?.length ? [{
+      label: `스킨 · ${currentSkin()?.label || ''}`,
+      submenu: skinManifest.skins.map((skin) => ({
+        label: skin.label,
+        type: 'radio',
+        checked: currentSkin()?.id === skin.id,
+        click: () => { local.skin = skin.id; saveLocal(); lastMenuKey = ''; sendView(); rebuildTrayMenu(); }
+      }))
+    }] : []),
     { label: '클릭 통과', type: 'checkbox', checked: local.clickThrough, click: (item) => setClickThrough(item.checked) },
     { label: 'Windows 시작 시 실행', type: 'checkbox', checked: app.getLoginItemSettings().openAtLogin, click: (item) => app.setLoginItemSettings({ openAtLogin: item.checked }) },
     { type: 'separator' },
@@ -431,6 +465,9 @@ if (!gotLock) {
   app.on('second-instance', openSetupWindow);
   app.whenReady().then(() => {
     loadLocal();
+    loadSkins();
+    // 진단 화면을 스킨별로 남길 때만 쓴다(CI · 내보내기 검수).
+    if (previewOut && process.env.RETTO_PREVIEW_SKIN) local.skin = process.env.RETTO_PREVIEW_SKIN;
     if (process.platform === 'darwin') app.dock?.hide();
     tray = new Tray(nativeImage.createFromPath(path.join(assetsDir, 'icon.png')).resize({ width: 16, height: 16 }));
     tray.on('click', () => openSession(view?.selected));
