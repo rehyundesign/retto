@@ -15,6 +15,7 @@ enum NewsChannel: String, CaseIterable {
     case vscode
     case claudeApp
     case cli
+    case orca
     case codex
 
     var label: String {
@@ -22,6 +23,7 @@ enum NewsChannel: String, CaseIterable {
         case .vscode: return "VS Code"
         case .claudeApp: return "Claude 앱"
         case .cli: return "터미널"
+        case .orca: return "Orca"
         case .codex: return "Codex"
         }
     }
@@ -33,6 +35,7 @@ enum NewsChannel: String, CaseIterable {
         case "vscode": return .vscode
         case "claude": return .claudeApp
         case "cli": return .cli
+        case "orca": return .orca
         default: return nil
         }
     }

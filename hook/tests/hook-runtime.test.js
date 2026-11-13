@@ -11,7 +11,7 @@ function invoke(hookPath, payload, fallbackState = 'idle', env = undefined, sour
     if (source === 'codex') args.push('codex');
     const child = spawn(process.execPath, args, {
       stdio: ['pipe', 'ignore', 'pipe'],
-      env: { ...process.env, CLAUDE_CODE_ENTRYPOINT: '', CLAUDE_CODE_EXECPATH: '', ...env }
+      env: { ...process.env, CLAUDE_CODE_ENTRYPOINT: '', CLAUDE_CODE_EXECPATH: '', ORCA_AGENT_SESSION_ID: '', ORCA_TERMINAL_HANDLE: '', ...env }
     });
     let stderr = '';
     child.stderr.on('data', (chunk) => { stderr += chunk; });
@@ -273,6 +273,8 @@ test('records which client each session came from', async () => {
     ['sdk', { CLAUDE_CODE_ENTRYPOINT: 'sdk-ts' }, 'claude'],
     ['agent', { CLAUDE_CODE_ENTRYPOINT: 'local-agent' }, 'claude'],
     ['terminal', { CLAUDE_CODE_ENTRYPOINT: 'cli' }, 'cli'],
+    // Orca 채팅. 예전에는 Claude 앱으로 분류되어 클릭하면 Claude 앱이 앞으로 왔다.
+    ['orca-chat', { CLAUDE_CODE_ENTRYPOINT: 'orca' }, 'orca'],
     ['unknown', {}, ''],
     // EXECPATH 는 더 이상 보지 않는다. VS Code 바이너리로 데스크탑 앱이 돌아도 entrypoint 가 답이다.
     ['desktop-via-code-binary', {
@@ -723,4 +725,38 @@ test('legacy prompt without turn ID does not retire the current active turn', as
   await invoke(hook, { ...base, hook_event_name: 'UserPromptSubmit' }, 'running', {}, 'codex');
   await invoke(hook, { ...base, turn_id: 'current-turn', tool_use_id: 'tool-a', hook_event_name: 'PermissionRequest' }, 'waiting', {}, 'codex');
   assert.equal(registry(directory)['codex:legacy-turn'].state, 'waiting');
+});
+
+/// 클릭했을 때 Orca 의 그 탭을 고르려면 Orca 가 넘긴 식별자가 남아 있어야 한다.
+/// Orca 터미널에서 띄운 다른 앱이 변수를 물려받아도 그 세션을 Orca 것으로 보지 않는다.
+test('records Orca chat and terminal identifiers only for Orca-launched sessions', async () => {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'reto-hook-orca-'));
+  const hookPath = path.join(directory, 'hook.cjs');
+  fs.copyFileSync(path.join(__dirname, '..', 'hook.cjs'), hookPath);
+  const orcaEnv = { ORCA_AGENT_SESSION_ID: 'claude_5ff065f5_07c7', ORCA_TERMINAL_HANDLE: '' };
+  await invoke(hookPath, { hook_event_name: 'UserPromptSubmit', session_id: 'chat' }, 'running',
+    { CLAUDE_CODE_ENTRYPOINT: 'orca', ...orcaEnv });
+  await invoke(hookPath, { hook_event_name: 'UserPromptSubmit', session_id: 'term' }, 'running',
+    { CLAUDE_CODE_ENTRYPOINT: 'cli', ORCA_TERMINAL_HANDLE: 'term_abc123' });
+  await invoke(hookPath, { hook_event_name: 'UserPromptSubmit', session_id: 'code' }, 'running',
+    { CLAUDE_CODE_ENTRYPOINT: 'claude-vscode', ...orcaEnv });
+  await invoke(hookPath, { hook_event_name: 'UserPromptSubmit', session_id: 'thread-orca' }, 'running',
+    { ORCA_AGENT_SESSION_ID: 'codex_9908c202' }, 'codex');
+  // 모양이 다른 값은 잘라 쓰지 않고 버린다. 잘린 ID 는 다른 탭을 가리킨다.
+  await invoke(hookPath, { hook_event_name: 'UserPromptSubmit', session_id: 'bad' }, 'running',
+    { CLAUDE_CODE_ENTRYPOINT: 'orca', ORCA_AGENT_SESSION_ID: 'bad id; rm -rf' });
+  // 식별자를 못 읽은 다음 훅이 이미 알아낸 값을 지우지 않는다.
+  await invoke(hookPath, { hook_event_name: 'Stop', session_id: 'chat' }, 'waving', { CLAUDE_CODE_ENTRYPOINT: 'orca' });
+
+  const { sessions } = JSON.parse(fs.readFileSync(path.join(directory, 'sessions.json'), 'utf8'));
+  assert.equal(sessions.chat.client, 'orca');
+  assert.equal(sessions.chat.orcaSessionId, 'claude_5ff065f5_07c7');
+  assert.equal(sessions.term.client, 'cli');
+  assert.equal(sessions.term.orcaTerminalHandle, 'term_abc123');
+  assert.equal(sessions.term.orcaSessionId, '');
+  assert.equal(sessions.code.client, 'vscode');
+  assert.equal(sessions.code.orcaSessionId, '');
+  assert.equal(sessions['codex:thread-orca'].client, 'codex');
+  assert.equal(sessions['codex:thread-orca'].orcaSessionId, 'codex_9908c202');
+  assert.equal(sessions.bad.orcaSessionId, '');
 });

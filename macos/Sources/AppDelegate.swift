@@ -68,6 +68,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     private var isUninstalling = false
     private var liveStatusApplyScheduled = false
     private let claudeNativeStatusReader = ClaudeNativeStatusReader()
+    private let orcaCodexOriginReader = OrcaCodexOriginReader()
+    private let orcaChatStatusReader = OrcaChatStatusReader()
+    private let orcaCodexThreadIndex = OrcaCodexThreadIndex()
+    private let orcaNavigator = OrcaNavigator()
     private let taskStatusDiagnostics = TaskStatusDiagnostics()
     /// 세션이 없을 때 쓰는 빈 껍데기. 상태·이름·멘트는 넘겨 주는 값으로 덮는다.
     private static let placeholderPayload: StatePayload? = {
@@ -299,6 +303,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     }
 
     private func resolveOpenApp(for payload: StatePayload?) -> OpenApp {
+        // Orca 에서 띄운 세션은 Orca 의 그 탭으로만 열 수 있다. VS Code·Claude 앱·Codex 앱으로 보내면
+        // 같은 대화를 한 번 더 열거나 엉뚱한 창이 앞으로 온다. 열기 대상을 고정했어도 Orca 로 보낸다.
+        if payload?.isOrca == true, isOpenAppInstalled(.orca) {
+            return .orca
+        }
         // Codex task id 는 Claude Code session id 와 호환되지 않는다. 사용자가 Claude 쪽 열기
         // 대상을 고정했더라도 Codex 세션은 반드시 Codex 로 돌려보낸다.
         if payload?.source == "codex" || payload?.client == "codex" {
@@ -554,6 +563,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
                 self.applySessions(self.hookSessions)
             }
         }
+        // Orca 의 Codex 채팅은 훅이 꺼져 있어 승인·질문 대기를 Orca 에 직접 물어본다.
+        // 상태를 고르는 도중(track)에도 바뀔 수 있으므로 다음 차례에 다시 그린다.
+        orcaChatStatusReader.onChange = { [weak self] in
+            DispatchQueue.main.async {
+                guard let self, !self.isUninstalling else { return }
+                self.applySessions(self.hookSessions)
+            }
+        }
         let petDirectory = FileManager.default.homeDirectoryForCurrentUser
             .appendingPathComponent(".claude/retto-pet")
         stateMonitor = StateMonitor(
@@ -578,8 +595,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             .map { ($0.id, $0) })
         // 이미 훅으로 받은 task는 더 정밀한 상태가 있으므로 유지한다. 훅에 없는 task만
         // 롤아웃에서 넣어, 연결을 꺼도 기본 표시가 사라지지 않게 한다.
-        for task in codexRolloutDiscovery.recentTasks() where task.isRettoVisibleTask && merged[task.id] == nil {
-            merged[task.id] = task
+        // Orca 의 Codex 채팅은 Codex 색인에 제목이 없어 숨겨졌다. Orca 기록의 제목으로 찾고 탭 ID 를 붙인다.
+        orcaCodexThreadIndex.refresh()
+        let orcaThreads = orcaCodexThreadIndex.threads
+        for task in codexRolloutDiscovery.recentTasks(extraTitles: orcaThreads.compactMapValues(\.title))
+            where task.isRettoVisibleTask && merged[task.id] == nil {
+            let thread = orcaThreads[task.navigationSessionId]
+            merged[task.id] = thread != nil && orcaCodexOriginReader.isFromOrca(transcriptPath: task.transcriptPath)
+                ? linkOrcaCodexTask(task, thread: thread) : task
         }
         for notice in slack.payloads { merged[notice.id] = notice }
         let monitoringSince = Date().timeIntervalSince1970 * 1000 - 24 * 60 * 60 * 1000
@@ -606,9 +629,19 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             }.map { ($0.navigationSessionId, $0.updatedAtMs ?? 0) }, uniquingKeysWith: max))
         // 우선순위는 파일 시각까지 읽으므로 비교마다 다시 구하지 않고 세션마다 한 번만 구한다.
         claudeNativeStatusReader.refresh()
-        sessions = merged.values.map { payload in
-            let output = reconciledCodexPayload(applyClaudeNativeStatus(
+        sessions = merged.values.map { incoming in
+            var payload = incoming
+            // Orca 는 자기가 띄운 Codex 의 훅을 끈다. 훅이 Orca 식별자를 적지 못하므로 롤아웃으로 알아본다.
+            if (payload.source == "codex" || payload.client == "codex"), !payload.isOrca,
+               orcaCodexOriginReader.isFromOrca(transcriptPath: payload.transcriptPath) {
+                payload.orcaHosted = true
+            }
+            var output = reconciledCodexPayload(applyClaudeNativeStatus(
                 claudeNativeStatusReader.status(for: payload), to: payload))
+            // 훅이 도는 Orca 터미널의 Codex 는 훅이 대기를 알려 준다. 훅 없는 채팅만 Orca 상태를 겹친다.
+            if payload.orcaHosted == true {
+                output = applyOrcaChatStatus(orcaChatStatusReader.status(for: payload.navigationSessionId), to: output)
+            }
             if payload.source != "slack" {
                 taskStatusDiagnostics.record(input: payload, output: output,
                     live: codexLiveStatusReader.statuses[payload.navigationSessionId],
@@ -622,6 +655,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
                 return ($0.payload.updatedAtMs ?? 0) > ($1.payload.updatedAtMs ?? 0)
             }
             .map(\.payload)
+        // 턴 도중·대기 중이거나 막 끝난 Orca 의 Codex 채팅만 Orca 에 묻는다(orcaChatNeedsWatching).
+        let watchNowMs = Date().timeIntervalSince1970 * 1000
+        orcaChatStatusReader.track(Set(sessions.filter {
+            !$0.isClosed && $0.orcaHosted == true && orcaChatNeedsWatching(state: $0.petState,
+                lastActivityMs: max($0.updatedAtMs ?? 0, transcriptModifiedAtMs(path: $0.transcriptPath) ?? 0), nowMs: watchNowMs)
+        }.map(\.navigationSessionId)))
         let openSessions = sessions.filter { !$0.isClosed }
         let attentionSessions = openSessions.filter { self.needsAttention($0) }
         if let pinnedSessionId,
@@ -816,7 +855,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             menu.addItem(open)
             return menu
         }
-        let apps: [OpenApp] = payload.sourceLabel == "Codex" ? [.codex] : [.vscode, .claude]
+        let apps: [OpenApp]
+        if payload.isOrca {
+            // Codex 스레드는 Codex 앱에서도 열린다. Orca 의 Claude 채팅은 다른 앱에서 고를 길이 없다.
+            apps = payload.sourceLabel == "Codex" ? [.orca, .codex] : [.orca]
+        } else {
+            apps = payload.sourceLabel == "Codex" ? [.codex] : [.vscode, .claude]
+        }
         for app in apps where isOpenAppInstalled(app) {
             let choice = NSMenuItem(title: openTaskMenuTitle(app), action: #selector(openTask(_:)), keyEquivalent: "")
             choice.target = self
@@ -841,6 +886,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         case .vscode: return "VS Code에서 열기"
         case .claude: return "Claude 앱에서 열기"
         case .codex: return "Codex 앱에서 열기"
+        case .orca: return "Orca에서 열기"
         }
     }
 
@@ -1055,6 +1101,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             return
         }
         let app = preferredApp ?? resolveOpenApp(for: target)
+        if app == .orca, let target {
+            openInOrca(target, windowOnly: windowOnly)
+            return
+        }
         focusHostApp(for: target, app: app) { [weak self] matchedWindow in
             guard let self, !windowOnly, matchedWindow else { return }
             // 세션을 집어 띄울 길이 없는 앱(Claude 데스크탑)은 앞으로 보낸 것으로 끝낸다.
@@ -1070,6 +1120,23 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             // 눌렀다는 것 자체를 다녀온 것으로 센다. 그 앱 안에서 어느 세션을 보는지까지는
             // 알 수 없지만, 배지가 안 지워지는 쪽이 더 성가시다. 손으로 지울 길도 따로 있다.
             self.markSeen(target)
+        }
+    }
+
+    /// Orca 를 앞으로 가져오고 그 세션의 채팅 탭(또는 터미널 탭)을 고른다.
+    /// ⌥ 를 누른 채면 Orca 만 앞으로 가져온다. 다른 앱과 같이, 눌러서 다녀오면 읽음으로 본다.
+    private func openInOrca(_ payload: StatePayload, windowOnly: Bool) {
+        let request = windowOnly
+            ? OrcaOpenRequest(sessionId: nil, terminalHandle: nil, workspacePath: nil, agent: "claude")
+            : orcaOpenRequest(for: payload)
+                ?? OrcaOpenRequest(sessionId: nil, terminalHandle: nil, workspacePath: payload.cwd, agent: "claude")
+        orcaNavigator.open(request) { [weak self] outcome in
+            guard let self else { return }
+            if outcome == .unavailable {
+                NSSound.beep()
+                return
+            }
+            if !windowOnly { self.markSeen(payload) }
         }
     }
 
@@ -1748,6 +1815,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
 
     func applicationWillTerminate(_ notification: Notification) {
         codexLiveStatusReader.stop()
+        orcaChatStatusReader.stop()
         clearDefaultsIfUninstalling()
     }
 

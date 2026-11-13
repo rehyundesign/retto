@@ -8,7 +8,7 @@ A desk pet for [Claude Code](https://claude.com/claude-code) and Codex — a mac
 that sits above every Space and full-screen app. It turns green while your agents work, blue
 when one needs your answer, orange when a turn finished and you haven't looked yet, red when
 something failed, and it takes you to that session when you click. One app watches sessions
-coming from VS Code, the Claude desktop app, the terminal, and Codex at once.
+coming from VS Code, the Claude desktop app, the terminal, Codex, and Orca at once.
 
 Requires an Apple Silicon Mac (macOS 13 or later) and Node.js.
 

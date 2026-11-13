@@ -3,6 +3,7 @@
 import AppKit
 import CoreText
 import Foundation
+import SQLite3
 
 /// 흰 배경에서 머리 위에 회색 안개가 없는지 잰다.
 ///
@@ -260,6 +261,121 @@ func runSelfTest() -> Int32 {
     // 훅이 답을 이름으로 쓰지 않게 고쳐서 대타가 이제 믿을 만하고, 이름 없는 세션이
     // 여럿이면 목록에서 구분이 안 되기 때문이다. 되돌리려면 Sessions.swift 의 title 을 줄인다.
     let unnamedTitleOK = unnamedPayload.title == "진행 중 작업"
+    // Orca 에서 띄운 세션. 누르면 Orca 의 그 탭으로 가야 하고, 다른 앱으로 떨어지면 안 된다.
+    // Claude 채팅은 훅이 Orca 세션 ID 를 적고, Codex 채팅은 훅이 꺼져 있어 롤아웃 originator 로 알아본다.
+    let orcaChat = try! JSONDecoder().decode(StatePayload.self, from: """
+        {"state":"waving","sessionId":"s-orca","source":"claude","client":"orca","orcaSessionId":"claude_abc","cwd":"/tmp/ws","sessionTitle":"Orca 작업"}
+        """.data(using: .utf8)!)
+    let orcaTerminal = try! JSONDecoder().decode(StatePayload.self, from: """
+        {"state":"running","sessionId":"s-term","source":"claude","client":"cli","orcaTerminalHandle":"term_abc","cwd":"/tmp/ws","sessionTitle":"터미널 작업"}
+        """.data(using: .utf8)!)
+    let plainCode = try! JSONDecoder().decode(StatePayload.self, from: """
+        {"state":"running","sessionId":"s-code","source":"claude","client":"vscode","cwd":"/tmp/ws","sessionTitle":"코드 작업"}
+        """.data(using: .utf8)!)
+    var orcaCodex = discoveredCodexTask
+    orcaCodex.orcaHosted = true
+    let orcaOK = openApp(forClient: "orca") == .orca
+        && sessionDeepLink(sessionId: "claude_abc", app: .orca) == nil
+        && !OpenApp.orca.hasSessionDeepLink && !OpenApp.orca.needsWindowFocusFirst
+        && installedOpenApp(preferred: .orca) { $0 != .orca } == .orca
+        && codexSessionMetaIsFromOrca("{\"type\":\"session_meta\",\"payload\":{\"id\":\"t\",\"originator\":\"orca_desktop\"}}")
+        && !codexSessionMetaIsFromOrca("{\"type\":\"session_meta\",\"payload\":{\"id\":\"t\",\"originator\":\"Codex Desktop\"}}")
+        && !codexSessionMetaIsFromOrca("{\"type\":\"session_meta\",\"payload\":")
+        && orcaChat.isOrca && orcaTerminal.isOrca && orcaCodex.isOrca && !plainCode.isOrca && !discoveredCodexTask.isOrca
+        && sessionMenuLabel(for: orcaChat) == "● 완료  Orca 작업 · ws · Orca"
+        && sessionMenuLabel(for: orcaCodex) == "● 완료  훅 없이 찾은 task · project · Orca"
+        && sessionMenuLabel(for: plainCode) == "● 작업 중  코드 작업 · ws · VS Code"
+        && orcaOpenRequest(for: orcaChat) == OrcaOpenRequest(sessionId: "claude_abc", terminalHandle: nil, workspacePath: "/tmp/ws", agent: "claude")
+        && orcaOpenRequest(for: orcaTerminal) == OrcaOpenRequest(sessionId: nil, terminalHandle: "term_abc", workspacePath: "/tmp/ws", agent: "claude")
+        && orcaOpenRequest(for: orcaCodex) == OrcaOpenRequest(sessionId: nil, terminalHandle: nil, workspacePath: "/tmp/project", agent: "codex", codexThreadId: "thread-one")
+        && orcaOpenRequest(for: plainCode) == nil
+        && NewsChannel.of(client: "orca", source: nil) == .orca
+        && orcaRevealOutcome("{\"opened\":\"chat\"}\n") == .chat
+        && orcaRevealOutcome("{\"opened\":\"workspace\"}") == .workspace
+        && orcaRevealOutcome("{\"opened\":\"none\"}") == nil
+        && orcaRevealOutcome("") == nil
+    // Orca 의 Codex 채팅은 훅이 꺼져 있다. Orca 가 탭에 붙인 상태가 `blocked`·`waiting` 이면 입력 대기다.
+    // 스레드를 이을 수 없거나 두 탭이 한 스레드를 가리키면 추측하지 않고 버린다.
+    let orcaStatuses = orcaChatStatuses(fromOutput: """
+        {"chats":[{"sessionId":"codex_a","threadId":"thread-a","state":"blocked","since":5000},
+        {"sessionId":"codex_b","threadId":"thread-b","state":"working","since":4000},
+        {"sessionId":"codex_c","threadId":null,"state":"blocked","since":4000},
+        {"sessionId":"codex_d","threadId":"thread-d","state":"waiting","since":4000},
+        {"sessionId":"codex_e","threadId":"thread-d","state":"done","since":4000},
+        {"sessionId":"bad id","threadId":"thread-f","state":"blocked","since":4000}]}
+        """.replacingOccurrences(of: "\n", with: ""))
+    var orcaRunning = orcaCodex
+    orcaRunning.state = "running"
+    orcaRunning.updatedAtMs = 3000
+    var orcaFinished = orcaCodex
+    orcaFinished.state = "waving"
+    orcaFinished.updatedAtMs = 6000
+    let blockedChat = orcaStatuses?["thread-a"]
+    let orcaRecord = "{\"conversationName\":\" Orca 제목 \",\"providerHandleChain\":[{\"handle\":{\"provider\":\"codex\",\"threadId\":\"thread-old\"}},{\"handle\":{\"provider\":\"codex\",\"threadId\":\"thread-t\"}}]}"
+    var untitledOrcaRollout = discoveredCodexTask
+    untitledOrcaRollout.sessionTitle = nil
+    // 실제 SQLite 파일로 읽는다. 한 스레드를 두 채팅이 가리키면 탭 ID 는 비운다.
+    let orcaIndexURL = FileManager.default.temporaryDirectory.appendingPathComponent("retto-orca-index-\(UUID().uuidString).db")
+    do {
+        var db: OpaquePointer?
+        sqlite3_open(orcaIndexURL.path, &db)
+        let dup = "{\"conversationName\":\"둘\",\"providerHandleChain\":[{\"handle\":{\"provider\":\"codex\",\"threadId\":\"thread-dup\"}}]}"
+        sqlite3_exec(db, "CREATE TABLE agent_session_records (session_id TEXT PRIMARY KEY, record_json TEXT NOT NULL);"
+            + "INSERT INTO agent_session_records VALUES ('codex_t', '\(orcaRecord)'), ('codex_d1', '\(dup)'), ('codex_d2', '\(dup)'),"
+            + "('claude_x', '\(orcaRecord)'), ('codex_bad', '{');", nil, nil, nil)
+        sqlite3_close(db)
+    }
+    let orcaIndex = OrcaCodexThreadIndex(url: orcaIndexURL)
+    orcaIndex.refresh(now: 100)
+    let orcaIndexThreads = orcaIndex.threads
+    try? FileManager.default.removeItem(at: orcaIndexURL)
+    let orcaFailedChat = orcaChatStatuses(fromOutput: "{\"chats\":[{\"sessionId\":\"codex_f\",\"threadId\":\"thread-f\",\"state\":\"done\",\"outcome\":\"failure\",\"since\":5500}]}")?["thread-f"]
+    var orcaRunningAfterFailure = orcaRunning
+    orcaRunningAfterFailure.updatedAtMs = 7000
+    let orcaWaiting = applyOrcaChatStatus(blockedChat, to: orcaRunning)
+    let orcaChatStatusOK = orcaStatuses?.keys.sorted() == ["thread-a", "thread-b"]
+        && blockedChat == OrcaChatStatus(orcaSessionId: "codex_a", threadId: "thread-a", needsInput: true, sinceMs: 5000)
+        && orcaStatuses?["thread-b"]?.needsInput == false
+        && orcaChatStatuses(fromOutput: "{\"error\":\"session.tabs.listAll\"}") == nil
+        && orcaChatStatuses(fromOutput: "") == nil
+        && orcaWaiting.petState == .waiting && orcaWaiting.needsAttention && orcaWaiting.updatedAtMs == 5000
+        && orcaWaiting.stateSource == "orca" && orcaWaiting.orcaSessionId == "codex_a"
+        && orcaOpenRequest(for: orcaWaiting)?.sessionId == "codex_a"
+        // 대기가 아니면 롤아웃 상태를 그대로 두고, 탭 ID 만 채운다.
+        && applyOrcaChatStatus(orcaStatuses?["thread-b"], to: orcaRunning).petState == .running
+        && applyOrcaChatStatus(orcaStatuses?["thread-b"], to: orcaRunning).orcaSessionId == "codex_b"
+        // 내 답을 기다리며 끝난 턴도 `blocked` 다. 롤아웃 완료가 더 새로워도 대기로 둔다.
+        && applyOrcaChatStatus(blockedChat, to: orcaFinished).petState == .waiting
+        // 조회가 실패해 회색으로 내려가도 묻기를 멈추지 않도록 원래 상태와 마지막 활동으로 고른다.
+        && orcaChatNeedsWatching(state: .running, lastActivityMs: 0.5, nowMs: 0.5 + 30 * 60 * 1000)
+        && !orcaChatNeedsWatching(state: .running, lastActivityMs: 1, nowMs: 1 + 3 * 60 * 60 * 1000)
+        && orcaChatNeedsWatching(state: .waving, lastActivityMs: 1, nowMs: 1 + 5 * 60 * 1000)
+        && !orcaChatNeedsWatching(state: .waving, lastActivityMs: 1, nowMs: 1 + 20 * 60 * 1000)
+        && !orcaChatNeedsWatching(state: .idle, lastActivityMs: 1, nowMs: 2)
+        && !orcaChatNeedsWatching(state: .running, lastActivityMs: nil, nowMs: 2)
+        && applyOrcaChatStatus(nil, to: orcaRunning) == orcaRunning
+        // 실패는 `done` + `outcome: failure`. 롤아웃에는 실패 표시가 없어 완료로 보이던 것을 실패로 바꾼다.
+        && orcaFailedChat?.failed == true && orcaFailedChat?.needsInput == false
+        && orcaChatStatuses(fromOutput: "{\"chats\":[{\"sessionId\":\"codex_g\",\"threadId\":\"thread-g\",\"state\":\"done\",\"outcome\":\"cancellation\",\"since\":1}]}")?["thread-g"]?.failed == false
+        && applyOrcaChatStatus(orcaFailedChat, to: orcaFinished).petState == .failed
+        && applyOrcaChatStatus(orcaFailedChat, to: orcaFinished).needsAttention
+        // 실패 뒤 새 턴이 시작됐으면 지난 실패를 띄우지 않는다.
+        && applyOrcaChatStatus(orcaFailedChat, to: orcaRunningAfterFailure).petState == .running
+        // Orca 의 Codex 채팅은 Codex 쪽 제목이 없어 숨겨졌다. Orca 기록의 제목과 탭 ID 를 붙여 보인다.
+        && orcaCodexThread(fromRecord: orcaRecord, sessionId: "codex_t")?.threadId == "thread-t"
+        && orcaCodexThread(fromRecord: orcaRecord, sessionId: "codex_t")?.thread == OrcaCodexThread(orcaSessionId: "codex_t", title: "Orca 제목")
+        && orcaCodexThread(fromRecord: "{\"providerHandleChain\":[]}", sessionId: "codex_u") == nil
+        && orcaCodexThread(fromRecord: "{", sessionId: "codex_u") == nil
+        // 제목은 Codex 색인이 먼저고, 비었을 때만 Orca 제목을 쓴다.
+        && codexDiscoveryTitles(index: ["a": "색인", "b": ""], extra: ["a": "Orca", "b": "Orca 비", "c": "Orca 만"])
+            == ["a": "색인", "b": "Orca 비", "c": "Orca 만"]
+        && linkOrcaCodexTask(untitledOrcaRollout, thread: OrcaCodexThread(orcaSessionId: "codex_t", title: "Orca 제목")).orcaHosted == true
+        && orcaOpenRequest(for: linkOrcaCodexTask(untitledOrcaRollout, thread: OrcaCodexThread(orcaSessionId: "codex_t", title: "Orca 제목")))?.sessionId == "codex_t"
+        && linkOrcaCodexTask(untitledOrcaRollout, thread: OrcaCodexThread(orcaSessionId: "", title: "둘")).orcaSessionId == nil
+        && linkOrcaCodexTask(untitledOrcaRollout, thread: nil) == untitledOrcaRollout
+        && orcaIndexThreads["thread-t"] == OrcaCodexThread(orcaSessionId: "codex_t", title: "Orca 제목")
+        && orcaIndexThreads["thread-dup"] == OrcaCodexThread(orcaSessionId: "", title: "둘")
+        && orcaIndexThreads.count == 2
     let runningCodexPayload = try! JSONDecoder().decode(StatePayload.self, from: "{\"state\":\"running\",\"sessionId\":\"thread-one\",\"source\":\"codex\",\"sessionTitle\":\"예전 제목\",\"updatedAtMs\":1000}".data(using: .utf8)!)
     let completedCodexTask = reconcileCodexTask(
         payload: runningCodexPayload,
@@ -717,8 +833,8 @@ func runSelfTest() -> Int32 {
     // ⚠️ ok 에 넣은 항목은 아래 print 에도 반드시 넣는다. 안 그러면 그 항목이 실패해도
     // ok:false 만 뜨고 무엇이 깨졌는지 알 수 없다 — 실제로 두 번 헤맸다.
     // scripts/check.sh 가 두 줄을 대조해서 빠진 게 있으면 막는다.
-    let ok = sixFrameThinkingTimingOK && christmasOK && claudeRowOK && fallbackOK && cornerOK && lookingOK && sleepRowOK && displayOK && dozeOK && sleepOK && ancientOK && viewedOK && haloOK && assetOK && skinsOK && dragRunOK && behaviorsOK && statesOK && deepLinkOK && clientRoutingOK && codexMenuOK && integrationOK && setupOK && legacyOK && transcriptShapesOK && scalesOK && baselineOK && decoupledOK && fontOK && priorityOK && registryOK && titleOK && badgeLayoutOK && clickRoutingOK && gazeStatesOK && expandOK && lineBudgetOK && typefaceOK && textDeltaOK && independentChatOK && tonesOK && folderFoldOK && labelOK && doneStaysOK && bubbleShapeOK && seenOK && staleOK && personalV2LayoutOK && codexTitleRefreshOK && codexCompletionRefreshOK && codexStateReconciliationOK && rolloutDiscoveryPayloadOK && unnamedTitleOK
-    print("{\"ok\":\(ok),\"asset\":\"\(Int(image.size.width))x\(Int(image.size.height))\",\"skins\":\(PetSkin.selectableCases.count),\"skinsOK\":\(skinsOK),\"christmasEffects\":\(christmasOK),\"dragRun\":\(dragRunOK),\"canJoinAllSpaces\":\(behaviorsOK),\"states\":\(animationCatalog.count),\"deepLink\":\(deepLinkOK),\"clientRouting\":\(clientRoutingOK),\"codexMenu\":\(codexMenuOK),\"integration\":\(integrationOK),\"setup\":\(setupOK),\"legacy\":\(legacyOK),\"transcriptShapes\":\(transcriptShapesOK),\"sizePresets\":\(supportedScales.count),\"baselineLayout\":\(baselineOK),\"scaleDecoupled\":\(decoupledOK),\"badgePlacement\":\(badgeLayoutOK),\"ribbonExpand\":\(expandOK),\"lineBudget\":\(lineBudgetOK),\"typefaces\":\(PetTypeface.allCases.count),\"typefaceOK\":\(typefaceOK),\"textDelta\":\(textDeltaOK),\"independentChat\":\(independentChatOK),\"tones\":\(tonesOK),\"folderFold\":\(folderFoldOK),\"doneStays\":\(doneStaysOK),\"bubbleShape\":\(bubbleShapeOK),\"seenRule\":\(seenOK),\"staleWorking\":\(staleOK),\"headroomClean\":\(haloOK),\"viewedElsewhere\":\(viewedOK),\"ancientNews\":\(ancientOK),\"sleeps\":\(sleepOK),\"sleepRow\":\(sleepRow),\"dozes\":\(dozeOK),\"displayState\":\(displayOK),\"seenByLooking\":\(lookingOK),\"corners\":\(cornerOK),\"appFallback\":\(fallbackOK),\"haloRows\":\(halo.rows),\"haloDeepest\":\(halo.deepest),\"haloFaint\":\(haloFaintPixels),\"claudeRow\":\(claudeRowOK),\"font\":\"\(rettoHandwritingFontName)\",\"fontLoaded\":\(fontOK),\"multiSession\":\(registryOK),\"sessionTitleFallback\":\(titleOK),\"prioritySelection\":\(priorityOK),\"badgeLayout\":\(badgeLayoutOK),\"clickRouting\":\(clickRoutingOK),\"sleepRowOK\":\(sleepRowOK),\"assetOK\":\(assetOK),\"statesOK\":\(statesOK),\"scales\":\(scalesOK),\"gazeStates\":\(gazeStatesOK),\"label\":\(labelOK),\"personalV2Layout\":\(personalV2LayoutOK),\"codexTitleRefresh\":\(codexTitleRefreshOK),\"codexCompletionRefresh\":\(codexCompletionRefreshOK),\"codexStateReconciliation\":\(codexStateReconciliationOK),\"rolloutDiscoveryPayload\":\(rolloutDiscoveryPayloadOK),\"sixFrameThinkingTiming\":\(sixFrameThinkingTimingOK),\"unnamedTitle\":\(unnamedTitleOK)}")
+    let ok = sixFrameThinkingTimingOK && christmasOK && claudeRowOK && fallbackOK && cornerOK && lookingOK && sleepRowOK && displayOK && dozeOK && sleepOK && ancientOK && viewedOK && haloOK && assetOK && skinsOK && dragRunOK && behaviorsOK && statesOK && deepLinkOK && clientRoutingOK && codexMenuOK && integrationOK && setupOK && legacyOK && transcriptShapesOK && scalesOK && baselineOK && decoupledOK && fontOK && priorityOK && registryOK && titleOK && badgeLayoutOK && clickRoutingOK && gazeStatesOK && expandOK && lineBudgetOK && typefaceOK && textDeltaOK && independentChatOK && tonesOK && folderFoldOK && labelOK && doneStaysOK && bubbleShapeOK && seenOK && staleOK && personalV2LayoutOK && codexTitleRefreshOK && codexCompletionRefreshOK && codexStateReconciliationOK && rolloutDiscoveryPayloadOK && unnamedTitleOK && orcaOK && orcaChatStatusOK
+    print("{\"ok\":\(ok),\"asset\":\"\(Int(image.size.width))x\(Int(image.size.height))\",\"skins\":\(PetSkin.selectableCases.count),\"skinsOK\":\(skinsOK),\"christmasEffects\":\(christmasOK),\"dragRun\":\(dragRunOK),\"canJoinAllSpaces\":\(behaviorsOK),\"states\":\(animationCatalog.count),\"deepLink\":\(deepLinkOK),\"clientRouting\":\(clientRoutingOK),\"codexMenu\":\(codexMenuOK),\"integration\":\(integrationOK),\"setup\":\(setupOK),\"legacy\":\(legacyOK),\"transcriptShapes\":\(transcriptShapesOK),\"sizePresets\":\(supportedScales.count),\"baselineLayout\":\(baselineOK),\"scaleDecoupled\":\(decoupledOK),\"badgePlacement\":\(badgeLayoutOK),\"ribbonExpand\":\(expandOK),\"lineBudget\":\(lineBudgetOK),\"typefaces\":\(PetTypeface.allCases.count),\"typefaceOK\":\(typefaceOK),\"textDelta\":\(textDeltaOK),\"independentChat\":\(independentChatOK),\"tones\":\(tonesOK),\"folderFold\":\(folderFoldOK),\"doneStays\":\(doneStaysOK),\"bubbleShape\":\(bubbleShapeOK),\"seenRule\":\(seenOK),\"staleWorking\":\(staleOK),\"headroomClean\":\(haloOK),\"viewedElsewhere\":\(viewedOK),\"ancientNews\":\(ancientOK),\"sleeps\":\(sleepOK),\"sleepRow\":\(sleepRow),\"dozes\":\(dozeOK),\"displayState\":\(displayOK),\"seenByLooking\":\(lookingOK),\"corners\":\(cornerOK),\"appFallback\":\(fallbackOK),\"haloRows\":\(halo.rows),\"haloDeepest\":\(halo.deepest),\"haloFaint\":\(haloFaintPixels),\"claudeRow\":\(claudeRowOK),\"font\":\"\(rettoHandwritingFontName)\",\"fontLoaded\":\(fontOK),\"multiSession\":\(registryOK),\"sessionTitleFallback\":\(titleOK),\"prioritySelection\":\(priorityOK),\"badgeLayout\":\(badgeLayoutOK),\"clickRouting\":\(clickRoutingOK),\"sleepRowOK\":\(sleepRowOK),\"assetOK\":\(assetOK),\"statesOK\":\(statesOK),\"scales\":\(scalesOK),\"gazeStates\":\(gazeStatesOK),\"label\":\(labelOK),\"personalV2Layout\":\(personalV2LayoutOK),\"codexTitleRefresh\":\(codexTitleRefreshOK),\"codexCompletionRefresh\":\(codexCompletionRefreshOK),\"codexStateReconciliation\":\(codexStateReconciliationOK),\"rolloutDiscoveryPayload\":\(rolloutDiscoveryPayloadOK),\"sixFrameThinkingTiming\":\(sixFrameThinkingTimingOK),\"unnamedTitle\":\(unnamedTitleOK),\"orca\":\(orcaOK),\"orcaChatStatus\":\(orcaChatStatusOK)}")
     return ok ? 0 : 1
 }
 
