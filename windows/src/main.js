@@ -356,6 +356,8 @@ function slackState() {
 
 function startSlack() {
   slack = new slackModule.SlackIntegration({
+    // ping 을 보낼 수 있는 소켓. 표준 WebSocket 에는 ping 이 없어 반쯤 끊긴 연결을 알아챌 수 없다.
+    WebSocketImpl: require('ws'),
     store: slackModule.fileStore({ fs, filePath: path.join(app.getPath('userData'), 'slack-credentials.bin'), safeStorage }),
     preferences: local.slackPreferences,
     onChange: () => {
