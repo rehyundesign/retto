@@ -1,14 +1,14 @@
 # Retto — 2026-11-13 로컬 동일본 (14종 스킨)
 
-[현재 로컬과 동일한 앱 ZIP 다운로드](https://github.com/rehyundesign/retto/releases/download/v0.12.0-local.20261113/Retto-local-14skins-20261113.zip)
+[현재 로컬과 동일한 앱 ZIP 다운로드](https://github.com/rehyundesign/retto/releases/download/v0.12.1-local.20261113/Retto-local-14skins-20261113.zip)
 
 Apple Silicon Mac · macOS 13 이상.
 
-2026-11-13 에 설치되어 있던 Retto.app(0.12.0)을 그대로 압축했습니다. 별도 사용자 설정, 키체인 토큰, Slack 메시지 기록은 포함하지 않습니다.
+2026-11-13 에 설치되어 있던 Retto.app(0.12.1)을 그대로 압축했습니다. 별도 사용자 설정, 키체인 토큰, Slack 메시지 기록은 포함하지 않습니다.
 
 - 리락쿠마 2종을 포함해 로컬의 14종 스킨을 모두 담았습니다. 2026-11-10 로컬 동일본과 같은 방식입니다.
-- 공개 DMG(0.12.0)와 같은 소스로 빌드했고, 설치본에서 보존하는 리락쿠마 그림만 다릅니다.
-- 이번 변경은 [0.12.0 안내](0.12.0-release.md)에 있습니다.
+- 공개 DMG(0.12.1)와 같은 소스로 빌드했고, 설치본에서 보존하는 리락쿠마 그림만 다릅니다.
+- 이번 변경은 [0.12.1 안내](0.12.1-release.md)에 있습니다.
 
 ## 설치
 
@@ -18,4 +18,4 @@ Apple Silicon Mac · macOS 13 이상.
 
 Apple Developer ID 서명·공증은 포함하지 않으며 ad-hoc 서명입니다.
 
-[SHA-256 체크섬](https://github.com/rehyundesign/retto/releases/download/v0.12.0-local.20261113/Retto-local-14skins-20261113.sha256)
+[SHA-256 체크섬](https://github.com/rehyundesign/retto/releases/download/v0.12.1-local.20261113/Retto-local-14skins-20261113.sha256)
