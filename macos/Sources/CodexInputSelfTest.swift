@@ -195,7 +195,9 @@ func runCodexInputSelfTest() -> Int32 {
             resyncInterval: reliabilityMode ? 0.1 : 2,
             maximumDedicatedReaders: fairRecovery ? 2 : 16,
             dedicatedReaderLease: fairRecovery ? 0.25 : 30,
-            maximumObserverHistory: CommandLine.arguments.contains("--live-codex-cycle-observers") ? 4 : 4096)
+            maximumObserverHistory: CommandLine.arguments.contains("--live-codex-cycle-observers") ? 4 : 4096,
+            readConfirmationInterval: CommandLine.arguments.contains("--live-codex-watch-reads") ? 0.15 : 5,
+            readRequestInterval: CommandLine.arguments.contains("--live-codex-watch-reads") ? 0.1 : 2)
         var trackedIDs: Set<String> = [id]
         if let index = CommandLine.arguments.firstIndex(of: "--live-codex-extra-thread"), CommandLine.arguments.count > index + 1 {
             trackedIDs.insert(CommandLine.arguments[index + 1])
@@ -208,6 +210,11 @@ func runCodexInputSelfTest() -> Int32 {
             expected = CommandLine.arguments[index + 1].components(separatedBy: ",")
         }
         var observed: [String] = []
+        var readExpected: [String]?
+        if let index = CommandLine.arguments.firstIndex(of: "--live-codex-read-expect"), CommandLine.arguments.count > index + 1 {
+            readExpected = CommandLine.arguments[index + 1].components(separatedBy: ",")
+        }
+        var observedRead: [String] = []
         let checksHookConfirmation = CommandLine.arguments.contains("--live-codex-confirm-hook")
         var confirmationRequestedAt: Double?
         var hookConfirmed = !checksHookConfirmation
@@ -220,10 +227,12 @@ func runCodexInputSelfTest() -> Int32 {
             // 초기 미확인 상태를 기준으로 삼고, 첫 앱 확인 뒤의 상태 전환을 비교한다.
             if observed.isEmpty && state == "unavailable" { return }
             if observed.last != state { observed.append(state) }
+            let unread = reader.statuses[id]?.hasUnreadTurn.map(String.init) ?? "unknown"
+            if observedRead.last != unread { observedRead.append(unread) }
         }
-        reader.track(trackedIDs)
+        reader.track(trackedIDs, readAfter: CommandLine.arguments.contains("--live-codex-watch-reads") ? [id: 0] : [:])
         let deadline = Date().addingTimeInterval(30)
-        while ((expected.map { observed != $0 } ?? (reader.statuses[id] == nil)) || !hookConfirmed) && Date() < deadline {
+        while ((expected.map { observed != $0 } ?? (reader.statuses[id] == nil)) || !hookConfirmed || (readExpected.map { observedRead != $0 } ?? false)) && Date() < deadline {
             RunLoop.main.run(until: Date().addingTimeInterval(0.05))
             if CommandLine.arguments.contains("--live-codex-cycle-observers"),
                reader.statuses[id]?.state == .waiting, observed.count > lastObserverCycleTransition {
@@ -261,6 +270,13 @@ func runCodexInputSelfTest() -> Int32 {
                 }
             }
         }
+        if let readExpected {
+            print("Live Codex unread transitions: \(observedRead.joined(separator: ","))")
+            // Keep watching after false to prove that a completed read stops polling.
+            RunLoop.main.run(until: Date().addingTimeInterval(0.5))
+            reader.stop()
+            return observedRead == readExpected && failures.isEmpty ? 0 : 1
+        }
         if checksHookConfirmation { print("Fresh hook confirmation: \(hookConfirmed ? "PASS" : "FAIL")") }
         print("Live Codex status: \(reader.statuses[id]?.state.rawValue ?? "unavailable")")
         if let expected {
@@ -268,8 +284,10 @@ func runCodexInputSelfTest() -> Int32 {
             reader.stop()
             return observed == expected && failures.isEmpty && hookConfirmed ? 0 : 1
         }
+        print("Live Codex unread: \(reader.statuses[id]?.hasUnreadTurn.map(String.init) ?? "unknown")")
+        let hadLiveStatus = reader.statuses[id] != nil
         reader.stop()
-        if reader.statuses[id] == nil { return 1 }
+        if !hadLiveStatus { return 1 }
     }
     if let flag = CommandLine.arguments.firstIndex(of: "--input-transcript"), CommandLine.arguments.count > flag + 1 {
         let path = CommandLine.arguments[flag + 1]

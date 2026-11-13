@@ -33,8 +33,8 @@ run() {
 
 fail() { print -r -u2 -- "✗ $1"; exit 1 }
 
-VERSION="$(grep '^VERSION=' "$REPO_ROOT/macos/scripts/build.sh" | head -1 | cut -d'"' -f2)"
-[[ -n "$VERSION" ]] || fail "build.sh 에서 VERSION 을 읽지 못했습니다."
+VERSION="$(python3 -c "import runpy; print(runpy.run_path('$REPO_ROOT/scripts/build-public.py')['VERSION'])")"
+[[ -n "$VERSION" ]] || fail "build-public.py에서 VERSION을 읽지 못했습니다."
 TAG="v$VERSION"
 DMG="$REPO_ROOT/dist/Retto-$VERSION.dmg"
 
@@ -49,7 +49,7 @@ fi
 
 # 2. 같은 태그로 두 번 올리지 않는다. 이미 있으면 버전을 올려야 한다는 뜻이다.
 if gh release view "$TAG" >/dev/null 2>&1; then
-  fail "$TAG 릴리스가 이미 있습니다. build.sh 의 VERSION 을 올려 주세요."
+  fail "$TAG 릴리스가 이미 있습니다. build-public.py의 VERSION을 올려 주세요."
 fi
 
 # 3. 빌드. dmg 와 서명 검사가 여기서 함께 돈다.

@@ -4,6 +4,7 @@ import AppKit
 import CoreText
 import Foundation
 import ServiceManagement
+import ApplicationServices
 
 final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     private struct TaskOpenChoice {
@@ -20,8 +21,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     private var codexOpenTargetItem: NSMenuItem!
     private var claudeIntegrationItem: NSMenuItem!
     private var setupWindow: SetupWindow?
-    private let slack = SlackIntegration()
+    private let slack = SlackIntegration(readProbe: SlackReadProbe.fromArguments(CommandLine.arguments))
     private var slackSettings: SlackSettingsWindow?
+    private var slackMenuItem: NSMenuItem?
     /// 켤 때 스스로 정리한 것. 설정 창이 이걸 그대로 보여준다.
     private var tidyNotes: [String] = []
     /// Claude 앱에서 세션까지 따라갈지. 접근성으로 사이드바를 대신 누르는 방식이라,
@@ -44,8 +46,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     private var autoSelectionItem: NSMenuItem!
     private var sessions: [StatePayload] = []
     private var selectedPayload: StatePayload?
-    /// 말풍선을 눌러 같은 상태의 다음 세션으로 넘긴 고정. 그 세션의 상태가 바뀌면 고정을 풀고 자동 선택으로 돌아간다.
-    private var cyclePinKey: String?
     private let transcriptReader = TranscriptReader()
     private let codexTranscriptStatusReader = CodexTranscriptStatusReader()
     private let codexThreadTitleReader = CodexThreadTitleReader()
@@ -89,6 +89,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
 
     private func markSeen(_ payload: StatePayload?) {
         guard let payload, !payload.id.isEmpty, payload.petState != .waiting else { return }
+        if payload.source == "slack" {
+            slack.dismissNotices([payload.id])
+            return
+        }
         var seen = seenSessions
         seen[payload.id] = max(payload.updatedAtMs ?? 0, Date().timeIntervalSince1970 * 1000)
         // 닫힌 세션 기록은 버린다
@@ -104,7 +108,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             updatedAtMs: payload.updatedAtMs,
             seenAtMs: seenSessions[payload.id],
             transcriptModifiedAtMs: transcriptModifiedAtMs(path: payload.transcriptPath),
-            nowMs: Date().timeIntervalSince1970 * 1000
+            nowMs: Date().timeIntervalSince1970 * 1000,
+            stateSource: payload.stateSource
         )
     }
 
@@ -147,20 +152,20 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
 
     /// 레토의 겉모습. 고르면 아틀라스를 갈아 끼우고 다음 실행에도 남는다.
     private var skin: PetSkin {
-        get { PetSkin(rawValue: UserDefaults.standard.string(forKey: skinDefaultsKey) ?? "") ?? .classic }
+        get { PetSkin.selection(rawValue: UserDefaults.standard.string(forKey: skinDefaultsKey)) }
         set { UserDefaults.standard.set(newValue.rawValue, forKey: skinDefaultsKey) }
     }
 
     /// 스킨의 아틀라스를 읽는다. 파일이 없으면 기본 스킨으로 물러난다 —
     /// 옛 앱에 새 스킨 설정만 남아 있는 경우에도 레토가 사라지지 않게.
     private func loadSpriteSheet(_ skin: PetSkin) -> NSImage? {
-        if skin == .amuRan, AmuRanFrames.hasAllFrames { return NSImage(size: NSSize(width: 7168, height: 7680)) }
+        if skin == .amuRan, skin.isAvailable { return NSImage(size: NSSize(width: 7168, height: 7680)) }
+        if skin == .hachupingping { return HachupingSkin.placeholder }
+        if skin == .howl { return HowlSkin.placeholder }
         if skin == .jeanne { return JeanneSkin.placeholder }
         if skin == .pichiPitch { return PichiSkin.placeholder }
         if skin == .chocolatHeart { return ChocolatHeart.placeholder }
-        if skin == .hana, Bundle.main.url(forResource: "character-0-0", withExtension: "png", subdirectory: "HanaFrames") != nil {
-            return HanaFrameCache.placeholder
-        }
+        if skin == .hana, skin.isAvailable { return HanaFrameCache.placeholder }
         if let url = Bundle.main.url(forResource: skin.resourceName, withExtension: "webp"),
            let image = NSImage(contentsOf: url) { return image }
         guard skin != .classic else { return nil }
@@ -189,8 +194,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         startStateMonitor()
         slack.onChange = { [weak self] in
             guard let self else { return }
+            self.taskStatusDiagnostics.recordSlack(self.slack.diagnosticsSnapshot)
+            self.updateSlackMenuItem()
             self.slackSettings?.refresh()
             self.applySessions(self.hookSessions)
+        }
+        slack.onDiagnosticsChange = { [weak self] in
+            guard let self else { return }
+            self.taskStatusDiagnostics.recordSlack(self.slack.diagnosticsSnapshot)
         }
         slack.restore()
         // 상태 파일을 한 번 읽고 나서 정한다. 곧바로 보면 소식이 있는 사람에게도 창이 뜬다.
@@ -259,7 +270,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             skin: skin,
             onOpenClaude: { [weak self] payload, windowOnly in
                 self?.revealAgentSession(payload, windowOnly: windowOnly)
-                self?.showNextSameStateSession(after: payload)
             },
             onOpenAttention: { [weak self] point in self?.showAttentionMenu(at: point) }
         )
@@ -411,8 +421,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         // 겉모습. 아틀라스만 갈아 끼우므로 상태·말풍선 동작은 그대로다.
         let skinMenu = NSMenu(title: "스킨")
         skinMenu.autoenablesItems = false
-        skinItems = PetSkin.allCases.map { value in
-            // 리소스가 누락되면 선택을 막고, 빌드 자체 검사에서 원인을 보고한다.
+        skinItems = PetSkin.selectableCases.map { value in
+            // 개인 스킨은 받아 간 쪽 번들에 파일이 없다. 지우지 않고 자물쇠로 남겨 둔다 —
+            // 항목이 통째로 사라지면 고장인지 원래 없는 건지 알 수 없다.
             let available = value.isAvailable
             let title = available ? value.label : "\(value.label) 🔒"
             let item = NSMenuItem(title: title, action: available ? #selector(changeSkin(_:)) : nil, keyEquivalent: "")
@@ -420,7 +431,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             item.isEnabled = available
             item.representedObject = value.rawValue
             item.state = value == skin ? .on : .off
-            if !available { item.toolTip = "스킨 리소스가 누락되었습니다. 앱을 다시 빌드해 주세요." }
+            if !available { item.toolTip = "스킨 리소스가 누락되었습니다. 개인 스킨 통합 빌드로 복구해 주세요." }
             skinMenu.addItem(item)
             return item
         }
@@ -496,6 +507,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
 
         let slackItem = NSMenuItem(title: "Slack 설정…", action: #selector(showSlackSettings), keyEquivalent: "")
         slackItem.target = self
+        slackMenuItem = slackItem
         menu.addItem(slackItem)
 
         let uninstallItem = NSMenuItem(title: "레토 제거…", action: #selector(uninstallRetto), keyEquivalent: "")
@@ -508,6 +520,17 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         menu.addItem(quitItem)
         statusItem.menu = menu
         petView.menu = menu
+    }
+
+    private func updateSlackMenuItem() {
+        let suffix: String
+        switch slack.connectionState {
+        case .connected: suffix = " · 연결됨"
+        case .connecting, .reconnecting: suffix = " · 연결 중"
+        case .failed: suffix = " · 연결 확인 필요"
+        case .disabled: suffix = ""
+        }
+        slackMenuItem?.title = "Slack 설정" + suffix + "…"
     }
 
     @objc private func showSlackSettings() {
@@ -577,7 +600,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             ($0.navigationSessionId, $0.updatedAtMs ?? 0)
         }, uniquingKeysWith: max)
         codexLiveStatusReader.track(Set(codexTasks.map(\.navigationSessionId)),
-            refreshAfter: waitingHooks, activityAfter: activityHints)
+            refreshAfter: waitingHooks, activityAfter: activityHints,
+            readAfter: Dictionary(sessions.filter {
+                ($0.source == "codex" || $0.client == "codex") && $0.petState != .waiting && needsAttention($0)
+            }.map { ($0.navigationSessionId, $0.updatedAtMs ?? 0) }, uniquingKeysWith: max))
         // 우선순위는 파일 시각까지 읽으므로 비교마다 다시 구하지 않고 세션마다 한 번만 구한다.
         claudeNativeStatusReader.refresh()
         sessions = merged.values.map { payload in
@@ -598,20 +624,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             .map(\.payload)
         let openSessions = sessions.filter { !$0.isClosed }
         let attentionSessions = openSessions.filter { self.needsAttention($0) }
-        if let key = cyclePinKey {
-            // 눌러서 넘긴 세션이 끝나거나 상태가 바뀌면 고정을 풀어, 다른 세션 소식을 가리지 않게 한다.
-            let pinned = openSessions.first(where: { $0.id == pinnedSessionId })
-            if pinned.map({ badgeToneKey(source: $0.source, state: effectiveState($0)) }) != key {
-                pinnedSessionId = nil
-                cyclePinKey = nil
-            }
-        }
         if let pinnedSessionId,
            let pinned = openSessions.first(where: { $0.id == pinnedSessionId }) {
             // 고정은 지켜주되, 손이 필요한 세션이 생기면 그쪽을 먼저 보여준다.
             // Claude 사이드바에 파란 숫자가 떴는데 레토가 딴 데를 보고 있으면 배지가 무슨 뜻이 없다.
             // openSessions 는 이미 우선순위대로 정렬돼 있어 첫 항목이 가장 급한 세션이다.
-            selectedPayload = preferredPinnedSession(pinned, attention: attentionSessions, priority: statePriority, needsAttention: needsAttention)
+            selectedPayload = preferredPinnedSession(pinned, attention: attentionSessions,
+                active: openSessions.filter { [.running, .review].contains(effectiveState($0)) },
+                priority: statePriority, needsAttention: needsAttention)
         } else if let previous = selectedPayload,
                   let waiting = openSessions.first(where: { $0.id == previous.id && $0.petState == .waiting }) {
             // 다른 알림이나 새 입력 대기가 와도 현재 입력 대기는 답변할 때까지 유지한다.
@@ -673,8 +693,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             attentionState: attention.max(by: { statePriority($0) < statePriority($1) })?.petState,
             attentionSource: attention.first?.source,
             inputCount: attention.filter { $0.petState == .waiting }.count,
-            badgeChips: asleep ? [] : badgeChips(selected: selectedPayload, in: sessions,
-                state: effectiveState, needsAttention: needsAttention),
             connectionStatus: taskConnectionNotice(for: selectedPayload,
                 unreadablePaths: codexTranscriptStatusReader.unreadablePaths, slackNotice: slack.connectionIssue),
             isPinned: selectedPayload.id == pinnedSessionId
@@ -714,26 +732,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
 
     /// 배지를 누르면 배지가 세던 세션들을 그대로 목록으로 보여준다. 하나뿐이면 묻지 않고 바로 연다.
     private func showAttentionMenu(at point: NSPoint) {
-        // 배지는 지금 말풍선 상태의 개수다. 누르면 그 상태의 세션을 늘어놓는다 — 숫자와 목록이 같은 것을 센다.
-        if let current = selectedPayload, let key = badgeToneKey(source: current.source, state: effectiveState(current)) {
-            let group = sameStateSessions(as: current, in: sessions, state: effectiveState, needsAttention: needsAttention)
-            if group.count >= 2 {
-                let menu = NSMenu(title: badgeToneName(key))
-                let header = NSMenuItem(title: "\(badgeToneName(key)) \(group.count)개", action: nil, keyEquivalent: "")
-                header.isEnabled = false
-                menu.addItem(header)
-                menu.addItem(.separator())
-                for payload in group {
-                    let item = NSMenuItem(title: sessionMenuLabel(for: payload), action: #selector(openSessionFromBadge(_:)), keyEquivalent: "")
-                    item.target = self
-                    item.representedObject = payload.id
-                    item.state = payload.id == current.id ? .on : .off
-                    menu.addItem(item)
-                }
-                menu.popUp(positioning: nil, at: point, in: petView)
-                return
-            }
-        }
         let waiting = badgeSessions()
         guard let first = waiting.first else {
             revealAgentSession(nil, windowOnly: false)
@@ -762,12 +760,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
               let payload = sessions.first(where: { $0.id == sessionId }) else { return }
         // ⌥ 를 누른 채 고르면 창만 앞으로 보내고 탭은 건드리지 않는다.
         revealAgentSession(payload, windowOnly: NSEvent.modifierFlags.contains(.option))
-        // 고른 세션을 말풍선에도 띄운다. 상태가 바뀌면 고정을 풀고 자동 선택으로 돌아간다
-        if let key = badgeToneKey(source: payload.source, state: effectiveState(payload)) {
-            pinnedSessionId = payload.id
-            cyclePinKey = key
-            applySessions(hookSessions)
-        }
     }
 
     private func rebuildSessionsMenu() {
@@ -1035,7 +1027,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     private func revealAgentSession(_ payload: StatePayload?, windowOnly: Bool, preferredApp: OpenApp? = nil) {
         let target = payload ?? selectedPayload
         if let target, target.source == "slack" {
-            guard let notice = slack.notices.first(where: { $0.id == target.id }) else { return }
+            guard let group = slack.groups.first(where: { $0.id == target.id }) else { return }
+            let notice = group.first
+            // Slack 실행을 기다리는 동안 새로 도착한 메시지는 해제하지 않는다.
+            let openedMessageIDs = group.messageIDs
             let reportFailure: (Error) -> Void = { error in
                 let alert = NSAlert()
                 alert.messageText = "Slack 메시지를 열지 못했습니다"
@@ -1050,11 +1045,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
                 }
                 let configuration = NSWorkspace.OpenConfiguration()
                 configuration.activates = true
-                NSWorkspace.shared.open([url], withApplicationAt: appURL, configuration: configuration) { [weak self] app, error in
+                NSWorkspace.shared.open([url], withApplicationAt: appURL, configuration: configuration) { [weak self] _, error in
                     DispatchQueue.main.async {
                         if let error { reportFailure(error) }
-                        else if app != nil { self?.markSeen(target) }
-                        else { reportFailure(SlackFailure.response) }
+                        else { self?.slack.dismissNotices(openedMessageIDs) }
                     }
                 }
             } catch { reportFailure(error) }
@@ -1080,7 +1074,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     }
 
     @objc private func changeSkin(_ sender: NSMenuItem) {
-        guard let raw = sender.representedObject as? String, let next = PetSkin(rawValue: raw) else { return }
+        guard let raw = sender.representedObject as? String, let next = PetSkin(rawValue: raw), PetSkin.selectableCases.contains(next) else { return }
         // 파일을 못 읽으면 설정을 바꾸지 않는다. 체크 표시만 옮겨 두면 다음 실행에 엉뚱한 모습이 뜬다.
         guard let sheet = loadSpriteSheet(next) else { return }
         skin = next
@@ -1109,24 +1103,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         }
     }
 
-    /// 같은 상태(작업 중 a·b 등)가 여럿이면 누를 때마다 다음 세션을 말풍선에 띄운다. a → b → a (2026-11-04 luxia).
-    private func showNextSameStateSession(after payload: StatePayload?) {
-        guard let current = payload ?? selectedPayload,
-              let next = nextSameStateSession(after: current, in: sessions, state: effectiveState, needsAttention: needsAttention) else { return }
-        pinnedSessionId = next.id
-        cyclePinKey = badgeToneKey(source: next.source, state: effectiveState(next))
-        applySessions(hookSessions)
-    }
-
     @objc private func selectAutomaticSession() {
-        cyclePinKey = nil
         pinnedSessionId = nil
         applySessions(hookSessions)
     }
 
     @objc private func selectSession(_ sender: NSMenuItem) {
         guard let sessionId = sender.representedObject as? String else { return }
-        cyclePinKey = nil
         pinnedSessionId = sessionId
         applySessions(hookSessions)
         panel.orderFrontRegardless()
@@ -1511,18 +1494,34 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         UserDefaults.standard.set(panel.frame.origin.y, forKey: "RettoClaudePetOriginY")
     }
 
-    /// 사용자가 그 세션 창을 보고 있으면 읽음으로 센다.
-    ///
-    /// 레토를 누르지 않고 직접 세션에 다녀오는 경우를 잡는 유일한 길이다. 디스크에는
-    /// "봤다" 는 기록이 없어서, 최상단 앱과 그 앱의 맨 앞 창 제목으로 알아낸다.
-    /// 창 제목을 읽지 못하는 환경에서는 아무 일도 하지 않고 수동 지우기만 남는다.
+    /// Codex의 읽음 상태를 우선하고, 다른 앱은 식별 가능한 앞 창을 3초 이상 확인한다.
+    /// 입력 대기는 답변할 때까지 유지한다. 창 제목이 없거나 대화가 모호하면 표시를 유지한다.
     private func markSeenByLooking() {
-        let now = Date().timeIntervalSince1970 * 1000
-        guard sessions.contains(where: { $0.petState != .waiting && needsAttention($0) }),
+        // Native read state also covers direct navigation without window-title permission.
+        for payload in sessions where payload.source == "codex" || payload.client == "codex" {
+            if needsAttention(payload), codexConfirmsRead(codexLiveStatusReader.statuses[payload.navigationSessionId], payload: payload) {
+                recordSeenFromAccess(payload)
+            }
+        }
+        let now = ProcessInfo.processInfo.systemUptime * 1000
+        guard !slack.notices.isEmpty || sessions.contains(where: { $0.petState != .waiting && needsAttention($0) }),
               let front = NSWorkspace.shared.frontmostApplication,
               let bundleId = front.bundleIdentifier,
               let title = frontWindowTitle(pid: front.processIdentifier), !title.isEmpty else {
             _ = readDwell.observe(key: nil, nowMs: now)
+            return
+        }
+        if bundleId == "com.tinyspeck.slackmacgap" {
+            let ids = slack.visibleConversationNoticeIDs(windowTitle: title)
+            let key = ids.isEmpty ? nil : "slack:\(front.processIdentifier):\(title):\(ids.sorted().joined(separator: ","))"
+            if readDwell.observe(key: key, nowMs: now) {
+                // DM 창을 3초 확인하면 레토 알림을 해제한다. 채널·스레드는 서버 조회를 유지한다.
+                // 현재 화면 적용이 끝난 다음 갱신해, 이전 DM이 다시 그려지지 않도록 한다.
+                DispatchQueue.main.async { [weak self] in
+                    self?.slack.acknowledgeVisibleDirectMessages(ids)
+                    self?.slack.prioritizeReadSync(ids)
+                }
+            }
             return
         }
         let matches = sessions.filter { payload in
@@ -1548,6 +1547,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     /// 와서 "그 세션 창을 보고 있으면 읽음" 판정이 조용히 꺼진다. 조용히 꺼지는 게 문제라
     /// 정보 창에서 상태를 보여 준다. 애드혹 서명이라 앱을 다시 빌드하면 권한이 풀릴 수 있다.
     private func canReadWindowTitles() -> Bool {
+        if AXIsProcessTrusted() { return true }
         let myPid = ProcessInfo.processInfo.processIdentifier
         let windows = CGWindowListCopyWindowInfo([.optionOnScreenOnly, .excludeDesktopElements], kCGNullWindowID) as? [[String: Any]] ?? []
         return windows.contains { window in
@@ -1559,6 +1559,20 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
 
     /// 그 앱의 맨 앞 창 제목 하나. 뒤에 있는 창까지 보면 보고 있지 않은 세션도 지워진다.
     private func frontWindowTitle(pid: pid_t) -> String? {
+        // Existing accessibility permission can supply the focused title without screen recording.
+        if AXIsProcessTrusted() {
+            let app = AXUIElementCreateApplication(pid)
+            AXUIElementSetMessagingTimeout(app, 0.05)
+            var window: CFTypeRef?
+            if AXUIElementCopyAttributeValue(app, kAXFocusedWindowAttribute as CFString, &window) == .success,
+               let window, CFGetTypeID(window) == AXUIElementGetTypeID() {
+                let focused = unsafeBitCast(window, to: AXUIElement.self)
+                AXUIElementSetMessagingTimeout(focused, 0.05)
+                var value: CFTypeRef?
+                if AXUIElementCopyAttributeValue(focused, kAXTitleAttribute as CFString, &value) == .success,
+                   let title = value as? String, !title.isEmpty { return title }
+            }
+        }
         let windows = CGWindowListCopyWindowInfo([.optionOnScreenOnly, .excludeDesktopElements], kCGNullWindowID) as? [[String: Any]] ?? []
         for window in windows {
             guard (window[kCGWindowOwnerPID as String] as? pid_t) == pid,
@@ -1581,12 +1595,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         guard !targets.isEmpty else { return }
         var seen = seenSessions
         let now = Date().timeIntervalSince1970 * 1000
-        for payload in targets {
+        for payload in targets where payload.source != "slack" {
             seen[payload.id] = max(payload.updatedAtMs ?? 0, now)
         }
         let live = Set(sessions.map(\.id))
         seenSessions = seen.filter { live.contains($0.key) }
-        applySessions(hookSessions)
+        if !slack.dismissNotices(Set(targets.filter { $0.source == "slack" }.map(\.id))) {
+            applySessions(hookSessions)
+        }
     }
 
     /// 레토가 누구이고 누가 만들었는지. 메일 주소는 눌러서 복사할 수 있게 둔다.

@@ -1,0 +1,37 @@
+{
+  "installed": "/Users/luxia/Applications/Retto.app",
+  "backup": "/private/tmp/retto-balanced-performance-20261110/final-install/Retto-before.bundle",
+  "binary_sha256": "9950fef8a6087ebe5ec7851969b5c3ed6f388b3c6715938eb5c0faea6428de6b",
+  "preserved_resources": 31492,
+  "checks": {
+    "--transcript-stream-self-test": 0,
+    "--frame-cache-self-test": 0,
+    "--self-test-all-skins": 0,
+    "--angel-self-test": 0,
+    "--angel-interactions-state-test": 0
+  },
+  "signature_verified": true,
+  "art_size_and_timing_unchanged": true,
+  "runtime_checks_passed": 22,
+  "python_status_checks_passed": 3,
+  "running_pid": 25498,
+  "live_observations": {
+    "first_final_build_cpu_percent": [
+      12.2,
+      27.8,
+      24.0
+    ],
+    "first_final_build_physical_footprint": "230.8 MB",
+    "first_final_build_peak_footprint": "394.3 MB",
+    "later_top_rows": [
+      "25498  0.0  221M 8   00:21.46",
+      "25498  15.1 226M+ 8   00:22.09",
+      "25498  23.1 219M- 8/1 00:22.62",
+      "25498  23.5 219M  8   00:23.17"
+    ],
+    "comparison_controlled": false
+  },
+  "new_crash_reports_since_install": 0,
+  "observation_seconds": 47,
+  "native_overlay_visually_verified": true
+}

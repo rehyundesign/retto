@@ -78,7 +78,7 @@ final class SlackSettingsWindow: NSObject {
         channelRows.setContentHuggingPriority(.required, for: .vertical)
         channelRows.topAnchor.constraint(equalTo: scroll.contentView.topAnchor).isActive = true
         channelRows.leadingAnchor.constraint(equalTo: scroll.contentView.leadingAnchor).isActive = true
-        add(label("레토가 실행 중일 때 도착한 새 메시지를 표시합니다. 레토에서 메시지를 열거나 알림을 지우면 표시가 사라지며, Slack의 읽음 상태는 바꾸지 않습니다."))
+        add(label("Slack에서 읽은 메시지는 읽음 위치를 확인한 뒤 레토에서도 해제합니다. 대상별 15초 간격으로 순환 조회합니다. 같은 워크스페이스의 DM·채널 창을 3초 이상 보고 있으면 읽음 조회를 앞당깁니다. Slack이 제공한 읽음 위치까지 알림을 해제합니다. 스레드는 API 읽음 위치로 확인합니다. Slack의 읽음 상태는 바꾸지 않습니다."))
         refresh(forceChannels: true)
     }
     func show() {
@@ -87,7 +87,7 @@ final class SlackSettingsWindow: NSObject {
         window.makeKeyAndOrderFront(nil)
     }
     func refresh(forceChannels: Bool = false) {
-        status.stringValue = integration.status
+        status.stringValue = [integration.status, integration.readSyncIssue].compactMap { $0 }.joined(separator: "\n")
         dm.state = integration.preferences.directMessages ? .on : .off
         mentions.state = integration.preferences.mentions ? .on : .off
         preview.state = integration.preferences.preview ? .on : .off
@@ -160,7 +160,7 @@ final class SlackSettingsWindow: NSObject {
         alert.messageText = "Slack 연결 준비"
         alert.informativeText = """
         1. api.slack.com/apps에서 개인용 Slack 앱을 만드세요. 워크스페이스에 따라 관리자 승인이 필요합니다.
-        2. OAuth & Permissions → User Token Scopes에 channels:read, groups:read, users:read, channels:history, groups:history, im:history, mpim:history를 추가하고 워크스페이스에 설치하세요. 사용자 토큰(xoxp-)을 복사하세요.
+        2. OAuth & Permissions → User Token Scopes에 channels:read, groups:read, im:read, mpim:read, users:read, channels:history, groups:history, im:history, mpim:history를 추가하고 워크스페이스에 설치하세요. 사용자 토큰(xoxp-)을 복사하세요.
         3. Event Subscriptions → Subscribe to events on behalf of users에 message.channels, message.groups, message.im, message.mpim을 추가하세요. 봇의 app_mention은 내 멘션과 다릅니다.
         4. Socket Mode를 켜고 Basic Information → App-Level Tokens에서 connections:write 권한의 토큰(xapp-)을 만드세요.
         5. 같은 앱의 두 토큰을 이 창에 입력하고 연결하세요. 권한을 변경했다면 앱을 다시 설치하세요.

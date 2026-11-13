@@ -7,7 +7,7 @@
   "oauth_config": {
     "scopes": {
       "user": [
-        "channels:read", "groups:read", "users:read", "channels:history",
+        "channels:read", "groups:read", "im:read", "mpim:read", "users:read", "channels:history",
         "groups:history", "im:history", "mpim:history"
       ]
     }
