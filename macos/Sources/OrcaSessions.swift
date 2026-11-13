@@ -191,37 +191,42 @@ final class OrcaNavigator {
         return .app
     }
 
-    /// 끝나면 표준 출력을, 실패하거나 8초 안에 끝나지 않으면 nil 을 돌려준다.
     private func run(_ executable: URL, _ arguments: [String], extraEnvironment: [String: String] = [:]) -> String? {
-        guard FileManager.default.isExecutableFile(atPath: executable.path) else { return nil }
-        let process = Process()
-        process.executableURL = executable
-        process.arguments = arguments
-        // 레토를 Orca 터미널에서 켰더라도 원격 Orca 나 다른 프로필로 가지 않게 Orca 변수는 넘기지 않는다.
-        var environment = ProcessInfo.processInfo.environment.filter {
-            !$0.key.hasPrefix("ORCA_") && $0.key != "NODE_OPTIONS" && $0.key != "ELECTRON_RUN_AS_NODE"
-        }
-        if environment["PATH"] == nil { environment["PATH"] = "/usr/bin:/bin:/usr/sbin:/sbin" }
-        for (key, value) in extraEnvironment { environment[key] = value }
-        process.environment = environment
-        let output = Pipe()
-        process.standardOutput = output
-        process.standardError = FileHandle.nullDevice
-        let finished = DispatchSemaphore(value: 0)
-        process.terminationHandler = { _ in finished.signal() }
-        do { try process.run() } catch { return nil }
-        // 출력이 파이프 버퍼를 넘어도 막히지 않게 끝날 때까지 읽는다.
-        var data = Data()
-        let reader = DispatchQueue(label: "retto.orca-navigator.read")
-        reader.async { data = output.fileHandleForReading.readDataToEndOfFile() }
-        if finished.wait(timeout: .now() + 8) == .timedOut {
-            process.terminate()
-            return nil
-        }
-        reader.sync {}
-        guard process.terminationStatus == 0 else { return nil }
-        return String(data: data, encoding: .utf8) ?? ""
+        runOrcaProcess(executable, arguments, extraEnvironment: extraEnvironment)
     }
+}
+
+/// 끝나면 표준 출력을, 실패하거나 제한 시간 안에 끝나지 않으면 nil 을 돌려준다.
+func runOrcaProcess(_ executable: URL, _ arguments: [String], extraEnvironment: [String: String] = [:],
+                    timeout: TimeInterval = 8) -> String? {
+    guard FileManager.default.isExecutableFile(atPath: executable.path) else { return nil }
+    let process = Process()
+    process.executableURL = executable
+    process.arguments = arguments
+    // 레토를 Orca 터미널에서 켰더라도 원격 Orca 나 다른 프로필로 가지 않게 Orca 변수는 넘기지 않는다.
+    var environment = ProcessInfo.processInfo.environment.filter {
+        !$0.key.hasPrefix("ORCA_") && $0.key != "NODE_OPTIONS" && $0.key != "ELECTRON_RUN_AS_NODE"
+    }
+    if environment["PATH"] == nil { environment["PATH"] = "/usr/bin:/bin:/usr/sbin:/sbin" }
+    for (key, value) in extraEnvironment { environment[key] = value }
+    process.environment = environment
+    let output = Pipe()
+    process.standardOutput = output
+    process.standardError = FileHandle.nullDevice
+    let finished = DispatchSemaphore(value: 0)
+    process.terminationHandler = { _ in finished.signal() }
+    do { try process.run() } catch { return nil }
+    // 출력이 파이프 버퍼를 넘어도 막히지 않게 끝날 때까지 읽는다.
+    var data = Data()
+    let reader = DispatchQueue(label: "retto.orca-process.read")
+    reader.async { data = output.fileHandleForReading.readDataToEndOfFile() }
+    if finished.wait(timeout: .now() + timeout) == .timedOut {
+        process.terminate()
+        return nil
+    }
+    reader.sync {}
+    guard process.terminationStatus == 0 else { return nil }
+    return String(data: data, encoding: .utf8) ?? ""
 }
 
 /// 스크립트가 마지막 줄에 출력한 결과를 읽는다. 아무것도 못 열었으면 nil.
@@ -233,5 +238,194 @@ func orcaRevealOutcome(_ output: String) -> OrcaOpenOutcome? {
     case "chat": return .chat
     case "workspace": return .workspace
     default: return nil
+    }
+}
+
+// MARK: - Orca 의 Codex 채팅이 내 답을 기다리는지
+//
+// Orca 는 자기가 띄운 Codex 의 훅을 끄므로 레토 훅으로는 승인·질문 대기를 알 수 없다. 롤아웃에도
+// 승인 요청은 남지 않는다(도구 호출만 남고 결과가 안 붙은 채로 멈춰 있어 오래 걸리는 명령과 구분이 안 된다).
+// 대신 Orca 가 그 채팅 탭에 붙여 두는 상태(`session.tabs.listAll` 의 `chatStatus`)를 읽는다.
+// Orca 1.4.257 은 승인·질문이 걸려 있거나 턴이 사용자 답을 기다리며 끝나면 `blocked` 를,
+// 터미널 훅 경로에서는 `waiting` 을 쓴다. 실패는 `done` + `outcome: failure` 라 `blocked` 와 겹치지 않는다
+// (2026-11-13 실측: 「ask」 권한 채팅에서 권한 상승 명령을 시키자 `working` → `blocked`).
+//
+// 탭에는 Codex 스레드 ID 가 없어서, Orca 세션 기록(`agent-session-journal.db` 의 `providerHandleChain`)을
+// 읽기 전용으로 열어 Orca 세션 ID 와 잇는다. 이을 수 없는 채팅은 추측하지 않고 버린다 — 다른 스레드를
+// 파랗게 칠하는 것보다 대기를 놓치는 편이 낫다. 기록을 쓰거나 응답을 보내지 않는다.
+
+/// Orca 채팅 탭 하나의 상태. `threadId` 는 Codex 스레드(= 롤아웃 파일 이름의 UUID)다.
+struct OrcaChatStatus: Equatable {
+    let orcaSessionId: String
+    let threadId: String
+    /// Orca 가 이 채팅을 내 답을 기다리는 상태로 표시했나.
+    let needsInput: Bool
+    /// 지금 상태가 시작된 시각(ms).
+    let sinceMs: Double
+}
+
+let orcaChatStatusScript = #"""
+const request = JSON.parse(process.env.RETTO_ORCA_REQUEST || '{}');
+const print = (value) => process.stdout.write(JSON.stringify(value) + '\n');
+(async () => {
+  const runtime = require(request.clientPath);
+  const client = new runtime.RuntimeClient(undefined, undefined, null, null);
+  const response = await client.call('session.tabs.listAll', {});
+  if (!response || response.ok === false) throw new Error('session.tabs.listAll');
+  const chats = [];
+  for (const snapshot of (response.result || {}).snapshots || []) {
+    for (const tab of snapshot.tabs || []) {
+      if (tab.type === 'agent-session' && tab.agent === 'codex' && tab.sessionId && tab.chatStatus) {
+        chats.push({ sessionId: tab.sessionId, status: tab.chatStatus });
+      }
+    }
+  }
+  const threads = {};
+  if (chats.length > 0) {
+    const { DatabaseSync } = require('node:sqlite');
+    const home = (runtime.getDefaultUserDataPath && runtime.getDefaultUserDataPath()) || request.userDataPath;
+    const db = new DatabaseSync(require('path').join(home, 'agent-session-journal.db'), { readOnly: true });
+    try {
+      const query = db.prepare('SELECT record_json FROM agent_session_records WHERE session_id = ?');
+      for (const chat of chats) {
+        const row = query.get(chat.sessionId);
+        if (!row) continue;
+        const chain = (JSON.parse(row.record_json) || {}).providerHandleChain || [];
+        const handle = [...chain].reverse().map((link) => link && link.handle)
+          .find((value) => value && value.provider === 'codex' && value.threadId);
+        if (handle) threads[chat.sessionId] = handle.threadId;
+      }
+    } finally {
+      db.close();
+    }
+  }
+  print({ chats: chats.map(({ sessionId, status }) => {
+    const main = status.mainAgent || {};
+    return {
+      sessionId,
+      threadId: threads[sessionId] || null,
+      state: status.state,
+      since: main.state === status.state && main.stateStartedAt ? main.stateStartedAt : status.updatedAt,
+    };
+  }) });
+})().catch((error) => {
+  print({ error: String((error && error.message) || error).slice(0, 200) });
+  process.exitCode = 1;
+}).finally(() => setTimeout(() => process.exit(), 20));
+"""#
+
+/// 스크립트 출력에서 Codex 스레드별 상태를 고른다. 출력을 못 읽으면 nil — 「대기 없음」과 구분한다.
+func orcaChatStatuses(fromOutput output: String) -> [String: OrcaChatStatus]? {
+    guard let line = output.split(separator: "\n").last,
+          let data = line.data(using: .utf8),
+          let object = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+          let chats = object["chats"] as? [[String: Any]] else { return nil }
+    func identifier(_ value: Any?) -> String? {
+        guard let text = value as? String,
+              text.range(of: "^[A-Za-z0-9_:.-]{1,128}$", options: .regularExpression) != nil else { return nil }
+        return text
+    }
+    var result: [String: OrcaChatStatus] = [:]
+    for chat in chats {
+        guard let sessionId = identifier(chat["sessionId"]), let threadId = identifier(chat["threadId"]),
+              let state = chat["state"] as? String else { continue }
+        let status = OrcaChatStatus(orcaSessionId: sessionId, threadId: threadId,
+                                    needsInput: state == "blocked" || state == "waiting",
+                                    sinceMs: (chat["since"] as? Double) ?? 0)
+        // 한 스레드를 두 탭이 가리키면(포크 직후 등) 어느 쪽인지 모른다. 둘 다 버린다.
+        if result[threadId] != nil {
+            result[threadId] = OrcaChatStatus(orcaSessionId: "", threadId: threadId, needsInput: false, sinceMs: 0)
+        } else {
+            result[threadId] = status
+        }
+    }
+    return result.filter { !$0.value.orcaSessionId.isEmpty }
+}
+
+/// Orca 가 알려 준 채팅 상태를 화면 상태에 겹친다. 대기가 아니면 롤아웃이 정한 상태를 그대로 둔다.
+func applyOrcaChatStatus(_ chat: OrcaChatStatus?, to payload: StatePayload) -> StatePayload {
+    guard let chat else { return payload }
+    var result = payload
+    if (result.orcaSessionId ?? "").isEmpty { result.orcaSessionId = chat.orcaSessionId }
+    guard chat.needsInput else { return result }
+    // 다음 조회 전에 롤아웃이 턴이 끝났다고 먼저 알려 왔으면 지난 대기를 다시 띄우지 않는다.
+    let inTurn = result.petState == .running || result.petState == .review || result.petState == .waiting
+    if !inTurn, (result.updatedAtMs ?? 0) > chat.sinceMs { return result }
+    result.state = PetState.waiting.rawValue
+    result.attention = true
+    if chat.sinceMs > 0 { result.updatedAtMs = chat.sinceMs }
+    result.stateSource = "orca"
+    return result
+}
+
+/// 일하는 중인 Orca 의 Codex 채팅만 몇 초마다 Orca 에 물어본다. 묻는 동안 Orca 를 켜지 않는다.
+/// 한 번에 Orca 의 Electron 을 node 로 0.3초쯤 띄운다(2026-11-13 측정: 0.29초, 최대 메모리 89MB).
+final class OrcaChatStatusReader {
+    static let interval: TimeInterval = 3
+    /// Codex 스레드 ID → 상태. 메인 스레드에서만 읽고 쓴다.
+    private(set) var statuses: [String: OrcaChatStatus] = [:]
+    var onChange: (() -> Void)?
+    private let queue = DispatchQueue(label: "retto.orca-chat-status", qos: .utility)
+    private var timer: Timer?
+    private var inFlight = false
+    private var tracked: Set<String> = []
+
+    /// 지켜볼 Codex 스레드를 바꾼다. 비면 묻기를 멈춘다.
+    func track(_ threadIds: Set<String>) {
+        tracked = threadIds
+        guard !threadIds.isEmpty else {
+            stop()
+            publish([:])
+            return
+        }
+        publish(statuses.filter { threadIds.contains($0.key) })
+        guard timer == nil else { return }
+        let timer = Timer(timeInterval: Self.interval, repeats: true) { [weak self] _ in self?.poll() }
+        RunLoop.main.add(timer, forMode: .common)
+        self.timer = timer
+        poll()
+    }
+
+    func stop() {
+        timer?.invalidate()
+        timer = nil
+    }
+
+    private func poll() {
+        guard !inFlight else { return }
+        guard let appURL = NSRunningApplication.runningApplications(withBundleIdentifier: orcaBundleIdentifier)
+            .first?.bundleURL else {
+            publish([:])
+            return
+        }
+        inFlight = true
+        queue.async { [weak self] in
+            let result = Self.fetch(appURL: appURL)
+            DispatchQueue.main.async {
+                guard let self else { return }
+                self.inFlight = false
+                // 못 읽었으면 지난 값을 들고 있지 않는다. 승인이 끝났는데 파란색이 남는 것보다 롤아웃 상태로 돌아가는 편이 낫다.
+                self.publish((result ?? [:]).filter { self.tracked.contains($0.key) })
+            }
+        }
+    }
+
+    private func publish(_ next: [String: OrcaChatStatus]) {
+        guard next != statuses else { return }
+        statuses = next
+        onChange?()
+    }
+
+    private static func fetch(appURL: URL) -> [String: OrcaChatStatus]? {
+        let clientPath = appURL.appendingPathComponent("Contents/Resources/app.asar.unpacked/out/cli/runtime-client.js").path
+        guard FileManager.default.fileExists(atPath: clientPath) else { return nil }
+        let userDataPath = FileManager.default.homeDirectoryForCurrentUser
+            .appendingPathComponent("Library/Application Support/orca").path
+        guard let json = try? JSONSerialization.data(withJSONObject: ["clientPath": clientPath, "userDataPath": userDataPath]),
+              let encoded = String(data: json, encoding: .utf8),
+              let output = runOrcaProcess(appURL.appendingPathComponent("Contents/MacOS/Orca"), ["-e", orcaChatStatusScript],
+                                          extraEnvironment: ["ELECTRON_RUN_AS_NODE": "1", "RETTO_ORCA_REQUEST": encoded],
+                                          timeout: 5) else { return nil }
+        return orcaChatStatuses(fromOutput: output)
     }
 }

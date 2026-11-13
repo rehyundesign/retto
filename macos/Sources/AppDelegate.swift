@@ -67,6 +67,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     private var liveStatusApplyScheduled = false
     private let claudeNativeStatusReader = ClaudeNativeStatusReader()
     private let orcaCodexOriginReader = OrcaCodexOriginReader()
+    private let orcaChatStatusReader = OrcaChatStatusReader()
     private let orcaNavigator = OrcaNavigator()
     private let taskStatusDiagnostics = TaskStatusDiagnostics()
     /// 세션이 없을 때 쓰는 빈 껍데기. 상태·이름·멘트는 넘겨 주는 값으로 덮는다.
@@ -535,6 +536,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
                 self.applySessions(self.hookSessions)
             }
         }
+        // Orca 의 Codex 채팅은 훅이 꺼져 있어 승인·질문 대기를 Orca 에 직접 물어본다.
+        // 상태를 고르는 도중(track)에도 바뀔 수 있으므로 다음 차례에 다시 그린다.
+        orcaChatStatusReader.onChange = { [weak self] in
+            DispatchQueue.main.async {
+                guard let self, !self.isUninstalling else { return }
+                self.applySessions(self.hookSessions)
+            }
+        }
         let petDirectory = FileManager.default.homeDirectoryForCurrentUser
             .appendingPathComponent(".claude/retto-pet")
         stateMonitor = StateMonitor(
@@ -591,8 +600,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
                orcaCodexOriginReader.isFromOrca(transcriptPath: payload.transcriptPath) {
                 payload.orcaHosted = true
             }
-            let output = reconciledCodexPayload(applyClaudeNativeStatus(
+            var output = reconciledCodexPayload(applyClaudeNativeStatus(
                 claudeNativeStatusReader.status(for: payload), to: payload))
+            // 훅이 도는 Orca 터미널의 Codex 는 훅이 대기를 알려 준다. 훅 없는 채팅만 Orca 상태를 겹친다.
+            if payload.orcaHosted == true {
+                output = applyOrcaChatStatus(orcaChatStatusReader.statuses[payload.navigationSessionId], to: output)
+            }
             if payload.source != "slack" {
                 taskStatusDiagnostics.record(input: payload, output: output,
                     live: codexLiveStatusReader.statuses[payload.navigationSessionId],
@@ -606,6 +619,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
                 return ($0.payload.updatedAtMs ?? 0) > ($1.payload.updatedAtMs ?? 0)
             }
             .map(\.payload)
+        // 턴 도중이거나 대기 중인 Orca 의 Codex 채팅만 Orca 에 묻는다. 끝났거나 오래 소식 없는 채팅까지
+        // 물으면 몇 초마다 Orca 의 Electron 을 헛되이 띄운다.
+        orcaChatStatusReader.track(Set(sessions.filter {
+            !$0.isClosed && $0.orcaHosted == true && [.running, .review, .waiting].contains(effectiveState($0))
+        }.map(\.navigationSessionId)))
         let openSessions = sessions.filter { !$0.isClosed }
         let attentionSessions = openSessions.filter { self.needsAttention($0) }
         if let pinnedSessionId,
@@ -1723,6 +1741,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
 
     func applicationWillTerminate(_ notification: Notification) {
         codexLiveStatusReader.stop()
+        orcaChatStatusReader.stop()
         clearDefaultsIfUninstalling()
     }
 

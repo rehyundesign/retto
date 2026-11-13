@@ -289,6 +289,38 @@ func runSelfTest() -> Int32 {
         && orcaRevealOutcome("{\"opened\":\"workspace\"}") == .workspace
         && orcaRevealOutcome("{\"opened\":\"none\"}") == nil
         && orcaRevealOutcome("") == nil
+    // Orca 의 Codex 채팅은 훅이 꺼져 있다. Orca 가 탭에 붙인 상태가 `blocked`·`waiting` 이면 입력 대기다.
+    // 스레드를 이을 수 없거나 두 탭이 한 스레드를 가리키면 추측하지 않고 버린다.
+    let orcaStatuses = orcaChatStatuses(fromOutput: """
+        {"chats":[{"sessionId":"codex_a","threadId":"thread-a","state":"blocked","since":5000},
+        {"sessionId":"codex_b","threadId":"thread-b","state":"working","since":4000},
+        {"sessionId":"codex_c","threadId":null,"state":"blocked","since":4000},
+        {"sessionId":"codex_d","threadId":"thread-d","state":"waiting","since":4000},
+        {"sessionId":"codex_e","threadId":"thread-d","state":"done","since":4000},
+        {"sessionId":"bad id","threadId":"thread-f","state":"blocked","since":4000}]}
+        """.replacingOccurrences(of: "\n", with: ""))
+    var orcaRunning = orcaCodex
+    orcaRunning.state = "running"
+    orcaRunning.updatedAtMs = 3000
+    var orcaFinished = orcaCodex
+    orcaFinished.state = "waving"
+    orcaFinished.updatedAtMs = 6000
+    let blockedChat = orcaStatuses?["thread-a"]
+    let orcaWaiting = applyOrcaChatStatus(blockedChat, to: orcaRunning)
+    let orcaChatStatusOK = orcaStatuses?.keys.sorted() == ["thread-a", "thread-b"]
+        && blockedChat == OrcaChatStatus(orcaSessionId: "codex_a", threadId: "thread-a", needsInput: true, sinceMs: 5000)
+        && orcaStatuses?["thread-b"]?.needsInput == false
+        && orcaChatStatuses(fromOutput: "{\"error\":\"session.tabs.listAll\"}") == nil
+        && orcaChatStatuses(fromOutput: "") == nil
+        && orcaWaiting.petState == .waiting && orcaWaiting.needsAttention && orcaWaiting.updatedAtMs == 5000
+        && orcaWaiting.stateSource == "orca" && orcaWaiting.orcaSessionId == "codex_a"
+        && orcaOpenRequest(for: orcaWaiting)?.sessionId == "codex_a"
+        // 대기가 아니면 롤아웃 상태를 그대로 두고, 탭 ID 만 채운다.
+        && applyOrcaChatStatus(orcaStatuses?["thread-b"], to: orcaRunning).petState == .running
+        && applyOrcaChatStatus(orcaStatuses?["thread-b"], to: orcaRunning).orcaSessionId == "codex_b"
+        // 승인 뒤 턴이 끝난 것을 롤아웃이 먼저 알렸으면 지난 대기를 다시 띄우지 않는다.
+        && applyOrcaChatStatus(blockedChat, to: orcaFinished).petState == .waving
+        && applyOrcaChatStatus(nil, to: orcaRunning) == orcaRunning
     let runningCodexPayload = try! JSONDecoder().decode(StatePayload.self, from: "{\"state\":\"running\",\"sessionId\":\"thread-one\",\"source\":\"codex\",\"sessionTitle\":\"예전 제목\",\"updatedAtMs\":1000}".data(using: .utf8)!)
     let completedCodexTask = reconcileCodexTask(
         payload: runningCodexPayload,
@@ -741,8 +773,8 @@ func runSelfTest() -> Int32 {
     // ⚠️ ok 에 넣은 항목은 아래 print 에도 반드시 넣는다. 안 그러면 그 항목이 실패해도
     // ok:false 만 뜨고 무엇이 깨졌는지 알 수 없다 — 실제로 두 번 헤맸다.
     // scripts/check.sh 가 두 줄을 대조해서 빠진 게 있으면 막는다.
-    let ok = rilakkumaTimingOK && christmasOK && claudeRowOK && fallbackOK && cornerOK && lookingOK && sleepRowOK && displayOK && dozeOK && sleepOK && ancientOK && viewedOK && haloOK && assetOK && skinsOK && dragRunOK && behaviorsOK && statesOK && deepLinkOK && clientRoutingOK && codexMenuOK && integrationOK && setupOK && legacyOK && transcriptShapesOK && scalesOK && baselineOK && decoupledOK && fontOK && priorityOK && registryOK && titleOK && badgeLayoutOK && clickRoutingOK && gazeStatesOK && expandOK && lineBudgetOK && typefaceOK && textDeltaOK && independentChatOK && tonesOK && folderFoldOK && labelOK && doneStaysOK && bubbleShapeOK && seenOK && staleOK && personalV2LayoutOK && codexTitleRefreshOK && codexCompletionRefreshOK && codexStateReconciliationOK && rolloutDiscoveryPayloadOK && unnamedTitleOK && orcaOK
-    print("{\"ok\":\(ok),\"asset\":\"\(Int(image.size.width))x\(Int(image.size.height))\",\"skins\":\(PetSkin.allCases.count),\"skinsOK\":\(skinsOK),\"christmasEffects\":\(christmasOK),\"dragRun\":\(dragRunOK),\"canJoinAllSpaces\":\(behaviorsOK),\"states\":\(animationCatalog.count),\"deepLink\":\(deepLinkOK),\"clientRouting\":\(clientRoutingOK),\"codexMenu\":\(codexMenuOK),\"integration\":\(integrationOK),\"setup\":\(setupOK),\"legacy\":\(legacyOK),\"transcriptShapes\":\(transcriptShapesOK),\"sizePresets\":\(supportedScales.count),\"baselineLayout\":\(baselineOK),\"scaleDecoupled\":\(decoupledOK),\"badgePlacement\":\(badgeLayoutOK),\"ribbonExpand\":\(expandOK),\"lineBudget\":\(lineBudgetOK),\"typefaces\":\(PetTypeface.allCases.count),\"typefaceOK\":\(typefaceOK),\"textDelta\":\(textDeltaOK),\"independentChat\":\(independentChatOK),\"tones\":\(tonesOK),\"folderFold\":\(folderFoldOK),\"doneStays\":\(doneStaysOK),\"bubbleShape\":\(bubbleShapeOK),\"seenRule\":\(seenOK),\"staleWorking\":\(staleOK),\"headroomClean\":\(haloOK),\"viewedElsewhere\":\(viewedOK),\"ancientNews\":\(ancientOK),\"sleeps\":\(sleepOK),\"sleepRow\":\(sleepRow),\"dozes\":\(dozeOK),\"displayState\":\(displayOK),\"seenByLooking\":\(lookingOK),\"corners\":\(cornerOK),\"appFallback\":\(fallbackOK),\"haloRows\":\(halo.rows),\"haloDeepest\":\(halo.deepest),\"haloFaint\":\(haloFaintPixels),\"claudeRow\":\(claudeRowOK),\"font\":\"\(rettoHandwritingFontName)\",\"fontLoaded\":\(fontOK),\"multiSession\":\(registryOK),\"sessionTitleFallback\":\(titleOK),\"prioritySelection\":\(priorityOK),\"badgeLayout\":\(badgeLayoutOK),\"clickRouting\":\(clickRoutingOK),\"sleepRowOK\":\(sleepRowOK),\"assetOK\":\(assetOK),\"statesOK\":\(statesOK),\"scales\":\(scalesOK),\"gazeStates\":\(gazeStatesOK),\"label\":\(labelOK),\"personalV2Layout\":\(personalV2LayoutOK),\"codexTitleRefresh\":\(codexTitleRefreshOK),\"codexCompletionRefresh\":\(codexCompletionRefreshOK),\"codexStateReconciliation\":\(codexStateReconciliationOK),\"rolloutDiscoveryPayload\":\(rolloutDiscoveryPayloadOK),\"rilakkumaTiming\":\(rilakkumaTimingOK),\"unnamedTitle\":\(unnamedTitleOK),\"orca\":\(orcaOK)}")
+    let ok = rilakkumaTimingOK && christmasOK && claudeRowOK && fallbackOK && cornerOK && lookingOK && sleepRowOK && displayOK && dozeOK && sleepOK && ancientOK && viewedOK && haloOK && assetOK && skinsOK && dragRunOK && behaviorsOK && statesOK && deepLinkOK && clientRoutingOK && codexMenuOK && integrationOK && setupOK && legacyOK && transcriptShapesOK && scalesOK && baselineOK && decoupledOK && fontOK && priorityOK && registryOK && titleOK && badgeLayoutOK && clickRoutingOK && gazeStatesOK && expandOK && lineBudgetOK && typefaceOK && textDeltaOK && independentChatOK && tonesOK && folderFoldOK && labelOK && doneStaysOK && bubbleShapeOK && seenOK && staleOK && personalV2LayoutOK && codexTitleRefreshOK && codexCompletionRefreshOK && codexStateReconciliationOK && rolloutDiscoveryPayloadOK && unnamedTitleOK && orcaOK && orcaChatStatusOK
+    print("{\"ok\":\(ok),\"asset\":\"\(Int(image.size.width))x\(Int(image.size.height))\",\"skins\":\(PetSkin.allCases.count),\"skinsOK\":\(skinsOK),\"christmasEffects\":\(christmasOK),\"dragRun\":\(dragRunOK),\"canJoinAllSpaces\":\(behaviorsOK),\"states\":\(animationCatalog.count),\"deepLink\":\(deepLinkOK),\"clientRouting\":\(clientRoutingOK),\"codexMenu\":\(codexMenuOK),\"integration\":\(integrationOK),\"setup\":\(setupOK),\"legacy\":\(legacyOK),\"transcriptShapes\":\(transcriptShapesOK),\"sizePresets\":\(supportedScales.count),\"baselineLayout\":\(baselineOK),\"scaleDecoupled\":\(decoupledOK),\"badgePlacement\":\(badgeLayoutOK),\"ribbonExpand\":\(expandOK),\"lineBudget\":\(lineBudgetOK),\"typefaces\":\(PetTypeface.allCases.count),\"typefaceOK\":\(typefaceOK),\"textDelta\":\(textDeltaOK),\"independentChat\":\(independentChatOK),\"tones\":\(tonesOK),\"folderFold\":\(folderFoldOK),\"doneStays\":\(doneStaysOK),\"bubbleShape\":\(bubbleShapeOK),\"seenRule\":\(seenOK),\"staleWorking\":\(staleOK),\"headroomClean\":\(haloOK),\"viewedElsewhere\":\(viewedOK),\"ancientNews\":\(ancientOK),\"sleeps\":\(sleepOK),\"sleepRow\":\(sleepRow),\"dozes\":\(dozeOK),\"displayState\":\(displayOK),\"seenByLooking\":\(lookingOK),\"corners\":\(cornerOK),\"appFallback\":\(fallbackOK),\"haloRows\":\(halo.rows),\"haloDeepest\":\(halo.deepest),\"haloFaint\":\(haloFaintPixels),\"claudeRow\":\(claudeRowOK),\"font\":\"\(rettoHandwritingFontName)\",\"fontLoaded\":\(fontOK),\"multiSession\":\(registryOK),\"sessionTitleFallback\":\(titleOK),\"prioritySelection\":\(priorityOK),\"badgeLayout\":\(badgeLayoutOK),\"clickRouting\":\(clickRoutingOK),\"sleepRowOK\":\(sleepRowOK),\"assetOK\":\(assetOK),\"statesOK\":\(statesOK),\"scales\":\(scalesOK),\"gazeStates\":\(gazeStatesOK),\"label\":\(labelOK),\"personalV2Layout\":\(personalV2LayoutOK),\"codexTitleRefresh\":\(codexTitleRefreshOK),\"codexCompletionRefresh\":\(codexCompletionRefreshOK),\"codexStateReconciliation\":\(codexStateReconciliationOK),\"rolloutDiscoveryPayload\":\(rolloutDiscoveryPayloadOK),\"rilakkumaTiming\":\(rilakkumaTimingOK),\"unnamedTitle\":\(unnamedTitleOK),\"orca\":\(orcaOK),\"orcaChatStatus\":\(orcaChatStatusOK)}")
     return ok ? 0 : 1
 }
 
