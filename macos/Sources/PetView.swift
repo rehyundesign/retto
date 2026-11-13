@@ -28,7 +28,7 @@ final class RettoView: NSView {
             }
             if skin == .angelWings { spriteRestState=nil }
             if skin == .hachupingping { spriteRestState=nil; _ = hachupingPolicy.select(state,session:payload?.id ?? ""); hachupingLastKey="" }
-            if skin == .chocolatHeart { chocolatEpoch = ProcessInfo.processInfo.systemUptime }; clearGaze(); frameIndex = 0; completedCycles = 0; restartAnimation(); restartChristmasEffects(); needsDisplay = true }
+            if skin == .chocolatHeart { chocolatEpoch = nowUptime }; clearGaze(); frameIndex = 0; completedCycles = 0; restartAnimation(); restartChristmasEffects(); needsDisplay = true }
     }
     private var spriteLayout: SpriteSheetLayout {
         SpriteSheetLayout.forImage(size: spriteSheet.size) ?? .retto
@@ -52,7 +52,7 @@ final class RettoView: NSView {
     func setAngelIdleVariantForPreview(_ value:Int,time:Double){angelPreviewTime=time;angelIdleChoice.force(value,cycle:Int(floor(time/3.2)));needsDisplay=true}
     func setAngelTimeForPreview(_ time:Double){angelPreviewTime=time;needsDisplay=true}
     private var amuRanPoseEpoch = ProcessInfo.processInfo.systemUptime
-    private let amuRanEffectEpoch = ProcessInfo.processInfo.systemUptime
+    private var amuRanEffectEpoch = ProcessInfo.processInfo.systemUptime
     private var amuRanPreviewTime: TimeInterval?
     private var amuRanSpriteOnlyPreview = false
     func setAmuRanTimeForPreview(_ time: TimeInterval) { amuRanPreviewTime = time; needsDisplay = true }
@@ -83,6 +83,13 @@ final class RettoView: NSView {
     private var frameIndex = 0
     private var completedCycles = 0
     private var animationTimer: Timer?
+    /// Windows 판 프레임 내보내기용 시계(WindowsSkinExport.swift). 값이 있으면 실제 시계 대신 이 시각으로 그리고,
+    /// 타이머를 걸지 않고 `exportAdvance(to:)` 로 시간을 흘린다. 앱이 화면에 띄울 때는 늘 nil 이다.
+    var exportClock: TimeInterval?
+    /// 내보낼 때 말풍선·배지를 빼고 캐릭터와 효과만 그린다.
+    var exportSpriteOnly = false
+    private var exportTimer: (interval: TimeInterval, repeats: Bool, next: TimeInterval)?
+    private var nowUptime: TimeInterval { exportClock ?? ProcessInfo.processInfo.systemUptime }
     private var jeanneEpoch = ProcessInfo.processInfo.systemUptime
     private var jeannePreviewTime: Double?
     func setJeanneTimeForPreview(_ time: Double) {
@@ -409,46 +416,53 @@ final class RettoView: NSView {
     }
 
     private func restartAnimation() {
-        if skin == .angelWings{angelLastDisplaySample=nil;angelEpoch=ProcessInfo.processInfo.systemUptime;angelIdleChoice.reset();angelLastMouseLocation=nil}
+        if skin == .angelWings{angelLastDisplaySample=nil;angelEpoch=nowUptime;angelIdleChoice.reset();angelLastMouseLocation=nil}
         if skin == .classic, let selected = currentAnimation {
-            classicGrownEpoch = ProcessInfo.processInfo.systemUptime
+            classicGrownEpoch = nowUptime
                 - ClassicGrown.elapsed(row: selected.row, frame: frameIndex, cycles: completedCycles)
         }
         let effectState = dragRun.map { String(describing: $0) } ?? visibleState.rawValue
         if effectState != christmasEffectState {
             christmasEffectState = effectState
-            christmasEffectsStart = ProcessInfo.processInfo.systemUptime
-            chocolatEpoch = ProcessInfo.processInfo.systemUptime
+            christmasEffectsStart = nowUptime
+            chocolatEpoch = nowUptime
         }
         animationTimer?.invalidate()
         if skin == .amuRan {
             _=amuChoice.enter(state,session:payload?.id ?? "",turn:payload?.turnId ?? "")
             if state == .waving { spriteRestState=nil }
-            amuRanPoseEpoch = ProcessInfo.processInfo.systemUptime
+            amuRanPoseEpoch = nowUptime
         }
         guard let animation = currentAnimation else { return }
         if skin == .hachupingping {
             let key=hachupingKey
-            if key != hachupingLastKey { frameIndex=0;completedCycles=0;hachupingEffectsEpoch=ProcessInfo.processInfo.systemUptime;hachupingLastKey=key }
-            hachupingEpoch=ProcessInfo.processInfo.systemUptime-Double(completedCycles*animation.frames+frameIndex)*animation.interval
+            if key != hachupingLastKey { frameIndex=0;completedCycles=0;hachupingEffectsEpoch=nowUptime;hachupingLastKey=key }
+            hachupingEpoch=nowUptime-Double(completedCycles*animation.frames+frameIndex)*animation.interval
         }
         if skin == .howl {
             if animation.row == 4 && howlLastRow != 4 { howlCookingB = Bool.random() }
             howlLastRow = animation.row
-            howlEpoch = ProcessInfo.processInfo.systemUptime - HowlSkin.elapsed(row:animation.row,frame:frameIndex,cycles:completedCycles)
+            howlEpoch = nowUptime - HowlSkin.elapsed(row:animation.row,frame:frameIndex,cycles:completedCycles)
         }
         let poseTiming = skin == .christmas && spriteLayout.columns == 16
             ? Christmas16Timing.frameDuration(row: animation.row, frame: frameIndex) : nil
         if skin == .jeanne {
-            jeanneEpoch = ProcessInfo.processInfo.systemUptime - JeanneSkin.elapsed(row: animation.row, frame: frameIndex, cycles: completedCycles)
+            jeanneEpoch = nowUptime - JeanneSkin.elapsed(row: animation.row, frame: frameIndex, cycles: completedCycles)
         }
         if skin == .pichiPitch {
-            pichiEpoch = ProcessInfo.processInfo.systemUptime - PichiSkin.elapsed(row: animation.row, frame: frameIndex, cycles: completedCycles)
+            pichiEpoch = nowUptime - PichiSkin.elapsed(row: animation.row, frame: frameIndex, cycles: completedCycles)
         }
         if skin == .hana {
-            hanaAnimationStart = ProcessInfo.processInfo.systemUptime - Double(completedCycles * animation.frames + frameIndex) * animation.interval
+            hanaAnimationStart = nowUptime - Double(completedCycles * animation.frames + frameIndex) * animation.interval
         }
-        let timer = Timer(timeInterval: skin == .angelWings && AngelSkin.available ? 0.05 : skin == .hachupingping || skin == .howl || (skin == .classic && ClassicGrown.available) ? 1.0 / 60 : skin == .jeanne ? 0.05 : (skin == .amuRan || skin == .hana || skin == .chocolatHeart || skin == .pichiPitch) ? 1.0 / 60 : (poseTiming ?? animation.interval), repeats: poseTiming == nil) { [weak self] _ in
+        let interval = skin == .angelWings && AngelSkin.available ? 0.05 : skin == .hachupingping || skin == .howl || (skin == .classic && ClassicGrown.available) ? 1.0 / 60 : skin == .jeanne ? 0.05 : (skin == .amuRan || skin == .hana || skin == .chocolatHeart || skin == .pichiPitch) ? 1.0 / 60 : (poseTiming ?? animation.interval)
+        if exportClock != nil {
+            // 내보낼 때는 타이머 대신 다음 차례 시각만 적어 두고 exportAdvance 가 그 시각에 같은 일을 한다.
+            exportTimer = (interval, poseTiming == nil, nowUptime + interval)
+            needsDisplay = true
+            return
+        }
+        let timer = Timer(timeInterval: interval, repeats: poseTiming == nil) { [weak self] _ in
             self?.advanceFrame()
             if poseTiming != nil { self?.restartAnimation() }
         }
@@ -461,7 +475,7 @@ final class RettoView: NSView {
         christmasEffectsTimer?.invalidate()
         christmasEffectsTimer = nil
         guard skin == .christmas else { return }
-        christmasEffectsStart = ProcessInfo.processInfo.systemUptime
+        christmasEffectsStart = nowUptime
         let timer = Timer(timeInterval: 0.05, repeats: true) { [weak self] _ in self?.needsDisplay = true }
         christmasEffectsTimer = timer
         RunLoop.main.add(timer, forMode: .common)
@@ -489,7 +503,7 @@ final class RettoView: NSView {
                 guard !hasActiveGaze else { return false }
             }
             let duration = JeanneSkin.state(row: animationCatalog[state]!.row)!.cycle
-            jeanneEpoch = ProcessInfo.processInfo.systemUptime - duration * 3 - 0.01
+            jeanneEpoch = nowUptime - duration * 3 - 0.01
             advanceFrame()
             guard visibleState == state, currentAnimation?.row == animationCatalog[state]?.row else { print("State changed unexpectedly: \(state)"); return false }
         }
@@ -498,13 +512,13 @@ final class RettoView: NSView {
         apply(payload,state:.waving,sessionCount:1,attentionCount:0,isPinned:false)
         playReaction()
         guard transientState == .jumping, !allowsGaze, currentAnimation?.row == animationCatalog[.jumping]?.row else { return false }
-        jeanneEpoch = ProcessInfo.processInfo.systemUptime - JeanneSkin.state(row:4)!.cycle - 0.01
+        jeanneEpoch = nowUptime - JeanneSkin.state(row:4)!.cycle - 0.01
         advanceFrame()
         guard transientState == nil, visibleState == .waving, currentAnimation?.row == 3 else { return false }
         for direction in [DragRun.right,.left] {
             dragRun = direction; restartAnimation()
             guard let a = currentAnimation, a.row == dragRunAnimations[direction]?.row, a.frames == 16 else { return false }
-            jeanneEpoch = ProcessInfo.processInfo.systemUptime - 2.1
+            jeanneEpoch = nowUptime - 2.1
             advanceFrame()
             guard frameIndex < 16 else { return false }
         }
@@ -521,7 +535,7 @@ final class RettoView: NSView {
     private func advanceFrame() {
         if skin == .angelWings {
             if visibleState == .idle && dragRun == nil && !hasActiveGaze {
-                angelIdleChoice.choose(cycle:Int(floor(max(0,ProcessInfo.processInfo.systemUptime-angelEpoch)/3.2)))
+                angelIdleChoice.choose(cycle:Int(floor(max(0,nowUptime-angelEpoch)/3.2)))
             }
             if let window,window.isVisible {
                 let cursor=NSEvent.mouseLocation
@@ -542,7 +556,7 @@ final class RettoView: NSView {
             }
         }
         if skin == .angelWings, let animation = currentAnimation {
-            let time = ProcessInfo.processInfo.systemUptime - angelEpoch
+            let time = nowUptime - angelEpoch
             let sample = AngelSkin.displaySample(row: animation.row, time: time,
                 alternateIdle: visibleState == .idle && angelIdleChoice.variant == 1,
                 flight: dragRun != nil)
@@ -552,35 +566,35 @@ final class RettoView: NSView {
         if skin == .hachupingping || skin == .howl || skin == .amuRan || skin == .jeanne { needsDisplay = true }
         guard dragRun != nil || !hasActiveGaze, let animation = currentAnimation else { return }
         if skin == .angelWings,AngelSkin.available,dragRun == nil || AngelInteractions.hasFlight {
-            let elapsed=ProcessInfo.processInfo.systemUptime-angelEpoch
+            let elapsed=nowUptime-angelEpoch
             let p=dragRun == nil ? AngelSkin.position(row:animation.row,time:elapsed):AngelInteractions.position(row:animation.row,time:elapsed)
             frameIndex=p.frame;completedCycles=p.cycles
         } else if skin == .hachupingping {
-            let p=HachupingSkin.position(hachupingKey,time:ProcessInfo.processInfo.systemUptime-hachupingEpoch)
+            let p=HachupingSkin.position(hachupingKey,time:nowUptime-hachupingEpoch)
             frameIndex=p.frame;completedCycles=p.cycles
         } else if skin == .howl {
-            let p = HowlSkin.position(row:animation.row,time:ProcessInfo.processInfo.systemUptime-howlEpoch)
+            let p = HowlSkin.position(row:animation.row,time:nowUptime-howlEpoch)
             frameIndex = p.frame; completedCycles = p.cycles
         } else if skin == .classic, ClassicGrown.available {
             let p = ClassicGrown.position(row: animation.row,
-                elapsed: ProcessInfo.processInfo.systemUptime - classicGrownEpoch)
+                elapsed: nowUptime - classicGrownEpoch)
             frameIndex = p.frame; completedCycles = p.cycles
         } else if skin == .jeanne {
             if dragRun == nil && hasActiveGaze { return }
-            let p = JeanneSkin.position(row: animation.row, time: ProcessInfo.processInfo.systemUptime - jeanneEpoch)
+            let p = JeanneSkin.position(row: animation.row, time: nowUptime - jeanneEpoch)
             frameIndex = p.frame; completedCycles = p.cycles
         } else if skin == .pichiPitch {
-            let p = PichiSkin.position(row: animation.row, time: ProcessInfo.processInfo.systemUptime - pichiEpoch)
+            let p = PichiSkin.position(row: animation.row, time: nowUptime - pichiEpoch)
             frameIndex = p.frame; completedCycles = p.cycles
         } else if skin == .chocolatHeart {
-            let tick = Int(max(0, ProcessInfo.processInfo.systemUptime - chocolatEpoch) / animation.interval)
+            let tick = Int(max(0, nowUptime - chocolatEpoch) / animation.interval)
             frameIndex = tick % animation.frames; completedCycles = tick / animation.frames
         } else if skin == .amuRan {
-            let p = AmuRanMotion.position(elapsed: ProcessInfo.processInfo.systemUptime - amuRanPoseEpoch, interval: animation.interval)
+            let p = AmuRanMotion.position(elapsed: nowUptime - amuRanPoseEpoch, interval: animation.interval)
             frameIndex = p.frame; completedCycles = p.cycles
         } else if skin == .hana {
             // 타이머 호출이 늦어져도 실제 경과 시간의 프레임으로 진행한다.
-            let elapsed = max(0, ProcessInfo.processInfo.systemUptime - hanaAnimationStart)
+            let elapsed = max(0, nowUptime - hanaAnimationStart)
             let position = HanaMotion.position(elapsed: elapsed, interval: animation.interval, frames: animation.frames)
             frameIndex = position.frame
             completedCycles = position.cycles
@@ -618,7 +632,7 @@ final class RettoView: NSView {
             guard let a = currentAnimation, a.row == HowlSkin.normalized(animationCatalog[s]!.row), !allowsGaze else { return false }
             lookDirection = 8
             guard !hasActiveGaze else { return false }
-            howlEpoch = ProcessInfo.processInfo.systemUptime - HowlSkin.state(row:a.row)!.cycle * 2.1
+            howlEpoch = nowUptime - HowlSkin.state(row:a.row)!.cycle * 2.1
             let heldVariant = howlCookingB
             advanceFrame()
             let expected: PetState = a.cycleLimit.map({ $0 <= 2 ? PetState.idle : s }) ?? s
@@ -634,7 +648,7 @@ final class RettoView: NSView {
         guard transientState == .jumping, currentAnimation?.row == 4 else { return false }
         let variant = howlCookingB
         for _ in 0..<4 { advanceFrame(); guard howlCookingB == variant else { return false } }
-        howlEpoch = ProcessInfo.processInfo.systemUptime - 3.21
+        howlEpoch = nowUptime - 3.21
         advanceFrame()
         guard transientState == nil, currentAnimation?.row == 11 else { return false }
         print("Howl native state/review/drag/unsupported-gaze/reaction-return and stable cooking choice: passed")
@@ -656,23 +670,23 @@ final class RettoView: NSView {
         enter(.failed);guard hachupingKey=="failed"else{return false}
         enter(.waving);guard hachupingKey=="princess",currentAnimation?.cycleLimit==nil else{return false}
         for t in [6.5,9.9,60.7] {
-            hachupingEpoch=ProcessInfo.processInfo.systemUptime-t;advanceFrame()
+            hachupingEpoch=nowUptime-t;advanceFrame()
             guard visibleState == .waving,hachupingKey=="princess",spriteRestState==nil,frameIndex==HachupingSkin.position("princess",time:t).frame else{print("Completion stopped after",t);return false}
         }
         skin = .howl;spriteRestState = .idle;skin = .hachupingping
         guard visibleState == .waving,hachupingKey=="princess",spriteRestState==nil else{return false}
         print("Completion stays animated beyond 2/3/18 loops; selecting from rested other skin resumes Princess")
         playReaction();guard transientState == .jumping,hachupingKey=="jump",!allowsGaze else{return false}
-        hachupingEpoch=ProcessInfo.processInfo.systemUptime-3.21;advanceFrame()
+        hachupingEpoch=nowUptime-3.21;advanceFrame()
         guard transientState==nil,hachupingKey=="princess"else{return false}
         enter(.idle)
         for t in [0.1,1.7,6.5,13.3] {
-            hachupingEpoch=ProcessInfo.processInfo.systemUptime-t;advanceFrame()
+            hachupingEpoch=nowUptime-t;advanceFrame()
             guard visibleState == .idle,hachupingKey=="idle",frameIndex==HachupingSkin.position("idle",time:t).frame else{print("Idle playback failure",t);return false}
         }
         updateGaze(toward:4);guard hasActiveGaze,lookDirection==4 else{return false}
         clearGaze();guard !hasActiveGaze,currentAnimation?.frames==16 else{return false}
-        hachupingEpoch=ProcessInfo.processInfo.systemUptime-1.7;advanceFrame()
+        hachupingEpoch=nowUptime-1.7;advanceFrame()
         guard frameIndex==HachupingSkin.position("idle",time:1.7).frame else{return false}
         print("Actual RettoView independent idle advances across loops and resumes after cursor hold")
         for d in [DragRun.left,.right] {setDragRunForPreview(d);guard currentAnimation?.interval==0.1,!allowsGaze else{return false}}
@@ -701,7 +715,7 @@ final class RettoView: NSView {
         setDragRunForPreview(nil)
         playReaction()
         guard transientState == .jumping,currentAnimation?.row==4,!allowsGaze else{return false}
-        amuRanPoseEpoch=ProcessInfo.processInfo.systemUptime-3.21
+        amuRanPoseEpoch=nowUptime-3.21
         advanceFrame()
         guard transientState==nil,currentAnimation?.row==11 else{print("Amu click did not return to sleep");return false}
         print("PASS actual Amu state/review alias,16-frame clocks,drag,gaze gates,click return to sleep")
@@ -717,7 +731,7 @@ final class RettoView: NSView {
         enter(.running,"start")
         let work=amuChoice.working
         guard AmuApproved.Choice.workingPool.contains(work) else{return false}
-        amuRanPoseEpoch=ProcessInfo.processInfo.systemUptime-1.1
+        amuRanPoseEpoch=nowUptime-1.1
         let phase=amuRanPoseEpoch
         for (i,s) in [PetState.review,.running,.review,.running].enumerated() {
             enter(s,"work refresh \(i)")
@@ -727,13 +741,13 @@ final class RettoView: NSView {
         let done=amuChoice.completion
         guard AmuApproved.Choice.completionPool.contains(done),currentAnimation?.cycleLimit==nil else{return false}
         for t in [6.5,9.9,60.7] {
-            amuRanPoseEpoch=ProcessInfo.processInfo.systemUptime-t;advanceFrame()
+            amuRanPoseEpoch=nowUptime-t;advanceFrame()
             let epoch=amuRanPoseEpoch
             enter(.waving,"completion refresh \(t)")
             guard visibleState == .waving,spriteRestState==nil,currentAnimation?.row==3,
                   amuChoice.completion==done,abs(amuRanPoseEpoch-epoch)<0.02 else{print("Completion became idle/rerolled after",t);return false}
         }
-        playReaction();amuRanPoseEpoch=ProcessInfo.processInfo.systemUptime-3.21;advanceFrame()
+        playReaction();amuRanPoseEpoch=nowUptime-3.21;advanceFrame()
         guard transientState==nil,visibleState == .waving,amuChoice.completion==done,currentAnimation?.cycleLimit==nil else{return false}
         print("PASS actual Amu: stable4-way work, review phase preserved, stable2-way completion beyond60s, no idle fallback, click returns to same completion")
         return true
@@ -754,7 +768,7 @@ final class RettoView: NSView {
         for d in [DragRun.left,.right]{setDragRunForPreview(d);guard currentAnimation?.row==(d == .right ? 1:2) else{return false}}
         setDragRunForPreview(nil);enter(.sleeping);playReaction()
         guard transientState == .jumping,currentAnimation?.row==4 else{return false}
-        angelEpoch=ProcessInfo.processInfo.systemUptime-2.401;advanceFrame()
+        angelEpoch=nowUptime-2.401;advanceFrame()
         guard transientState==nil,currentAnimation?.row==11 else{print("Angel click return failure");return false}
         print("PASS Angel actual state transitions,review-to-running alias,gaze gate,legacy drag,click returns to sleep")
         return true
@@ -780,7 +794,7 @@ final class RettoView: NSView {
         for d in [DragRun.left,.right] {
             setDragRunForPreview(d)
             guard currentAnimation?.frames==16,currentAnimation?.interval==0.1,!allowsGaze else{return false}
-            angelEpoch=ProcessInfo.processInfo.systemUptime-1.601;advanceFrame()
+            angelEpoch=nowUptime-1.601;advanceFrame()
             guard frameIndex==0,completedCycles==1 else{print("Flight pose cadence mismatch");return false}
         }
         setDragRunForPreview(nil)
@@ -1112,19 +1126,19 @@ final class RettoView: NSView {
 
         let amuRect = AmuApproved.registeredRect(row:row,in:petRect,workingKey:amuChoice.working,completionKey:amuChoice.completion)
         let amuEffectsRect = AmuApproved.registeredRect(row:AmuRanMotion.row(state:visibleState,drag:dragRun),in:petRect,workingKey:amuChoice.working,completionKey:amuChoice.completion)
-        let amuRanTime = amuRanPreviewTime ?? (ProcessInfo.processInfo.systemUptime - amuRanEffectEpoch)
-        let amuRanPoseTime = amuRanPreviewTime ?? (ProcessInfo.processInfo.systemUptime - amuRanPoseEpoch)
+        let amuRanTime = amuRanPreviewTime ?? (nowUptime - amuRanEffectEpoch)
+        let amuRanPoseTime = amuRanPreviewTime ?? (nowUptime - amuRanPoseEpoch)
         if skin == .amuRan { AmuRanFrames.drawEffects(state: visibleState, drag: dragRun, time: amuRanTime, poseTime: amuRanPoseTime, gazeDirection: dragRun == nil ? lookDirection : nil, in: amuEffectsRect, front: false,workingKey:amuChoice.working,completionKey:amuChoice.completion) }
         let hachuDrawKey = skin == .hachupingping && hasActiveGaze && dragRun == nil ? "gaze":hachupingKey
-        let hachuTime = hachupingPreviewTime ?? (ProcessInfo.processInfo.systemUptime-hachupingEffectsEpoch)
+        let hachuTime = hachupingPreviewTime ?? (nowUptime-hachupingEffectsEpoch)
         if skin == .hachupingping { HachupingSkin.drawEffects(key:hachuDrawKey,time:hachuTime,front:false,in:petRect) }
-        let howlTime = howlPreviewTime ?? (ProcessInfo.processInfo.systemUptime-howlEpoch)
+        let howlTime = howlPreviewTime ?? (nowUptime-howlEpoch)
         if skin == .howl { HowlSkin.drawEffects(row:row,frame:column,time:howlTime,cookingB:howlCookingB,front:false,in:petRect) }
-        let jeanneTime = jeannePreviewTime ?? (ProcessInfo.processInfo.systemUptime - jeanneEpoch)
+        let jeanneTime = jeannePreviewTime ?? (nowUptime - jeanneEpoch)
         if skin == .jeanne { JeanneSkin.drawEffects(row: row, frame: column, time: jeanneTime, front: false, in: petRect) }
-        let pichiTime = pichiPreviewTime ?? (ProcessInfo.processInfo.systemUptime - pichiEpoch)
+        let pichiTime = pichiPreviewTime ?? (nowUptime - pichiEpoch)
         if skin == .pichiPitch { PichiSkin.drawEffects(row: row, time: pichiTime, front: false, in: petRect) }
-        let christmasTime = christmasPreviewTime ?? (ProcessInfo.processInfo.systemUptime - christmasEffectsStart)
+        let christmasTime = christmasPreviewTime ?? (nowUptime - christmasEffectsStart)
         if skin == .christmas {
             drawChristmasEffects(state: visibleState, drag: dragRun, gaze: lookDirection != nil,
                                  in: petRect, time: christmasTime, frame: frameIndex, front: false)
@@ -1135,7 +1149,7 @@ final class RettoView: NSView {
         }
 
         if skin == .chocolatHeart {
-            ChocolatHeart.drawEffects(row: row, time: chocolatPreviewTime ?? (ProcessInfo.processInfo.systemUptime - chocolatEpoch), front: false, in: petRect)
+            ChocolatHeart.drawEffects(row: row, time: chocolatPreviewTime ?? (nowUptime - chocolatEpoch), front: false, in: petRect)
         }
         NSGraphicsContext.saveGraphicsState()
         let shadow = NSShadow()
@@ -1144,7 +1158,7 @@ final class RettoView: NSView {
         shadow.shadowOffset = NSSize(width: 0, height: -2 * uiScale)
         shadow.set()
         if skin == .angelWings,AngelSkin.available,dragRun == nil || AngelInteractions.hasFlight {
-            let t=angelPreviewTime ?? (ProcessInfo.processInfo.systemUptime-angelEpoch)
+            let t=angelPreviewTime ?? (nowUptime-angelEpoch)
             if hasActiveGaze,let d=lookDirection {
                 _=AngelInteractions.drawGaze(direction:d,time:t,in:petRect)
             }else if dragRun != nil,let key=AngelInteractions.flightKey(row) {
@@ -1185,7 +1199,7 @@ final class RettoView: NSView {
 
 
         if skin == .chocolatHeart {
-            ChocolatHeart.drawEffects(row: row, time: chocolatPreviewTime ?? (ProcessInfo.processInfo.systemUptime - chocolatEpoch), front: true, in: petRect)
+            ChocolatHeart.drawEffects(row: row, time: chocolatPreviewTime ?? (nowUptime - chocolatEpoch), front: true, in: petRect)
         }
         if skin == .jeanne { JeanneSkin.drawEffects(row: row, frame: column, time: jeanneTime, front: true, in: petRect) }
         if skin == .pichiPitch { PichiSkin.drawEffects(row: row, time: pichiTime, front: true, in: petRect) }
@@ -1196,7 +1210,7 @@ final class RettoView: NSView {
             drawSleepBreath(petRect: petRect, scale: uiScale)
         }
 
-        if skin != .amuRan || !amuRanSpriteOnlyPreview { drawStatusRibbon(statusAnimation, layout: layout) }
+        if !exportSpriteOnly, skin != .amuRan || !amuRanSpriteOnlyPreview { drawStatusRibbon(statusAnimation, layout: layout) }
     }
 
 
@@ -1809,11 +1823,11 @@ extension RettoView {
         }
         setDragRunForPreview(nil)
         playReaction()
-        classicGrownEpoch = ProcessInfo.processInfo.systemUptime - 2.401
+        classicGrownEpoch = nowUptime - 2.401
         advanceFrame()
         guard transientState == nil,visibleState == .idle else { print("Classic transition check failed at line \(#line)"); return false }
         applyState(.waving)
-        classicGrownEpoch = ProcessInfo.processInfo.systemUptime - 4.801
+        classicGrownEpoch = nowUptime - 4.801
         advanceFrame()
         guard visibleState == .idle,state == .waving else { print("Classic transition check failed at line \(#line)"); return false }
         applyState(.idle,sleep:true)
@@ -1849,7 +1863,7 @@ extension RettoView {
             updateHover(at:NSPoint(x:layout.petRect.maxX+300,y:layout.petRect.midY))
             guard lookDirection != nil else{return false}
             RunLoop.main.run(until:Date(timeIntervalSinceNow:gazeHoldDuration+0.10))
-            guard lookDirection==nil,ProcessInfo.processInfo.systemUptime-classicGrownEpoch<0.30 else{print("Classic reset failed: \(value)");return false}
+            guard lookDirection==nil,nowUptime-classicGrownEpoch<0.30 else{print("Classic reset failed: \(value)");return false}
         }
         applyGazeState(.idle)
         lookDirection=15
@@ -1875,11 +1889,59 @@ extension RettoView {
         playReaction()
         updateHover(at:NSPoint(x:layout.petRect.maxX+300,y:layout.petRect.midY))
         guard transientState == .jumping,lookDirection==nil else{return false}
-        classicGrownEpoch=ProcessInfo.processInfo.systemUptime-2.401
+        classicGrownEpoch=nowUptime-2.401
         advanceFrame()
         guard transientState==nil,currentAnimation?.row==0 else{return false}
         animationTimer?.invalidate();gazeResetTimer?.invalidate();gazeTransitionTimer?.invalidate()
         print("Classic gaze:48 cursor/state mappings,0.8s return,15-to0 wrap,sleep/drag/reaction gates passed")
         return true
     }
+}
+
+// Windows 판 프레임 내보내기(WindowsSkinExport.swift)가 쓰는 길. 실제 타이머가 하는 일을 가짜 시계로 그대로 한다.
+extension RettoView {
+    /// 시계를 t 까지 흘린다. 그 사이 타이머가 울렸을 차례마다 advanceFrame 을 부른다.
+    func exportAdvance(to t: TimeInterval) {
+        guard exportClock != nil else { return }
+        var guardCount = 0
+        while let timer = exportTimer, timer.next <= t, guardCount < 100_000 {
+            guardCount += 1
+            exportClock = timer.next
+            if timer.repeats { exportTimer = (timer.interval, true, timer.next + timer.interval) } else { exportTimer = nil }
+            advanceFrame()
+            if !timer.repeats { restartAnimation() }
+        }
+        exportClock = t
+    }
+    /// 만들 때 실제 시계로 잡힌 기준 시각들을 내보내기 시계로 옮긴다.
+    func exportResetEpochs() {
+        let now = nowUptime
+        chocolatEpoch = now
+        angelEpoch = now
+        amuRanPoseEpoch = now
+        amuRanEffectEpoch = now
+        classicGrownEpoch = now
+        hachupingEpoch = now
+        hachupingEffectsEpoch = now
+        howlEpoch = now
+        jeanneEpoch = now
+        pichiEpoch = now
+        hanaAnimationStart = now
+        christmasEffectsStart = now
+    }
+    /// 상태를 맞춘 뒤 처음부터 다시 돌린다. 만들 때 걸린 실제 타이머 대신 내보내기 시계의 차례를 잡는다.
+    func exportRestart() {
+        animationTimer?.invalidate()
+        animationTimer = nil
+        frameIndex = 0
+        completedCycles = 0
+        restartAnimation()
+    }
+    var exportVisibleState: PetState { visibleState }
+    var exportHasActiveGaze: Bool { hasActiveGaze }
+    var exportCycleSeconds: TimeInterval {
+        guard let a = currentAnimation else { return 1 }
+        return Double(a.frames) * a.interval
+    }
+    var exportCycleLimit: Int? { currentAnimation?.cycleLimit }
 }

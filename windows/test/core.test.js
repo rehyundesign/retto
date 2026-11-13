@@ -55,13 +55,24 @@ test('silent "working" turns into idle after ten minutes unless the transcript k
 });
 
 test('a pin holds until something needs you', () => {
-  const quiet = choose([session('a', 'idle', 1), session('b', 'running', 1)], { pinnedId: 'a' });
+  const quiet = choose([session('a', 'idle', 1), session('b', 'idle', 1)], { pinnedId: 'a' });
   assert.equal(quiet.selected.id, 'a');
+  // 맥 preferredPinnedSession — 쉬는 고정 세션은 실행 중인 작업을 가리지 않는다.
+  const working = choose([session('a', 'idle', 1), session('b', 'running', 1)], { pinnedId: 'a' });
+  assert.equal(working.selected.id, 'b');
+  assert.equal(working.keepPin, true);
   const urgent = choose([session('a', 'idle', 1), session('b', 'waiting', 1)], { pinnedId: 'a' });
   assert.equal(urgent.selected.id, 'b');
   assert.equal(urgent.keepPin, true);
   const gone = choose([session('b', 'idle', 1)], { pinnedId: 'a' });
   assert.equal(gone.keepPin, false);
+});
+
+test('the waiting session on screen stays until answered, even if another one starts waiting', () => {
+  const held = choose([session('a', 'waiting', 2), session('b', 'waiting', 1)], { previousId: 'a' });
+  assert.equal(held.selected.id, 'a');
+  const answered = choose([session('a', 'running', 1), session('b', 'waiting', 1)], { previousId: 'a' });
+  assert.equal(answered.selected.id, 'b');
 });
 
 test('Retto sleeps when everything is quiet for ten minutes, and when nothing exists', () => {

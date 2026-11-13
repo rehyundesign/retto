@@ -71,6 +71,7 @@ if let i = CommandLine.arguments.firstIndex(of:"--render-howl-preview"), i+1 < C
     exit(renderHowlPreview(to:CommandLine.arguments[i+1],sample:t,pose:pose,held:CommandLine.arguments.contains("--hold-howl-pose")))
 }
 if CommandLine.arguments.contains("--self-test-all-skins") { exit(runAllSkinsSelfTest()) }
+if let i = CommandLine.arguments.firstIndex(of: "--export-windows-skins"), i + 1 < CommandLine.arguments.count { exit(exportWindowsSkins(to: CommandLine.arguments[i + 1])) }
 if CommandLine.arguments.contains("--self-test-amu-ran-clock") { exit(runAmuRanClockSelfTest()) }
 if let i = CommandLine.arguments.firstIndex(of: "--render-amu-ran-motion-preview"), i + 1 < CommandLine.arguments.count { exit(renderAmuRanMotionPreview(to: CommandLine.arguments[i+1])) }
 if let i = CommandLine.arguments.firstIndex(of: "--render-amu-ran-gaze-preview"), i + 1 < CommandLine.arguments.count { exit(renderAmuRanGazePreview(to: CommandLine.arguments[i+1])) }

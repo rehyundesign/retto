@@ -56,14 +56,62 @@
 없으면 `%LOCALAPPDATA%\Programs\Orca`. **Windows 에서 Orca 가 실제로 그 자리에 깔리는지는 확인하지 못했다.**
 못 찾으면 Orca 기능은 아무것도 하지 않고, 누르면 예전처럼 Codex 앱 · VS Code 로 간다.
 
+## 스킨 — 맥 앱이 그린 프레임을 재생한다 (2단계, 2026-11-13)
+
+스킨은 다시 짜지 않았다. 맥 스킨은 스킨마다 Swift 코드(효과 · 위치 보정 · 시선 · 잠 호흡 · 무작위 변형)가 따로 있어,
+옮기면 두 앱의 그림이 갈린다. 대신 맥 앱의 실제 그리기(`RettoView`)를 가짜 시계로 돌려 프레임을 내보낸다.
+
+- **내보내기** `Retto --export-windows-skins <폴더> [--fps 15] [--scale 0.8] [--skins a,b]` (`macos/Sources/WindowsSkinExport.swift`).
+  `PetView.swift` 의 시각 읽기를 `nowUptime` 한 자리로 모으고, 값이 있으면 타이머 대신 `exportAdvance(to:)` 가
+  타이머가 울렸을 차례마다 `advanceFrame` 을 부른다. 스킨마다 8개 상태 · 끌기 좌우 · 시선 16방향을 담는다
+- **만들기** `cd windows && npm run skins` — 공개 빌드(`build-public.py --app-only`)로 내보내고 WebP 로 바꿔
+  `windows/skins/` 에 둔다(14종 · 85MB, 생성물이라 Git 밖). zip 을 만들기 전에 돌린다
+- **재생** `windows/src/pet.js` — 고르는 순서는 맥 `PetView.draw` 와 같다. 끄는 동안 좌우 달리기 → 누른 뒤 점프 한 바퀴 →
+  상태. 완료 손 흔들기는 정해진 횟수 뒤 쉬는 자세(`then`). 쉬는 중에는 커서 쪽 시선(16방향 · 히스테리시스 4° · 한 칸 60ms ·
+  멈추면 0.8초 뒤 해제, 맥 `Geometry.swift` 값)
+- **스킨 고르기** 트레이 메뉴 「스킨」. 고른 것은 `retto-state.json` 에 남는다
+- 스킨 프레임이 없으면(Windows CI 빌드) 예전처럼 기본 아틀라스 한 장으로 그린다
+
+**맥과 다른 점** — 무작위로 고르는 변형(아무 · 란의 완료 동작, 천사의 쉬는 동작 등)은 내보낼 때 뽑힌 한 가지만 담긴다.
+시선은 쉬는 중에만 쓴다(맥은 스킨에 따라 작업 중 · 완료에도 쓴다). 한 클립은 최대 6초를 이어 돌린다.
+증거: [테스트] 맥 — `electron . --render-preview` 로 기본 · 천사 · 하츄핑핑 · 잔느 · 아무란이 맥과 같은 그림 · 효과로 그려졌다.
+
+## Slack — 맥과 같은 규칙, 저장만 다르다 (3단계, 2026-11-13)
+
+`windows/src/slack.js` 가 맥 `SlackIntegration.swift` 를 옮겼다. 트레이 「Slack 설정…」에서 연결한다(`slack.html`).
+
+- 같은 것: Socket Mode 수신(사용자 토큰 xoxp- · 앱 토큰 xapp-), DM · 내 멘션 · 고른 채널, 자기 메시지 · 시스템 이벤트 제외,
+  같은 사람 · 대화 · 스레드 묶음과 `+N`, 수정 · 삭제 반영, Slack 에서 읽은 위치까지 해제(대상 15초 · 메서드 2초 · 429 는
+  Retry-After), 미리보기 끄기, `slack://channel` 로 Slack 데스크톱 앱 열기, 인증 오류면 재연결을 멈춤
+- 다른 것: 토큰은 키체인 대신 Electron `safeStorage`(Windows DPAPI)로 암호화해 `%APPDATA%\Retto\slack-credentials.bin` 에 둔다.
+  메시지는 메모리에만 둔다. Slack 창 제목으로 읽음을 앞당기는 기능과 본인 DM 읽음 시험(`--slack-read-probe`)은 없다
+- 고르는 순서를 맥과 맞췄다 — 입력 대기 80 · 실패 75 · Slack 새 메시지 70 · 완료 55(예전 Windows 는 실패가 완료보다 아래였다)
+- 증거: [테스트] 맥 — `windows/test/slack.test.js` 9건(맥 `SlackSelfTest.swift` 와 같은 사례, 가짜 Slack 서버로 연결 · ack ·
+  이름 조회 · 읽음 해제까지). 실제 Slack 계정 · Windows Slack 앱 열기는 미검증
+
+## 정밀 기능 (4단계, 2026-11-13)
+
+| 옮긴 것 | 파일 | 맥 원본 |
+| --- | --- | --- |
+| 말풍선 문장과 이름을 트랜스크립트에서 직접 읽기(끝 512KB, 읽은 뒤 접근 시각 되돌림) | `windows/src/transcript.js` | `TranscriptReader` |
+| 말풍선 정리(마크다운 기호 빼기 · 날것 링크는 도메인) · 이름표 옆 도구 이름 · 오류 | `transcript.js` `bodyText` · `detailText` | `PetView.bodyText` · `detailText` |
+| 고정 세션 규칙 — 쉬는 고정 세션은 실행 중 작업을 가리지 않음, 더 급한 알림이 먼저 | `core.js` `chooseView` | `preferredPinnedSession` |
+| 지금 보고 있는 입력 대기는 답할 때까지 유지 | `core.js` `chooseView` | `applySessions` |
+| Claude 앱 세션을 누르면 Claude 앱(`claude://`)으로. 예전에는 VS Code 로 갔다 | `main.js` `openSession` | `OpenTarget.swift` |
+
+**일부러 옮기지 않은 것** — 확인할 수 없는 것을 추측해 넣으면 틀린 상태를 만든다.
+- Claude 자체 상태 기록(`~/.claude/sessions`): 맥은 기록의 프로세스 시작 시각(`procStart`)을 실제 프로세스와 맞춰 본 뒤에만 믿는다
+  (PID 재사용 방지). Windows 에서 이 값이 어떤 모양인지 확인하지 못했다. 잘못 옮기면 죽은 세션의 대기가 남거나 진짜 대기를 지운다
+- Codex 앱 실시간 상태 스트림 · 창 제목으로 읽음 판정: Windows 에서 Codex 앱의 연결 자리와 창 제목 모양을 확인하지 못했다
+
 ## 맥과 아직 다른 것
 
 | 다른 것 | 다음 단계 |
 | --- | --- |
-| 스킨 14종 · 스킨별 동작(시선 · 효과 · 끌 때 달리는 그림 · 자는 그림) | 2단계. 맥은 스킨마다 Swift 코드가 따로 있다 |
-| Slack 연동 | 3단계. 맥은 토큰을 키체인에 둔다. Windows 자격 증명으로 다시 짜야 한다 |
-| Claude 앱 사이드바로 바로 가기 · Claude 앱 · 터미널 세션을 그 앱으로 | 4단계. 맥은 접근성 API 로 행을 누른다. Windows 는 UI Automation 으로 다시 짜야 한다. 지금은 VS Code 로 보낸다 |
-| Codex 앱 실시간 상태 스트림 · 밖에서 읽음 판정 · 창 제목으로 읽음 · 트랜스크립트에서 말풍선 문장 | 4단계. 없으면 롤아웃만으로 본 질문 대기는 맥처럼 확인 안 된 것으로 보고 표시하지 않는다 |
+| 스킨의 무작위 변형 · 작업 중 시선 | 위 「스킨」. 내보낸 한 가지만 재생한다 |
+| Slack 창 제목으로 읽음 앞당기기 · 본인 DM 읽음 시험 | 위 「Slack」. API 읽음 조회로만 해제한다 |
+| Claude 앱의 그 대화로 바로 가기(맥은 접근성 API 로 사이드바 행을 누른다) · 터미널 세션을 그 터미널로 | Claude 앱을 앞으로 가져오는 데까지. UI Automation 은 실기 PC 에서 확인한 뒤 |
+| Claude 자체 상태 기록 · Codex 앱 실시간 상태 · 창 제목으로 읽음 | 위 「일부러 옮기지 않은 것」. Windows 실기 확인이 먼저다 |
 | 설치 프로그램 · 서명 · 자동 업데이트 | zip 을 풀어 `Retto.exe` 를 실행한다. 서명이 없어 SmartScreen 이 「추가 정보 → 실행」을 한 번 묻는다 |
 
 ## 왜 Electron 인가

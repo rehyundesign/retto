@@ -1,7 +1,7 @@
 {
   "name": "retto-windows",
   "productName": "Retto",
-  "version": "0.12.1-beta.1",
+  "version": "0.12.1-beta.2",
   "description": "Retto desk pet for Windows (beta)",
   "author": "luxia yoon",
   "license": "MIT",
@@ -10,6 +10,7 @@
   "scripts": {
     "start": "electron .",
     "test": "node --test test/*.test.js",
+    "skins": "node scripts/export-skins.mjs",
     "dist": "electron-builder --win zip --x64 --arm64"
   },
   "devDependencies": {
@@ -23,7 +24,8 @@
     "files": ["src/**/*", "package.json"],
     "extraResources": [
       { "from": "../assets", "to": "assets", "filter": ["spritesheet.webp", "NanumMiNiSonGeurSsi.ttf", "LICENSE.md", "icon.png"] },
-      { "from": "../hook", "to": "hook", "filter": ["hook.cjs", "install.cjs", "lib/**/*", "package.json"] }
+      { "from": "../hook", "to": "hook", "filter": ["hook.cjs", "install.cjs", "lib/**/*", "package.json"] },
+      { "from": "skins", "to": "skins", "filter": ["**/*"] }
     ],
     "win": { "icon": "../assets/icon.png", "artifactName": "Retto-${version}-windows-${arch}.${ext}" }
   }

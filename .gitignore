@@ -43,3 +43,6 @@ windows/node_modules/
 /tools/jeanne-skin/motion/native-v*/baseline/
 /tools/jeanne-skin/motion/native-v*/installed-before*.zip
 /tools/jeanne-skin/motion/native-v*/installed-before.json
+
+# Windows 판 스킨 프레임. 맥 앱이 그린 생성물이라 넣지 않는다(windows/scripts/export-skins.mjs).
+windows/skins/

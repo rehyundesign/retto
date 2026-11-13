@@ -10,25 +10,41 @@ const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
 const { pathToFileURL } = require('node:url');
-const { app, BrowserWindow, Menu, Tray, ipcMain, nativeImage, screen, shell } = require('electron');
+const { app, BrowserWindow, Menu, Tray, ipcMain, nativeImage, safeStorage, screen, shell } = require('electron');
 const core = require('./core');
 const setupCheck = require('./setup-check');
 const orca = require('./orca');
 const { StatusAssembler } = require('./status');
+const slackModule = require('./slack');
+const transcript = require('./transcript');
+const transcriptReader = new transcript.TranscriptReader();
 
 const POLL_MS = 250;
 const RETHINK_MS = 1000;
-const PET_SIZE = { width: 280, height: 230 };
+const PET_SIZE = { width: 280, height: 270 };
 
 const resourcesDir = app.isPackaged ? process.resourcesPath : path.join(__dirname, '..', '..');
 const assetsDir = path.join(resourcesDir, 'assets');
 const hookDir = path.join(resourcesDir, 'hook');
+// 스킨 프레임. 맥 앱이 실제로 그린 그림을 내보낸 것이다(macos/Sources/WindowsSkinExport.swift · windows/scripts/export-skins.mjs).
+// 없으면 예전처럼 기본 아틀라스 한 장으로 그린다.
+const skinsDir = app.isPackaged ? path.join(process.resourcesPath, 'skins') : path.join(__dirname, '..', 'skins');
+let skinManifest = null;
+function loadSkins() {
+  try { skinManifest = JSON.parse(fs.readFileSync(path.join(skinsDir, 'manifest.json'), 'utf8')); } catch { skinManifest = null; }
+}
+function currentSkin() {
+  const skins = skinManifest?.skins || [];
+  return skins.find((skin) => skin.id === local.skin) || skins.find((skin) => skin.id === 'classic') || skins[0] || null;
+}
 const { petDir, settingsPath, codexHooksPath, codexHome } = setupCheck.homePaths();
 const registryPath = path.join(petDir, 'sessions.json');
 const statePath = () => path.join(app.getPath('userData'), 'retto-state.json');
 
 let petWindow;
 let setupWindow;
+let slackWindow;
+let slack;
 let tray;
 let sessions = [];
 let hookSessions = [];
@@ -36,7 +52,7 @@ let assembler;
 let view;
 let registryMtime = 0;
 const trackingStartedAtMs = Date.now();
-let local = { seen: {}, pinnedId: null, clickThrough: false, position: null, setupShown: false };
+let local = { seen: {}, pinnedId: null, clickThrough: false, position: null, setupShown: false, skin: 'classic', slackPreferences: null };
 
 function loadLocal() {
   try { local = { ...local, ...JSON.parse(fs.readFileSync(statePath(), 'utf8')) }; } catch {}
@@ -121,10 +137,13 @@ function transcriptModifiedAt(session) {
 function rethink() {
   const nowMs = Date.now();
   try { sessions = assembler ? assembler.sessions(hookSessions, nowMs) : hookSessions; } catch { sessions = hookSessions; }
+  // Slack 새 메시지는 AI 세션과 같은 목록에 넣는다(맥 applySessions). 메시지는 메모리에만 있다.
+  if (slack) sessions = [...sessions, ...slack.payloads()];
   view = core.chooseView({
     sessions,
     seen: local.seen,
     pinnedId: local.pinnedId,
+    previousId: view?.selected?.id || null,
     nowMs: Date.now(),
     trackingStartedAtMs,
     transcriptModifiedAt
@@ -153,14 +172,16 @@ function sendView() {
     bubble = { kicker: 'ZZZ', title: '레토', message: '쿨쿨…', tone: 'quiet' };
   } else {
     const animation = core.ANIMATIONS[selected.visibleState];
+    const slackNotice = selected.source === 'slack' && selected.visibleState === 'waving';
+    // 맥 앱처럼 트랜스크립트에서 방금 쓴 문장과 이름을 직접 읽는다. 훅은 도구를 부를 때만 돌기 때문이다.
+    const live = selected.source === 'slack' ? { message: '', title: '' } : transcriptReader.read(selected.transcriptPath);
+    const body = transcript.bodyText(live.message, selected.lastAssistantMessage);
     bubble = {
-      kicker: animation.kicker,
-      title: core.sessionTitle(selected),
-      message: selected.lastAssistantMessage && selected.visibleState === 'waving'
-        ? String(selected.lastAssistantMessage).slice(0, 80)
-        : animation.title,
+      kicker: transcript.detailText(selected, selected.visibleState, slackNotice ? 'SLACK' : animation.kicker),
+      title: live.title || core.sessionTitle(selected),
+      message: body || animation.title,
       project: core.projectName(selected),
-      tone: animation.tone
+      tone: slackNotice ? 'slack' : animation.tone
     };
   }
   const pose = view?.pose || 'sleeping';
@@ -170,9 +191,23 @@ function sendView() {
     sprite: core.SPRITE,
     bubble: { ...bubble, colors: core.TONES[bubble.tone] },
     badge: view?.badgeCount || 0,
+    skin: skinPayload(),
     pinned: Boolean(local.pinnedId),
     clickThrough: local.clickThrough
   });
+}
+
+function skinPayload() {
+  const skin = currentSkin();
+  if (!skin) return null;
+  return {
+    id: skin.id,
+    base: pathToFileURL(path.join(skinsDir, skin.id) + path.sep).href,
+    clips: skin.clips,
+    frameWidth: skinManifest.frameWidth,
+    frameHeight: skinManifest.frameHeight,
+    petRect: skinManifest.petRect
+  };
 }
 
 // ── 세션 열기 ──────────────────────────────────────────────────────────────
@@ -183,6 +218,15 @@ function sendView() {
 async function openSession(session) {
   if (!session) return;
   const rawId = session.rawSessionId || session.sessionId || session.id;
+  // Slack 메시지는 Slack 데스크톱 앱으로 연다. 여는 동안 새로 온 메시지는 남기고, 연 묶음만 지운다.
+  if (session.source === 'slack') {
+    const group = slack?.groupFor(session.id);
+    const url = slack?.messageURL(group);
+    if (!url) return;
+    const opened = await shell.openExternal(url).then(() => true, () => false);
+    if (opened) slack.dismissNotices(new Set(group.messages.map((m) => slackModule.noticeId(m))));
+    return;
+  }
   markSeen(session);
   // Orca 에서 띄운 세션은 Orca 의 그 탭으로 간다. Orca 를 못 찾으면 아래 원래 길로 간다.
   const orcaRequest = orca.openRequest(session);
@@ -191,7 +235,11 @@ async function openSession(session) {
     if (rawId) await shell.openExternal(`codex://threads/${encodeURIComponent(rawId)}`).catch(() => {});
     return;
   }
-  // Claude 앱 세션은 세션 딥링크가 없다(맥에서 확인한 사실). 1차에서는 VS Code 로 보낸다 — 맥의 fallback 순서와 다르다.
+  // Claude 앱 세션은 Claude 앱으로 보낸다. 세션을 집어 띄우는 링크는 없어 앱을 앞으로 가져오는 데까지다
+  // (맥 OpenTarget.swift sessionDeepLink — 맥은 거기서 접근성 API 로 사이드바 행을 누른다).
+  if (session.client === 'claude') {
+    if (await shell.openExternal('claude://').then(() => true, () => false)) return;
+  }
   // 작업 폴더를 모르면 폴더 창만 열고 세션 딥링크는 보내지 않는다. 딥링크가 엉뚱한 창으로 가서
   // 같은 대화가 새 패널로 하나 더 열리는 것보다 창만 앞으로 오는 편이 낫다(docs/세션-열기.md).
   //
@@ -216,9 +264,12 @@ function markSeen(session) {
 }
 
 function clearAttention() {
+  const slackGroups = new Set();
   for (const session of view?.badgeSessions || []) {
+    if (session.source === 'slack') { slackGroups.add(session.id); continue; }
     local.seen[session.id] = Math.max(session.updatedAtMs || 0, Date.now());
   }
+  if (slackGroups.size) slack?.dismissNotices(slackGroups);
   saveLocal();
   rethink();
 }
@@ -285,6 +336,36 @@ function openSetupWindow() {
   setupWindow.loadFile(path.join(__dirname, 'setup.html'));
 }
 
+function openSlackWindow() {
+  if (slackWindow && !slackWindow.isDestroyed()) { slackWindow.show(); slackWindow.focus(); return; }
+  slackWindow = new BrowserWindow({
+    width: 560,
+    height: 720,
+    title: 'Retto Slack 설정',
+    autoHideMenuBar: true,
+    webPreferences: { preload: path.join(__dirname, 'preload.js'), contextIsolation: true, nodeIntegration: false, sandbox: true }
+  });
+  slackWindow.loadFile(path.join(__dirname, 'slack.html'));
+}
+
+function slackState() {
+  if (!slack) return { status: '연결되지 않음', connectionState: 'disabled', hasCredentials: false, preferences: slackModule.DEFAULT_PREFERENCES, channels: [] };
+  return { status: slack.status, issue: slack.connectionIssue, connectionState: slack.connectionState, hasCredentials: slack.hasCredentials,
+    preferences: slack.preferences, channels: slack.channels };
+}
+
+function startSlack() {
+  slack = new slackModule.SlackIntegration({
+    store: slackModule.fileStore({ fs, filePath: path.join(app.getPath('userData'), 'slack-credentials.bin'), safeStorage }),
+    preferences: local.slackPreferences,
+    onChange: () => {
+      setImmediate(rethink);
+      if (slackWindow && !slackWindow.isDestroyed()) slackWindow.webContents.send('slack:state', slackState());
+    }
+  });
+  slack.restore();
+}
+
 function setupReport() {
   return setupCheck.inspect(expectedHookCounts());
 }
@@ -306,7 +387,7 @@ let lastMenuKey = '';
 function rebuildTrayMenu() {
   if (!tray) return;
   const listed = (view?.sessions || []).filter((session) => !session.isClosed).slice(0, 12);
-  const key = JSON.stringify([listed.map((session) => [session.id, session.visibleState, core.sessionTitle(session)]), local.pinnedId, local.clickThrough, view?.badgeCount]);
+  const key = JSON.stringify([listed.map((session) => [session.id, session.visibleState, core.sessionTitle(session)]), local.pinnedId, local.clickThrough, view?.badgeCount, local.skin, slack?.connectionState, slack?.connectionIssue]);
   if (key === lastMenuKey) return;
   lastMenuKey = key;
   const sessionItems = listed.length
@@ -324,10 +405,20 @@ function rebuildTrayMenu() {
     { label: '자동으로 급한 세션 따라가기', type: 'radio', checked: !local.pinnedId, click: () => { local.pinnedId = null; saveLocal(); rethink(); } },
     { type: 'separator' },
     { label: `완료 알림 모두 읽음${view?.badgeCount ? ` (${view.badgeCount})` : ''}`, enabled: Boolean(view?.badgeCount), click: clearAttention },
+    ...(skinManifest?.skins?.length ? [{
+      label: `스킨 · ${currentSkin()?.label || ''}`,
+      submenu: skinManifest.skins.map((skin) => ({
+        label: skin.label,
+        type: 'radio',
+        checked: currentSkin()?.id === skin.id,
+        click: () => { local.skin = skin.id; saveLocal(); lastMenuKey = ''; sendView(); rebuildTrayMenu(); }
+      }))
+    }] : []),
     { label: '클릭 통과', type: 'checkbox', checked: local.clickThrough, click: (item) => setClickThrough(item.checked) },
     { label: 'Windows 시작 시 실행', type: 'checkbox', checked: app.getLoginItemSettings().openAtLogin, click: (item) => app.setLoginItemSettings({ openAtLogin: item.checked }) },
     { type: 'separator' },
     { label: `AI 연동 확인${setupProblems().length ? ` — ${setupProblems().join(' · ')}` : ''}`, click: openSetupWindow },
+    { label: `Slack 설정${slack?.connectionState === 'connected' ? ' · 연결됨' : slack?.connectionIssue ? ` — ${slack.connectionIssue}` : ''}…`, click: openSlackWindow },
     { label: '레토 위치 처음으로', click: () => { const p = defaultPosition(); petWindow.setPosition(p.x, p.y); rememberPosition(); } },
     { label: `Retto ${app.getVersion()} (베타)`, enabled: false },
     { label: '종료', role: 'quit' }
@@ -384,6 +475,23 @@ ipcMain.handle('setup:install', () => {
 ipcMain.handle('setup:uninstall', () => {
   try { uninstallHooks(); problemsCache.at = 0; return { ok: true }; } catch (error) { return { ok: false, error: String(error?.message || error) }; }
 });
+ipcMain.handle('slack:state', () => slackState());
+ipcMain.handle('slack:connect', (_event, { userToken, appToken }) => {
+  try { slack.connect(userToken, appToken); return { ok: true }; } catch (error) { return { ok: false, error: error.description || String(error.message || error) }; }
+});
+ipcMain.handle('slack:disconnect', () => {
+  try { slack.disconnect(); return { ok: true }; } catch (error) { return { ok: false, error: error.description || String(error.message || error) }; }
+});
+ipcMain.on('slack:preferences', (_event, value) => {
+  const next = {};
+  for (const key of ['directMessages', 'mentions', 'preview']) if (typeof value?.[key] === 'boolean') next[key] = value[key];
+  if (Array.isArray(value?.channelIDs)) next.channelIDs = value.channelIDs.filter((id) => typeof id === 'string' && /^[CG][A-Z0-9]+$/.test(id));
+  slack.setPreferences(next);
+  local.slackPreferences = slack.preferences;
+  saveLocal();
+});
+ipcMain.on('slack:refresh-channels', () => slack?.refreshChannels());
+
 ipcMain.on('setup:open-url', (_event, url) => {
   if (typeof url === 'string' && /^https:\/\//.test(url)) shell.openExternal(url);
 });
@@ -431,13 +539,17 @@ if (!gotLock) {
   app.on('second-instance', openSetupWindow);
   app.whenReady().then(() => {
     loadLocal();
+    loadSkins();
+    // 진단 화면을 스킨별로 남길 때만 쓴다(CI · 내보내기 검수).
+    if (previewOut && process.env.RETTO_PREVIEW_SKIN) local.skin = process.env.RETTO_PREVIEW_SKIN;
     if (process.platform === 'darwin') app.dock?.hide();
     tray = new Tray(nativeImage.createFromPath(path.join(assetsDir, 'icon.png')).resize({ width: 16, height: 16 }));
     tray.on('click', () => openSession(view?.selected));
     createPetWindow();
     // 상태가 바뀌면(Orca 응답 등) 다음 차례에 다시 그린다. 고르는 도중에 다시 부르지 않게 미룬다.
     assembler = new StatusAssembler({ codexHome, onChange: () => setImmediate(rethink) });
-    app.on('before-quit', () => assembler?.stop());
+    app.on('before-quit', () => { assembler?.stop(); slack?.stop(); });
+    if (!previewOut) startSlack();
     readSessions();
     rethink();
     setInterval(() => { if (readSessions()) rethink(); }, POLL_MS);

@@ -9,5 +9,11 @@ contextBridge.exposeInMainWorld('retto', {
   report: () => ipcRenderer.invoke('setup:report'),
   install: () => ipcRenderer.invoke('setup:install'),
   uninstall: () => ipcRenderer.invoke('setup:uninstall'),
-  openUrl: (url) => ipcRenderer.send('setup:open-url', url)
+  openUrl: (url) => ipcRenderer.send('setup:open-url', url),
+  slackState: () => ipcRenderer.invoke('slack:state'),
+  slackConnect: (userToken, appToken) => ipcRenderer.invoke('slack:connect', { userToken, appToken }),
+  slackDisconnect: () => ipcRenderer.invoke('slack:disconnect'),
+  slackPreferences: (value) => ipcRenderer.send('slack:preferences', value),
+  slackRefreshChannels: () => ipcRenderer.send('slack:refresh-channels'),
+  onSlackState: (callback) => ipcRenderer.on('slack:state', (_event, value) => callback(value))
 });
