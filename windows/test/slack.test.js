@@ -192,3 +192,64 @@ test('연결 흐름 — auth.test → apps.connections.open → hello → 이벤
   assert.ok(changes > 0);
   integration.stop();
 });
+
+test('읽음 조회는 한 번 끝난 뒤에 다음을 본다 — 느린 요청이 겹쳐 돌지 않는다', async () => {
+  let running = 0, peak = 0, reads = 0;
+  const fetchImpl = async (url) => {
+    const method = url.split('/').pop();
+    if (method === 'auth.test') return { status: 200, headers: { get: () => null }, json: async () => ({ ok: true, user_id: 'U_ME', team_id: 'T123' }) };
+    if (method === 'apps.connections.open') return { status: 200, headers: { get: () => null }, json: async () => ({ ok: false, error: 'not_allowed' }) };
+    running += 1; peak = Math.max(peak, running); reads += 1;
+    await new Promise((r) => setTimeout(r, 40));
+    running -= 1;
+    return { status: 200, headers: { get: () => null }, json: async () => ({ ok: true, channel: { id: 'D1' } }) };
+  };
+  const store = { read: () => ({ userToken: 'xoxp-u', appToken: 'xapp-a' }), write() {}, delete() {} };
+  const integration = new slack.SlackIntegration({ store, fetchImpl, readIntervalMs: 5, now: (() => { let t = 0; return () => (t += 20); })() });
+  integration.restore();
+  await new Promise((r) => setTimeout(r, 10));
+  integration.inbox.accept(parse(event({ channel: 'D1' })), prefs());
+  await new Promise((r) => setTimeout(r, 200));
+  integration.stop();
+  assert.ok(reads >= 2, `읽음 조회가 여러 번 돌았다 (${reads})`);
+  assert.equal(peak, 1, '동시에 둘 이상 돌지 않는다');
+});
+
+test('요청 제한 시간은 응답 본문을 다 받을 때까지 걸린다', async () => {
+  const fetchImpl = async (_url, { signal }) => ({
+    status: 200, headers: { get: () => null },
+    json: () => new Promise((_resolve, reject) => signal.addEventListener('abort', () => reject(new Error('aborted'))))
+  });
+  const integration = new slack.SlackIntegration({ store: { read: () => null }, fetchImpl, requestTimeoutMs: 30 });
+  const started = Date.now();
+  await assert.rejects(integration.call('auth.test', 'xoxp-u'), (e) => e.kind === 'response');
+  assert.ok(Date.now() - started < 1000);
+});
+
+test('ping 에 답이 없으면 소켓을 끊고 다시 잇는다', async () => {
+  const sockets = [];
+  class PingSocket {
+    constructor() { this.listeners = {}; this.handlers = {}; this.terminated = false; sockets.push(this);
+      setImmediate(() => this.emit('message', { data: JSON.stringify({ type: 'hello' }) })); }
+    addEventListener(name, fn) { (this.listeners[name] ||= []).push(fn); }
+    on(name, fn) { this.handlers[name] = fn; }
+    emit(name, value) { for (const fn of this.listeners[name] || []) fn(value); }
+    ping() {}
+    terminate() { this.terminated = true; this.emit('close', {}); }
+    send() {}
+    close() { this.emit('close', {}); }
+  }
+  const fetchImpl = async (url) => {
+    const method = url.split('/').pop();
+    const body = method === 'auth.test' ? { ok: true, user_id: 'U_ME', team_id: 'T123' }
+      : method === 'apps.connections.open' ? { ok: true, url: 'wss://wss-primary.slack.com/link' } : { ok: true, channels: [] };
+    return { status: 200, headers: { get: () => null }, json: async () => body };
+  };
+  const integration = new slack.SlackIntegration({ store: { read: () => ({ userToken: 'xoxp-u', appToken: 'xapp-a' }) }, fetchImpl,
+    WebSocketImpl: PingSocket, heartbeatMs: 15 });
+  integration.restore();
+  await new Promise((r) => setTimeout(r, 80));
+  assert.ok(sockets[0].terminated, '답 없는 소켓을 끊는다');
+  assert.equal(integration.connectionState, 'reconnecting');
+  integration.stop();
+});

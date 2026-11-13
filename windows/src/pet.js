@@ -88,10 +88,22 @@ function chooseClip(now) {
   return restClip || current.pose;
 }
 
+/// 위상을 이어 가는 클립 묶음. 아무·란은 작업 중과 도구 사용이 같은 동작이라 바꿔도 처음부터 돌지 않는다
+/// (맥 PetView.apply 의 amu work 묶음).
+function motionGroup(skinId, name) {
+  return skinId === 'amuRan' && (name === 'running' || name === 'review') ? 'amu-work' : name;
+}
+
+/// 지금 화면에 보이는 자세. 완료 뒤 쉬는 자세로 넘어갔으면 쉬는 중이다(맥 visibleState).
+function visiblePose() { return restClip || current.pose; }
+
 function drawSkin(now) {
   const skin = current.skin;
   const wanted = chooseClip(now);
-  if (wanted !== clipName) { clipName = wanted; clipStartedAt = now; }
+  if (wanted !== clipName) {
+    if (motionGroup(skin.id, wanted) !== motionGroup(skin.id, clipName)) clipStartedAt = now;
+    clipName = wanted;
+  }
   let name = clipName;
   let clip = skin.clips[name];
   if (!clip) return;
@@ -111,7 +123,7 @@ function drawSkin(now) {
     }
   }
   // 시선은 쉬는 자세일 때 커서 쪽 방향 그림 한 장으로 바꾼다.
-  if (gaze && skin.clips.gaze && GAZE_STATES.has(current.pose) && !dragDirection && now >= reactionUntil) {
+  if (gaze && skin.clips.gaze && GAZE_STATES.has(visiblePose()) && !dragDirection && now >= reactionUntil) {
     clip = skin.clips.gaze; index = gaze.current;
   }
   const picture = image(clip.file);
@@ -127,7 +139,8 @@ let lastGazeStep = 0;
 function loop(now) {
   if (current?.skin) {
     if (gaze) {
-      if (now - gaze.lastMoveAt > GAZE_HOLD_MS) gaze = null;
+      // 시선이 풀리면 맥처럼 동작을 처음부터 다시 돈다(PetView.clearGaze → restartAnimation).
+      if (now - gaze.lastMoveAt > GAZE_HOLD_MS) { gaze = null; clipStartedAt = now; }
       else if (now - lastGazeStep >= GAZE_STEP_MS) { gaze.current = nextGazeDirection(gaze.current, gaze.target); lastGazeStep = now; }
     }
     if (dragDirection && now - dragStoppedAt > 150 && !press) dragDirection = null;
@@ -236,7 +249,7 @@ canvas.addEventListener('pointerup', () => {
 // 커서 쪽을 본다. 맥처럼 레토 창 위에서 움직일 때만, 몸 중심에서 조금 떨어졌을 때만.
 document.addEventListener('pointermove', (event) => {
   const skin = current?.skin;
-  if (!skin || !skin.clips.gaze || press || !GAZE_STATES.has(current.pose)) return;
+  if (!skin || !skin.clips.gaze || press || !GAZE_STATES.has(visiblePose())) return;
   const rect = canvas.getBoundingClientRect();
   const centerX = rect.left + (skin.petRect.x + skin.petRect.width / 2) * DISPLAY;
   const centerY = rect.top + (skin.petRect.y + skin.petRect.height / 2) * DISPLAY;

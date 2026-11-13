@@ -4,7 +4,7 @@
 
 **[Download Retto 0.12.1 for Apple Silicon Mac](https://github.com/rehyundesign/retto/releases/download/v0.12.1/Retto-0.12.1.dmg)** · [설치 안내 / release notes](docs/0.12.1-release.md)
 
-**[Windows 베타 0.12.1-beta.2 (x64) · 스킨 14종 · Slack](https://github.com/rehyundesign/retto/releases/download/v0.12.1-beta.2-windows/Retto-0.12.1-beta.2-windows-x64.zip)** · [ARM64](https://github.com/rehyundesign/retto/releases/download/v0.12.1-beta.2-windows/Retto-0.12.1-beta.2-windows-arm64.zip) · [맥과 같은 것 · 다른 것](docs/windows.md)
+**[Windows 베타 0.12.1-beta.3 (x64) · 스킨 14종 · Slack](https://github.com/rehyundesign/retto/releases/download/v0.12.1-beta.3-windows/Retto-0.12.1-beta.3-windows-x64.zip)** · [ARM64](https://github.com/rehyundesign/retto/releases/download/v0.12.1-beta.3-windows/Retto-0.12.1-beta.3-windows-arm64.zip) · [맥과 같은 것 · 다른 것](docs/windows.md)
 
 A desk pet for [Claude Code](https://claude.com/claude-code) and Codex — a macOS overlay cat
 that sits above every Space and full-screen app. It turns green while your agents work, blue

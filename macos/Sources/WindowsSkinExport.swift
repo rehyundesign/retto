@@ -118,7 +118,10 @@ func exportWindowsSkins(to path: String) -> Int32 {
             if let drag { view.setDragRunForPreview(drag) }
             view.exportRestart()
             let limit = view.exportCycleLimit
-            let duration = limit != nil ? 8.0 : min(6.0, max(2.0, view.exportCycleSeconds))
+            // 반복 클립은 동작 한 바퀴의 정수배로 녹화한다. 이어 돌릴 때 중간 자세에서 처음 자세로 튀지 않게.
+            // (몸과 효과의 주기가 다른 스킨은 몸 주기에 맞춘다.) 2초보다 짧으면 여러 바퀴, 12초까지.
+            let cycle = max(0.05, view.exportCycleSeconds)
+            let duration = limit != nil ? 8.0 : min(max(12.0, cycle), cycle * max(1, (2.0 / cycle).rounded(.up)))
             let count = max(1, Int((duration * fps).rounded()))
             let cycleFrames = max(1, Int((view.exportCycleSeconds * fps).rounded()))
             let startVisible = view.exportVisibleState

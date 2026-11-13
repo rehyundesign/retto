@@ -232,7 +232,11 @@ const DEFAULT_PREFERENCES = { directMessages: true, mentions: true, preview: tru
 /// 연결과 수신. 상태 변경은 한 곳(이 객체)에서만 하고, 재연결 전의 비동기 결과는 generation 으로 버린다.
 class SlackIntegration {
   /// store: { read(): {userToken, appToken}|null, write(credentials), delete() } — 맥 SlackKeychain 자리.
-  constructor({ store, preferences, onChange, fetchImpl = globalThis.fetch, WebSocketImpl = globalThis.WebSocket, now = () => performance.now() / 1000 } = {}) {
+  constructor({ store, preferences, onChange, fetchImpl = globalThis.fetch, WebSocketImpl = globalThis.WebSocket, now = () => performance.now() / 1000,
+    requestTimeoutMs = 25000, heartbeatMs = 20000, readIntervalMs = 2000 } = {}) {
+    this.requestTimeoutMs = requestTimeoutMs;
+    this.heartbeatMs = heartbeatMs;
+    this.readIntervalMs = readIntervalMs;
     this.store = store;
     this.fetch = fetchImpl;
     this.WebSocket = WebSocketImpl;
@@ -318,7 +322,7 @@ class SlackIntegration {
   stop() {
     this.generation += 1;
     this.metadataPending.clear(); this.metadataRetryAt.clear();
-    clearInterval(this.readTimer); this.readTimer = null;
+    clearTimeout(this.readTimer); this.readTimer = null;
     this.readSchedule = new ReadSchedule(); this.readSyncIssues.clear();
     try { this.socket?.close(); } catch {}
     this.socket = null;
@@ -341,8 +345,16 @@ class SlackIntegration {
       if (this.generation !== current) return;
       if (!auth.user_id || !auth.team_id) throw new SlackFailure('response');
       this.userID = auth.user_id; this.teamID = auth.team_id; this.workspaceName = auth.team || '';
-      // 소켓을 다시 잇는 동안에도 읽음 조회(HTTP)는 계속한다.
-      if (!this.readTimer) this.readTimer = setInterval(() => this.refreshReadState(current), 2000);
+      // 소켓을 다시 잇는 동안에도 읽음 조회(HTTP)는 계속한다. 맥처럼 한 번 끝난 뒤 2초를 쉬고 다음을 본다 —
+      // 느린 요청이 끝나기 전에 다음 조회가 겹쳐 돌지 않게.
+      if (!this.readTimer) {
+        const tick = async () => {
+          if (this.generation !== current) return;
+          await this.refreshReadState(current).catch(() => {});
+          if (this.generation === current) this.readTimer = setTimeout(tick, this.readIntervalMs);
+        };
+        this.readTimer = setTimeout(tick, this.readIntervalMs);
+      }
       const connection = await this.call('apps.connections.open', credentials.appToken);
       if (this.generation !== current) return;
       let url;
@@ -351,6 +363,20 @@ class SlackIntegration {
       await new Promise((resolve, reject) => {
         const ws = new this.WebSocket(url.href);
         this.socket = ws;
+        // 맥처럼 20초마다 ping 을 보내 반쯤 끊긴 연결(닫힘 신호 없이 멈춘 소켓)을 알아챈다. 답이 없으면 끊고 다시 잇는다.
+        // ping 을 보낼 수 있는 소켓(ws 패키지)일 때만 — 표준 WebSocket 에는 ping 이 없다.
+        let heartbeat = null;
+        if (typeof ws.ping === 'function') {
+          let alive = true;
+          ws.on('pong', () => { alive = true; });
+          heartbeat = setInterval(() => {
+            if (this.generation !== current) { clearInterval(heartbeat); return; }
+            if (!alive) { clearInterval(heartbeat); try { ws.terminate(); } catch {} return; }
+            alive = false;
+            try { ws.ping(); } catch { clearInterval(heartbeat); try { ws.terminate(); } catch {} }
+          }, this.heartbeatMs);
+        }
+        const finish = (error) => { clearInterval(heartbeat); reject(error); };
         ws.addEventListener('message', (event) => {
           if (this.generation !== current) return;
           let object;
@@ -368,8 +394,8 @@ class SlackIntegration {
             this.accept(object.payload);
           }
         });
-        ws.addEventListener('close', () => reject(new SlackFailure('response')));
-        ws.addEventListener('error', () => reject(new SlackFailure('response')));
+        ws.addEventListener('close', () => finish(new SlackFailure('response')));
+        ws.addEventListener('error', () => finish(new SlackFailure('response')));
       });
     } catch (error) {
       if (this.generation !== current) return;
@@ -491,7 +517,7 @@ class SlackIntegration {
   async call(method, token, parameters = {}) {
     const body = Object.keys(parameters).sort().map((k) => `${encodeURIComponent(k)}=${encodeURIComponent(parameters[k])}`).join('&');
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 25000);
+    const timeout = setTimeout(() => controller.abort(), this.requestTimeoutMs);
     let response;
     try {
       response = await this.fetch(`https://slack.com/api/${method}`, {
@@ -500,10 +526,11 @@ class SlackIntegration {
         body,
         signal: controller.signal
       });
-    } catch { throw new SlackFailure('response'); } finally { clearTimeout(timeout); }
-    if (response.status === 429) throw new SlackFailure('rateLimit', null, Number(response.headers.get('Retry-After') || 30) || 30);
+    } catch { clearTimeout(timeout); throw new SlackFailure('response'); }
+    if (response.status === 429) { clearTimeout(timeout); throw new SlackFailure('rateLimit', null, Number(response.headers.get('Retry-After') || 30) || 30); }
+    // 25초 제한은 본문을 다 받을 때까지 걸어 둔다(맥 URLRequest.timeoutInterval 과 같다).
     let object;
-    try { object = await response.json(); } catch { throw new SlackFailure('response'); }
+    try { object = await response.json(); } catch { throw new SlackFailure('response'); } finally { clearTimeout(timeout); }
     if (response.status !== 200 || !object || typeof object !== 'object') throw new SlackFailure('response');
     if (object.ok !== true) throw new SlackFailure('api', object.error || 'unknown');
     return object;
