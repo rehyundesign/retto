@@ -107,7 +107,7 @@ async function runSelfCheck({ safeStorage, skinsDir, orcaRequired = false }) {
       return { ...detail, note: 'Orca 가 떠 있지 않다 — 아무것도 하지 않는 것이 맞다' };
     }
     const clientPath = orca.runtimeClientPath(running);
-    assert(clientPath, `runtime-client.js 가 없다: ${running}`);
+    assert(clientPath, `Orca 런타임 클라이언트가 없다: ${running}`);
     const reader = new orca.ChatStatusReader({ onChange() {} });
     reader.tracked = new Set(['self-check']);
     await reader.poll();
@@ -115,7 +115,7 @@ async function runSelfCheck({ safeStorage, skinsDir, orcaRequired = false }) {
     const response = await new RuntimeClient(undefined, undefined, null, null).call('session.tabs.listAll', {});
     assert(response && response.ok !== false, `session.tabs.listAll 실패: ${JSON.stringify(response).slice(0, 300)}`);
     return { ...detail, clientPath, snapshots: (response.result?.snapshots || []).length,
-      journal: fs.existsSync(path.join(userData, 'agent-session-journal.db')) };
+      sessionDb: orca.sessionDbPath(userData), sessionDbExists: fs.existsSync(orca.sessionDbPath(userData) || '') };
   });
 
   await check(results, 'skins', false, () => {

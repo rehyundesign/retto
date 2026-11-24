@@ -51,10 +51,22 @@ function installedOrcaResources(platform = process.platform) {
   return candidates.find((dir) => fs.existsSync(path.join(dir, 'app.asar.unpacked'))) || null;
 }
 
+/// Orca 1.4.269 에서 `out/cli/runtime-client.js` 가 `out/cli/runtime/client.js` 로 옮겨졌다(OrcaSessions.swift orcaRuntimeClientPath).
 function runtimeClientPath(resources) {
   if (!resources) return null;
-  const file = path.join(resources, 'app.asar.unpacked', 'out', 'cli', 'runtime-client.js');
-  return fs.existsSync(file) ? file : null;
+  for (const relative of [['runtime', 'client.js'], ['runtime-client.js']]) {
+    const file = path.join(resources, 'app.asar.unpacked', 'out', 'cli', ...relative);
+    if (fs.existsSync(file)) return file;
+  }
+  return null;
+}
+
+/// Orca 세션 기록 DB(orcaSessionDatabaseURL). 1.4.269 부터 `agent-session-domain.db` 에 쓰고, 새 세션(UUID)은 거기에만 있다.
+/// 새 DB 가 없는 예전 Orca 만 `agent-session-journal.db` 를 읽는다.
+function sessionDbPath(dir = userDataDir()) {
+  if (!dir) return null;
+  const domain = path.join(dir, 'agent-session-domain.db');
+  return fs.existsSync(domain) ? domain : path.join(dir, 'agent-session-journal.db');
 }
 
 /// 레토를 Orca 터미널에서 켰더라도 원격 Orca 나 다른 프로필로 가지 않게 Orca 변수를 지운다.
@@ -91,7 +103,7 @@ function readThreads(dbPath) {
   try {
     const result = {};
     const owners = {};
-    for (const row of db.prepare("SELECT session_id, record_json FROM agent_session_records WHERE session_id LIKE 'codex%'").all()) {
+    for (const row of db.prepare(`SELECT session_id, record_json FROM agent_session_records WHERE session_id LIKE 'codex%' OR (CASE WHEN json_valid(record_json) THEN json_extract(record_json, '$.provider') END) = 'codex'`).all()) {
       const found = codexThreadFromRecord(row.record_json, row.session_id);
       if (!found) continue;
       owners[found.threadId] = (owners[found.threadId] || 0) + 1;
@@ -108,7 +120,7 @@ function readThreads(dbPath) {
 
 /// 세션 기록을 파일이 바뀌었을 때만, 2초에 한 번까지 다시 읽는다(OrcaCodexThreadIndex).
 class ThreadIndex {
-  constructor(dbPath = userDataDir() && path.join(userDataDir(), 'agent-session-journal.db')) {
+  constructor(dbPath = sessionDbPath()) {
     this.dbPath = dbPath; this.threads = {}; this.stamp = ''; this.checkedAt = 0;
   }
   refresh(nowMs = Date.now()) {
@@ -217,7 +229,7 @@ function isOrcaSession(session) {
 class ChatStatusReader {
   constructor({ onChange, dbPath } = {}) {
     this.onChange = onChange || (() => {});
-    this.dbPath = dbPath || (userDataDir() && path.join(userDataDir(), 'agent-session-journal.db'));
+    this.dbPath = dbPath || sessionDbPath();
     this.statuses = {};
     this.failures = {};
     this.tracked = new Set();
@@ -300,7 +312,7 @@ async function reveal({ sessionId, terminalHandle, workspacePath, agent, codexTh
     }
     let chat = sessionId ? chats.find((item) => item.sessionId === sessionId) : undefined;
     if (!chat && !sessionId && codexThreadId) {
-      const dbPath = userDataDir() && path.join(userDataDir(), 'agent-session-journal.db');
+      const dbPath = sessionDbPath();
       let owners = [];
       try {
         const threads = sessionThreads(dbPath);
@@ -356,5 +368,6 @@ module.exports = {
   reveal,
   runningOrcaResources,
   runtimeClientPath,
+  sessionDbPath,
   userDataDir
 };

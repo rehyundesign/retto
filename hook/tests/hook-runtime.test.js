@@ -358,6 +358,35 @@ test('ending right after Stop keeps the completion notice until it is seen', asy
   assert.equal(after.updatedAtMs, completed.updatedAtMs);
 });
 
+/// Orca 채팅은 Stop 1~5초 뒤 내부 하위 에이전트의 SubagentStop 을 보낸다. 완료가 작업 중으로 바뀌면 안 된다.
+test('a subagent hook after Stop keeps the completion notice', async () => {
+  const directory = freshHook('retto-hook-subagent-after-stop-');
+  const hookPath = path.join(directory, 'hook.cjs');
+  const orca = { CLAUDE_CODE_ENTRYPOINT: 'orca', ORCA_AGENT_SESSION_ID: '6a2b3c2a-ebaf-42bd-8acf-1f537b9f9970' };
+
+  await invoke(hookPath, { hook_event_name: 'UserPromptSubmit', session_id: 's', prompt: '해줘' }, 'running', orca);
+  await invoke(hookPath, { hook_event_name: 'Stop', session_id: 's' }, 'waving', orca);
+  const completed = registry(directory).s;
+  await invoke(hookPath, { hook_event_name: 'SubagentStop', session_id: 's' }, 'running', orca);
+  await invoke(hookPath, { hook_event_name: 'SubagentStart', session_id: 's' }, 'running', orca);
+
+  const after = registry(directory).s;
+  assert.equal(after.state, 'waving');
+  assert.equal(after.attention, true);
+  assert.equal(after.updatedAtMs, completed.updatedAtMs);
+});
+
+test('a subagent inside a turn still reads as working', async () => {
+  const directory = freshHook('retto-hook-subagent-in-turn-');
+  const hookPath = path.join(directory, 'hook.cjs');
+
+  await invoke(hookPath, { hook_event_name: 'UserPromptSubmit', session_id: 's', prompt: '해줘' }, 'running', DESKTOP);
+  await invoke(hookPath, { hook_event_name: 'SubagentStart', session_id: 's' }, 'running', DESKTOP);
+  assert.equal(registry(directory).s.state, 'running');
+  await invoke(hookPath, { hook_event_name: 'SubagentStop', session_id: 's' }, 'running', DESKTOP);
+  assert.equal(registry(directory).s.state, 'running');
+});
+
 test('ending after a failure or input request keeps the attention state', async () => {
   for (const [event, fallback, expected] of [
     ['StopFailure', 'failed', 'failed'],

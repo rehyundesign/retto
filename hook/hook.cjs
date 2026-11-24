@@ -351,6 +351,17 @@ function isLiveRestart(event, previous, nowMs) {
     && nowMs - (previous.updatedAtMs || 0) < sessionStartGrace;
 }
 
+/// Orca 채팅은 턴이 끝난 뒤(Stop 1~5초 뒤) 내부 하위 에이전트를 한 번 더 돌려 SubagentStop 을 보낸다.
+/// 그대로 받으면 완료(waving)가 작업 중(running)으로 바뀌고, 앱은 Claude 의 idle 과 합쳐 대기로 보여
+/// 완료 알림이 몇 초 만에 사라진다(2026-11-24 기록: Orca 에서 Stop 직후 SubagentStop 37회).
+/// 턴 밖(완료, 실패, 대기)에서 온 하위 에이전트 소식은 상태도 시각도 건드리지 않는다.
+/// 턴 안의 하위 에이전트는 앞선 PreToolUse 로 이미 running 이라 영향이 없다.
+function isSubagentAfterTurn(event, previous) {
+  return (event === 'SubagentStart' || event === 'SubagentStop')
+    && previous.closed !== true
+    && ['waving', 'failed', 'idle'].includes(previous.state);
+}
+
 /// 클로드 앱은 창을 띄우거나 폴더를 훑을 때마다 프롬프트 한 번 없이 SessionStart→SessionEnd 만
 /// 남기고 사라지는 세션을 만든다(1초 안에 나고 죽는다). 그대로 두면 레지스트리가 껍데기로 찬다.
 /// 사람이 말을 건 적도 Claude 가 답한 적도 없이 끝난 세션은 기록에 남기지 않는다.
@@ -440,7 +451,7 @@ function updateRegistry(input, fallbackState) {
   // 완료·실패·입력 대기를 닫아 버리면 화면에서 함께 빠진다. 이미 확인한 시각도 유지해야
   // 다음 폴링에서 안 읽음 알림으로 되살아나지 않는다.
   const preserveAttention = event === 'SessionEnd' && previous.attention === true;
-  const preservePrevious = liveRestart || preserveAttention;
+  const preservePrevious = liveRestart || preserveAttention || isSubagentAfterTurn(event, previous);
   const state = preservePrevious ? previous.state
     : Object.keys(pendingApprovals).length > 0 ? 'waiting' : eventState(input, fallbackState);
   const cwd = text(input.cwd, 500) || previous.cwd || '';

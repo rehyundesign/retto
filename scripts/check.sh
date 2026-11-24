@@ -5,7 +5,14 @@ SCRIPT_DIR="${0:A:h}"
 APP_ROOT="${SCRIPT_DIR:h}"
 
 print -- "› Swift 빌드와 자체 검사"
-"$APP_ROOT/macos/scripts/build.sh" >/dev/null
+# 검사에서는 배포용 DMG 를 만들지 않는다. 만들면 같은 버전에서 두 번째 검사부터 「이미 있다」로 실패했다.
+# 빌드 폴더($TMPDIR/retto-public-*)는 앱 사본을 통째로 담아 macOS 앱 목록에 하나씩 등록된다.
+# 통과하면 지우고, 실패하면 원인을 볼 수 있게 남긴다.
+build_output=$("$APP_ROOT/macos/scripts/build.sh" --app-only)
+build_dir=${${(M)${(f)build_output}:#VERIFIED: *}#VERIFIED: }
+if [[ -n "$build_dir" && "$build_dir" == */retto-public-* && -d "$build_dir" ]]; then
+  rm -rf -- "$build_dir"
+fi
 
 print -- "› 자체 검사 항목이 다 보이는가"
 for candidate in /opt/homebrew/bin/node /usr/local/bin/node /usr/bin/node; do

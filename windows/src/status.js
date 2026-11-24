@@ -69,7 +69,8 @@ function assemble({ hookSessions, rollouts, threads, originator, indexTitle, tra
     if (!orca.isOrcaSession(out) && out.transcriptPath && originator(out.transcriptPath) === 'orca_desktop') {
       out = orca.linkTask(out, threads[out.rawSessionId] || { orcaSessionId: '' });
     }
-    const status = out.transcriptPath ? transcript(out.transcriptPath) : null;
+    const rawStatus = out.transcriptPath ? transcript(out.transcriptPath) : null;
+    const status = rawStatus && orca.isOrcaSession(out) ? codex.clearInputsBeforeLatestPrompt(rawStatus) : rawStatus;
     if (status) out = codex.reconcileTask(out, indexTitle(out.rawSessionId), status);
     // 롤아웃만으로 본 질문 대기는 맥 앱처럼 확인된 것으로 보지 않는다(NativeTaskStatus.swift unconfirmedInputTask).
     if (out.state === 'waiting' && out.stateSource === 'rollout') out = { ...out, state: 'idle', needsAttention: false, stateSource: 'unavailable' };

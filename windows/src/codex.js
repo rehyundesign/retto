@@ -381,8 +381,18 @@ class RolloutDiscovery {
   }
 }
 
+/// Orca 채팅용(CodexTranscriptStatus.clearingInputsBeforeLatestPrompt). Orca 는 질문 답을 question_reply 로 보내지 않고
+/// 새 턴의 turn_trigger 도 null 로 남긴다. 질문 뒤에 사용자 메시지가 오면 그 질문은 끝난 것으로 본다.
+function clearInputsBeforeLatestPrompt(status) {
+  const prompt = status?.latestPromptAtMs || 0;
+  if (!prompt) return status;
+  const inputRequests = Object.fromEntries(Object.entries(status.inputRequests || {}).filter(([, at]) => at >= prompt));
+  return { ...status, inputRequests };
+}
+
 module.exports = {
   RolloutDiscovery,
+  clearInputsBeforeLatestPrompt,
   TranscriptStatusReader,
   codexHomeDir,
   discoveryTitles,

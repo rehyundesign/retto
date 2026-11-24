@@ -418,6 +418,17 @@ struct CodexTranscriptStatus: Codable {
         return completedAtMs > max(latestPromptAtMs ?? 0, latestAbortAtMs ?? 0, latestComposerStartAtMs ?? 0)
     }
 
+    /// Orca 채팅용. Orca 는 Codex 의 질문에 답을 `send_user_message_question_reply` 로 보내지 않고,
+    /// 새 턴의 `turn_trigger` 도 composer 가 아니라 null 로 남긴다(2026-11-24 롤아웃 확인).
+    /// 그래서 질문이 한 번 나오면 영원히 답을 기다리는 것으로 남아, 이후 작업과 완료가 모두 회색 대기로 보였다.
+    /// Orca 에서는 질문 뒤에 사용자 메시지가 오면 그 질문은 끝난 것으로 본다.
+    func clearingInputsBeforeLatestPrompt() -> CodexTranscriptStatus {
+        guard let prompt = latestPromptAtMs, prompt > 0 else { return self }
+        var result = self
+        result.inputRequests = inputRequests?.filter { $0.value >= prompt }
+        return result
+    }
+
     func merged(with newer: CodexTranscriptStatus) -> CodexTranscriptStatus {
         CodexTranscriptStatus(
             completedAtMs: max(completedAtMs ?? 0, newer.completedAtMs ?? 0),

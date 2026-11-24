@@ -8,9 +8,22 @@ func unconfirmedInputTask(_ task: ReconciledCodexTask) -> ReconciledCodexTask {
         needsAttention: false, title: task.title, source: .unavailable)
 }
 
+/// Codex 앱 상태를 확인하지 못해도, 작업 기록이 이 시간 안에 쓰였으면 작업 중을 유지한다.
+let codexTranscriptActiveWindowMs: Double = 2 * 60 * 1000
+
 /// 연결 확인 실패는 독립적으로 확인된 완료·실패 알림을 취소하지 않는다.
-func unavailableCodexTask(_ task: ReconciledCodexTask) -> ReconciledCodexTask {
+///
+/// 작업 중도 무조건 대기로 내리면, Codex 앱이 일하는 동안 상태 스트림 확인만 실패한 세션이 회색 대기로 보인다
+/// (2026-11-23 기록: Codex 앱 세션 3개, 17번, 길게는 67분. 그동안 롤아웃은 몇 초 간격으로 계속 쓰였다).
+/// 그래서 롤아웃이 최근 2분 안에 쓰였으면 작업 중을 유지한다. Codex 앱이 꺼져 롤아웃이 멈춘 턴은 지금처럼 내린다.
+func unavailableCodexTask(_ task: ReconciledCodexTask, transcriptModifiedAtMs: Double? = nil,
+                          nowMs: Double = Date().timeIntervalSince1970 * 1000) -> ReconciledCodexTask {
     guard task.state != .waving && task.state != .failed else { return task }
+    if [.running, .review].contains(task.state), let modified = transcriptModifiedAtMs,
+       nowMs - modified <= codexTranscriptActiveWindowMs {
+        return ReconciledCodexTask(state: task.state, observedAtMs: task.observedAtMs,
+            needsAttention: false, title: task.title, source: .rollout)
+    }
     return ReconciledCodexTask(state: .idle, observedAtMs: task.observedAtMs,
         needsAttention: false, title: task.title, source: .unavailable)
 }
