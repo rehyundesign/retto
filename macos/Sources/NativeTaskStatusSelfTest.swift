@@ -88,6 +88,15 @@ func checkNativeTaskStatus(_ check: (Bool, String) -> Void) {
         check(uncertain.state == .idle && !uncertain.needsAttention && uncertain.source == .unavailable,
               "unavailable live state does not preserve an unconfirmed \(state.rawValue) hook")
     }
+    let working = ReconciledCodexTask(state: .running, observedAtMs: 500, needsAttention: false, title: nil, source: .hook)
+    let active = unavailableCodexTask(working, transcriptModifiedAtMs: 100_000, nowMs: 100_000 + codexTranscriptActiveWindowMs)
+    check(active.state == .running && !active.needsAttention,
+          "unavailable live state keeps running while the rollout is still being written")
+    check(unavailableCodexTask(working, transcriptModifiedAtMs: 100_000, nowMs: 100_001 + codexTranscriptActiveWindowMs).state == .idle,
+          "unavailable live state drops running once the rollout stops")
+    check(unavailableCodexTask(ReconciledCodexTask(state: .waiting, observedAtMs: 500, needsAttention: true, title: nil, source: .hook),
+                               transcriptModifiedAtMs: 100_000, nowMs: 100_000).state == .idle,
+          "a fresh rollout does not confirm an unconfirmed input request")
     write("desktop", "busy", time: 200)
     reader.refresh(now: Date(timeIntervalSince1970: 2))
     check(reader.statuses["desktop"]?.state == .running, "approval completion updates before the tool finishes")

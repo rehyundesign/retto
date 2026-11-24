@@ -168,3 +168,48 @@ test('합치기 — 제목 없는 Orca 롤아웃에 Orca 제목·탭 ID 를 붙�
   assert.deepEqual(orca.openRequest(orcaTask), { sessionId: 'codex_t', terminalHandle: null, workspacePath: null, agent: 'codex', codexThreadId: 'thread-t' });
   assert.equal(orca.openRequest(hookCodex), null);
 });
+
+test('Orca 1.4.269 구조 — 런타임 클라이언트 새 경로, 새 세션 기록 DB, UUID 세션 ID 를 읽는다', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'retto-orca-new-'));
+  const cli = path.join(root, 'app.asar.unpacked', 'out', 'cli');
+  fs.mkdirSync(path.join(cli, 'runtime'), { recursive: true });
+  assert.equal(orca.runtimeClientPath(root), null);
+  fs.writeFileSync(path.join(cli, 'runtime-client.js'), '');
+  assert.equal(orca.runtimeClientPath(root), path.join(cli, 'runtime-client.js'), '예전 Orca 는 예전 경로');
+  fs.writeFileSync(path.join(cli, 'runtime', 'client.js'), '');
+  assert.equal(orca.runtimeClientPath(root), path.join(cli, 'runtime', 'client.js'), '새 경로가 먼저');
+
+  assert.equal(orca.sessionDbPath(root), path.join(root, 'agent-session-journal.db'), '새 DB 가 없으면 예전 DB');
+  const { DatabaseSync } = require('node:sqlite');
+  const file = path.join(root, 'agent-session-domain.db');
+  const db = new DatabaseSync(file);
+  db.exec('CREATE TABLE agent_session_records (session_id TEXT PRIMARY KEY, record_json TEXT NOT NULL)');
+  const insert = db.prepare('INSERT INTO agent_session_records VALUES (?, ?)');
+  insert.run('8f449a2e-4362-49aa-b719-198bab2f5d76', JSON.stringify({ provider: 'codex', conversationName: '새 채팅',
+    providerHandleChain: [{ handle: { provider: 'codex', threadId: 'thread-new' } }] }));
+  insert.run('6a2b3c2a-ebaf-42bd-8acf-1f537b9f9970', JSON.stringify({ provider: 'claude', providerHandleChain: [] }));
+  db.close();
+  assert.equal(orca.sessionDbPath(root), file, '새 DB 가 있으면 새 DB');
+  assert.deepEqual(orca.readThreads(file), {
+    'thread-new': { orcaSessionId: '8f449a2e-4362-49aa-b719-198bab2f5d76', title: '새 채팅' }
+  });
+  fs.rmSync(root, { recursive: true, force: true });
+});
+
+test('Orca 의 Codex 질문은 뒤이은 사용자 메시지로 풀린다 — Codex 앱은 그대로 기다린다', () => {
+  const line = (second, payload) => JSON.stringify({ timestamp: `2026-11-24T02:20:${String(second).padStart(2, '0')}.000Z`, type: 'response_item', payload });
+  const ask = line(1, { type: 'function_call', name: 'request_user_input_async', call_id: 'q', arguments: JSON.stringify({ questions: [{ title: 'x' }] }) });
+  const output = line(2, { type: 'function_call_output', call_id: 'q', output: 'request submitted' });
+  const prompt = (second) => line(second, { type: 'message', role: 'user', content: [{ type: 'input_text', text: '다음 요청' }] });
+  const later = codex.transcriptStatus([ask, output, prompt(5)].join('\n'));
+  assert.ok(codex.pendingInputAtMs(later), 'Codex 앱 기준으로는 아직 대기');
+  assert.equal(codex.pendingInputAtMs(codex.clearInputsBeforeLatestPrompt(later)), undefined);
+  const earlier = codex.transcriptStatus([prompt(0), ask].join('\n'));
+  assert.ok(codex.pendingInputAtMs(codex.clearInputsBeforeLatestPrompt(earlier)), '사용자 메시지 뒤에 나온 질문은 그대로 대기');
+
+  const session = { id: 'codex:t', rawSessionId: 't', source: 'codex', client: 'codex', sessionTitle: 'Orca 채팅',
+    state: 'running', updatedAtMs: 1, orcaHosted: true, transcriptPath: '/fixture' };
+  const [out] = assemble({ hookSessions: [session], rollouts: [], threads: {}, originator: () => 'orca_desktop',
+    indexTitle: () => undefined, transcript: () => later, chatStatus: () => undefined });
+  assert.notEqual(out.stateSource, 'unavailable', '지난 질문 때문에 회색 대기로 내려가지 않는다');
+});

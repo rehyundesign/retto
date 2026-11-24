@@ -22,9 +22,36 @@ import Foundation
 import SQLite3
 
 let orcaBundleIdentifier = "com.stablyai.orca"
-/// Orca 의 기본 사용자 데이터 폴더. 세션 기록(`agent-session-journal.db`)이 여기 있다.
+/// Orca 의 기본 사용자 데이터 폴더. 세션 기록 DB 가 여기 있다.
 let orcaUserDataURL = FileManager.default.homeDirectoryForCurrentUser
     .appendingPathComponent("Library/Application Support/orca")
+
+/// Orca 세션 기록 DB. 1.4.269(2026-11-21 설치 확인)부터 `agent-session-domain.db` 에 쓴다.
+/// 예전 `agent-session-journal.db` 의 기록 124개도 새 DB 에 모두 옮겨져 있다(2026-11-24 확인).
+/// 새 세션(ID 가 UUID)은 새 DB 에만 있다. 새 DB 가 없는 예전 Orca 만 예전 DB 를 읽는다.
+func orcaSessionDatabaseURL(userData: URL = orcaUserDataURL) -> URL {
+    let domain = userData.appendingPathComponent("agent-session-domain.db")
+    if FileManager.default.fileExists(atPath: domain.path) { return domain }
+    return userData.appendingPathComponent("agent-session-journal.db")
+}
+
+/// Orca 세션 기록에서 Codex 채팅을 고르는 SQL 조건. 예전 ID 는 `codex_…`, 1.4.269 부터는 UUID 라
+/// ID 만으로는 못 고른다. 기록 최상위의 provider 로도 고른다. 핸들 안의 provider 까지 보면 Codex 를 이어 붙인
+/// Claude 기록이 섞인다. 깨진 JSON 한 줄이 조회 전체를 멈추지 않게 json_valid 로 먼저 거른다.
+/// Orca 스크립트(orcaChatStatusScript)에도 같은 조건을 글자 그대로 쓴다.
+let orcaCodexRecordFilter = "session_id LIKE 'codex%' OR (CASE WHEN json_valid(record_json) THEN json_extract(record_json, '$.provider') END) = 'codex'"
+
+/// Orca 런타임 클라이언트 모듈. 1.4.269 에서 `out/cli/runtime-client.js` 가 `out/cli/runtime/client.js` 로 옮겨졌다.
+/// 둘 다 없으면 nil. 경고 없이 넘어가면 탭 이동과 대기 확인이 함께 멈추므로 navigator.log 에 남긴다.
+func orcaRuntimeClientPath(appURL: URL) -> String? {
+    let unpacked = appURL.appendingPathComponent("Contents/Resources/app.asar.unpacked/out/cli")
+    for relative in ["runtime/client.js", "runtime-client.js"] {
+        let path = unpacked.appendingPathComponent(relative).path
+        if FileManager.default.fileExists(atPath: path) { return path }
+    }
+    ClaudeAppNavigator.log("Orca 런타임 클라이언트 없음: \(unpacked.path)")
+    return nil
+}
 
 /// Codex 롤아웃 첫 줄이 Orca 채팅이 띄운 스레드의 것인가.
 func codexSessionMetaIsFromOrca(_ firstLine: String) -> Bool {
@@ -198,14 +225,13 @@ final class OrcaNavigator {
            run(cli, ["terminal", "switch", "--terminal", handle, "--json"]) != nil {
             return .terminal
         }
-        let clientPath = resources.appendingPathComponent("app.asar.unpacked/out/cli/runtime-client.js").path
         if request.sessionId != nil || request.workspacePath != nil || request.codexThreadId != nil,
-           FileManager.default.fileExists(atPath: clientPath) {
+           let clientPath = orcaRuntimeClientPath(appURL: appURL) {
             var body: [String: String] = ["clientPath": clientPath, "agent": request.agent]
             if let sessionId = request.sessionId { body["sessionId"] = sessionId }
             if let thread = request.codexThreadId {
                 body["codexThreadId"] = thread
-                body["journalPath"] = orcaUserDataURL.appendingPathComponent("agent-session-journal.db").path
+                body["journalPath"] = orcaSessionDatabaseURL().path
             }
             if let path = request.workspacePath { body["workspacePath"] = path }
             if let json = try? JSONSerialization.data(withJSONObject: body),
@@ -283,7 +309,7 @@ func orcaRevealOutcome(_ output: String) -> OrcaOpenOutcome? {
 // 터미널 훅 경로에서는 `waiting` 을 쓴다. 실패는 `done` + `outcome: failure` 라 `blocked` 와 겹치지 않는다
 // (2026-11-13 실측: 「ask」 권한 채팅에서 권한 상승 명령을 시키자 `working` → `blocked`).
 //
-// 탭에는 Codex 스레드 ID 가 없어서, Orca 세션 기록(`agent-session-journal.db` 의 `providerHandleChain`)을
+// 탭에는 Codex 스레드 ID 가 없어서, Orca 세션 기록(`orcaSessionDatabaseURL` 의 `providerHandleChain`)을
 // 읽기 전용으로 열어 Orca 세션 ID 와 잇는다. 이을 수 없는 채팅은 추측하지 않고 버린다 — 다른 스레드를
 // 파랗게 칠하는 것보다 대기를 놓치는 편이 낫다. 탭 상태를 읽기 전후의 스레드가 다르면 그 조회는 버린다.
 // 기록을 쓰거나 응답을 보내지 않는다.
@@ -308,14 +334,13 @@ const print = (value) => process.stdout.write(JSON.stringify(value) + '\n');
 (async () => {
   const runtime = require(request.clientPath);
   const client = new runtime.RuntimeClient(undefined, undefined, null, null);
-  const home = (runtime.getDefaultUserDataPath && runtime.getDefaultUserDataPath()) || request.userDataPath;
   // Orca 세션 ID → 마지막 Codex 스레드 ID. 기록 하나가 깨져도 나머지는 읽는다.
   const readThreads = () => {
     const { DatabaseSync } = require('node:sqlite');
-    const db = new DatabaseSync(require('path').join(home, 'agent-session-journal.db'), { readOnly: true });
+    const db = new DatabaseSync(request.databasePath, { readOnly: true });
     const threads = {};
     try {
-      for (const row of db.prepare("SELECT session_id, record_json FROM agent_session_records WHERE session_id LIKE 'codex%'").all()) {
+      for (const row of db.prepare(`SELECT session_id, record_json FROM agent_session_records WHERE session_id LIKE 'codex%' OR (CASE WHEN json_valid(record_json) THEN json_extract(record_json, '$.provider') END) = 'codex'`).all()) {
         try {
           const chain = (JSON.parse(row.record_json) || {}).providerHandleChain || [];
           const handle = [...chain].reverse().map((link) => link && link.handle)
@@ -517,9 +542,9 @@ final class OrcaChatStatusReader {
     }
 
     private static func fetch(appURL: URL) -> [String: OrcaChatStatus]? {
-        let clientPath = appURL.appendingPathComponent("Contents/Resources/app.asar.unpacked/out/cli/runtime-client.js").path
-        guard FileManager.default.fileExists(atPath: clientPath) else { return nil }
-        guard let json = try? JSONSerialization.data(withJSONObject: ["clientPath": clientPath, "userDataPath": orcaUserDataURL.path]),
+        guard let clientPath = orcaRuntimeClientPath(appURL: appURL) else { return nil }
+        guard let json = try? JSONSerialization.data(withJSONObject: ["clientPath": clientPath,
+                                                                      "databasePath": orcaSessionDatabaseURL().path]),
               let encoded = String(data: json, encoding: .utf8),
               let output = runOrcaProcess(appURL.appendingPathComponent("Contents/MacOS/Orca"), ["-e", orcaChatStatusScript],
                                           extraEnvironment: ["ELECTRON_RUN_AS_NODE": "1", "RETTO_ORCA_REQUEST": encoded],
@@ -558,11 +583,13 @@ func orcaCodexThread(fromRecord json: String, sessionId: String) -> (threadId: S
 /// Codex 스레드 ID → Orca 채팅. 기록 파일이 바뀌었을 때만, 2초에 한 번까지 다시 읽는다.
 final class OrcaCodexThreadIndex {
     private(set) var threads: [String: OrcaCodexThread] = [:]
-    private let url: URL
     private var stamp: [Double] = []
     private var checkedAt: TimeInterval = 0
 
-    init(url: URL = orcaUserDataURL.appendingPathComponent("agent-session-journal.db")) { self.url = url }
+    private let fixedURL: URL?
+    private var url: URL { fixedURL ?? orcaSessionDatabaseURL() }
+
+    init(url: URL? = nil) { fixedURL = url }
 
     func refresh(now: TimeInterval = Date().timeIntervalSince1970) {
         guard now - checkedAt >= 2 else { return }
@@ -589,7 +616,7 @@ final class OrcaCodexThreadIndex {
         defer { sqlite3_close(db) }
         sqlite3_busy_timeout(db, 200)
         var statement: OpaquePointer?
-        let sql = "SELECT session_id, record_json FROM agent_session_records WHERE session_id LIKE 'codex%'"
+        let sql = "SELECT session_id, record_json FROM agent_session_records WHERE \(orcaCodexRecordFilter)"
         guard sqlite3_prepare_v2(db, sql, -1, &statement, nil) == SQLITE_OK else { return nil }
         defer { sqlite3_finalize(statement) }
         var result: [String: OrcaCodexThread] = [:]

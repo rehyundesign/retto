@@ -30,6 +30,15 @@ func runCodexInputSelfTest() -> Int32 {
     check(codexTranscriptStatus(in: request("a", 2) + "\n" + answer("a")).pendingInputAtMs != nil, "partial answer remains pending")
     check(codexTranscriptStatus(in: request("a") + "\n" + answer("b")).pendingInputAtMs != nil, "unrelated reply does not dismiss input")
     check(codexTranscriptStatus(in: request("a") + "\n" + answer("a") + "\n" + request("b")).pendingInputAtMs != nil, "next request waits")
+    // Orca 는 답을 question_reply 로 보내지 않고 새 턴도 composer 로 표시하지 않는다. 질문 뒤 사용자 메시지로 푼다.
+    func prompt(_ second: Int) -> String {
+        record(second, ["type": "message", "role": "user", "content": [["text": "다음 요청"]]])
+    }
+    let orcaLater = codexTranscriptStatus(in: [request("a"), toolOutput, prompt(5)].joined(separator: "\n"))
+    check(orcaLater.pendingInputAtMs != nil, "plain prompt alone keeps Codex app input pending")
+    check(orcaLater.clearingInputsBeforeLatestPrompt().pendingInputAtMs == nil, "Orca prompt after a question releases it")
+    check(codexTranscriptStatus(in: [prompt(0), request("a")].joined(separator: "\n"))
+        .clearingInputsBeforeLatestPrompt().pendingInputAtMs != nil, "Orca question after the prompt still waits")
     check(displayState(state: .waiting, updatedAtMs: 1, seenAtMs: 100, transcriptModifiedAtMs: 1, nowMs: 100_000) == .waiting, "viewing never dismisses pending input")
     check(selectionPriority(state: .waiting, isClosed: false) > selectionPriority(state: .waving, isClosed: false, source: "slack"), "input before Slack")
     let payload = try! JSONDecoder().decode(StatePayload.self, from: Data("{\"state\":\"running\",\"sessionId\":\"fixture\",\"updatedAtMs\":1}".utf8))

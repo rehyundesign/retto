@@ -757,7 +757,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     private func reconciledCodexPayload(_ payload: StatePayload) -> StatePayload {
         guard !payload.isClosed, payload.source == "codex" || payload.client == "codex" else { return payload }
         var refreshed = payload
-        let transcriptStatus = codexTranscriptStatusReader.status(at: payload.transcriptPath)
+        let rawTranscriptStatus = codexTranscriptStatusReader.status(at: payload.transcriptPath)
+        let transcriptStatus = payload.isOrca ? rawTranscriptStatus.clearingInputsBeforeLatestPrompt() : rawTranscriptStatus
         let reconciled = reconcileCodexTask(
             payload: payload,
             indexTitle: codexThreadTitleReader.title(for: payload.navigationSessionId),
@@ -767,7 +768,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             || codexLiveStatusReader.unavailableThreadIDs.contains(payload.navigationSessionId)
         // Orca 의 Codex 는 Codex 앱 스트림에 없다. 스트림 없이 롤아웃만으로 본 것과 같게 다룬다.
         let task = payload.isOrca ? unconfirmedInputTask(reconciled)
-            : unavailable ? unavailableCodexTask(reconciled)
+            : unavailable ? unavailableCodexTask(reconciled,
+                transcriptModifiedAtMs: transcriptModifiedAtMs(path: payload.transcriptPath))
             : applyCodexLiveStatus(codexLiveStatusReader.statuses[payload.navigationSessionId],
                 to: reconciled, transcriptStatus: transcriptStatus)
         refreshed.state = task.state.rawValue
